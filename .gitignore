@@ -148,7 +148,7 @@ dmypy.json
 
 # pytype static type analyzer
 .pytype/
-
+.HMS_EV/
 # Cython debug symbols
 cython_debug/
 
