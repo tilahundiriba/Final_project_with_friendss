@@ -8,12 +8,12 @@
 
 .btn-primary {
    
-    background-color: #007bff;
+    background-color: #ccd6e0;
     border-color: #007bff;
     color: #fff;
 }
 .container{
-    background-color: #ffffff;
+    background-color: #e6eaee;
 }
 label {
     /* Add your custom styles here */
@@ -21,5 +21,5 @@ label {
     color: #fdfdfd;  /* Blue color, you can customize */
 }
 body{
-    background-color: rgb(112, 110, 110);
+    background-color: rgb(150, 149, 149);
 }

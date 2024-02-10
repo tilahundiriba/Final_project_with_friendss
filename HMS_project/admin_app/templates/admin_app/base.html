@@ -9,36 +9,13 @@
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
 <style>
     
-.form-control {
-   
-   border-radius: 5px;
-   margin-bottom: 10px;
-}
 
-
-.btn-primary {
-  
-   background-color: #007bff;
-   border-color: #007bff;
-   color: #fff;
-}
-.container{
-   background-color: #ffffff;
-}
-label {
-   /* Add your custom styles here */
-   font-weight: bold;
-   color: #fdfdfd;  /* Blue color, you can customize */
-}
-body{
-   background-color: rgb(112, 110, 110);
-}
 
 </style>
 </head>
 <body>
-    <div class="container-fluid mt-4">
-        <div class="container" style="width: 60%;">
+    <div class="mt-4 d-flex justify-content-center ">
+        <div class="d-flex justify-content-center ">
             {% block content %} 
    
            {% endblock  %} 

@@ -1,20 +1,21 @@
 {% extends 'admin_app/base.html' %}
-    {% block content %}
-    <div class="container d-flex justify-content-center" style="width: 30%;">
-<form action="{% url 'user_login' %}" method="post">
+{% block content %}
+<div class="container d-flex justify-content-center" style="width: 30%;">
+    <form action="{% url 'user_login' %}" method="post">
         {% csrf_token %}
         <div class="mt-4 mb-4">
-    <label for="username">Username</label>
-    <input type="text" name="username" placeholder="Enter Username">
+            <label for="username">Username</label>
+            <input type="text" name="username" placeholder="Enter Username">
+        </div>
+        <div class="mt-4">
+            <label for="password">Password</label>
+            <input type="text" name="password" placeholder="Enter Password">
+        </div>
+        <div class="mt-4 mb-4">
+            <input type="submit" value="Submit" class="btn btn-lg btn-success">
+
+        </div>
+        <a href="{% url 'password_reset' %}">Forget Password</a>
+    </form>
 </div>
-    <div class="mt-4">
-    <label for="password">Password</label>
-    <input type="text" name="password" placeholder="Enter Password">
-</div>
-    <div class="mt-4 mb-4">
-    <input type="submit" value="Submit" class="btn btn-lg btn-success">
-    <a href="{% url 'password_reset' %}">Forget Password</a>
-</div>
-</form>
-</div>  
 {% endblock %}

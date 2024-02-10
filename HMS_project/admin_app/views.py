@@ -71,3 +71,9 @@ def user_login(request):
             return HttpResponse('invalid login details supplied!')
     else:
         return render(request , 'admin_app/home.html',{})
+def dis_login(request):
+    return render(request,'admin_app/login.html')
+def dis_home(request):
+    return render(request,'admin_app/homefinal.html')
+def dis_homepage(request):
+    return render(request,'admin_app/homepage.html')
