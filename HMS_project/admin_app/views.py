@@ -77,3 +77,5 @@ def dis_home(request):
     return render(request,'admin_app/homefinal.html')
 def dis_homepage(request):
     return render(request,'admin_app/homepage.html')
+def dis_base(request):
+    return render(request,'admin_app/base.html')

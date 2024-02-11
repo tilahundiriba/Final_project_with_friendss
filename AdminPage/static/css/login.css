@@ -21,7 +21,7 @@
     padding: 28px;
     margin: 0 28px;
     border-radius: 10px;
-    box-shadow: inset -2px 2px 2px white;
+    box-shadow: inset -2px 2px 2px rgb(27, 27, 27);
 }
 
 .form-title{

@@ -1,26 +1,78 @@
 {% load static %}
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Base</title>
-    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'css/main.css' %}">
-<style>
-    
-
-
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Home Page</title>
+  <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'fontawesome/css/all.min.css' %}">
+  <link rel="stylesheet" href="{% static 'style.css' %}" />
 </head>
+
 <body>
-    <div class="mt-4 d-flex justify-content-center ">
-        <div class="d-flex justify-content-center ">
-            {% block content %} 
-   
-           {% endblock  %} 
+ 
+  <div class="main">
+    <nav class="navbar navbar-expand-lg bg-success">
+      <div class="container-fluid">
+        <img class="logo" src="{% static 'images/logo.png' %}" alt="LOGO" />
+        <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse"
+          data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
+          aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse  justify-content-end" id="navbarNavDropdown">
+          <ul class="navbar-nav">
+            <li class="nav-item" style="display: inline-flex; text-decoration: none; ">
+              <i class="fa-solid fa-house p-2 " style="font-size: 34px;"></i>
+              <a class="nav-link" aria-current="page" href="{% url 'dis_homepage' %}">Home</a>
+            </li>
+            <li class="nav-item" style="display: inline-flex; text-decoration: none;">
+              <i class="fa-solid fa-circle-info p-2 " style="font-size: 34px;"></i>
+              <a class="nav-link" href="{% url 'dis_home' %}">Services</a>
+            </li>
+
+            <li class="nav-item " style="display: inline-flex; text-decoration: none;">
+              <i class="fa-solid fa-user p-2" style="font-size: 34px;"></i>
+              <a class="nav-link" href="{% url 'dis_login' %}" role="button"> Login </a>
+            
+            </li>
+          </ul>
         </div>
       </div>
- 
+    </nav>
+
+   
+    {% block content %}
+
+    {% endblock %}
+    <footer>
+      <div class="container2">
+        <div class="footer-content">
+          <h3>Contact Us</h3>
+          <p>Email:info@gmail.com</p>
+          <p>Email:info@gmail.com</p>
+        
+        </div>
+        <div class="footer-content">
+          <h3>Quick Links</h3>
+          <ul class="list">
+            <li style="text-decoration: none; color: #f18930;">Home</li>
+            <li style="text-decoration: none; color: #f18930;">Home</li>
+
+          </ul>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
 </body>
-</html>
+

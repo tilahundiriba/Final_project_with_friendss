@@ -17,6 +17,7 @@ urlpatterns = [
     path('dis_login/', views.dis_login, name='dis_login'),
     path('dis_home/', views.dis_home, name='dis_home'),
     path('dis_homepage/', views.dis_homepage, name='dis_homepage'),
+     path('dis_base/', views.dis_base, name='dis_base'),
 ]
 
 #template_name='password_reset_form.html'
