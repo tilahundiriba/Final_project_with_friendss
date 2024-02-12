@@ -72,7 +72,7 @@ def user_login(request):
     else:
         return render(request , 'admin_app/home.html',{})
 def dis_login(request):
-    return render(request,'admin_app/login.html')
+    return render(request,'admin_app/loginfinal.html')
 def dis_home(request):
     return render(request,'admin_app/homefinal.html')
 def dis_homepage(request):
