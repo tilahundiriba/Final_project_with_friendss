@@ -1,7 +1,8 @@
 from django.urls import path
 from . import views
 from django.contrib.auth import views as auth_views
-
+from django.conf import settings
+from django.conf.urls.static import static
 urlpatterns = [
     path('members/', views.members, name='members'),
     path('test/', views.testing, name='test'),
@@ -19,6 +20,9 @@ urlpatterns = [
     path('dis_homepage/', views.dis_homepage, name='dis_homepage'),
      path('dis_base/', views.dis_base, name='dis_base'),
 ]
+
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 #template_name='password_reset_form.html'
 #template_name='password_reset_done.html'

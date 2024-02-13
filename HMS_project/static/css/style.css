@@ -9,7 +9,7 @@
  /* padding: 5px; */
   border-radius: 10px;
   text-decoration: underline black;
-  background-color: aquamarine;
+  /* background-color: aquamarine; */
 }
       .navbar {
         color: white;
@@ -62,16 +62,7 @@
         font-family: Georgia, Times, "Times New Roman", serif;
       }
     
-      /* .container1 {
-        position: relative;
-        background-color: rgb(46, 143, 150);
-        margin-top: 15%;
-        border: 1px solid rgb(14, 97, 62);
-        border-radius: 10px;
-        width: 100%;
-        box-shadow: 10px 10px 10px rgb(37, 36, 36);
-        text-align: justify;
-      } */
+   
       .card-title {
         font-family: Georgia, Times, "Times New Roman", serif;
         color: rgb(0, 0, 0);
@@ -84,18 +75,7 @@
        
       }
     
-      /* body{
-
-            
-       background-image: url("{% 'static/css/hdone.jpg' %}");
-       background-color: rgb(80, 184, 184);
-       background-size: cover;
-       
-       height: 100vh;
-       background-repeat: no-repeat;
-       background-attachment: fixed;
-       background-position: center;
-      } */
+    
       #login {
         width: 200px;
         height: 40px;
@@ -115,8 +95,8 @@
 
      }
      .main{
-     justify-content: center;
-       background-color: #1f1919;
+      justify-content: center;
+       background-color: #b8b5b5;
        background-size: cover;
        height: 100vh;
        background-repeat: no-repeat;
@@ -243,8 +223,8 @@
 
     footer {
       position: relative;
-      /* background: #343434; */
-      background: #f18930;
+      background: #343434;
+      /* background: #f18930; */
     padding: 10px;
     }
 
@@ -461,20 +441,21 @@
  
 /* style for a new login page start */
 .center{
-  position: absolute;
+  position: relative;
   top: 50%;
   left: 50%;
   transform: translate(-50%,-50%);
   width: 400px;
-  background: rgb(112, 114, 113);
+  background: rgb(133, 134, 133);
   border-radius: 10px;
   box-shadow: -5px 5px 10px 0px rgba(0.5, 0.5, 0.5, 0.5);
 
 }
 .center h1{
   text-align: center;
-  padding: 0 0 20px 0;
-  border-bottom: 1px solid silver;
+  padding: 10px 10px 20px 0;
+  border-bottom: 1px solid rgb(49, 47, 47);
+  font-size: 30px;
 
 }
 .center form{
@@ -529,7 +510,7 @@ form .txt_field{
 }
 .pass{
   margin: -5px 0 20px 5px;
-  color: #a6a6a6;
+  color: #f3f0f0;
   cursor: pointer;
   
 }
@@ -538,9 +519,9 @@ form .txt_field{
 }
 .pass a{
   text-decoration: none;
-  color: #4d90bd;
+  color: #0d2230;
 }
-input[type='submit']{
+.login_btn{
   width: 100%;
   height: 50px;
   border: 1px solid;
@@ -554,7 +535,7 @@ input[type='submit']{
   margin-bottom: 30px;
 
 }
-input[type='submit']:hover{
+.login_btn:hover{
   border-color: #2691d9;
   transition: .5s;
 }
