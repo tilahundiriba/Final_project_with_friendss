@@ -18,8 +18,13 @@ urlpatterns = [
     path('dis_login/', views.dis_login, name='dis_login'),
     path('dis_home/', views.dis_home, name='dis_home'),
     path('dis_homepage/', views.dis_homepage, name='dis_homepage'),
-     path('dis_base/', views.dis_base, name='dis_base'),
-]
+    path('dis_base/', views.dis_base, name='dis_base'),
+    path('dis_dash/', views.dis_dash, name='dis_dash'),
+    path('dis_dash_content/', views.dis_dash_content, name='dis_dash_content'),
+
+    path('dis_dr_dash/', views.dis_dr_dash, name='dis_dr_dash'),
+    path('dis_dr_dash_content/', views.dis_dr_dash_content, name='dis_dr_dash_content'),
+] 
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

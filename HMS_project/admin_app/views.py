@@ -79,3 +79,13 @@ def dis_homepage(request):
     return render(request,'admin_app/homepage.html')
 def dis_base(request):
     return render(request,'admin_app/base.html')
+
+def dis_dash(request):
+    return render(request,'admin_dash/dashboard.html')
+def dis_dash_content(request):
+    return render(request,'admin_dash/dash_content.html')
+
+def dis_dr_dash(request):
+    return render(request,'doctors/dr_dash.html')
+def dis_dr_dash_content(request):
+    return render(request,'doctors/dash_content.html')
