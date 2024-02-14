@@ -89,3 +89,5 @@ def dis_dr_dash(request):
     return render(request,'doctors/dr_dash.html')
 def dis_dr_dash_content(request):
     return render(request,'doctors/dash_content.html')
+def form(request):
+    return render(request,'doctors/form.html')

@@ -24,6 +24,8 @@ urlpatterns = [
 
     path('dis_dr_dash/', views.dis_dr_dash, name='dis_dr_dash'),
     path('dis_dr_dash_content/', views.dis_dr_dash_content, name='dis_dr_dash_content'),
+    path('form/', views.form, name='form'),
+
 ] 
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
