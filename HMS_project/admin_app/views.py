@@ -4,7 +4,6 @@ from django.shortcuts import render,redirect,reverse
 from django.http import HttpResponse
 from .models import LabTest,Payment
 from django.contrib.auth import login
-from .forms import SignUpForm
 from django.contrib.auth import authenticate ,login , logout
 from django.contrib.auth.hashers import make_password
 from django.core.mail import send_mail
@@ -13,6 +12,81 @@ from django.utils.html import strip_tags
 from HMS_project import settings
 from .models import UserAccount1
 from .utils import generate_username, generate_password
+from .models import UserAccount1 
+from django.contrib.auth.models import User
+from django.shortcuts import render
+from .models import UserProfileInfo2
+
+from django.contrib.auth import authenticate, login
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render
+
+def login_view(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        profession = request.POST.get('profession')
+
+        # Authenticate the user
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            # Check if user's profession matches
+            try:
+                user_profile = UserProfileInfo2.objects.get(user=user)
+                if user_profile.profession == profession:
+                    # User authentication successful and profession matches
+                    login(request, user)
+                    return HttpResponse('User logined successfully') # Redirect to home URL after login
+                else:
+                    return HttpResponse('Invalid profession for the user')
+            except UserProfileInfo2.DoesNotExist:
+                return HttpResponse('User does not have a profile')
+        else:
+            # User authentication failed
+            return HttpResponse('Invalid username or password')
+    else:
+        return render(request, 'admin_dash/test_login.html', {})
+
+
+
+def register(request):
+    registered = False
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        profession = request.POST.get('profession')  # Retrieve profession from the form
+        protfolio_site = request.POST.get('protfolio_site')
+        profile_pic = request.FILES.get('profile_pic')
+
+        # Create user object
+        user = User.objects.create_user(username=username, email=email, password=password)
+
+        # Create user profile
+        user_profile = UserProfileInfo2.objects.create(
+            user=user,
+            profession=profession,
+            protfolio_site=protfolio_site,
+            profile_pic=profile_pic
+        )
+
+        registered = True
+        # return redirect('dis_dash_content')
+    else:
+        # Render an empty form for GET request
+        return render(request, 'admin_dash/test_reg.html')
+
+    return render(request, 'admin_dash/test_reg.html',
+                  {'registered': registered})
+
+
+
+
+
+
+
+
 
 def createUserAccount(request):
     if request.method == 'POST':
@@ -91,36 +165,39 @@ def home(request):
 
 
 
-def signup(request):
-    if request.method == 'POST':
-        form = SignUpForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            login(request, user)  
-            return redirect('home')  
-    else:
-        form = SignUpForm()
-    return render(request, 'admin_app/register.html', {'form': form})
+# def signup(request):
+#     if request.method == 'POST':
+#         form = SignUpForm(request.POST)
+#         if form.is_valid():
+#             user = form.save()
+#             login(request, user)  
+#             return redirect('home')  
+#     else:
+#         form = SignUpForm()
+#     return render(request, 'admin_app/register.html', {'form': form})
 
-def user_login(request):
-    if request.method == 'POST':
-        username= request.POST.get('username')
-        password= request.POST.get('password')
+# def user_login(request):
+#     if request.method == 'POST':
+#         username= request.POST.get('username')
+#         profession= request.POST.get('profession')
+#         password= request.POST.get('password')
 
-        user = authenticate(username=username , password=password)
+#         user = authenticate(username=username, profession=profession,password=password)
 
-        if user:
-            if user.is_active:
-                login(request,user)
-                return HttpResponseRedirect(reverse('test'))
-            else:
-                return HttpResponse('accont not active')
-        else:
-            print('some tried to login and failed!')
-            print('username:{} and password{}'.format(username,password))
-            return HttpResponse('invalid login details supplied!')
-    else:
-        return render(request , 'admin_app/home.html',{})
+#         if user:
+#             if user.is_active:
+#                 login(request,user)
+#                 return HttpResponseRedirect(reverse('dis_home'))
+#             else:
+#                 return HttpResponse('accont not active')
+#         else:
+#             print('some tried to login and failed!')
+#             print('username:{} and password{} and profession{}'.format(username,password,profession))
+#             return HttpResponse('invalid login details supplied!')
+#     else:
+#         return render(request , 'admin_app/loginfinal.html',{})
+
+    
 def dis_login(request):
     return render(request,'admin_app/loginfinal.html')
 def dis_home(request):

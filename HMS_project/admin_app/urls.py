@@ -9,7 +9,6 @@ urlpatterns = [
     path('test_fees/', views.lab_test_payment, name='lab_test_payment'),
     path('process-payment/', views.process_payment, name='process_payment'),
     path('home/',views.home , name='home'),
-    path('user_login/', views.user_login , name='user_login'),
     path('register/',views.createUserAccount, name='createUserAccount'),
     path('password_reset/', auth_views.PasswordResetView.as_view(template_name='admin_app/password_reset_form.html'), name='password_reset'),
     path('password_reset_done/', auth_views.PasswordResetDoneView.as_view(template_name='admin_app/password_reset_done.html'), name='password_reset_done'),
@@ -32,6 +31,9 @@ urlpatterns = [
     path('patient_history/', views.dis_patient_history, name='patient_history'),
     path('user_registration/', views.dis_user_registration, name='user_registration'),
     path('vital_info/', views.dis_vital_info, name='vital_info'),
+    path('test_reg/', views.register, name='test_reg'),
+    path('test_log/', views.login_view, name='test_log'),
+ 
 
 ] 
 
