@@ -1,0 +1,56 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  
+    <title>Email Template</title>
+ 
+    <!-- Add Bootstrap CSS link here -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Add Font Awesome CSS link here -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        /* Custom styles */
+        .container {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .title {
+            color: #007bff;
+        }
+        .lead {
+            color: #6c757d;
+        }
+        .icon {
+            font-size: 24px;
+            margin-right: 10px;
+        }
+        .logo {
+            width: 100px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="data:image/jpeg;base64,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" alt="Hospital Logo" class="logo">
+        <h1 class="mt-4 title">Hello, {{ profession }}!</h1>
+        <p class="lead">Thank you for joining Shashemene Specialized Referral Hospital.</p>
+        <p>Your account information:</p>
+        <ul>
+            <li><i class="fas fa-user-md icon"></i><strong>Username:</strong> {{ username }}</li>
+            <li><i class="fas fa-key icon"></i><strong>Password:</strong> {{ password }}</li>
+        </ul>
+        <p>If you have any questions or need assistance, please don't hesitate to contact us.</p>
+        <p class="mb-0">Best regards,</p>
+        <p class="mb-0">Shashemene Specialized Referral Hospital</p>
+    </div>
+    <!-- Add Bootstrap JS scripts here -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <!-- Add Font Awesome JS script here -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
+</body>
+</html>

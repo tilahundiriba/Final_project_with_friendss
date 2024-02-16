@@ -13,6 +13,7 @@ from django.utils.html import strip_tags
 from HMS_project import settings
 from .models import UserAccount1
 from .utils import generate_username, generate_password
+
 def createUserAccount(request):
     if request.method == 'POST':
         email = request.POST.get('email')
@@ -37,7 +38,7 @@ def createUserAccount(request):
             'password': password,
             'profession': profession,
         }
-        html_message = render_to_string('userAccountApp/email_templte.html', context)
+        html_message = render_to_string('admin_dash/email_template.html', context)
         plain_message = strip_tags(html_message)
         send_mail(
             'Account Created',
@@ -49,9 +50,9 @@ def createUserAccount(request):
         )
 
         # Redirect to account list after account creation
-        return redirect('createUserAccount')
+        return redirect('dis_dash_content')
 
-    return render(request, 'admin_app/register.html')
+    return render(request, 'admin_dash/user_registration.html')
 
 
 
@@ -149,6 +150,6 @@ def dis_medication(request):
 def dis_patient_history(request):
     return render(request,'doctors/patient_history.html')
 def dis_user_registration(request):
-    return render(request,'doctors/user_registration.html')
+    return render(request,'admin_dash/user_registration.html')
 def dis_vital_info(request):
     return render(request,'doctors/vital_info.html')

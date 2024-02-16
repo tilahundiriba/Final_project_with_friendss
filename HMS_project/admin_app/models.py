@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
-from django.db import models
+
 
 # Staff account table  
 class UserAccount1(models.Model):
