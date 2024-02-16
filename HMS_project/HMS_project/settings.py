@@ -26,6 +26,16 @@ SECRET_KEY = 'django-insecure-p9r%ow-iook*^x(p=8=d(@n0*858!i5jjqx3&)82*@kanjq9m(
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'  # Use SMTP as the email backend
+EMAIL_HOST = 'smtp.gmail.com'  # Specify your email host
+EMAIL_PORT = 587  # Specify the port for your email host
+EMAIL_USE_TLS = True  # Enable TLS encryption for the connection
+EMAIL_HOST_USER = 'getayemuluken9@gmail.com'  # Specify the email address to use for sending email
+EMAIL_HOST_PASSWORD = 'jdqs ezos ffnq jxkc'  # Specify the email password
+
+# Default email address settings
+DEFAULT_FROM_EMAIL = 'your_email@example.com'  # Specify the default "from" address for outgoing e
+SERVER_EMAIL = 'your_email@example.com'  # Specify the email address used as the "from" address fo
 
 ALLOWED_HOSTS = []
 

@@ -6,6 +6,55 @@ from .models import LabTest,Payment
 from django.contrib.auth import login
 from .forms import SignUpForm
 from django.contrib.auth import authenticate ,login , logout
+from django.contrib.auth.hashers import make_password
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
+from HMS_project import settings
+from .models import UserAccount1
+from .utils import generate_username, generate_password
+def createUserAccount(request):
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        profession = request.POST.get('profession')
+
+        # Generate username and password
+        username = generate_username(email, profession)
+        password = generate_password()
+
+        # Create the user
+        hashed_password = make_password(password)
+        user = UserAccount1.objects.create(
+            UserName=username,
+            Password=hashed_password,
+            Email=email,
+            Profession=profession,
+        )
+
+        # Send email with username and password
+        context = {
+            'username': username,
+            'password': password,
+            'profession': profession,
+        }
+        html_message = render_to_string('userAccountApp/email_templte.html', context)
+        plain_message = strip_tags(html_message)
+        send_mail(
+            'Account Created',
+            plain_message,
+            settings.EMAIL_HOST_USER,
+            [email],
+            html_message=html_message,
+            fail_silently=False,
+        )
+
+        # Redirect to account list after account creation
+        return redirect('createUserAccount')
+
+    return render(request, 'admin_app/register.html')
+
+
+
 def members(request):
     return HttpResponse("Hello From Admin App!")
 def testing(request):
