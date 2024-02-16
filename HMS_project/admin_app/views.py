@@ -79,15 +79,27 @@ def dis_homepage(request):
     return render(request,'admin_app/homepage.html')
 def dis_base(request):
     return render(request,'admin_app/base.html')
-
+# admin dashboard views
 def dis_dash(request):
     return render(request,'admin_dash/dashboard.html')
 def dis_dash_content(request):
     return render(request,'admin_dash/dash_content.html')
-
+# doctor dashboard views
 def dis_dr_dash(request):
     return render(request,'doctors/dr_dash.html')
 def dis_dr_dash_content(request):
     return render(request,'doctors/dash_content.html')
+# user register views
 def form(request):
     return render(request,'doctors/form.html')
+# additional forms
+def dis_bill(request):
+    return render(request,'doctors/bill.html')
+def dis_medication(request):
+    return render(request,'doctors/medication.html')
+def dis_patient_history(request):
+    return render(request,'doctors/patient_history.html')
+def dis_user_registration(request):
+    return render(request,'doctors/user_registration.html')
+def dis_vital_info(request):
+    return render(request,'doctors/vital_info.html')

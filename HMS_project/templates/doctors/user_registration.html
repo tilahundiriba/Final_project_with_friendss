@@ -1,10 +1,16 @@
-<!DOCTYPE html>
+{% extends 'admin_dash/dashboard.html' %}
+{% load static %}
+{% block content %}
+
+<!-- <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    {% block 'title' %}
     <title>Registration From</title>
+    {% endblock %}
     <style>
         /* body{
 box-sizing: border-box;
@@ -156,9 +162,9 @@ background: rgb(130, 106, 251);
 
         }
     </style>
-</head>
+<!-- </head> -->
 
-<body>
+<!-- <body> -->
     <div class="container-one">
         <section class="container">
             <header>
@@ -208,6 +214,8 @@ background: rgb(130, 106, 251);
             </form>
         </section>
     </div>
-</body>
+<!-- </body>
 
-</html>
+
+</html> -->
+{% endblock %}
