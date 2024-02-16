@@ -1,6 +1,18 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+
+from django.db import models
+
+# Staff account table  
+class UserAccount1(models.Model):
+    UserName = models.CharField(primary_key=True)
+    Profession = models.CharField(max_length=100)
+    Password = models.CharField(max_length=100)
+    Email = models.EmailField(max_length=100)
+    Profile = models.ImageField(blank=True, upload_to='profile')
+    
+    
 class LabTest(models.Model):
     test_type = models.CharField(max_length=255)
     test_fee = models.DecimalField(max_digits=10, decimal_places=2)
