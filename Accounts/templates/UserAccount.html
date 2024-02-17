@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>User Account</title>
+
+    "{%load static %}"
+    <link rel="stylesheet" href="{% static 'User.css'%}" />
+    <script src="{% static 'User.js'%}"></script>
+  </head>
+  <body>
+    <form name="Form" onsubmit="return validateForm()">
+      <h2>User Account</h2>
+      <div class="box">
+        <label>User Name</label>
+        <input type="text" name="name" id="name" />
+        <div class="error" id="nameErr"></div>
+      </div>
+
+      <div class="box">
+        <label>Password</label>
+        <input type="password" name="password" id="name" />
+        <div class="error" id="passwordErr"></div>
+      </div>
+
+      <div class="box">
+        <label>Email Address</label>
+        <input type="text" name="email" id="email" />
+        <div class="error" id="emailErr"></div>
+      </div>
+
+      <div class="box">
+        <label>SID</label>
+        <input type="text" name="sid" maxlength="10" id="sid" />
+        <div class="error" id="sidErr"></div>
+      </div>
+
+      <div class="box">
+        <label>Proffession</label>
+        <select name="profession" id="profession">
+          <option>Select</option>
+          <option>Admin</option>
+          <option>Doctor</option>
+          <option>Nurse</option>
+          <option>Lab Technician</option>
+          <option>Receptionist</option>
+          <option>Cashier</option>
+        </select>
+        <div class="error" id="proffessionErr"></div>
+      </div>
+
+      <div class="box">
+        <label>Gender</label>
+        <div class="form-inline" id="gender">
+          <label><input type="radio" name="gender" value="male" /> Male</label>
+          <label
+            ><input type="radio" name="gender" value="female" /> Female</label
+          >
+        </div>
+        <div class="error" id="genderErr"></div>
+      </div>
+
+      <div class="box">
+        <input type="submit" value="Submit" />
+      </div>
+    </form>
+  </body>
+</html>

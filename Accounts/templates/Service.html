@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Prescription Information</title>
+    "{%load static %}"
+    <link rel="stylesheet" href="{% static 'User.css'%}" />
+    <script src="{% static 'User.js'%}"></script>
+  </head>
+  <body>
+    <form name="Form" onsubmit="return validateForm()">
+      <h2>Prescription Information</h2>
+      <div class="box">
+        <label>PID</label>
+        <input type="text" name="pid" id="pid" />
+        <div class="error" id="nameErr"></div>
+      </div>
+
+      <div class="box">
+        <label>Prescription</label>
+        <input type="text" name="prescription" id="prescription" />
+        <div class="error" id="addressErr"></div>
+      </div>
+
+      <div class="box">
+        <div class="input-container">
+          <label for="date">Date </label>
+          <input type="date" name="date" id="date" />
+        </div>
+      </div>
+
+      <div class="box">
+        <label>Doctor ID</label>
+        <input type="text" name="doctorid" id="doctorid" />
+        <div class="error" id="addressErr"></div>
+      </div>
+
+      <div class="box">
+        <label>LID</label>
+        <input type="text" name="lid" id="lid" />
+        <div class="error" id="addressErr"></div>
+      </div>
+
+      <div class="box">
+        <input type="submit" value="Submit" />
+      </div>
+    </form>
+  </body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Login Page</title>
+
+    "{%load static %}"
+    <link rel="stylesheet" href="{% static 'User.css'%}" />
+    <script src="{% static 'User.js'%}"></script>
+  </head>
+  <body>
+    <form name="Form" onsubmit="return validateForm()">
+      <h2>Log into your Account</h2>
+      <div class="box">
+        <label>User Name</label>
+        <input type="text" name="name" id="name" />
+        <div class="error" id="nameErr"></div>
+      </div>
+
+      <div class="box">
+        <label>Password</label>
+        <input type="password" name="password" id="name" />
+        <div class="error" id="passwordErr"></div>
+      </div>
+
+      <div class="box">
+        <input type="submit" value="Login" />
+      </div>
+    </form>
+  </body>
+</html>
