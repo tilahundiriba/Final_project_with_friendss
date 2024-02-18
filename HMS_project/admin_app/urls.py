@@ -4,8 +4,14 @@ from django.contrib.auth import views as auth_views
 from django.conf import settings
 from django.conf.urls.static import static
 urlpatterns = [
+
     path('test_fees/', views.lab_test_payment, name='lab_test_payment'),
     path('process-payment/', views.process_payment, name='process_payment'),
+
+    path('members/', views.members, name='members'),
+    path('test/', views.testing, name='test'),
+    # path('test_fees/', views.lab_test_payment, name='lab_test_payment'),
+    # path('process-payment/', views.process_payment, name='process_payment'),
     path('home/',views.home , name='home'),
     path('register/',views.createUserAccount, name='createUserAccount'),
     path('password_reset/', auth_views.PasswordResetView.as_view(template_name='admin_app/password_reset_form.html'), name='password_reset'),
@@ -27,6 +33,12 @@ urlpatterns = [
     path('dis_dr_dash/', views.dis_dr_dash, name='dis_dr_dash'),
     path('dis_dr_dash_content/', views.dis_dr_dash_content, name='dis_dr_dash_content'),
     path('form/', views.form, name='form'),
+
+
+  # additional forms path
+    path('bill/', views.dis_bill, name='bill'),
+    path('medication/', views.dis_medication, name='medication'),
+    #path('patientOrder/', views.patientOrder, name='patientOrder'),
     path('patient_history/', views.dis_patient_history, name='patient_history'),
     path('about-appointment/', views.about_appointment, name='about-appointment'),
     path('add-appointment/', views.add_appointment, name='add-appointment'),
@@ -51,7 +63,7 @@ urlpatterns = [
   path('invoice/', views.invoice, name='invoice'),
   path('casher_dash/', views.casher_dash, name='casher_dash'),
   path('casher_dash_content/', views.casher_dash_content, name='casher_dash_content'),
-  
+
   #receptionist views path start here
   path('receptionist_dash/', views.receptionist_dash, name='receptionist_dash'),
   path('dash_content/', views.receptionist_dash_content, name='receptionist_dash_content'),
@@ -59,10 +71,6 @@ urlpatterns = [
   path('edit-patient/', views.edit_patient, name='edit-patient'),
   path('about_patient/', views.about_patient, name='about_patient'),
   path('dis_patient/', views.dis_patient, name='dis_patient'),
-
-
-
- 
 
 ] 
 

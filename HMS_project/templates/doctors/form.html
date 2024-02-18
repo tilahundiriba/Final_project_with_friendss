@@ -170,80 +170,81 @@ background: rgb(130, 106, 251);
             <header>
                 New Patient Registration
             </header>
-            <form action="#" class="form">
+            <form action="{% url 'form' %}" class="form" method="post">
+                {% csrf_token %}
                 <div class="column">
                     <div class="input-box">
-                        <label for="">First Name</label>
-                        <input type="text" placeholder="Enter first name">
+                        <label for="first_name">First Name</label>
+                        <input type="text" placeholder="Enter first name" name="first_name" id="first_name">
                     </div>
                     <div class="input-box">
-                        <label for="">Middle Name</label>
-                        <input type="text" placeholder="Enter middle name">
+                        <label for="middle_name">Middle Name</label>
+                        <input type="text" placeholder="Enter middle name" name="middle_name" id="middle_name">
                     </div>
                 </div>
-
+            
                 <div class="input-box">
-                    <label for="">Last Name</label>
-                    <input type="text" placeholder="Enter last name">
+                    <label for="last_name">Last Name</label>
+                    <input type="text" placeholder="Enter last name" name="last_name" id="last_name">
                 </div>
                 <div class="gender-box">
                     <h3>Gender</h3>
                     <div class="gender-option">
                         <div class="gender">
-                            <input type="radio" id="check-male" name="gender">
+                            <input type="radio" id="check-male" name="gender" value="male">
                             <label for="check-male"> Male</label>
                         </div>
                         <div class="gender">
-                            <input type="radio" id="check-female" name="gender">
+                            <input type="radio" id="check-female" name="gender" value="female">
                             <label for="check-female"> Female</label>
                         </div>
                     </div>
                 </div>
                 <div class="column">
-
-
                     <div class="input-box">
-                        <label for="">Birth Date</label>
-                        <input type="date">
+                        <label for="birth_date">Birth Date</label>
+                        <input type="date" name="birth_date" id="birth_date">
                     </div>
                     <div class="input-box">
-                        <label for="">Age</label>
-                        <input type="text" placeholder="Enter your age">
+                        <label for="age">Age</label>
+                        <input type="text" placeholder="Enter your age" name="age" id="age">
                     </div>
                 </div>
                 <div class="column">
-
                     <div class="input-box">
-                        <label for="">Phone Number</label>
-                        <input type="text" placeholder="+2519-########">
-
+                        <label for="phone_number">Phone Number</label>
+                        <input type="text" placeholder="+2519-########" name="phone_number" id="phone_number">
                     </div>
                     <div class="input-box">
-                        <label for="">Email</label>
-                        <input type="email" placeholder="example@gmail.com">
+                        <label for="email">Email</label>
+                        <input type="email" placeholder="example@gmail.com" name="email" id="email">
                     </div>
                 </div>
                 <div class="input-box">
-                    <label for="">Address</label>
-                    <!-- <input type="email" placeholder="Enter your email"> -->
+                    <label for="country">Address</label>
                     <div class="column">
                         <div class="select-box">
-                            <select>
+                            <select name="country" id="country">
                                 <option hidden>Country</option>
-                                <option>Country1</option>
-                                <option>Country2</option>
-                                <option>Country3</option>
-                                <option>Country4</option>
+                                <option value='Ethiopia'>Ethiopia</option>
+                                <option value='Other'>Other</option>
+
                             </select>
                         </div>
-                        <input type="text" placeholder="Enter you city">
+                        <input type="text" placeholder="Enter your city" name="city" id="city">
                     </div>
                     <div class="column">
-                        <input type="text" placeholder="Enter your region">
-                        <input type="text" placeholder="Enter street address">
+                        <input type="text" placeholder="Enter your region" name="region" id="region">
+                        <input type="text" placeholder="Enter street address" name="street_address" id="street_address">
                     </div>
                 </div>
-
+                <label for="doctor_id">Assigned Doctor:</label>
+    <select name="doctor_id" id="doctor_id">
+        <option hidden>Select Doctors</option>
+        {% for doctor in doctors %}
+            <option value="{{ doctor.id }}">{{ doctor.first_name }} {{ doctor.last_name }}</option>
+        {% endfor %}
+    </select>
                 <button type="submit">Submit</button>
             </form>
         </section>
