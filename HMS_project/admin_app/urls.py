@@ -28,6 +28,7 @@ urlpatterns = [
   # additional forms path
     path('bill/', views.dis_bill, name='bill'),
     path('medication/', views.dis_medication, name='medication'),
+    #path('patientOrder/', views.patientOrder, name='patientOrder'),
     path('patient_history/', views.dis_patient_history, name='patient_history'),
     path('user_registration/', views.dis_user_registration, name='user_registration'),
     path('vital_info/', views.dis_vital_info, name='vital_info'),
