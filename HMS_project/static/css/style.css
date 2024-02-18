@@ -98,7 +98,7 @@
       justify-content: center;
        background-color: #b8b5b5;
        background-size: cover;
-       height: 100vh;
+       height: fit-content;
        background-repeat: no-repeat;
        background-attachment: fixed;
        background-position: center;
@@ -446,7 +446,7 @@
   left: 50%;
   transform: translate(-50%,-50%);
   width: 400px;
-  background: rgb(133, 134, 133);
+  background: rgb(10, 140, 150);
   border-radius: 10px;
   box-shadow: -5px 5px 10px 0px rgba(0.5, 0.5, 0.5, 0.5);
 

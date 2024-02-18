@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     {% block 'title' %}
-    <title>Bootstrap Admin Dashboard</title>
+    <title>Nurse Dashboard</title>
 {% endblock %}
 	<!-- Fav  Icon Link -->
 	<link rel="shortcut icon" type="image/png" href="{% static 'images2/fav.png' %}">
@@ -57,14 +57,14 @@
                     <a href="#">Hospital</a>
                 </div>
                 <ul class="sidebar-nav">
-                    <li class="sidebar-header">Doctor Elements</li>
+                    <li class="sidebar-header">Nurse Elements</li>
                     <li class="sidebar-item">
-                        <a href="{% url 'dis_dr_dash_content' %}" class="sidebar-link">
+                        <a href="{% url 'dis_nurse_dash_content' %}" class="sidebar-link">
                             <i class="fa-solid fa-list pe-2"></i>
                             Dashboard
                         </a>
                     </li>
-          
+      
                     <li class="sidebar-item">
                         <a href="#" class="sidebar-link collapsed" data-bs-target="#posts" data-bs-toggle="collapse"
                             aria-expanded="false"><i class="fa-solid fa-hospital-user pe-2"></i>
@@ -72,10 +72,10 @@
                         </a>
                         <ul id="posts" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                             <li class="sidebar-item">
-                                <a href="{% url 'patient_history' %}" class="sidebar-link">Record Patient History</a>
+                                <a href="{% url 'medication' %}" class="sidebar-link">Patient Medication</a>
                             </li>
                             <li class="sidebar-item">
-                                <a href="{% url 'medication' %}" class="sidebar-link">View Patient History</a>
+                                <a href="{% url 'vital_info' %}" class="sidebar-link">Vital Information</a>
                             </li>
 
                         </ul>
@@ -84,21 +84,19 @@
                         <a href="#" class="sidebar-link collapsed" data-bs-target="#auth" data-bs-toggle="collapse"
                             aria-expanded="false">
                             <i class="fa-regular fa-calendar-check pe-2"></i>
-                            Appointments
+                            Room
                         </a>
                         <ul id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                             <li class="sidebar-item">
-                                <a href="{% url 'add-appointment' %}" class="sidebar-link">Set Appointments</a>
+                                <a href="{% url 'add_room' %}" class="sidebar-link">Add Rooms</a>
                             </li>
                             <li class="sidebar-item">
-                                <a href="{% url 'edit-appointment' %}" class="sidebar-link">Edit Appointments</a>
+                                <a href="{% url 'dis_room' %}" class="sidebar-link">View Rooms</a>
                             </li>
                             <li class="sidebar-item">
-                                <a href="{% url 'dis-appointment' %}" class="sidebar-link">View Appointments</a>
+                                <a href="{% url 'edit_room' %}" class="sidebar-link">Edit Rooms</a>
                             </li>
-                            <li class="sidebar-item">
-                                <a href="{% url 'about-appointment' %}" class="sidebar-link">About Appointments</a>
-                            </li>
+
                         </ul>
                     </li>
 
@@ -107,7 +105,7 @@
                             aria-expanded="false">
                             <!-- <i class="fa-regular fa-flask-vial pe-2"></i> -->
                             <i class="fa-solid fa-flask-vial pe-2"></i>
-                            Laboratory
+                            Others
                         </a>
                         <ul id="feed" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                             <li class="sidebar-item">
@@ -121,6 +119,8 @@
                             </li>
                         </ul>
                     </li>
+      
+
                     <!-- <li class="sidebar-header">Setting</li> -->
                     <li class="sidebar-item">
                         <a href="#" class="sidebar-link collapsed" data-bs-target="#multi" data-bs-toggle="collapse"
@@ -155,11 +155,11 @@
                     <span class="navbar-toggler-icon text-white"></span>
                 </button>
                 <img src="{% static 'images/profile.jpg'%}" class="avatar img-fluid rounded" alt="" />
-         
+             
             </nav>
             <main class="content px-3 py-2">
                 {% block content %}
-              
+          
                 </nav>
                 <main class="content px-3 py-2">
                     <div class="container-fluid">
@@ -241,57 +241,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- <div class="col-12 col-md-6 d-flex">
-                                <div class="card flex-fill border-0">
-                                    <div class="card-body py-4">
-                                        <div class="d-flex align-items-start">
-                                            <div class="flex-grow-1" style="width:10px; margin:auto;">
-                                                <canvas id="myChart"></canvas>
-
-                                                <script>
-                                                    var xValues = [
-                                                        "Italy",
-                                                        "France",
-                                                        "Spain",
-                                                        "USA",
-                                                        "Argentina",
-                                                    ];
-                                                    var yValues = [55, 45, 35, 25, 15];
-                                                    var barColors = [
-                                                        "#ff9999",
-                                                        "#80ff00",
-                                                        "#00bfff",
-                                                        "#ffbf00",
-                                                        "#b34d4d",
-                                                    ];
-
-                                                    new Chart("myChart", {
-                                                        type: "bar",
-                                                        data: {
-                                                            labels: xValues,
-                                                            datasets: [
-                                                                {
-                                                                    backgroundColor: barColors,
-                                                                    data: yValues,
-                                                                },
-                                                            ],
-                                                        },
-                                                        options: {
-                                                            legend: { display: false },
-                                                            title: {
-                                                                display: true,
-                                                                text: "Users Number In Hospital",
-                                                            },
-                                                            responsive: true, // Enable responsiveness
-                                                            maintainAspectRatio: false,
-                                                        },
-                                                    });
-                                                </script>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> -->
+                          
                         </div>
                         <!-- Table Element -->
                         <div class="card border-0">
@@ -371,8 +321,7 @@
                 </footer>
         </div>
     </div>
-    	<!-- Jquery Library-->
-	<script src="{% static 'js2/jquery-3.2.1.min.js' %}"></script>
+    <script src="{% static 'js2/jquery-3.2.1.min.js' %}"></script>
 	<!-- Popper Library-->
 	<script src="{% static 'js2/popper.min.js' %}"></script>
 	<!-- Bootstrap Library-->
