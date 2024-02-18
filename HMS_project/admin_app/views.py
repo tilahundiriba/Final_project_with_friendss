@@ -233,6 +233,8 @@ def form(request):
         city = request.POST.get('city')
         region = request.POST.get('region')
         street_address = request.POST.get('street_address')
+        # doctor_id = request.POST.get('doctor_id')
+        # doctors = UserAccount1.objects.filter(account_type='Doctor')
 
         # Generate unique ID
         generated_id = 'SH' + get_random_string(length=6, allowed_chars='1234567890')
@@ -251,7 +253,7 @@ def form(request):
             country=country,
             city=city,
             region=region,
-            street_address=street_address
+            street_address=street_address,
         )
 
         #return render(request, 'doctors/form.html', {'generated_id': generated_id})
@@ -267,7 +269,9 @@ def dis_bill(request):
 def dis_medication(request):
     return render(request,'doctors/medication.html')
 
-
+def displayRegisteredPatient(request):
+    
+    return render(request,'doctors/displayRegisteredPatient.html')
 
 def dis_user_registration(request):
     return render(request,'admin_dash/user_registration.html')
