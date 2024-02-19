@@ -50,6 +50,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'admin_app',
+    'nurse_app',
+    'doctor_app',
+    'casher_app',
+    'receptionist_app',
 ]
 
 MIDDLEWARE = [

@@ -3,7 +3,10 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.contrib.auth.models import Group, Permission
 from django.contrib.auth.models import User
+from receptionist_app.models import Patient
 # Staff account table  
+
+
 class UserProfileInfo2(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     profession = models.CharField(max_length=100)  # Add profession field
@@ -14,14 +17,7 @@ class UserProfileInfo2(models.Model):
         return self.user.username
 
 
-class UserAccount1(models.Model):
-    UserName = models.CharField(primary_key=True)
-    Profession = models.CharField(max_length=100)
-    Password = models.CharField(max_length=100)
-    Email = models.EmailField(max_length=100)
-    Profile = models.ImageField(blank=True, upload_to='profile')
-    
-    
+
 class LabTest(models.Model):
     test_type = models.CharField(max_length=255)
     test_fee = models.DecimalField(max_digits=10, decimal_places=2)
@@ -59,33 +55,6 @@ def __str__(self):
 
 
 
-from django.db import models
 
-class Patient(models.Model):
-    patient_id = models.CharField(primary_key=True)
-    first_name = models.CharField(max_length=100)
-    middle_name = models.CharField(max_length=100, blank=True)
-    last_name = models.CharField(max_length=100)
-    gender = models.CharField(max_length=10)
-    birth_date = models.DateField()
-    age = models.IntegerField()
-    phone_number = models.CharField(max_length=20)
-    email = models.EmailField()
-    country = models.CharField(max_length=100)
-    city = models.CharField(max_length=100)
-    region = models.CharField(max_length=100)
-    street_address = models.CharField(max_length=200)
 
-    def __str__(self):
-        return self.patient_id
-    
-    
-    #patient history table
 
-class PatientHistory(models.Model):
-    PatientID=models.ForeignKey(Patient, on_delete=models.CASCADE)
-    Date=models.DateField()
-    Sympthom=models.CharField(max_length=100)
-    DiseaseName=models.CharField(max_length=100)
-    Nurse_ID=models.ForeignKey(UserAccount1,on_delete=models.CASCADE,related_name='doctor_history_set',related_query_name='doctor_history')
-    Doctor_ID=models.ForeignKey(UserAccount1,on_delete=models.CASCADE,related_name='nurse_history_set',related_query_name='doctor_history')
