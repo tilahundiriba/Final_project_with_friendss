@@ -311,7 +311,6 @@ def dis_medication(request):
 
 
 def dis_patient_history(request):
-    
     return render(request,'doctors/patient_history.html')
 # additional forms
 def dis_bill(request):
@@ -320,7 +319,6 @@ def dis_medication(request):
     return render(request,'doctors/medication.html')
 
 def displayRegisteredPatient(request):
-    
     return render(request,'doctors/displayRegisteredPatient.html')
 
 def dis_user_registration(request):
