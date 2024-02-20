@@ -37,7 +37,7 @@
 				<!-- Top Navigation -->
 			
 				<!-- /Menu -->
-				<div class="container menu-nav" id="container-min">
+				<!-- <div class="container menu-nav" id="container-min">
 					<nav class="navbar navbar-expand-lg proclinic-bg text-white">
 						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
 						 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -145,13 +145,13 @@
 							</ul>
 						</div>
 					</nav>
-				</div>
+				</div> -->
 				<!-- Breadcrumb -->
 				<!-- Page Title -->
 				<div class="container mt-0">
 					<div class="row breadcrumb-bar">
 						<div class="col-md-6">
-							<h3 class="block-title">Add Room Allotment</h3>
+							<h3 class="block-title">Add Room and Bed</h3>
 						</div>
 						<div class="col-md-6">
 							<ol class="breadcrumb">
@@ -177,36 +177,26 @@
 					<div class="col-md-12">
 						<div class="widget-area-2 proclinic-box-shadow">
 							<h3 class="widget-title">Add Room Allotment</h3>
-							<form>
+							<form action="{% url 'add_room' %}" method="post">
+								{% csrf_token %}
 								<div class="form-row">
 									<div class="form-group col-md-6">
+										<label for="room-block">Block Number</label>
+										<input type="text" class="form-control" placeholder="Room Block" id="room-block" name="block_no">
+									</div>
+									<div class="form-group col-md-6">
 										<label for="room-number">Room Number</label>
-										<input type="text" class="form-control" placeholder="Room Number" id="room-number">
+										<input type="text" class="form-control" placeholder="Room Number" id="room-number" name="room_no">
 									</div>
 									<div class="form-group col-md-6">
-										<label for="room-type">Room Type</label>
-										<select class="form-control" id="room-type">
-											<option>ICU</option>
-											<option>General</option>
-											<option>AC Room</option>
-										</select>
+										<label for="bed-number">Bed Number</label>
+										<input type="text" placeholder="Bed Number" class="form-control" id="bed-number" name="bed_no">
 									</div>
 									<div class="form-group col-md-6">
-										<label for="patient-name">Patient Name</label>
-										<input type="text" placeholder="Patient Name" class="form-control" id="patient-name">
+										<label for="bed-status">Status</label>
+										<input type="text" placeholder="Allotment Date" class="form-control" id="bed-status" name="status">
 									</div>
-									<div class="form-group col-md-6">
-										<label for="allot-date">Allotment Date</label>
-										<input type="date" placeholder="Allotment Date" class="form-control" id="allot-date">
-									</div>
-									<div class="form-group col-md-6">
-										<label for="discharge-date">Discharge Date</label>
-										<input type="date" placeholder="Discharge Date" class="form-control" id="discharge-date">
-									</div>
-									<div class="form-group col-md-6">
-										<label for="doctor-name">Doctor Name</label>
-										<input type="text" placeholder="Doctor Name" class="form-control" id="doctor-name">
-									</div>
+									
 																		
 									<div class="form-check col-md-12 mb-2">
 										<div class="text-left">

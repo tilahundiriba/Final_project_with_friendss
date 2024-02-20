@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     {% block 'title' %}
-    <title>Bootstrap Admin Dashboard</title>
+    <title></title>
 {% endblock %}
 	<!-- Fav  Icon Link -->
 	<link rel="shortcut icon" type="image/png" href="{% static 'images2/fav.png' %}">
@@ -120,7 +120,27 @@
                             </li>
                         </ul>
                     </li>
-
+                    <li class="sidebar-item">
+                        <a href="#" class="sidebar-link collapsed" data-bs-target="#auth2" data-bs-toggle="collapse"
+                            aria-expanded="false">
+                            <i class="fa-regular fa-calendar-check pe-2"></i>
+                            Prescriptions
+                        </a>
+                        <ul id="auth2" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                            <li class="sidebar-item">
+                                <a href="{% url 'add_perscription' %}" class="sidebar-link">Set Prescription</a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a href="{% url 'edit_perscription' %}" class="sidebar-link">Edit Prescription</a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a href="{% url 'perscriptions' %}" class="sidebar-link">View Prescription</a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a href="{% url 'about_perscription' %}" class="sidebar-link">About Prescription</a>
+                            </li>
+                        </ul>
+                    </li>
                     <li class="sidebar-item">
                         <a href="#" class="sidebar-link collapsed" data-bs-target="#feed" data-bs-toggle="collapse"
                             aria-expanded="false">

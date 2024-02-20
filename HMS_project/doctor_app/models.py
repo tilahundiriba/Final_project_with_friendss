@@ -19,3 +19,13 @@ class Appointment(models.Model):
     Doctor_ID=models.ForeignKey(UserProfileInfo2,on_delete=models.CASCADE)
     App_reseon = models.TextField(max_length=200)
     App_status = models.TextField(max_length=100)
+
+
+class Prescription(models.Model):
+    P_ID=models.ForeignKey(Patient, on_delete=models.CASCADE)
+    Prec_number=models.CharField(max_length=100)
+    Prec_date=models.DateField(max_length=100)
+    Precscriptions=models.TextField(max_length=200,null=True)
+    Patient_full_name=models.TextField(max_length=100)
+    Doctor_ID=models.ForeignKey(UserProfileInfo2,on_delete=models.CASCADE)
+  

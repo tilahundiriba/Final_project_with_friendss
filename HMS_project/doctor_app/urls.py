@@ -13,6 +13,11 @@ urlpatterns = [
     path('edit-appointment/', views.edit_appointment, name='edit-appointment'),
     path('appointments/', views.dis_appointment, name='dis-appointment'),
 
+    path('perscriptions/', views.perscription, name='perscriptions'),
+    path('add_perscription/', views.add_perscription, name='add_perscription'),
+    path('edit_perscription/', views.edit_perscription, name='edit_perscription'),
+    path('about_perscription/', views.about_perscription, name='about_perscription'),
+
 ] 
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

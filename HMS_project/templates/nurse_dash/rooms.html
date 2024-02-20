@@ -159,8 +159,8 @@
 										<span class="ti-home"></span>
 									</a>
 								</li>
-								<li class="breadcrumb-item">Allotments</li>
-								<li class="breadcrumb-item active">All Allotments</li>
+								<li class="breadcrumb-item active">Allotments</li>
+								<li class="breadcrumb-item ">All Allotments</li>
 							</ol>
 						</div>
 					</div>
@@ -175,7 +175,7 @@
 					<!-- Widget Item -->
 					<div class="col-md-12">
 						<div class="widget-area-2 proclinic-box-shadow">
-							<h3 class="widget-title">Allotments List</h3>
+							<h3 class="widget-title">Rooms List</h3>
 							<div class="table-responsive mb-3">
 								<table id="tableId" class="table table-bordered table-striped">
 									<thead>
@@ -186,16 +186,17 @@
 													<label class="custom-control-label" for="select-all"></label>
 												</div>
 											</th>
-											<th>Room</th>
-											<th>Room Type</th>
-											<th>Patient Name</th>
-											<th>Allotment Date</th>
-                                            <th>Discharge Date</th>
-                                            <th>Doctor Name</th>
+											<th>Room Block</th>
+											<th>Room Number</th>
+											<th>Bed Number</th>
 											<th>Status</th>
+											<th>Actions</th>
+                                            
+											
 										</tr>
 									</thead>
                                     <tbody>
+										{% for room in rooms %}
                                         <tr>
                                             <td>
                                                 <div class="custom-control custom-checkbox">
@@ -203,203 +204,22 @@
                                                     <label class="custom-control-label" for="1"></label>
                                                 </div>
                                             </td>
-                                            <td>10</td>
-                                            <td>Icu</td>
-                                            <td>Manoj Kumar</td>
-                                            <td>12-11-2018</td>
-                                            <td>16-11-2018</td>
-                                            <td>Dr Daniel Smith</td>
+                                            <td>{{room.Room_block}}</td>
+                                            <td>{{room.Room_no}}</td>
+                                            <td>{{room.Bed_no}}</td>
+                                            
                                             <td>
-                                                <span class="badge badge-success">Available</span>
+                                                <span class="badge badge-success">{{room.Status}}</span>
+                                            </td>
+                                            <td>
+												<a href="#" class="btn btn-outline-danger"><span class="ti-trash"></span> </a>
+												<a href="#" class="btn btn-outline-primary "><span class="ti-pencil-alt"></span></a>
+												<a href="#" class="btn btn-outline-info "><span class="ti-eye"></span></a>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="custom-control custom-checkbox">
-                                                    <input class="custom-control-input" type="checkbox" id="2">
-                                                    <label class="custom-control-label" for="2"></label>
-                                                </div>
-                                            </td>
-                                            <td>4</td>
-                                            <td>Ac Room</td>
-                                            <td>Susan</td>
-                                            <td>10-11-2018</td>
-                                            <td>-</td>
-                                            <td>Dr Daniel Smith</td>
-                                            <td>
-                                                <span class="badge badge-danger">Not Discharged</span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="custom-control custom-checkbox">
-                                                    <input class="custom-control-input" type="checkbox" id="3">
-                                                    <label class="custom-control-label" for="3"></label>
-                                                </div>
-                                            </td>
-                                            <td>2</td>
-                                            <td>Ac Room</td>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>
-                                                <span class="badge badge-warning">Not Alloted</span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="custom-control custom-checkbox">
-                                                    <input class="custom-control-input" type="checkbox" id="4">
-                                                    <label class="custom-control-label" for="4"></label>
-                                                </div>
-                                            </td>
-                                            <td>3</td>
-                                            <td>General</td>
-                                            <td>Raj kiran</td>
-                                            <td>10-11-2018</td>
-                                            <td>12-11-2018</td>
-                                            <td>Dr Wilsson</td>
-                                            <td>
-                                                <span class="badge badge-success">Available</span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="custom-control custom-checkbox">
-                                                    <input class="custom-control-input" type="checkbox" id="5">
-                                                    <label class="custom-control-label" for="5"></label>
-                                                </div>
-                                            </td>
-                                            <td>10</td>
-                                            <td>Icu</td>
-                                            <td>Manoj Kumar</td>
-                                            <td>12-11-2018</td>
-                                            <td>16-11-2018</td>
-                                            <td>Dr Daniel Smith</td>
-                                            <td>
-                                                <span class="badge badge-success">Available</span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="custom-control custom-checkbox">
-                                                    <input class="custom-control-input" type="checkbox" id="6">
-                                                    <label class="custom-control-label" for="6"></label>
-                                                </div>
-                                            </td>
-                                            <td>4</td>
-                                            <td>Ac Room</td>
-                                            <td>Susan</td>
-                                            <td>10-11-2018</td>
-                                            <td>-</td>
-                                            <td>Dr Daniel Smith</td>
-                                            <td>
-                                                <span class="badge badge-danger">Not Discharged</span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="custom-control custom-checkbox">
-                                                    <input class="custom-control-input" type="checkbox" id="7">
-                                                    <label class="custom-control-label" for="7"></label>
-                                                </div>
-                                            </td>
-                                            <td>2</td>
-                                            <td>Ac Room</td>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>
-                                                <span class="badge badge-warning">Not Alloted</span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="custom-control custom-checkbox">
-                                                    <input class="custom-control-input" type="checkbox" id="8">
-                                                    <label class="custom-control-label" for="8"></label>
-                                                </div>
-                                            </td>
-                                            <td>3</td>
-                                            <td>General</td>
-                                            <td>Raj kiran</td>
-                                            <td>10-11-2018</td>
-                                            <td>12-11-2018</td>
-                                            <td>Dr Wilsson</td>
-                                            <td>
-                                                <span class="badge badge-success">Available</span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="custom-control custom-checkbox">
-                                                    <input class="custom-control-input" type="checkbox" id="9">
-                                                    <label class="custom-control-label" for="9"></label>
-                                                </div>
-                                            </td>
-                                            <td>10</td>
-                                            <td>Icu</td>
-                                            <td>Manoj Kumar</td>
-                                            <td>12-11-2018</td>
-                                            <td>16-11-2018</td>
-                                            <td>Dr Daniel Smith</td>
-                                            <td>
-                                                <span class="badge badge-success">Available</span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="custom-control custom-checkbox">
-                                                    <input class="custom-control-input" type="checkbox" id="10">
-                                                    <label class="custom-control-label" for="10"></label>
-                                                </div>
-                                            </td>
-                                            <td>4</td>
-                                            <td>Ac Room</td>
-                                            <td>Susan</td>
-                                            <td>10-11-2018</td>
-                                            <td>-</td>
-                                            <td>Dr Daniel Smith</td>
-                                            <td>
-                                                <span class="badge badge-danger">Not Discharged</span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="custom-control custom-checkbox">
-                                                    <input class="custom-control-input" type="checkbox" id="11">
-                                                    <label class="custom-control-label" for="11"></label>
-                                                </div>
-                                            </td>
-                                            <td>2</td>
-                                            <td>Ac Room</td>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>
-                                                <span class="badge badge-warning">Not Alloted</span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="custom-control custom-checkbox">
-                                                    <input class="custom-control-input" type="checkbox" id="12">
-                                                    <label class="custom-control-label" for="12"></label>
-                                                </div>
-                                            </td>
-                                            <td>3</td>
-                                            <td>General</td>
-                                            <td>Raj kiran</td>
-                                            <td>10-11-2018</td>
-                                            <td>12-11-2018</td>
-                                            <td>Dr Wilsson</td>
-                                            <td>
-                                                <span class="badge badge-success">Available</span>
-                                            </td>
-                                        </tr>
+                                      
+                                     {% endfor %}
+                                     
                                     </tbody>
                                 </table>
                                 

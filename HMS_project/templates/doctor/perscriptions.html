@@ -1,21 +1,16 @@
 {% extends 'doctor/dr_dash.html' %}
 {% load static %}
 {% block content %}
-
 <!DOCTYPE html>
 <html>
-
-
-<!-- Mirrored from www.konnectplugins.com/proclinic/Horizontal/appointments.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 24 Jan 2022 10:41:26 GMT -->
+{% block 'title' %}
+<title>Precsriptions List</title>
+{% endblock %}
+<!-- Mirrored from www.konnectplugins.com/proclinic/Horizontal/patients.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 24 Jan 2022 10:42:01 GMT -->
 
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	{% block 'title' %}
-	<title>Appointment List</title>
-	{% endblock %}
-	<!-- Fav  Icon Link -->
+
+</head>
 
 <body>
 	<!-- Pre Loader -->
@@ -35,6 +30,27 @@
 			<!-- Top Navigation -->
 
 			<!-- /Menu -->
+			<!-- Breadcrumb -->
+			<!-- Page Title -->
+			<div class="container mt-0">
+				<div class="row breadcrumb-bar">
+					<div class="col-md-6">
+						<h3 class="block-title">Perscriptions</h3>
+					</div>
+					<div class="col-md-6">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item">
+								<a href="index.html">
+									<span class="ti-home"></span>
+								</a>
+							</li>
+							<li class="breadcrumb-item active">Perscriptions</li>
+							<li class="breadcrumb-item ">All Perscription</li>
+						</ol>
+					</div>
+				</div>
+			</div>
+			<!-- /Page Title -->
 			<div class="container menu-nav" id="container-min">
 				<nav class="navbar navbar-expand-lg proclinic-bg text-white">
 					<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -45,7 +61,7 @@
 
 					<div class="collapse navbar-collapse" id="navbarSupportedContent">
 						<ul class="navbar-nav mr-auto">
-						
+
 							<li class="nav-item dropdown">
 								<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
 									aria-haspopup="true" aria-expanded="false"><span class="ti-wheelchair"></span>
@@ -53,7 +69,7 @@
 								<div class="dropdown-menu">
 									<a class="dropdown-item" href="add-patient.html">add History</a>
 									<a class="dropdown-item" href="patients.html">View History</a>
-							
+
 								</div>
 							</li>
 							<li class="nav-item dropdown">
@@ -62,7 +78,7 @@
 								<div class="dropdown-menu">
 									<a class="dropdown-item" href="{% url 'dis_dr_dash' %}">Home</a>
 									<a class="dropdown-item" href="{% url 'dis_dr_dash_content' %}">Dashboard</a>
-									
+
 								</div>
 							</li>
 							<li class="nav-item dropdown active">
@@ -72,76 +88,55 @@
 								<div class="dropdown-menu">
 									<a class="dropdown-item" href="{% url 'add-appointment' %}">Add Appointment</a>
 									<a class="dropdown-item" href="{% url 'dis-appointment' %}">All Appointments</a>
-									<a class="dropdown-item" href="{% url 'about-appointment' %}">Appointment Details</a>
+									<a class="dropdown-item" href="{% url 'about-appointment' %}">Appointment
+										Details</a>
 									<a class="dropdown-item" href="{% url 'edit-appointment' %}">Edit Appointment</a>
 								</div>
 							</li>
-							<!-- <li class="nav-item dropdown">
+							<li class="nav-item dropdown">
 								<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
 									aria-haspopup="true" aria-expanded="false"><span class="ti-money"></span>
-									Payments</a>
+									Perscriptions</a>
 								<div class="dropdown-menu">
-									<a class="dropdown-item" href="add-payment.html">Add Payment</a>
-									<a class="dropdown-item" href="payments.html">All Payments</a>
-									<a class="dropdown-item" href="about-payment.html">Payment Invoice</a>
+									<a class="dropdown-item" href="add-payment.html">Add Perscription</a>
+									<a class="dropdown-item" href="payments.html">All Perscription</a>
+									<a class="dropdown-item" href="about-payment.html">View Perscription</a>
 								</div>
 							</li>
 							<li class="nav-item dropdown">
 								<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
 									aria-haspopup="true" aria-expanded="false"><span class="ti-key"></span> Room
-									Allotments</a>
+									Laboratory</a>
 								<div class="dropdown-menu">
-									<a class="dropdown-item" href="add-room.html">Add Room Allotment</a>
-									<a class="dropdown-item" href="rooms.html">All Rooms</a>
-									<a class="dropdown-item" href="edit-room.html">Edit Room Allotment</a>
+									<a class="dropdown-item" href="add-room.html">Add Laboratory</a>
+									<a class="dropdown-item" href="rooms.html">All Laboratory</a>
+									<a class="dropdown-item" href="edit-room.html">Edit Laboratory</a>
 								</div>
-							</li> -->
-							<!-- <li class="nav-item dropdown">
+							</li>
+							<li class="nav-item dropdown">
 								<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
 									aria-haspopup="true" aria-expanded="false"><span class="ti-layout-tab"></span> UI
 									Kit</a>
 								<div class="dropdown-menu">
 									<a class="dropdown-item" href="typography.html">Typography</a>
 									<a class="dropdown-item" href="buttons.html">Buttons</a>
-							
+
 								</div>
-							</li> -->
-							<!-- <li class="nav-item dropdown">
+							</li>
+							<li class="nav-item dropdown">
 								<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
 									aria-haspopup="true" aria-expanded="false"><span class="ti-file"></span> Other
 									Pages</a>
 								<div class="dropdown-menu">
 									<a class="dropdown-item" href="login.html">Login </a>
 									<a class="dropdown-item" href="sign-up.html">Sign Up</a>
-								
+
 								</div>
-							</li> -->
+							</li>
 						</ul>
 					</div>
 				</nav>
 			</div>
-			<!-- Breadcrumb -->
-			<!-- Page Title -->
-			<div class="container mt-0">
-				<div class="row breadcrumb-bar">
-					<div class="col-md-6">
-						<h3 class="block-title">Appointments</h3>
-					</div>
-					<div class="col-md-6">
-						<ol class="breadcrumb">
-							<li class="breadcrumb-item">
-								<a href="index.html">
-									<span class="ti-home"></span>
-								</a>
-							</li>
-							<li class="breadcrumb-item active">Appointments</li>
-							<li class="breadcrumb-item ">Appointments List</li>
-						</ol>
-					</div>
-				</div>
-			</div>
-			<!-- /Page Title -->
-
 			<!-- /Breadcrumb -->
 			<!-- Main Content -->
 			<div class="container">
@@ -150,8 +145,9 @@
 					<!-- Widget Item -->
 					<div class="col-md-12">
 						<div class="widget-area-2 proclinic-box-shadow">
-							<h3 class="widget-title">Appointments List</h3>
+							<h3 class="widget-title">Prescription List</h3>
 							<div class="table-responsive mb-3">
+								
 								<table id="tableId" class="table table-bordered table-striped">
 									<thead>
 										<tr>
@@ -161,18 +157,17 @@
 													<label class="custom-control-label" for="select-all"></label>
 												</div>
 											</th> -->
-											<th>Appointment ID</th>
 											<th>Patient ID</th>
-											<th>Time Slot</th>
-											<th>Appointment Date</th>
-											<th>Doctor Name</th>
-											<th>Problem</th>
-											<th>Status</th>
+											<th>Patient Name</th>
+											<th>Doctor ID</th>
+											<th>Prescription Number</th>
+											<th>Prescription Date</th>
+											<th>Prescriptions</th>
 											<th>Actions</th>
 										</tr>
 									</thead>
 									<tbody>
-										{% for app in appointment %}
+										{% for pres in prescriptions %}
 										<tr>
 											<!-- <td>
 												<div class="custom-control custom-checkbox">
@@ -180,28 +175,26 @@
 													<label class="custom-control-label"></label>
 												</div>
 											</td> -->
-											<td>{{app.App_number}}</td>
-											<td>{{app.P_ID}}</td>
-											<td>{{app.Time_slot}}</td>
-											<td>{{app.App_date}}</td>
-											<td>{{app.Doctor_ID}}</td>
-											<td>{{app.App_reseon}}</td>
+											<td>{{pres.P_ID}}</td>
+											<td>{{pres.Patient_full_name}}</td>
+											<td>{{pres.Doctor_ID}}</td>
+											<td>{{pres.Prec_number}}</td>
+											<td>{{pres.Prec_date}}</td>
+											<td>{{pres.Precscriptions}}</td>
+
 											<td>
-												<span class="badge badge-success">{{app.App_status}}</span>
-											</td>
-											<td><a href="#" class="btn btn-danger mt-3 mb-0"><span
+												<a href="#" class="btn btn-outline-danger"><span
 														class="ti-trash"></span></a>
-												<a href="#" class="btn btn-primary mt-3 mb-0"><span
+												<a href="#" class="btn btn-outline-primary "><span
 														class="ti-pencil-alt"></span></a>
-												<a href="#" class="btn btn-info mt-3 mb-0"><span
-															class="ti-eye"></span></a>
+												<a href="#" class="btn btn-outline-info "><span
+														class="ti-eye"></span></a>
 											</td>
 										</tr>
-
 										{% endfor %}
 									</tbody>
 								</table>
-
+								
 								<!--Export links-->
 								<nav aria-label="Page navigation example">
 									<ul class="pagination justify-content-center export-pagination">
@@ -221,10 +214,10 @@
 									</ul>
 								</nav>
 								<!-- /Export links-->
-								<!-- <button type="button" class="btn btn-danger mt-3 mb-0"><span class="ti-trash"></span>
+								<button type="button" class="btn btn-danger mt-3 mb-0"><span class="ti-trash"></span>
 									DELETE</button>
 								<button type="button" class="btn btn-primary mt-3 mb-0"><span
-										class="ti-pencil-alt"></span> EDIT</button> -->
+										class="ti-pencil-alt"></span> EDIT</button>
 							</div>
 						</div>
 					</div>
@@ -249,10 +242,11 @@
 		<span class="ti-angle-up"></span>
 	</a>
 	<!-- /Back to Top -->
+
 </body>
 
 
-<!-- Mirrored from www.konnectplugins.com/proclinic/Horizontal/appointments.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 24 Jan 2022 10:41:56 GMT -->
+<!-- Mirrored from www.konnectplugins.com/proclinic/Horizontal/patients.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 24 Jan 2022 10:42:01 GMT -->
 
 </html>
 {% endblock %}
