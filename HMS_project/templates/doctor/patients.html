@@ -57,6 +57,7 @@
 						<div class="widget-area-2 proclinic-box-shadow">
 							<h3 class="widget-title">Patients List</h3>							
 							<div class="table-responsive mb-3">
+								{% for patient in patients %}
 								<table id="tableId" class="table table-bordered table-striped">
 									<thead>
 										<tr>
@@ -82,193 +83,27 @@
 													<label class="custom-control-label" for="1"></label>
 												</div>
 											</td>
-											<td>1</td>
-											<td>Manoj Kumar</td>
-											<td>30</td>
-											<td>333-444-7777</td>
-											<td>12-03-2018</td>
+											<td>{{pateint.patient_id}}</td>
+											<td>{{pateint.first_name}}</td>
+											<td>{{pateint.middle_name}}</td>
+											<td>{{pateint.last_name}}</td>
+											<td>{{pateint.gender}}</td>
+											<td>{{pateint.birth_date}}</td>
+											<td>{{pateint.age}}</td>
+											<td>{{pateint.phone_number}}</td>
+											<td>{{pateint.email}}</td>
+											<td>{{pateint.country}}</td>
+											<td>{{pateint.city}}</td>
+											<td>{{pateint.region}}</td>
+											<td>{{pateint.street_address}}</td>
+											
 											<td>
 												<span class="badge badge-success">Completed</span>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<div class="custom-control custom-checkbox">
-													<input class="custom-control-input" type="checkbox" id="2">
-													<label class="custom-control-label" for="2"></label>
-												</div>
-											</td>
-											<td>2</td>
-											<td>Riya </td>
-											<td>26</td>
-											<td>3423-232-987</td>
-											<td>12-10-2018</td>
-											<td>
-												<span class="badge badge-warning">Pending</span>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<div class="custom-control custom-checkbox">
-													<input class="custom-control-input" type="checkbox" id="3">
-													<label class="custom-control-label" for="3"></label>
-												</div>
-											</td>
-											<td>3</td>
-											<td>Paul</td>
-											<td>46</td>
-											<td>3423-132-987</td>
-											<td>45-10-2018</td>
-											<td>
-												<span class="badge badge-danger">Cancelled</span>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<div class="custom-control custom-checkbox">
-													<input class="custom-control-input" type="checkbox" id="4">
-													<label class="custom-control-label" for="4"></label>
-												</div>
-											</td>
-											<td>4</td>
-											<td>Manoj Kumar</td>
-											<td>30</td>
-											<td>333-444-7777</td>
-											<td>12-03-2018</td>
-											<td>
-												<span class="badge badge-success">Completed</span>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<div class="custom-control custom-checkbox">
-													<input class="custom-control-input" type="checkbox" id="5">
-													<label class="custom-control-label" for="5"></label>
-												</div>
-											</td>
-											<td>5</td>
-											<td>Riya </td>
-											<td>26</td>
-											<td>3423-232-987</td>
-											<td>12-10-2018</td>
-											<td>
-												<span class="badge badge-warning">Pending</span>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<div class="custom-control custom-checkbox">
-													<input class="custom-control-input" type="checkbox" id="6">
-													<label class="custom-control-label" for="6"></label>
-												</div>
-											</td>
-											<td>6</td>
-											<td>Paul</td>
-											<td>46</td>
-											<td>3423-132-987</td>
-											<td>45-10-2018</td>
-											<td>
-												<span class="badge badge-danger">Cancelled</span>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<div class="custom-control custom-checkbox">
-													<input class="custom-control-input" type="checkbox" id="7">
-													<label class="custom-control-label" for="7"></label>
-												</div>
-											</td>
-											<td>7</td>
-											<td>Manoj Kumar</td>
-											<td>30</td>
-											<td>333-444-7777</td>
-											<td>12-03-2018</td>
-											<td>
-												<span class="badge badge-success">Completed</span>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<div class="custom-control custom-checkbox">
-													<input class="custom-control-input" type="checkbox" id="8">
-													<label class="custom-control-label" for="8"></label>
-												</div>
-											</td>
-											<td>8</td>
-											<td>Riya </td>
-											<td>26</td>
-											<td>3423-232-987</td>
-											<td>12-10-2018</td>
-											<td>
-												<span class="badge badge-warning">Pending</span>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<div class="custom-control custom-checkbox">
-													<input class="custom-control-input" type="checkbox" id="9">
-													<label class="custom-control-label" for="9"></label>
-												</div>
-											</td>
-											<td>9</td>
-											<td>Paul</td>
-											<td>46</td>
-											<td>3423-132-987</td>
-											<td>45-10-2018</td>
-											<td>
-												<span class="badge badge-danger">Cancelled</span>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<div class="custom-control custom-checkbox">
-													<input class="custom-control-input" type="checkbox" id="10">
-													<label class="custom-control-label" for="10"></label>
-												</div>
-											</td>
-											<td>10</td>
-											<td>Manoj Kumar</td>
-											<td>30</td>
-											<td>333-444-7777</td>
-											<td>12-03-2018</td>
-											<td>
-												<span class="badge badge-success">Completed</span>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<div class="custom-control custom-checkbox">
-													<input class="custom-control-input" type="checkbox" id="11">
-													<label class="custom-control-label" for="11"></label>
-												</div>
-											</td>
-											<td>11</td>
-											<td>Riya </td>
-											<td>26</td>
-											<td>3423-232-987</td>
-											<td>12-10-2018</td>
-											<td>
-												<span class="badge badge-warning">Pending</span>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<div class="custom-control custom-checkbox">
-													<input class="custom-control-input" type="checkbox" id="12">
-													<label class="custom-control-label" for="12"></label>
-												</div>
-											</td>
-											<td>12</td>
-											<td>Paul</td>
-											<td>46</td>
-											<td>3423-132-987</td>
-											<td>45-10-2018</td>
-											<td>
-												<span class="badge badge-danger">Cancelled</span>
 											</td>
 										</tr>
 									</tbody>
 								</table>
+								{% endfor %}
 								<!--Export links-->
 								<nav aria-label="Page navigation example">
 									<ul class="pagination justify-content-center export-pagination">

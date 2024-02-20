@@ -50,10 +50,12 @@ def receptionist_dash_content(request):
 def add_patient(request):
     return render(request,'receptionist_dash/add-patient.html')
 def dis_patient(request):
-    return render(request,'receptionist_dash/patients.html')
+    patients = Patient.objects.all()
+    return render(request,'receptionist_dash/patients.html', {'patients':patients})
 def about_patient(request):
-    return render(request,'receptionist_dash/about-patient.html')
+    patients = Patient.objects.all()
+    return render(request,'receptionist_dash/about-patient.html', {'patients':patients})
 def edit_patient(request):
     return render(request,'receptionist_dash/edit-patient.html')
 def dis_forms(request):
-    return render(request,'receptionist_dash/forms.html')
+    return render(request,'receptionist_dash/form.html')
