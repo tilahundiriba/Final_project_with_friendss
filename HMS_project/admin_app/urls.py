@@ -28,6 +28,7 @@ urlpatterns = [
     path('user_log/', views.login_view, name='user_log'),
     path('index/', views.dis_index, name='index'),
     path('user_registration/', views.dis_user_registration, name='user_registration'),
+     path('change_credentials/', views.change_credentials, name='change_credentials'),
 
 ] 
 

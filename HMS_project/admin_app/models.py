@@ -10,7 +10,7 @@ from receptionist_app.models import Patient
 class UserProfileInfo2(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     profession = models.CharField(max_length=100)  # Add profession field
-    protfolio_site = models.URLField(blank=True)
+    password_changed = models.BooleanField(default=False)
     profile_pic = models.ImageField(upload_to='profile_pics', blank=True)
 
     def __str__(self):
