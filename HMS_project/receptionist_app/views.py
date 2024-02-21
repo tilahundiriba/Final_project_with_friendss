@@ -1,3 +1,4 @@
+
 from django.shortcuts import redirect, render
 from django.utils.crypto import get_random_string
 from django.shortcuts import render
@@ -49,9 +50,14 @@ def receptionist_dash(request):
 def receptionist_dash_content(request):
     return render(request,'receptionist_dash/dash_content.html')
 
+from django.shortcuts import render
+from django.utils.crypto import get_random_string
+from django.shortcuts import render
+from .models import Patient
+
 def add_patient(request):
     if request.method == 'POST':
-        # Retrieve the form data from the POST request
+ m
         first_name = request.POST.get('first_name')
         middle_name = request.POST.get('middle_name')
         last_name = request.POST.get('last_name')
@@ -65,10 +71,18 @@ def add_patient(request):
         region = request.POST.get('region')
         street_address = request.POST.get('street_address')
         doctor_id=request.POST.get('doctor_id')
+
+   
+
+        # doctor_id = request.POST.get('doctor_id')
+        # doctors = UserAccount1.objects.filter(account_type='Doctor')
+
+        # Generate unique ID
         generated_id = 'SH' + get_random_string(length=6, allowed_chars='1234567890')
 
-        # Create a new Patient object with the retrieved data
-        patient = PatientInformation(
+        # Save patient data to the database
+        patient = PatientInformation.objects.create(
+
             patient_id=generated_id,
             first_name=first_name,
             middle_name=middle_name,
@@ -108,6 +122,22 @@ def dis_patient(request):
     return render(request,'receptionist_dash/patients.html', {'patients':patients})
 def about_patient(request):
     patients = PatientInformation.objects.all()
+
+        
+
+        #return render(request, 'doctors/form.html', {'generated_id': generated_id})
+
+    return render(request,'receptionist_dash/form.html')
+def receptionist_dash(request):
+    return render(request,'receptionist_dash/receptionist_dash.html')
+def receptionist_dash_content(request):
+    return render(request,'receptionist_dash/dash_content.html')
+def add_patient(request):
+    return render(request,'receptionist_dash/add-patient.html')
+def dis_patient(request):
+    patients = Patient.objects.all()
+    return render(request,'receptionist_dash/patients.html', {'patients':patients})
+
     return render(request,'receptionist_dash/about-patient.html', {'patients':patients})
 def edit_patient(request):
     return render(request,'receptionist_dash/edit-patient.html')

@@ -50,6 +50,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'admin_app',
+    'nurse_app',
+    'doctor_app',
+    'casher_app',
+    'receptionist_app',
 ]
 
 MIDDLEWARE = [
@@ -87,26 +91,26 @@ WSGI_APPLICATION = 'HMS_project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-# DATABASES = {
-    # 'default': {
-        # 'ENGINE':'django.db.backends.postgresql',
-        # 'NAME':'newBD',
-        # 'USER':'tilish',
-        # 'PASSWORD':'14241224',
-        # 'HOST':'localhost',
-        # 'PORT':'5432',
-    # }
-# }
 DATABASES = {
     'default': {
         'ENGINE':'django.db.backends.postgresql',
-        'NAME':'postgres',
-        'USER':'postgres',
-        'PASSWORD':'362588',
+        'NAME':'newBD',
+        'USER':'tilish',
+        'PASSWORD':'14241224',
         'HOST':'localhost',
         'PORT':'5432',
     }
 }
+# DATABASES = {
+#     'default': {
+#         'ENGINE':'django.db.backends.postgresql',
+#         'NAME':'postgres',
+#         'USER':'postgres',
+#         'PASSWORD':'362588',
+#         'HOST':'localhost',
+#         'PORT':'5432',
+#     }
+# }
 
 
 

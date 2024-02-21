@@ -53,7 +53,7 @@
             </a>
             <ul id="pages" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
               <li class="sidebar-item">
-                <a href="#" class="sidebar-link">Add New Staff</a>
+                <a href="{% url 'user_registration' %}" class="sidebar-link">Add New Staff</a>
               </li>
               <li class="sidebar-item">
                 <a href="#" class="sidebar-link">View Staff</a>
@@ -67,13 +67,13 @@
             </a>
             <ul id="posts" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
               <li class="sidebar-item">
-                <a href="#" class="sidebar-link">Add New Patient</a>
+                <a href="{% url 'form' %}" class="sidebar-link">Add New Patient</a>
               </li>
               <li class="sidebar-item">
                 <a href="#" class="sidebar-link">Patient History</a>
               </li>
               <li class="sidebar-item">
-                <a href="#" class="sidebar-link">Approve Discharge</a>
+                <a href="{% url 'bill' %}" class="sidebar-link">Approve Discharge</a>
               </li>
             </ul>
           </li>
@@ -130,7 +130,7 @@
                   aria-expanded="false">Create Account</a>
                 <ul id="level-1" class="sidebar-dropdown list-unstyled collapse">
                   <li class="sidebar-item">
-                    <a href="#" class="sidebar-link">Create Account</a>
+                    <a href="{% url 'user_registration' %}" class="sidebar-link">Create Account</a>
                   </li>
                   <li class="sidebar-item">
                     <a href="#" class="sidebar-link">Create Account</a>
@@ -144,9 +144,9 @@
     </aside>
     <div class="main">
       <nav class="navbar navbar-expend px-3 border-bottom">
-        <button class="btn" id="sidebar-toggle" type="button">
+        <!-- <button class="btn bg-dark" id="sidebar-toggle" type="button">
           <span class="navbar-toggler-icon"></span>
-        </button>
+        </button> -->
         <img src="{% static 'images/profile.jpg'%}" class="avatar img-fluid rounded" alt="" />
         <!-- <div class="navbar-collapse navbar justify-content-end"> -->
         <!-- <ul class="navbar-nav">
