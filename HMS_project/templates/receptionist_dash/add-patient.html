@@ -177,50 +177,74 @@
 							<form>
 								<div class="form-row">
 									<div class="form-group col-md-6">
-										<label for="patient-name">Patient Name</label>
-										<input type="text" class="form-control" placeholder="Patient name" id="patient-name">
+										<label for="fname">First Name</label>
+										<input type="text" class="form-control" placeholder="first name" id="fname" name="fname">
 									</div>
 									<div class="form-group col-md-6">
-										<label for="dob">Date Of Birth</label>
-										<input type="date" placeholder="Date of Birth" class="form-control" id="dob">
+										<label for="mname">Middle Name</label>
+										<input type="text" placeholder="middle name" class="form-control" id="mname" name="mname">
 									</div>
+									<div class="form-group col-md-6">
+										<label for="lname">Last Name</label>
+										<input type="text" placeholder="last name" class="form-control" id="lname" name="lname">
+									</div>
+									<div class="form-group col-md-6">
+										<label for="dob">Date Of birth</label>
+										<input type="date" placeholder="date of birth" class="form-control" id="dor" name="dor">
+									</div>
+									
 									<div class="form-group col-md-6">
 										<label for="age">Age</label>
-										<input type="text" placeholder="Age" class="form-control" id="age">
+										<input type="int" placeholder="age" class="form-control" id="age" name="age">
 									</div>
 									<div class="form-group col-md-6">
-										<label for="phone">Phone</label>
-										<input type="text" placeholder="Phone" class="form-control" id="phone">
+										<label for="sex">Gender</label>
+										<select class="form-control" id="sex" name="sex">
+											<option>Male</option>
+											<option>Female</option>
+								
+										</select>
+									</div> 
+									<div class="form-group col-md-6">
+										<label for="pno">Phone Number</label>
+										<input type="text" placeholder="phone number" class="form-control" id="pno" name="pno">
 									</div>
 									<div class="form-group col-md-6">
 										<label for="email">Email</label>
-										<input type="email" placeholder="email" class="form-control" id="Email">
+										<input type="email" placeholder="example@gmail.com" class="form-control" id="Email">
 									</div>
 									<div class="form-group col-md-6">
-										<label for="gender">Gender</label>
-										<select class="form-control" id="gender">
-											<option>Male</option>
-											<option>Female</option>
+										<label for="address">Address</label>
+										<select class="form-control" id="address" name="address">
+											<option>Ethiopia</option>
+											<option>Eritrea</option>
+											<option>Kenya</option>
 											<option>Other</option>
 										</select>
+									</div> 
+									<div class="form-group col-md-6">
+										<label for="region"></label>
+										<input type="text" placeholder="region" class="form-control" id="region" name="region">
 									</div>
-									<div class="form-group col-md-12">
-										<label for="exampleFormControlTextarea1">Address</label>
-										<textarea placeholder="Address" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+									<div class="form-group col-md-6">
+										<label for="city"></label>
+										<input type="text" placeholder="city" class="form-control" id="city" name="city">
 									</div>
-									<div class="form-group col-md-12">
-										<label for="file">File</label>
-										<input type="file" class="form-control" id="file">
+									
+								
+									<div class="form-group col-md-6">
+										<label for="kebele"></label>
+										<input type="text" placeholder="kebele" class="form-control" id="kebele" name="kebele">
 									</div>
-																		
-									<div class="form-check col-md-12 mb-2">
-										<div class="text-left">
-											<div class="custom-control custom-checkbox">
-												<input class="custom-control-input" type="checkbox" id="ex-check-2">
-												<label class="custom-control-label" for="ex-check-2">Please Confirm</label>
-											</div>
-										</div>
-									</div>
+									<div class="form-group col-md-6">
+										<label for="assidoc">Assigned Doctor</label>
+										<select class="form-control" id="assidoc" name="assidoc">
+											<option>Selam</option>
+											<option>Nahom</option>
+											<option>Helen</option>
+											<option>Other</option>
+										</select>
+									</div> 
 									<div class="form-group col-md-6 mb-3">
 										<button type="submit" class="btn btn-primary btn-lg">Submit</button>
 									</div>
