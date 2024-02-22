@@ -34,7 +34,7 @@ def login_view(request):
             try:
                 user_profile = UserProfileInfo2.objects.get(user=user)
                 if user_profile.profession == profession:
-                    return HttpResponse('User logged in successfully') 
+                    # return HttpResponse('User logged in successfully') 
                     if user_profile.password_changed:
                         login(request, user)
                         return HttpResponse('User logged in successfully')  # Redirect to home URL after login
@@ -204,9 +204,14 @@ def displayRegisteredPatient(request):
     return render(request,'doctors/displayRegisteredPatient.html')
 def dis_user_registration(request):
     return render(request,'admin_dash/user_registration.html')
+def dis_web_home(request):
+    return render(request,'admin_dash/web_home.html')
 
 
 
+from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login
 
 @login_required
 def change_credentials(request):
@@ -216,27 +221,35 @@ def change_credentials(request):
         new_password = request.POST['new_password']
         confirm_new_password = request.POST['confirm_new_password']
 
-        user = authenticate(request, username=request.user.username, password=current_password)
-        user_profile = UserProfileInfo2.objects.get(user=user)
-        if user is not None:
-            
+        user = request.user  # Use the authenticated user directly
+
+        # Verify the current password
+        if user.check_password(current_password):
             if new_password == confirm_new_password:
-                user.set_password(new_password)
+                # Update username and password
                 user.username = username
-                user.user_profile.password_changed = True
+                user.set_password(new_password)
                 user.save()
+
+                # Optional: Update user profile if necessary
+                user.user_profile.password_changed = True
                 user.user_profile.save()
+
+                # Re-authenticate user with new password
                 login(request, user)
-                # return render(request, 'admin_app/loginfinal.html')
-                # return HttpResponse("password changed successfully.")
+
+                # Redirect to login page after successful update
                 return redirect('login')
             else:
                 error_message = "New passwords must match."
-                return render(request, 'admin_app/change_credentials.html', {'error_message': error_message})
         else:
             error_message = "Incorrect current password."
-            return render(request, 'admin_app/change_credentials.html', {'error_message': error_message})
+
+        # Render the form with error message
+        return render(request, 'admin_app/change_credentials.html', {'error_message': error_message})
+
     return render(request, 'admin_app/change_credentials.html')
+
 def success_message(request):
     # You can customize this view to display a success message or redirect to a different page
     return HttpResponse("Password changed successfully.")

@@ -11,7 +11,11 @@ urlpatterns = [
   path('about_patient/', views.about_patient, name='about_patient'),
   path('dis_patient/', views.dis_patient, name='dis_patient'),
   path('dis_form/', views.dis_forms, name='dis_form'),
+<<<<<<< HEAD
   #path('form/', views.form, name='form'),
+=======
+  # path('form/', views.form, name='form'),
+>>>>>>> 72a5f89308ed5d819d1dc0c643305eda45376074
 ] 
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

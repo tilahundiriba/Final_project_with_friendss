@@ -177,6 +177,7 @@
 							<form action="{% url 'add_patient' %}" method='post'>
 								{% csrf_token %}
 								<div class="form-row">
+<<<<<<< HEAD
 									<div class="form-group col-md-4">
 										<label for="first-name">First Name</label>
 										<input type="text" class="form-control" placeholder="First name" id="first-name" name="first_name">
@@ -194,10 +195,60 @@
 										<select class="form-control" id="gender" name="gender">
 											<option>Male</option>
 											<option>Female</option>
-											<option>Other</option>
-										</select>
+=======
+									<div class="form-group col-md-6">
+										<label for="fname">First Name</label>
+										<input type="text" class="form-control" placeholder="first name" id="fname" name="fname">
 									</div>
 									<div class="form-group col-md-6">
+										<label for="mname">Middle Name</label>
+										<input type="text" placeholder="middle name" class="form-control" id="mname" name="mname">
+									</div>
+									<div class="form-group col-md-6">
+										<label for="lname">Last Name</label>
+										<input type="text" placeholder="last name" class="form-control" id="lname" name="lname">
+									</div>
+									<div class="form-group col-md-6">
+										<label for="dob">Date Of birth</label>
+										<input type="date" placeholder="date of birth" class="form-control" id="dor" name="dor">
+									</div>
+									
+									<div class="form-group col-md-6">
+										<label for="age">Age</label>
+										<input type="int" placeholder="age" class="form-control" id="age" name="age">
+									</div>
+									<div class="form-group col-md-6">
+										<label for="sex">Gender</label>
+										<select class="form-control" id="sex" name="sex">
+											<option>Male</option>
+											<option>Female</option>
+								
+										</select>
+									</div> 
+									<div class="form-group col-md-6">
+										<label for="pno">Phone Number</label>
+										<input type="text" placeholder="phone number" class="form-control" id="pno" name="pno">
+									</div>
+									<div class="form-group col-md-6">
+										<label for="email">Email</label>
+										<input type="email" placeholder="example@gmail.com" class="form-control" id="Email">
+									</div>
+									<div class="form-group col-md-6">
+										<label for="address">Address</label>
+										<select class="form-control" id="address" name="address">
+											<option>Ethiopia</option>
+											<option>Eritrea</option>
+											<option>Kenya</option>
+>>>>>>> 72a5f89308ed5d819d1dc0c643305eda45376074
+											<option>Other</option>
+										</select>
+									</div> 
+									<div class="form-group col-md-6">
+										<label for="region"></label>
+										<input type="text" placeholder="region" class="form-control" id="region" name="region">
+									</div>
+									<div class="form-group col-md-6">
+<<<<<<< HEAD
 										<label for="birth-date">Date of Birth</label>
 										<input type="date" class="form-control" id="birth-date" name="birth_date">
 									</div>
@@ -240,7 +291,26 @@
 												<label class="custom-control-label" for="confirm">Please Confirm</label>
 											</div>
 										</div>
+=======
+										<label for="city"></label>
+										<input type="text" placeholder="city" class="form-control" id="city" name="city">
 									</div>
+									
+								
+									<div class="form-group col-md-6">
+										<label for="kebele"></label>
+										<input type="text" placeholder="kebele" class="form-control" id="kebele" name="kebele">
+>>>>>>> 72a5f89308ed5d819d1dc0c643305eda45376074
+									</div>
+									<div class="form-group col-md-6">
+										<label for="assidoc">Assigned Doctor</label>
+										<select class="form-control" id="assidoc" name="assidoc">
+											<option>Selam</option>
+											<option>Nahom</option>
+											<option>Helen</option>
+											<option>Other</option>
+										</select>
+									</div> 
 									<div class="form-group col-md-6 mb-3">
 										<button type="submit" class="btn btn-primary btn-lg">Submit</button>
 									</div>
