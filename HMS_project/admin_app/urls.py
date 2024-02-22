@@ -29,6 +29,7 @@ urlpatterns = [
     path('index/', views.dis_index, name='index'),
     path('user_registration/', views.dis_user_registration, name='user_registration'),
      path('change_credentials/', views.change_credentials, name='change_credentials'),
+      path('web_home/', views.dis_web_home, name='web_home'),
 
 ] 
 

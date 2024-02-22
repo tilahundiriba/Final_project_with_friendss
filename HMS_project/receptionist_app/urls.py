@@ -11,7 +11,7 @@ urlpatterns = [
   path('about_patient/', views.about_patient, name='about_patient'),
   path('dis_patient/', views.dis_patient, name='dis_patient'),
   path('dis_form/', views.dis_forms, name='dis_form'),
-  path('form/', views.form, name='form'),
+  # path('form/', views.form, name='form'),
 ] 
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
