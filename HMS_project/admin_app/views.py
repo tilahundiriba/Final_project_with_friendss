@@ -16,7 +16,7 @@ from .utils import generate_username, generate_password
 from django.contrib.auth.models import User
 from django.shortcuts import render
 from .models import UserProfileInfo2
-from .models import Patient
+from .models import PatientChange
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 

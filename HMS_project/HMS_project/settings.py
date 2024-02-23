@@ -113,14 +113,14 @@ WSGI_APPLICATION = 'HMS_project.wsgi.application'
 #     }
 # }
 
-DATABASES = {
-    'default': {
-        'ENGINE':'django.db.backends.postgresql',
-        'NAME':'postgres',
-        'USER':'postgres',
-        'PASSWORD':'362588',
+# DATABASES = {
+#     'default': {
+#         'ENGINE':'django.db.backends.postgresql',
+#         'NAME':'postgres',
+#         'USER':'postgres',
+#         'PASSWORD':'362588',
 
-    }}
+#     }}
 DATABASES = {
     'default': {
         'ENGINE':'django.db.backends.postgresql',

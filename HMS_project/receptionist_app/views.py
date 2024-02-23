@@ -4,7 +4,7 @@ from django.shortcuts import redirect, render
 from django.utils.crypto import get_random_string
 # from .models import Patient
 
-from .models import Patient
+from .models import PatientChange
 from admin_app.models import User
 
 #
@@ -77,7 +77,7 @@ def add_patient(request):
         else:
             return HttpResponse('wrong doctor id')   
             
-        patient = Patient.objects.create(
+        patient = PatientChange.objects.create(
                 patient_id=generated_id,
                 first_name=first_name,
                 middle_name=middle_name,
@@ -106,7 +106,7 @@ def add_patient(request):
         # Store the patient data in the sessio
     return render(request, 'receptionist_dash/add-patient.html')  # Render the form template initially
 def dis_patient(request):
-    patients = Patient.objects.all()
+    patients = PatientChange.objects.all()
     return render(request,'receptionist_dash/patients.html', {'patients':patients})
 def about_patient(request):
         #return render(request, 'doctors/form.html', {'generated_id': generated_id})
@@ -163,7 +163,7 @@ def receptionist_dash_content(request):
 def add_patient(request):
     return render(request,'receptionist_dash/add-patient.html')
 def dis_patient(request):
-    patients = Patient.objects.all()
+    patients = PatientChange.objects.all()
     return render(request,'receptionist_dash/patients.html', {'patients':patients})
 
     

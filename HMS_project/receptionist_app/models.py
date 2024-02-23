@@ -1,6 +1,6 @@
 from django.db import models
 from admin_app.models import User
-class Patient(models.Model):
+class PatientChange(models.Model):
     patient_id = models.CharField(primary_key=True)
     first_name = models.CharField(max_length=100)
     middle_name = models.CharField(max_length=100, blank=True)
@@ -14,7 +14,7 @@ class Patient(models.Model):
     city = models.CharField(max_length=100)
     region = models.CharField(max_length=100)
     street_address = models.CharField(max_length=200)
-    Doctor_ID=models.ForeignKey(User,on_delete=models.CASCADE,related_name='doctor_history_set',related_query_name='doctor_history')
+    Doctor_ID=models.ForeignKey(User,on_delete=models.CASCADE)
     
     def __str__(self):
         return self.patient_id

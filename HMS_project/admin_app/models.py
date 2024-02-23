@@ -3,7 +3,7 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.contrib.auth.models import Group, Permission
 from django.contrib.auth.models import User
-from receptionist_app.models import Patient
+from receptionist_app.models import PatientChange
 # Staff account table  
 
 

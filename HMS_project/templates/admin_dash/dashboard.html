@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
-<html lang="en" data-bs-theme="dark">
+<html lang="en" >
 <head>
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -8,7 +8,21 @@
   {% block 'title' %}
   <title>Bootstrap Admin Dashboard</title>
   {% endblock %}
-
+	<link rel="shortcut icon" type="image/png" href="{% static 'images2/fav.png' %}">
+	<!-- Bootstrap core CSS -->
+	<link rel="stylesheet" href="{% static 'css2/bootstrap.min.css' %}">
+	<!-- themify icons CSS -->
+	<link rel="stylesheet" href="{% static 'css2/themify-icons.css' %}">
+	<!-- Animations CSS -->
+	<link rel="stylesheet" href="{% static 'css2/animate.css' %}">
+	<!-- Main CSS -->
+	<link rel="stylesheet" href="{% static 'css2/styles.css' %}">
+	<link rel="stylesheet" href="{% static 'css2/green.css' %}" id="style_theme">
+	<link rel="stylesheet" href="{% static 'css2/responsive.css' %}">
+	<!-- morris charts -->
+	<link rel="stylesheet" href="{% static 'charts/css/morris.css' %}">
+	<!-- jvectormap -->
+	<link rel="stylesheet" href="{% static 'css2/jquery-jvectormap.css' %}">
   <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
   <link rel="stylesheet" href="{% static 'fontawesome/css/all.min.css' %}">
   <link rel="stylesheet" href="{% static 'css/dashboard.css' %}" />
@@ -25,6 +39,29 @@
       width: 100%;
       height: auto;
     } */
+    .js-sidebar {
+          display: block; /* Hide the div by default */
+        }
+      #container-min{
+        display: none;
+      }
+      #navbar_id{
+        display:block;
+
+      }
+     
+        /* Media query for screens less than or equal to 435px */
+        @media only screen and (max-width: 768px) {
+          .js-sidebar {
+            display: none; /* Display the div when the screen is 435px or less */
+          }
+          #container-min{
+        display: block;
+      }
+      #navbar_id{
+        display: none;
+      }
+        }
   </style>
 
 
@@ -32,7 +69,7 @@
 
 <body>
   <div class="wrapper">
-    <aside id="sidebar" class="js-sidebar">
+    <aside id="sidebar" class="js-sidebar bg-success">
       <!-- Content For Sidebar -->
       <div class="h-100">
         <div class="sidebar-logo">
@@ -41,7 +78,7 @@
         <ul class="sidebar-nav">
           <li class="sidebar-header">Admin Elements</li>
           <li class="sidebar-item">
-            <a href="{% url 'dis_dash_content' %}" class="sidebar-link">
+            <a href="{% url 'index' %}" class="sidebar-link">
               <i class="fa-solid fa-list pe-2"></i>
               Dashboard
             </a>
@@ -67,11 +104,10 @@
             </a>
             <ul id="posts" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
               <li class="sidebar-item">
-<<<<<<< HEAD
+
                 <a href="{% url 'user_registration' %}" class="sidebar-link">Add New Patient</a>
-=======
-                <a href="#" class="sidebar-link">Add New Patient</a>
->>>>>>> 72a5f89308ed5d819d1dc0c643305eda45376074
+
+
               </li>
               <li class="sidebar-item">
                 <a href="#" class="sidebar-link">Patient History</a>
@@ -147,50 +183,16 @@
       </div>
     </aside>
     <div class="main">
-      <nav class="navbar navbar-expend px-3 border-bottom">
-        <!-- <button class="btn bg-dark" id="sidebar-toggle" type="button">
-          <span class="navbar-toggler-icon"></span>
-        </button> -->
-        <img src="{% static 'images/profile.jpg'%}" class="avatar img-fluid rounded" alt="" />
-        <!-- <div class="navbar-collapse navbar justify-content-end"> -->
-        <!-- <ul class="navbar-nav">
-              <li class="nav-item dropdown"> -->
-        <!-- <a href="#" data-bs-toggle="dropdown" class="nav-icon pe-md-0"> -->
-        <!-- <img
-                    src="image/profile.jpg"
-                    class="avatar img-fluid rounded"
-                    alt=""
-                  /> -->
-        <!-- </a> -->
-        <!-- <div class="dropdown-menu">
-                  <a href="#" class="dropdown-item">Profile</a>
-                  <a href="#" class="dropdown-item">Setting</a>
-                  <a href="#" class="dropdown-item">Logout</a>
-                </div> -->
-        <!-- </li>
-            </ul> -->
-        <!-- </div> -->
+      <nav class="navbar navbar-expend px-3 border-bottom bg-success text-white" id="navbar_id">
+         <button class="btn " id="sidebar-toggle" type="button">
+          <span class="navbar-toggler-icon "></span>
+        </button> 
+        <!-- <img src="{% static 'images/profile.jpg'%}" class="avatar img-fluid rounded" alt="" /> -->
+       
       </nav>
       <main class="content px-3 py-2">
         {% block content %}
-         <!-- <div class="navbar-collapse navbar justify-content-end"> -->
-        <!-- <ul class="navbar-nav">
-              <li class="nav-item dropdown"> -->
-        <!-- <a href="#" data-bs-toggle="dropdown" class="nav-icon pe-md-0"> -->
-        <!-- <img
-                    src="image/profile.jpg"
-                    class="avatar img-fluid rounded"
-                    alt=""
-                  /> -->
-        <!-- </a> -->
-        <!-- <div class="dropdown-menu">
-                  <a href="#" class="dropdown-item">Profile</a>
-                  <a href="#" class="dropdown-item">Setting</a>
-                  <a href="#" class="dropdown-item">Logout</a>
-                </div> -->
-        <!-- </li>
-            </ul> -->
-        <!-- </div> -->
+   
     </nav>
     <main class="content px-3 py-2">
      <div class="container-fluid">
@@ -350,7 +352,7 @@
         <i class="fa-regular fa-moon"></i>
         <i class="fa-regular fa-sun"></i>
       </a>
-      <footer class="footer">
+      <!-- <footer class="footer">
         <div class="container-fluid">
           <div class="row text-muted">
             <div class="col-6 text-start">
@@ -378,9 +380,21 @@
             </div>
           </div>
         </div>
-      </footer>
+      </footer> -->
     </div>
   </div>
+  <script src="{% static 'js2/jquery-3.2.1.min.js' %}"></script>
+	<!-- Popper Library-->
+	<script src="{% static 'js2/popper.min.js' %}"></script>
+	<!-- Bootstrap Library-->
+	<script src="{% static 'js2/bootstrap.min.js' %}"></script>
+	<!-- morris charts -->
+	<script src="{% static 'charts/js/raphael-min.js' %}"></script>
+	<script src="{% static 'charts/js/morris.min.js' %}"></script>
+	<script src="{% static 'js2/custom-morris.js' %}"></script>
+
+	<!-- Custom Script-->
+	<script src="{% static 'js2/custom.js' %}"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"></script>
   <script src="{% static 'js/scripts.js' %}"></script>
 </body>
