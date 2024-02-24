@@ -28,6 +28,19 @@
       .home{
         background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('{% static "images/hdone.jpg" %}');
       }
+      @keyframes changetext{
+    0%{content: "Healthy";}
+    10%{content: "Care";}
+    20%{content: "Safe";}
+    /* 30%{content: "ayb";}
+    40%{content: "timatim";}
+    50%{content: "tiya";}
+    60%{content: "tiya";}
+    70%{content: "tiya";}
+    80%{content: "tiya";}
+    90%{content: "tiya";}
+    100%{content: "tiya";} */
+} 
     </style>
 </head>
 <body>
@@ -74,8 +87,8 @@
     
         <div class="content">
           {% block content %}
-            <h5>Shashamene Specialize Refferal Hospital</h5>
-            <h1>Get<span class="changecontent"></span></h1>
+            <h5>Shashamene Specialized Refferal Hospital</h5>
+            <h1>Be&nbsp;<span class="changecontent"></span></h1>
             <p>Live Health And Better Life!</p>
             {% endblock %}
         </div>
@@ -258,8 +271,8 @@
     <footer>
     <div class="footer-col">
      
-        <i class='fas fa-map-marker-alt' style="font-size:30px;color:orange; display: inline-block;padding-left: -150px;"></i>
-        <h4>Gurage,wolkite,SNNPR</h4>
+        <!-- <i class='fas fa-map-marker-alt' style="font-size:30px;color:orange; display: inline-block;padding-left: -150px;"></i> -->
+        <h4>Shashamene,Arsi, Oromia</h4>
   </div>
   <div class="footer-col">
       <h4>QuickLinks</h4>

@@ -16,7 +16,7 @@ from .utils import generate_username, generate_password
 from django.contrib.auth.models import User
 from django.shortcuts import render
 from .models import UserProfileInfo2
-from .models import PatientChange
+# from .models import PatientChange
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import BedAllocation
 
@@ -32,7 +32,7 @@ def login_view(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
-        profession = request.POST.get('profession')
+        profession = request.POST.get('role')
 
         # Authenticate the user
         user = authenticate(request, username=username, password=password)

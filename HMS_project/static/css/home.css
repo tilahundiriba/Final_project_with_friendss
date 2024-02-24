@@ -86,19 +86,19 @@
     text-shadow: 0px 1px 1px black;
     animation: changetext 10s infinite linear;
 }
-@keyframes changetext{
-    0%{content: "health";}
-    10%{content: "care";}
-    20%{content: "ketfo";}
-    30%{content: "ayb";}
+/* @keyframes changetext{
+    0%{content: "Healthy";}
+    10%{content: "Care";}
+    20%{content: "Safe";}
+    /* 30%{content: "ayb";}
     40%{content: "timatim";}
     50%{content: "tiya";}
     60%{content: "tiya";}
     70%{content: "tiya";}
     80%{content: "tiya";}
     90%{content: "tiya";}
-    100%{content: "tiya";}
-} 
+    100%{content: "tiya";} 
+}  */
 .home .content p{
     color: white;
     font-size: 15px;
