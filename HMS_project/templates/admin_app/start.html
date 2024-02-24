@@ -1,10 +1,17 @@
 <!DOCTYPE html>
+{% include
+'HMS_project/casher_app/templates/casher_dash/casher_app/casher_dash.html'%} {%
+include 'HMS_project/doctor_app/templates/doctor/doctor_app/dr_dash.html'%} {%
+include 'HMS_project/nurse_app/templates/nurse_dash/nurse_app/nurse_dash.html'%}
+{% include
+'HMS_project/receptionist_app/templates/receptionist_dash/receptionist_app/receptionist_dash.html'%}
+
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Demo Hospital Website</title>
+    <title>Shashamane Hospital Website</title>
     {%load static%}
     <link
       rel="stylesheet"
@@ -19,14 +26,12 @@
       >
 
       <nav class="navbar">
-        <a href="#home">home</a>
+        <a href="{% url 'home' %}">Home</a>
         <a href="#services">services</a>
-        <a href="#about">about</a>
-        <a href="#doctors">doctors</a>
-        <a href="#book">book</a>
-        <a href="#review">review</a>
-        <a href="#blogs">blogs</a>
-        <a href="payment.html">Payment</a>
+        <a href="{% url 'dis_dr_dash' %}">Doctors</a>
+        <a href="{% url 'nurse_dash' %}">Nurse</a>
+        <a href="{% url 'casher_dash' %}">Payment</a>
+        <a href="{% url 'receptionist_dash' %}">Reception</a>
       </nav>
 
       <div id="menu-btn" class="fas fa-bars"></div>
@@ -84,9 +89,7 @@
           <i class="fas fa-notes-medical"></i>
 
           <h3>free checkups</h3>
-          <p>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad, omnis.
-          </p>
+          <p>Depends on the type of illness</p>
           <a href="" target="_blank" class="btn"
             >learn more <span class="fas fa-chevron-right"></span
           ></a>
@@ -95,9 +98,7 @@
         <div class="box">
           <i class="fas fa-ambulance"></i>
           <h3>24/7 ambulance</h3>
-          <p>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad, omnis.
-          </p>
+          <p>ambulance service is 24/7 available</p>
           <a href="" target="_blank" class="btn"
             >learn more <span class="fas fa-chevron-right"></span
           ></a>
@@ -105,9 +106,7 @@
         <div class="box">
           <i class="fas fa-user-md"></i>
           <h3>expert doctors</h3>
-          <p>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad, omnis.
-          </p>
+          <p>We have well qualified doctors in all departments</p>
 
           <a href="" target="_blank" class="btn">
             learn more <span class="fas fa-chevron-right"></span
@@ -117,9 +116,7 @@
         <div class="box">
           <i class="fas fa-pills"></i>
           <h3>medicines</h3>
-          <p>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad, omnis.
-          </p>
+          <p>We take total care and give the best modern medication</p>
           <a href="" target="_blank" class="btn"
             >learn more <span class="fas fa-chevron-right"></span
           ></a>
@@ -128,9 +125,7 @@
         <div class="box">
           <i class="fas fa-procedures"></i>
           <h3>bed facility</h3>
-          <p>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad, omnis.
-          </p>
+          <p>Beds are equiped and well furnished</p>
           <a href="" target="_blank" class="btn"
             >learn more <span class="fas fa-chevron-right"></span
           ></a>
@@ -139,9 +134,7 @@
         <div class="box">
           <i class="fas fa-heartbeat"></i>
           <h3>total care</h3>
-          <p>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad, omnis.
-          </p>
+          <p>We give Maximum and total care to all our patients</p>
           <a href="" target="_blank" class="btn">
             learn more <span class="fas fa-chevron-right"></span>
           </a>
@@ -265,7 +258,7 @@
               <a href="#"> <i class="fas fa-calendar"></i> 3rd oct, 2022 </a>
               <a href="#"> <i class="fas fa-user"></i> by admin </a>
             </div>
-            <h3>Consultanty Towards Doctor make your problem solved..</h3>
+            <h3>Consultanty Towards Doctors make your problem solved..</h3>
             <p>
               If a certain body part of your body is constantly troubling,
               consultants can barely help. They can help reduce the pain or just

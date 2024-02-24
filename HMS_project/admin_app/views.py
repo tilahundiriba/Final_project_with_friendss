@@ -183,6 +183,10 @@ def dis_homepage(request):
     return render(request,'admin_app/homepage.html')
 def dis_base(request):
     return render(request,'admin_app/base.html')
+def start(request):
+     return render(request, 'admin_app/start.html')
+
+
 
 # admin dashboard views
 def dis_dash(request):
@@ -200,8 +204,4 @@ def displayRegisteredPatient(request):
     return render(request,'doctors/displayRegisteredPatient.html')
 def dis_user_registration(request):
     return render(request,'admin_dash/user_registration.html')
-
-def start(request):
-    # View logic goes here
-     return render(request, 'admin_app/start.html')
 
