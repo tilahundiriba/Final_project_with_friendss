@@ -54,6 +54,25 @@ def __str__(self):
     return f"{self.reset_key}"
 
 
+# models.py
+from django.db import models
+from django.utils import timezone
+
+class BedAllocation(models.Model):
+    patient_id = models.IntegerField()
+    alloc_date = models.DateField(default=timezone.now)
+    departure_date = models.DateField(null=True, blank=True)
+
+    def count_days_stayed(self):
+        if self.departure_date:
+            days_stayed = (self.departure_date - self.alloc_date).days
+            return days_stayed
+        else:
+            # If departure date is not set, return None or handle it as needed
+            return 0
+
+
+
 
 
 

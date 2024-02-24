@@ -1,0 +1,22 @@
+<!-- bed_allocation_detail.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bed Allocation Detail</title>
+</head>
+<body>
+    {% for bed_allocation_instance in bed_allocation_instance %}
+    <h1>Bed Allocation Detail</h1>
+    <p>Patient ID: {{ bed_allocation_instance.patient_id }}</p>
+    <p>Allocation Date: {{ bed_allocation_instance.alloc_date }}</p>
+    <p>Departure Date: {{ bed_allocation_instance.departure_date }}</p>
+    {% if bed_allocation_instance.departure_date %}
+        <p>Number of Days Stayed: {{ bed_allocation_instance.count_days_stayed }}</p>
+    {% else %}
+        <p>Patient is still in the bed</p>
+    {% endif %}
+    {% endfor %}
+</body>
+</html>

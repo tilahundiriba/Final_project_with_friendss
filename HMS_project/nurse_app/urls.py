@@ -1,5 +1,5 @@
 from django.urls import path
-from . import views
+from .import views
 from django.contrib.auth import views as auth_views
 from django.conf import settings
 from django.conf.urls.static import static
@@ -14,5 +14,6 @@ urlpatterns = [
     path('add-room/', views.add_room, name='add_room'),
     path('edit-room/', views.edit_room, name='edit_room'),
     path('dis-room/', views.dis_room, name='dis_room'),
+  
  
 ]

@@ -18,7 +18,15 @@ from django.shortcuts import render
 from .models import UserProfileInfo2
 from .models import PatientChange
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render
+from .models import BedAllocation
+
+
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import UserChangeForm
+from django.shortcuts import render, redirect
+from django.contrib import messages
+
+
 
 def login_view(request):
     if request.method == 'POST':
@@ -35,12 +43,12 @@ def login_view(request):
                 user_profile = UserProfileInfo2.objects.get(user=user)
                 if user_profile.profession == profession:
                     # return HttpResponse('User logged in successfully') 
-                    if user_profile.password_changed:
+                    # if user_profile.password_changed:
                         login(request, user)
                         return HttpResponse('User logged in successfully')  # Redirect to home URL after login
-                    else:
-                        # Redirect to change password view
-                        return render(request, 'admin_app/change_credentials.html', {})
+                    # else:
+                    #     # Redirect to change password view
+                    #     return redirect('password_change')
                 else:
                     return HttpResponse('Invalid profession for the user')
             except UserProfileInfo2.DoesNotExist:
@@ -52,37 +60,6 @@ def login_view(request):
     else:
         return render(request, 'admin_dash/loginfinal.html', {})
 
-
-
-# def register(request):
-#     registered = False
-#     if request.method == 'POST':
-#         username = request.POST.get('username')
-#         email = request.POST.get('email')
-#         password = request.POST.get('password')
-#         profession = request.POST.get('profession')  # Retrieve profession from the form
-#         # protfolio_site = request.POST.get('protfolio_site')
-#         # profile_pic = request.FILES.get('profile_pic')
-
-#         # Create user object
-#         user = User.objects.create_user(username=username, email=email, password=password)
-
-#         # Create user profile
-#         user_profile = UserProfileInfo2.objects.create(
-#             user=user,
-#             profession=profession,
-#             # protfolio_site=protfolio_site,
-#             # profile_pic=profile_pic
-#         )
-
-#         registered = True
-#         # return redirect('dis_dash_content')
-#     else:
-#         # Render an empty form for GET request
-#         return render(request, 'admin_dash/test_reg.html')
-
-#     return render(request, 'admin_dash/test_reg.html',
-#                   {'registered': registered})
 def createUserAccount(request):
     if request.method == 'POST':
         email = request.POST.get('email')
@@ -181,6 +158,8 @@ def home(request):
     return render(request,'admin_app/home.html')
 def dis_login(request):
     return render(request,'admin_app/loginfinal.html')
+def dis_login2(request):
+    return render(request,'admin_dash/login.html')
 def dis_home(request):
     return render(request,'admin_app/homefinal.html')
 def dis_homepage(request):
@@ -253,3 +232,12 @@ def change_credentials(request):
 def success_message(request):
     # You can customize this view to display a success message or redirect to a different page
     return HttpResponse("Password changed successfully.")
+
+
+
+# views.py
+
+
+def bed_allocation_detail(request):
+    bed_allocation_instance = BedAllocation.objects.all()
+    return render(request, 'admin_app/testNodays.html', {'bed_allocation_instance': bed_allocation_instance})

@@ -30,7 +30,11 @@ urlpatterns = [
     path('user_registration/', views.dis_user_registration, name='user_registration'),
      path('change_credentials/', views.change_credentials, name='change_credentials'),
       path('web_home/', views.dis_web_home, name='web_home'),
+  path('test_no_days/', views.bed_allocation_detail, name='dis_room'),
+  path('dis_login2/', views.dis_login2, name='dis_login2'),
 
+
+    
 ] 
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

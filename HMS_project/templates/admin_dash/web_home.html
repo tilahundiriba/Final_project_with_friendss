@@ -23,6 +23,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
     <!-- Google Fonts -->
+
+    <style>
+      .home{
+        background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('{% static "images/hdone.jpg" %}');
+      }
+    </style>
 </head>
 <body>
 
@@ -36,14 +42,14 @@
         <div class="collapse navbar-collapse" id="mynavbar">
           <ul class="navbar-nav me-auto">
             <li class="nav-item">
-              <a class="nav-link active" href="index.html">Home</a>
+              <a class="nav-link active" href="{% url 'web_home' %}">Home</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#services">Services</a>
             </li>
             
             <li class="nav-item">
-              <a class="nav-link" href="#login">Login</a>
+              <a class="nav-link" href="{% url 'dis_login2' %}">Login</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#about">About</a>
@@ -65,12 +71,15 @@
 
     <!-- Home Section Start -->
     <div class="home">
+    
         <div class="content">
+          {% block content %}
             <h5>Shashamene Specialize Refferal Hospital</h5>
             <h1>Get<span class="changecontent"></span></h1>
             <p>Live Health And Better Life!</p>
-         
+            {% endblock %}
         </div>
+      
     </div>
     <!-- Home Section End -->
 
@@ -270,7 +279,7 @@
   </div>
   <div class="footer-col">
       <h4>Social Links</h4>
-      <div class="links">
+      <div class="links" style="display: flex; flex-direction: row;">
           <a  href="#"><i class="fab fa-linkedin-in" style=" color:rgb(14, 180, 83); "></i></a>
           <a  href="#"><i class="fab fa-facebook-f"   style=" color:rgb(14, 180, 83); "></i></a>
           <a  href="#"><i class="fab fa-twitter"  style=" color:rgb(14, 180, 83); "></i></a>
