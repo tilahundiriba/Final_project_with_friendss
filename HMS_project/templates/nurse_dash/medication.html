@@ -1,18 +1,15 @@
-
-{% extends 'nurse_dash/nurse_dash.html' %}
-{% load static %}
-{% block content %}
+{% extends 'nurse_dash/nurse_dash.html' %} {% load static %} {% block content %}
 <!-- <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
-    {% block 'title' %}
-    <title>Registration From</title>
-    {% endblock %}
-    <style>
-        /* body{
+{% block 'title' %}
+<title>Registration From</title>
+{% endblock %}
+<style>
+  /* body{
 box-sizing: border-box;
 min-height: 100hv;
 display: flex;
@@ -21,219 +18,202 @@ justify-content: center;
 padding: 20px;
 background: rgb(130, 106, 251);  
         } */
-        .container-one {
-            box-sizing: border-box;
-            min-height: 100hv;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            /* background: rgb(130, 106, 251); */
-        }
+  .container-one {
+    box-sizing: border-box;
+    min-height: 100hv;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    /* background: rgb(130, 106, 251); */
+  }
 
-        .container {
-            position: relative;
-            max-width: 500px;
-            width: 100%;
-            background: #fff;
-            padding: 25px;
-            border-radius: 8px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  .container {
+    position: relative;
+    max-width: 500px;
+    width: 100%;
+    background: #fff;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  }
 
-        }
+  .container header {
+    font-size: 1.5rem;
+    color: #333;
+    font-weight: 500;
+    text-align: center;
+  }
 
-        .container header {
-            font-size: 1.5rem;
-            color: #333;
-            font-weight: 500;
-            text-align: center;
-        }
+  .container .form {
+    margin-top: 30px;
+  }
 
-        .container .form {
-            margin-top: 30px;
-        }
+  .form .input-box {
+    width: 100%;
+    margin-top: 20px;
+    /* background: #bd6a6a; */
+  }
 
-        .form .input-box {
-            width: 100%;
-            margin-top: 20px;
-            /* background: #bd6a6a; */
-        }
+  .input-box label {
+    color: #333;
+  }
 
-        .input-box label {
-            color: #333;
-        }
+  .form :where(.input-box input, .select-box) {
+    position: relative;
+    height: 40px;
+    width: 98%;
+    outline: none;
+    font-size: 1rem;
+    color: #707070;
+    margin-top: 8px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    /* padding: 0 15px; */
+    padding-left: 10px;
+  }
 
-        .form :where(.input-box input, .select-box) {
-            position: relative;
-            height: 40px;
-            width: 98%;
-            outline: none;
-            font-size: 1rem;
-            color: #707070;
-            margin-top: 8px;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            /* padding: 0 15px; */
-            padding-left: 10px;
+  .form textarea {
+    position: relative;
+    height: 100px;
+    width: 98%;
+    outline: none;
+    font-size: 1rem;
+    color: #707070;
+    margin-top: 8px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    /* padding: 0 15px; */
+    padding-left: 10px;
+  }
 
+  .form .column {
+    display: flex;
+    column-gap: 15px;
+  }
 
-        }
+  .form :where(.gender-option, .gender) {
+    display: flex;
+    align-items: center;
+    column-gap: 50px;
+  }
 
-        .form textarea {
-            position: relative;
-            height: 100px;
-            width: 98%;
-            outline: none;
-            font-size: 1rem;
-            color: #707070;
-            margin-top: 8px;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            /* padding: 0 15px; */
-            padding-left: 10px;
+  .form .gender {
+    cursor: pointer;
+    column-gap: 5px;
+  }
 
+  .gender input {
+    accent-color: rgb(130, 106, 251);
+  }
 
-        }
+  .gender label {
+    color: #707070;
+  }
 
-        .form .column {
-            display: flex;
-            column-gap: 15px;
-        }
+  .form :where(.gender input .gender label) {
+    cursor: pointer;
+  }
 
-        .form :where(.gender-option, .gender) {
-            display: flex;
-            align-items: center;
-            column-gap: 50px;
-        }
+  .form .gender-box {
+    margin-top: 20px;
+  }
 
-        .form .gender {
-            cursor: pointer;
-            column-gap: 5px;
-        }
+  .gender-box h3 {
+    color: #333;
+    font-size: 1rem;
+    font-weight: 400;
+    margin-bottom: 8px;
+  }
 
-        .gender input {
-            accent-color: rgb(130, 106, 251);
-        }
+  .select-box select {
+    height: 100%;
+    width: 100%;
+    outline: none;
+    border: none;
+    color: #707070;
+    font-size: 1rem;
+  }
 
-        .gender label {
-            color: #707070;
-        }
+  .address :where(input, .select-box) {
+    margin-top: 15px;
+  }
 
-        .form :where(.gender input .gender label) {
-            cursor: pointer;
-        }
+  .form button {
+    height: 55px;
+    width: 100%;
+    color: #fff;
+    font-size: 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 400;
+    border: none;
+    transition: all 0.2s ease;
+    background: rgb(130, 106, 251);
+    margin-top: 15px;
+  }
 
-        .form .gender-box {
-            margin-top: 20px;
+  .form button:hover {
+    background: rgb(88, 56, 250);
+  }
 
-        }
+  ::placeholder {
+    color: #999;
+    /* Placeholder text color */
+    font-size: 14px;
+    /* Placeholder font size */
+    font-family: Arial, sans-serif;
+    /* Placeholder font family */
+  }
 
-        .gender-box h3 {
-            color: #333;
-            font-size: 1rem;
-            font-weight: 400;
-            margin-bottom: 8px;
-        }
+  @media screen and (max-width: 500px) {
+    .form .column {
+      flex-wrap: wrap;
+    }
 
-        .select-box select {
-            height: 100%;
-            width: 100%;
-            outline: none;
-            border: none;
-            color: #707070;
-            font-size: 1rem;
-
-        }
-
-        .address :where(input, .select-box) {
-            margin-top: 15px;
-        }
-
-        .form button {
-            height: 55px;
-            width: 100%;
-            color: #fff;
-            font-size: 1rem;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: 400;
-            border: none;
-            transition: all 0.2s ease;
-            background: rgb(130, 106, 251);
-            margin-top: 15px;
-        }
-
-        .form button:hover {
-            background: rgb(88, 56, 250);
-        }
-
-        ::placeholder {
-            color: #999;
-            /* Placeholder text color */
-            font-size: 14px;
-            /* Placeholder font size */
-            font-family: Arial, sans-serif;
-            /* Placeholder font family */
-        }
-
-        @media screen and (max-width:500px) {
-            .form .column {
-                flex-wrap: wrap;
-            }
-
-            .form :where(.gender-option, .gender) {
-                row-gap: 15px;
-            }
-
-        }
-    </style>
+    .form :where(.gender-option, .gender) {
+      row-gap: 15px;
+    }
+  }
+</style>
 <!-- </head>
 
 <body> -->
-    <div class="container-one">
-        <section class="container">
-            <header>
-                Medication Record
-            </header>
-            <form action="#" class="form">
+<div class="container-one">
+  <section class="container">
+    <header>Medication Record</header>
+    <form action="#" class="form">
+      <div class="input-box">
+        <label>Patient ID</label>
+        <input type="text" placeholder="pateint Id" />
+      </div>
+      <div class="input-box">
+        <label>Drugs</label>
+        <textarea name="message" placeholder="drugs"></textarea>
+      </div>
 
-                <div class="input-box">
-                    <label >Patient ID</label>
-                    <input type="text" placeholder="pateint Id">
-                </div>
-                <div class="input-box">
-                    <label >Drugs</label>
-                    <textarea name="message" placeholder="drugs"></textarea>
-                   
-                </div>
+      <div class="input-box">
+        <label>Medication Time</label>
+        <input type="text" placeholder="medicarion time" />
+      </div>
 
+      <div class="input-box">
+        <label>Bed Number</label>
+        <input type="text" placeholder="disease" />
+      </div>
+      <div class="input-box">
+        <label>Nurse ID</label>
+        <input type="text" placeholder="doctor id" />
+      </div>
+      <div class="input-box">
+        <label>Remark</label>
+        <input type="text" placeholder="remark" />
+      </div>
 
-                <div class="input-box">
-                    <label >Medication Time</label>
-                    <input type="text" placeholder="medicarion time">
-                </div>
-
-
-
-
-                <div class="input-box">
-                    <label >Bed Number</label>
-                    <input type="text" placeholder="disease">
-                </div>
-                <div class="input-box">
-                    <label >Nurse ID</label>
-                    <input type="text" placeholder="doctor id">
-                </div>
-                <div class="input-box">
-                    <label >Remark</label>
-                    <input type="text" placeholder="remark">
-                </div>
-
-
-                <button type="submit">Submit</button>
-            </form>
-        </section>
-    </div>
+      <button type="submit">Submit</button>
+    </form>
+  </section>
+</div>
 <!-- </body>
 
 </html> -->

@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Demo Hospital Website</title>
+    {%load static%}
+    <link
+      rel="stylesheet"
+      href="{% static 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css'%}"
+    />
+    <link rel="stylesheet" href="{% static 'csss/home.css' %}" />
+  </head>
+  <body>
+    <header class="header">
+      <a href="#" class="logo">
+        <i class="fas fa-heartbeat"> </i>Shashamane Specialized Hospital</a
+      >
+
+      <nav class="navbar">
+        <a href="#home">home</a>
+        <a href="#services">services</a>
+        <a href="#about">about</a>
+        <a href="#doctors">doctors</a>
+        <a href="#book">book</a>
+        <a href="#review">review</a>
+        <a href="#blogs">blogs</a>
+        <a href="payment.html">Payment</a>
+      </nav>
+
+      <div id="menu-btn" class="fas fa-bars"></div>
+    </header>
+
+    <section class="home" id="home">
+      <div class="image">
+        <img src="{% static 'csss/Doctor4.jpeg' %}" alt="" />
+      </div>
+      <div class="content">
+        <h3>Medicines cure Diseases,But Doctors Can Cure Patients</h3>
+        <p>
+          Shashamane has set up a special cell for patients from overseas
+          seeking treatment at its facilities. Now, it is looking forward to
+          extending its surgical skills in different parts of the nation and the
+          globe by the way of association with hospitals and institutes having
+          similar kind of dedication and zeal towards 'Patient Care'.
+        </p>
+        <a href="" target="_blank" class="btn"
+          >contact us <span class="fas fa-chevron-right"></span
+        ></a>
+      </div>
+    </section>
+
+    <section class="icons-container">
+      <div class="icons">
+        <i class="fas fa-user-md"></i>
+        <h3>180+</h3>
+        <p>Docors on Duty</p>
+      </div>
+
+      <div class="icons">
+        <i class="fas fa-users"></i>
+        <h3>2300+</h3>
+        <p>Satisfied patients</p>
+      </div>
+
+      <div class="icons">
+        <i class="fas fa-procedures"></i>
+        <h3>700+</h3>
+        <p>Bed facility</p>
+      </div>
+
+      <div class="icons">
+        <i class="fas fa-hospital"></i>
+        <h3>70+</h3>
+        <p>available hospitals</p>
+      </div>
+    </section>
+
+    <section class="services" id="services">
+      <h1 class="heading">our <span>services</span></h1>
+      <div class="box-container">
+        <div class="box">
+          <i class="fas fa-notes-medical"></i>
+
+          <h3>free checkups</h3>
+          <p>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad, omnis.
+          </p>
+          <a href="" target="_blank" class="btn"
+            >learn more <span class="fas fa-chevron-right"></span
+          ></a>
+        </div>
+
+        <div class="box">
+          <i class="fas fa-ambulance"></i>
+          <h3>24/7 ambulance</h3>
+          <p>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad, omnis.
+          </p>
+          <a href="" target="_blank" class="btn"
+            >learn more <span class="fas fa-chevron-right"></span
+          ></a>
+        </div>
+        <div class="box">
+          <i class="fas fa-user-md"></i>
+          <h3>expert doctors</h3>
+          <p>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad, omnis.
+          </p>
+
+          <a href="" target="_blank" class="btn">
+            learn more <span class="fas fa-chevron-right"></span
+          ></a>
+        </div>
+
+        <div class="box">
+          <i class="fas fa-pills"></i>
+          <h3>medicines</h3>
+          <p>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad, omnis.
+          </p>
+          <a href="" target="_blank" class="btn"
+            >learn more <span class="fas fa-chevron-right"></span
+          ></a>
+        </div>
+
+        <div class="box">
+          <i class="fas fa-procedures"></i>
+          <h3>bed facility</h3>
+          <p>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad, omnis.
+          </p>
+          <a href="" target="_blank" class="btn"
+            >learn more <span class="fas fa-chevron-right"></span
+          ></a>
+        </div>
+
+        <div class="box">
+          <i class="fas fa-heartbeat"></i>
+          <h3>total care</h3>
+          <p>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad, omnis.
+          </p>
+          <a href="" target="_blank" class="btn">
+            learn more <span class="fas fa-chevron-right"></span>
+          </a>
+        </div>
+      </div>
+    </section>
+    <section class="about" id="about">
+      <h1 class="heading"><span>about</span> us</h1>
+      <div class="row">
+        <div class="image">
+          <img src="{% static 'csss/Doctor1.jpeg' %}" alt="" />
+        </div>
+        <div class="content">
+          <h3>we take care of your healthy life to live long ago..</h3>
+          <p>
+            A doctor–patient relationship (DPR) is considered to be the core
+            element in the ethical principles of medicine. DPR is usually
+            developed when a physician tends to a patient’s medical needs via
+            check-up, diagnosis, and treatment in an agreeable manner. Due to
+            the relationship, the doctor owes a responsibility to the patient to
+            proceed toward the ailment or conclude the relationship
+            successfully. In particular, it is essential that primary care
+            physicians develop a satisfactory DPR in order to deliver prime
+            health care to patients
+          </p>
+          <p>
+            Trust in doctors allows patients to effectively discuss their health
+            issues. Development of trust enables the patient to comply with the
+            doctor’s guidance, which consequently results in improvement of
+            health.
+          </p>
+          <a href="" class="btn">
+            learn more <span class="fas fa-chevron-right"></span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="book" id="book">
+      <h1 class="heading"><span>book</span> now</h1>
+      <div class="row">
+        <div class="image">
+          <img src="{% static 'csss/Doctor5.jpeg' %}" alt="" />
+        </div>
+        <form name="google-sheet-form" method="post">
+          <h3>book appointment</h3>
+          <input type="text" name="Name" placeholder="your name" class="box" />
+          <input
+            type="number"
+            name="Number"
+            placeholder="your number"
+            class="box"
+          />
+          <input
+            type="email"
+            name="Email ID"
+            placeholder="your email"
+            class="box"
+          />
+          <input type="date" name="Date" class="box" />
+          <select type="gender" name="gender" id="gender" class="box">
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+          </select>
+          <input type="submit" value="book now" class="btn" />
+        </form>
+      </div>
+    </section>
+
+    <section class="blogs" id="blogs">
+      <h1 class="heading">our <span>blogs</span></h1>
+      <div class="box-container">
+        <div class="box">
+          <div class="image">
+            <img src="{% static 'csss/Doctor3.jpeg' %}" alt="" />
+          </div>
+          <div class="content">
+            <div class="icon">
+              <a href="#"> <i class="fas fa-calendar"></i> 3rd oct, 2022 </a>
+              <a href="#"> <i class="fas fa-user"></i> by admin </a>
+            </div>
+            <h3>Doctor's Responsibilities Towards their Duty</h3>
+            <p>
+              Doctors have many duties toward their patients. Their
+              responsibilities cover their own actions, as well as orders they
+              give to their assistants, such as nurses, medical students and
+              residents.
+            </p>
+            <a href="" class="btn">
+              learn more <span class="fas fa-chevron-right"></span>
+            </a>
+          </div>
+        </div>
+        <div class="box">
+          <div class="image">
+            <img src="{% static 'csss/Doctor2.jpeg' %}" alt="" />
+          </div>
+          <div class="content">
+            <div class="icon">
+              <a href="#"> <i class="fas fa-calendar"></i>3rd oct, 2022 </a>
+              <a href="#"> <i class="fas fa-user"></i> by admin </a>
+            </div>
+            <h3>Medical Doctors Job To Do Perform Diagonsis Test</h3>
+            <p>
+              It’s a medical doctor’s job to diagnose and treat patients to help
+              keep them at peak health. To do this, medical doctors perform
+              physical examinations, take and make note of a patient’s medical
+              history.
+            </p>
+            <a href="" class="btn">
+              learn more <span class="fas fa-chevron-right"></span>
+            </a>
+          </div>
+        </div>
+        <div class="box">
+          <div class="image">
+            <img src="{%static 'csss/Doctor1.jpeg'%}" alt="" />
+          </div>
+          <div class="content">
+            <div class="icon">
+              <a href="#"> <i class="fas fa-calendar"></i> 3rd oct, 2022 </a>
+              <a href="#"> <i class="fas fa-user"></i> by admin </a>
+            </div>
+            <h3>Consultanty Towards Doctor make your problem solved..</h3>
+            <p>
+              If a certain body part of your body is constantly troubling,
+              consultants can barely help. They can help reduce the pain or just
+              short-term relief. Specialists look forward to permanent and
+              long-term solutions.
+            </p>
+            <a href="" class="btn">
+              learn more <span class="fas fa-chevron-right"></span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="footer">
+      <div class="box-container">
+        <div class="box">
+          <h3>quick links</h3>
+          <a href="#"> <i class="fas fa-chevron-right"></i> home </a>
+          <a href="#"> <i class="fas fa-chevron-right"></i> services </a>
+          <a href="#"> <i class="fas fa-chevron-right"></i> about </a>
+          <a href="#"> <i class="fas fa-chevron-right"></i> doctors </a>
+          <a href="#"> <i class="fas fa-chevron-right"></i> book </a>
+          <a href="#"> <i class="fas fa-chevron-right"></i> review </a>
+        </div>
+        <div class="box">
+          <h3>our services</h3>
+          <a href="#"> <i class="fas fa-chevron-right"></i> dental care </a>
+          <a href="#"> <i class="fas fa-chevron-right"></i> message therapy </a>
+          <a href="#"> <i class="fas fa-chevron-right"></i> cardioloty </a>
+          <a href="#"> <i class="fas fa-chevron-right"></i> diagnosis </a>
+          <a href="#">
+            <i class="fas fa-chevron-right"></i> ambulance service
+          </a>
+        </div>
+        <div class="box">
+          <h3>contact info</h3>
+          <a href="#"> <i class="fas fa-phone"></i> +251 </a>
+          <a href="#"> <i class="fas fa-phone"></i> +251</a>
+          <a href="#"> <i class="fas fa-envelope"></i> wku@gmail.com </a>
+          <a href="#"> <i class="fas fa-envelope"></i> Shashamane@gmail.com </a>
+          <a href="#">
+            <i class="fas fa-map-marker-alt"></i> Shashamane, Ethiopia
+          </a>
+        </div>
+        <div class="box">
+          <h3>follow us</h3>
+          <a href="#"> <i class="fab fa-facebook-f"></i> facebook </a>
+          <a href="#"> <i class="fab fa-twitter"></i> twitter </a>
+          <a href="#"> <i class="fab fa-instagram"></i> instagram </a>
+        </div>
+      </div>
+    </section>
+    <footer>
+      <div class="end">
+        copyrights &copy; reserved by <span>Wku_CS students</span>
+      </div>
+    </footer>
+    <script src="script.js"></script>
+    <script>
+      const scriptURL =
+        "https://script.google.com/macros/s/AKfycbzbLnLtWZNN3G0BiCoPVbI2Y-DK0tJ-v7G2qeZ5Ia1nds4hFFiUiUyf-RhTVM9zdDeh/exec";
+      const form = document.forms["google-sheet-form"];
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        fetch(scriptURL, {
+          method: "POST",
+          body: new FormData(form),
+        })
+          .then((response) => alert("Thanks For Booking Your Appointment!!!"))
+          .catch((error) => console.error("Error!", error.message));
+      });
+    </script>
+  </body>
+</html>

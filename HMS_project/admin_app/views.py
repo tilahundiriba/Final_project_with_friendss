@@ -46,7 +46,8 @@ def login_view(request):
             return HttpResponse('Invalid username or password')
     else:
         return render(request, 'admin_dash/test_login.html', {})
-
+    
+    
 
 
 # def register(request):
@@ -200,4 +201,7 @@ def displayRegisteredPatient(request):
 def dis_user_registration(request):
     return render(request,'admin_dash/user_registration.html')
 
+def start(request):
+    # View logic goes here
+     return render(request, 'admin_app/start.html')
 
