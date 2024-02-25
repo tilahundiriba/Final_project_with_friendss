@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'doctor_app',
     'casher_app',
     'receptionist_app',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -66,7 +67,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     # 'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
-
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 ROOT_URLCONF = 'HMS_project.urls'
 
 TEMPLATES = [
@@ -122,18 +123,23 @@ WSGI_APPLICATION = 'HMS_project.wsgi.application'
 #         'PASSWORD':'362588',
 
 #     }}
+# DATABASES = {
+#     'default': {
+#         'ENGINE':'django.db.backends.postgresql',
+#         'NAME':'newBD',
+#         'USER':'tilish',
+#         'PASSWORD':'14241224',
+
+#         'HOST':'localhost',
+#         'PORT':'5432',
+#     }
+# }
 DATABASES = {
     'default': {
-        'ENGINE':'django.db.backends.postgresql',
-        'NAME':'newBD',
-        'USER':'tilish',
-        'PASSWORD':'14241224',
-
-        'HOST':'localhost',
-        'PORT':'5432',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',  # Adjust the path to your SQLite database file
     }
 }
-
 
 # DATABASES = {
 #     'default': {

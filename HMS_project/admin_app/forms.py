@@ -11,7 +11,7 @@ class SignUpForm(UserCreationForm):
         fields = ('username', 'email', 'password1', 'password2')
        
     email = forms.CharField(
-        label="Email",
+        label="Enter Your Email",
         widget=forms.EmailInput(attrs={'class': 'form-control'}),
     )
     username = forms.CharField(

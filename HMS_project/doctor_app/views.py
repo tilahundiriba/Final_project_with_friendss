@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import  Appointment,Prescription
-# from receptionist_app.models import PatientChange
+from receptionist_app.models import PatientRegister
 from django.shortcuts import get_object_or_404
 from admin_app.models import UserProfileInfo2
 def dis_dr_dash(request):
@@ -19,7 +19,7 @@ def add_perscription(request):
         # Extract other fields similarly
         
         # Create an instance of Appointment model and save it
-        patient = get_object_or_404( patient_id=patientid)
+        patient = get_object_or_404( PatientRegister,patient_id=patientid)
         doctor = get_object_or_404(UserProfileInfo2, user_id=doctor_id)
         appointment = Prescription(
             P_ID=patient,
@@ -78,7 +78,7 @@ def create_appointment(request):
         # Extract other fields similarly
         
         # Create an instance of Appointment model and save it
-        patient = get_object_or_404( patient_id=patientid)
+        patient = get_object_or_404( PatientRegister,patient_id=patientid)
         doctor = get_object_or_404(UserProfileInfo2, user_id=doctor_id)
         appointment = Appointment(
             P_ID=patient,

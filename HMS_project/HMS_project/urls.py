@@ -24,7 +24,7 @@ urlpatterns = [
     path('nurse_app/', include('nurse_app.urls')),
     path('casher_app/', include('casher_app.urls')),
     path('receptionist_app/', include('receptionist_app.urls')),
-    path('accounts/', include('django.contrib.auth.urls')),
+    # path('accounts/', include('django.contrib.auth.urls')),
     # path('accounts/login/', auth_views.LoginView.as_view(template_name='admin_app/loginfinal.html'), name='login'),
 
 

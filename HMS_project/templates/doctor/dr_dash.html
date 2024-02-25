@@ -69,14 +69,14 @@
 
 <body>
     <div class="wrapper">
-        <aside id="sidebar" class="js-sidebar">
+        <aside id="sidebar" class="js-sidebar bg-success">
             <!-- Content For Sidebar -->
             <div class="h-100">
                 <div class="sidebar-logo">
                     <a href="#">Hospital</a>
                 </div>
                 <ul class="sidebar-nav">
-                    <li class="sidebar-header">Doctor Elements</li>
+                    <li class="sidebar-header">Elements</li>
                     <li class="sidebar-item">
                         <a href="{% url 'dis_dr_dash_content' %}" class="sidebar-link">
                             <i class="fa-solid fa-list pe-2"></i>
@@ -91,10 +91,10 @@
                         </a>
                         <ul id="posts" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                             <li class="sidebar-item">
-                                <a href="{% url 'patient_history' %}" class="sidebar-link">Record Patient History</a>
+                                <a href="{% url 'patient_history' %}" class="sidebar-link">Patient History</a>
                             </li>
                             <li class="sidebar-item">
-                                <a href="{% url 'medication' %}" class="sidebar-link">View Patient History</a>
+                                <a href="{% url 'medication' %}" class="sidebar-link">View History</a>
                             </li>
 
                         </ul>
@@ -189,11 +189,11 @@
             </div>
         </aside>
         <div class="main">
-            <nav class="navbar navbar-expend px-3 border-bottom" id="navbar_id">
+            <nav class="navbar navbar-expend px-3 border-bottom bg-success" id="navbar_id">
                 <button class="btn bg-success text-dark" id="sidebar-toggle" type="button">
                     <span class="navbar-toggler-icon text-white"></span>
                 </button>
-                <img src="{% static 'images/profile.jpg'%}" class="avatar img-fluid rounded" alt="" />
+                <!-- <img src="{% static 'images/profile.jpg'%}" class="avatar img-fluid rounded" alt="" /> -->
          
             </nav>
             <main class="content px-3 py-2">

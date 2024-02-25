@@ -1,6 +1,7 @@
+{% extends 'admin_dash/web_home.html' %}
 
 {% load static %}
-
+{% block content %}
 <!DOCTYPE html>
 <html>
 
@@ -70,7 +71,7 @@
 								<div class="form-group row">
 									<div class="col-sm-12">
 										<select name="role" class="form-control" style="height: 60px;">
-										 <option disabled selected>Role</option>
+										 <option selected value="Choose Your Role">Choose Your Role</option>
 										 <option value="Admin">Admin</option>
 										 <option value="Doctor">Doctor</option>
 										 <option value="Nurse">Nurse</option>
@@ -125,3 +126,4 @@
 
 <!-- Mirrored from www.konnectplugins.com/proclinic/Horizontal/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 24 Jan 2022 10:42:12 GMT -->
 </html>
+{% endblock %}

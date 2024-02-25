@@ -27,7 +27,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 
 
-
+@login_required
 def login_view(request):
     if request.method == 'POST':
         username = request.POST.get('username')
