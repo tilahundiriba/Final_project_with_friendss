@@ -3,8 +3,11 @@ from .models import  Appointment,Prescription
 from receptionist_app.models import PatientRegister
 from django.shortcuts import get_object_or_404
 from admin_app.models import UserProfileInfo2
+
 def dis_dr_dash(request):
     return render(request,'doctor/dr_dash.html')
+
+
 def add_perscription(request):
     registered=False
     if request.method == 'POST':
@@ -22,7 +25,7 @@ def add_perscription(request):
         patient = get_object_or_404( PatientRegister,patient_id=patientid)
         doctor = get_object_or_404(UserProfileInfo2, user_id=doctor_id)
         appointment = Prescription(
-            P_ID=patient,
+            PatientID=patient,
             Prec_date=prec_date,
             Prec_number=prec_number,
             Doctor_ID=doctor,
@@ -33,7 +36,8 @@ def add_perscription(request):
         )
         appointment.save()
         registered=True
-        return redirect('add-appointment')  # Redirect to a success page or another URL
+        # return redirect('add-appointment') 
+        return render(request,'doctor/add-perscription.html',{'register':registered})
     return render(request,'doctor/add-perscription.html')
 def edit_perscription(request):
     return render(request,'doctor/edit-perscription.html')
@@ -46,6 +50,8 @@ def about_perscription(request):
 def dis_dr_dash_content(request):
     return render(request,'doctor/dash_content.html')
 def dis_patient_history(request):
+
+
     return render(request,'doctor/patient_history.html')
 def add_appointment(request):
     return render(request,'doctor/add-appointment.html')
@@ -81,7 +87,7 @@ def create_appointment(request):
         patient = get_object_or_404( PatientRegister,patient_id=patientid)
         doctor = get_object_or_404(UserProfileInfo2, user_id=doctor_id)
         appointment = Appointment(
-            P_ID=patient,
+            PatientID=patient,
             App_number=app_number,
             App_date=app_date,
             Time_slot=time_slot,
@@ -93,7 +99,7 @@ def create_appointment(request):
         )
         appointment.save()
         registered=True
-        return redirect('add-appointment')  # Redirect to a success page or another URL
+        return render(request, 'doctor/add-appointment.html',{'registered':registered}) # Redirect to a success page or another URL
 
     return render(request, 'doctor/add-appointment.html')
 

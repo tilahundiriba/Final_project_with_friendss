@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from django.shortcuts import get_object_or_404
 from.models import RoomInformation,VitalInformation
 def dis_medication(request):
-    return render(request,'nurse_dash/medication.html')
+    return render(request,'nurse_dash/medication2.html')
 def dis_vital_info(request):
     registered=False
     if request.method == 'POST':
@@ -39,7 +39,7 @@ def dis_vital_info(request):
         )
         vital.save()
         registered=True
-        return redirect('dis_nurse_dash_content')  # Redirect to a success page or another URL
+        return render(request,'nurse_dash/vital_info2.html',{'registered':registered}) # Redirect to a success page or another URL
     return render(request,'nurse_dash/vital_info2.html')
 def add_room(request):
     registered=False
@@ -56,7 +56,7 @@ def add_room(request):
         )
         appointment.save()
         registered=True
-        return redirect('dis_nurse_dash_content')  # Redirect to a success page or another URL
+        return render(request,'nurse_dash/add-room.html',{'registered':registered})  # Redirect to a success page or another URL
     return render(request,'nurse_dash/add-room.html')
 def edit_room(request):
     return render(request,'nurse_dash/edit-room.html')
