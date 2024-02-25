@@ -54,7 +54,7 @@ INSTALLED_APPS = [
     'doctor_app',
     'casher_app',
     'receptionist_app',
-    'crispy_forms',
+   # 'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -115,14 +115,15 @@ WSGI_APPLICATION = 'HMS_project.wsgi.application'
 #     }
 # }
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE':'django.db.backends.postgresql',
-#         'NAME':'postgres',
-#         'USER':'postgres',
-#         'PASSWORD':'362588',
-
-#     }}
+DATABASES = {
+    'default': {
+        'ENGINE':'django.db.backends.postgresql',
+        'NAME':'mg',
+        'USER':'postgres',
+        'PASSWORD':'362588',
+         'HOST':'localhost',
+         'PORT':'5432',
+   }}
 # DATABASES = {
 #     'default': {
 #         'ENGINE':'django.db.backends.postgresql',
@@ -134,12 +135,12 @@ WSGI_APPLICATION = 'HMS_project.wsgi.application'
 #         'PORT':'5432',
 #     }
 # }
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',  # Adjust the path to your SQLite database file
-    }
-}
+#DATABASES = {
+   # 'default': {
+    #    'ENGINE': 'django.db.backends.sqlite3',
+    #    'NAME': BASE_DIR / 'db.sqlite3',  # Adjust the path to your SQLite database file
+   # }
+#}
 
 # DATABASES = {
 #     'default': {

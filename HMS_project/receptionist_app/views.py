@@ -52,8 +52,18 @@ def add_patient(request):
         patient.save()   
         register=True 
     return render(request, 'receptionist_dash/add-patient.html',{'register':register})  # Render the form template initially
+from django.http import JsonResponse
 
-
+def delete_patient(request, patient_id):
+    if request.method == 'DELETE':
+        try:
+            patient = PatientRegister.objects.get(patient_id=patient_id)
+            patient.delete()
+            return JsonResponse({'message': 'Patient deleted successfully'})
+        except PatientRegister.DoesNotExist:
+            return JsonResponse({'message': 'Patient not found'}, status=404)
+    
+    return render(request,'receptionist_dash/patients.html')
 def dis_patient(request):
     patients = PatientRegister.objects.all()
     return render(request,'receptionist_dash/patients.html', {'patients':patients})
