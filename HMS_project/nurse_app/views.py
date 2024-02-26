@@ -1,9 +1,12 @@
 from django.shortcuts import render,redirect
 from django.shortcuts import get_object_or_404
+from admin_app .models import UserProfileInfo2
+from receptionist_app.models import PatientRegister
 from.models import RoomInformation,VitalInformation
+from django.contrib.auth.models import User
 def dis_medication(request):
     return render(request,'nurse_dash/medication2.html')
-def dis_vital_info(request):
+def add_vital_info(request):
     registered=False
     if request.method == 'POST':
         patient_id = request.POST.get('patient_id')
@@ -20,9 +23,10 @@ def dis_vital_info(request):
         bloodglu = request.POST.get('bloodglu')
         nurse_id = request.POST.get('nurseid')
         remark = request.POST.get('remark')
-        
+        patient = get_object_or_404( PatientRegister,patient_id=patient_id)
+        nurse_name = get_object_or_404( User,username=nurse_id)
         vital = VitalInformation(
-            Patient_ID=patient_id,
+            Patient_id=patient,
             Vital_info_no=vital_no,
             H_rate=Heart_Rate,
             B_pressure=bloodpre,
@@ -30,7 +34,7 @@ def dis_vital_info(request):
             Pain_level=painlev,
             Weight=weight,
             Height=height,
-            Nurse_id=nurse_id,
+            Nurse_id=nurse_name,
             Oxy_satu=oxysatu,
             B_gluc_level=bloodglu,
             R_rate=resRate,
@@ -39,8 +43,8 @@ def dis_vital_info(request):
         )
         vital.save()
         registered=True
-        return render(request,'nurse_dash/vital_info2.html',{'registered':registered}) # Redirect to a success page or another URL
-    return render(request,'nurse_dash/vital_info2.html')
+        return render(request,'nurse_dash/add-vital_info.html',{'registered':registered}) # Redirect to a success page or another URL
+    return render(request,'nurse_dash/add-vital_info.html')
 def add_room(request):
     registered=False
     if request.method == 'POST':
@@ -63,6 +67,9 @@ def edit_room(request):
 def dis_room(request):
     room =RoomInformation.objects.all()
     return render(request,'nurse_dash/rooms.html',{'rooms':room})
+def dis_vitals(request):
+    vitals =VitalInformation.objects.all()
+    return render(request,'nurse_dash/vital_infos.html',{'vitals':vitals})
 def nurse_dash(request):
     return render(request,'nurse_dash/nurse_dash.html')
 def dis_nurse_dash_content(request):
