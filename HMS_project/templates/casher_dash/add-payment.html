@@ -70,69 +70,68 @@
 								<div class="form-row">
 									<div class="form-group col-md-6">
 										<label for="patient-id">Patient ID</label>
-										<input type="text" class="form-control" placeholder="Patient ID" id="patient-id">
+										<input type="text" class="form-control" placeholder="Patient ID" id="patient-id" name="patient-id">
                                     </div>
                                     <div class="form-group col-md-6">
 										<label for="patient-name">Patient Name</label>
-										<input type="text" class="form-control" placeholder="Patient Name" id="patient-name">
+										<input type="text" class="form-control" placeholder="Patient Name" id="patient-name" name="patient-name">
 									</div>
 									<div class="form-group col-md-6">
-										<label for="department">Department</label>
-										<select class="form-control" id="department">
+										<label for="medical_specialty">Medical Specialty</label>
+										<select class="form-control" id="medical_specialty" name="medical_specialty">
 											<option>Neuro</option>
 											<option>Ortho</option>
 											<option>General</option>
 										</select>
 									</div>
 									<div class="form-group col-md-6">
-										<label for="doctor-name">Doctor Name</label>
-										<input type="text" placeholder="Doctor Name" class="form-control" id="doctor-name">
+										<label for="cashier_name">Cashier Name</label>
+										<input type="text" placeholder="cashier name" class="form-control" id="cashier_name" name="cashier_name">
 									</div>
 									<div class="form-group col-md-6">
 										<label for="adminssion-date">Admission Date</label>
-										<input type="date" placeholder="Adminssion Date" class="form-control" id="adminssion-date">
+										<input type="date" placeholder="Adminssion Date" class="form-control" id="adminssion-date" name="adminssion-date">
                                     </div>	
                                     <div class="form-group col-md-6">
 										<label for="discharge-date">Discharge Date</label>
-										<input type="date" placeholder="Discharge Date" class="form-control" id="discharge-date">
+										<input type="date" placeholder="Discharge Date" class="form-control" id="discharge-date" name="discharge-date">
                                     </div>	
                                     <div class="form-group col-md-12">
 										<h4>Services</h4>										
                                     </div>
                                     <div class="form-group col-md-6">
 										<label for="service-name">Service Name</label>
-										<input type="text" placeholder="Service Name" class="form-control" id="service-name">
+										<input type="text" placeholder="Service Name" class="form-control" id="service-name" name="service-name">
+                                    </div>	
+									<div class="form-group col-md-3">
+										<label for="service-name">Service Name</label>
+										<select class="form-control" placeholder="Service Name" id="service-name" name="service-name" multiple size="4">
+											<option>Card</option>
+											<option>Food</option>
+											<option>Bed</option>
+											<option>Laboratory</option>
+										</select>
                                     </div>	
                                     <div class="form-group col-md-6">
 										<label for="treatment-cost">Cost of Treatment</label>
-										<input type="text" placeholder="Cost of Treatment" class="form-control" id="treatment-cost">
+										<input type="text" placeholder="Cost of Treatment" class="form-control" id="treatment-cost" name="treatment-cost">
                                     </div>
                                     <div class="form-group col-md-12">
                                         <button type="button" class="btn btn-outline-success"><span class="ti-plus"></span> Add Service</button>										
                                     </div>
+
                                     <div class="form-group col-md-12">
 										<h4>Payment</h4>										
                                     </div>
-                                    <div class="form-group col-md-3">
-										<label for="discount">Discount (%)</label>
-										<input type="text" placeholder="Discount" class="form-control" id="discount">
-                                    </div>	
-                                    <div class="form-group col-md-3">
-										<label for="advance-paid">Advance Paid</label>
-										<input type="text" placeholder="Advance Paid" class="form-control" id="advance-paid">
-                                    </div>
+                                
                                     <div class="form-group col-md-3">
 										<label for="payment-type">Payment Type</label>
-										<select class="form-control" id="payment-type">
-											<option>Check</option>
-											<option>Card</option>
+										<select class="form-control" id="payment-type" name="payment-type">
+										    <option>Insurance</option>
 											<option>Cash</option>
 										</select>
                                     </div>	
-                                    <div class="form-group col-md-3">
-										<label for="card-check">Card/Check No</label>
-										<input type="text" placeholder="Card/Check No" class="form-control" id="card-check">
-									</div>																	
+                                    																
 									<div class="form-check col-md-12 mb-2">
 										<div class="text-left">
 											<div class="custom-control custom-checkbox">
