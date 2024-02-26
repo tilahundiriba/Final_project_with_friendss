@@ -66,58 +66,65 @@
 					<div class="col-md-12">
 						<div class="widget-area-2 proclinic-box-shadow">
 							<h3 class="widget-title">Edit Patient</h3>
-							<form>
-								<div class="form-row">
-									<div class="form-group col-md-6">
-										<label for="patient-name">Patient Name</label>
-										<input type="text" value="Daniel Smith" class="form-control" placeholder="Patient name" id="patient-name">
-									</div>
-									<div class="form-group col-md-6">
-										<label for="dob">Date Of Birth</label>
-										<input type="date" value="1989-10-10" placeholder="Date of Birth" class="form-control" id="dob">
-									</div>
-									<div class="form-group col-md-6">
-										<label for="age">Age</label>
-										<input type="text" value="30" placeholder="Age" class="form-control" id="age">
-									</div>
-									<div class="form-group col-md-6">
-										<label for="phone">Phone</label>
-										<input type="text" value="12345 67890" placeholder="Phone" class="form-control" id="phone">
-									</div>
-									<div class="form-group col-md-6">
-										<label for="email">Email</label>
-										<input type="email" value="email@email.com" placeholder="email" class="form-control" id="Email">
-									</div>
-									<div class="form-group col-md-6">
-										<label for="gender">Gender</label>
-										<select class="form-control" id="gender">
-											<option selected>Male</option>
-											<option>Female</option>
-											<option>Other</option>
-										</select>
-									</div>
-									<div class="form-group col-md-12">
-										<label for="exampleFormControlTextarea1">Address</label>
-										<textarea placeholder="Address" class="form-control" id="exampleFormControlTextarea1" rows="3">Koramangala Banglore, India</textarea>
-									</div>
-									<div class="form-group col-md-12">
-										<label for="file">File</label>
-										<input type="file" class="form-control" id="file">
-									</div>
-																		
-									<div class="form-check col-md-12 mb-2">
-										<div class="text-left">
-											<div class="custom-control custom-checkbox">
-												<input class="custom-control-input" type="checkbox" id="ex-check-2">
-												<label class="custom-control-label" for="ex-check-2">Please Confirm</label>
-											</div>
-										</div>
-									</div>
-									<div class="form-group col-md-6 mb-3">
-										<button type="submit" class="btn btn-primary btn-lg">Update</button>
-									</div>
-								</div>
-							</form>
+		<form method="POST" action="{% url 'update_patient' patientid.patient_id %}" >
+    {% csrf_token %}
+    <div class="form-row">
+		<div class="form-group col-md-4">
+			<label for="patient_id">Patient ID</label>
+			<input type="text" class="form-control" id="patient_id" name="patient_id" value="{{ patientid.patient_id }}">
+		</div>
+        <div class="form-group col-md-4">
+            <label for="first_name">First Name</label>
+            <input type="text" class="form-control" id="first_name" name="first_name" value="{{ patientid.first_name }}">
+        </div>
+        <div class="form-group col-md-4">
+            <label for="middle_name">Middle Name</label>
+            <input type="text" class="form-control" id="middle_name" name="middle_name" value="{{ patientid.middle_name }}">
+        </div>
+        <div class="form-group col-md-4">
+            <label for="last_name">Last Name</label>
+            <input type="text" class="form-control" id="last_name" name="last_name" value="{{patientid.last_name }}">
+        </div>
+    </div>
+        <div class="form-group col-md-4">
+            <label for="age">Age</label>
+            <input type="text" class="form-control" id="age" name="age" value="{{ patientid.age }}">
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <label for="phone_number">Phone Number</label>
+            <input type="text" class="form-control" id="phone_number" name="phone_number" value="{{ patientid.phone_number }}">
+        </div>
+        <div class="form-group col-md-4">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" name="email" value="{{ patientid.email }}">
+        </div>
+        <div class="form-group col-md-4">
+            <label for="country">Country</label>
+            <input type="text" class="form-control" id="country" name="country" value="{{ patientid.country }}">
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <label for="city">City</label>
+            <input type="text" class="form-control" id="city" name="city" value="{{ patientid.city }}">
+        </div>
+        <div class="form-group col-md-4">
+            <label for="region">Region</label>
+            <input type="text" class="form-control" id="region" name="region" value="{{ patientid.region }}">
+        </div>
+        <div class="form-group col-md-4">
+            <label for="kebele">Kebele</label>
+            <input type="text" class="form-control" id="kebele" name="kebele" value="{{ patientid.kebele }}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="doctor_id">Doctor ID</label>
+        <input type="text" class="form-control" id="doctor_id" name="doctor_id" value="{{ patientid.staff }}">
+    </div>
+    <button type="submit" class="btn btn-primary">Update</button>
+</form>
 							<!-- Alerts-->
 							<div class="alert alert-success alert-dismissible fade show" role="alert">
 								<strong>Successfully Updated!</strong> Please add payment now
