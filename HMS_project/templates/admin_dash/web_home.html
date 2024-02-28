@@ -72,6 +72,7 @@
             <input class="form-control me-2" type="text" placeholder="Search">
             <button class="btn btn-primary" type="button">Search</button>
           </form>
+          <div id="google_translate_element" ></div>
         </div>
       </div>
     </nav>
@@ -146,7 +147,7 @@
 
 
         </div>
-
+     
 
         <div class="row" style="margin-top: 30px;">
 
@@ -305,5 +306,15 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     {% endblock %}
+    <script src="http://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <script>
+    
+       function googleTranslateElementInit(){
+        new google.translate.TranslateElement(
+            {pageLanguage: 'en', defaultLanguage: 'en'},
+            'google_translate_element'
+        );
+       } 
+    </script>
 </body>
 </html>

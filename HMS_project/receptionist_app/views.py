@@ -1,6 +1,8 @@
 
-from functools import cache, lru_cache
-from pyexpat.errors import messages
+from django.core.cache import cache
+
+
+from django.contrib import messages
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils.crypto import get_random_string
@@ -51,23 +53,25 @@ def add_patient(request):
           
         patient_count = cache.get('patient_count', 0)
         patient_count += 1
-        cache.set('patien_count', patient_count)
-        messages.success(request, 'patient data sent successfully.')  
+        cache.set('patient_count', patient_count)
+        messages.success(request, 'Patient data sent successfully.')  
         register=True 
-    return render(request, 'receptionist_dash/add-patient.html',{'register':register})  # Render the form template initially
+    return render(request, 'receptionist_dash/add-patient.html',{'register':register,})  # Render the form template initially
 def check_patient_data(request):
     patient_count = cache.get('patient_count', 0)
     patients = PatientRegister.objects.filter(is_checked=False)
     return render(request, 'doctor/unchecked_patient.html', {'patients': patients ,'patient_count': patient_count})
 
 def check_patient(request, patient_id):
-    patients = PatientRegister.objects.get(patient_id=patient_id)
-    patients.is_checked = True
-    patients.save()
-    messages.success(request, 'patient data approved successfully.')
+    patient = get_object_or_404(PatientRegister, patient_id=patient_id)
+    patient.is_checked = True
+    patient.save()
+    messages.success(request, 'Patient is  checked successfully.')
+    
     patient_count = cache.get('patient_count', 0)
     patient_count -= 1
     cache.set('patient_count', patient_count)
+    
     return redirect('check_patient_data')
 
 

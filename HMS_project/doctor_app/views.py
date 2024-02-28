@@ -58,7 +58,7 @@ def dis_appointment(request):
 def about_appointment(request):
     return render(request,'doctor/about-appointment.html')
 def dis_patient_history(request):
-    return render(request,'doctor/patient_history.html')
+    return render(request,'doctor/patient_history2.html')
 
 from django.shortcuts import render, redirect
 from .models import Appointment

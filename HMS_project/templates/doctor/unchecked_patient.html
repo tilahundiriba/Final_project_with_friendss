@@ -9,21 +9,28 @@
     <title>Document</title>
 </head>
 <body>
-  <div>
-    {% if patient_count %}
-  <p> unchecked patients : {{ patient_count }}</p>
+  <div class="row">
+    <div class="col-6" style="display: flex; flex-direction: column;">
+      {% if messages %}
+      {% for message in messages %}
+        <div class="alert alert-success">
+          {{ message }}
+        </div>
+      {% endfor %}
     {% endif %}
-    {% for patient in patients %}
-    <p>{{ patient.patient_id}}</p>
-    <p>{{ patient.first_name}}</p>
-    <p>{{ patient.last_name}}</p>
-    <p>{{ patient.age}}</p>
-    <p>{{ patient.Doctor_ID}}</p>
-    {% endfor %}
-
-    <form action="{% url 'check_patient' patient.patient_id %}">
-      <button type='submit'> checked</button>
-    </form>
+      <p> Unchecked patients are : {{ patient_count }}</p>
+       
+        {% for patient in patients %}
+        <p>Patient ID:{{ patient.patient_id}}</p><br>
+        <p>Patient First Name:{{ patient.first_name}}</p><br>
+        <p>Patient Last Name:{{ patient.last_name}}</p><br>
+        <p>Patient Age:{{ patient.age}}</p><br>
+        <p>Doctor Name:{{ patient.staff}}</p><br>
+        <form action="{% url 'check_patient' patient.patient_id %}">
+          <button type='submit'> checked</button>
+        </form>
+        {% endfor %}
+    </div>
   </div>
 </body>
 </html>
