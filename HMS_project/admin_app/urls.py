@@ -32,8 +32,6 @@ urlpatterns = [
     path('web_home/', views.dis_web_home, name='web_home'),
     path('test_no_days/', views.bed_allocation_detail, name='dis_room'),
     path('dis_login2/', views.dis_login2, name='dis_login2'),
-
-
     
 ] 
 

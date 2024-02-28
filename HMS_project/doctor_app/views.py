@@ -49,23 +49,16 @@ def about_perscription(request):
 
 def dis_dr_dash_content(request):
     return render(request,'doctor/dash_content.html')
-def dis_patient_history(request):
 
-
-    return render(request,'doctor/patient_history.html')
-def add_appointment(request):
-    return render(request,'doctor/add-appointment.html')
 def edit_appointment(request):
     return render(request,'doctor/edit-appointment.html')
 def dis_appointment(request):
     appointment=Appointment.objects.all()
     return render(request,'doctor/appointments.html',{'appointment':appointment})
 def about_appointment(request):
-    
     return render(request,'doctor/about-appointment.html')
 def dis_patient_history(request):
     return render(request,'doctor/patient_history.html')
-
 
 from django.shortcuts import render, redirect
 from .models import Appointment

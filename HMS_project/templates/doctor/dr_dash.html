@@ -96,7 +96,9 @@
                             <li class="sidebar-item">
                                 <a href="{% url 'medication' %}" class="sidebar-link">View History</a>
                             </li>
-
+                            <li class="sidebar-item">
+                                <a href="{% url 'check_patient' %}" class="sidebar-link">check_patient</a>
+                            </li>
                         </ul>
                     </li>
                     <li class="sidebar-item">
@@ -148,6 +150,8 @@
                             <i class="fa-solid fa-flask-vial pe-2"></i>
                             Laboratory
                         </a>
+
+
                         <ul id="feed" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                             <li class="sidebar-item">
                                 <a href="#" class="sidebar-link">Send Lab Test</a>

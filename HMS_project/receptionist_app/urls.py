@@ -12,7 +12,9 @@ urlpatterns = [
   path('dis_patient/', views.dis_patient, name='dis_patient'),
   path('dis_form/', views.dis_forms, name='dis_form'),
   path('delete_patient/', views.delete_patient, name='delete_patient'),
-  path('update_patient/<str:patient_id>/', views.update_patient, name='update_patient'),
+  path('update_patient/<str:patient_id>/', views.update_patient, name='update_patient'), 
+
+
 
 
   #path('form/', views.form, name='form'),

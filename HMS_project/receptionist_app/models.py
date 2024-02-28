@@ -16,6 +16,7 @@ class PatientRegister(models.Model):
     region = models.CharField(max_length=100)
     kebele = models.CharField(max_length=200)
     staff=models.CharField(max_length=200)
+    is_checked=models.BooleanField(default=False)
     
     def __str__(self):
         return self.patient_id

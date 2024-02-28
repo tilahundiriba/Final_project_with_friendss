@@ -69,62 +69,64 @@
 		<form method="POST" action="{% url 'update_patient' patientid.patient_id %}" >
     {% csrf_token %}
     <div class="form-row">
-		<div class="form-group col-md-4">
+
+		<div class="form-group col-md-6">
 			<label for="patient_id">Patient ID</label>
 			<input type="text" class="form-control" id="patient_id" name="patient_id" value="{{ patientid.patient_id }}">
 		</div>
-        <div class="form-group col-md-4">
+        <div class="form-group col-md-6">
             <label for="first_name">First Name</label>
             <input type="text" class="form-control" id="first_name" name="first_name" value="{{ patientid.first_name }}">
         </div>
-        <div class="form-group col-md-4">
+        <div class="form-group col-md-6">
             <label for="middle_name">Middle Name</label>
             <input type="text" class="form-control" id="middle_name" name="middle_name" value="{{ patientid.middle_name }}">
         </div>
-        <div class="form-group col-md-4">
+        <div class="form-group col-md-6">
             <label for="last_name">Last Name</label>
             <input type="text" class="form-control" id="last_name" name="last_name" value="{{patientid.last_name }}">
         </div>
-    </div>
-        <div class="form-group col-md-4">
+    
+        <div class="form-group col-md-6">
             <label for="age">Age</label>
-            <input type="text" class="form-control" id="age" name="age" value="{{ patientid.age }}">
+            <input type="number" class="form-control" id="age" name="age" value="{{ patientid.age }}">
         </div>
-    </div>
-    <div class="form-row">
-        <div class="form-group col-md-4">
+    
+    {% comment %} <div class="form-row"> {% endcomment %}
+        <div class="form-group col-md-6">
             <label for="phone_number">Phone Number</label>
             <input type="text" class="form-control" id="phone_number" name="phone_number" value="{{ patientid.phone_number }}">
         </div>
-        <div class="form-group col-md-4">
+        <div class="form-group col-md-6">
             <label for="email">Email</label>
             <input type="email" class="form-control" id="email" name="email" value="{{ patientid.email }}">
         </div>
-        <div class="form-group col-md-4">
+        <div class="form-group col-md-6">
             <label for="country">Country</label>
             <input type="text" class="form-control" id="country" name="country" value="{{ patientid.country }}">
         </div>
-    </div>
-    <div class="form-row">
-        <div class="form-group col-md-4">
+ 
+    {% comment %} <div class="form-row"> {% endcomment %}
+        <div class="form-group col-md-6">
             <label for="city">City</label>
             <input type="text" class="form-control" id="city" name="city" value="{{ patientid.city }}">
         </div>
-        <div class="form-group col-md-4">
+        <div class="form-group col-md-6">
             <label for="region">Region</label>
             <input type="text" class="form-control" id="region" name="region" value="{{ patientid.region }}">
         </div>
-        <div class="form-group col-md-4">
+        <div class="form-group col-md-6">
             <label for="kebele">Kebele</label>
             <input type="text" class="form-control" id="kebele" name="kebele" value="{{ patientid.kebele }}">
         </div>
-    </div>
-    <div class="form-group">
+    
+    <div class="form-group col-md-6">
         <label for="doctor_id">Doctor ID</label>
         <input type="text" class="form-control" id="doctor_id" name="doctor_id" value="{{ patientid.staff }}">
     </div>
     <button type="submit" class="btn btn-primary">Update</button>
 </form>
+</div>
 							<!-- Alerts-->
 							<div class="alert alert-success alert-dismissible fade show" role="alert">
 								<strong>Successfully Updated!</strong> Please add payment now

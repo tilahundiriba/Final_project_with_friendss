@@ -1,7 +1,7 @@
 
 {% extends 'doctor/dr_dash.html' %}
 {% load static %}
-{% block content %} {% endcomment %} {% endcomment %}
+{% block content %} 
 <!-- <!DOCTYPE html>
 <html lang="en">
 
@@ -202,28 +202,17 @@ background: rgb(130, 106, 251);
 <!-- </head>
 
 <body> -->
-    <script>
-        function showButtons() {
-            var buttonsDiv = document.getElementById('buttons');
-            buttonsDiv.classList.add('show-buttons');
-        }
-    </script>
     <div class="container-one">
 
         <section class="container">
   <div class="container">
-    {% comment %} <a href="{% url 'patientOrder' %}" id='order' onclick="showButtons()">Order</a> {% endcomment %}
-    <a href="#" id='order' onclick="showButtons()">Order</a>
-
-    <div id="buttons" class="buttons">
-        <!-- <button onclick="location.href='{% url 'displayRegisteredPatient' %}'" id="view-btn" >Click me</button> -->
-        <button id="view-btn" >View</button>
-        <button id="go-btn">Go</button>
-    </div>
+    <header>
+        Patient History
+    </header>
 </div>
-            <header>
-                Patient History
-            </header>
+           
+           
+           
             <form action="#" class="form">
 
                 <div class="input-box">

@@ -77,8 +77,14 @@
 							<div class="table-responsive mb-3">
 								<form class="search-form" action="{% url 'delete_patient' %}" method="POST">
 									{% csrf_token %}
-									<input class="search-input" type="text" name="search_query" placeholder="Search...">
-									<button type="submit">Search</button>
+									<div class="form-row">
+										<div class="form-group col-md-10">
+										  <input class="form-control form-control-lg" type="text" name="search_query" placeholder="Patient Search...">
+										</div>
+										<div class="form-group col-md-2">
+										  <button type="submit" class="btn btn-primary btn-lg">Search</button>
+										</div>
+									  </div>
 								<table id="tableId" class="table table-bordered table-striped">
 									<thead>
 										<tr>
@@ -93,7 +99,7 @@
 											<th>Patient ID</th>
 											<th>First Name</th>
 											<th>Middle Name</th>
-											
+											<th>Last Name</th>
 											<th>Gender</th>
 										
 											<th>Age</th>
@@ -104,7 +110,10 @@
 										
 											<th>Kebele</th>
 											<th>Doctor ID</th>
+											<th>checked</th>
+
 											<th>Actions</th>
+
 
 										
 										</tr>
@@ -124,7 +133,8 @@
 											<td >{{patient.patient_id}}</td>
 											<td >{{patient.first_name}}</td>
 											<td >{{patient.middle_name}}</td>
-											
+											<td >{{patient.last_name}}</td>
+
 											<td >{{patient.gender}}</td>
 										
 											<td >{{patient.age}}</td>
@@ -135,7 +145,8 @@
 										
 											<td >{{patient.kebele}}</td>
 											<td >{{patient.staff}}</td>
-											
+											<td >{{patient.is_checked}}</td>
+
 											<td>
 												<button name='delete'  class="delete-link btn btn-outline-danger" ><span class="ti-trash"></span> </button>
 											 <a href="{% url 'edit-patient' patient.patient_id %}" class="btn btn-outline-primary "><span class="ti-pencil-alt"></span></a> 
@@ -165,9 +176,6 @@
 									</ul>
 								</nav>
 								<!-- /Export links-->
-								<button type="button" class="btn btn-danger mt-3 mb-0"><span class="ti-trash"></span> DELETE</button>
-								<button  type="submit" class="btn btn-primary mt-3 mb-0"><span class="ti-pencil-alt"></span> EDIT</button>
-								<a href="#" class="btn btn-outline-primary "><span class="ti-pencil-alt"></span></a> 
 
 							</div>
 						</div>

@@ -1,11 +1,13 @@
 
+from functools import cache, lru_cache
+from pyexpat.errors import messages
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils.crypto import get_random_string
 from .models import PatientRegister
 from admin_app.models import User
 from django.db.models import Q
-
+from django import *
 def receptionist_dash(request):
     return render(request,'receptionist_dash/receptionist_dash.html')
 def receptionist_dash_content(request):
@@ -29,31 +31,45 @@ def add_patient(request):
         doctor_id = request.POST.get('doctor_id')
         generated_id = 'SH' + get_random_string(length=6, allowed_chars='1234567890')
 
-        # if User.objects.filter(user_id=doctor_id).exists():
-        #     doctor_id=request.POST.get('doctor_id')
-        # else:
-        #     return HttpResponse('wrong doctor id')   
             
-        patient = PatientRegister.objects.create(
-                patient_id=generated_id,
-                first_name=first_name,
-                middle_name=middle_name,
-                last_name=last_name,
-                gender=gender,
-                birth_date=birth_date,
-                age=age,
-                phone_number=phone_number,
-                email=email,
-                country=country,
-                city=city,
-                region=region,
-                kebele=kebele,
-                staff=doctor_id,
+        PatientRegister.objects.create(
+        patient_id=generated_id,
+        first_name=first_name,
+        middle_name=middle_name,
+        last_name=last_name,
+        gender=gender,
+        birth_date=birth_date,
+        age=age,
+        phone_number=phone_number,
+        email=email,
+        country=country,
+        city=city,
+        region=region,
+        kebele=kebele,
+        staff=doctor_id,
                 )
-                  
-        patient.save()   
+          
+        patient_count = cache.get('patient_count', 0)
+        patient_count += 1
+        cache.set('patien_count', patient_count)
+        messages.success(request, 'patient data sent successfully.')  
         register=True 
     return render(request, 'receptionist_dash/add-patient.html',{'register':register})  # Render the form template initially
+def check_patient_data(request):
+    patient_count = cache.get('patient_count', 0)
+    patients = PatientRegister.objects.filter(is_checked=False)
+    return render(request, 'doctor/unchecked_patient.html', {'patients': patients ,'patient_count': patient_count})
+
+def check_patient(request, patient_id):
+    patients = PatientRegister.objects.get(patient_id=patient_id)
+    patients.is_checked = True
+    patients.save()
+    messages.success(request, 'patient data approved successfully.')
+    patient_count = cache.get('patient_count', 0)
+    patient_count -= 1
+    cache.set('patient_count', patient_count)
+    return redirect('check_patient_data')
+
 
 def delete_patient(request):
     if request.method == 'POST':
