@@ -3,35 +3,78 @@
 {% block content %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
 </head>
+
 <body>
-  <div class="row">
-    <div class="col-6" style="display: flex; flex-direction: column;">
+  <div class="wrapper">
+    <!-- Page Content -->
+    <div id="content">
+
+  <div class="container home">
+    <div class="container mt-0">
+      <div class="row breadcrumb-bar">
+        <div class="col-md-6">
+          <h3 class="block-title">Patients</h3>
+        </div>
+        <div class="col-md-6">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a href="index.html">
+                <span class="ti-home"></span>
+              </a>
+            </li>
+            <li class="breadcrumb-item active">Patients</li>
+            <li class="breadcrumb-item ">Unchecked Patients</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <div class="row">
       {% if messages %}
       {% for message in messages %}
-        <div class="alert alert-success">
-          {{ message }}
-        </div>
+      <div class="alert alert-success">
+        {{ message }}
+      </div>
       {% endfor %}
-    {% endif %}
-      <p> Unchecked patients are : {{ patient_count }}</p>
-       
-        {% for patient in patients %}
-        <p>Patient ID:{{ patient.patient_id}}</p><br>
-        <p>Patient First Name:{{ patient.first_name}}</p><br>
-        <p>Patient Last Name:{{ patient.last_name}}</p><br>
-        <p>Patient Age:{{ patient.age}}</p><br>
-        <p>Doctor Name:{{ patient.staff}}</p><br>
-        <form action="{% url 'check_patient' patient.patient_id %}">
-          <button type='submit'> checked</button>
-        </form>
-        {% endfor %}
+      {% endif %}
+      <p class="wiget-title color-yellow "> Remaning unchecked patients are : {{ patient_count }}</p>
+
+      {% for patient in patients %}
+
+      <div class="col-md-6">
+        <div class="widget-area proclinic-box-shadow color-red" style="padding: 10px 20px;">
+
+          <div class="widget-right justify-content-center" style="margin: 20px; ">
+
+            <h3 class="wiget-title color-green text-center">Patients</h3>
+
+            <p><strong style="font-size: large;">Patient ID:&nbsp;</strong>{{ patient.patient_id}}</p>
+            <p><strong style="font-size: large;">First Name:&nbsp;</strong>{{ patient.first_name}}</p>
+            <p><strong style="font-size: large;">Last Name:&nbsp;</strong>{{ patient.last_name}}</p>
+            <p><strong style="font-size: large;"> Age:&nbsp;</strong>{{ patient.age}}</p>
+            <p><strong style="font-size: large;">Doctor Name:&nbsp;</strong>{{ patient.staff}}</p>
+            <form action="{% url 'check_patient' patient.patient_id %}">
+              <button type='submit' class="btn btn-outline-primary mt-3 mb-0 me-4"><span class="ti-eye"></span>
+                Checked</button>
+              <button type='button' class="btn btn-outline-info mt-3 mb-0"><span class="ti-pencil-alt"></span>
+                History</button>
+            </form>
+
+          </div>
+        </div>
+      </div>
+      {% endfor %}
     </div>
+    
   </div>
+</div>
+</div>
 </body>
+
 </html>
 {% endblock %}
