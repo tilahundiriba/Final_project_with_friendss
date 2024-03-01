@@ -73,7 +73,7 @@
                     <a href="#">Hospital</a>
                 </div>
                 <ul class="sidebar-nav">
-                    <li class="sidebar-header">Casher Elements</li>
+                    <li class="sidebar-header">Elements</li>
                     <li class="sidebar-item">
                         <a href="{% url 'casher_dash_content' %}" class="sidebar-link">
                             <i class="fa-solid fa-list pe-2"></i>
@@ -102,7 +102,7 @@
                     <li class="sidebar-item">
                         <a href="#" class="sidebar-link collapsed" data-bs-target="#auth" data-bs-toggle="collapse"
                             aria-expanded="false">
-                            <i class="fa-regular fa-calendar-check pe-2"></i>
+                            <i class="fa-solid fa-money-bills pe-2"></i>
                             Bill
                         </a>
                         <ul id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
@@ -118,13 +118,13 @@
                     <li class="sidebar-item">
                         <a href="#" class="sidebar-link collapsed" data-bs-target="#feed" data-bs-toggle="collapse"
                             aria-expanded="false">
-                            <!-- <i class="fa-regular fa-flask-vial pe-2"></i> -->
-                            <i class="fa-solid fa-flask-vial pe-2"></i>
-                            Other
+                     
+                            <i class="fa-solid fa-wallet pe-2"></i>
+                            Lab. Payment
                         </a>
                         <ul id="feed" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                             <li class="sidebar-item">
-                                <a href="#" class="sidebar-link">Send Lab Test</a>
+                                <a href="{% url 'check_payment_request' %}" class="sidebar-link">Lab Payment</a>
                             </li>
                             <li class="sidebar-item">
                                 <a href="#" class="sidebar-link">Send Lab Fee</a>
@@ -174,7 +174,7 @@
                 <button class="btn bg-success text-dark" id="sidebar-toggle" type="button">
                     <span class="navbar-toggler-icon text-white"></span>
                 </button>
-                <img src="{% static 'images/profile.jpg'%}" class="avatar img-fluid rounded" alt="" />
+                <!-- <img src="{% static 'images/profile.jpg'%}" class="avatar img-fluid rounded" alt="" /> -->
    
             </nav>
             <main class="content px-3 py-2">

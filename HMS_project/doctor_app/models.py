@@ -38,5 +38,6 @@ class Laboratory(models.Model):
     Doctor_ID=models.ForeignKey(UserProfileInfo2,on_delete=models.CASCADE)
     Technician_ID=models.ForeignKey(UserProfileInfo2,on_delete=models.CASCADE,related_name='laboratory_send_set',related_query_name='laboratory_send_set',null=True)
     Is_tested= models.BooleanField(default=False)
+    Is_payed= models.BooleanField(default=False)
     def __str__(self):
         return f'{self.PatientID}'

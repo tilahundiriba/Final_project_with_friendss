@@ -3,7 +3,7 @@ from . import views
 from django.contrib.auth import views as auth_views
 from django.conf import settings
 from django.conf.urls.static import static
-
+from doctor_app.views import check_payment_request,checked_payment_request 
 
 urlpatterns = [
  
@@ -14,6 +14,8 @@ urlpatterns = [
   path('invoice/', views.invoice, name='invoice'),
   path('casher_dash/', views.casher_dash, name='casher_dash'),
   path('casher_dash_content/', views.casher_dash_content, name='casher_dash_content'),
+  path('check_payment_request/',check_payment_request ,name='check_payment_request'),
+  path('checked_payment_request/<str:patient_id>/', checked_payment_request, name='checked_payment_request'),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -38,12 +38,12 @@ def add_lab(request):
         registered=True
         return render(request,'doctor/add_lab.html',{'register':registered})
     return render(request,'doctor/add_lab.html')
-
+# views for getting untested lab request and render it
 def check_request(request):
     request_count = cache.get('request_count', 0)
     requests = Laboratory.objects.filter(Is_tested=False)
     return render(request, 'laboratory_dash/lab_requests.html', {'requests': requests ,'request_count': request_count})
-
+# views for testing the lab for single patient 
 def checked_request(request, patient_id):
     lab_request = get_object_or_404(Laboratory, PatientID=patient_id)
     lab_request.Is_tested = True
@@ -53,7 +53,22 @@ def checked_request(request, patient_id):
     request_count -= 1
     cache.set('request_count', request_count)
     return redirect('check_request')
-
+# views for getting unpayed lab request and render it
+def check_payment_request(request):
+    request_count = cache.get('request_count', 0)
+    payments = Laboratory.objects.filter(Is_payed=False)
+    return render(request, 'casher_dash/lab_payments.html', {'payments': payments ,'request_count': request_count})
+# views for paying the lab payment for each patient
+def checked_payment_request(request, patient_id):
+    pay_request = get_object_or_404(Laboratory, PatientID=patient_id)
+    pay_request.Is_payed = True
+    pay_request.save()
+    messages.success(request, 'lab. payment request is  payed successfully.')
+    request_count = cache.get('request_count', 0)
+    request_count -= 1
+    cache.set('request_count', request_count)
+    return redirect('check_payment_request')
+# view for tadding prescriptions 
 def add_perscription(request):
     registered=False
     if request.method == 'POST':
@@ -63,10 +78,6 @@ def add_perscription(request):
         p_name = request.POST.get('name')
         doctor_id = request.POST.get('dr_name')
         prec = request.POST.get('prescription')
-        
-     
-        # Extract other fields similarly
-        
         # Create an instance of Appointment model and save it
         patient = get_object_or_404( PatientRegister,patient_id=patientid)
         doctor = get_object_or_404(UserProfileInfo2, user_id=doctor_id)

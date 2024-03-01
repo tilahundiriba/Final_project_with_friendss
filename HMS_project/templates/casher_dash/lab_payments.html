@@ -1,0 +1,83 @@
+{% extends 'casher_dash/casher_dash.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% block 'title' %}
+  <title>Lab Payment Requests</title>
+  {% endblock %}
+</head>
+
+<body>
+  <div class="wrapper">
+    <!-- Page Content -->
+    <div id="content">
+        {% include 'casher_dash/navbar.html' %}
+  <div class="container home">
+    <div class="container mt-0">
+      <div class="row breadcrumb-bar">
+        <div class="col-md-6">
+          <h3 class="block-title">Lab Payment Requests</h3>
+        </div>
+        <div class="col-md-6">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a href="index.html">
+                <span class="ti-home"></span>
+              </a>
+            </li>
+            <li class="breadcrumb-item active">Lab Payment Requests</li>
+            <li class="breadcrumb-item ">Unpayed Requests</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      {% if messages %}
+      {% for message in messages %}
+      <div class="alert alert-success">
+        {{ message }}
+      </div>
+      {% endfor %}
+      {% endif %}
+      <p class="wiget-title color-yellow "> Remaning unpayed requests are : {{ request_count }}</p>
+
+      {% for pay in payments %}
+
+      <div class="col-md-6">
+        <div class="widget-area proclinic-box-shadow color-red" style="padding: 10px 30px; border-radius: 20px;">
+
+          <div class="widget-right justify-content-center">
+
+            <h3 class="wiget-title color-green text-center">Lab Payment Requests</h3>
+
+            <p><strong style="font-size: large;">Patient ID:&nbsp;</strong>{{ pay.PatientID}}</p>
+            <p><strong style="font-size: large;">lab. type:&nbsp;</strong>{{ pay.Lab_type}}</p>
+            <p><strong style="font-size: large;">Doctor Name:&nbsp;</strong>{{ pay.Doctor_ID}}</p>
+            <p><strong style="font-size: large;">Status:&nbsp;</strong>{{ pay.Is_tested}}</p>
+            <p><strong style="font-size: large;">Payment:&nbsp;</strong>{{ pay.Is_payed}}</p>
+            <p><strong style="font-size: large;">Admitted Date:&nbsp;</strong>{{ pay.Admit_date}}</p>
+            <form action="{% url 'checked_payment_request' pay.PatientID %}">
+              <button type='submit' class="btn btn-outline-primary mt-3 mb-0 me-4"><span class="ti-eye"></span>
+                Payed</button>
+              <a href="#" class="btn btn-outline-info mt-3 mb-0"><span class="ti-pencil-alt"></span>
+                Pay</a>
+            </form>
+
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    
+  </div>
+</div>
+</div>
+</body>
+
+</html>
+{% endblock %}
