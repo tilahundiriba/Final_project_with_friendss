@@ -94,14 +94,14 @@ WSGI_APPLICATION = 'HMS_project.wsgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 # DATABASES = {
-    # 'default': {
-        # 'ENGINE':'django.db.backends.postgresql',
-        # 'NAME':'malu',
-        # 'USER':'postgres',
-        # 'PASSWORD':'1234',
-        # 'HOST':'localhost',
-        # 'PORT':'5050',
-    # }
+#     'default': {
+#         'ENGINE':'django.db.backends.postgresql',
+#         'NAME':'malu',
+#         'USER':'postgres',
+#         'PASSWORD':'1234',
+#         'HOST':'localhost',
+#         'PORT':'5050',
+#     }
 # }
 # 
 # DATABASES = {
