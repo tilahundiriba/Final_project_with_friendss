@@ -28,4 +28,15 @@ class Prescription(models.Model):
     Precscriptions=models.TextField(max_length=200,null=True)
     Patient_full_name=models.TextField(max_length=100)
     Doctor_ID=models.ForeignKey(UserProfileInfo2,on_delete=models.CASCADE)
-  
+
+class Laboratory(models.Model):
+    PatientID=models.ForeignKey(PatientRegister, on_delete=models.CASCADE)
+    Lab_number=models.CharField(max_length=100)
+    Admit_date=models.DateField(max_length=100)
+    Lab_type=models.TextField(max_length=200)
+    Lab_result=models.TextField(max_length=100, null=True)
+    Doctor_ID=models.ForeignKey(UserProfileInfo2,on_delete=models.CASCADE)
+    Technician_ID=models.ForeignKey(UserProfileInfo2,on_delete=models.CASCADE,related_name='laboratory_send_set',related_query_name='laboratory_send_set',null=True)
+    Is_tested= models.BooleanField(default=False)
+    def __str__(self):
+        return f'{self.PatientID}'

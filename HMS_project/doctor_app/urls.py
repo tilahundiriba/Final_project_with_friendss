@@ -7,7 +7,6 @@ urlpatterns = [
 
     path('dis_dr_dash/', views.dis_dr_dash, name='dis_dr_dash'),
     path('dis_dr_dash_content/', views.dis_dr_dash_content, name='dis_dr_dash_content'),
-    #path('patientOrder/', views.patientOrder, name='patientOrder'),
     path('patient_history/', views.dis_patient_history, name='patient_history'),
     path('about-appointment/', views.about_appointment, name='about-appointment'),
     path('add-appointment/', views.create_appointment, name='add-appointment'),
@@ -20,6 +19,8 @@ urlpatterns = [
     path('about_perscription/', views.about_perscription, name='about_perscription'),
     path('check_patient_data/', check_patient_data, name='check_patient_data'),
     path('check_patient/<str:patient_id>/', check_patient, name='check_patient'),
+    path('add_lab/', views.add_lab, name='add_lab'),
+    path('lab_tests/', views.dis_labtest, name='lab_tests'),
 
 
 ] 

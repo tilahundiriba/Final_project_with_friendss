@@ -49,7 +49,7 @@
       <div class="col-md-6">
         <div class="widget-area proclinic-box-shadow color-red" style="padding: 10px 20px;">
 
-          <div class="widget-right justify-content-center" style="margin: 20px; ">
+          <div class="widget-right justify-content-center">
 
             <h3 class="wiget-title color-green text-center">Patients</h3>
 
@@ -61,8 +61,8 @@
             <form action="{% url 'check_patient' patient.patient_id %}">
               <button type='submit' class="btn btn-outline-primary mt-3 mb-0 me-4"><span class="ti-eye"></span>
                 Checked</button>
-              <button type='button' class="btn btn-outline-info mt-3 mb-0"><span class="ti-pencil-alt"></span>
-                History</button>
+              <a href="{% url 'patient_history' %}" class="btn btn-outline-info mt-3 mb-0"><span class="ti-pencil-alt"></span>
+                History</a>
             </form>
 
           </div>
