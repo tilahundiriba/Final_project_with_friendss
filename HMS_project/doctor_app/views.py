@@ -1,12 +1,58 @@
 from django.shortcuts import render
-from .models import  Appointment,Prescription
+from .models import  Appointment,Prescription,Laboratory
 from receptionist_app.models import PatientRegister
 from django.shortcuts import get_object_or_404
 from admin_app.models import UserProfileInfo2
+from django.core.cache import cache
+from django.contrib import messages
 
 def dis_dr_dash(request):
     return render(request,'doctor/dr_dash.html')
+def dis_labtest(request):
+    labs= Laboratory.objects.all()
+    return render(request,'doctor/labtests.html',{'labs':labs})
+def add_lab(request):
+    registered=False
+    if request.method == 'POST':
+        patientid = request.POST.get('patient_id')
+        lab_number = request.POST.get('lab_no')
+        admit_date = request.POST.get('admited_date')
+        lab_type = request.POST.get('lab_type')
+        doctor_id = request.POST.get('dr_name')
+        # Create an instance of Appointment model and save it
+        patient = get_object_or_404( PatientRegister,patient_id=patientid)
+        doctor = get_object_or_404(UserProfileInfo2, user_id=doctor_id)
+        lab = Laboratory(
+            PatientID=patient,
+            Admit_date=admit_date,
+            Lab_number=lab_number,
+            Doctor_ID=doctor,
+            Lab_type=lab_type,
+            # Assign values to other fields similarly
+        )
+        lab.save()
+        request_count = cache.get('request_count', 0)
+        request_count += 1
+        cache.set('request_count', request_count)
+        messages.success(request, 'Laboratory test sent successfully.') 
+        registered=True
+        return render(request,'doctor/add_lab.html',{'register':registered})
+    return render(request,'doctor/add_lab.html')
 
+def check_request(request):
+    request_count = cache.get('request_count', 0)
+    requests = Laboratory.objects.filter(Is_tested=False)
+    return render(request, 'laboratory_dash/lab_requests.html', {'requests': requests ,'request_count': request_count})
+
+def checked_request(request, patient_id):
+    lab_request = get_object_or_404(Laboratory, PatientID=patient_id)
+    lab_request.Is_tested = True
+    lab_request.save()
+    messages.success(request, 'lab. request is  tested successfully.')
+    request_count = cache.get('request_count', 0)
+    request_count -= 1
+    cache.set('request_count', request_count)
+    return redirect('check_request')
 
 def add_perscription(request):
     registered=False
