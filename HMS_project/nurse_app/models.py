@@ -2,6 +2,7 @@ from django.db import models
 from receptionist_app.models import PatientRegister
 from admin_app.models import UserProfileInfo2
 from django.contrib.auth.models import User
+
 class RoomInformation(models.Model):
     Room_block=models.TextField(max_length=100)
     Room_no=models.TextField(max_length=100 ,primary_key=True)

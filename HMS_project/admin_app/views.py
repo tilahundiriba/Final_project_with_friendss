@@ -63,9 +63,9 @@ def login_view(request):
 def createUserAccount(request):
     if request.method == 'POST':
         email = request.POST.get('email')
-        profession = request.POST.get('profession')
+        role = request.POST.get('role')
         # Generate username and password
-        username = generate_username(email, profession)
+        username = generate_username(email, role)
         password = generate_password()
 
         # Create the user
@@ -75,13 +75,13 @@ def createUserAccount(request):
         # Create user profile
         user_profile = UserProfileInfo2.objects.create(
             user=user,
-            profession=profession,
+            role=role,
         )
         # Send email with username and password
         context = {
             'username': username,
             'password': password,
-            'profession': profession,
+            'role': role,
         }
         html_message = render_to_string('admin_dash/email_template.html', context)
         plain_message = strip_tags(html_message)

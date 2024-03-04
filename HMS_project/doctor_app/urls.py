@@ -21,6 +21,9 @@ urlpatterns = [
     path('check_patient/<str:patient_id>/', check_patient, name='check_patient'),
     path('add_lab/', views.add_lab, name='add_lab'),
     path('lab_tests/', views.dis_labtest, name='lab_tests'),
+    path('profile/<int:user_id>/', views.upload_profile_pic, name='profile'),
+    path('profile_form/', views.dis_profile_form, name='profile_form'),
+    path('profiles/', views.profiles, name='profiles'),
 
 
 ] 

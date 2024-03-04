@@ -3,7 +3,7 @@ from receptionist_app.models import PatientRegister
 from admin_app.models import UserProfileInfo2
 # Create your models here.
 class Payment(models.Model):
-    Patient_id=models.ForeignKey(PatientRegister, on_delete=models.CASCADE,related_name='payment_set', related_query_name='payment')
+    Patient_id=models.ForeignKey(PatientRegister, on_delete=models.CASCADE)
     Pay_number=models.CharField(max_length=100)
     Admit_date=models.DateField(max_length=100)
     Lab_payment=models.TextField(max_length=200,null=True)

@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.shortcuts import render
 from .models import  Appointment,Prescription,Laboratory
 from receptionist_app.models import PatientRegister
@@ -5,9 +6,28 @@ from django.shortcuts import get_object_or_404
 from admin_app.models import UserProfileInfo2
 from django.core.cache import cache
 from django.contrib import messages
+from django.shortcuts import get_object_or_404
 
+def upload_profile_pic(request, user_id):
+    if request.method == 'POST' and request.FILES.get('profile_pic'):
+        profile_pic = request.FILES['profile_pic']
+        # Get the user object using the user_id
+        user_profile = get_object_or_404(UserProfileInfo2, user_id=user_id)
+        # Update the profile picture for the user
+        user_profile.profile_pic = profile_pic
+        user_profile.save()
+        return HttpResponse('Profile picture uploaded successfully!')
+    else:
+        return render(request, 'doctor/profile.html',{'user_id': user_id})
+    
+
+def profiles(request):
+    profiles=UserProfileInfo2.objects.all()
+    return render(request,'doctor/profiles.html',{'profiles':profiles})
 def dis_dr_dash(request):
     return render(request,'doctor/dr_dash.html')
+def dis_profile_form(request):
+    return render(request,'doctor/profile.html')
 def dis_labtest(request):
     labs= Laboratory.objects.all()
     return render(request,'doctor/labtests.html',{'labs':labs})
