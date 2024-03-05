@@ -3,8 +3,11 @@ from . import views
 from django.contrib.auth import views as auth_views
 from django.conf import settings
 from django.conf.urls.static import static
-urlpatterns = [
+from .views import NotificationListView
 
+urlpatterns = [
+    path('writenotification/', views.writenotification, name='writenotification'),
+    path('notifications/', NotificationListView.as_view(), name='notifications'),
     path('test_fees/', views.lab_test_payment, name='lab_test_payment'),
     path('process-payment/', views.process_payment, name='process_payment'),
 

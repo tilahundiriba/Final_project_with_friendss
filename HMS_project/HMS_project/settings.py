@@ -43,6 +43,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'daphne',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -85,6 +86,15 @@ TEMPLATES = [
         },
     },
 ]
+ASGI_APPLICATION = 'HMS_project.asgi.application'
+
+
+# 👇 5. Add the below line for channel layer
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': "channels.layers.InMemoryChannelLayer"
+    }
+}
 
 WSGI_APPLICATION = 'HMS_project.wsgi.application'
 

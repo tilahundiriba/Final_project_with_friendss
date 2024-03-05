@@ -170,13 +170,19 @@
                             </li>
                         </ul>
                     </li>
-                    <!-- <li class="sidebar-header">Setting</li> -->
-                    <li class="sidebar-item">
-                        <a href="#" class="sidebar-link">
-                            <i class="fa-regular fa-bell pe-2"></i>
-                            Notifications </a>
 
-                    </li>
+             
+                    <!-- <li class="sidebar-header">Setting</li> -->
+                    <li class="sidebar-item dropdown dropdown-menu-start">
+                        <a href="{% url 'writenotification' %}" class="sidebar-link" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i id="bellCount" class="fa-solid fa-bell" data-count="0" ></i>
+                            Notifications </a>
+                            <ul class="dropdown-menu dropdown-menu-dark  text-wrap" id="notify" style="width: 300px !important;"></ul>
+                    </li>      
+                    
+                    
+
+
                     <li class="sidebar-item">
                         <a href="#" class="sidebar-link collapsed" data-bs-target="#multi" data-bs-toggle="collapse"
                             aria-expanded="false">

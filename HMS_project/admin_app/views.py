@@ -25,7 +25,27 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserChangeForm
 from django.shortcuts import render, redirect
 from django.contrib import messages
-
+from django.shortcuts import render
+from django.http import JsonResponse
+from django.views import View
+from .models import Notification
+# Create your views here.
+def writenotification(request):
+    return render(request, 'doctor/view_notification.html')
+class NotificationListView(View):
+    def get(self, request, *args, **kwargs):
+        # Retrieve all notifications from the database
+        notifications = Notification.objects.all()
+        
+        # Create a list to store the notification messages
+        notification_messages = []
+        
+        # Iterate over the notifications and extract the messages
+        for notification in notifications:
+            notification_messages.append(notification.message)
+        
+        # Return the notification messages as a JSON response
+        return JsonResponse(notification_messages, safe=False)
 
 @login_required
 def login_view(request):
