@@ -152,18 +152,18 @@ DATABASES = {
        'NAME': BASE_DIR / 'db.sqlite3',  # Adjust the path to your SQLite database file
    }
 }
-
+# 
 # DATABASES = {
 #     'default': {
 #         'ENGINE':'django.db.backends.postgresql',
-#         'NAME':'postgres',
+#         'NAME':'nf',
 #         'USER':'postgres',
 #         'PASSWORD':'362588',
 #         'HOST':'localhost',
 #         'PORT':'5432',
 #     }
 # }
-
+# 
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
