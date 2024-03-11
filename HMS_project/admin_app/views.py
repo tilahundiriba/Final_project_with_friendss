@@ -20,7 +20,6 @@ from .models import UserProfileInfo2
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import BedAllocation
 
-
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserChangeForm
 from django.shortcuts import render, redirect
@@ -29,7 +28,19 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from django.views import View
 from .models import Notification
+from receptionist_app.models import PatientRegister
+
+import csv
+import openpyxl
+from reportlab.lib.pagesizes import letter
+from reportlab.platypus import SimpleDocTemplate, Table
+
+
+
 # Create your views here.
+
+
+
 def writenotification(request):
     return render(request, 'doctor/view_notification.html')
 class NotificationListView(View):
@@ -261,3 +272,54 @@ def success_message(request):
 def bed_allocation_detail(request):
     bed_allocation_instance = BedAllocation.objects.all()
     return render(request, 'admin_app/testNodays.html', {'bed_allocation_instance': bed_allocation_instance})
+
+# view for handling the document saving format start
+def save_data(request, format):
+    queryset = PatientRegister.objects.all()  # Fetch data from your model
+
+    if format == 'csv':
+        response = HttpResponse(content_type='text/csv')
+        response['Content-Disposition'] = 'attachment; filename="data.csv"'
+
+        writer = csv.writer(response)
+        writer.writerow(['Patient_ID', 'First_Name', 'Middle_Name','Last_Name', 'Age', 'Phone_No'])  # Write header row
+        for obj in queryset:
+            writer.writerow([obj.patient_id, obj.first_name,obj.middle_name, obj.last_name,obj.age,obj.phone_number,])  # Write data rows
+
+        return response
+
+    elif format == 'pdf':
+        response = HttpResponse(content_type='application/pdf')
+        response['Content-Disposition'] = 'attachment; filename="data.pdf"'
+
+        doc = SimpleDocTemplate(response, pagesize=letter)
+        table_data = []
+        for obj in queryset:
+            table_data.append([obj.patient_id, obj.first_name,obj.middle_name, obj.last_name,obj.age,obj.phone_number,])  # Add data rows to table
+
+        table = Table(table_data)
+        doc.build([table])
+
+        return response
+
+    elif format == 'excel':
+        response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+        response['Content-Disposition'] = 'attachment; filename="data.xlsx"'
+
+        workbook = openpyxl.Workbook()
+        worksheet = workbook.active
+        for idx, obj in enumerate(queryset, start=1):
+            worksheet[f'A{idx}'] = obj.patient_id
+            worksheet[f'B{idx}'] = obj.first_name
+            worksheet[f'C{idx}'] = obj.middle_name
+            worksheet[f'D{idx}'] = obj.last_name
+            worksheet[f'E{idx}'] = obj.age
+            worksheet[f'F{idx}'] = obj.phone_number
+
+        workbook.save(response)
+        return response
+
+    else:
+        # Handle other formats or invalid requests here
+        return HttpResponse("Invalid format requested")
+# view for handling the document saving format end

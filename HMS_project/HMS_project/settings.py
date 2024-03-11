@@ -43,7 +43,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'daphne',
+       'daphne',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'casher_app',
     'receptionist_app',
    'laboratory_app'
+    #    'channels',
 ]
 
 MIDDLEWARE = [
@@ -209,7 +210,8 @@ STATICFILES_DIRS = [
 # MEDIA_URL = 'media/'
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = MEDIA_DIR
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 

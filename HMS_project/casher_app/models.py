@@ -2,7 +2,7 @@ from django.db import models
 from receptionist_app.models import PatientRegister
 from admin_app.models import UserProfileInfo2
 # Create your models here.
-class Payment(models.Model):
+class PaymentModel(models.Model):
     Patient_id=models.ForeignKey(PatientRegister, on_delete=models.CASCADE)
     Pay_number=models.CharField(max_length=100)
     Admit_date=models.DateField(max_length=100)
