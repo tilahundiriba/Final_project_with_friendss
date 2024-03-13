@@ -109,6 +109,9 @@
             <div class="h-100">
                 <div class="sidebar-logo">
                     <a href="#">Hospital</a>
+                    {% if request.user.is_authenticated %}
+                    <p style="color: white;">Welcome, {{ request.user.username }}!</p>
+                {% endif %}
                 </div>
                 <ul class="sidebar-nav">
                     <li class="sidebar-header">Elements</li>

@@ -1,13 +1,13 @@
 import random
 import string
 
-def generate_username(email, profession):
+def generate_username(email, role):
     # Extract a specific part of the email
     email_parts = email.split("@")
     username = email_parts[0].split(".")[0]  # Extract the first part before the dot (.) if available
     
-    if profession:
-        username += "_" + profession.lower().replace(" ", "_")
+    if role:
+        username += "_" + role.lower().replace(" ", "_")
     
     return username
 

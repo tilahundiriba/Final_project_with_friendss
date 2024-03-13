@@ -33,7 +33,8 @@ from receptionist_app.models import PatientRegister
 import csv
 import openpyxl
 from reportlab.lib.pagesizes import letter
-from reportlab.platypus import SimpleDocTemplate, Table
+from reportlab.platypus import SimpleDocTemplate, Table,TableStyle
+from reportlab.lib import colors
 
 
 
@@ -63,7 +64,7 @@ def login_view(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
-        profession = request.POST.get('role')
+        role = request.POST.get('role')
 
         # Authenticate the user
         user = authenticate(request, username=username, password=password)
@@ -72,14 +73,20 @@ def login_view(request):
             # Check if user's profession matches
             try:
                 user_profile = UserProfileInfo2.objects.get(user=user)
-                if user_profile.profession == profession:
-                    # return HttpResponse('User logged in successfully') 
-                    # if user_profile.password_changed:
-                        login(request, user)
-                        return HttpResponse('User logged in successfully')  # Redirect to home URL after login
-                    # else:
-                    #     # Redirect to change password view
-                    #     return redirect('password_change')
+                if user_profile.role == role:
+                    login(request, user)
+                    if role=='doctor':
+                      return redirect('dis_dr_dash')  # Redirect to home URL after login
+                    elif role=='nurse':
+                      return redirect('nurse_dash')
+                    if role=='admin':
+                      return redirect('dis_dash')  # Redirect to home URL after login
+                    elif role=='casher':
+                      return redirect('casher_dash')
+                    if role=='receptionist':
+                      return redirect('receptionist_dash')  # Redirect to home URL after login
+                    elif role=='technician':
+                      return redirect('lab_dashboard')
                 else:
                     return HttpResponse('Invalid profession for the user')
             except UserProfileInfo2.DoesNotExist:
@@ -89,12 +96,13 @@ def login_view(request):
             # User authentication failed
             return HttpResponse('Invalid username or password')
     else:
-        return render(request, 'admin_dash/loginfinal.html', {})
+        return render(request, 'admin_dash/login.html', {})
 
 def createUserAccount(request):
     if request.method == 'POST':
         email = request.POST.get('email')
         role = request.POST.get('role')
+        special = request.POST.get('spec')
         # Generate username and password
         username = generate_username(email, role)
         password = generate_password()
@@ -107,12 +115,14 @@ def createUserAccount(request):
         user_profile = UserProfileInfo2.objects.create(
             user=user,
             role=role,
+            specialty=special
         )
         # Send email with username and password
         context = {
             'username': username,
             'password': password,
             'role': role,
+            'speciality':special,
         }
         html_message = render_to_string('admin_dash/email_template.html', context)
         plain_message = strip_tags(html_message)
@@ -128,7 +138,7 @@ def createUserAccount(request):
         # Redirect to account list after account creation
         return redirect('dis_dash_content')
 
-    return render(request, 'admin_dash/user_registration.html')
+    return render(request, 'admin_dash/user_registration2.html')
 
 
 def lab_test_payment(request):
@@ -213,7 +223,7 @@ def dis_index(request):
 def displayRegisteredPatient(request):
     return render(request,'doctors/displayRegisteredPatient.html')
 def dis_user_registration(request):
-    return render(request,'admin_dash/user_registration.html')
+    return render(request,'admin_dash/user_registration2.html')
 def dis_web_home(request):
     return render(request,'admin_dash/web_home.html')
 
@@ -298,6 +308,14 @@ def save_data(request, format):
             table_data.append([obj.patient_id, obj.first_name,obj.middle_name, obj.last_name,obj.age,obj.phone_number,])  # Add data rows to table
 
         table = Table(table_data)
+        style = TableStyle([('BACKGROUND', (0, 0), (-1, 0), colors.grey),
+                            ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
+                            ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
+                            ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+                            ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
+                            ('BACKGROUND', (0, 1), (-1, -1), colors.beige),
+                            ('GRID', (0, 0), (-1, -1), 1, colors.black)])
+        table.setStyle(style)
         doc.build([table])
 
         return response
@@ -322,4 +340,3 @@ def save_data(request, format):
     else:
         # Handle other formats or invalid requests here
         return HttpResponse("Invalid format requested")
-# view for handling the document saving format end

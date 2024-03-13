@@ -162,16 +162,26 @@
 								<nav aria-label="Page navigation example">
 									<ul class="pagination justify-content-center export-pagination">
 										<li class="page-item">
-											<button class="page-link" onclick="saveData('csv')" ><span class="ti-download" ></span> csv</button>
+											<form method="post" action="{% url 'save_data' format='csv' %}">
+												{% csrf_token %}
+												<button type="submit" class="page-link"><span class="ti-download" ></span> csv</button>
+											</form>
+											
 										</li>
 										<li class="page-item">
 											<button class="page-link" ><span class="ti-printer"></span>  print</button>
 										</li>
 										<li class="page-item">
-											<button class="page-link" onclick="saveData('pdf')"><span class="ti-file"></span> PDF</button>
+											<form method="post" action="{% url 'save_data' format='pdf' %}">
+												{% csrf_token %}
+												<button type="submit" class="page-link"><span class="ti-download" ></span> pdf</button>
+											</form>
 										</li>
 										<li class="page-item">
-											<button class="page-link" onclick="saveData('excel')"><span class="ti-align-justify" ></span> Excel</button>
+											<form method="post" action="{% url 'save_data' format='excel' %}">
+												{% csrf_token %}
+												<button type="submit" class="page-link"><span class="ti-download" ></span> excel</button>
+											</form>
 										</li>
 									</ul>
 								</nav>
@@ -199,25 +209,7 @@
 		<span class="ti-angle-up"></span>
 	</a>
 	<!-- /Back to Top -->
-	<script>
-        function saveData(format) {
-            var xhr = new XMLHttpRequest();
-            xhr.open('GET', '/save_data/' + format, true);
-            xhr.responseType = 'blob';
 
-            xhr.onload = function () {
-                if (this.status == 200) {
-                    var blob = new Blob([this.response], { type: xhr.getResponseHeader('content-type') });
-                    var link = document.createElement('a');
-                    link.href = window.URL.createObjectURL(blob);
-                    link.download = 'data.' + format;
-                    link.click();
-                }
-            };
-
-            xhr.send();
-        }
-    </script>
 </body>
 
 
