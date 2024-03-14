@@ -8,18 +8,29 @@ from django.core.cache import cache
 from django.contrib import messages
 from django.shortcuts import get_object_or_404
 
-def upload_profile_pic(request, user_id):
-    if request.method == 'POST' and request.FILES.get('profile_pic'):
-        profile_pic = request.FILES['profile_pic']
-        # Get the user object using the user_id
-        user_profile = get_object_or_404(UserProfileInfo2, user_id=user_id)
-        # Update the profile picture for the user
-        user_profile.profile_pic = profile_pic
-        user_profile.save()
-        return HttpResponse('Profile picture uploaded successfully!')
-    else:
-        return render(request, 'doctor/profile.html',{'user_id': user_id})
+# def upload_profile_pic(request, user_id):
+#     if request.method == 'POST' and request.FILES.get('profile_pic'):
+#         profile_pic = request.FILES['profile_pic']
+#         # Get the user object using the user_id
+#         user_profile = get_object_or_404(UserProfileInfo2, user_id=user_id)
+#         # Update the profile picture for the user
+#         user_profile.profile_pic = profile_pic
+#         user_profile.save()
+#         return HttpResponse('Profile picture uploaded successfully!')
+#     else:
+#         return render(request, 'doctor/profile.html',{'user_id': user_id})
     
+def updateProfile(request, user_id):
+    user_profile = get_object_or_404(UserProfileInfo2, user__id=user_id)
+    if request.method == 'POST':
+        # Fetching form data from request.POST
+        profile_picture = request.FILES.get('profile_picture')
+        # Updating user_profile fields
+        if profile_picture:
+           user_profile.profile_picture = profile_picture
+        user_profile.save()
+        return redirect('profiles')
+    return render(request, 'doctor/profile.html',{'user_id': user_id})
 
 def profiles(request):
     profiles=UserProfileInfo2.objects.all()

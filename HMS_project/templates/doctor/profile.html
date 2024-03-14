@@ -15,7 +15,7 @@
     <h2>Upload Profile Picture</h2>
     <form action="{% url 'profile' user_id=user_id  %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        <input type="file" name="profile_pic">
+        <input type="file" name="profile_picture">
         <button type="submit">Upload</button>
     </form>
 </body>

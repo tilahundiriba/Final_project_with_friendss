@@ -26,17 +26,21 @@
           
           <div class="col">
                     <div class="card shadow-sm align-items-center">
+                      {% if users.profile_pic %}
                     <img
                         src="{{ users.profile_pic.url}}"
                         class="rounded-circle"
                         width="200"
                         height="200"
                     />
+                    {% endif %}
                     <div class="card-body">
                     
                         {{users.user.username }}<br>
                         <div class="d-flex justify-content-between align-items-center">
+                          {% if request.user == user %}
                        <a href="{% url 'profile' users.user_id %}">edit</a>
+                       {% endif %}
                         </div>
                     </div>
                     </div>

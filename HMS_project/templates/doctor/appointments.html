@@ -81,7 +81,7 @@
 											<th>Patient ID</th>
 											<th>Time Slot</th>
 											<th>Appointment Date</th>
-											<th>Doctor Name</th>
+											
 											<th>Problem</th>
 											<th>Status</th>
 											<th>Actions</th>
@@ -100,7 +100,7 @@
 											<td>{{app.PatientID}}</td>
 											<td>{{app.Time_slot}}</td>
 											<td>{{app.App_date}}</td>
-											<td>{{app.Doctor_ID}}</td>
+									
 											<td>{{app.App_reseon}}</td>
 											<td>
 												<span class="badge badge-success">{{app.App_status}}</span>
@@ -122,17 +122,29 @@
 								<nav aria-label="Page navigation example">
 									<ul class="pagination justify-content-center export-pagination">
 										<li class="page-item">
-											<a class="page-link" href="#"><span class="ti-download"></span> csv</a>
+									
+											<form method="post" action="{% url 'save_data' format='csv' %}">
+												{% csrf_token %}
+												<button type="submit" class="page-link"><span class="ti-download" ></span> csv</button>
+											</form>
 										</li>
 										<li class="page-item">
 											<a class="page-link" href="#"><span class="ti-printer"></span> print</a>
 										</li>
 										<li class="page-item">
-											<a class="page-link" href="#"><span class="ti-file"></span> PDF</a>
+											
+											<form method="post" action="{% url 'save_data' format='pdf' %}">
+												{% csrf_token %}
+												<button type="submit" class="page-link"><span class="ti-download" ></span> pdf</button>
+											</form>
 										</li>
 										<li class="page-item">
-											<a class="page-link" href="#"><span class="ti-align-justify"></span>
-												Excel</a>
+										
+											
+												<form method="post" action="{% url 'save_data' format='excel' %}">
+													{% csrf_token %}
+													<button type="submit" class="page-link"><span class="ti-download" ></span> excel</button>
+												</form>
 										</li>
 									</ul>
 								</nav>
