@@ -72,9 +72,15 @@
     <aside id="sidebar" class="js-sidebar bg-success">
       <!-- Content For Sidebar -->
       <div class="h-100">
-        <div class="sidebar-logo">
-          <a href="#">Hospital</a>
-        </div>
+        {% if request.user.is_authenticated %}
+                <div class="sidebar-logo">
+                    <img src="{{ user.userprofileinfo2.profile_pic.url}}" alt="NOOOOOOo"
+                    class="rounded-circle"
+                    width="50"
+                    height="50">
+                    <p style="color: white;">Welcome, {{ request.user.username }}!</p>
+                </div>
+                {% endif %}
         <ul class="sidebar-nav">
           <li class="sidebar-header">Admin Elements</li>
           <li class="sidebar-item">

@@ -1,6 +1,8 @@
 from django.urls import path
 from doctor_app.views import check_request,checked_request
 from . import views
+from django.conf import settings
+from django.conf.urls.static import static
 urlpatterns = [
   # additional forms path
   path('lab_dashboard/', views.dis_lab_dash, name='lab_dashboard'),
@@ -9,3 +11,4 @@ urlpatterns = [
   path('checked_request/<str:patient_id>/', checked_request, name='checked_request'),
 
 ] 
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
