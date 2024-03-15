@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+
 from django.shortcuts import render
 from .models import  Appointment,Prescription,Laboratory
 from receptionist_app.models import PatientRegister
@@ -6,8 +6,8 @@ from django.shortcuts import get_object_or_404
 from admin_app.models import UserProfileInfo2
 from django.core.cache import cache
 from django.contrib import messages
-from django.shortcuts import get_object_or_404
-
+from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 # def upload_profile_pic(request, user_id):
 #     if request.method == 'POST' and request.FILES.get('profile_pic'):
 #         profile_pic = request.FILES['profile_pic']
@@ -19,26 +19,30 @@ from django.shortcuts import get_object_or_404
 #         return HttpResponse('Profile picture uploaded successfully!')
 #     else:
 #         return render(request, 'doctor/profile.html',{'user_id': user_id})
-    
-def updateProfile(request, user_id):
-    user_profile = get_object_or_404(UserProfileInfo2, user__id=user_id)
-    if request.method == 'POST':
-        # Fetching form data from request.POST
-        profile_picture = request.FILES.get('profile_picture')
-        # Updating user_profile fields
-        if profile_picture:
-           user_profile.profile_picture = profile_picture
-        user_profile.save()
-        return redirect('profiles')
-    return render(request, 'doctor/profile.html',{'user_id': user_id})
+@login_required
+def profile(request):
+    user = request.user
+    return render(request, 'doctor/profile_show.html', {'user': user})
 
-def profiles(request):
-    profiles=UserProfileInfo2.objects.all()
-    return render(request,'doctor/profiles.html',{'profiles':profiles})
+@login_required
+def profile_update(request, user_id):
+    user = get_object_or_404(User, pk=user_id)
+    if request.user != user:  # Ensure user can only update their own profile
+        return redirect('profile_show')
+    
+    user_profile, created = UserProfileInfo2.objects.get_or_create(user=user)
+    
+    if request.method == 'POST':
+        profile_pic = request.FILES.get('profile_pic')
+        user_profile.profile_pic = profile_pic
+        user_profile.save()
+        return redirect('profile_show')
+    
+    return render(request, 'doctor/update_profile.html', {'user_id': user_id, 'user_profile': user_profile})
+
+
 def dis_dr_dash(request):
     return render(request,'doctor/dr_dash.html')
-def dis_profile_form(request):
-    return render(request,'doctor/profile.html')
 def dis_labtest(request):
     labs= Laboratory.objects.all()
     return render(request,'doctor/labtests.html',{'labs':labs})
