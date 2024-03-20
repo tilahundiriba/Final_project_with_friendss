@@ -19,6 +19,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path,include
 from django.contrib.auth import views as auth_views
+from admin_app.views import change_credentials
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('admin_app/', include('admin_app.urls')),
@@ -27,7 +28,7 @@ urlpatterns = [
     path('casher_app/', include('casher_app.urls')),
     path('receptionist_app/', include('receptionist_app.urls')),
     path('laboratory_app/', include('laboratory_app.urls')),
-
+    path('change_credentials/',change_credentials, name='change_credentials'),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

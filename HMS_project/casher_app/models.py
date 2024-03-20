@@ -17,3 +17,12 @@ class PaymentModel(models.Model):
 
     def __str__(self):
         return f'{self.Patient_id}'
+    
+class ServicePayment(models.Model):
+    Food_payment=models.TextField(max_length=100, null=True)
+    Service_payment=models.TextField(max_length=100, null=True)
+    Card_payment=models.TextField(max_length=100, null=True)
+    Bed_payment=models.TextField(max_length=100, null=True)
+    Lab_payment=models.TextField(max_length=200, null=True)
+    def __str__(self):
+        return f'{self.Food_payment,self.Service_payment,self.Card_payment,self.Bed_payment,self.Lab_payment}'
