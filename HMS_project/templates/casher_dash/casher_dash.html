@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
+
 <html lang="en" data-bs-theme="dark">
 
 <head>
@@ -9,6 +10,7 @@
     {% block 'title' %}
     <title>Casher Dashboard</title>
 {% endblock %}
+
 	<!-- Fav  Icon Link -->
 	<link rel="shortcut icon" type="image/png" href="{% static 'images2/fav.png' %}">
 	<!-- Bootstrap core CSS -->
@@ -156,10 +158,10 @@
                         </a>
                         <ul id="multi" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                             <li class="sidebar-item">
-                                <a href="{% url 'profile_show' %}" class="sidebar-link collapsed" aria-expanded="false">Profile</a>
+                                <a href="{% url 'show_casher_profile' %}" class="sidebar-link collapsed" aria-expanded="false">Profile</a>
                             </li>
                             <li class="sidebar-item">
-                                <a href="#" class="sidebar-link">Logout</a>
+                                <a href="{% url 'logout' %}" class="sidebar-link">Logout</a>
                             </li>
                         </ul>
                     </li>
@@ -336,8 +338,18 @@
                         </div>
                     </div>
                 </footer> -->
+               
         </div>
     </div>
+
+    <script>
+        // Check if user is logged in, redirect to login page if not
+        var isAuthenticated = "{{ user.is_authenticated|lower }}";
+        if (!isAuthenticated) {
+            window.location.replace("{% url 'user_log' %}");
+        }
+    </script>
+    
     <script src="{% static 'js2/jquery-3.2.1.min.js' %}"></script>
 	<!-- Popper Library-->
 	<script src="{% static 'js2/popper.min.js' %}"></script>

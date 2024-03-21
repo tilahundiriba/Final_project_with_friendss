@@ -5,6 +5,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from doctor_app.views import check_payment_request,checked_payment_request 
 
+
 urlpatterns = [
  
   path('bill/', views.dis_bill, name='bill'),
@@ -17,7 +18,7 @@ urlpatterns = [
   path('check_payment_request/',check_payment_request ,name='check_payment_request'),
   path('checked_payment_request/<str:patient_id>/', checked_payment_request, name='checked_payment_request'),
   path('profile/<int:user_id>/', views.profile_update, name='profile'),
-  path('profile',views.profile, name='profile')
+  path('profile/',views.profile, name='show_casher_profile'),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -16,7 +16,7 @@ urlpatterns = [
     path('dis-room/', views.dis_room, name='dis_room'),
     path('dis-vitals/', views.dis_vitals, name='dis_vitals'),
     path('profile/<int:user_id>/', views.profile_update, name='profile'),
-    path('profile_show',views.profile, name='profile_show')
+    path('profile_show/',views.profile, name='show_nurse_profile')
   
  
 ]

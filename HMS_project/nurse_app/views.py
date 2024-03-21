@@ -15,7 +15,7 @@ def profile(request):
 def profile_update(request, user_id):
     user = get_object_or_404(User, pk=user_id)
     if request.user != user:  # Ensure user can only update their own profile
-        return redirect('profile_show')
+        return redirect('show_nurse_profile')
     
     user_profile, created = UserProfileInfo2.objects.get_or_create(user=user)
     
@@ -23,7 +23,7 @@ def profile_update(request, user_id):
         profile_pic = request.FILES.get('profile_pic')
         user_profile.profile_pic = profile_pic
         user_profile.save()
-        return redirect('profile_show')
+        return redirect('show_nurse_profile')
     
     return render(request, 'nurse_dash/update_profile.html', {'user_id': user_id, 'user_profile': user_profile})
 

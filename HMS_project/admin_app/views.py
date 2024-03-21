@@ -59,7 +59,7 @@ class NotificationListView(View):
         # Return the notification messages as a JSON response
         return JsonResponse(notification_messages, safe=False)
 
-@login_required
+# @login_required
 def login_view(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -97,6 +97,11 @@ def login_view(request):
             return HttpResponse('Invalid username or password')
     else:
         return render(request, 'admin_dash/login.html', {})
+
+# @login_required
+def logout_view(request):
+    logout(request)
+    return redirect('user_log')
 
 def createUserAccount(request):
     if request.method == 'POST':

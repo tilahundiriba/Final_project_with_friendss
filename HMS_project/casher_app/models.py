@@ -19,10 +19,9 @@ class PaymentModel(models.Model):
         return f'{self.Patient_id}'
     
 class ServicePayment(models.Model):
-    Food_payment=models.TextField(max_length=100, null=True)
-    Service_payment=models.TextField(max_length=100, null=True)
-    Card_payment=models.TextField(max_length=100, null=True)
-    Bed_payment=models.TextField(max_length=100, null=True)
-    Lab_payment=models.TextField(max_length=200, null=True)
+    Payment=models.TextField(max_length=100, null=True)
+    Services=models.TextField(max_length=100, null=True)
+    Payment_method=models.TextField(max_length=100, null=True)
+  
     def __str__(self):
-        return f'{self.Food_payment,self.Service_payment,self.Card_payment,self.Bed_payment,self.Lab_payment}'
+        return f'{self.Payment,self.Services,self.Payment_method}'

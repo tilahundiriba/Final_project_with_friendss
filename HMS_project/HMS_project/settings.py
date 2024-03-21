@@ -9,7 +9,8 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
-
+from django.views.decorators.cache import never_cache
+from django.utils.decorators import method_decorator
 from pathlib import Path
 import os
 
@@ -98,8 +99,11 @@ CHANNEL_LAYERS = {
 
 WSGI_APPLICATION = 'HMS_project.wsgi.application'
 
-
-
+LOGOUT_REDIRECT_URL = 'user_log'
+class NoCacheMixin:
+    @method_decorator(never_cache)
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 

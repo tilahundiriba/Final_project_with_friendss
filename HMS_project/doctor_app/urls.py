@@ -22,7 +22,7 @@ urlpatterns = [
     path('add_lab/', views.add_lab, name='add_lab'),
     path('lab_tests/', views.dis_labtest, name='lab_tests'),
     path('profile/<int:user_id>/', views.profile_update, name='profile'),
-    path('profile_show',views.profile, name='profile_show')
+    path('profile_show/',views.profile, name='show_doctor_profile')
 
 
 
