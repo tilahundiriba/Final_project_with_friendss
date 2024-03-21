@@ -1,0 +1,329 @@
+{% load static %}
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hospital Website</title>
+
+    <link rel="stylesheet" href="{% static 'css/home.css' %}" />
+
+    <!-- Bootstrap Link -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <!-- Bootstrap Link -->
+
+    <!-- Font Awesome Cdn -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+    />
+    <!-- Font Awesome Cdn -->
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Google Fonts -->
+
+    <style>
+      .home {
+        background-image: linear-gradient(
+            rgba(0, 0, 0, 0.3),
+            rgba(0, 0, 0, 0.2)
+          ),
+          url('{% static "images/hdone.jpg" %}');
+      }
+      @keyframes changetext {
+        0% {
+          content: "Healthy";
+        }
+        10% {
+          content: "Care";
+        }
+        20% {
+          content: "Safe";
+        }
+        /* 30%{content: "ayb";}
+    40%{content: "timatim";}
+    50%{content: "tiya";}
+    60%{content: "tiya";}
+    70%{content: "tiya";}
+    80%{content: "tiya";}
+    90%{content: "tiya";}
+    100%{content: "tiya";} */
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar Start -->
+    <nav class="navbar navbar-expand-lg" id="navbar">
+      <div class="container">
+        <a class="navbar-brand" href="index.html" id="logo"
+          ><span>H</span>ospital</a
+        >
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#mynavbar"
+        >
+          <span><i class="fa-solid fa-bars"></i></span>
+        </button>
+        <div class="collapse navbar-collapse" id="mynavbar">
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+              <a class="nav-link active" href="{% url 'web_home' %}">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#services">Services</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'dis_login2' %}">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#about">About</a>
+            </li>
+          </ul>
+          <form class="d-flex">
+            <input class="form-control me-2" type="text" placeholder="Search" />
+            <button class="btn btn-primary" type="button">Search</button>
+          </form>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Navbar End -->
+
+    <!-- Home Section Start -->
+    <div class="home">
+      <div class="content">
+        {% block content %}
+        <h5>Shashamene Specialized Refferal Hospital</h5>
+        <h1>Be&nbsp;<span class="changecontent"></span></h1>
+        <p>Live Health And Better Life!</p>
+        {% endblock %}
+      </div>
+    </div>
+    <!-- Home Section End -->
+
+    <!-- Section Services Start -->
+    <section class="services" id="services">
+      <div class="container">
+        <div class="main-txt">
+          <h1><span>S</span>ervices</h1>
+        </div>
+
+        <div class="row" style="margin-top: 30px">
+          <div class="col-md-4 py-3 py-md-0">
+            <div class="card">
+              <i class="fas fa-tooth"></i>
+              <div class="card-body">
+                <h3>Inpatient Care</h3>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 py-3 py-md-0">
+            <div class="card">
+              <i class="fa-solid fa-truck-medical"></i>
+              <div class="card-body">
+                <h3>Emergency Care</h3>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 py-3 py-md-0">
+            <div class="card">
+              <i class="fa-solid fa-person-dots-from-line"></i>
+              <div class="card-body">
+                <h3>Diagnostic Services</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 30px">
+          <div class="col-md-4 py-3 py-md-0">
+            <div class="card">
+              <i class="fa-solid fa-x-ray"></i>
+              <div class="card-body">
+                <h3>Diagnostic Services</h3>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 py-3 py-md-0">
+            <div class="card">
+              <i class="fa-solid fa-prescription-bottle-medical"></i>
+              <div class="card-body">
+                <h3>Pharmacy Services</h3>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 py-3 py-md-0">
+            <div class="card">
+              <i class="fa-solid fa-hands-holding-child"></i>
+              <div class="card-body">
+                <h3>Child Care</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Section Services End -->
+
+    <!-- Section Gallary Start -->
+    <section class="gallary" id="gallary">
+      <div class="container">
+        <div class="main-txt">
+          <h1><span>G</span>allary</h1>
+        </div>
+
+        <div class="row" style="margin-top: 30px">
+          <div class="col-md-4 py-3 py-md-0">
+            <div class="card">
+              <img
+                src="{% static 'images/emergency.jpg' %}"
+                alt=""
+                height="230px"
+              />
+            </div>
+          </div>
+          <div class="col-md-4 py-3 py-md-0">
+            <div class="card">
+              <img
+                src="{% static 'images/laboratory.jpg' %}"
+                alt=""
+                height="230px"
+              />
+            </div>
+          </div>
+          <div class="col-md-4 py-3 py-md-0">
+            <div class="card">
+              <img
+                src="{% static 'images/surgical.jpg' %}"
+                alt=""
+                height="230px"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 30px">
+          <div class="col-md-4 py-3 py-md-0">
+            <div class="card">
+              <img
+                src="{% static 'images/laboratory.jpg' %}"
+                alt=""
+                height="230px"
+              />
+            </div>
+          </div>
+          <div class="col-md-4 py-3 py-md-0">
+            <div class="card">
+              <img
+                src="{% static 'images/emergency.jpg' %}"
+                alt=""
+                height="230px"
+              />
+            </div>
+          </div>
+          <div class="col-md-4 py-3 py-md-0">
+            <div class="card">
+              <img
+                src="{% static 'images/surgical.jpg' %}"
+                alt=""
+                height="230px"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section Gallary End -->
+
+    <!-- About Start -->
+    <section class="about" id="about">
+      <div class="container">
+        <div class="main-txt">
+          <h1>About <span>Us</span></h1>
+        </div>
+        <div class="row" style="margin-top: 50px">
+          <div class="col-md-6 py-3 py-md-0">
+            <div class="card">
+              <img src="{% static 'images/abouttwo.jpg' %}" alt="" />
+            </div>
+          </div>
+          <div class="col-md-6 py-3 py-md-0">
+            <h2>How Hospital Work</h2>
+            <p>
+              A hospital is a specialized medical facility where individuals
+              receive diagnosis, treatment, and care for various illnesses,
+              injuries, and medical conditions. Hospitals typically have a wide
+              range of medical professionals, including doctors, nurses,
+              surgeons, and specialists, as well as advanced medical equipment
+              and technology to provide comprehensive medical care.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- About End -->
+    <!-- Footer Start -->
+    <footer>
+      <div class="footer-col">
+        <!-- <i class='fas fa-map-marker-alt' style="font-size:30px;color:orange; display: inline-block;padding-left: -150px;"></i> -->
+        <h4>Shashamene,Arsi, Oromia</h4>
+      </div>
+      <div class="footer-col">
+        <h4>QuickLinks</h4>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Service</a></li>
+          <li><a href="#">Gallary</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Help And support</h4>
+        <ul class="footerlinks">
+          <li><a href="#">Support center</a></li>
+          <li><a href="#">legal</a></li>
+          <li><a href="#">contact us</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Social Links</h4>
+        <div class="links" style="display: flex; flex-direction: row">
+          <a href="#"
+            ><i class="fab fa-linkedin-in" style="color: rgb(14, 180, 83)"></i
+          ></a>
+          <a href="#"
+            ><i class="fab fa-facebook-f" style="color: rgb(14, 180, 83)"></i
+          ></a>
+          <a href="#"
+            ><i class="fab fa-twitter" style="color: rgb(14, 180, 83)"></i
+          ></a>
+          <a href="#"
+            ><i class="fab fa-instagram" style="color: rgb(14, 180, 83)"></i
+          ></a>
+        </div>
+      </div>
+    </footer>
+    <!-- Footer End -->
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

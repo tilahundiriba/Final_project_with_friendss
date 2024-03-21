@@ -1,0 +1,232 @@
+*,
+::after,
+::before {
+    box-sizing: border-box;
+}
+.nav-item:hover{
+  color: rgb(255, 255, 255);
+ margin-top:  5px;
+ padding: 5px;
+  border-radius: 10px;
+  text-decoration: underline black;
+}
+      .navbar {
+        color: white;
+        font-size: large;
+      }
+      a,
+      .dropdown-item {
+        font-family: sans-serif;
+        font-size: xx-large;
+        color: white;
+      }
+      .navbar-brand,
+      .nav-link {
+        color: white;
+        font-size: 2.2rem;
+        font-family: Georgia, Times, "Times New Roman", serif;
+      }
+      .dropdown-menu {
+        height: 100px;
+        width: 200px;
+        border-radius: 5px;
+        border: solid 1px black;
+      }
+      
+
+      h1 {
+        color: white;
+      }
+      .navbar-toggler {
+        color: rgb(29, 17, 17);
+      }
+    
+
+      i {
+        font-size: larger;
+      }
+
+   
+
+      h1 {
+        color: rgb(255, 255, 255);
+        font-size: 900;
+        font-family: Georgia, Times, "Times New Roman", serif;
+        margin: 10px;
+        text-align: center;
+      }
+
+      .btn {
+        margin: 10px;
+        font-family: Georgia, Times, "Times New Roman", serif;
+      }
+    
+      /* .container1 {
+        position: relative;
+        background-color: rgb(46, 143, 150);
+        margin-top: 15%;
+        border: 1px solid rgb(14, 97, 62);
+        border-radius: 10px;
+        width: 100%;
+        box-shadow: 10px 10px 10px rgb(37, 36, 36);
+        text-align: justify;
+      } */
+      .card-title {
+        font-family: Georgia, Times, "Times New Roman", serif;
+        color: rgb(0, 0, 0);
+        font-size: 2.2rem;
+      }
+      .card-body {
+        text-align: center;
+       padding: 30px;
+     
+       
+      }
+    
+      body{
+
+            
+       /* background-image: url("{% 'static/css/hdone.jpg' %}"); */
+       background-color: rgb(194, 207, 207);
+       background-size: cover;
+       height: 100vh;
+       background-repeat: no-repeat;
+       background-attachment: fixed;
+       background-position: center;
+      }
+      #login {
+        width: 200px;
+        height: 40px;
+        box-shadow: -10px 10px 10px black;
+      }
+      .card{
+      margin: 20px 20px;
+      border: 1px solid black;
+      box-shadow: -10px 10px 10px rgb(69, 52, 52);
+      opacity: 0.8;
+      
+      }
+     .logo{
+      height: 50px;
+      width: 50px;
+      border-radius: 50%;
+
+     }
+     .main{
+     
+       background-image: url("{% 'static/images/hdone.jpg' %}");
+       background-size: cover;
+       height: 100vh;
+       background-repeat: no-repeat;
+       background-attachment: fixed;
+       background-position: center;
+     }
+     @media (max-width:768px) {
+      h1 {
+        color: rgb(255, 255, 255);
+        font-size: 1.0rem;
+        font-family: Georgia, Times, "Times New Roman", serif;
+        margin: 10px;
+        text-align: center;
+      }
+      #login {
+        width: 150px;
+        height: 40px;
+        box-shadow: -5px 5px 5px black;
+      }
+      .card-title {
+        font-family: Georgia, Times, "Times New Roman", serif;
+        color: rgb(0, 0, 0);
+        font-size: 1.0rem;
+      }
+      a,
+      .dropdown-item {
+        font-family: sans-serif;
+        font-size: large;
+        color: white;
+      }
+      .navbar-brand,
+      .nav-link {
+        color: white;
+        font-size: 1.2rem;
+        font-family: Georgia, Times, "Times New Roman", serif;
+      }
+      .logo{
+        height: 50px;
+        width: 50px;
+        border-radius: 50%;
+  
+       }
+
+       .dropdown-menu {
+        height: 100px;
+        width: 200px;
+        border-radius: 5px;
+        border: solid 1px black;
+      }
+     }
+     @media (min-width:768px) and (max-width:1024px) {
+      h1 {
+        color: rgb(255, 255, 255);
+        font-size: 1.5rem;
+        font-family: Georgia, Times, "Times New Roman", serif;
+        margin: 10px;
+        text-align: center;
+      }
+      #login {
+        width: 200px;
+        height: 40px;
+        box-shadow: -5px 5px 5px black;
+      }
+      .card-title {
+        font-family: Georgia, Times, "Times New Roman", serif;
+        color: rgb(0, 0, 0);
+        font-size: 1.5rem;
+      }
+      a,
+      .dropdown-item {
+        font-family: sans-serif;
+        font-size: 1.5rem;
+        color: white;
+      }
+      .navbar-brand,
+      .nav-link {
+        color: white;
+        font-size: 1.5rem;
+        font-family: Georgia, Times, "Times New Roman", serif;
+      }
+     }
+     @media (min-width:1024px) {
+      h1 {
+        color: rgb(255, 255, 255);
+        font-size: 2.0rem;
+        font-family: Georgia, Times, "Times New Roman", serif;
+        margin: 10px;
+        text-align: center;
+        text-shadow: -2px 4px 2px rgb(122, 77, 77);
+      }
+      #login {
+        width: 200px;
+        height: 40px;
+        box-shadow: -5px 5px 5px black;
+      }
+      .card-title {
+        font-family: Georgia, Times, "Times New Roman", serif;
+        color: rgb(0, 0, 0);
+        font-size: 1.5rem;
+      }
+      a,
+      .dropdown-item {
+        font-family: sans-serif;
+        font-size: 1.5rem;
+        color: white;
+      }
+      .navbar-brand,
+      .nav-link {
+        color: white;
+        font-size: 1.5rem;
+        font-family: Georgia, Times, "Times New Roman", serif;
+      }
+
+     }
+    

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Order</title>
+    <style>
+        /* Add your custom styles here */
+        .container {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #f8f8f8;
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: none;
+            z-index: 9999;
+        }
+
+        .notification.show {
+            display: block;
+        }
+    </style>
+    <script>
+        function showButtons() {
+            var buttonsDiv = document.getElementById('');
+            buttonsDiv.classList.add('show-buttons');
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Patient Order</h1>
+        <button id="view-btn">View</button>
+        <button id="go-btn">Go</button>
+        <div id="notification" class="notification"></div>
+    </div>
+
+    <script>
+        document.getElementById('view-btn').addEventListener('click', function() {
+            // Get the data and display it in the notification div
+            var patientData = {
+                patientId: 'PAT123',
+                historyNumber: 'HIST456',
+                symptoms: 'Fever, Headache',
+                disease: 'Common Cold',
+                doctorId: 'DOC789'
+            };
+
+            var notificationDiv = document.getElementById('notification');
+            notificationDiv.innerHTML = `
+                <p><strong>Patient ID:</strong> ${patientData.patientId}</p>
+                <p><strong>History Number:</strong> ${patientData.historyNumber}</p>
+                <p><strong>Symptoms:</strong> ${patientData.symptoms}</p>
+                <p><strong>Disease:</strong> ${patientData.disease}</p>
+                <p><strong>Doctor ID:</strong> ${patientData.doctorId}</p>
+            `;
+
+            notificationDiv.classList.add('show');
+        });
+
+        document.getElementById('go-btn').addEventListener('click', function() {
+            // Get the patient ID and populate the patient field
+            var patientId = 'PAT123'; // Replace with the actual patient ID
+            document.getElementById('patient-field').value = patientId;
+        });
+    </script>
+</body>
+</html>

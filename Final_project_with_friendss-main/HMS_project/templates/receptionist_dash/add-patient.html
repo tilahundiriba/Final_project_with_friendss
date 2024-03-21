@@ -1,0 +1,207 @@
+{% extends 'receptionist_dash/receptionist_dash.html' %}
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.konnectplugins.com/proclinic/Horizontal/add-patient.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 24 Jan 2022 10:42:01 GMT -->
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	{% block 'title' %}
+	<title>ProClinic-Bootstrap4 Hospital Admin</title>
+	{% endblock %}
+	<!-- Fav  Icon Link -->
+</head>
+
+<body>
+	<!-- Pre Loader -->
+	<div class="loading">
+		<div class="spinner">
+			<div class="double-bounce1"></div>
+			<div class="double-bounce2"></div>
+		</div>
+	</div>
+	<!--/Pre Loader -->
+	<!-- Color Changer -->
+
+	<!-- /Color Changer -->
+	<div class="wrapper">
+		<!-- Page Content -->
+		<div id="content">
+			<!-- Top Navigation -->
+			<!-- /Menu -->
+			{% include 'receptionist_dash/navbar.html' %}
+			
+			<!-- Breadcrumb -->
+			<!-- Page Title -->
+			<div class="container mt-0">
+				<div class="row breadcrumb-bar">
+					<div class="col-md-6">
+						<h3 class="block-title">Add Patient</h3>
+					</div>
+					<div class="col-md-6">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item">
+								<a href="index.html">
+									<span class="ti-home"></span>
+								</a>
+							</li>
+							<li class="breadcrumb-item">Patients</li>
+							<li class="breadcrumb-item ">Add Patient</li>
+						</ol>
+					</div>
+				</div>
+			</div>
+			<!-- /Page Title -->
+
+			<!-- /Breadcrumb -->
+			<!-- Main Content -->
+			<div class="container">
+
+				<div class="row">
+					<!-- Widget Item -->
+					<div class="col-md-12">
+						<div class="widget-area-2 proclinic-box-shadow">
+							<h3 class="widget-title">Add Patient</h3>
+							<form action="{% url 'add_patient' %}" method='post'>
+								{% csrf_token %}
+								<div class="form-row">
+
+									<div class="form-group col-md-6">
+										<label for="first-name">First Name</label>
+										<input type="text" class="form-control" placeholder="First name" id="first-name"
+											name="first_name">
+									</div>
+									<div class="form-group col-md-6">
+										<label for="middle-name">Middle Name</label>
+										<input type="text" class="form-control" placeholder="Middle name"
+											id="middle-name" name="middle_name">
+									</div>
+									<div class="form-group col-md-6">
+										<label for="last-name">Last Name</label>
+										<input type="text" class="form-control" placeholder="Last name" id="last-name"
+											name="last_name">
+									</div>
+									<div class="form-group col-md-6">
+										<label for="gender">Gender</label>
+										<select class="form-control" id="gender" name="gender">
+											<option>Male</option>
+											<option>Female</option>
+
+										</select>
+									</div>
+
+									<div class="form-group col-md-6">
+
+										<label for="birth-date">Date of Birth</label>
+										<input type="date" class="form-control" id="birth-date" name="birth_date">
+									</div>
+									<div class="form-group col-md-6">
+										<label for="age">Age</label>
+										<input type="number" class="form-control" placeholder="Age" id="age" name="age">
+									</div>
+									<div class="form-group col-md-6">
+										<label for="phone-number">Phone Number</label>
+										<input type="text" class="form-control" placeholder="Phone number"
+											id="phone-number" name="phone_number">
+									</div>
+									<div class="form-group col-md-6">
+										<label for="doctor-id">Doctor ID</label>
+										<input type="text" class="form-control" placeholder="Doctor ID" id="doctor-id"
+											name="doctor_id">
+									</div>
+									<div class="form-group col-md-6">
+										<label for="email">Email</label>
+										<input type="email" class="form-control" placeholder="Email" id="email"
+											name="email">
+									</div>
+									<div class="form-group col-md-6">
+										<label for="country">Country</label>
+										<input type="text" class="form-control" placeholder="Country" id="country"
+											name="country">
+									</div>
+									<div class="form-group col-md-6">
+										<label for="city">City</label>
+										<input type="text" class="form-control" placeholder="City" id="city"
+											name="city">
+									</div>
+									<div class="form-group col-md-6">
+										<label for="region">Region</label>
+										<input type="text" class="form-control" placeholder="Region" id="region"
+											name="region">
+									</div>
+									
+									
+
+
+									<div class="form-group col-md-6">
+										<label for="kebele">Kebele</label>
+										<input type="text" placeholder="kebele" class="form-control" id="kebele"
+											name="kebele">
+
+									</div>
+									<div class="form-group col-md-6">
+										<label for="assidoc">Assigned Doctor</label>
+										<select class="form-control" id="assidoc" name="assidoc">
+											<option>Selam</option>
+											<option>Nahom</option>
+											<option>Helen</option>
+											<option>Other</option>
+										</select>
+									</div>
+									
+								</div>
+								<div class="form-group col-md-6 mb-3">
+									<button type="submit" class="btn btn-primary btn-lg">Submit</button>
+								</div>
+							</form>
+							<!-- Alerts-->
+							<div class="alert alert-success alert-dismissible fade show" role="alert">
+								<strong>Successfully Done!</strong> Please add payment now
+								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+									<span aria-hidden="true">×</span>
+								</button>
+							</div>
+							<div class="alert alert-warning alert-dismissible fade show" role="alert">
+								<strong>Holy guacamole!</strong> You should check in on some of those fields below.
+								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+									<span aria-hidden="true">×</span>
+								</button>
+							</div>
+							<!-- /Alerts-->
+						</div>
+					</div>
+					<!-- /Widget Item -->
+				</div>
+			</div>
+			<!-- /Main Content -->
+			<!--Copy Rights-->
+			<div class="container">
+				<div class="d-sm-flex justify-content-center">
+					<span class="text-muted text-center d-block d-sm-inline-block">Copyright © 2018 <a
+							href="http://www.konnectplugins.com/" target="_blank">konnectcode</a>. All rights
+						reserved.</span>
+				</div>
+			</div>
+			<!-- /Copy Rights-->
+		</div>
+		<!-- /Page Content -->
+	</div>
+	<!-- Back to Top -->
+	<a id="back-to-top" href="#" class="back-to-top">
+		<span class="ti-angle-up"></span>
+	</a>
+
+
+</body>
+
+
+<!-- Mirrored from www.konnectplugins.com/proclinic/Horizontal/add-patient.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 24 Jan 2022 10:42:01 GMT -->
+
+</html>
+{% endblock %}

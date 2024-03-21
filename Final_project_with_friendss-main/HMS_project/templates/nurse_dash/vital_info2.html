@@ -1,0 +1,193 @@
+{% extends 'nurse_dash/nurse_dash.html' %}
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.konnectplugins.com/proclinic/Horizontal/edit-room.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 24 Jan 2022 10:42:01 GMT -->
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	{% block 'title' %}
+	<title>Edit Room</title>
+	{% endblock %}
+	<!-- Fav  Icon Link -->
+</head>
+
+<body>
+	<!-- Pre Loader -->
+	<div class="loading">
+		<div class="spinner">
+			<div class="double-bounce1"></div>
+			<div class="double-bounce2"></div>
+		</div>
+	</div>
+	<!--/Pre Loader -->
+	<!-- Color Changer -->
+
+	<!-- /Color Changer -->
+	<div class="wrapper">
+		<!-- Page Content -->
+		<div id="content">
+				<!-- Top Navigation -->
+
+				<!-- /Menu -->
+				{% include 'nurse_dash/navbar.html' %}
+				<!-- Breadcrumb -->
+				<!-- Page Title -->
+				<div class="container mt-0">
+					<div class="row breadcrumb-bar">
+						<div class="col-md-6">
+							<h3 class="block-title">Edit Room Allotment</h3>
+						</div>
+						<div class="col-md-6">
+							<ol class="breadcrumb">
+								<li class="breadcrumb-item">
+									<a href="index.html">
+										<span class="ti-home"></span>
+									</a>
+								</li>
+								<li class="breadcrumb-item">Room Allotments</li>
+								<li class="breadcrumb-item active">Edit Room Allotment</li>
+							</ol>
+						</div>
+					</div>
+				</div>
+			<!-- /Page Title -->
+
+			<!-- /Breadcrumb -->
+			<!-- Main Content -->
+			<div class="container">
+
+				<div class="row">
+					<!-- Widget Item -->
+					<div class="col-md-12">
+						<div class="widget-area-2 proclinic-box-shadow">
+							<h3 class="widget-title">Vital Informations</h3>
+							<form>
+								<div class="form-row">
+									<div class="form-group col-md-6">
+										<label for="patient-id">Patient ID</label>
+										<input type="text" class="form-control" placeholder="Patient ID" id="patient-id" name="patient_id">
+									</div>
+									<div class="form-group col-md-6">
+										<label for="dor">Date Of Record</label>
+										<input type="date" placeholder="date of record" class="form-control" id="dor" name="dor">
+									</div>
+									<div class="form-group col-md-6">
+										<label for="HeartRate">Heart Rate</label>
+										<input type="text" placeholder="heart rate" class="form-control" id="HeartRate" name="Heart_Rate">
+									</div>
+									<div class="form-group col-md-6">
+										<label for="vin">Vital Info Number</label>
+										<input type="text" placeholder="vital info number" class="form-control" id="VIN" name="VIN">
+									</div>
+									<div class="form-group col-md-6">
+										<label for="bloodpre">Blood Pressure</label>
+										<input type="text" placeholder="blood pressure" class="form-control" id="bloodpre" name="bloodpre">
+									</div>
+									<div class="form-group col-md-6">
+										<label for="resRate">Respiratory Rate</label>
+										<input type="text" placeholder="respiratory rate" class="form-control" id="resRate" name="resRate">
+									</div>
+									<div class="form-group col-md-6">
+										<label for="bodytemp">Body Temprature</label>
+										<input type="text" placeholder="body temprature" class="form-control" id="bodytemp" name="bodytemp">
+									</div>
+									<div class="form-group col-md-6">
+										<label for="oxysatu">Oxygen Saturation</label>
+										<input type="text" placeholder="oxygen saturation" class="form-control" id="oxysatu" name="oxysatu">
+									</div>
+									<div class="form-group col-md-6">
+										<label for="painlev">Pain Level</label>
+										<input type="text" placeholder="Pain level" class="form-control" id="painlev" name="painlev">
+									</div>
+									<div class="form-group col-md-6">
+										<label for="height">Height</label>
+										<input type="text" placeholder="height" class="form-control" id="height" name="height">
+									</div>
+									<div class="form-group col-md-6">
+										<label for="weight">Weight</label>
+										<input type="text" placeholder="weight" class="form-control" id="weight" name="weight">
+									</div>
+									<div class="form-group col-md-6">
+										<label for="bloodglu">Blood Glucose level</label>
+										<input type="text" placeholder="blood glucose level" class="form-control" id="bloodglu" name="bloodglu">
+									</div>
+									<div class="form-group col-md-6">
+										<label for="nurseid">Nursing ID</label>
+										<input type="text" placeholder="nursing id" class="form-control" id="nurseid" name="nurseid">
+									</div>
+									<div class="form-group col-md-6">
+										<label for="exampleFormControlTextarea1">Remark</label>
+										<textarea placeholder="remark" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+									</div>
+									<!-- <div class="form-group col-md-6">
+										<label for="gender">Gender</label>
+										<select class="form-control" id="gender">
+											<option>Male</option>
+											<option>Female</option>
+											<option>Other</option>
+										</select>
+									</div> -->
+									
+																	
+									<div class="form-check col-md-12 mb-2">
+										<div class="text-left">
+											<div class="custom-control custom-checkbox">
+												<input class="custom-control-input" type="checkbox" id="ex-check-2">
+												<label class="custom-control-label" for="ex-check-2">Please Confirm</label>
+											</div>
+										</div>
+									</div>
+									<div class="form-group col-md-6 mb-3">
+										<button type="submit" class="btn btn-primary btn-lg">Submit</button>
+									</div>
+								</div>
+							</form>
+							
+							
+						</div>
+					</div>
+					<!-- /Widget Item -->
+				</div>
+			</div>
+			<!-- /Main Content -->
+			<!--Copy Rights-->
+			<div class="container">
+				<div class="d-sm-flex justify-content-center">
+				  <span class="text-muted text-center d-block d-sm-inline-block">Copyright © 2018 <a href="http://www.konnectplugins.com/" target="_blank">konnectcode</a>. All rights reserved.</span>
+				</div>
+			</div>
+			<!-- /Copy Rights-->
+		</div>
+		<!-- /Page Content -->
+	</div>
+	<!-- Back to Top -->
+	<a id="back-to-top" href="#" class="back-to-top">
+		<span class="ti-angle-up"></span>
+	</a>
+	<!-- /Back to Top -->
+	<!-- Jquery Library-->
+	<script src="js/jquery-3.2.1.min.js"></script>
+	<!-- Popper Library-->
+	<script src="js/popper.min.js"></script>
+	<!-- Bootstrap Library-->
+    <script src="js/bootstrap.min.js"></script>
+    
+    <!-- Datatable  -->
+	<script src="datatable/jquery.dataTables.min.js"></script>
+	<script src="datatable/dataTables.bootstrap4.min.js"></script>
+    
+	<!-- Custom Script-->
+	<script src="js/custom.js"></script>
+
+</body>
+
+
+<!-- Mirrored from www.konnectplugins.com/proclinic/Horizontal/edit-room.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 24 Jan 2022 10:42:01 GMT -->
+</html>
+{% endblock %}

@@ -1,0 +1,167 @@
+{% extends 'doctor/dr_dash.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+{% block 'title' %}
+<title>Precsriptions List</title>
+{% endblock %}
+<!-- Mirrored from www.konnectplugins.com/proclinic/Horizontal/patients.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 24 Jan 2022 10:42:01 GMT -->
+
+<head>
+
+</head>
+
+<body>
+	<!-- Pre Loader -->
+	<div class="loading">
+		<div class="spinner">
+			<div class="double-bounce1"></div>
+			<div class="double-bounce2"></div>
+		</div>
+	</div>
+	<!--/Pre Loader -->
+	<!-- Color Changer -->
+
+	<!-- /Color Changer -->
+	<div class="wrapper">
+		<!-- Page Content -->
+		<div id="content">
+			<!-- Top Navigation -->
+
+			<!-- /Menu -->
+			<!-- Breadcrumb -->
+			<!-- Page Title -->
+			<div class="container mt-0">
+				<div class="row breadcrumb-bar">
+					<div class="col-md-6">
+						<h3 class="block-title">Perscriptions</h3>
+					</div>
+					<div class="col-md-6">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item">
+								<a href="index.html">
+									<span class="ti-home"></span>
+								</a>
+							</li>
+							<li class="breadcrumb-item active">Perscriptions</li>
+							<li class="breadcrumb-item ">All Perscription</li>
+						</ol>
+					</div>
+				</div>
+			</div>
+			<!-- /Page Title -->
+			{% include 'doctor/navbar.html' %}
+			<!-- /Breadcrumb -->
+			<!-- Main Content -->
+			<div class="container">
+
+				<div class="row">
+					<!-- Widget Item -->
+					<div class="col-md-12">
+						<div class="widget-area-2 proclinic-box-shadow">
+							<h3 class="widget-title">Prescription List</h3>
+							<div class="table-responsive mb-3">
+								
+								<table id="tableId" class="table table-bordered table-striped">
+									<thead>
+										<tr>
+											<!-- <th class="no-sort">
+												<div class="custom-control custom-checkbox">
+													<input class="custom-control-input" type="checkbox" id="select-all">
+													<label class="custom-control-label" for="select-all"></label>
+												</div>
+											</th> -->
+											<th>Patient ID</th>
+											<th>Patient Name</th>
+											<th>Doctor ID</th>
+											<th>Prescription Number</th>
+											<th>Prescription Date</th>
+											<th>Prescriptions</th>
+											<th>Actions</th>
+										</tr>
+									</thead>
+									<tbody>
+										{% for pres in prescriptions %}
+										<tr>
+											<!-- <td>
+												<div class="custom-control custom-checkbox">
+													<input class="custom-control-input" type="checkbox">
+													<label class="custom-control-label"></label>
+												</div>
+											</td> -->
+											<td>{{pres.P_ID}}</td>
+											<td>{{pres.Patient_full_name}}</td>
+											<td>{{pres.Doctor_ID}}</td>
+											<td>{{pres.Prec_number}}</td>
+											<td>{{pres.Prec_date}}</td>
+											<td>{{pres.Precscriptions}}</td>
+
+											<td>
+												<a href="#" class="btn btn-outline-danger"><span
+														class="ti-trash"></span></a>
+												<a href="#" class="btn btn-outline-primary "><span
+														class="ti-pencil-alt"></span></a>
+												<a href="#" class="btn btn-outline-info "><span
+														class="ti-eye"></span></a>
+											</td>
+										</tr>
+										{% endfor %}
+									</tbody>
+								</table>
+								
+								<!--Export links-->
+								<nav aria-label="Page navigation example">
+									<ul class="pagination justify-content-center export-pagination">
+										<li class="page-item">
+											<a class="page-link" href="#"><span class="ti-download"></span> csv</a>
+										</li>
+										<li class="page-item">
+											<a class="page-link" href="#"><span class="ti-printer"></span> print</a>
+										</li>
+										<li class="page-item">
+											<a class="page-link" href="#"><span class="ti-file"></span> PDF</a>
+										</li>
+										<li class="page-item">
+											<a class="page-link" href="#"><span class="ti-align-justify"></span>
+												Excel</a>
+										</li>
+									</ul>
+								</nav>
+								<!-- /Export links-->
+								<button type="button" class="btn btn-danger mt-3 mb-0"><span class="ti-trash"></span>
+									DELETE</button>
+								<button type="button" class="btn btn-primary mt-3 mb-0"><span
+										class="ti-pencil-alt"></span> EDIT</button>
+							</div>
+						</div>
+					</div>
+					<!-- /Widget Item -->
+				</div>
+			</div>
+			<!-- /Main Content -->
+			<!--Copy Rights-->
+			<div class="container">
+				<div class="d-sm-flex justify-content-center">
+					<span class="text-muted text-center d-block d-sm-inline-block">Copyright © 2018 <a
+							href="http://www.konnectplugins.com/" target="_blank">konnectcode</a>. All rights
+						reserved.</span>
+				</div>
+			</div>
+			<!-- /Copy Rights-->
+		</div>
+		<!-- /Page Content -->
+	</div>
+	<!-- Back to Top -->
+	<a id="back-to-top" href="#" class="back-to-top">
+		<span class="ti-angle-up"></span>
+	</a>
+	<!-- /Back to Top -->
+
+</body>
+
+
+<!-- Mirrored from www.konnectplugins.com/proclinic/Horizontal/patients.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 24 Jan 2022 10:42:01 GMT -->
+
+</html>
+{% endblock %}
