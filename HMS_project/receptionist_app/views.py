@@ -1,13 +1,38 @@
 
 from django.core.cache import cache
 from django.contrib import messages
-from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils.crypto import get_random_string
 from .models import PatientRegister
 from admin_app.models import User
 from django.db.models import Q
 from django import *
+from admin_app .models import UserProfileInfo2
+from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
+
+@login_required
+def profile(request):
+    user = request.user
+    return render(request, 'receptionist_dash/profile.html', {'user': user})
+
+@login_required
+def profile_update(request, user_id):
+    user = get_object_or_404(User, pk=user_id)
+    if request.user != user:  # Ensure user can only update their own profile
+        return redirect('profile_show')
+    
+    user_profile, created = UserProfileInfo2.objects.get_or_create(user=user)
+    
+    if request.method == 'POST':
+        profile_pic = request.FILES.get('profile_pic')
+        user_profile.profile_pic = profile_pic
+        user_profile.save()
+        return redirect('profile_show')
+    
+    return render(request, 'receptionist_dash/update_profile.html', {'user_id': user_id, 'user_profile': user_profile})
+
+
 def receptionist_dash(request):
     return render(request,'receptionist_dash/receptionist_dash.html')
 def receptionist_dash_content(request):

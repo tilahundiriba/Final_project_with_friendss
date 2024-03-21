@@ -1,5 +1,30 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from .models import PaymentModel
+from django.shortcuts import get_object_or_404
+from admin_app.models import UserProfileInfo2
+from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
+@login_required
+def profile(request):
+    user = request.user
+    return render(request, 'casher_dash/profile.html', {'user': user})
+
+@login_required
+def profile_update(request, user_id):
+    user = get_object_or_404(User, pk=user_id)
+    if request.user != user:  # Ensure user can only update their own profile
+        return redirect('profile_show')
+    
+    user_profile, created = UserProfileInfo2.objects.get_or_create(user=user)
+    
+    if request.method == 'POST':
+        profile_pic = request.FILES.get('profile_pic')
+        user_profile.profile_pic = profile_pic
+        user_profile.save()
+        return redirect('profile_show')
+    
+    return render(request, 'casher_dash/update_profile.html', {'user_id': user_id, 'user_profile': user_profile})
+
 def casher_dash(request):
     return render(request,'casher_dash/casher_dash.html')
 def casher_dash_content(request):

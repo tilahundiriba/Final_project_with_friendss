@@ -1,0 +1,109 @@
+<!-- profile_picture_form.html -->
+{% extends 'laboratory_dash/lab_dashboard.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.konnectplugins.com/proclinic/Horizontal/add-appointment.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 24 Jan 2022 10:42:01 GMT -->
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	{% block 'title' %}
+	<title>Your Profile Picture</title>
+	{% endblock %}
+	<!-- Fav  Icon Link -->
+
+</head>
+
+<body>
+	<!-- Pre Loader -->
+	<div class="loading">
+		<div class="spinner">
+			<div class="double-bounce1"></div>
+			<div class="double-bounce2"></div>
+		</div>
+	</div>
+	<!--/Pre Loader -->
+	<div class="wrapper">
+		<!-- Page Content -->
+		<div id="content">
+				<!-- Menu -->
+				{% include 'doctor/navbar.html' %}
+				<!-- /Menu -->
+				<!-- Breadcrumb -->
+				<!-- Page Title -->
+				<div class="container mt-0">
+					<div class="row breadcrumb-bar">
+						<div class="col-md-6">
+							<h3 class="block-title"> Profile</h3>
+						</div>
+						<div class="col-md-6">
+							<ol class="breadcrumb">
+								<li class="breadcrumb-item">
+									<a href="#">
+										<span class="ti-home"></span>
+									</a>
+								</li>
+								<li class="breadcrumb-item ">Profile</li>
+								<li class="breadcrumb-item active">Update Profile</li>
+							</ol>
+						</div>
+					</div>
+				</div>
+			<!-- /Page Title -->
+
+			<!-- /Breadcrumb -->
+			<!-- Main Content -->
+			<div class="container" >
+
+				<div class="row" style="justify-content: center;">
+					<!-- Widget Item -->
+					<div class="col-md-6">
+						<div class="widget-area-2 proclinic-box-shadow"  >
+							<h3 class="widget-title" style="margin-left: 35%;">Your Profile</h3>
+                            {% if request.user.is_authenticated %}
+                            <img src="{{ user.userprofileinfo2.profile_pic.url}}" alt="NOOOOOOo"
+                            class="rounded-circle"
+                            width="200"
+                            height="200" style="margin-left: 30%; margin-bottom: 10%;">
+							<!-- Alerts-->
+                            <div class="form-group col-md-6 mb-3" style="margin-left: 38%;">
+                                <a href="{% url 'profile' user.id %}" class="btn btn-outline-primary "><span
+                                    class="ti-pencil-alt">Update</span></a>
+                            </div>
+                            {% endif %}
+							{% if registered %}
+							<div class="alert alert-success alert-dismissible fade show" role="alert">
+								<strong>Update Successfully Done!</strong> 
+								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+									<span aria-hidden="true">×</span>
+								</button>
+							</div>
+							{% endif %}
+							<!-- /Alerts-->
+						</div>
+					</div>
+					<!-- /Widget Item -->
+				</div>
+			</div>
+			<!-- /Main Content -->
+		
+		</div>
+		<!-- /Page Content -->
+	</div>
+	<!-- Back to Top -->
+	<a id="back-to-top" href="#" class="back-to-top">
+		<span class="ti-angle-up"></span>
+	</a>
+	<!-- /Back to Top -->
+
+
+</body>
+
+
+<!-- Mirrored from www.konnectplugins.com/proclinic/Horizontal/add-appointment.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 24 Jan 2022 10:42:01 GMT -->
+</html>
+{% endblock %}
