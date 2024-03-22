@@ -1,6 +1,5 @@
 from django.db import models
 from receptionist_app.models import PatientRegister
-from admin_app.models import UserProfileInfo2
 from django.contrib.auth.models import User
 
 class RoomInformation(models.Model):

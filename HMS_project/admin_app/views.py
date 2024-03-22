@@ -19,7 +19,7 @@ from .models import UserProfileInfo2
 # from .models import PatientChange
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import BedAllocation
-
+from django.db.models import Sum
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserChangeForm
 from django.shortcuts import render, redirect
@@ -29,7 +29,8 @@ from django.http import JsonResponse
 from django.views import View
 from .models import Notification
 from receptionist_app.models import PatientRegister
-
+from doctor_app.models import Appointment
+from casher_app.models import PaymentModel
 import csv
 import openpyxl
 from reportlab.lib.pagesizes import letter
@@ -219,7 +220,13 @@ def dis_dash(request):
 def dis_dash_content(request):
     return render(request,'admin_dash/dash_content.html')
 def dis_index(request):
-    return render(request,'admin_dash/index.html')
+    total_sum = PaymentModel.objects.aggregate(total_sum=Sum('Total'))['total_sum']
+    total_sum = total_sum or 0
+    number_of_patient = PatientRegister.objects.count()
+    number_of_app= Appointment.objects.count()
+    return render(request,'admin_dash/index.html',{'number_patients':number_of_patient,
+                                                   'number_of_app':number_of_app,
+                                                   'total_amount':total_sum})
 #admin views end here
 
 # doctor views start here

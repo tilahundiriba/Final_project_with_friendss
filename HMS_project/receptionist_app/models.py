@@ -15,7 +15,7 @@ class PatientRegister(models.Model):
     city = models.CharField(max_length=100)
     region = models.CharField(max_length=100)
     kebele = models.CharField(max_length=200)
-    staff=models.CharField(max_length=200)
+    receptinist_id=models.ForeignKey(User,on_delete=models.CASCADE,null=True)
     is_checked=models.BooleanField(default=False)
     
     def __str__(self):

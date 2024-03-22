@@ -67,7 +67,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    # 'whitenoise.middleware.WhiteNoiseMiddleware',
+    'admin_app.alternative_admin.AdminFallbackMiddleware',
+
 ]
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 ROOT_URLCONF = 'HMS_project.urls'
@@ -104,6 +105,9 @@ class NoCacheMixin:
     @method_decorator(never_cache)
     def dispatch(self, *args, **kwargs):
         return super().dispatch(*args, **kwargs)
+    
+ADMIN_USERNAME = 'tilahun'   
+DESIGNATED_ADMIN_USERNAME = 'second_admin'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 

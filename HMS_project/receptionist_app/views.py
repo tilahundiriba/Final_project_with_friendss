@@ -71,7 +71,7 @@ def add_patient(request):
         city=city,
         region=region,
         kebele=kebele,
-        staff=doctor_id,
+        receptinist_id=doctor_id,
                 )
           
         patient_count = cache.get('patient_count', 0)
