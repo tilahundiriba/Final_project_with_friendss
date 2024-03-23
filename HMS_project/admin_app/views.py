@@ -65,7 +65,7 @@ def login_view(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
-        role = request.POST.get('role')
+        # role = request.POST.get('role')
 
         # Authenticate the user
         user = authenticate(request, username=username, password=password)
@@ -74,24 +74,27 @@ def login_view(request):
             # Check if user's profession matches
             try:
                 user_profile = UserProfileInfo2.objects.get(user=user)
-                if user_profile.role == role:
-                    login(request, user)
-                    if role=='doctor':
-                      return redirect('dis_dr_dash')  # Redirect to home URL after login
-                    elif role=='nurse':
-                      return redirect('nurse_dash')
-                    if role=='admin':
-                      return redirect('dis_dash')  # Redirect to home URL after login
-                    elif role=='casher':
-                      return redirect('casher_dash')
-                    if role=='receptionist':
-                      return redirect('receptionist_dash')  # Redirect to home URL after login
-                    elif role=='technician':
-                      return redirect('lab_dashboard')
+                # if user_profile.role:
+                login(request, user)
+                if user_profile.password_changed:
+                    if user_profile.role =='doctor':
+                        return redirect('dis_dr_dash')  # Redirect to home URL after login
+                    elif user_profile.role =='nurse':
+                        return redirect('nurse_dash')
+                    if user_profile.role =='admin':
+                        return redirect('dis_dash')  # Redirect to home URL after login
+                    elif user_profile.role =='casher':
+                        return redirect('casher_dash')
+                    elif user_profile.role =='receptionist':
+                        return redirect('receptionist_dash')  # Redirect to home URL after login
+                    elif user_profile.role =='technician':
+                        return redirect('lab_dashboard')
                 else:
-                    return HttpResponse('Invalid profession for the user')
+                    return redirect('change_credentials')
+                # else:
+                #     return HttpResponse('Invalid profession for the user')
             except UserProfileInfo2.DoesNotExist:
-                return HttpResponse('User does not have a profile')
+                return HttpResponse('User does not have a role...!!!')
 
         else:
             # User authentication failed
@@ -254,7 +257,7 @@ def change_credentials(request):
         confirm_new_password = request.POST['confirm_new_password']
 
         user = request.user  # Use the authenticated user directly
-
+        user_profile = UserProfileInfo2.objects.get(user=user)
         # Verify the current password
         if user.check_password(current_password):
             if new_password == confirm_new_password:
@@ -264,14 +267,14 @@ def change_credentials(request):
                 user.save()
 
                 # Optional: Update user profile if necessary
-                user.user_profile.password_changed = True
-                user.user_profile.save()
+                user_profile.password_changed = True
+                user_profile.save()
 
                 # Re-authenticate user with new password
                 login(request, user)
 
                 # Redirect to login page after successful update
-                return redirect('login')
+                return redirect('user_log')
             else:
                 error_message = "New passwords must match."
         else:
