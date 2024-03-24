@@ -281,9 +281,9 @@ def change_credentials(request):
             error_message = "Incorrect current password."
 
         # Render the form with error message
-        return render(request, 'admin_app/change_credentials.html', {'error_message': error_message})
+        return render(request, 'admin_dash/change_credentials.html', {'error_message': error_message})
 
-    return render(request, 'admin_app/change_credentials.html')
+    return render(request, 'admin_dash/change_credentials.html')
 
 def success_message(request):
     # You can customize this view to display a success message or redirect to a different page
