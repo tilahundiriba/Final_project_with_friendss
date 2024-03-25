@@ -2,7 +2,6 @@
 from django.http import HttpResponse ,HttpResponseRedirect
 from django.shortcuts import render,redirect,reverse
 from django.http import HttpResponse
-from .models import LabTest,Payment
 from django.utils.crypto import get_random_string
 from django.contrib.auth import login
 from django.contrib.auth import authenticate ,login , logout
@@ -36,12 +35,6 @@ import openpyxl
 from reportlab.lib.pagesizes import letter
 from reportlab.platypus import SimpleDocTemplate, Table,TableStyle
 from reportlab.lib import colors
-
-
-
-# Create your views here.
-
-
 
 def writenotification(request):
     return render(request, 'doctor/view_notification.html')
@@ -148,75 +141,10 @@ def createUserAccount(request):
         return redirect('dis_dash_content')
 
     return render(request, 'admin_dash/user_registration2.html')
-
-
-def lab_test_payment(request):
-    lab_tests = LabTest.objects.all()
-    context = {'lab_tests': lab_tests}
-    return render(request, 'admin_app/lab_test_payment.html', context)
-
-def process_payment(request):
-    if request.method == 'POST':
-        patient_name = request.POST.get('patient_name')
-        lab_test_id = request.POST.get('lab_test_type')
-        payment_amount = request.POST.get('payment_amount')
-
-        lab_test = LabTest.objects.get(id=lab_test_id)
-        payment = Payment.objects.create(
-            patient_name=patient_name,
-            lab_test=lab_test,
-            payment_amount=payment_amount
-        )
-        return HttpResponse("Payment processed successfully!")
-
-    return HttpResponse("Invalid request method.")
-
-
-
-def members(request):
-    return HttpResponse("Hello From Admin App!")
-def testing(request):
-       context = {
-          'fruits': ['Apple', 'Banana', 'Cherry'],   
-        }
-       return render(request,'admin_app/templates.html',context)
-
-
-
-# def lab_test_payment(request):
-    # lab_tests = LabTest.objects.all()
-    # context = {'lab_tests': lab_tests}
-    # return render(request, 'admin_app/lab_test_payment.html', context)
-# 
-# def process_payment(request):
-    # if request.method == 'POST':
-        # patient_name = request.POST.get('patient_name')
-        # lab_test_id = request.POST.get('lab_test_type')
-        # payment_amount = request.POST.get('payment_amount')
-# 
-        # lab_test = LabTest.objects.get(id=lab_test_id)
-        # payment = Payment.objects.create(
-            # patient_name=patient_name,
-            # lab_test=lab_test,
-            # payment_amount=payment_amount
-        # )
-        # return HttpResponse("Payment processed successfully!")
-# 
-    # return HttpResponse("Invalid request method.")
-
-def home(request):
-    return render(request,'admin_app/home.html')
-def dis_login(request):
-    return render(request,'admin_app/loginfinal.html')
 def dis_login2(request):
     return render(request,'admin_dash/login.html')
-def dis_home(request):
-    return render(request,'admin_app/homefinal.html')
-def dis_homepage(request):
-    return render(request,'admin_app/homepage.html')
 def dis_base(request):
     return render(request,'admin_app/base.html')
-
 # admin dashboard views
 def dis_dash(request):
     return render(request,'admin_dash/dashboard.html')
@@ -235,8 +163,20 @@ def dis_index(request):
 # doctor views start here
 # doctor dashboard views start here
 
-def displayRegisteredPatient(request):
-    return render(request,'doctors/displayRegisteredPatient.html')
+def display_users(request):
+    users= UserProfileInfo2.objects.all()
+    user_names= User.objects.all()
+    combined_data = []
+    for user_info in users or user_names:
+        user_dict = {
+            'username': user_info.user.username,
+            'email': user_info.user.email,
+            'role': user_info.role,
+            'id':user_info.user.id,
+            'special':user_info.specialty,
+        }
+        combined_data.append(user_dict)
+    return render(request,'admin_dash/staffs.html',{'combined_datas':combined_data})
 def dis_user_registration(request):
     return render(request,'admin_dash/user_registration2.html')
 def dis_web_home(request):

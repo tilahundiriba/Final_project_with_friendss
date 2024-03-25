@@ -1,0 +1,231 @@
+{% extends 'admin_dash/dashboard.html' %}
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html>
+<!-- Mirrored from www.konnectplugins.com/proclinic/Horizontal/doctors.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 24 Jan 2022 10:42:01 GMT -->
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	{% block 'title' %}
+	<title>All Staffs</title>
+	{% endblock %}
+	
+</head>
+
+<body>
+	<!-- Pre Loader -->
+	<div class="loading">
+		<div class="spinner">
+			<div class="double-bounce1"></div>
+			<div class="double-bounce2"></div>
+		</div>
+	</div>
+	<!--/Pre Loader -->
+
+	<div class="wrapper">
+		<!-- Page Content -->
+		<div id="content">
+				<!-- Top Navigation -->
+				<div class="container top-brand">
+					<nav class="navbar navbar-default">			
+						<div class="navbar-header">
+							<div class="sidebar-header"> <a href="index.html"><img src="#" class="logo" alt="logo"></a>
+							</div>
+						</div>
+						<ul class="nav justify-content-end">
+							<li class="nav-item">
+								<a class="nav-link">
+									<span title="Fullscreen" class="ti-fullscreen fullscreen"></span>
+								</a>							
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" data-toggle="modal" data-target=".proclinic-modal-lg">
+									<span class="ti-search"></span>
+								</a>
+								<div class="modal fade proclinic-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+									<div class="modal-dialog modal-lorvens">
+										<div class="modal-content proclinic-box-shadow2">
+											<div class="modal-header">
+												<h5 class="modal-title">Search Patient/Doctor:</h5>
+												<span class="ti-close" data-dismiss="modal" aria-label="Close">
+												</span>
+											</div>
+											<div class="modal-body">
+												<form>
+													<div class="form-group">
+														<input type="text" class="form-control" id="search-term" placeholder="Type text here">
+														<button type="button" class="btn btn-lorvens proclinic-bg">
+															<span class="ti-location-arrow"></span> Search</button>
+													</div>
+												</form>
+											</div>
+										</div>
+									</div>
+								</div>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+								 aria-expanded="false">
+									<span class="ti-announcement"></span>
+								</a>
+								<div class="dropdown-menu proclinic-box-shadow2 notifications animated flipInY">
+									<h5>Notifications</h5>
+									<a class="dropdown-item" href="#">
+										<span class="ti-wheelchair"></span> New Patient Added</a>
+									<a class="dropdown-item" href="#">
+										<span class="ti-money"></span> Patient payment done</a>
+									<a class="dropdown-item" href="#">
+										<span class="ti-time"></span>Patient Appointment booked</a>
+									<a class="dropdown-item" href="#">
+										<span class="ti-wheelchair"></span> New Patient Added</a>
+								</div>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+								 aria-expanded="false">
+											<img src="{{ user.userprofileinfo2.profile_pic.url}}" alt="NOOOOOOo"
+											class="rounded-circle"
+											width="40"
+											height="40">
+								</a>
+								<div class="dropdown-menu proclinic-box-shadow2 profile animated flipInY">
+									<h5>{{ request.user.username }}</h5>
+									<a class="dropdown-item" href="#">
+										<span class="ti-settings"></span> Settings</a>
+									<a class="dropdown-item" href="#">
+										<span class="ti-help-alt"></span> Help</a>
+									<a class="dropdown-item" href="#">
+										<span class="ti-power-off"></span> Logout</a>
+								</div>
+							</li>
+						</ul>
+				
+					</nav>
+				</div>
+				<!-- /Top Navigation -->
+				<!-- Menu -->
+				{% include 'admin_dash/navbar.html' %}
+				
+				<!-- Page Title -->
+				<div class="container mt-0">
+					<div class="row breadcrumb-bar">
+						<div class="col-md-6">
+							<h3 class="block-title">Staffs</h3>
+						</div>
+						<div class="col-md-6">
+							<ol class="breadcrumb">
+								<li class="breadcrumb-item">
+									<a href="index.html">
+										<span class="ti-home"></span>
+									</a>
+								</li>
+								<li class="breadcrumb-item active">Staffs</li>
+								<li class="breadcrumb-item ">All Staffs</li>
+							</ol>
+						</div>
+					</div>
+				</div>
+			<!-- /Page Title -->
+
+			<!-- Main Content -->
+			<div class="container">
+
+				<div class="row">
+					<!-- Widget Item -->
+					<div class="col-md-12">
+						<div class="widget-area-2 proclinic-box-shadow">
+							<h3 class="widget-title">Staffs List</h3>
+							<div class="table-responsive mb-3">
+								<table id="tableId" class="table table-bordered table-striped">
+									<thead>
+										<tr>
+											<!-- <th class="no-sort">
+												<div class="custom-control custom-checkbox">
+													<input class="custom-control-input" type="checkbox" id="select-all">
+													<label class="custom-control-label" for="select-all"></label>
+												</div>
+											</th> -->
+											<th>Staff ID</th>
+											<th>Staff Name</th>
+											<th> Email <small>(in Years)</small></th>
+											<th> Role</th>
+											<th>Specialization</th>
+											<th>Actions</th>
+										</tr>
+									</thead>
+									<tbody>
+										{% for user_name in combined_datas %}
+										<tr>
+											<!-- <td>
+												<div class="custom-control custom-checkbox">
+													<input class="custom-control-input" type="checkbox" id="1">
+													<label class="custom-control-label" for="1"></label>
+												</div>
+											</td> -->
+											<td>{{user_name.id}}</td>
+											<td>{{user_name.username}}</td>
+											<td>{{user_name.email}}</td>
+											<td>{{user_name.role}}</td>
+											<td>{{user_name.special}}</td>
+											<td>
+												<a href="#" class="btn btn-outline-danger "><span class="ti-trash"></span></a> 
+												<a href="#" class="btn btn-outline-primary "><span class="ti-pencil-alt"></span></a> 
+												<a href="#" class="btn btn-outline-info "><span class="ti-eye"></span></a>
+											</td>
+										</tr>
+										{% endfor %}
+									</tbody>
+                                </table>
+                                
+								<!--Export links-->
+								<nav aria-label="Page navigation example">
+									<ul class="pagination justify-content-center export-pagination">
+										<li class="page-item">
+											<a class="page-link" href="#"><span class="ti-download"></span> csv</a>
+										</li>
+										<li class="page-item">
+											<a class="page-link" href="#"><span class="ti-printer"></span>  print</a>
+										</li>
+										<li class="page-item">
+											<a class="page-link" href="#"><span class="ti-file"></span> PDF</a>
+										</li>
+										<li class="page-item">
+											<a class="page-link" href="#"><span class="ti-align-justify"></span> Excel</a>
+										</li>
+									</ul>
+								</nav>
+								<!-- /Export links-->
+								<button type="button" class="btn btn-danger mt-3 mb-0"><span class="ti-trash"></span> DELETE</button>
+								<button type="button" class="btn btn-primary mt-3 mb-0"><span class="ti-pencil-alt"></span> EDIT</button>
+							</div>
+						</div>
+					</div>
+					<!-- /Widget Item -->
+				</div>
+			</div>
+			<!-- /Main Content -->
+			<!--Copy Rights-->
+			<div class="container">
+				<div class="d-sm-flex justify-content-center">
+				  <span class="text-muted text-center d-block d-sm-inline-block">Copyright © 2018 <a href="http://www.konnectplugins.com/" target="_blank">konnectcode</a>. All rights reserved.</span>
+				</div>
+			</div>
+			<!-- /Copy Rights-->
+		</div>
+		<!-- /Page Content -->
+	</div>
+	<!-- Back to Top -->
+	<a id="back-to-top" href="#" class="back-to-top">
+		<span class="ti-angle-up"></span>
+	</a>
+	<!-- /Back to Top -->
+
+</body>
+
+
+<!-- Mirrored from www.konnectplugins.com/proclinic/Horizontal/doctors.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 24 Jan 2022 10:42:01 GMT -->
+</html>
+{% endblock %}

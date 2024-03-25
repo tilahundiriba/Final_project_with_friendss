@@ -22,21 +22,6 @@ class UserProfileInfo2(models.Model):
     def __str__(self):
         return f'{self.user.username,self.user,self.profile_pic,self.user_id,self.role,self.specialty,self.password_changed}'
 
-class LabTest(models.Model):
-    test_type = models.CharField(max_length=255)
-    test_fee = models.DecimalField(max_digits=10, decimal_places=2)
-    def __str__(self):
-      return f"{self.test_type}{self.test_fee}"
-    
-class Payment(models.Model):
-    patient_name = models.CharField(max_length=255)
-    lab_test = models.ForeignKey(LabTest, on_delete=models.CASCADE)
-    payment_amount = models.DecimalField(max_digits=10, decimal_places=2)
-    def __str__(self):
-      return f"{self.patient_name}{self.lab_test} {self.payment_amount}"
-    
-  
-
 
 class UserProfile(AbstractUser):
     reset_key = models.CharField(max_length=100, blank=True, null=True)
