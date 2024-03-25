@@ -78,7 +78,7 @@
                     class="rounded-circle"
                     width="50"
                     height="50">
-                    <p style="color: white;">Welcome, {{ request.user.username }}!</p>
+                    <p style="color: white;"> {{ request.user.username }}</p>
                 </div>
                 {% endif %}
         <ul class="sidebar-nav">
@@ -149,17 +149,17 @@
               </li>
             </ul>
           </li>
-          <li class="sidebar-item">
+          <li class="sidebar-item" >
             <a href="#" class="sidebar-link collapsed" data-bs-target="#report" data-bs-toggle="collapse"
-              aria-expanded="false"><i class="fa-solid fa-envelopes-bulk pe-2"></i>
+              aria-expanded="false" ><i class="fa-solid fa-envelopes-bulk pe-2" ></i>
               Reports
             </a>
-            <ul id="report" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
-              <li class="sidebar-item">
-                <a href="#" class="sidebar-link">Add Report</a>
+            <ul id="report" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar" >
+              <li class="sidebar-item" >
+                <a href="#" class="sidebar-link" >Add Report</a>
               </li>
               <li class="sidebar-item">
-                <a href="#" class="sidebar-link" style="border: 1px solid white;">View Report</a>
+                <a href="#" class="sidebar-link" >View Report</a>
               </li>
             </ul>
           </li>

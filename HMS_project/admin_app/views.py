@@ -35,7 +35,8 @@ import openpyxl
 from reportlab.lib.pagesizes import letter
 from reportlab.platypus import SimpleDocTemplate, Table,TableStyle
 from reportlab.lib import colors
-
+from django.shortcuts import render, get_object_or_404
+from .models import User, UserProfileInfo2
 def writenotification(request):
     return render(request, 'doctor/view_notification.html')
 class NotificationListView(View):
@@ -181,6 +182,13 @@ def dis_user_registration(request):
     return render(request,'admin_dash/user_registration2.html')
 def dis_web_home(request):
     return render(request,'admin_dash/web_home.html')
+def edit_staff(request):
+    return render(request,'admin_dash/edit_staff.html')
+def view_staff(request,user_id):
+    user = get_object_or_404(User, pk=user_id)
+    user_profile_info = get_object_or_404(UserProfileInfo2, user_id=user_id)
+
+    return render(request,'admin_dash/view_staff.html',{'user':user,'user_profile_info':user_profile_info})
 
 
 

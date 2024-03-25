@@ -26,6 +26,8 @@ urlpatterns = [
     path('dis_login2/', views.dis_login2, name='dis_login2'),
     path('save_data/<str:format>/', views.save_data, name='save_data'),
     path('dispaly_users/', views.display_users, name='display_users'),
+    path('edit_staff/', views.edit_staff, name='edit_staff'),
+    path('view_staff/<int:user_id>', views.view_staff, name='view_staff'),
     
 ] 
 
