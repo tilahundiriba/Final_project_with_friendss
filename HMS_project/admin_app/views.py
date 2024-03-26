@@ -148,7 +148,13 @@ def dis_base(request):
     return render(request,'admin_app/base.html')
 # admin dashboard views
 def dis_dash(request):
-    return render(request,'admin_dash/dashboard.html')
+    total_sum = PaymentModel.objects.aggregate(total_sum=Sum('Total'))['total_sum']
+    total_sum = total_sum or 0
+    number_of_patient = PatientRegister.objects.count()
+    number_of_app= Appointment.objects.count()
+    return render(request,'admin_dash/dashboard.html',{'number_patients':number_of_patient,
+                                                   'number_of_app':number_of_app,
+                                                   'total_amount':total_sum})
 def dis_dash_content(request):
     return render(request,'admin_dash/dash_content.html')
 def dis_index(request):
@@ -303,3 +309,10 @@ def save_data(request, format):
     else:
         # Handle other formats or invalid requests here
         return HttpResponse("Invalid format requested")
+    
+
+def deactivate(request, user_id):
+    user_deactive = get_object_or_404(User, id=user_id)
+    user_deactive.is_active = False
+    user_deactive.save()
+    return redirect('display_users')

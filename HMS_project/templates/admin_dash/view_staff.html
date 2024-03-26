@@ -65,24 +65,30 @@
 							<div class="widget-left">
 								<!-- <span class="ti-money"></span> -->
                                 <img src="{{ user_profile_info.profile_pic.url}}" alt="NOOOOOOo"
-                                class="rounded-circle"
+                               
                                 width="300"
-                                height="400">
+                                height="300" >
 							</div>
 							<div class="widget-right">
-								<h4 class="wiget-title">Username{{user.username}}</h4>
-								<span class="numeric color-green">Username:&nbsp;&nbsp;{{user.username}}</span><br><br>
-								<span class="numeric color-green">Email:&nbsp;&nbsp;{{user.email}}</span><br><br>
-								<span class="numeric color-green">Role:&nbsp;&nbsp;{{user_profile_info.role}}</span><br><br>
-								<span class="numeric color-green">Specialization:&nbsp;&nbsp;{{user_profile_info.specialty}}</span><br><br>
+								<h4 class="wiget-title"> <strong style="font-size: large; color: black;">Username:</strong> &nbsp;&nbsp;{{user.username}}</h4>
+								<h4 class="wiget-title"><strong style="font-size: large; color: black;">Email:</strong> &nbsp;&nbsp;{{user.email}}</h4>
+								<h4 class="wiget-title"><strong style="font-size: large; color: black;">Role:</strong> &nbsp;&nbsp;{{user_profile_info.role}}</h4>
+								<h4 class="wiget-title"><strong style="font-size: large; color: black;">Specialization:</strong> &nbsp;&nbsp;{{user_profile_info.specialty}}</h4>
+
                                 {% if user.is_active %}
-								<span class="numeric color-green">Active:&nbsp;&nbsp;Active</span>
+								<h4 class="wiget-title" style="margin-bottom: 40px;"> <strong style="font-size: large; color: black; margin-bottom: 40px;">Active:</strong> &nbsp;&nbsp;Active</h4>
+							
                                 {% else %}
-                                <span class="numeric color-green">Active:&nbsp;&nbsp;Deactive</span>
+								<h4 class="wiget-title" style="margin-bottom: 40px;"> <strong style="font-size: large; color: black; margin-bottom: 40px;">Active:</strong> &nbsp;&nbsp;Deactive</h4>
+                             
                                 {% endif %}
+								
+								<a href="{% url 'deactivate' user.id %}" class="btn btn-outline-primary "><span class="ti-user">DEACTIVATE</span></a> 
 							
 							</div>
+							
 						</div>
+					
 					</div>
 					<!-- /Widget Item -->
 				</div>

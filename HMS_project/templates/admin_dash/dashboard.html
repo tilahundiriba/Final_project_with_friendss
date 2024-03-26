@@ -240,7 +240,7 @@
               <!-- /Breadcrumb -->
               <!-- Main Content -->
               <div class="container home">
-                <div class="row">
+              	<div class="row">
                   <!-- Widget Item -->
                   <div class="col-md-4">
                     <div class="widget-area proclinic-box-shadow color-red">
@@ -249,7 +249,7 @@
                       </div>
                       <div class="widget-right">
                         <h4 class="wiget-title">Patients</h4>
-                        <span class="numeric color-red">348</span>
+                        <span class="numeric color-red">{{number_patients}}</span>
                         <p class="inc-dec mb-0"><span class="ti-angle-up"></span> +20% Increased</p>
                       </div>
                     </div>
@@ -263,8 +263,8 @@
                       </div>
                       <div class="widget-right">
                         <h4 class="wiget-title">Appointments</h4>
-                        <span class="numeric color-green">1585</span>
-                        <p class="inc-dec mb-0"><span class="ti-angle-down"></span> -15% Decreased</p>
+                        <span class="numeric color-green">{{number_of_app}}</span>
+                        <p class="inc-dec mb-0"><span class="ti-angle-down"></span> +15% Increased</p>
                       </div>
                     </div>
                   </div>
@@ -277,13 +277,14 @@
                       </div>
                       <div class="widget-right">
                         <h4 class="wiget-title">Total Revenue</h4>
-                        <span class="numeric color-yellow">$7300</span>
+                        <span class="numeric color-yellow">${{total_amount}}</span>
                         <p class="inc-dec mb-0"><span class="ti-angle-up"></span> +10% Increased</p>
                       </div>
                     </div>
                   </div>
                   <!-- /Widget Item -->
                 </div>
+        
         
                 <div class="row">
                   <!-- Widget Item -->

@@ -8,17 +8,7 @@ from django.core.cache import cache
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-# def upload_profile_pic(request, user_id):
-#     if request.method == 'POST' and request.FILES.get('profile_pic'):
-#         profile_pic = request.FILES['profile_pic']
-#         # Get the user object using the user_id
-#         user_profile = get_object_or_404(UserProfileInfo2, user_id=user_id)
-#         # Update the profile picture for the user
-#         user_profile.profile_pic = profile_pic
-#         user_profile.save()
-#         return HttpResponse('Profile picture uploaded successfully!')
-#     else:
-#         return render(request, 'doctor/profile.html',{'user_id': user_id})
+
 @login_required
 def profile(request):
     user = request.user
