@@ -5,10 +5,12 @@ class PatientHistory(models.Model):
     Patient_ID=models.ForeignKey(PatientRegister, on_delete=models.CASCADE)
     Date=models.DateField()
     Sympthom=models.CharField(max_length=100)
+    History_No=models.AutoField(primary_key=True)
     DiseaseName=models.CharField(max_length=100)
     Nurse_ID=models.ForeignKey(User,on_delete=models.CASCADE)
     Doctor_ID=models.ForeignKey(User,on_delete=models.CASCADE,related_name='nurse_history_set',related_query_name='doctor_history')
-
+    def __str__(self):
+        return f'{self.Patient_ID,self.Nurse_ID,self.Doctor_ID,self.DiseaseName}'
 
 class Appointment(models.Model):
     PatientID=models.ForeignKey(PatientRegister, on_delete=models.CASCADE)

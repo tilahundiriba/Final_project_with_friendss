@@ -7,7 +7,11 @@ urlpatterns = [
 
     path('dis_dr_dash/', views.dis_dr_dash, name='dis_dr_dash'),
     path('dis_dr_dash_content/', views.dis_dr_dash_content, name='dis_dr_dash_content'),
-    path('patient_history/', views.dis_patient_history, name='patient_history'),
+
+    path('add_history/', views.add_history, name='add_history'),
+    path('dis_history/', views.dis_history, name='dis_history'),
+    path('edit_history/<int:history_no>/', views.edit_history, name='edit_history'),
+
     path('about-appointment/', views.about_appointment, name='about-appointment'),
     path('add-appointment/', views.create_appointment, name='add-appointment'),
     path('edit-appointment/', views.edit_appointment, name='edit-appointment'),

@@ -11,7 +11,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	{% block 'title' %}
-	<title>Add prescriptions</title>
+	<title>Edit Patient History</title>
 	{% endblock %}
 	<!-- Fav  Icon Link -->
 
@@ -125,7 +125,7 @@
 				<div class="container mt-0">
 					<div class="row breadcrumb-bar">
 						<div class="col-md-6">
-							<h3 class="block-title">Patient History</h3>
+							<h3 class="block-title">Edit Patient History</h3>
 						</div>
 						<div class="col-md-6">
 							<ol class="breadcrumb">
@@ -135,7 +135,7 @@
 									</a>
 								</li>
 								<li class="breadcrumb-item active">History</li>
-								<li class="breadcrumb-item ">Patient History</li>
+								<li class="breadcrumb-item ">Edit Patient History</li>
 							</ol>
 						</div>
 					</div>
@@ -150,56 +150,69 @@
 					<!-- Widget Item -->
 					<div class="col-md-12">
 						<div class="widget-area-2 proclinic-box-shadow">
-							<h3 class="widget-title">Patient History</h3>
-							<form action="{% url 'add_perscription' %}" method="post">
+							<h3 class="widget-title">Edit Patient History</h3>
+							<form action="{% url 'add_history' %}" method="post">
 								{% csrf_token %}
 								<div class="form-row">
 									<div class="form-group col-md-6">
 										<label for="patient_id">Patient ID</label>
-										<input type="text" class="form-control" placeholder="Patient id" id="patient_id" name="patient_id">
+										<input type="text" class="form-control" placeholder="Patient id" id="patient_id" value="{{ history.Patient_ID}}" name="patient_id">
 									</div>
 									<div class="form-group col-md-6">
-										<label for="hisno">History Number</label>
-										<input type="text" placeholder="history number" class="form-control" id="hisno" name="hisno">
+										<label for="date">Date</label>
+										<input type="date" class="form-control" value="{{ history.Date|date:'Y-m-d' }}" id="date" name="date">
 									</div>
-									<!-- <div class="form-group col-md-6">
-										<label for="age">Patient ID</label>
-										<input type="text" placeholder="Patient ID" class="form-control" id="age" name="patient_id">
-									</div> -->
-									
-									
-							
-									<div class="form-group col-md-12">
+									<div class="form-group col-md-6">
 										<label for="symptom">Symptoms</label>
-										<textarea placeholder="symptom" class="form-control" id="symptom" rows="3" name="symptom"></textarea>
+										<textarea placeholder="symptom" class="form-control" id="symptom" rows="3" name="symptom">{{ history.Sympthom }}</textarea>
 									</div>
-                                    <div class="form-group col-md-6">
+									<div class="form-group col-md-6">
 										<label for="disease">Disease</label>
-										<input type="text" placeholder="disease" class="form-control" id="disease" name="disease">
+										<!-- <input type="text" placeholder="disease" class="form-control" id="disease" name="disease"> -->
+										<textarea placeholder="disease" class="form-control" id="disease" rows="3" name="disease">{{ history.DiseaseName }}</textarea>
+									</div>
+								
+								
+								
+									<div class="form-group col-md-6">
+										<label for="nr_name">Nr. Name</label>
+
+										<select class="form-control" id="nr_name" name="nr_name">
+											<option>Select Name</option>
+											{% for user in users %}
+											<option value="{{user.username}}">{{user.username}}</option>
+											{% endfor %}
+										</select>
 									</div>
                                     <div class="form-group col-md-6">
-										<label for="docid">Doctor ID</label>
-										<input type="text" placeholder="doctor id" class="form-control" id="docid" name="docid">
+										<label for="dr_name">Dr. Name</label>
+										<select class="form-control" id="dr_name" name="dr_name">
+											<option>Select Name</option>
+											{% for user in users %}
+											<option value="{{user.username}}">{{user.username}}</option>
+											{% endfor %}
+										</select>
+										
 									</div>
 
-									<div class="form-group col-md-6 mb-3">
-										<button type="submit" class="btn btn-primary btn-lg">Submit</button>
-									</div>
+									
+								</div>
+								<div class="form-group col-md-6 mb-3">
+									<button type="submit" class="btn btn-primary btn-lg">Submit</button>
 								</div>
 							</form>
 							<!-- Alerts-->
+							{% if Editing_history %}
 							<div class="alert alert-success alert-dismissible fade show" role="alert">
-								<strong>Successfully Done!</strong> Please add payment now
+								
+								<strong>Editng History Successfully Done!</strong> 
 								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 									<span aria-hidden="true">×</span>
 								</button>
+							
 							</div>
-							<div class="alert alert-warning alert-dismissible fade show" role="alert">
-								<strong>Holy guacamole!</strong> You should check in on some of those fields below.
-								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-									<span aria-hidden="true">×</span>
-								</button>
-							</div>
+							{% endif %}
+						
 							<!-- /Alerts-->
 						</div>
 					</div>

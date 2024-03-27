@@ -135,51 +135,10 @@ def receptionist_dash(request):
     return render(request,'receptionist_dash/receptionist_dash.html')
 def receptionist_dash_content(request):
     return render(request,'receptionist_dash/dash_content.html')
-# def edit_patient(request):
-    # if 'update' in request.POST:
-   # Handle deletion of selected employees
-            #  patient_delete = request.POST.getlist('patient_delete')
-            #  try:
-                #  patient = PatientRegister.objects.filter(patient_id__in=patient_delete)
-                #  first_name = request.POST.get('first_name')
-                #  middle_name = request.POST.get('middle_name')
-                #  last_name = request.POST.get('last_name')
-                #  gender = request.POST.get('gender')
-                #  birth_date = request.POST.get('birth_date')
-                #  age = request.POST.get('age')
-                #  phone_number = request.POST.get('phone_number')
-                #  email = request.POST.get('email')
-                #  country = request.POST.get('country')
-                #  city = request.POST.get('city')
-                #  region = request.POST.get('region')
-                #  kebele = request.POST.get('kebele')
-                #  doctor_id = request.POST.get('doctor_id')
-                #  patient = PatientRegister.objects.create(
-                            # first_name=first_name,
-                            # middle_name=middle_name,
-                            # last_name=last_name,
-                            # gender=gender,
-                            # birth_date=birth_date,
-                            # age=age,
-                            # phone_number=phone_number,
-                            # email=email,
-                            # country=country,
-                            # city=city,
-                            # region=region,
-                            # kebele=kebele,
-                            # staff=doctor_id,)
-                            #   
-                #  patient.save()   
-# 
-                #  return redirect('dis_patient')
-            #  except PatientRegister.DoesNotExist:
-                #  pass
-    # 
-    # return redirect('dis_patient')
 def edit_patient(request,patient_id):
      try:
        patientid = get_object_or_404(PatientRegister, pk=patient_id)
- #   std = Student.objects.get(pk=roll)
+
        return render(request,'receptionist_dash/edit-patient.html',{'patientid':patientid})
      except PatientRegister.DoesNotExist:
        return render(request,'receptionist_dash/edit-patient.html',{'message':'patient  not found'})
@@ -215,25 +174,3 @@ def update_patient(request,patient_id):
    patient.staff=doctor_id
    patient.save()
    return redirect('dis_patient')
-# def update(request,roll):
-    # try:
-        # std = get_object_or_404(Student, pk=roll)
-      #std = Student.objects.get(pk=roll)
-        # return render(request,'secondapp/update.html',{'std':std})
-    # except Student.DoesNotExist:
-        #   return render(request,'secondapp/update.html',{'message':'Student not found'})
-# def do_update(request ,roll):
-    # std_roll = request.POST.get('roll')
-    # std_name = request.POST.get('name')
-    # std_email = request.POST.get('email')
-    # std_address = request.POST.get('address')
-    # std_phone = request.POST.get('phone')
-# 
-    # std = Student.objects.get(pk=roll)
-    # std.roll = std_roll
-    # std.name = std_name
-    # std.email = std_email
-    # std.address = std_address
-    # std.phone = std_phone
-    # std.save()
-    # return redirect('home')

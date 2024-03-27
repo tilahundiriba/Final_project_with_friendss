@@ -1,0 +1,245 @@
+{% extends 'doctor/dr_dash.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.konnectplugins.com/proclinic/Horizontal/add-patient.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 24 Jan 2022 10:42:01 GMT -->
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	{% block 'title' %}
+	<title>Add Patient History</title>
+	{% endblock %}
+	<!-- Fav  Icon Link -->
+
+</head>
+
+<body>
+	<!-- Pre Loader -->
+	<div class="loading">
+		<div class="spinner">
+			<div class="double-bounce1"></div>
+			<div class="double-bounce2"></div>
+		</div>
+	</div>
+	<!--/Pre Loader -->
+	<!-- Color Changer -->
+
+	<!-- /Color Changer -->
+	<div class="wrapper">
+		<!-- Page Content -->
+		<div id="content">
+				<!-- Top Navigation -->
+		
+				<!-- /Menu -->
+				<div class="container menu-nav" id="container-min">
+					<nav class="navbar navbar-expand-lg proclinic-bg text-white">
+						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+						 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+							<span class="ti-menu text-white"></span>
+						</button>
+				
+						<div class="collapse navbar-collapse" id="navbarSupportedContent">
+							<ul class="navbar-nav mr-auto">
+						
+								<li class="nav-item dropdown">
+									<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+										aria-haspopup="true" aria-expanded="false"><span class="ti-wheelchair"></span>
+										Patients</a>
+									<div class="dropdown-menu">
+										<a class="dropdown-item" href="add-patient.html">add History</a>
+										<a class="dropdown-item" href="patients.html">View History</a>
+								
+									</div>
+								</li>
+								<li class="nav-item dropdown">
+									<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+										aria-haspopup="true" aria-expanded="false"><span class="ti-user"></span> Doctors</a>
+									<div class="dropdown-menu">
+										<a class="dropdown-item" href="{% url 'dis_dr_dash' %}">Home</a>
+										<a class="dropdown-item" href="{% url 'dis_dr_dash_content' %}">Dashboard</a>
+										
+									</div>
+								</li>
+								<li class="nav-item dropdown active">
+									<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+										aria-haspopup="true" aria-expanded="false"><span class="ti-pencil-alt"></span>
+										Appointments</a>
+									<div class="dropdown-menu">
+										<a class="dropdown-item" href="{% url 'add-appointment' %}">Add Appointment</a>
+										<a class="dropdown-item" href="{% url 'dis-appointment' %}">All Appointments</a>
+										<a class="dropdown-item" href="{% url 'about-appointment' %}">Appointment Details</a>
+										<a class="dropdown-item" href="{% url 'edit-appointment' %}">Edit Appointment</a>
+									</div>
+								</li>
+								 <li class="nav-item dropdown">
+									<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+										aria-haspopup="true" aria-expanded="false"><span class="ti-money"></span>
+										Prescriptions</a>
+									<div class="dropdown-menu">
+										<a class="dropdown-item" href="{% url 'add-appointment' %}">Add Prescriptions</a>
+										<a class="dropdown-item" href="{% url 'dis-appointment' %}">All Prescriptions</a>
+										<a class="dropdown-item" href="{% url 'edit-appointment' %}">Edit Prescriptions</a>
+										<a class="dropdown-item" href="{% url 'about-appointment' %}">About Prescriptions</a>
+									</div>
+								</li>
+								<!--<li class="nav-item dropdown">
+									<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+										aria-haspopup="true" aria-expanded="false"><span class="ti-key"></span> Room
+										Allotments</a>
+									<div class="dropdown-menu">
+										<a class="dropdown-item" href="add-room.html">Add Room Allotment</a>
+										<a class="dropdown-item" href="rooms.html">All Rooms</a>
+										<a class="dropdown-item" href="edit-room.html">Edit Room Allotment</a>
+									</div>
+								</li> -->
+								<!-- <li class="nav-item dropdown">
+									<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+										aria-haspopup="true" aria-expanded="false"><span class="ti-layout-tab"></span> UI
+										Kit</a>
+									<div class="dropdown-menu">
+										<a class="dropdown-item" href="typography.html">Typography</a>
+										<a class="dropdown-item" href="buttons.html">Buttons</a>
+								
+									</div>
+								</li> -->
+								<!-- <li class="nav-item dropdown">
+									<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+										aria-haspopup="true" aria-expanded="false"><span class="ti-file"></span> Other
+										Pages</a>
+									<div class="dropdown-menu">
+										<a class="dropdown-item" href="login.html">Login </a>
+										<a class="dropdown-item" href="sign-up.html">Sign Up</a>
+									
+									</div>
+								</li> -->
+							</ul>
+						</div>
+					</nav>
+				</div>
+				<!-- Breadcrumb -->
+				<!-- Page Title -->
+				<div class="container mt-0">
+					<div class="row breadcrumb-bar">
+						<div class="col-md-6">
+							<h3 class="block-title">Patient History</h3>
+						</div>
+						<div class="col-md-6">
+							<ol class="breadcrumb">
+								<li class="breadcrumb-item">
+									<a href="index.html">
+										<span class="ti-home"></span>
+									</a>
+								</li>
+								<li class="breadcrumb-item active">History</li>
+								<li class="breadcrumb-item ">Patient History</li>
+							</ol>
+						</div>
+					</div>
+				</div>
+			<!-- /Page Title -->
+
+			<!-- /Breadcrumb -->
+			<!-- Main Content -->
+			<div class="container">
+
+				<div class="row">
+					<!-- Widget Item -->
+					<div class="col-md-12">
+						<div class="widget-area-2 proclinic-box-shadow">
+							<h3 class="widget-title">Patient History</h3>
+							<form action="{% url 'add_history' %}" method="post">
+								{% csrf_token %}
+								<div class="form-row">
+									<div class="form-group col-md-6">
+										<label for="patient_id">Patient ID</label>
+										<input type="text" class="form-control" placeholder="Patient id" id="patient_id" name="patient_id">
+									</div>
+									<div class="form-group col-md-6">
+										<label for="date">Date</label>
+										<input type="date" class="form-control" id="date" name="date">
+									</div>
+									<div class="form-group col-md-6">
+										<label for="symptom">Symptoms</label>
+										<textarea placeholder="symptom" class="form-control" id="symptom" rows="3" name="symptom"></textarea>
+									</div>
+									<div class="form-group col-md-6">
+										<label for="disease">Disease</label>
+										<!-- <input type="text" placeholder="disease" class="form-control" id="disease" name="disease"> -->
+										<textarea placeholder="disease" class="form-control" id="disease" rows="3" name="disease"></textarea>
+									</div>
+								
+								
+								
+									<div class="form-group col-md-6">
+										<label for="nr_name">Nr. Name</label>
+
+										<select class="form-control" id="nr_name" name="nr_name">
+											<option>Select Name</option>
+											{% for user in users %}
+											<option value="{{user.username}}">{{user.username}}</option>
+											{% endfor %}
+										</select>
+									</div>
+                                    <div class="form-group col-md-6">
+										<label for="dr_name">Dr. Name</label>
+										<select class="form-control" id="dr_name" name="dr_name">
+											<option>Select Name</option>
+											{% for user in users %}
+											<option value="{{user.username}}">{{user.username}}</option>
+											{% endfor %}
+										</select>
+										
+									</div>
+
+									
+								</div>
+								<div class="form-group col-md-6 mb-3">
+									<button type="submit" class="btn btn-primary btn-lg">Submit</button>
+								</div>
+							</form>
+							<!-- Alerts-->
+							{% if added_history %}
+							<div class="alert alert-success alert-dismissible fade show" role="alert">
+								
+								<strong>Adding History Successfully Done!</strong> 
+								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+									<span aria-hidden="true">×</span>
+								</button>
+							
+							</div>
+							{% endif %}
+						
+							<!-- /Alerts-->
+						</div>
+					</div>
+					<!-- /Widget Item -->
+				</div>
+			</div>
+			<!-- /Main Content -->
+			<!--Copy Rights-->
+			<div class="container">
+				<div class="d-sm-flex justify-content-center">
+				  <span class="text-muted text-center d-block d-sm-inline-block">Copyright © 2018 <a href="http://www.konnectplugins.com/" target="_blank">konnectcode</a>. All rights reserved.</span>
+				</div>
+			</div>
+			<!-- /Copy Rights-->
+		</div>
+		<!-- /Page Content -->
+	</div>
+	<!-- Back to Top -->
+	<a id="back-to-top" href="#" class="back-to-top">
+		<span class="ti-angle-up"></span>
+	</a>
+	<!-- /Back to Top -->
+
+
+</body>
+
+
+<!-- Mirrored from www.konnectplugins.com/proclinic/Horizontal/add-patient.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 24 Jan 2022 10:42:01 GMT -->
+</html>
+{% endblock %}

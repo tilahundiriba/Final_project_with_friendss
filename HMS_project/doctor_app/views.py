@@ -1,6 +1,6 @@
 
 from django.shortcuts import render
-from .models import  Appointment,Prescription,Laboratory
+from .models import  Appointment,Prescription,Laboratory,PatientHistory
 from receptionist_app.models import PatientRegister
 from django.shortcuts import get_object_or_404
 from admin_app.models import UserProfileInfo2
@@ -8,6 +8,7 @@ from django.core.cache import cache
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect
 
 @login_required
 def profile(request):
@@ -147,7 +148,7 @@ def perscription(request):
     prescription= Prescription.objects.all()
     return render(request,'doctor/perscriptions.html',{'prescriptions':prescription})
 def about_perscription(request):
-    return render(request,'doctor/about-perscription.html')
+    return render(request,'doctor/about-percription.html')
 
 def dis_dr_dash_content(request):
     return render(request,'doctor/dash_content.html')
@@ -159,11 +160,85 @@ def dis_appointment(request):
     return render(request,'doctor/appointments.html',{'appointment':appointment})
 def about_appointment(request):
     return render(request,'doctor/about-appointment.html')
-def dis_patient_history(request):
-    return render(request,'doctor/patient_history2.html')
+def dis_history(request):
+    histories = PatientHistory.objects.all()
+    return render(request,'doctor/histories.html',{'histories':histories})
+def add_history(request):
+    users= User.objects.all()
+    added_history=False
+    if request.method == 'POST':
+        patient_id = request.POST.get('patient_id')
+        date = request.POST.get('date')
+        syptoms = request.POST.get('symptom')
+        disease = request.POST.get('disease')
+        doctor_name = request.POST.get('dr_name')
+        nurse_name = request.POST.get('nr_name')
+ 
+        # Create an instance of Appointment model and save it
+        try:
+            patient = get_object_or_404( PatientRegister,patient_id=patient_id)
+            doctor = get_object_or_404(User, username=doctor_name)
+            nurse = get_object_or_404(User, username=nurse_name)
+            history = PatientHistory(
+                Patient_ID=patient,
+                Sympthom=syptoms,
+                Date=date,
+                Doctor_ID=doctor,
+                DiseaseName=disease,
+                Nurse_ID = nurse
 
-from django.shortcuts import render, redirect
-from .models import Appointment
+                # Assign values to other fields similarly
+            )
+            history.save()
+            added_history=True
+        except PatientRegister.DoesNotExist:
+            # Handle the case where the patient is not found
+            # You can add appropriate error handling or redirect to an error page
+            pass
+        except UserProfileInfo2.DoesNotExist:
+            # Handle the case where the doctor is not found
+            # You can add appropriate error handling or redirect to an error page
+            pass
+        # return redirect('add-appointment') 
+        return render(request,'doctor/add_history.html',{'added_history':added_history,'users':users})
+    return render(request,'doctor/add_history.html',{'users':users})
+
+def edit_history(request,history_no):
+    users= User.objects.all()
+    editing_history=False
+    history = PatientHistory.objects.get(pk=history_no)
+    if request.method == 'POST':
+        patient_id = request.POST.get('patient_id')
+        date = request.POST.get('date')
+        syptoms = request.POST.get('symptom')
+        disease = request.POST.get('disease')
+        doctor_name = request.POST.get('dr_name')
+        nurse_name = request.POST.get('nr_name')
+ 
+        # Create an instance of Appointment model and save it
+        try:
+            doctor = get_object_or_404(User, username=doctor_name)
+            nurse = get_object_or_404(User, username=nurse_name)
+           
+            history.Patient_ID=patient_id
+            history.Sympthom=syptoms
+            history.DiseaseName=disease
+            history.Nurse_ID=nurse
+            history.Doctor_ID=doctor
+            history.Date=date
+            history.save()
+            editing_history=True
+        except PatientRegister.DoesNotExist:
+            # Handle the case where the patient is not found
+            # You can add appropriate error handling or redirect to an error page
+            pass
+        except UserProfileInfo2.DoesNotExist:
+            # Handle the case where the doctor is not found
+            # You can add appropriate error handling or redirect to an error page
+            pass
+        # return redirect('add-appointment') 
+        return render(request,'doctor/edit_history.html',{'editing_history':editing_history,'users':users})
+    return render(request,'doctor/edit_history.html',{'users':users,'history':history})
 
 def create_appointment(request):
     user=User.objects.all()
