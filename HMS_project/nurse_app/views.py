@@ -31,6 +31,7 @@ def profile_update(request, user_id):
 def dis_medication(request):
     return render(request,'nurse_dash/medication2.html')
 def add_vital_info(request):
+    users= User.objects.all()
     registered=False
     if request.method == 'POST':
         patient_id = request.POST.get('patient_id')
@@ -45,10 +46,10 @@ def add_vital_info(request):
         weight = request.POST.get('weight')
         height = request.POST.get('height')
         bloodglu = request.POST.get('bloodglu')
-        nurse_id = request.POST.get('nurseid')
+        nurse_name = request.POST.get('nurseid')
         remark = request.POST.get('remark')
         patient = get_object_or_404( PatientRegister,patient_id=patient_id)
-        nurse_name = get_object_or_404( User,username=nurse_id)
+        nurse_name = get_object_or_404( User,username=nurse_name)
         vital = VitalInformation(
             Patient_id=patient,
             Vital_info_no=vital_no,
@@ -68,7 +69,7 @@ def add_vital_info(request):
         vital.save()
         registered=True
         return render(request,'nurse_dash/add-vital_info.html',{'registered':registered}) # Redirect to a success page or another URL
-    return render(request,'nurse_dash/add-vital_info.html')
+    return render(request,'nurse_dash/add-vital_info.html',{'users':users})
 def add_room(request):
     registered=False
     if request.method == 'POST':
@@ -76,13 +77,13 @@ def add_room(request):
         room_no = request.POST.get('room_no')
         bed_no = request.POST.get('bed_no')
         status = request.POST.get('status')
-        appointment = RoomInformation(
+        room_info = RoomInformation(
             Room_block=room_block,
             Room_no=room_no,
             Bed_no=bed_no,
             Status=status,
         )
-        appointment.save()
+        room_info.save()
         registered=True
         return render(request,'nurse_dash/add-room.html',{'registered':registered})  # Redirect to a success page or another URL
     return render(request,'nurse_dash/add-room.html')

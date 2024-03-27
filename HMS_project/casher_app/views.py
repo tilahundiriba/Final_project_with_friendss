@@ -4,7 +4,7 @@ from django.shortcuts import get_object_or_404
 from admin_app.models import UserProfileInfo2
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-
+from receptionist_app.models import PatientRegister
 
 @login_required
 def profile(request):
@@ -34,9 +34,10 @@ def casher_dash_content(request):
 def dis_bill(request):
     return render(request,'casher_dash/bill.html')
 def add_payment(request):
+    payed=False
     if request.method == 'POST':
         patient_id = request.POST.get('patient_id')
-        casher_id = request.POST.get('cashier_name')
+        casher_name = request.POST.get('cashier_name')
         added_date = request.POST.get('adminssion_date')
         pay_no = request.POST.get('payment_no')
         f_payment = request.POST.get('food_payment')
@@ -56,22 +57,34 @@ def add_payment(request):
         card=c_payment + c_p_amount
         lab=l_payment + l_p_amount
         other= other_payment + other_p_amount
-        payment = PaymentModel.objects.create(
-            patient_id=patient_id,
-            Pay_number=pay_no,
-            Admit_date=added_date,
-            Lab_payment=lab,
-            Food_payment=food,
-            Service_payment=other,
-            Card_payment=card,
-            Bed_payment=bed,
-            Pay_method=payemnt_method,
-            Total=total,
-            Casher_id=casher_id
-        )
-        return redirect("casher_dash")
+        try:
+            patient = get_object_or_404( PatientRegister,patient_id=patient_id)
+            casher = get_object_or_404(User, username=casher_name)
+            payment = PaymentModel.objects.create(
+                patient_id=patient,
+                Pay_number=pay_no,
+                Admit_date=added_date,
+                Lab_payment=lab,
+                Food_payment=food,
+                Service_payment=other,
+                Card_payment=card,
+                Bed_payment=bed,
+                Pay_method=payemnt_method,
+                Total=total,
+                Casher_id=casher
+            )
+        except PatientRegister.DoesNotExist:
+            # Handle the case where the patient is not found
+            # You can add appropriate error handling or redirect to an error page
+            pass
+        except UserProfileInfo2.DoesNotExist:
+            # Handle the case where the doctor is not found
+            # You can add appropriate error handling or redirect to an error page
+            pass
+        payed=True
+        return redirect("add-payment")
     payment = ServicePayment.objects.all()
-    return render(request,'casher_dash/add-payment.html',{'payments':payment})
+    return render(request,'casher_dash/add-payment.html',{'payments':payment,'payed':payed})
 def about_payment(request):
     return render(request,'casher_dash/about-payment.html')
 def dis_payment(request):

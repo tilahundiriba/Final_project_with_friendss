@@ -120,7 +120,13 @@
 									</div>
 									<div class="form-group col-md-6">
 										<label for="nurseid">Nursing ID</label>
-										<input type="text" placeholder="nursing id" class="form-control" id="nurseid" name="nurseid">
+										<select class="form-control" id="nurseid" name="nurseid">
+											<option>Select Name</option>
+											{% for user in users %}
+											<option value="{{user.username}}">{{user.username}}</option>
+											{% endfor %}
+										</select>
+										<!-- <input type="text" placeholder="nursing id" class="form-control" id="nurseid" name="nurseid"> -->
 									</div>
 									<div class="form-group col-md-6">
 										<label for="exampleFormControlTextarea1">Remark</label>

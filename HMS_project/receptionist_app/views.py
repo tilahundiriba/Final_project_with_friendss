@@ -53,10 +53,10 @@ def add_patient(request):
         city = request.POST.get('city')
         region = request.POST.get('region')
         kebele = request.POST.get('kebele')
-        doctor_id = request.POST.get('doctor_id')
+        recep_name = request.POST.get('doctor_id')
         generated_id = 'SH' + get_random_string(length=6, allowed_chars='1234567890')
 
-            
+        recept = get_object_or_404(User, username=recep_name)    
         PatientRegister.objects.create(
         patient_id=generated_id,
         first_name=first_name,
@@ -71,7 +71,7 @@ def add_patient(request):
         city=city,
         region=region,
         kebele=kebele,
-        receptinist_id=doctor_id,
+        receptinist_id=recept,
                 )
           
         patient_count = cache.get('patient_count', 0)

@@ -37,32 +37,42 @@ def dis_labtest(request):
     labs= Laboratory.objects.all()
     return render(request,'doctor/labtests.html',{'labs':labs})
 def add_lab(request):
+    users=User.objects.all()
     registered=False
     if request.method == 'POST':
         patientid = request.POST.get('patient_id')
         lab_number = request.POST.get('lab_no')
         admit_date = request.POST.get('admited_date')
         lab_type = request.POST.get('lab_type')
-        doctor_id = request.POST.get('dr_name')
+        doctor_name = request.POST.get('dr_name')
         # Create an instance of Appointment model and save it
-        patient = get_object_or_404( PatientRegister,patient_id=patientid)
-        doctor = get_object_or_404(UserProfileInfo2, user_id=doctor_id)
-        lab = Laboratory(
-            PatientID=patient,
-            Admit_date=admit_date,
-            Lab_number=lab_number,
-            Doctor_ID=doctor,
-            Lab_type=lab_type,
-            # Assign values to other fields similarly
-        )
-        lab.save()
-        request_count = cache.get('request_count', 0)
-        request_count += 1
-        cache.set('request_count', request_count)
-        messages.success(request, 'Laboratory test sent successfully.') 
-        registered=True
+        try:
+            patient = get_object_or_404( PatientRegister,patient_id=patientid)
+            doctor = get_object_or_404(User, username=doctor_name)
+            lab = Laboratory(
+                PatientID=patient,
+                Admit_date=admit_date,
+                Lab_number=lab_number,
+                Doctor_ID=doctor,
+                Lab_type=lab_type,
+                # Assign values to other fields similarly
+            )
+            lab.save()
+            request_count = cache.get('request_count', 0)
+            request_count += 1
+            cache.set('request_count', request_count)
+            messages.success(request, 'Laboratory test sent successfully.') 
+            registered=True
+        except PatientRegister.DoesNotExist:
+            # Handle the case where the patient is not found
+            # You can add appropriate error handling or redirect to an error page
+            pass
+        except UserProfileInfo2.DoesNotExist:
+            # Handle the case where the doctor is not found
+            # You can add appropriate error handling or redirect to an error page
+            pass
         return render(request,'doctor/add_lab.html',{'register':registered})
-    return render(request,'doctor/add_lab.html')
+    return render(request,'doctor/add_lab.html',{'users':users})
 # views for getting untested lab request and render it
 def check_request(request):
     request_count = cache.get('request_count', 0)
@@ -95,32 +105,42 @@ def checked_payment_request(request, patient_id):
     return redirect('check_payment_request')
 # view for tadding prescriptions 
 def add_perscription(request):
+    users=User.objects.all()
     registered=False
     if request.method == 'POST':
         patientid = request.POST.get('patient_id')
         prec_number = request.POST.get('pec_no')
         prec_date = request.POST.get('pres_date')
         p_name = request.POST.get('name')
-        doctor_id = request.POST.get('dr_name')
+        doctor_name = request.POST.get('dr_name')
         prec = request.POST.get('prescription')
         # Create an instance of Appointment model and save it
-        patient = get_object_or_404( PatientRegister,patient_id=patientid)
-        doctor = get_object_or_404(UserProfileInfo2, user_id=doctor_id)
-        appointment = Prescription(
-            PatientID=patient,
-            Prec_date=prec_date,
-            Prec_number=prec_number,
-            Doctor_ID=doctor,
-            Patient_full_name=p_name,
-            Precscriptions=prec,
+        try:
+            patient = get_object_or_404( PatientRegister,patient_id=patientid)
+            doctor = get_object_or_404(User, username=doctor_name)
+            presc = Prescription(
+                PatientID=patient,
+                Prec_date=prec_date,
+                Prec_number=prec_number,
+                Doctor_ID=doctor,
+                Patient_full_name=p_name,
+                Precscriptions=prec,
 
-            # Assign values to other fields similarly
-        )
-        appointment.save()
-        registered=True
+                # Assign values to other fields similarly
+            )
+            presc.save()
+            registered=True
+        except PatientRegister.DoesNotExist:
+            # Handle the case where the patient is not found
+            # You can add appropriate error handling or redirect to an error page
+            pass
+        except UserProfileInfo2.DoesNotExist:
+            # Handle the case where the doctor is not found
+            # You can add appropriate error handling or redirect to an error page
+            pass
         # return redirect('add-appointment') 
         return render(request,'doctor/add-perscription.html',{'register':registered})
-    return render(request,'doctor/add-perscription.html')
+    return render(request,'doctor/add-perscription.html',{'users':users})
 def edit_perscription(request):
     return render(request,'doctor/edit-perscription.html')
 def perscription(request):
@@ -146,35 +166,44 @@ from django.shortcuts import render, redirect
 from .models import Appointment
 
 def create_appointment(request):
+    user=User.objects.all()
     registered=False
     if request.method == 'POST':
         patientid = request.POST.get('patient_id')
         app_number = request.POST.get('app_no')
         app_date = request.POST.get('app_date')
         time_slot = request.POST.get('time_slot')
-        doctor_id = request.POST.get('dr_name')
+        doctor_name = request.POST.get('dr_name')
         app_reseon = request.POST.get('problem')
         app_status = request.POST.get('status')
      
         # Extract other fields similarly
-        
+        try:
         # Create an instance of Appointment model and save it
-        patient = get_object_or_404( PatientRegister,patient_id=patientid)
-        doctor = get_object_or_404(UserProfileInfo2, user_id=doctor_id)
-        appointment = Appointment(
-            PatientID=patient,
-            App_number=app_number,
-            App_date=app_date,
-            Time_slot=time_slot,
-            Doctor_ID=doctor,
-            App_reseon=app_reseon,
-            App_status=app_status,
+            patient = get_object_or_404( PatientRegister,patient_id=patientid)
+            doctor = get_object_or_404(User, username=doctor_name)
+            appointment = Appointment(
+                PatientID=patient,
+                App_number=app_number,
+                App_date=app_date,
+                Time_slot=time_slot,
+                Doctor_ID=doctor,
+                App_reseon=app_reseon,
+                App_status=app_status,
 
-            # Assign values to other fields similarly
-        )
-        appointment.save()
-        registered=True
+                # Assign values to other fields similarly
+            )
+            appointment.save()
+            registered=True
+        except PatientRegister.DoesNotExist:
+            # Handle the case where the patient is not found
+            # You can add appropriate error handling or redirect to an error page
+            pass
+        except UserProfileInfo2.DoesNotExist:
+            # Handle the case where the doctor is not found
+            # You can add appropriate error handling or redirect to an error page
+            pass
         return render(request, 'doctor/add-appointment.html',{'registered':registered}) # Redirect to a success page or another URL
 
-    return render(request, 'doctor/add-appointment.html')
+    return render(request, 'doctor/add-appointment.html',{'users':user})
 
