@@ -37,8 +37,8 @@ from reportlab.platypus import SimpleDocTemplate, Table,TableStyle
 from reportlab.lib import colors
 from django.shortcuts import render, get_object_or_404
 from .models import User, UserProfileInfo2
-def writenotification(request):
-    return render(request, 'doctor/view_notification.html')
+
+
 class NotificationListView(View):
     def get(self, request, *args, **kwargs):
         # Retrieve all notifications from the database
@@ -53,6 +53,12 @@ class NotificationListView(View):
         
         # Return the notification messages as a JSON response
         return JsonResponse(notification_messages, safe=False)
+def poster(request):
+    if request.method=='POST':
+        message=request.POST.get('message')
+        notification=Notification(message=message)
+        notification.save()
+    return render(request,'admin_dash/write-notifications.html')
 
 # @login_required
 def login_view(request):

@@ -3,9 +3,11 @@ from receptionist_app.views import check_patient,check_patient_data
 from . import views
 from django.conf import settings
 from django.conf.urls.static import static
+from admin_app.views import NotificationListView
 urlpatterns = [
 
     path('dis_dr_dash/', views.dis_dr_dash, name='dis_dr_dash'),
+    path('notifications/', NotificationListView.as_view(), name='notifications'),
     path('dis_dr_dash_content/', views.dis_dr_dash_content, name='dis_dr_dash_content'),
 
     path('add_history/', views.add_history, name='add_history'),

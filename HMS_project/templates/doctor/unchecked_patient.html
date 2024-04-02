@@ -43,9 +43,11 @@
       {% endfor %}
       {% endif %}
       <!-- <p class="wiget-title color-yellow "> Remaning unchecked patients are : {{ patient_count }}</p> -->
-
+  
       {% for patient in patients %}
-
+    
+    
+    {% if request.user == patient.doctor_name %}
       <div class="col-md-6">
         <div class="widget-area proclinic-box-shadow color-red" style="padding: 10px 20px; min-width: 250px;">
 
@@ -57,18 +59,21 @@
             <p><strong style="font-size: large;">First Name:&nbsp;</strong>{{ patient.first_name}}</p>
             <p><strong style="font-size: large;">Last Name:&nbsp;</strong>{{ patient.last_name}}</p>
             <p><strong style="font-size: large;"> Age:&nbsp;</strong>{{ patient.age}}</p>
-            <p><strong style="font-size: large;">Doctor Name:&nbsp;</strong>{{ patient.staff}}</p>
+            <p><strong style="font-size: large;">Doctor Name:&nbsp;</strong>{{ patient.doctor_name}}</p>
             <form action="{% url 'check_patient' patient.patient_id %}">
               <button type='submit' class="btn btn-outline-primary mt-3 mb-0 me-4"><span class="ti-eye"></span>
                 Checked</button>
-              <a href="{% url 'patient_history' %}" class="btn btn-outline-info mt-3 mb-0"><span class="ti-pencil-alt"></span>
+              <a href="{% url 'add_history' %}" class="btn btn-outline-info mt-3 mb-0"><span class="ti-pencil-alt"></span>
                 History</a>
             </form>
 
           </div>
         </div>
       </div>
+    
+     {% endif %}
       {% endfor %}
+    
     </div>
     
   </div>

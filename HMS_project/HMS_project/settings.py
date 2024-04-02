@@ -55,8 +55,10 @@ INSTALLED_APPS = [
     'doctor_app',
     'casher_app',
     'receptionist_app',
-   'laboratory_app'
-    #    'channels',
+   'laboratory_app',
+       'channels',
+       'corsheaders',
+       'patient_app',
 ]
 
 MIDDLEWARE = [
@@ -67,7 +69,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'admin_app.alternative_admin.AdminFallbackMiddleware',
+    # 'admin_app.alternative_admin.AdminFallbackMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 
 ]
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -107,7 +110,7 @@ class NoCacheMixin:
         return super().dispatch(*args, **kwargs)
     
 ADMIN_USERNAME = 'tilahun'   
-DESIGNATED_ADMIN_USERNAME = 'second_admin'
+DESIGNATED_ADMIN_USERNAME = 'admin'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
@@ -141,24 +144,24 @@ DESIGNATED_ADMIN_USERNAME = 'second_admin'
 #         'PASSWORD':'362588',
 #          'HOST':'localhost',
 #          'PORT':'5432',
-#    }}
-# DATABASES = {
-#     'default': {
-#         'ENGINE':'django.db.backends.postgresql',
-#         'NAME':'newBD',
-#         'USER':'tilish',
-#         'PASSWORD':'14241224',
-
-#         'HOST':'localhost',
-#         'PORT':'5432',
-#     }
-# }
+   #}}
 DATABASES = {
-   'default': {
-       'ENGINE': 'django.db.backends.sqlite3',
-       'NAME': BASE_DIR / 'db.sqlite3',  # Adjust the path to your SQLite database file
-   }
+    'default': {
+        'ENGINE':'django.db.backends.postgresql',
+        'NAME':'TD',
+        'USER':'tilish',
+        'PASSWORD':'14241224',
+
+        'HOST':'localhost',
+        'PORT':'5432',
+    }
 }
+# DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.sqlite3',
+#        'NAME': BASE_DIR / 'db.sqlite3',  # Adjust the path to your SQLite database file
+#    }
+# }
 # 
 # DATABASES = {
 #     'default': {
@@ -192,6 +195,13 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+CORS_ORIGIN_ALLOW_ALL = True  # Allow requests from any origin
+# Or specify allowed origins explicitly
+CORS_ALLOWED_ORIGINS = [
+    'http://127.0.0.1:8000',
+    'http://localhost:8000',
+    # Add other origins as needed
+]
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/

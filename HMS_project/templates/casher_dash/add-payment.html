@@ -93,15 +93,18 @@
 									<div class="form-group col-md-6">
 										<h4>Cost Of Treatment </h4>										
                                     </div>
-									<div class="form-group col-md-6">
+									 <div class="form-group col-md-6">
 										<label for="food_payment">Food Payment</label>
-										<select class="form-control" id="food_payment" name="food_payment">
+										<select class="form-control" id="food_payment" name="food_payment" >
 											{% for pay in payments %}
 										    <option value="{{ pay.Services }}" data-cost-food="{{ pay.Payment }}">{{ pay.Services }}</option>
 											{% endfor %}
 											
 										</select>
                                     </div>
+									<!-- <div id="cost_amount_fields" class="form-group col-md-6">
+										
+									</div> -->
 						
                                     <div class="form-group col-md-6">
 										<label for="food_p_amount">Cost Amount</label>
@@ -164,8 +167,8 @@
 										<input type="text" placeholder="Cost amount" class="form-control" id="other_amount" name="other_amount"
 										step="0.01"
                                         required>
-                                    </div>
-                                    <!-- <div class="form-group col-md-12">
+                                    </div> 
+                                   <!-- <div class="form-group col-md-12">
                                         <button type="button" class="btn btn-outline-success"><span class="ti-plus"></span> Add Service</button>										
                                     </div> -->
 
@@ -176,7 +179,7 @@
                                     <div class="form-group col-md-6">
 										<label for="payment-type">Payment Type</label>
 										
-										<select class="form-control" id="payment-type" name="payment_type">
+										<select class="form-control" id="payment-type" name="payment_type" >
 											{% for pay in payments %}
 										    <option value="{{ pay.Payment_method }}">{{ pay.Payment_method }}</option>
 											{% endfor %}
@@ -230,29 +233,90 @@
 	<script>
 		document.getElementById('other').addEventListener('change', function() {
 			var selectedOption = this.options[this.selectedIndex];
-			var cost = selectedOption.getAttribute('data-cost');
-			document.getElementById('other_amount').value = cost;
+			// var cost = selectedOption.getAttribute('data-cost');
+			// document.getElementById('other_amount').value = cost;
+			var combinedValue = selectedOption.getAttribute('data-cost');
+			var paymentAmount = combinedValue.match(/\d+(\.\d+)?/)[0]; // Extracting the payment amount
+			document.getElementById('other_amount').value = paymentAmount;
 		});
 		document.getElementById('food_payment').addEventListener('change', function() {
 			var selectedOption = this.options[this.selectedIndex];
-			var cost = selectedOption.getAttribute('data-cost-food');
-			document.getElementById('food_p_amount').value = cost;
+			// var cost = selectedOption.getAttribute('data-cost-food');
+			// document.getElementById('food_p_amount').value = cost;
+			var combinedValue = selectedOption.getAttribute('data-cost-food');
+			var paymentAmount = combinedValue.match(/\d+(\.\d+)?/)[0]; // Extracting the payment amount
+			document.getElementById('food_p_amount').value = paymentAmount;
 		});
 		document.getElementById('bed_payment').addEventListener('change', function() {
 			var selectedOption = this.options[this.selectedIndex];
-			var cost = selectedOption.getAttribute('data-cost-bed');
-			document.getElementById('bed_p_amount').value = cost;
+			// var cost = selectedOption.getAttribute('data-cost-bed');
+			// document.getElementById('bed_p_amount').value = cost;
+			var combinedValue = selectedOption.getAttribute('data-cost-bed');
+			var paymentAmount = combinedValue.match(/\d+(\.\d+)?/)[0]; // Extracting the payment amount
+			document.getElementById('bed_p_amount').value = paymentAmount;
 		});
 		document.getElementById('card_payment').addEventListener('change', function() {
 			var selectedOption = this.options[this.selectedIndex];
-			var cost = selectedOption.getAttribute('data-cost-card');
-			document.getElementById('card_p_amount').value = cost;
+			// var cost = selectedOption.getAttribute('data-cost-card');
+			// document.getElementById('card_p_amount').value = cost;
+			var combinedValue = selectedOption.getAttribute('data-cost-card');
+			var paymentAmount = combinedValue.match(/\d+(\.\d+)?/)[0]; // Extracting the payment amount
+			document.getElementById('card_p_amount').value = paymentAmount;
+
 		});
 		document.getElementById('lab_payment').addEventListener('change', function() {
 			var selectedOption = this.options[this.selectedIndex];
-			var cost = selectedOption.getAttribute('data-cost-lab');
-			document.getElementById('lab_p_amount').value = cost;
+			// var cost = selectedOption.getAttribute('data-cost-lab');
+			// document.getElementById('lab_p_amount').value = cost;
+			var combinedValue = selectedOption.getAttribute('data-cost-lab');
+			var paymentAmount = combinedValue.match(/\d+(\.\d+)?/)[0]; // Extracting the payment amount
+			document.getElementById('lab_p_amount').value = paymentAmount;
 		});
+// 		document.getElementById('food_payment').addEventListener('click', function() {
+//     var options = this.options;
+//     var costAmountFieldsContainer = document.getElementById('cost_amount_fields');
+
+//     // Clear existing input fields
+//     costAmountFieldsContainer.innerHTML = '';
+
+//     // Iterate through all options in the dropdown
+//     for (var i = 0; i < options.length; i++) {
+//         var option = options[i];
+//         var serviceName = option.value;
+//         var cost = parseFloat(option.getAttribute('data-cost-food'));
+
+//         // Check if the option is selected
+//         if (option.selected) {
+//             // Create a container for the input field
+//             var inputFieldContainer = document.createElement('div');
+
+//             // Create input field for the selected option
+//             var inputField = document.createElement('input');
+//             inputField.type = 'text';
+//             inputField.className = 'form-control';
+//             inputField.value = cost.toFixed(2); // Set cost amount
+//             inputField.readOnly = true;
+//             inputField.name = serviceName + '_p_amount'; // Set unique name for each input field
+
+//             // Create label for input field
+//             var label = document.createElement('label');
+//             label.textContent = serviceName + ' Cost Amount:';
+
+//             // Append label and input field to container
+//             inputFieldContainer.appendChild(label);
+//             inputFieldContainer.appendChild(inputField);
+
+//             // Append container to the main container
+//             costAmountFieldsContainer.appendChild(inputFieldContainer);
+//         }
+//     }
+// });
+
+
+
+
+
+
 	</script>
 
 </body>

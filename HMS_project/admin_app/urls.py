@@ -6,8 +6,8 @@ from django.conf.urls.static import static
 from .views import NotificationListView
 
 urlpatterns = [
-    path('writenotification/', views.writenotification, name='writenotification'),
-    path('notifications/', NotificationListView.as_view(), name='notifications'),
+    path('poster/', views.poster, name='poster'),
+    # path('notifications/', NotificationListView.as_view(), name='notifications'),
 
     path('register/',views.createUserAccount, name='createUserAccount'),
     path('password_reset/', auth_views.PasswordResetView.as_view(template_name='admin_app/password_reset_form.html'), name='password_reset'),

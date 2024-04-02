@@ -21,15 +21,15 @@ def profile_update(request, user_id):
     user = get_object_or_404(User, pk=user_id)
     if request.user != user:  # Ensure user can only update their own profile
         return redirect('show_rece_profile')
-    
+
     user_profile, created = UserProfileInfo2.objects.get_or_create(user=user)
-    
+
     if request.method == 'POST':
         profile_pic = request.FILES.get('profile_pic')
         user_profile.profile_pic = profile_pic
         user_profile.save()
         return redirect('show_rece_profile')
-    
+
     return render(request, 'receptionist_dash/update_profile.html', {'user_id': user_id, 'user_profile': user_profile})
 
 
@@ -39,6 +39,7 @@ def receptionist_dash_content(request):
     return render(request,'receptionist_dash/dash_content.html')
 
 def add_patient(request):
+    users= User.objects.all()
     register=False
     if request.method == 'POST':
         first_name = request.POST.get('first_name')
@@ -53,10 +54,12 @@ def add_patient(request):
         city = request.POST.get('city')
         region = request.POST.get('region')
         kebele = request.POST.get('kebele')
-        recep_name = request.POST.get('doctor_id')
+        recep_name = request.POST.get('rece_name')
+        doctor_name = request.POST.get('assidoc')
         generated_id = 'SH' + get_random_string(length=6, allowed_chars='1234567890')
 
-        recept = get_object_or_404(User, username=recep_name)    
+        recept = get_object_or_404(User, username=recep_name)
+        doctor = get_object_or_404(User, username=doctor_name)
         PatientRegister.objects.create(
         patient_id=generated_id,
         first_name=first_name,
@@ -71,15 +74,16 @@ def add_patient(request):
         city=city,
         region=region,
         kebele=kebele,
-        receptinist_id=recept,
+        receptinist_name=recept,
+        doctor_name=doctor,
                 )
-          
+
         patient_count = cache.get('patient_count', 0)
         patient_count += 1
         cache.set('patient_count', patient_count)
-        messages.success(request, 'Patient data sent successfully.')  
-        register=True 
-    return render(request, 'receptionist_dash/add-patient.html',{'register':register,})  # Render the form template initially
+        messages.success(request, 'Patient data sent successfully.')
+        register=True
+    return render(request, 'receptionist_dash/add-patient.html',{'register':register,'users':users})  # Render the form template initially
 def check_patient_data(request):
     patient_count = cache.get('patient_count', 0)
     patients = PatientRegister.objects.filter(is_checked=False)
@@ -90,11 +94,11 @@ def check_patient(request, patient_id):
     patient.is_checked = True
     patient.save()
     messages.success(request, 'Patient is  checked successfully.')
-    
+
     patient_count = cache.get('patient_count', 0)
     patient_count -= 1
     cache.set('patient_count', patient_count)
-    
+
     return redirect('check_patient_data')
 
 
@@ -121,7 +125,7 @@ def delete_patient(request):
             # Handle deletion of selected employees
             patient_delete = request.POST.getlist('patient_delete')
             PatientRegister.objects.filter(patient_id__in=patient_delete).delete()
-            
+
     else:
         patients = PatientRegister.objects.all()
 
@@ -142,8 +146,8 @@ def edit_patient(request,patient_id):
        return render(request,'receptionist_dash/edit-patient.html',{'patientid':patientid})
      except PatientRegister.DoesNotExist:
        return render(request,'receptionist_dash/edit-patient.html',{'message':'patient  not found'})
-     
- 
+
+
     # return render(request,'receptionist_dash/edit-patient.html')
 def dis_forms(request):
     return render(request,'receptionist_dash/form.html')
@@ -159,7 +163,7 @@ def update_patient(request,patient_id):
    region = request.POST.get('region')
    kebele = request.POST.get('kebele')
    doctor_id = request.POST.get('doctor_id')
-   
+
    patient = PatientRegister.objects.get(pk=patient_id)
    patient.first_name=first_name
    patient.middle_name=middle_name

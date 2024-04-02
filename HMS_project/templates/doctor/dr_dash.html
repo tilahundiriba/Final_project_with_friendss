@@ -70,17 +70,23 @@
         }
 
 
-   
-    .fa-solid {
-        font-size: 26px;
+
+
+    .unseen {
+        color: red;
     }
 
-    .fa-solid[data-count]:after {
+
+    .ti-announcement {
+        font-size: 20px;
+    }
+
+    .ti-announcement[data-count]:after {
         position: absolute;
-        right: 0%;
-        top: 1%;
+        /* right: -10%; */
+        top: 15%; 
         content: attr(data-count);
-        font-size: 36%;
+        font-size: 46%;
         padding: .6em;
         border-radius: 999px;
         line-height: .75em;
@@ -90,11 +96,6 @@
         min-width: 2em;
         font-weight: bold;
     }
-
-    .unseen {
-        color: red;
-    }
-
 
         
     </style>
@@ -210,7 +211,7 @@
              
                     <!-- <li class="sidebar-header">Setting</li> -->
                     <li class="sidebar-item dropdown dropdown-menu-start">
-                        <a href="{% url 'writenotification' %}" class="sidebar-link" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a href="#" class="sidebar-link" data-bs-toggle="dropdown" aria-expanded="false">
                             <i id="bellCount" class="fa-solid fa-bell" data-count="0" ></i>
                             Notifications </a>
                             <ul class="dropdown-menu dropdown-menu-dark  text-wrap" id="notify" style="width: 300px !important;"></ul>
@@ -242,11 +243,93 @@
                 <!-- <img src="{% static 'images/profile.jpg'%}" class="avatar img-fluid rounded" alt="" /> -->
 
             </nav>
-            <main class="content px-3 py-2">
+            <main class="content px-3 py-2" style="background-color: white;">
+                <div class="container top-brand">
+					<nav class="navbar navbar-default">			
+						<div class="navbar-header">
+							<div class="sidebar-header"> <a href="index.html">
+                                <img src="#" class="logo" alt="logo"></a>
+							</div>
+						</div>
+						<ul class="nav justify-content-end">
+							<li class="nav-item">
+								<a class="nav-link">
+									<span title="Fullscreen" class="ti-fullscreen fullscreen"></span>
+								</a>							
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" data-toggle="modal" data-target=".proclinic-modal-lg">
+									<span class="ti-search"></span>
+								</a>
+								<div class="modal fade proclinic-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+									<div class="modal-dialog modal-lorvens">
+										<div class="modal-content proclinic-box-shadow2">
+											<div class="modal-header">
+												<h5 class="modal-title">Search Patient/Doctor:</h5>
+												<span class="ti-close" data-dismiss="modal" aria-label="Close">
+												</span>
+											</div>
+											<div class="modal-body">
+												<form>
+													<div class="form-group">
+														<input type="text" class="form-control" id="search-term" placeholder="Type text here">
+														<button type="button" class="btn btn-lorvens proclinic-bg">
+															<span class="ti-location-arrow"></span> Search</button>
+													</div>
+												</form>
+											</div>
+										</div>
+									</div>
+								</div>
+							</li>
+							<!-- <li class="nav-item">
+								<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+								 aria-expanded="false">
+									<span id="bellCount" class="ti-announcement" data-count="0"></span>
+								</a>
+								<div class="dropdown-menu proclinic-box-shadow2 notifications animated flipInY">
+									<h5>Notifications</h5>
+									<a class="dropdown-item" href="#" id="notify">
+										<span class="ti-wheelchair"></span> New Patient Added</a>
+									
+								</div>
+							</li> -->
+                            <li class="nav-item">
+                                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                    <span id="bellCount" class="ti-announcement" data-count="0"></span>
+                                </a>
+                                <div class="dropdown-menu proclinic-box-shadow2 notifications animated flipInY">
+                                    <h5>Notifications</h5>
+                                    <ul id="notificationList"></ul> <!-- Empty <ul> element to contain the notifications -->
+                                </div>
+                            </li>
+                            
+							<li class="nav-item">
+								<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+								 aria-expanded="false">
+                                 <img src="{{ user.userprofileinfo2.profile_pic.url}}" alt="NOOOOOOo"
+                                 class="rounded-circle"
+                                 width="40"
+                                 height="40">
+								</a>
+								<div class="dropdown-menu proclinic-box-shadow2 profile animated flipInY">
+									<h5>{{user.username}}</h5>
+									<a class="dropdown-item" href="#">
+										<span class="ti-settings"></span> Settings</a>
+									<a class="dropdown-item" href="#">
+										<span class="ti-help-alt"></span> Help</a>
+									<a class="dropdown-item" href="{% url 'logout' %}">
+										<span class="ti-power-off"></span> Logout</a>
+								</div>
+							</li>
+						</ul>
+				
+					</nav>
+				</div>
                 {% block content %}
-
+              
                 </nav>
-                <main class="content px-3 py-2">
+                <main class="content px-3 py-2" >
                     <div class="container-fluid">
                         <div class="mb-3">
                             <h4>Dashboard</h4>
@@ -326,7 +409,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- <div class="col-12 col-md-6 d-flex">
+                       
                                 <div class="card flex-fill border-0">
                                     <div class="card-body py-4">
                                         <div class="d-flex align-items-start">
@@ -376,7 +459,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div> -->
+                            </div> 
                         </div>
                         <!-- Table Element -->
                         <div class="card border-0">
@@ -425,37 +508,88 @@
                     <i class="fa-regular fa-moon"></i>
                     <i class="fa-regular fa-sun"></i>
                 </a>
-                <!-- <footer class="footer">
-                    <div class="container-fluid">
-                        <div class="row text-muted">
-                            <div class="col-6 text-start">
-                                <p class="mb-0">
-                                    <a href="#" class="text-muted">
-                                        <strong>CodzSwod</strong>
-                                    </a>
-                                </p>
-                            </div>
-                            <div class="col-6 text-end">
-                                <ul class="list-inline">
-                                    <li class="list-inline-item">
-                                        <a href="#" class="text-muted">Contact</a>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a href="#" class="text-muted">About Us</a>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a href="#" class="text-muted">Terms</a>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a href="#" class="text-muted">Booking</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </footer> -->
+             
+                  
         </div>
     </div>
+<!-- scripts for notification start-->
+
+<script>
+    // setup chat socket
+    const notifySocket = new WebSocket(
+        'ws://'
+        + window.location.host
+        + '/ws/notify/'
+    );
+
+    // Array to store all notifications
+    let notifications = [];
+
+    // Array to store unseen notifications
+    let unseenNotifications = [];
+
+    // on socket open
+    notifySocket.onopen = function (e) {
+        console.log('Socket successfully connected.');
+        // loadNotifications(); // Load notifications from the server when the socket is opened
+    };
+
+    // on socket close
+    notifySocket.onclose = function (e) {
+        console.log('Socket closed unexpectedly');
+    };
+
+    // on receiving message on group
+    notifySocket.onmessage = function (e) {
+        const data = JSON.parse(e.data);
+        const message = data.message;
+        // Call the setMessage function to add the new li element
+        setMessage(message);
+    };
+
+    function setMessage(message) {
+    // Create a new anchor element
+    var newAnchor = document.createElement('a');
+    newAnchor.className = 'dropdown-item text-wrap unseen'; // Add the "unseen" class
+    newAnchor.href = '#';
+    newAnchor.textContent = message; // Set the text content of the anchor to the received message
+    
+    // Get the ul element with the id "notificationList"
+    var ulElement = document.getElementById('notificationList');
+    
+    // Append the new anchor element to the ul element
+    ulElement.appendChild(newAnchor);
+    
+    // Add the notification to the array
+    notifications.push(newAnchor);
+    
+    // Add the unseen notification to the unseen array
+    unseenNotifications.push(newAnchor);
+    
+    // Get the current count of unseen notifications
+    var count = unseenNotifications.length;
+    
+    // Update the count on the bell icon
+    document.getElementById('bellCount').setAttribute('data-count', count);
+    
+    // Decrease the count by 1 when the user views the notification
+    newAnchor.addEventListener('click', function() {
+        if (count > 0) {
+            count -= 1;
+            document.getElementById('bellCount').setAttribute('data-count', count);
+            newAnchor.classList.remove('unseen'); // Remove the "unseen" class
+        }
+    });
+}
+
+    
+    
+
+
+</script>
+<!-- scripts for notification end-->
+
+
     <!-- Jquery Library-->
     <script src="{% static 'js2/jquery-3.2.1.min.js' %}"></script>
     <!-- Popper Library-->

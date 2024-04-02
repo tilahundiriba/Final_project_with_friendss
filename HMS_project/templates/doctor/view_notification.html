@@ -1,7 +1,6 @@
 {% extends 'doctor/dr_dash.html' %}
 
 
-
 {% block content %}
 
 <script>
@@ -40,45 +39,44 @@
     function setMessage(message) {
         // Create a new li element
         var newLi = document.createElement('li');
-
+        
         // Create a new anchor element
         var newAnchor = document.createElement('a');
         newAnchor.className = 'dropdown-item text-wrap unseen'; // Add the "unseen" class
         newAnchor.href = '#';
-        newAnchor.textContent = message;
-
+        newAnchor.textContent = message; // Set the text content of the anchor to the received message
+        
         // Append the anchor element to the li element
         newLi.appendChild(newAnchor);
-
+        
         // Get the ul element with the id "notify"
         var ulElement = document.getElementById('notify');
-
+        
         // Append the new li element to the ul element
         ulElement.appendChild(newLi);
-
+        
         // Add the notification to the array
         notifications.push(newAnchor);
-
+        
         // Add the unseen notification to the unseen array
         unseenNotifications.push(newAnchor);
-
+        
         // Get the current count of unseen notifications
         var count = unseenNotifications.length;
-
+        
         // Update the count on the bell icon
         document.getElementById('bellCount').setAttribute('data-count', count);
-
+        
         // Remove the "unseen" class from previous unseen notifications
         unseenNotifications.forEach(notification => {
             notification.classList.remove('unseen');
         });
-
-        // Add the "unseen" class to the new unseen notification
-        newAnchor.classList.add('unseen');
-
-        // Remove the new unseen notification from the unseen array
-        unseenNotifications = [newAnchor];
-
+        
+        // Add the "unseen" class to all unseen notifications
+        unseenNotifications.forEach(notification => {
+            notification.classList.add('unseen');
+        });
+        
         // Decrease the count by 1 when the user views the notification
         newAnchor.addEventListener('click', function() {
             if (count > 0) {
@@ -88,10 +86,12 @@
             }
         });
     }
+    
+    
 
     function loadNotifications() {
         // Send a request to the server to retrieve notifications
-        fetch('http://localhost:8000/notifications/') // Replace with the URL for retrieving notifications from the server
+        fetch('http://localhost:8000/admin_app/notifications/') // Replace with the URL for retrieving notifications from the server
             .then(response => response.json())
             .then(data => {
                 data.forEach(notification => {

@@ -1,0 +1,1 @@
+from admin_app.consumers import NotificationConsumer

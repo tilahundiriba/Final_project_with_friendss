@@ -114,9 +114,13 @@
 											id="phone-number" name="phone_number">
 									</div>
 									<div class="form-group col-md-6">
-										<label for="doctor-id">Doctor ID</label>
-										<input type="text" class="form-control" placeholder="Doctor ID" id="doctor-id"
-											name="doctor_id">
+										<label for="rece_name">Receptionist Name</label>
+											<select class="form-control" id="rece_name" name="rece_name">
+												<option selected disabled >Select Receptionist</option>
+												{% for user in users %}
+												<option value="{{user.username}}">{{user.username}}</option>
+											{% endfor %}
+											</select>
 									</div>
 									<div class="form-group col-md-6">
 										<label for="email">Email</label>
@@ -148,15 +152,16 @@
 											name="kebele">
 
 									</div>
-									<!-- <div class="form-group col-md-6">
+									<div class="form-group col-md-6">
 										<label for="assidoc">Assigned Doctor</label>
 										<select class="form-control" id="assidoc" name="assidoc">
-											<option>Selam</option>
-											<option>Nahom</option>
-											<option>Helen</option>
-											<option>Other</option>
+											<option selected disabled>Select Doctor</option>
+											{% for user in users %}
+												<option value="{{user.username}}">{{user.username}}</option>
+											{% endfor %}
+										
 										</select>
-									</div> -->
+									</div>
 									
 								</div>
 								<div class="form-group col-md-6 mb-3">

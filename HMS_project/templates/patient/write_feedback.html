@@ -1,4 +1,4 @@
-{% extends 'admin_dash/dashboard.html' %}
+{% extends 'admin_dash/web_home.html' %}
 {% load static %}
 {% block content %}
 
@@ -12,7 +12,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	{% block 'title' %}
-    <title>Registration From</title>
+    <title>Write Feedbacks</title>
     {% endblock %}
 	<!-- Fav  Icon Link -->
 </head>
@@ -39,18 +39,18 @@
 				<!-- Page Title -->
 				<div class="container mt-0">
 					<div class="row breadcrumb-bar">
-						<div class="col-md-12">
-							<h3 class="block-title">User Registration</h3>
+						<div class="col-md-6">
+							<h3 class="block-title">Write Feedbacks</h3>
 						</div>
-						<div class="col-md-12">
+						<div class="col-md-6">
 							<ol class="breadcrumb">
 								<li class="breadcrumb-item">
 									<a href="index.html">
 										<span class="ti-home"></span>
 									</a>
 								</li>
-								<li class="breadcrumb-item active">Users</li>
-								<li class="breadcrumb-item ">User Registration</li>
+								<li class="breadcrumb-item active"> Feedbacks</li>
+								<li class="breadcrumb-item ">Write Feedbacks</li>
 							</ol>
 						</div>
 					</div>
@@ -65,35 +65,17 @@
 					<!-- Widget Item -->
 					<div class="col-md-12">
 						<div class="widget-area-2 proclinic-box-shadow">
-							<h3 class="widget-title">User Registration</h3>
-							<form action="{% url 'createUserAccount' %}" method="post">
+							<h3 class="widget-title">Write Feedbacks</h3>
+							<form action="{% url 'poster' %}" method="post">
 								{% csrf_token %}
-                                <div class="form-group col-md-12">
-                                    <label for="email">Email</label>
-                                    <input type="email" placeholder="example@gmail.com" class="form-control" id="Email" name="email">
+                                <div class="form-group col-md-6">
+                                    <label for="message">Feedbacks</label>
+                                  
+                                    <textarea id="message" name="message" rows="4" class="form-control" cols="50" placeholder="Feedbacks....."></textarea>
                                 </div>
-									<div class="form-group col-md-12">
-										<label for="role">Role</label>
-										<select class="form-control" id="role" name="role">
-											<option value="doctor">Doctor</option>
-											<option value="nurse">Nurse</option>
-											<option value="casher">Casher</option>
-											<option value="technician">Technician</option>
-											<option value="receptionist">Receptionist</option>
-											<option value="admin">Admin</option>
-										</select>
-									</div>
-									<div class="form-group col-md-12">
-										<label for="speciality">Speciality</label>
-										<select class="form-control" id="speciality" name="spec">
-											<option value="Psychiatry">Psychiatry</option>
-											<option value="Radiology">Radiology</option>
-											<option value="Gastroenterology">Gastroenterology</option>
-											<option value="Surgery">Surgery</option>
-											<option value="Pediatrics">Pediatrics</option>
-										</select>
-									</div>
-									<div class="form-group col-md-12 mb-3">
+								
+								
+									<div class="form-group col-md-6 mb-3">
 										<button type="submit" class="btn btn-primary btn-lg">Submit</button>
 									</div>
 								</div>
@@ -105,12 +87,7 @@
 									<span aria-hidden="true">×</span>
 								</button>
 							</div>
-							<div class="alert alert-warning alert-dismissible fade show" role="alert">
-								<strong>Holy guacamole!</strong> You should check in on some of those fields below.
-								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-									<span aria-hidden="true">×</span>
-								</button>
-							</div>
+					
 							<!-- /Alerts-->
 						</div>
 					</div>

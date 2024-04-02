@@ -1,4 +1,4 @@
-{% extends 'doctor/dr_dash.html' %}
+{% extends 'admin_dash/dashboard.html' %}
 {% load static %}
 {% block content %}
 
@@ -6,16 +6,15 @@
 <html>
 
 
-<!-- Mirrored from www.konnectplugins.com/proclinic/Horizontal/add-appointment.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 24 Jan 2022 10:42:01 GMT -->
+<!-- Mirrored from www.konnectplugins.com/proclinic/Horizontal/add-doctor.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 24 Jan 2022 10:42:01 GMT -->
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	{% block 'title' %}
-	<title>Add Appointment</title>
-	{% endblock %}
+    <title>Write Notifications</title>
+    {% endblock %}
 	<!-- Fav  Icon Link -->
-
 </head>
 
 <body>
@@ -71,9 +70,9 @@
 							<li class="nav-item">
 								<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
 								 aria-expanded="false">
-									<span id="bellCount" class="ti-announcement" data-count="0"></span>
+									<span class="ti-announcement"></span>
 								</a>
-								<div class="dropdown-menu proclinic-box-shadow2 notifications animated flipInY" id="notify">
+								<div class="dropdown-menu proclinic-box-shadow2 notifications animated flipInY">
 									<h5>Notifications</h5>
 									<a class="dropdown-item" href="#">
 										<span class="ti-wheelchair"></span> New Patient Added</a>
@@ -106,32 +105,30 @@
 				</div>
 				<!-- /Top Navigation -->
 				<!-- Menu -->
-				{% include 'doctor/navbar.html' %}
+		
 				<!-- /Menu -->
 				<!-- Breadcrumb -->
 				<!-- Page Title -->
 				<div class="container mt-0">
 					<div class="row breadcrumb-bar">
 						<div class="col-md-6">
-							<h3 class="block-title">Add Appointment</h3>
+							<h3 class="block-title">Write Notifications</h3>
 						</div>
 						<div class="col-md-6">
 							<ol class="breadcrumb">
 								<li class="breadcrumb-item">
-									<a href="#">
+									<a href="index.html">
 										<span class="ti-home"></span>
 									</a>
 								</li>
-								<li class="breadcrumb-item">Appointments</li>
-								<li class="breadcrumb-item ">Add Appointment</li>
+								<li class="breadcrumb-item active"> Notifications</li>
+								<li class="breadcrumb-item ">Write Notifications</li>
 							</ol>
 						</div>
 					</div>
 				</div>
 			<!-- /Page Title -->
-	<!-- Top Navigation -->
-	
-	<!-- /Top Navigation -->
+
 			<!-- /Breadcrumb -->
 			<!-- Main Content -->
 			<div class="container">
@@ -140,86 +137,34 @@
 					<!-- Widget Item -->
 					<div class="col-md-12">
 						<div class="widget-area-2 proclinic-box-shadow">
-							<h3 class="widget-title">Add Appointment</h3>
-							<form action="{% url 'add-appointment' %}" method="post">
+							<h3 class="widget-title">Write Notifications</h3>
+							<form action="{% url 'poster' %}" method="post">
 								{% csrf_token %}
-								<div class="form-row">
-									<div class="form-group col-md-6">
-										<label for="patient-id">Patient ID</label>
-										<input type="text" class="form-control" placeholder="Patient ID" id="patient-id" name="patient_id">
-									</div>
-									<div class="form-group col-md-6">
-										<label for="app_no">App. Number</label>
-										<input type="text" class="form-control" placeholder="App. Number" id="app_no" name="app_no">
-									</div>
-									<div class="form-group col-md-6">
-										<label for="dr_name">Doctor Name</label>
-									
-										
-										<select class="form-control" id="dr_name" name="dr_name">
-											<option>Select Name</option>
-											{% for user in users %}
-											<option value="{{user.username}}">{{user.username}}</option>
-											{% endfor %}
-										</select>
-										
-									</div>
-									<div class="form-group col-md-6">
-										<label for="appointment-date">Appointment Date</label>
-										<input type="date" placeholder="Appointment Date" class="form-control" id="appointment-date" name="app_date">
-									</div>
-									<div class="form-group col-md-6">
-										<label for="time-slot">Time Slot</label>
-										<select class="form-control" id="time-slot" name="time_slot">
-											<option>10AM-11AM</option>
-											<option>11AM-12pm</option>
-											<option>12PM-01PM</option>
-											<option>2PM-3PM</option>
-											<option>3PM-4PM</option>
-											<option>4PM-5PM</option>
-											<option>6PM-7PM</option>
-											<option>7PM-8PM</option>
-											<option>8PM-9PM</option>
-										</select>
-									</div>
-									<div class="form-group col-md-6">
-										<label for="app_status">Status</label>
-										<input type="text" placeholder="Status" class="form-control" id="app_status" name="status">
-									</div>
-									<div class="form-group col-md-12">
-										<label for="problem">Problem</label>
-										<textarea placeholder="Problem" class="form-control" id="problem" rows="3" name="problem"></textarea>
-									</div>
-																		
-									<div class="form-check col-md-12 mb-2">
-										<div class="text-left">
-											<div class="custom-control custom-checkbox">
-												<input class="custom-control-input" type="checkbox" id="ex-check-2">
-												<label class="custom-control-label" for="ex-check-2">Please Confirm</label>
-											</div>
-										</div>
-									</div>
+                                <div class="form-group col-md-6">
+                                    <label for="message">Messages</label>
+                                  
+                                    <textarea id="message" name="message" rows="4" class="form-control" cols="50" placeholder="Messages....."></textarea>
+                                </div>
+								
+								
 									<div class="form-group col-md-6 mb-3">
 										<button type="submit" class="btn btn-primary btn-lg">Submit</button>
 									</div>
 								</div>
 							</form>
 							<!-- Alerts-->
-							{% if registered %}
 							<div class="alert alert-success alert-dismissible fade show" role="alert">
-								<strong>Successfully Done!</strong> Appointment token Generated
+								<strong>Successfully Done!</strong> Please Check in user list
 								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 									<span aria-hidden="true">×</span>
 								</button>
 							</div>
-							{% else %}
 							<div class="alert alert-warning alert-dismissible fade show" role="alert">
 								<strong>Holy guacamole!</strong> You should check in on some of those fields below.
 								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 									<span aria-hidden="true">×</span>
 								</button>
 							</div>
-							{% endif %}
 							<!-- /Alerts-->
 						</div>
 					</div>
@@ -241,12 +186,11 @@
 	<a id="back-to-top" href="#" class="back-to-top">
 		<span class="ti-angle-up"></span>
 	</a>
-	<!-- /Back to Top -->
 
 
 </body>
 
 
-<!-- Mirrored from www.konnectplugins.com/proclinic/Horizontal/add-appointment.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 24 Jan 2022 10:42:01 GMT -->
+<!-- Mirrored from www.konnectplugins.com/proclinic/Horizontal/add-doctor.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 24 Jan 2022 10:42:01 GMT -->
 </html>
 {% endblock %}

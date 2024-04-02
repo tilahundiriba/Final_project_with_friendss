@@ -23,8 +23,8 @@ def notification_created(sender, instance, created, **kwargs):
         )
 
 
-# @receiver(post_save, sender=User)
-# def update_admin_username_setting(sender, instance, **kwargs):
-#     if instance.is_superuser:
-#         settings.ADMIN_USERNAME = instance.username
+@receiver(post_save, sender=User)
+def update_admin_username_setting(sender, instance, **kwargs):
+    if instance.is_superuser:
+        settings.ADMIN_USERNAME = instance.username
 
