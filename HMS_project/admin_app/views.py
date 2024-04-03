@@ -322,3 +322,8 @@ def deactivate(request, user_id):
     user_deactive.is_active = False
     user_deactive.save()
     return redirect('display_users')
+
+
+
+
+

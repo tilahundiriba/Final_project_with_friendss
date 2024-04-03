@@ -11,12 +11,12 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
 @login_required
-def profile(request):
+def doc_profile(request):
     user = request.user
     return render(request, 'doctor/profile_show.html', {'user': user})
 
 @login_required
-def profile_update(request, user_id):
+def profile_update_doc(request, user_id):
     user = get_object_or_404(User, pk=user_id)
     if request.user != user:  # Ensure user can only update their own profile
         return redirect('show_doctor_profile')

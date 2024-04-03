@@ -12,12 +12,12 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
 @login_required
-def profile(request):
+def rece_profile(request):
     user = request.user
     return render(request, 'receptionist_dash/profile.html', {'user': user})
 
 @login_required
-def profile_update(request, user_id):
+def rece_profile_update(request, user_id):
     user = get_object_or_404(User, pk=user_id)
     if request.user != user:  # Ensure user can only update their own profile
         return redirect('show_rece_profile')

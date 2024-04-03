@@ -7,12 +7,12 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
 @login_required
-def profile(request):
+def nurse_profile(request):
     user = request.user
     return render(request, 'nurse_dash/profile.html', {'user': user})
 
 @login_required
-def profile_update(request, user_id):
+def nurse_profile_update(request, user_id):
     user = get_object_or_404(User, pk=user_id)
     if request.user != user:  # Ensure user can only update their own profile
         return redirect('show_nurse_profile')
@@ -28,8 +28,12 @@ def profile_update(request, user_id):
     return render(request, 'nurse_dash/update_profile.html', {'user_id': user_id, 'user_profile': user_profile})
 
 
+def add_medication(request):
+    return render(request,'nurse_dash/add_medication.html')
 def dis_medication(request):
-    return render(request,'nurse_dash/medication2.html')
+    return render(request,'nurse_dash/dis_medication.html')
+def edit_medication(request):
+    return render(request,'nurse_dash/edit_medication.html')
 def add_vital_info(request):
     users= User.objects.all()
     registered=False

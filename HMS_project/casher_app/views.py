@@ -12,7 +12,7 @@ def profile(request):
     return render(request, 'casher_dash/profile.html', {'user': user})
 
 @login_required
-def profile_update(request, user_id):
+def casher_profile_update(request, user_id):
     user = get_object_or_404(User, pk=user_id)
     if request.user != user:  # Ensure user can only update their own profile
         return redirect('show_casher_profile')

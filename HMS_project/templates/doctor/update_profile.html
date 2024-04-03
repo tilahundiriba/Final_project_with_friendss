@@ -2,24 +2,7 @@
 {% extends 'doctor/dr_dash.html' %}
 {% load static %}
 {% block content %}
-<!-- upload_profile_pic.html -->
 
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Upload Profile Picture</title>
-</head>
-<body>
-    <h2>Upload Profile Picture</h2>
-    <form action="{% url 'profile' user_id=user_id  %}" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <input type="file" name="profile_picture">
-        <button type="submit">Upload</button>
-    </form>
-</body>
-</html> -->
 <!DOCTYPE html>
 <html>
 
@@ -82,7 +65,7 @@
 					<div class="col-md-12">
 						<div class="widget-area-2 proclinic-box-shadow">
 							<h3 class="widget-title">Add Profile</h3>
-							<form action="{% url 'profile' user_id=user.id  %}" method="post" enctype="multipart/form-data">
+							<form action="{% url 'update_doctor_profile' user_id=user.id  %}" method="post" enctype="multipart/form-data">
 								{% csrf_token %}
 								<div class="form-row">
 									<div class="form-group col-md-6">

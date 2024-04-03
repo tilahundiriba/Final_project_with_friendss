@@ -13,8 +13,8 @@ urlpatterns = [
   path('dis_form/', views.dis_forms, name='dis_form'),
   path('delete_patient/', views.delete_patient, name='delete_patient'),
   path('update_patient/<str:patient_id>/', views.update_patient, name='update_patient'), 
-  path('profile/<int:user_id>/', views.profile_update, name='profile'),
-  path('profile_show/',views.profile, name='show_rece_profile')
+  path('profile/<int:user_id>/', views.rece_profile_update, name='update_rece_profile'),
+  path('show_rece_profile/',views.rece_profile, name='show_rece_profile')
 
 ] 
 

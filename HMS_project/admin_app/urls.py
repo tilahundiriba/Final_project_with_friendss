@@ -5,6 +5,11 @@ from django.conf import settings
 from django.conf.urls.static import static
 from .views import NotificationListView
 
+
+# urlpatterns = [
+#     path('generate-report-pdf/', generate_report_pdf, name='generate_report_pdf'),
+#     # Add more URL patterns as needed
+# ]
 urlpatterns = [
     path('poster/', views.poster, name='poster'),
     # path('notifications/', NotificationListView.as_view(), name='notifications'),

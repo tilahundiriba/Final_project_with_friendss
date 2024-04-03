@@ -97,10 +97,10 @@
                         </a>
                         <ul id="posts" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                             <li class="sidebar-item">
-                                <a href="{% url 'medication' %}" class="sidebar-link">Patient Medication</a>
+                                <a href="{% url 'vital_info' %}" class="sidebar-link">Add Vital Info</a>
                             </li>
                             <li class="sidebar-item">
-                                <a href="{% url 'vital_info' %}" class="sidebar-link">Vital Information</a>
+                                <a href="#" class="sidebar-link">Vital Information</a>
                             </li>
                             <li class="sidebar-item">
                                 <a href="{% url 'dis_vitals' %}" class="sidebar-link">View Information</a>
@@ -110,7 +110,7 @@
                     <li class="sidebar-item">
                         <a href="#" class="sidebar-link collapsed" data-bs-target="#auth" data-bs-toggle="collapse"
                             aria-expanded="false">
-                            <i class="fa-regular fa-calendar-check pe-2"></i>
+                            <i class="fa-solid fa-house-medical pe-2"></i>
                             Room
                         </a>
                         <ul id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
@@ -131,18 +131,18 @@
                         <a href="#" class="sidebar-link collapsed" data-bs-target="#feed" data-bs-toggle="collapse"
                             aria-expanded="false">
                             <!-- <i class="fa-regular fa-flask-vial pe-2"></i> -->
-                            <i class="fa-solid fa-flask-vial pe-2"></i>
+                            <i class="fa-solid fa-tablets pe-2"></i>
                             Medication
                         </a>
                         <ul id="feed" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                             <li class="sidebar-item">
-                                <a href="#" class="sidebar-link">Add Medication</a>
+                                <a href="{% url 'add_medication' %}" class="sidebar-link">Add Medication</a>
                             </li>
                             <li class="sidebar-item">
                                 <a href="#" class="sidebar-link">View Medication</a>
                             </li>
                             <li class="sidebar-item">
-                                <a href="#" class="sidebar-link">Edit Medicationt</a>
+                                <a href="{% url 'edit_medication' %}" class="sidebar-link">Edit Medicationt</a>
                             </li>
                         </ul>
                     </li>
@@ -174,9 +174,9 @@
                 </ul>
             </div>
         </aside>
-        <div class="main">
-            <nav class="navbar navbar-expend px-3 border-bottom bg-success" id="navbar_id">
-                <button class="btn bg-success text-dark" id="sidebar-toggle" type="button">
+        <div class="main bg-light">
+            <nav class="navbar navbar-expend px-3 border-bottom " id="navbar_id">
+                <button class="btn  text-dark" id="sidebar-toggle" type="button">
                     <span class="navbar-toggler-icon text-white"></span>
                 </button>
                 <!-- <img src="{% static 'images/profile.jpg'%}" class="avatar img-fluid rounded" alt="" /> -->
@@ -186,7 +186,7 @@
                 <div class="container top-brand">
 					<nav class="navbar navbar-default">			
 						<div class="navbar-header">
-							<div class="sidebar-header"> <a href="index.html"><img src="#" class="logo" alt="logo"></a>
+							<div class="sidebar-header"> <a href="index.html">LOGO</a>
 							</div>
 						</div>
 						<ul class="nav justify-content-end">

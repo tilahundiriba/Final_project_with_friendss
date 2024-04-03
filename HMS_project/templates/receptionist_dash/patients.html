@@ -1,4 +1,3 @@
-
 {% extends 'receptionist_dash/receptionist_dash.html' %}
 {% load static %}
 {% block content %}
@@ -7,6 +6,7 @@
 
 
 <!-- Mirrored from www.konnectplugins.com/proclinic/Horizontal/patients.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 24 Jan 2022 10:42:01 GMT -->
+
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,6 +22,7 @@
 			border-radius: 4px;
 		}
 	</style>
+
 </head>
 
 <body>
@@ -39,30 +40,30 @@
 	<div class="wrapper">
 		<!-- Page Content -->
 		<div id="content">
-				<!-- Top Navigation -->
+			<!-- Top Navigation -->
 
-				<!-- /Menu -->
-				{% include 'receptionist_dash/navbar.html' %}
-				<!-- Breadcrumb -->
-				<!-- Page Title -->
-				<div class="container mt-0">
-					<div class="row breadcrumb-bar">
-						<div class="col-md-6">
-							<h3 class="block-title">Patients</h3>
-						</div>
-						<div class="col-md-6">
-							<ol class="breadcrumb">
-								<li class="breadcrumb-item">
-									<a href="index.html">
-										<span class="ti-home"></span>
-									</a>
-								</li>
-								<li class="breadcrumb-item">Patients</li>
-								<li class="breadcrumb-item active">All Patients</li>
-							</ol>
-						</div>
+			<!-- /Menu -->
+			{% include 'receptionist_dash/navbar.html' %}
+			<!-- Breadcrumb -->
+			<!-- Page Title -->
+			<div class="container mt-0">
+				<div class="row breadcrumb-bar">
+					<div class="col-md-6">
+						<h3 class="block-title">Patients</h3>
+					</div>
+					<div class="col-md-6">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item">
+								<a href="index.html">
+									<span class="ti-home"></span>
+								</a>
+							</li>
+							<li class="breadcrumb-item">Patients</li>
+							<li class="breadcrumb-item active">All Patients</li>
+						</ol>
 					</div>
 				</div>
+			</div>
 			<!-- /Page Title -->
 
 			<!-- /Breadcrumb -->
@@ -73,116 +74,127 @@
 					<!-- Widget Item -->
 					<div class="col-md-12">
 						<div class="widget-area-2 proclinic-box-shadow">
-							<h3 class="widget-title">Patients List</h3>							
+							<h3 class="widget-title">Patients List</h3>
 							<div class="table-responsive mb-3">
 								<form class="search-form" action="{% url 'delete_patient' %}" method="POST">
 									{% csrf_token %}
 									<div class="form-row">
 										<div class="form-group col-md-10">
-										  <input class="form-control form-control-lg" type="text" name="search_query" placeholder="Patient Search...">
+											<input class="form-control form-control-lg" type="text" name="search_query"
+												placeholder="Patient Search...">
 										</div>
 										<div class="form-group col-md-2">
-										  <button type="submit" class="btn btn-primary btn-lg">Search</button>
+											<button type="submit" class="btn btn-primary btn-lg">Search</button>
 										</div>
-									  </div>
-								<table id="tableId" class="table table-bordered table-striped">
-									<thead>
-										<tr>
-											<!-- <td>
+									</div>
+									<table id="mytable" class="table table-bordered table-striped">
+										<thead>
+											<tr>
+												<!-- <td>
 												<div class="custom-control custom-checkbox">
 													<input class="custom-control-input" type="checkbox" id="1">
 													<label class="custom-control-label" for="1"></label>
 												</div>
 											</td> -->
-											<th>Check</th>
+												<th>Check</th>
 
-											<th>Patient ID</th>
-											<th>First Name</th>
-											<th>Last Name</th>
-										
-											<th>Gender</th>
-										
-											<th>Age</th>
-											<th>Phone Number</th>
-											
-											<th>Country</th>
-											<th>City</th>
-										
-											<th>Kebele</th>
-											<th>Doctor Name</th>
-											<th>Receptionist Name</th>
-											<th>checked</th>
+												<th>Patient ID</th>
+												<th>First Name</th>
+												<th>Last Name</th>
 
-											<th>Actions</th>
+												<th>Gender</th>
+
+												<th>Age</th>
+												<th>Phone Number</th>
+
+												<th>Country</th>
+												<th>City</th>
+
+												<th>Kebele</th>
+												<th>Dr Name</th>
+												<th>Rt Name</th>
+												<th>checked</th>
+
+												<th>Actions</th>
 
 
-										
-										</tr>
-									</thead>
-									<tbody>
-										{% for patient in patients %}
-										<tr>
-											<!-- <td>
+
+											</tr>
+										</thead>
+										<tbody>
+											{% for patient in patients %}
+											<tr>
+												<!-- <td>
 												<div class="custom-control custom-checkbox">
 													<input class="custom-control-input" type="checkbox" id="1">
 													<label class="custom-control-label" for="1"></label>
 												</div>
 											</td> -->
-											<td>
-												<input type="checkbox" name="patient_delete" value="{{ patient.patient_id }}">
-											  </td>
-											<td >{{patient.patient_id}}</td>
-											<td >{{patient.first_name}}</td>
-											<td >{{patient.middle_name}}</td>
-										
+												<td>
+													<input type="checkbox" name="patient_delete"
+														value="{{ patient.patient_id }}">
+												</td>
+												<td>{{patient.patient_id}}</td>
+												<td>{{patient.first_name}}</td>
+												<td>{{patient.middle_name}}</td>
 
-											<td >{{patient.gender}}</td>
-										
-											<td >{{patient.age}}</td>
-											<td >{{patient.phone_number}}</td>
-										
-											<td >{{patient.country}}</td>
-											<td >{{patient.city}}</td>
-										
-											<td >{{patient.kebele}}</td>
-											<td >{{patient.doctor_name}}</td>
-											<td >{{patient.receptinist_name}}</td>
-											<td >{{patient.is_checked}}</td>
 
-											<td>
-												<button name='delete'  class="delete-link btn btn-outline-danger" ><span class="ti-trash"></span> </button>
-											 <a href="{% url 'edit-patient' patient.patient_id %}" class="btn btn-outline-primary "><span class="ti-pencil-alt"></span></a> 
-												<a href="#" class="btn btn-outline-info "><span class="ti-eye"></span></a>
-											</td>
-											{% endfor %}
-										</tr>
-									</tbody>
-								</table>
-							</form>
-							
+												<td>{{patient.gender}}</td>
+
+												<td>{{patient.age}}</td>
+												<td>{{patient.phone_number}}</td>
+
+												<td>{{patient.country}}</td>
+												<td>{{patient.city}}</td>
+
+												<td>{{patient.kebele}}</td>
+												<td>{{patient.doctor_name}}</td>
+												<td>{{patient.receptinist_name}}</td>
+												<td>{{patient.is_checked}}</td>
+
+												<td>
+													<button name='delete'
+														class="delete-link btn btn-outline-danger"><span
+															class="ti-trash"></span> </button>
+													<a href="{% url 'edit-patient' patient.patient_id %}"
+														class="btn btn-outline-primary "><span
+															class="ti-pencil-alt"></span></a>
+													<a href="#" class="btn btn-outline-info "><span
+															class="ti-eye"></span></a>
+												</td>
+												{% endfor %}
+											</tr>
+										</tbody>
+									</table>
+								</form>
+
 								<!--Export links-->
 								<nav aria-label="Page navigation example">
 									<ul class="pagination justify-content-center export-pagination">
 										<li class="page-item">
 											<form method="post" action="{% url 'save_data' format='csv' %}">
 												{% csrf_token %}
-												<button type="submit" class="page-link"><span class="ti-download" ></span> csv</button>
+												<button type="submit" class="page-link"><span
+														class="ti-download"></span> csv</button>
 											</form>
-											
+
 										</li>
 										<li class="page-item">
-											<button class="page-link" ><span class="ti-printer"></span>  print</button>
+											<button class="page-link"><span
+													class="ti-printer"></span> print pdf</button>
 										</li>
 										<li class="page-item">
 											<form method="post" action="{% url 'save_data' format='pdf' %}">
 												{% csrf_token %}
-												<button type="submit" class="page-link"><span class="ti-download" ></span> pdf</button>
+												<button type="submit" class="page-link"><span
+														class="ti-download"></span> pdf</button>
 											</form>
 										</li>
 										<li class="page-item">
 											<form method="post" action="{% url 'save_data' format='excel' %}">
 												{% csrf_token %}
-												<button type="submit" class="page-link"><span class="ti-download" ></span> excel</button>
+												<button type="submit" class="page-link"><span
+														class="ti-download"></span> excel</button>
 											</form>
 										</li>
 									</ul>
@@ -199,7 +211,9 @@
 			<!--Copy Rights-->
 			<div class="container">
 				<div class="d-sm-flex justify-content-center">
-				  <span class="text-muted text-center d-block d-sm-inline-block">Copyright © 2018 <a href="http://www.konnectplugins.com/" target="_blank">konnectcode</a>. All rights reserved.</span>
+					<span class="text-muted text-center d-block d-sm-inline-block">Copyright © 2018 <a
+							href="http://www.konnectplugins.com/" target="_blank">konnectcode</a>. All rights
+						reserved.</span>
 				</div>
 			</div>
 			<!-- /Copy Rights-->
@@ -212,9 +226,13 @@
 	</a>
 	<!-- /Back to Top -->
 
+
+		
+		
 </body>
 
 
 <!-- Mirrored from www.konnectplugins.com/proclinic/Horizontal/patients.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 24 Jan 2022 10:42:01 GMT -->
+
 </html>
 {% endblock %}

@@ -66,7 +66,7 @@
 					<div class="col-md-12">
 						<div class="widget-area-2 proclinic-box-shadow">
 							<h3 class="widget-title">Add Profile</h3>
-							<form action="{% url 'profile' user_id=user.id  %}" method="post" enctype="multipart/form-data">
+							<form action="{% url 'update_nurse_profile' user_id=user.id  %}" method="post" enctype="multipart/form-data">
 								{% csrf_token %}
 								<div class="form-row">
 									<div class="form-group col-md-6">
