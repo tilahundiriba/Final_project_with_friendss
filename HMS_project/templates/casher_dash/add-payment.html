@@ -79,8 +79,16 @@
                                     </div>	
 						
 									<div class="form-group col-md-6">
-										<label for="cashier_name">Cashier Name</label>
-										<input type="text" placeholder="cashier name" class="form-control" id="cashier_name" name="cashier_name">
+										<label for="cashier_name">Casher Name</label>
+										<!-- <input type="text" placeholder="cashier name" class="form-control" id="cashier_name" name="cashier_name"> -->
+										<select class="form-control" id="cashier_name" name="cashier_name">
+											<option disabled selected >Select Name</option>
+											{% for user in users %}
+										    
+										    <option value="{{ user.username }}">{{ user.username}}</option>
+											{% endfor %}
+										
+										</select>
 									</div>
 									
                                     <div class="form-group col-md-6">
@@ -96,6 +104,7 @@
 									 <div class="form-group col-md-6">
 										<label for="food_payment">Food Payment</label>
 										<select class="form-control" id="food_payment" name="food_payment" >
+											<option disabled selected >Select Service Name</option>
 											{% for pay in payments %}
 										    <option value="{{ pay.Services }}" data-cost-food="{{ pay.Payment }}">{{ pay.Services }}</option>
 											{% endfor %}
@@ -112,7 +121,9 @@
                                     </div>
 									<div class="form-group col-md-6">
 										<label for="payment-type">Bed Payment</label>
+									
 										<select class="form-control" id="bed_payment" name="bed_payment">
+											<option disabled selected >Select Service Name</option>
 											{% for pay in payments %}
 										    <option value="{{ pay.Services }}" data-cost-bed="{{ pay.Payment }}">{{ pay.Services }}</option>
 											{% endfor %}
@@ -127,6 +138,7 @@
 									<div class="form-group col-md-6">
 										<label for="card_payment">Card Payment</label>
 										<select class="form-control" id="card_payment" name="card_payment">
+											<option disabled selected >Select Service Name</option>
 											{% for pay in payments %}
 										    <option value="{{ pay.Services }}" data-cost-card="{{ pay.Payment }}">{{ pay.Services }}</option>
 											{% endfor %}
@@ -141,6 +153,7 @@
 									<div class="form-group col-md-6">
 										<label for="lab_payment">Lab Payment</label>
 										<select class="form-control" id="lab_payment" name="lab_payment">
+											<option disabled selected >Select Service Name</option>
 											{% for pay in payments %}
 										    <option value="{{ pay.Services }}" data-cost-lab="{{ pay.Payment }}">{{ pay.Services }}</option>
 											{% endfor %}
@@ -155,6 +168,7 @@
 									<div class="form-group col-md-6">
 										<label for="other">Other Service</label>
 										<select class="form-control" id="other" name="other">
+											<option disabled selected >Select Service Name</option>
 											{%  for pay in payments %}
 										    <option value="{{ pay.Services }}" data-cost="{{ pay.Payment }}">{{ pay.Services }}</option>
 											{% endfor %}
@@ -180,12 +194,14 @@
 										<label for="payment-type">Payment Type</label>
 										
 										<select class="form-control" id="payment-type" name="payment_type" >
+											<option disabled selected >Select Payment Method</option>
 											{% for pay in payments %}
 										    <option value="{{ pay.Payment_method }}">{{ pay.Payment_method }}</option>
 											{% endfor %}
 										</select>
 										
                                     </div>	
+                              
                                     																
 									<div class="form-check col-md-12 mb-2">
 										<div class="text-left">

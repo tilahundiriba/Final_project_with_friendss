@@ -85,7 +85,7 @@
 									
 										
 										<select class="form-control" id="dr_name" name="dr_name">
-											<option>Select Name</option>
+											<option>Choose Name</option>
 											{% for user in users %}
 											<option value="{{user.username}}">{{user.username}}</option>
 											{% endfor %}
@@ -99,6 +99,7 @@
 									<div class="form-group col-md-6">
 										<label for="time-slot">Time Slot</label>
 										<select class="form-control" id="time-slot" name="time_slot">
+											<option selected disabled>Choose Time</option>
 											<option>10AM-11AM</option>
 											<option>11AM-12pm</option>
 											<option>12PM-01PM</option>
@@ -112,21 +113,21 @@
 									</div>
 									<div class="form-group col-md-6">
 										<label for="app_status">Status</label>
-										<input type="text" placeholder="Status" class="form-control" id="app_status" name="status">
+										<!-- <input type="text" placeholder="Status" class="form-control" id="app_status" name="status"> -->
+										<select class="form-control" id="app_status" name="app_status">
+											<option selected disabled>Choose Status</option>
+											<option value="Completed">Completed</option>
+											<option value="Pending">Pending</option>
+											<option value="Cancelled">Cancelled</option>
+											
+										</select>
 									</div>
 									<div class="form-group col-md-12">
 										<label for="problem">Problem</label>
 										<textarea placeholder="Problem" class="form-control" id="problem" rows="3" name="problem"></textarea>
 									</div>
 																		
-									<div class="form-check col-md-12 mb-2">
-										<div class="text-left">
-											<div class="custom-control custom-checkbox">
-												<input class="custom-control-input" type="checkbox" id="ex-check-2">
-												<label class="custom-control-label" for="ex-check-2">Please Confirm</label>
-											</div>
-										</div>
-									</div>
+								
 									<div class="form-group col-md-6 mb-3">
 										<button type="submit" class="btn btn-primary btn-lg">Submit</button>
 									</div>

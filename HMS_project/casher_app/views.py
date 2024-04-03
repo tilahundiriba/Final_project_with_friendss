@@ -34,6 +34,7 @@ def casher_dash_content(request):
 def dis_bill(request):
     return render(request,'casher_dash/bill.html')
 def add_payment(request):
+    users = User.objects.all()
     payed=False
     if request.method == 'POST':
         patient_id = request.POST.get('patient_id')
@@ -52,11 +53,7 @@ def add_payment(request):
         other_p_amount = float(request.POST.get('other_amount'))
         payemnt_method = request.POST.get('payment_type')
         total =f_p_amount + b_p_amount +c_p_amount+l_p_amount+other_p_amount
-        # food=f_payment + f_p_amount
-        # bed=b_payment + b_p_amount
-        # card=c_payment + c_p_amount
-        # lab=l_payment + l_p_amount
-        # other= other_payment + other_p_amount
+     
         try:
             patient = get_object_or_404( PatientRegister,patient_id=patient_id)
             casher = get_object_or_404(User, username=casher_name)
@@ -84,7 +81,7 @@ def add_payment(request):
         payed=True
         return redirect("add-payment")
     payment = ServicePayment.objects.all()
-    return render(request,'casher_dash/add-payment.html',{'payments':payment,'payed':payed})
+    return render(request,'casher_dash/add-payment.html',{'payments':payment,'payed':payed,'users':users})
 def about_payment(request):
     return render(request,'casher_dash/about-payment.html')
 def dis_payment(request):

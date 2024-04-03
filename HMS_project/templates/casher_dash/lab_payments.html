@@ -64,7 +64,7 @@
             <form action="{% url 'checked_payment_request' pay.PatientID %}">
               <button type='submit' class="btn btn-outline-primary mt-3 mb-0 me-4"><span class="ti-eye"></span>
                 Payed</button>
-              <a href="#" class="btn btn-outline-info mt-3 mb-0"><span class="ti-pencil-alt"></span>
+              <a href="{% url 'add-payment' %}" class="btn btn-outline-info mt-3 mb-0"><span class="ti-pencil-alt"></span>
                 Pay</a>
             </form>
 

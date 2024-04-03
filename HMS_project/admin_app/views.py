@@ -108,6 +108,7 @@ def logout_view(request):
     return redirect('user_log')
 
 def createUserAccount(request):
+    created=False
     if request.method == 'POST':
         email = request.POST.get('email')
         role = request.POST.get('role')
@@ -143,11 +144,11 @@ def createUserAccount(request):
             html_message=html_message,
             fail_silently=False,
         )
-
+        created=True
         # Redirect to account list after account creation
-        return redirect('dis_dash_content')
+        return render(request, 'admin_dash/add_staff.html',{'created':created})
 
-    return render(request, 'admin_dash/user_registration2.html')
+    return render(request, 'admin_dash/add_staff.html')
 def dis_login2(request):
     return render(request,'admin_dash/login.html')
 def dis_base(request):
@@ -191,7 +192,7 @@ def display_users(request):
         combined_data.append(user_dict)
     return render(request,'admin_dash/staffs.html',{'combined_datas':combined_data})
 def dis_user_registration(request):
-    return render(request,'admin_dash/user_registration2.html')
+    return render(request,'admin_dash/add-staff.html')
 def dis_web_home(request):
     return render(request,'admin_dash/web_home.html')
 def edit_staff(request):

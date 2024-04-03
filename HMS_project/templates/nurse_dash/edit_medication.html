@@ -68,7 +68,7 @@
                     <div class="col-md-12">
                         <div class="widget-area-2 proclinic-box-shadow">
                             <h3 class="widget-title"> Edit Medication Record </h3>
-                            <form action="{% url 'edit_medication' medications.id %}" method="post">
+                            <form action="{% url 'edit_medication' medications.Med_no %}" method="post">
                                 {% csrf_token %}
                                 <div class="form-row">
                                     <div class="form-group col-md-6">

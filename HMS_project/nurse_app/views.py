@@ -57,8 +57,8 @@ def add_medication(request):
 def dis_medication(request):
     medications = Medication.objects.all()
     return render(request,'nurse_dash/dis_medication.html',{'medications':medications})
-def edit_medication(request,id):
-    medications = Medication.objects.get(pk=id)
+def edit_medication(request,med_no):
+    medications = Medication.objects.get(Med_no=med_no)
     users= User.objects.all()
     if request.method == 'POST':
         patient_id = request.POST.get('patient_id')
@@ -68,8 +68,9 @@ def edit_medication(request,id):
         nurse_name = request.POST.get('nurseid')
         remark = request.POST.get('remark')
         nurse_name = get_object_or_404( User,username=nurse_name)
+        patient = get_object_or_404( PatientRegister,patient_id=patient_id)
     
-        medications.Patient_id=patient_id
+        medications.Patient_id=patient
         medications.Med_time=med_time
         medications.Bed_no=bed_no
         medications.Remark=remark

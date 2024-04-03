@@ -250,7 +250,7 @@ def create_appointment(request):
         time_slot = request.POST.get('time_slot')
         doctor_name = request.POST.get('dr_name')
         app_reseon = request.POST.get('problem')
-        app_status = request.POST.get('status')
+        app_status = request.POST.get('app_status')
      
         # Extract other fields similarly
         try:

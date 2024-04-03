@@ -29,6 +29,6 @@ class Medication(models.Model):
     Med_time=models.TextField(max_length=100)
     Bed_no=models.CharField(max_length=100)
     Remark=models.TextField(max_length=100)
-    Nurse_name=models.TextField(max_length=100)
+    Nurse_name=models.ForeignKey(User,on_delete=models.CASCADE)
     Drugs=models.TextField(max_length=100)
-    # Med_no=models.TextField(max_length=100 ,primary_key=True)
+    Med_no=models.AutoField(primary_key=True)
