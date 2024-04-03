@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from django.shortcuts import get_object_or_404
 from admin_app .models import UserProfileInfo2
 from receptionist_app.models import PatientRegister
-from.models import RoomInformation,VitalInformation
+from.models import RoomInformation,VitalInformation,Medication
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
@@ -29,11 +29,55 @@ def nurse_profile_update(request, user_id):
 
 
 def add_medication(request):
-    return render(request,'nurse_dash/add_medication.html')
+    users= User.objects.all()
+    registered=False
+    if request.method == 'POST':
+        patient_id = request.POST.get('patient_id')
+        med_time = request.POST.get('MediTime')
+        bed_no = request.POST.get('Bedno')
+        drug = request.POST.get('drugs')
+        nurse_name = request.POST.get('nurseid')
+        remark = request.POST.get('remark')
+      
+        patient = get_object_or_404( PatientRegister,patient_id=patient_id)
+        nurse_name = get_object_or_404( User,username=nurse_name)
+        med = Medication(
+            Patient_id=patient,
+            Med_time=med_time,
+            Bed_no=bed_no,
+            Remark=remark,
+            Nurse_name=nurse_name,
+            Drugs=drug,
+           
+        )
+        med.save()
+        registered=True
+        return render(request,'nurse_dash/add_medication.html',{'registered':registered,'users':users})
+    return render(request,'nurse_dash/add_medication.html',{'users':users})
 def dis_medication(request):
-    return render(request,'nurse_dash/dis_medication.html')
-def edit_medication(request):
-    return render(request,'nurse_dash/edit_medication.html')
+    medications = Medication.objects.all()
+    return render(request,'nurse_dash/dis_medication.html',{'medications':medications})
+def edit_medication(request,id):
+    medications = Medication.objects.get(pk=id)
+    users= User.objects.all()
+    if request.method == 'POST':
+        patient_id = request.POST.get('patient_id')
+        med_time = request.POST.get('MediTime')
+        bed_no = request.POST.get('Bedno')
+        drug = request.POST.get('drugs')
+        nurse_name = request.POST.get('nurseid')
+        remark = request.POST.get('remark')
+        nurse_name = get_object_or_404( User,username=nurse_name)
+    
+        medications.Patient_id=patient_id
+        medications.Med_time=med_time
+        medications.Bed_no=bed_no
+        medications.Remark=remark
+        medications.Nurse_name=nurse_name
+        medications.Drugs=drug
+        medications.save()
+        return redirect('dis_medication')
+    return render(request,'nurse_dash/edit_medication.html',{'medications':medications,'users':users})
 def add_vital_info(request):
     users= User.objects.all()
     registered=False

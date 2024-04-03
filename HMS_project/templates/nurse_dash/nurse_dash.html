@@ -93,7 +93,7 @@
                     <li class="sidebar-item">
                         <a href="#" class="sidebar-link collapsed" data-bs-target="#posts" data-bs-toggle="collapse"
                             aria-expanded="false"><i class="fa-solid fa-hospital-user pe-2"></i>
-                            Patients
+                            Vital Informations
                         </a>
                         <ul id="posts" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                             <li class="sidebar-item">
@@ -139,10 +139,10 @@
                                 <a href="{% url 'add_medication' %}" class="sidebar-link">Add Medication</a>
                             </li>
                             <li class="sidebar-item">
-                                <a href="#" class="sidebar-link">View Medication</a>
+                                <a href="{% url 'dis_medication' %}" class="sidebar-link">View Medication</a>
                             </li>
                             <li class="sidebar-item">
-                                <a href="{% url 'edit_medication' %}" class="sidebar-link">Edit Medicationt</a>
+                                <a href="#" class="sidebar-link">Edit Medication</a>
                             </li>
                         </ul>
                     </li>
