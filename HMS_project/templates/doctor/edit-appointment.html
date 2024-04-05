@@ -7,6 +7,7 @@
 
 
 <!-- Mirrored from www.konnectplugins.com/proclinic/Horizontal/edit-appointment.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 24 Jan 2022 10:42:01 GMT -->
+
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -30,104 +31,25 @@
 	<div class="wrapper">
 		<!-- Page Content -->
 		<div id="content">
-				<!-- Top Navigation -->
-				<!-- <div class="container top-brand">
-					<nav class="navbar navbar-default">			
-						<div class="navbar-header">
-							<div class="sidebar-header"> <a href="index.html"><img src="images/logo-dark.png" class="logo" alt="logo"></a>
-							</div>
-						</div>
-						<ul class="nav justify-content-end">
-							<li class="nav-item">
-								<a class="nav-link">
-									<span title="Fullscreen" class="ti-fullscreen fullscreen"></span>
-								</a>							
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" data-toggle="modal" data-target=".proclinic-modal-lg">
-									<span class="ti-search"></span>
+
+			<div class="container mt-0">
+				<div class="row breadcrumb-bar">
+					<div class="col-md-6">
+						<h3 class="block-title">Edit Appointment</h3>
+					</div>
+					<div class="col-md-6">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item">
+								<a href="#">
+									<span class="ti-home"></span>
 								</a>
-								<div class="modal fade proclinic-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
-									<div class="modal-dialog modal-lorvens">
-										<div class="modal-content proclinic-box-shadow2">
-											<div class="modal-header">
-												<h5 class="modal-title">Search Patient/Doctor:</h5>
-												<span class="ti-close" data-dismiss="modal" aria-label="Close">
-												</span>
-											</div>
-											<div class="modal-body">
-												<form>
-													<div class="form-group">
-														<input type="text" class="form-control" id="search-term" placeholder="Type text here">
-														<button type="button" class="btn btn-lorvens proclinic-bg">
-															<span class="ti-location-arrow"></span> Search</button>
-													</div>
-												</form>
-											</div>
-										</div>
-									</div>
-								</div>
 							</li>
-							<li class="nav-item">
-								<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
-								 aria-expanded="false">
-									<span class="ti-announcement"></span>
-								</a>
-								<div class="dropdown-menu proclinic-box-shadow2 notifications animated flipInY">
-									<h5>Notifications</h5>
-									<a class="dropdown-item" href="#">
-										<span class="ti-wheelchair"></span> New Patient Added</a>
-									<a class="dropdown-item" href="#">
-										<span class="ti-money"></span> Patient payment done</a>
-									<a class="dropdown-item" href="#">
-										<span class="ti-time"></span>Patient Appointment booked</a>
-									<a class="dropdown-item" href="#">
-										<span class="ti-wheelchair"></span> New Patient Added</a>
-								</div>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
-								 aria-expanded="false">
-									<span class="ti-user"></span>
-								</a>
-								<div class="dropdown-menu proclinic-box-shadow2 profile animated flipInY">
-									<h5>John Willing</h5>
-									<a class="dropdown-item" href="#">
-										<span class="ti-settings"></span> Settings</a>
-									<a class="dropdown-item" href="#">
-										<span class="ti-help-alt"></span> Help</a>
-									<a class="dropdown-item" href="#">
-										<span class="ti-power-off"></span> Logout</a>
-								</div>
-							</li>
-						</ul>
-				
-					</nav>
-				</div> -->
-				<!-- /Top Navigation -->
-				<!-- Menu -->
-				{% include 'doctor/navbar.html' %}
-				<!-- /Menu -->
-				<!-- Breadcrumb -->
-				<!-- Page Title -->
-				<div class="container mt-0">
-					<div class="row breadcrumb-bar">
-						<div class="col-md-6">
-							<h3 class="block-title">Edit Appointment</h3>
-						</div>
-						<div class="col-md-6">
-							<ol class="breadcrumb">
-								<li class="breadcrumb-item">
-									<a href="#">
-										<span class="ti-home"></span>
-									</a>
-								</li>
-								<li class="breadcrumb-item">Appointments</li>
-								<li class="breadcrumb-item ">Edit Appointment</li>
-							</ol>
-						</div>
+							<li class="breadcrumb-item">Appointments</li>
+							<li class="breadcrumb-item ">Edit Appointment</li>
+						</ol>
 					</div>
 				</div>
+			</div>
 			<!-- /Page Title -->
 
 			<!-- /Breadcrumb -->
@@ -143,7 +65,8 @@
 								<div class="form-row">
 									<div class="form-group col-md-6">
 										<label for="patient-name">Patient ID</label>
-										<input type="text" value="P654T" class="form-control" placeholder="Patient ID" id="patient-id">
+										<input type="text" value="P654T" class="form-control" placeholder="Patient ID"
+											id="patient-id">
 									</div>
 									<div class="form-group col-md-6">
 										<label for="department">Department</label>
@@ -155,11 +78,13 @@
 									</div>
 									<div class="form-group col-md-6">
 										<label for="doctor-name">Doctor Name</label>
-										<input type="text" value="Dr Kiran Sharma" placeholder="Doctor Name" class="form-control" id="doctor-name">
+										<input type="text" value="Dr Kiran Sharma" placeholder="Doctor Name"
+											class="form-control" id="doctor-name">
 									</div>
 									<div class="form-group col-md-6">
 										<label for="appointment-date">Appointment Date</label>
-										<input type="date" value="2018-11-12" placeholder="Appointment Date" class="form-control" id="appointment-date">
+										<input type="date" value="2018-11-12" placeholder="Appointment Date"
+											class="form-control" id="appointment-date">
 									</div>
 									<div class="form-group col-md-6">
 										<label for="time-slot">Time Slot</label>
@@ -177,13 +102,15 @@
 									</div>
 									<div class="form-group col-md-6">
 										<label for="token-number">Token Number <small>(Auto Generated)</small></label>
-										<input type="text" value="58" placeholder="Token Number" class="form-control" id="token-number">
+										<input type="text" value="58" placeholder="Token Number" class="form-control"
+											id="token-number">
 									</div>
 									<div class="form-group col-md-12">
 										<label for="problem">Problem</label>
-										<textarea placeholder="Problem" class="form-control" id="problem" rows="3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur convallis egestas aliquet. Nunc ullamcorper massa in magna pulvinar, a eleifend felis condimentum.</textarea>
+										<textarea placeholder="Problem" class="form-control" id="problem"
+											rows="3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur convallis egestas aliquet. Nunc ullamcorper massa in magna pulvinar, a eleifend felis condimentum.</textarea>
 									</div>
-																		
+
 									<div class="form-group col-md-6 mb-3">
 										<button type="submit" class="btn btn-primary btn-lg">Update</button>
 									</div>
@@ -212,7 +139,9 @@
 			<!--Copy Rights-->
 			<div class="container">
 				<div class="d-sm-flex justify-content-center">
-				  <span class="text-muted text-center d-block d-sm-inline-block">Copyright © 2018 <a href="http://www.konnectplugins.com/" target="_blank">konnectcode</a>. All rights reserved.</span>
+					<span class="text-muted text-center d-block d-sm-inline-block">Copyright © 2018 <a
+							href="http://www.konnectplugins.com/" target="_blank">konnectcode</a>. All rights
+						reserved.</span>
 				</div>
 			</div>
 			<!-- /Copy Rights-->
@@ -230,5 +159,6 @@
 
 
 <!-- Mirrored from www.konnectplugins.com/proclinic/Horizontal/edit-appointment.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 24 Jan 2022 10:42:01 GMT -->
+
 </html>
 {% endblock %}

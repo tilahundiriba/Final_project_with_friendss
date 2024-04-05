@@ -37,7 +37,75 @@
  
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <style>
+        /* Default style for the div */
+        .js-sidebar {
+            display: block;
+            /* Hide the div by default */
+        }
 
+        #container-min {
+            display: none;
+        }
+
+        #navbar_id {
+            display: block;
+
+        }
+
+        /* Media query for screens less than or equal to 435px */
+        @media only screen and (max-width: 768px) {
+            .js-sidebar {
+                display: none;
+                /* Display the div when the screen is 435px or less */
+                
+            }
+
+            #container-min {
+                display: block;
+            }
+
+            #navbar_id {
+                display: none;
+            }
+        }
+
+
+
+
+    .unseen {
+        color: red;
+    }
+
+
+    .ti-announcement {
+        font-size: 20px;
+    }
+
+    .ti-announcement[data-count]:after {
+        position: absolute;
+        /* right: -10%; */
+        top: 15%; 
+        content: attr(data-count);
+        font-size: 46%;
+        padding: .6em;
+        border-radius: 999px;
+        line-height: .75em;
+        color: white;
+        background: rgba(255, 0, 0, .85);
+        text-align: center;
+        min-width: 2em;
+        font-weight: bold;
+    }
+
+    .badge{
+        width: 100px;
+        height: 30px;
+        padding: auto;
+        padding-top: 10px;
+        font-size: smaller;
+    }
+    </style>
   
 
 
@@ -45,7 +113,7 @@
 
 <body>
     <div class="wrapper">
-        <aside id="sidebar" class="js-sidebar bg-success">
+        <aside id="sidebar" class="js-sidebar" style="background-color: rgb(34, 146, 183);">
             <!-- Content For Sidebar -->
             <div class="h-100">
                 {% if request.user.is_authenticated %}
@@ -129,7 +197,7 @@
             </div>
         </aside>
         <div class="main">
-            <nav class="navbar navbar-expend px-3 border-bottom bg-success" id="navbar_id">
+            <nav class="navbar navbar-expend px-3 border-bottom " id="navbar_id">
                 <button class="btn text-white" id="sidebar-toggle" type="button">
                     <span class="navbar-toggler-icon text-white"></span>
                 </button>
@@ -215,6 +283,10 @@
 				
 					</nav>
 				</div>
+                
+			<!-- /Menu -->
+			{% include 'receptionist_dash/navbar.html' %}
+			<!-- Breadcrumb -->
                 {% block content %}
             
                 </nav>

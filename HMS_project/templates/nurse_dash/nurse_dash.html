@@ -69,7 +69,7 @@
 
 <body>
     <div class="wrapper">
-        <aside id="sidebar" class="js-sidebar bg-primary">
+        <aside id="sidebar" class="js-sidebar" style="background-color: rgb(34, 146, 183);">
             <!-- Content For Sidebar -->
             <div class="h-100">
                 {% if request.user.is_authenticated %}
@@ -260,7 +260,9 @@
 						</ul>
 				
 					</nav>
+                    
 				</div>
+                {% include 'nurse_dash/navbar.html' %}
                 {% block content %}
           
                 </nav>

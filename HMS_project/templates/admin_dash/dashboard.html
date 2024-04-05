@@ -76,7 +76,7 @@
 
 <body>
   <div class="wrapper">
-    <aside id="sidebar" class="js-sidebar bg-success">
+    <aside id="sidebar" class="js-sidebar" style="background-color: rgb(34, 146, 183);">
       <!-- Content For Sidebar -->
       <div class="h-100">
        
@@ -278,6 +278,11 @@
         
           </nav>
         </div>
+        	
+				<!-- Menu -->
+				{% include 'admin_dash/navbar.html' %}
+				<!-- /Menu -->
+				<!-- Breadcrumb -->
         {% block content %}
 
         <body>
@@ -296,10 +301,7 @@
             <!-- Page Content -->
             <div id="content">
               <!-- Top Navigation -->
-         
-              {% include 'admin_dash/navbar.html' %}
-              <!-- /Menu -->
-              <!-- Breadcrumb -->
+       
               <!-- Page Title -->
               <div class="container mt-0">
                 <div class="row breadcrumb-bar">
