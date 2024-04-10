@@ -120,9 +120,7 @@
                             <li class="sidebar-item">
                                 <a href="{% url 'dis_room' %}" class="sidebar-link">View Rooms</a>
                             </li>
-                            <li class="sidebar-item">
-                                <a href="{% url 'edit_room' %}" class="sidebar-link">Edit Rooms</a>
-                            </li>
+                           
 
                         </ul>
                     </li>
@@ -141,9 +139,24 @@
                             <li class="sidebar-item">
                                 <a href="{% url 'dis_medication' %}" class="sidebar-link">View Medication</a>
                             </li>
+                           
+                        </ul>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="#" class="sidebar-link collapsed" data-bs-target="#allocate" data-bs-toggle="collapse"
+                            aria-expanded="false">
+                      
+                            <i class="fa fa-bed pe-2" aria-hidden="true"></i>
+                            Bed Allocations
+                        </a>
+                        <ul id="allocate" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                             <li class="sidebar-item">
-                                <a href="#" class="sidebar-link">Edit Medication</a>
+                                <a href="{% url 'allocate_room' %}" class="sidebar-link">Allocate Bed</a>
                             </li>
+                            <li class="sidebar-item">
+                                <a href="{% url 'dis_allocate_bed' %}" class="sidebar-link">View Allocate</a>
+                            </li>
+                           
                         </ul>
                     </li>
                     <li class="sidebar-item">

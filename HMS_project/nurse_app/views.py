@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from django.shortcuts import get_object_or_404
 from admin_app .models import UserProfileInfo2
 from receptionist_app.models import PatientRegister
-from.models import RoomInformation,VitalInformation,Medication
+from.models import RoomInformation,VitalInformation,Medication,BedInformation
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
@@ -126,21 +126,61 @@ def add_room(request):
         room_no = request.POST.get('room_no')
         bed_no = request.POST.get('bed_no')
         status = request.POST.get('status')
+        room_type = request.POST.get('room-type')
         room_info = RoomInformation(
             Room_block=room_block,
             Room_no=room_no,
             Bed_no=bed_no,
             Status=status,
+            Room_type=room_type,
         )
         room_info.save()
         registered=True
         return render(request,'nurse_dash/add-room.html',{'registered':registered})  # Redirect to a success page or another URL
     return render(request,'nurse_dash/add-room.html')
-def edit_room(request):
-    return render(request,'nurse_dash/edit-room.html')
+def edit_room(request,bed_no):
+    rooms = RoomInformation.objects.get(Bed_no=bed_no)
+    if request.method == 'POST':
+        room_block = request.POST.get('block_no')
+        room_no = request.POST.get('room_no')
+        bed_noo = request.POST.get('bed_no')
+        status = request.POST.get('status')
+        room_type = request.POST.get('room-type')
+        rooms.Room_block=room_block
+        rooms.Room_no=room_no
+        rooms.Bed_no=bed_noo
+        rooms.Status=status
+        rooms.Room_type=room_type
+        rooms.save()
+        return redirect('dis_room')
+    return render(request,'nurse_dash/edit-room.html',{'rooms':rooms})
 def dis_room(request):
     room =RoomInformation.objects.all()
     return render(request,'nurse_dash/rooms.html',{'rooms':room})
+def allocate_room(request):
+    registered=False
+    if request.method == 'POST':
+        patient_id = request.POST.get('patient_id')
+        room_no = request.POST.get('room-number')
+        bed_no = request.POST.get('bed_no')
+        all_date = request.POST.get('allot-date')
+        room_type = request.POST.get('room-type')
+        patient = get_object_or_404( PatientRegister,patient_id=patient_id)
+        room_noo = get_object_or_404( RoomInformation,Room_no=room_no)
+        bed_info = BedInformation(
+            Patient_id=patient,
+            Room_no=room_noo,
+            Bed_no=bed_no,
+            Alloc_date=all_date,
+            Room_type=room_type,
+        )
+        bed_info.save()
+        registered=True
+        return render(request,'nurse_dash/Room_allocation.html',{'registered':registered})
+    return render(request,'nurse_dash/Room_allocation.html')
+def dis_bed_allocation(request):
+    alloc =BedInformation.objects.all()
+    return render(request,'nurse_dash/allocations.html',{'allocs':alloc})
 def dis_vitals(request):
     vitals =VitalInformation.objects.all()
     return render(request,'nurse_dash/vital_infos.html',{'vitals':vitals})

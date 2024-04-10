@@ -21,7 +21,7 @@ from django.urls import path,include
 from admin_app.views import change_credentials,logout_view
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('admin_app/', include('admin_app.urls')),
+    path('', include('admin_app.urls')),
     path('patient_app/', include('patient_app.urls')),
     path('doctor_app/', include('doctor_app.urls')),
     path('nurse_app/', include('nurse_app.urls')),

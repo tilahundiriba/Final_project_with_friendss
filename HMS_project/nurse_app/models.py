@@ -6,7 +6,15 @@ class RoomInformation(models.Model):
     Room_block=models.TextField(max_length=100)
     Room_no=models.TextField(max_length=100 ,primary_key=True)
     Bed_no=models.CharField(max_length=100)
+    Room_type=models.CharField(max_length=100,null=True)
     Status=models.TextField(max_length=100)
+
+class BedInformation(models.Model):
+    Patient_id=models.ForeignKey(PatientRegister,on_delete=models.CASCADE)
+    Room_no=models.ForeignKey(RoomInformation,on_delete=models.CASCADE)
+    Bed_no=models.CharField(max_length=100)
+    Room_type=models.CharField(max_length=100,null=True)
+    Alloc_date=models.DateField(max_length=100)
 
 class VitalInformation(models.Model):
     Patient_id=models.ForeignKey(PatientRegister,on_delete=models.CASCADE,related_name='nurse_vitalinfo_set',related_query_name='nurse_vitalinfo_set')
@@ -32,3 +40,4 @@ class Medication(models.Model):
     Nurse_name=models.ForeignKey(User,on_delete=models.CASCADE)
     Drugs=models.TextField(max_length=100)
     Med_no=models.AutoField(primary_key=True)
+
