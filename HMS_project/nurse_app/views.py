@@ -166,15 +166,14 @@ def allocate_room(request):
         all_date = request.POST.get('allot-date')
         room_type = request.POST.get('room-type')
         patient = get_object_or_404( PatientRegister,patient_id=patient_id)
-        room_noo = get_object_or_404( RoomInformation,Room_no=room_no)
-        bed_info = BedInformation(
+        room = get_object_or_404( RoomInformation,Room_no=room_no)
+        bed_info = BedInformation.objects.create(
             Patient_id=patient,
-            Room_no=room_noo,
+            Room_no=room,
             Bed_no=bed_no,
             Alloc_date=all_date,
             Room_type=room_type,
         )
-        bed_info.save()
         registered=True
         return render(request,'nurse_dash/Room_allocation.html',{'registered':registered})
     return render(request,'nurse_dash/Room_allocation.html')

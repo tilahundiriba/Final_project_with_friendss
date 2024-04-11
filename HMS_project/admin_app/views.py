@@ -39,20 +39,34 @@ from django.shortcuts import render, get_object_or_404
 from .models import User, UserProfileInfo2
 
 
-class NotificationListView(View):
-    def get(self, request, *args, **kwargs):
-        # Retrieve all notifications from the database
-        notifications = Notification.objects.all()
-        
-        # Create a list to store the notification messages
-        notification_messages = []
-        
-        # Iterate over the notifications and extract the messages
-        for notification in notifications:
-            notification_messages.append(notification.message)
-        
-        # Return the notification messages as a JSON response
-        return JsonResponse(notification_messages, safe=False)
+
+    
+from django.shortcuts import render
+from .models import Notification
+
+def notification_view(request):
+    # Fetch all notifications that haven't been seen by the user
+    notifications = Notification.objects.all()
+    unseen_count = Notification.objects.filter(seen=False).count()
+    
+    # Display the count of unseen messages to the user
+    # return render(request, 'notifications.html', {'unseen_count': unseen_count})
+    return render(request, 'admin_dash/seeNotifications.html', {'notifications': notifications,'unseen_count': unseen_count})
+
+from django.shortcuts import redirect
+from .models import Notification
+
+def mark_notification_as_seen(request, id):
+    # Get the notification by ID
+    notification = Notification.objects.get(id=id)
+    
+    # Mark the notification as seen
+    notification.seen = True
+    notification.save()
+    if 'unseen_count' in request.session:
+        request.session['unseen_count'] = max(0, request.session.get('unseen_count', 0) - 1)
+    return redirect('index')
+
 def poster(request):
     if request.method=='POST':
         message=request.POST.get('message')
@@ -159,9 +173,13 @@ def dis_dash(request):
     total_sum = total_sum or 0
     number_of_patient = PatientRegister.objects.count()
     number_of_app= Appointment.objects.count()
+    notifications = Notification.objects.all()
+    unseen_count = Notification.objects.filter(seen=False).count()
     return render(request,'admin_dash/dashboard.html',{'number_patients':number_of_patient,
                                                    'number_of_app':number_of_app,
-                                                   'total_amount':total_sum})
+                                                   'total_amount':total_sum,
+                                                   'notifications':notifications,
+                                                   'unseen_count':unseen_count})
 def dis_dash_content(request):
     return render(request,'admin_dash/dash_content.html')
 def dis_index(request):
@@ -169,9 +187,13 @@ def dis_index(request):
     total_sum = total_sum or 0
     number_of_patient = PatientRegister.objects.count()
     number_of_app= Appointment.objects.count()
+    notifications = Notification.objects.all()
+    unseen_count = Notification.objects.filter(seen=False).count()
     return render(request,'admin_dash/index.html',{'number_patients':number_of_patient,
                                                    'number_of_app':number_of_app,
-                                                   'total_amount':total_sum})
+                                                   'total_amount':total_sum,
+                                                   'notifications':notifications,
+                                                   'unseen_count':unseen_count})
 #admin views end here
 
 # doctor views start here

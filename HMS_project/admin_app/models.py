@@ -7,8 +7,9 @@ from django.contrib.auth.models import User
 
 # 1. 👇 Add the following line
 class Notification(models.Model):
-    message = models.CharField(max_length=100)
-    
+    message = models.TextField(max_length=500)
+    timestamp = models.DateTimeField(auto_now_add=True)
+    seen = models.BooleanField(default=False)
     def __str__(self):
         return self.message
 

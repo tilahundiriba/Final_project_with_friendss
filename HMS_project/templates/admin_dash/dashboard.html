@@ -69,6 +69,39 @@
         display: none;
       }
     }
+
+    .unseen {
+      color: red;
+    }
+
+
+    .ti-announcement {
+      font-size: 20px;
+    }
+
+    .ti-announcement[data-count]:after {
+      position: absolute;
+      /* right: -10%; */
+      top: 15%;
+      content: attr(data-count);
+      font-size: 46%;
+      padding: .6em;
+      border-radius: 999px;
+      line-height: .75em;
+      color: white;
+      background: rgba(255, 0, 0, .85);
+      text-align: center;
+      min-width: 2em;
+      font-weight: bold;
+    }
+
+    .badge {
+      width: 100px;
+      height: 30px;
+      padding: auto;
+      padding-top: 10px;
+      font-size: smaller;
+    }
   </style>
 
 
@@ -79,11 +112,11 @@
     <aside id="sidebar" class="js-sidebar" style="background-color: rgb(34, 146, 183);">
       <!-- Content For Sidebar -->
       <div class="h-100">
-       
+
         <div class="sidebar-logo">
-       <a href="#">LOGO</a>
+          <a href="#">LOGO</a>
         </div>
-   
+
         <ul class="sidebar-nav">
           <li class="sidebar-header">Elements</li>
           <li class="sidebar-item">
@@ -133,7 +166,7 @@
             </a>
             <ul id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
               <li class="sidebar-item">
-              <a href="{% url 'poster' %}" class="sidebar-link">Write Notifications</a>
+                <a href="{% url 'poster' %}" class="sidebar-link">Write Notifications</a>
               </li>
               <li class="sidebar-item">
                 <a href="#" class="sidebar-link">View Notifications</a>
@@ -199,9 +232,9 @@
         <!-- <img src="{% static 'images/profile.jpg'%}" class="avatar img-fluid rounded" alt="" /> -->
 
       </nav>
-      <main class="content px-3 py-2" >
-        <div class="container top-brand" >
-          <nav class="navbar navbar-default">			
+      <main class="content px-3 py-2">
+        <div class="container top-brand">
+          <nav class="navbar navbar-default">
             <div class="navbar-header">
               <div class="sidebar-header"> <a href="index.html">LOGO</a>
               </div>
@@ -210,7 +243,7 @@
               <li class="nav-item">
                 <a class="nav-link">
                   <span title="Fullscreen" class="ti-fullscreen fullscreen"></span>
-                </a>							
+                </a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" data-toggle="modal" data-target=".proclinic-modal-lg">
@@ -239,35 +272,30 @@
               </li>
               <li class="nav-item">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
-                 aria-expanded="false">
-                  <span class="ti-announcement"></span>
+                  aria-expanded="false">
+                  <span id="bellCount" class="ti-announcement" data-count="{{unseen_count}}"></span>
                 </a>
-                <div class="dropdown-menu proclinic-box-shadow2 notifications animated flipInY">
+                <div class="dropdown-menu proclinic-box-shadow2 notifications animated flipInY" >
                   <h5>Notifications</h5>
-                  <a class="dropdown-item" href="#">
-                    <span class="ti-wheelchair"></span> New Patient Added</a>
-                  <a class="dropdown-item" href="#">
-                    <span class="ti-money"></span> Patient payment done</a>
-                  <a class="dropdown-item" href="#">
-                    <span class="ti-time"></span>Patient Appointment booked</a>
-                  <a class="dropdown-item" href="#">
-                    <span class="ti-wheelchair"></span> New Patient Added</a>
+                  <ul style="max-width: 400px;">
+                
+                    {% include 'admin_dash/seeNotifications.html' %}
+                
+                  </ul> <!-- Empty <ul> element to contain the notifications -->
                 </div>
               </li>
               <li class="nav-item">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
-                 aria-expanded="false">
-                      <img src="{{ user.userprofileinfo2.profile_pic.url}}" alt="NOOOOOOo"
-                      class="rounded-circle"
-                      width="40"
-                      height="40">
+                  aria-expanded="false">
+                  <img src="{{ user.userprofileinfo2.profile_pic.url}}" alt="NOOOOOOo" class="rounded-circle" width="40"
+                    height="40">
                 </a>
-                
+
                 <div class="dropdown-menu proclinic-box-shadow2 profile animated flipInY">
                   <h5>{{ request.user.username }}</h5>
                   <a class="dropdown-item" href="#">
                     <span class="ti-settings"></span> Settings</a>
-                    
+
                   <a class="dropdown-item" href="#">
                     <span class="ti-help-alt"></span> Help</a>
                   <a class="dropdown-item" href="{% url 'logout' %}">
@@ -275,14 +303,15 @@
                 </div>
               </li>
             </ul>
-        
+
           </nav>
         </div>
-        	
-				<!-- Menu -->
-				{% include 'admin_dash/navbar.html' %}
-				<!-- /Menu -->
-				<!-- Breadcrumb -->
+
+        <!-- Menu -->
+        {% include 'admin_dash/navbar.html' %}
+        <!-- /Menu -->
+        <!-- Breadcrumb -->
+ 
         {% block content %}
 
         <body>
@@ -301,7 +330,7 @@
             <!-- Page Content -->
             <div id="content">
               <!-- Top Navigation -->
-       
+
               <!-- Page Title -->
               <div class="container mt-0">
                 <div class="row breadcrumb-bar">
@@ -353,6 +382,7 @@
                     </div>
                   </div>
                   <!-- /Widget Item -->
+              
                   <!-- Widget Item -->
                   <div class="col-md-4">
                     <div class="widget-area proclinic-box-shadow color-yellow">

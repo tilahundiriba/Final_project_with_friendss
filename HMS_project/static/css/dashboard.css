@@ -25,7 +25,7 @@ li {
 h4 {
     font-family: 'Poppins', sans-serif;
     font-size: 1.275rem;
-    color: var(--bs-emphasi-color);
+    color: white;
 }
 
 /* Layout for admin dashboard skeleton */
@@ -52,7 +52,7 @@ h4 {
     overflow: hidden;
     transition: all 0.35s ease-in-out;
     width: 100%;
-    background: var(--bs-dark-bg-subtle);
+    background: white;
 }
 
 /* Sidebar Elements Style */
@@ -87,6 +87,7 @@ a.sidebar-link {
     position: relative;
     display: block;
     font-size: 1rem;
+    background-color: #FFF;
 }
 
 .sidebar-link[data-bs-toggle="collapse"]::after {
@@ -100,6 +101,7 @@ a.sidebar-link {
     top: 1.4rem;
     transform: rotate(-135deg);
     transition: all .2s ease-out;
+    background-color: #FFF;
 }
 
 .sidebar-link[data-bs-toggle="collapse"].collapsed::after {

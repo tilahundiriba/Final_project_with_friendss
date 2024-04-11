@@ -24,10 +24,10 @@
     margin-bottom: 5px;
 }
 #logo span{
-    color:rgb(21, 179, 81);
+    color:rgb(34, 146, 183);
 }
 .navbar-toggler span{
-    color:rgb(21, 179, 81);
+    color:rgb(34, 146, 183);
 }
 .navbar-nav{
     margin-left: 20px;
@@ -41,11 +41,11 @@
     transition: 0.5s ease;
 }
 .nav-item .nav-link:hover{
-    background-color: rgb(21, 179, 81);
+    background-color: rgb(34, 146, 183);
     color: white;
 }
 #navbar form button{
-    background:rgb(21, 179, 81);
+    background:rgb(34, 146, 183);
     color: white;
     border:none ;
     border-radius: 30px;
@@ -82,7 +82,7 @@
 }
 .changecontent::after{
     content: ' ';
-    color: rgb(21, 179, 81);
+    color: rgb(34, 146, 183);
     text-shadow: 0px 1px 1px black;
     animation: changetext 10s infinite linear;
 }
@@ -118,7 +118,7 @@
     transition: 0.5s;
 }
 .home .content a:hover{
-    background: rgb(21, 179, 81);
+    background: rgb(34, 146, 183);
     color: white;
 }
 @media (max-width:850px){
@@ -149,7 +149,7 @@
     text-shadow: 0px 1px 1px black;
 }
 .main-txt h1 span{
-    color: rgb(21, 179, 81);
+    color: rgb(34, 146, 183);
 }
 .packages .card{
     border-radius: 10px;
@@ -175,7 +175,7 @@
     font-size: 15px;
 }
 .checked{
-    color: rgb(21, 179, 81);
+    color: rgb(34, 146, 183);
 }
 .star i{
     font-size: 15px;
@@ -187,7 +187,7 @@
 
     padding: 10px;
     text-decoration: none;
-    background: rgb(21, 179, 81);
+    background: rgb(34, 146, 183);
     color: white;
     border-radius: 5px;
     text-align:left ;
@@ -211,7 +211,7 @@
 .services .card i{
     font-size: 80px;
     text-align: center;
-    color: rgb(21, 179, 81);
+    color: rgb(34, 146, 183);
     margin-top: 35px;
 }
 .services .card .card-body h3{
@@ -248,7 +248,7 @@
     margin-left: 550px; 
     margin-top: 40px;
     text-decoration: none;
-    background: rgb(21, 179, 81);
+    background: rgb(34, 146, 183);
     color: white;
     border-radius: 5px;
     border: none;
@@ -285,7 +285,7 @@
     height: 38px;
     border: none;
     border-radius: 5px;
-    background: rgb(21, 179, 81);
+    background: rgb(34, 146, 183);
     color: white;
     letter-spacing: 2px;
     font-weight: 550;
@@ -329,7 +329,7 @@ ul{
     margin-bottom: 30px;
     font-weight: 400;
     font-size: 18px;
-    color: rgb(21, 179, 81);
+    color: rgb(34, 146, 183);
     text-transform: capitalize;
 }
 

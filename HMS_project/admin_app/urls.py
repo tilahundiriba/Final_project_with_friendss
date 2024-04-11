@@ -3,7 +3,7 @@ from . import views
 from django.contrib.auth import views as auth_views
 from django.conf import settings
 from django.conf.urls.static import static
-from .views import NotificationListView
+
 
 
 # urlpatterns = [
@@ -12,7 +12,8 @@ from .views import NotificationListView
 # ]
 urlpatterns = [
     path('poster/', views.poster, name='poster'),
-    # path('notifications/', NotificationListView.as_view(), name='notifications'),
+    # path('notifications/', views.notification_view, name='notifications'),
+    path('seen_notifications/<int:id>/', views.mark_notification_as_seen, name='seen_notifications'),
 
     path('register/',views.createUserAccount, name='createUserAccount'),
     path('password_reset/', auth_views.PasswordResetView.as_view(template_name='admin_app/password_reset_form.html'), name='password_reset'),
