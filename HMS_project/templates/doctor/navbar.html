@@ -26,7 +26,7 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
                         aria-haspopup="true" aria-expanded="false"><span class="ti-wheelchair"></span>
-                        Patients Information</a>
+                        Patients </a>
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="add-patient.html">View Patient info </a>
                         <a class="dropdown-item" href="patients.html">Update Patient info </a>
@@ -39,10 +39,10 @@
                         aria-haspopup="true" aria-expanded="false"><span class="ti-wheelchair"></span>
                         Patients History</a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="add-patient.html">Record Patient info </a>
-                        <a class="dropdown-item" href="patients.html">Update Patient info </a>
-                        <a class="dropdown-item" href="about-patient.html">View Patient info</a>
-                        <a class="dropdown-item" href="edit-patient.html">Edit Patient</a>
+                        <a class="dropdown-item" href="{% url 'add_history' %}">Add History </a>
+                        <a class="dropdown-item" href="{% url 'dis_history' %}">View History </a>
+                        <a class="dropdown-item" href="{% url 'dis_history' %}">check patient </a>
+                        
                     </div>
                 </li>
                 <li class="nav-item dropdown">
@@ -50,8 +50,10 @@
                         aria-haspopup="true" aria-expanded="false"><span class="ti-wheelchair"></span>
                         Appointment</a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="add-patient.html">View Appointment </a>
-                        <a class="dropdown-item" href="patients.html">Update Appointment </a>
+                        <a class="dropdown-item" href="{% url 'add-appointment' %}">Add Appointment </a>
+                        <a class="dropdown-item" href="{% url 'dis-appointment' %}">View Appointment </a>
+                        <a class="dropdown-item" href="{% url 'edit-appointment' %}">Edit Appointment </a>
+                        <a class="dropdown-item" href="{% url 'about-appointment' %}">About Appointments </a>
                     </div>
                 </li>
                 <li class="nav-item dropdown">
@@ -59,21 +61,41 @@
                         aria-haspopup="true" aria-expanded="false"><span class="ti-wheelchair"></span>
                         Laboratory</a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="add-patient.html">Send Order </a>
-                        <a class="dropdown-item" href="patients.html"> View Lab Result</a>
+                        <a class="dropdown-item" href="{% url 'add_lab' %}">Add Lab Test </a>
+                        <a class="dropdown-item" href="{% url 'lab_tests' %}" > View Lab Test</a>
+                        <a class="dropdown-item" href="#" > View Lab Result</a>
                     </div>
                 </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
                             aria-haspopup="true" aria-expanded="false"><span class="ti-wheelchair"></span>
-                            Medication</a>
+                            Prescriptions</a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="add-patient.html">Prescribe Medication</a>
+                            <a class="dropdown-item" href="{% url 'add_perscription' %}">Set Prescription </a>
+                            <a class="dropdown-item" href="{% url 'edit_perscription' %}">Edit Prescription</a>
+                            <a class="dropdown-item" href="{% url 'perscriptions' %}">View Prescription</a>
+                            <a class="dropdown-item" href="{% url 'about_perscription' %}">About Prescription</a>
                         </div>
+                        
                     </li>
+                
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                        aria-haspopup="true" aria-expanded="false"><span class="ti-wheelchair"></span>
+                        Notification</a>
+                   
                 </li>
 
-                
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                        aria-haspopup="true" aria-expanded="false"><span class="ti-wheelchair"></span>
+                        Setting</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="{% url 'show_doctor_profile' %}" >Profile</a>
+                            <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+                        </div>
+                </li>
+            </ul>
             </ul>
         </div>
     </nav>

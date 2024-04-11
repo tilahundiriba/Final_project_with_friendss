@@ -26,20 +26,31 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
                         aria-haspopup="true" aria-expanded="false"><span class="ti-wheelchair"></span>
-                        Bed</a>
+                        Rooms</a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="add-patient.html">Add Bed</a>
-                        <a class="dropdown-item" href="patients.html">Update Bed</a>
-                        <a class="dropdown-item" href="about-patient.html">View Bed</a>
-                        <a class="dropdown-item" href="edit-patient.html">Delete Bed</a>
+                        <a class="dropdown-item" href="{% url 'add_room' %}">Add Rooms</a>
+                        <a class="dropdown-item" href="{% url 'dis_room' %}">View Rooms</a>
+
                     </div>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
                         aria-haspopup="true" aria-expanded="false"><span class="ti-wheelchair"></span>
-                        Vital Info</a>
+                        Bed Allocation</a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="add-patient.html">Record Vital Info </a>
+                        <a class="dropdown-item" href="{% url 'allocate_room' %}">Allocate Bed</a>
+                        <a class="dropdown-item" href="{% url 'dis_allocate_bed' %}">View Allocated</a>
+
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                        aria-haspopup="true" aria-expanded="false"><span class="ti-wheelchair"></span>
+                        Vital Information</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="{% url 'vital_info' %}">Add Vital Info </a>
+                        <a class="dropdown-item" href="#">Vital Information </a>
+                        <a class="dropdown-item" href="{% url 'dis_vitals' %}">View Information </a>
                     </div>
                 </li>
                 <li class="nav-item dropdown">
@@ -47,10 +58,25 @@
                         aria-haspopup="true" aria-expanded="false"><span class="ti-wheelchair"></span>
                         Medication</a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="add-patient.html">Record Medication</a>
+                        <a class="dropdown-item" href="{% url 'add_medication' %}">Add Medication</a>
+                        <a class="dropdown-item" href="{% url 'dis_medication' %}">View Medication</a>
                     </div>
                 </li>
-                
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                        aria-haspopup="true" aria-expanded="false"><span class="ti-wheelchair"></span>
+                        Notification</a>
+                   
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                        aria-haspopup="true" aria-expanded="false"><span class="ti-wheelchair"></span>
+                        Setting</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="{% url 'show_nurse_profile' %}"  >Profile</a>
+                            <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+                        </div>
+                </li>
             </ul>
         </div>
     </nav>

@@ -16,22 +16,47 @@
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
                      aria-expanded="false"><span class="ti-wheelchair"></span> Patients</a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="add-patient.html">Add Patient</a>
-                        <a class="dropdown-item" href="patients.html">All Patients</a>
-                        <a class="dropdown-item" href="about-patient.html">Patient Details</a>
-                        <a class="dropdown-item" href="edit-patient.html">Edit Patient</a>
+                        <a class="dropdown-item" href="#">Add New Patient</a>
+                        <a class="dropdown-item" href="#">Patient History</a>
+                        <a class="dropdown-item" href="#">Approve Discharge</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown active">
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
-                     aria-expanded="false"><span class="ti-user"></span> Doctors</a>
+                     aria-expanded="false"><span class="ti-user"></span> Staffs</a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="add-doctor.html">Add Doctor</a>
-                        <a class="dropdown-item" href="doctors.html">All Doctors</a>
-                        <a class="dropdown-item" href="about-doctor.html">Doctor Details</a>
-                        <a class="dropdown-item" href="edit-doctor.html">Edit Doctor</a>
+                        <a class="dropdown-item" href="{% url 'createUserAccount' %}">Add New Staff</a>
+                        <a class="dropdown-item" href="{% url 'display_users' %}">View Staff</a>
                     </div>
                 </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                        aria-haspopup="true" aria-expanded="false"><span class="ti-wheelchair"></span>
+                        Notification</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="{% url 'poster' %}" >Write Notifications</a>
+                            <a class="dropdown-item" href="#">View Notifications</a>
+                        </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                        aria-haspopup="true" aria-expanded="false"><span class="ti-wheelchair"></span>
+                        Feedbacks</a>
+                        <div class="dropdown-menu">
+                          
+                            <a class="dropdown-item" href="#">View Feedback</a>
+                        </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                        aria-haspopup="true" aria-expanded="false"><span class="ti-wheelchair"></span>
+                        Reports</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#" >Add Report</a>
+                            <a class="dropdown-item" href="#">View Report</a>
+                        </div>
+                </li>
+                 
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
                      aria-expanded="false"><span class="ti-pencil-alt"></span> Appointments</a>
@@ -82,6 +107,7 @@
                      
                     </div>
                 </li>
+
             </ul>
         </div>
     </nav>
