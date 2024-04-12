@@ -57,7 +57,6 @@ INSTALLED_APPS = [
     'receptionist_app',
    'laboratory_app',
        'channels',
-       'corsheaders',
        'patient_app',
 ]
 
@@ -70,7 +69,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     # 'admin_app.alternative_admin.AdminFallbackMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
 
 ]
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -194,13 +192,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-CORS_ORIGIN_ALLOW_ALL = True  # Allow requests from any origin
-# Or specify allowed origins explicitly
-CORS_ALLOWED_ORIGINS = [
-    'http://127.0.0.1:8000',
-    'http://localhost:8000',
-    # Add other origins as needed
-]
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/

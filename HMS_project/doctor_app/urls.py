@@ -7,6 +7,7 @@ from django.conf.urls.static import static
 urlpatterns = [
 
     path('dis_dr_dash/', views.dis_dr_dash, name='dis_dr_dash'),
+    path('view_notification/', views.test_notification, name='view_notification'),
  
     path('dis_dr_dash_content/', views.dis_dr_dash_content, name='dis_dr_dash_content'),
 

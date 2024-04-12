@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from .models import PaymentModel,ServicePayment
+from .models import PaymentModel,ServicePayment,Discharge
 from django.shortcuts import get_object_or_404
 from admin_app.models import UserProfileInfo2
 from django.contrib.auth.models import User
@@ -29,6 +29,41 @@ def casher_profile_update(request, user_id):
 
 def casher_dash(request):
     return render(request,'casher_dash/casher_dash.html')
+def add_discharge(request):
+    users = User.objects.all()
+    payed=False
+    if request.method == 'POST':
+        patient_id = request.POST.get('patient_id')
+        casher_name = request.POST.get('casher_name')
+        discharge_date = request.POST.get('discharge_date')
+        reffer = request.POST.get('reffer')
+        status = request.POST.get('status')
+        reason = request.POST.get('reason')
+     
+ 
+     
+        try:
+            patient = get_object_or_404( PatientRegister,patient_id=patient_id)
+            casher = get_object_or_404(User, username=casher_name)
+            discharge = Discharge.objects.create(
+                Patient_id=patient,
+                Discharge_date=discharge_date,
+                Reason= reason,
+                Casher_id=casher,
+                Reffer_to=reffer,
+                Status=status
+            )
+        except PatientRegister.DoesNotExist:
+            # Handle the case where the patient is not found
+            # You can add appropriate error handling or redirect to an error page
+            pass
+        except UserProfileInfo2.DoesNotExist:
+            # Handle the case where the doctor is not found
+            # You can add appropriate error handling or redirect to an error page
+            pass
+        payed=True
+        return redirect("add-discharge")
+    return render(request,'casher_dash/add-discharge.html',{'users':users})
 def casher_dash_content(request):
     return render(request,'casher_dash/casher_dash_content.html')
 def dis_bill(request):

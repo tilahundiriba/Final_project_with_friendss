@@ -1,13 +1,13 @@
-<div class="widget-right" style="overflow: auto; max-height: 300px; max-width: 200px;">
+<div class="widget-right" >
     {% for notification in notifications %}
     {% if notification.seen == True %}
-    <p class="wiget-title text-success"> {{notification.message}}</p>
-    <p class="wiget-title text-success"> {{notification.timestamp}}</p>
+    <p class="wiget-title text-success" style="font-size: smaller;"> {{notification.message}}</p>
+    <p class="wiget-title text-success" style="font-size: smaller;"> {{notification.timestamp}}</p>
     <hr>
 
     {% else %}
-    <p class="wiget-title text-danger"> {{notification.message}}</p>
-    <p class="wiget-title text-danger"> {{notification.timestamp}}</p>
+    <p class="wiget-title text-danger " style="font-size: smaller;"> {{notification.message}}</p>
+    <p class="wiget-title text-danger" style="font-size: smaller;"> {{notification.timestamp}}</p>
     <a href="{% url 'seen_notifications' notification.id %}" class="btn btn-outline-primary "><span class="ti-eye">Mark
             as Seen</span></a>
     <hr>

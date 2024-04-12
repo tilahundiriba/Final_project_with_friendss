@@ -160,6 +160,8 @@ def dis_appointment(request):
     return render(request,'doctor/appointments.html',{'appointment':appointment})
 def about_appointment(request):
     return render(request,'doctor/about-appointment.html')
+def test_notification(request):
+    return render(request,'doctor/view_notification.html')
 def dis_history(request):
     histories = PatientHistory.objects.all()
     return render(request,'doctor/histories.html',{'histories':histories})

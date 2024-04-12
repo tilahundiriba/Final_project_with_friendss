@@ -210,7 +210,7 @@
                                 <a href="{% url 'lab_tests' %}" class="sidebar-link">View Lab Test</a>
                             </li>
                             <li class="sidebar-item">
-                                <a href="#" class="sidebar-link">View Lab Result</a>
+                                <a href="{% url 'view_notification' %}" class="sidebar-link">View notification</a>
                             </li>
                         </ul>
                     </li>
@@ -250,7 +250,7 @@
                 <!-- <img src="{% static 'images/profile.jpg'%}" class="avatar img-fluid rounded" alt="" /> -->
 
             </nav>
-            <main class="content px-3 py-2" style="background-color: white;">
+            <main class="content px-3 py-2 bg-light">
                 <div class="container top-brand">
 					<nav class="navbar navbar-default">			
 						<div class="navbar-header">
@@ -339,7 +339,7 @@
                 {% block content %}
               
                 </nav>
-                <main class="content px-3 py-2" >
+                <main class="content px-3 py-2 " >
                     <div class="container-fluid">
                         <div class="mb-3">
                             <h4>Dashboard</h4>

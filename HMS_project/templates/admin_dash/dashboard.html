@@ -230,7 +230,7 @@
         <!-- <img src="{% static 'images/profile.jpg'%}" class="avatar img-fluid rounded" alt="" /> -->
 
       </nav>
-      <main class="content px-3 py-2">
+      <main class="content px-3 py-2 bg-light">
         <div class="container top-brand">
           <nav class="navbar navbar-default">
             <div class="navbar-header">
@@ -275,7 +275,7 @@
                 </a>
                 <div class="dropdown-menu proclinic-box-shadow2 notifications animated flipInY" >
                   <h5>Notifications</h5>
-                  <ul style="max-width: 400px;">
+                  <ul style="overflow: auto; max-height: 300px; max-width: 200px;">
                 
                     {% include 'admin_dash/seeNotifications.html' %}
                 

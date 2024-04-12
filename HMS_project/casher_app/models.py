@@ -2,6 +2,7 @@ from django.db import models
 from receptionist_app.models import PatientRegister
 from admin_app.models import UserProfileInfo2
 from django.contrib.auth.models import User
+from nurse_app.models import BedInformation
 # Create your models here.
 class PaymentModel(models.Model):
     Patient_id=models.ForeignKey(PatientRegister, on_delete=models.CASCADE)
@@ -26,3 +27,25 @@ class ServicePayment(models.Model):
   
     def __str__(self):
         return f'{self.Payment,self.Services,self.Payment_method}'
+class Discharge(models.Model):
+    Discharge_no = models.AutoField(primary_key=True)
+    Patient_id = models.ForeignKey(PatientRegister, on_delete=models.CASCADE)
+    Reason = models.TextField(max_length=100, null=True)
+    Discharge_date = models.DateField(null=True)
+    Status = models.TextField(max_length=100, null=True)
+    No_days = models.BigIntegerField(null=True)
+    Reffer_to = models.TextField(max_length=100, null=True)
+    Approval = models.BooleanField(default=False)
+    Casher_name = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+
+    def save(self, *args, **kwargs):
+        # Calculate the number of days stayed before saving
+        if self.Discharge_date:
+            bed_info = BedInformation.objects.filter(Patient_id=self.Patient_id).first()
+            if bed_info:
+                alloc_date = bed_info.Alloc_date
+                self.No_days = (self.Discharge_date - alloc_date).days
+        super(Discharge, self).save(*args, **kwargs)
+
+    def __str__(self):
+        return f'{self.Patient_id}, {self.Discharge_no}, {self.Approval}'

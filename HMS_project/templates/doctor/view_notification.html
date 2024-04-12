@@ -1,106 +1,87 @@
-<!-- {% extends 'doctor/dr_dash.html' %}
+{% extends 'doctor/testbase.html' %}
+{% block title %} Home {% endblock %}
+{% block css_style %}
+<style>
+    .fa-solid {
+        font-size: 26px;
+    }
 
+    .fa-solid[data-count]:after {
+        position: absolute;
+        right: 0%;
+        top: 1%;
+        content: attr(data-count);
+        font-size: 36%;
+        padding: .6em;
+        border-radius: 999px;
+        line-height: .75em;
+        color: white;
+        background: rgba(255, 0, 0, .85);
+        text-align: center;
+        min-width: 2em;
+        font-weight: bold;
+    }
+</style>
 
+{% endblock %}
 {% block content %}
+<div class="container mt-5">
+    <h1 class="text-center">Welcome to Notify</h1>
+</div>
+{% endblock %}
 
+{% block js_script %}
 <script>
-    // setup chat socket
-    const notifySocket = new WebSocket(
+    // setup chat scoket
+    const notifyScoket = new WebSocket(
         'ws://'
         + window.location.host
         + '/ws/notify/'
     );
 
-    // Array to store all notifications
-    let notifications = [];
-
-    // Array to store unseen notifications
-    let unseenNotifications = [];
-
     // on socket open
-    notifySocket.onopen = function (e) {
+    notifyScoket.onopen = function (e) {
         console.log('Socket successfully connected.');
-        loadNotifications(); // Load notifications from the server when the socket is opened
     };
 
     // on socket close
-    notifySocket.onclose = function (e) {
+    notifyScoket.onclose = function (e) {
         console.log('Socket closed unexpectedly');
     };
 
     // on receiving message on group
-    notifySocket.onmessage = function (e) {
+    notifyScoket.onmessage = function (e) {
         const data = JSON.parse(e.data);
         const message = data.message;
         // Call the setMessage function to add the new li element
         setMessage(message);
+
     };
 
     function setMessage(message) {
         // Create a new li element
         var newLi = document.createElement('li');
-        
+
         // Create a new anchor element
         var newAnchor = document.createElement('a');
-        newAnchor.className = 'dropdown-item text-wrap unseen'; // Add the "unseen" class
+        newAnchor.className = 'dropdown-item text-wrap';
         newAnchor.href = '#';
-        newAnchor.textContent = message; // Set the text content of the anchor to the received message
-        
+        newAnchor.textContent = message;
+
         // Append the anchor element to the li element
         newLi.appendChild(newAnchor);
-        
+
         // Get the ul element with the id "notify"
         var ulElement = document.getElementById('notify');
-        
+
         // Append the new li element to the ul element
         ulElement.appendChild(newLi);
-        
-        // Add the notification to the array
-        notifications.push(newAnchor);
-        
-        // Add the unseen notification to the unseen array
-        unseenNotifications.push(newAnchor);
-        
-        // Get the current count of unseen notifications
-        var count = unseenNotifications.length;
-        
-        // Update the count on the bell icon
-        document.getElementById('bellCount').setAttribute('data-count', count);
-        
-        // Remove the "unseen" class from previous unseen notifications
-        unseenNotifications.forEach(notification => {
-            notification.classList.remove('unseen');
-        });
-        
-        // Add the "unseen" class to all unseen notifications
-        unseenNotifications.forEach(notification => {
-            notification.classList.add('unseen');
-        });
-        
-        // Decrease the count by 1 when the user views the notification
-        newAnchor.addEventListener('click', function() {
-            if (count > 0) {
-                count -= 1;
-                document.getElementById('bellCount').setAttribute('data-count', count);
-                newAnchor.classList.remove('unseen'); // Remove the "unseen" class
-            }
-        });
-    }
-    
-    
 
-    function loadNotifications() {
-        // Send a request to the server to retrieve notifications
-        fetch('http://localhost:8000/admin_app/notifications/') // Replace with the URL for retrieving notifications from the server
-            .then(response => response.json())
-            .then(data => {
-                data.forEach(notification => {
-                    setMessage(notification.message);
-                });
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
+        // getting object of count
+        count = document.getElementById('bellCount').getAttribute('data-count');
+        document.getElementById('bellCount').setAttribute('data-count', parseInt(count) + 1);
     }
+
+
 </script>
-{% endblock %} -->
+{% endblock %}
