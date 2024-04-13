@@ -251,46 +251,51 @@ def add_history(request):
     return render(request,'doctor/add_history.html',{'users':users,'notifications':notifications,
                                                 'unseen_count':unseen_count})
 
-def edit_history(request,history_no):
-    notifications = Notification.objects.all()
-    unseen_count = Notification.objects.filter(seen=False).count()
-    users= User.objects.all()
-    editing_history=False
-    history = PatientHistory.objects.get(pk=history_no)
-    if request.method == 'POST':
+def update_history(request, history_no):
         patient_id = request.POST.get('patient_id')
         date = request.POST.get('date')
-        syptoms = request.POST.get('symptom')
+        symptoms = request.POST.get('symptom')
         disease = request.POST.get('disease')
         doctor_name = request.POST.get('dr_name')
         nurse_name = request.POST.get('nr_name')
- 
-        # Create an instance of Appointment model and save it
-        try:
-            doctor = get_object_or_404(User, username=doctor_name)
-            nurse = get_object_or_404(User, username=nurse_name)
-           
-            history.Patient_ID=patient_id
-            history.Sympthom=syptoms
-            history.DiseaseName=disease
-            history.Nurse_ID=nurse
-            history.Doctor_ID=doctor
-            history.Date=date
-            history.save()
-            editing_history=True
-        except PatientRegister.DoesNotExist:
-            # Handle the case where the patient is not found
+        history = PatientHistory.objects.get(pk=history_no)  
+        doctor = get_object_or_404(User, username=doctor_name)
+        nurse = get_object_or_404(User, username=nurse_name)
+        patient = get_object_or_404( PatientRegister,patient_id=patient_id)
+
+        history.Patient_ID= patient
+        history.Sympthom = symptoms
+        history.DiseaseName = disease
+        history.Nurse_ID= nurse
+        history.Doctor_ID = doctor
+        history.Date = date
+        history.save()
+        return redirect('dis_history')  # Redirect to a success URL
+  
+
+
+def edit_history(request, history_no):
+    notifications = Notification.objects.all()
+    unseen_count = Notification.objects.filter(seen=False).count()
+    users = User.objects.all()
+   
+    try:
+        
+        history1 = get_object_or_404(PatientHistory, pk=history_no)
+        return render(request, 'doctor/edit_history.html', {
+    
+        'users': users,
+        'history': history1,
+        'notifications': notifications,
+        'unseen_count': unseen_count
+    })  # Redirect to a success URL
+    except PatientHistory.DoesNotExist:
+            # Handle the case where the user (doctor or nurse) is not found
             # You can add appropriate error handling or redirect to an error page
-            pass
-        except UserProfileInfo2.DoesNotExist:
-            # Handle the case where the doctor is not found
-            # You can add appropriate error handling or redirect to an error page
-            pass
-        # return redirect('add-appointment') 
-        return render(request,'doctor/edit_history.html',{'editing_history':editing_history,'users':users,'notifications':notifications,
-                                                'unseen_count':unseen_count})
-    return render(request,'doctor/edit_history.html',{'users':users,'history':history,'notifications':notifications,
-                                                'unseen_count':unseen_count})
+        return redirect('dis_history')
+       
+
+
 
 def create_appointment(request):
     notifications = Notification.objects.all()

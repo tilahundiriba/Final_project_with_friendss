@@ -5,6 +5,7 @@ class PatientHistory(models.Model):
     Patient_ID=models.ForeignKey(PatientRegister, on_delete=models.CASCADE)
     Date=models.DateField()
     Sympthom=models.CharField(max_length=100)
+    symptom2 = models.CharField(max_length=200 ,null=True)
     History_No=models.AutoField(primary_key=True)
     DiseaseName=models.CharField(max_length=100)
     Nurse_ID=models.ForeignKey(User,on_delete=models.CASCADE)

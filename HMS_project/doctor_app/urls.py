@@ -14,6 +14,8 @@ urlpatterns = [
     path('add_history/', views.add_history, name='add_history'),
     path('dis_history/', views.dis_history, name='dis_history'),
     path('edit_history/<int:history_no>/', views.edit_history, name='edit_history'),
+    path('update_history/<int:history_no>/', views.update_history, name='update_history'),
+   
 
     path('about-appointment/', views.about_appointment, name='about-appointment'),
     path('add-appointment/', views.create_appointment, name='add-appointment'),

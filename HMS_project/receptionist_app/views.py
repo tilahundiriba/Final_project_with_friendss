@@ -56,6 +56,7 @@ def add_patient(request):
         kebele = request.POST.get('kebele')
         recep_name = request.POST.get('rece_name')
         doctor_name = request.POST.get('assidoc')
+        symptom = request.POST.get('symptom')
         generated_id = 'SH' + get_random_string(length=6, allowed_chars='1234567890')
 
         recept = get_object_or_404(User, username=recep_name)
@@ -76,6 +77,7 @@ def add_patient(request):
         kebele=kebele,
         receptinist_name=recept,
         doctor_name=doctor,
+        symptom=symptom,
                 )
 
         patient_count = cache.get('patient_count', 0)
@@ -102,6 +104,15 @@ def check_patient(request, patient_id):
     return redirect('check_patient_data')
 
 
+def existing_patient(request):
+    form=False
+    if request.method == 'POST':
+        users= User.objects.all()
+        patient_id = request.POST.get('patient_id')
+        patient = get_object_or_404(PatientRegister, patient_id=patient_id)
+        form=True
+        return render(request, 'receptionist_dash/existing_patient.html', {'patients': patient,'users':users,'form':form})
+    return render(request, 'receptionist_dash/existing_patient.html', {'form': form})
 def delete_patient(request):
     if request.method == 'POST':
         search_query = request.POST.get('search_query')
@@ -118,8 +129,8 @@ def delete_patient(request):
              Q(country__icontains=search_query) |
              Q(city__icontains=search_query) |
              Q(region__icontains=search_query) |
-             Q(kebele__icontains=search_query) |
-             Q(staff__icontains=search_query)
+             Q(kebele__icontains=search_query) 
+            
 )
         if 'delete' in request.POST:
             # Handle deletion of selected employees
@@ -142,8 +153,8 @@ def receptionist_dash_content(request):
 def edit_patient(request,patient_id):
      try:
        patientid = get_object_or_404(PatientRegister, pk=patient_id)
-
-       return render(request,'receptionist_dash/edit-patient.html',{'patientid':patientid})
+       users= User.objects.all()
+       return render(request,'receptionist_dash/edit-patient.html',{'patientid':patientid,'users':users})
      except PatientRegister.DoesNotExist:
        return render(request,'receptionist_dash/edit-patient.html',{'message':'patient  not found'})
 
@@ -161,9 +172,13 @@ def update_patient(request,patient_id):
    country = request.POST.get('country')
    city = request.POST.get('city')
    region = request.POST.get('region')
+   date = request.POST.get('birth_date')
    kebele = request.POST.get('kebele')
-   doctor_id = request.POST.get('doctor_id')
-
+   doctor_id = request.POST.get('assidoc')
+   rece = request.POST.get('rece_name')
+   symptom = request.POST.get('symptom')
+   recept = get_object_or_404(User, username=rece)
+   doctor = get_object_or_404(User, username=doctor_id)
    patient = PatientRegister.objects.get(pk=patient_id)
    patient.first_name=first_name
    patient.middle_name=middle_name
@@ -174,7 +189,10 @@ def update_patient(request,patient_id):
    patient.country=country
    patient.city=city
    patient.region=region
+   patient.birth_date=date
    patient.kebele=kebele
-   patient.staff=doctor_id
+   patient.symptom=symptom
+   patient.doctor_name=doctor
+   patient.receptinist_name=recept
    patient.save()
    return redirect('dis_patient')

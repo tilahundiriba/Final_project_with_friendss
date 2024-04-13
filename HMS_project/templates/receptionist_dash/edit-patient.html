@@ -82,7 +82,11 @@
             <label for="last_name">Last Name</label>
             <input type="text" class="form-control" id="last_name" name="last_name" value="{{patientid.last_name }}">
         </div>
-    
+		<div class="form-group col-md-6">
+
+			<label for="birth-date">Date of Birth</label>
+			<input type="date" class="form-control" id="birth-date" name="birth_date">
+		</div>
         <div class="form-group col-md-6">
             <label for="age">Age</label>
             <input type="number" class="form-control" id="age" name="age" value="{{ patientid.age }}">
@@ -116,10 +120,29 @@
             <input type="text" class="form-control" id="kebele" name="kebele" value="{{ patientid.kebele }}">
         </div>
     
-    <div class="form-group col-md-6">
-        <label for="doctor_id">Doctor ID</label>
-        <input type="text" class="form-control" id="doctor_id" name="doctor_id" value="{{ patientid.staff }}">
-    </div>
+		<div class="form-group col-md-6">
+			<label for="assidoc"> Doctor Name</label>
+			<select class="form-control" id="assidoc" name="doctor_name">
+				<option selected disabled>Select Doctor</option>
+				{% for user in users %}
+					<option value="{{user.username}}">{{user.username}}</option>
+				{% endfor %}
+			
+			</select>
+		</div>
+		<div class="form-group col-md-6">
+			<label for="rece_name">Receptionist Name</label>
+				<select class="form-control" id="rece_name" name="rece_name">
+					<option selected disabled >Select Receptionist</option>
+					{% for user in users %}
+					<option value="{{user.username}}">{{user.username}}</option>
+				{% endfor %}
+				</select>
+		</div>
+		<div class="form-group col-md-12">
+			<label for="symptom">Symptoms</label>
+			<textarea placeholder="symptom" class="form-control" id="symptom" rows="3" name="symptom">{{ patientid.symptom }}</textarea>
+		</div>
     <button type="submit" class="btn btn-primary">Update</button>
 </form>
 </div>

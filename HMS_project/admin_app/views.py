@@ -130,13 +130,20 @@ def createUserAccount(request):
         email = request.POST.get('email')
         role = request.POST.get('role')
         special = request.POST.get('spec')
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        
         # Generate username and password
         username = generate_username(email, role)
         password = generate_password()
 
         # Create the user
         hashed_password = make_password(password)
-        user = User.objects.create_user(username=username, email=email, password=password)
+        user = User.objects.create_user(username=username,
+                                        first_name=first_name,
+                                        last_name=last_name ,
+                                        email=email,
+                                        password=password)
 
         # Create user profile
         user_profile = UserProfileInfo2.objects.create(
