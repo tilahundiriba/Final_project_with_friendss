@@ -8,8 +8,8 @@
     {% else %}
     <p class="wiget-title text-danger " style="font-size: smaller;"> {{notification.message}}</p>
     <p class="wiget-title text-danger" style="font-size: smaller;"> {{notification.timestamp}}</p>
-    <a href="{% url 'seen_notifications' notification.id %}" class="btn btn-outline-primary "><span class="ti-eye">Mark
-            as Seen</span></a>
+    <a href="{% url 'seen_notifications' notification.id %}" class="btn btn-outline-primary "><span class="ti-eye"></span></a>
+ 
     <hr>
     {% endif %}
     {% endfor %}

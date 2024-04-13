@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from .models import PaymentModel,ServicePayment,Discharge
 from django.shortcuts import get_object_or_404
-from admin_app.models import UserProfileInfo2
+from admin_app.models import UserProfileInfo2,Notification
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from receptionist_app.models import PatientRegister
@@ -9,7 +9,11 @@ from receptionist_app.models import PatientRegister
 @login_required
 def profile(request):
     user = request.user
-    return render(request, 'casher_dash/profile.html', {'user': user})
+    notifications = Notification.objects.all()
+    unseen_count = Notification.objects.filter(seen=False).count()
+    return render(request, 'casher_dash/profile.html', {'user': user,
+                                                        'notifications':notifications,
+                                                        'unseen_count':unseen_count})
 
 @login_required
 def casher_profile_update(request, user_id):
@@ -24,11 +28,17 @@ def casher_profile_update(request, user_id):
         user_profile.profile_pic = profile_pic
         user_profile.save()
         return redirect('show_casher_profile')
-    
-    return render(request, 'casher_dash/update_profile.html', {'user_id': user_id, 'user_profile': user_profile})
+    notifications = Notification.objects.all()
+    unseen_count = Notification.objects.filter(seen=False).count()
+    return render(request, 'casher_dash/update_profile.html', {'user_id': user_id, 
+                                                               'user_profile': user_profile,
+                                                               'notifications':notifications,
+                                                               'unseen_count':unseen_count})
 
 def casher_dash(request):
-    return render(request,'casher_dash/casher_dash.html')
+    notifications = Notification.objects.all()
+    unseen_count = Notification.objects.filter(seen=False).count()
+    return render(request,'casher_dash/casher_dash.html',{'notifications':notifications,'unseen_count':unseen_count})
 def add_discharge(request):
     users = User.objects.all()
     payed=False
@@ -63,12 +73,20 @@ def add_discharge(request):
             pass
         payed=True
         return redirect("add-discharge")
-    return render(request,'casher_dash/add-discharge.html',{'users':users})
+    notifications = Notification.objects.all()
+    unseen_count = Notification.objects.filter(seen=False).count()
+    return render(request,'casher_dash/add-discharge.html',{'users':users,
+                                                            'notifications':notifications,
+                                                            'unseen_count':unseen_count})
 def casher_dash_content(request):
-    return render(request,'casher_dash/casher_dash_content.html')
+    notifications = Notification.objects.all()
+    unseen_count = Notification.objects.filter(seen=False).count()
+    return render(request,'casher_dash/casher_dash_content.html',{'notifications':notifications,'unseen_count':unseen_count})
 def dis_bill(request):
     return render(request,'casher_dash/bill.html')
 def add_payment(request):
+    notifications = Notification.objects.all()
+    unseen_count = Notification.objects.filter(seen=False).count()
     users = User.objects.all()
     payed=False
     if request.method == 'POST':
@@ -116,11 +134,24 @@ def add_payment(request):
         payed=True
         return redirect("add-payment")
     payment = ServicePayment.objects.all()
-    return render(request,'casher_dash/add-payment.html',{'payments':payment,'payed':payed,'users':users})
+    return render(request,'casher_dash/add-payment.html',{'payments':payment,
+                                                          'payed':payed,
+                                                          'users':users,
+                                                          'notifications':notifications,
+                                                            'unseen_count':unseen_count})
 def about_payment(request):
-    return render(request,'casher_dash/about-payment.html')
+    notifications = Notification.objects.all()
+    unseen_count = Notification.objects.filter(seen=False).count()
+    return render(request,'casher_dash/about-payment.html',{'notifications':notifications,
+                                                            'unseen_count':unseen_count})
 def dis_payment(request):
-    return render(request,'casher_dash/payments.html')
+    notifications = Notification.objects.all()
+    unseen_count = Notification.objects.filter(seen=False).count()
+    return render(request,'casher_dash/payments.html',{'notifications':notifications,
+                                                            'unseen_count':unseen_count})
 def invoice(request):
-    return render(request,'casher_dash/invoice.html')
+    notifications = Notification.objects.all()
+    unseen_count = Notification.objects.filter(seen=False).count()
+    return render(request,'casher_dash/invoice.html',{'notifications':notifications,
+                                                            'unseen_count':unseen_count})
 #casher view end here.

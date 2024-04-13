@@ -3,7 +3,7 @@ from django.shortcuts import render
 from .models import  Appointment,Prescription,Laboratory,PatientHistory
 from receptionist_app.models import PatientRegister
 from django.shortcuts import get_object_or_404
-from admin_app.models import UserProfileInfo2
+from admin_app.models import UserProfileInfo2,Notification
 from django.core.cache import cache
 from django.contrib import messages
 from django.contrib.auth.models import User
@@ -13,7 +13,10 @@ from django.shortcuts import render, redirect
 @login_required
 def doc_profile(request):
     user = request.user
-    return render(request, 'doctor/profile_show.html', {'user': user})
+    notifications = Notification.objects.all()
+    unseen_count = Notification.objects.filter(seen=False).count()
+    return render(request, 'doctor/profile_show.html', {'user': user,'notifications':notifications,
+                                                        'unseen_count':unseen_count})
 
 @login_required
 def profile_update_doc(request, user_id):
@@ -28,17 +31,30 @@ def profile_update_doc(request, user_id):
         user_profile.profile_pic = profile_pic
         user_profile.save()
         return redirect('show_doctor_profile')
-    
-    return render(request, 'doctor/update_profile.html', {'user_id': user_id, 'user_profile': user_profile})
+    notifications = Notification.objects.all()
+    unseen_count = Notification.objects.filter(seen=False).count()
+    return render(request, 'doctor/update_profile.html', {'user_id': user_id,
+                                                           'user_profile': user_profile,
+                                                           'notifications':notifications,
+                                                        'unseen_count':unseen_count})
 
 
 def dis_dr_dash(request):
-    return render(request,'doctor/dr_dash.html')
+    notifications = Notification.objects.all()
+    unseen_count = Notification.objects.filter(seen=False).count()
+    return render(request,'doctor/dr_dash.html',{
+                                                'notifications':notifications,
+                                                'unseen_count':unseen_count})
 def dis_labtest(request):
     labs= Laboratory.objects.all()
-    return render(request,'doctor/labtests.html',{'labs':labs})
+    notifications = Notification.objects.all()
+    unseen_count = Notification.objects.filter(seen=False).count()
+    return render(request,'doctor/labtests.html',{'labs':labs,'notifications':notifications,
+                                                'unseen_count':unseen_count})
 def add_lab(request):
     users=User.objects.all()
+    notifications = Notification.objects.all()
+    unseen_count = Notification.objects.filter(seen=False).count()
     registered=False
     if request.method == 'POST':
         patientid = request.POST.get('patient_id')
@@ -72,13 +88,20 @@ def add_lab(request):
             # Handle the case where the doctor is not found
             # You can add appropriate error handling or redirect to an error page
             pass
-        return render(request,'doctor/add_lab.html',{'register':registered})
-    return render(request,'doctor/add_lab.html',{'users':users})
+        return render(request,'doctor/add_lab.html',{'register':registered,'notifications':notifications,
+                                                'unseen_count':unseen_count})
+    return render(request,'doctor/add_lab.html',{'users':users,'notifications':notifications,
+                                                'unseen_count':unseen_count})
 # views for getting untested lab request and render it
 def check_request(request):
     request_count = cache.get('request_count', 0)
     requests = Laboratory.objects.filter(Is_tested=False)
-    return render(request, 'laboratory_dash/lab_requests.html', {'requests': requests ,'request_count': request_count})
+    notifications = Notification.objects.all()
+    unseen_count = Notification.objects.filter(seen=False).count()
+    return render(request, 'laboratory_dash/lab_requests.html', {'requests': requests ,
+                                                                 'request_count': request_count,
+                                                                 'notifications':notifications,
+                                                'unseen_count':unseen_count})
 # views for testing the lab for single patient 
 def checked_request(request, patient_id):
     lab_request = get_object_or_404(Laboratory, PatientID=patient_id)
@@ -107,6 +130,8 @@ def checked_payment_request(request, patient_id):
 # view for tadding prescriptions 
 def add_perscription(request):
     users=User.objects.all()
+    notifications = Notification.objects.all()
+    unseen_count = Notification.objects.filter(seen=False).count()
     registered=False
     if request.method == 'POST':
         patientid = request.POST.get('patient_id')
@@ -140,32 +165,51 @@ def add_perscription(request):
             # You can add appropriate error handling or redirect to an error page
             pass
         # return redirect('add-appointment') 
-        return render(request,'doctor/add-perscription.html',{'register':registered})
-    return render(request,'doctor/add-perscription.html',{'users':users})
+        return render(request,'doctor/add-perscription.html',{'register':registered,'notifications':notifications,
+                                                'unseen_count':unseen_count})
+    return render(request,'doctor/add-perscription.html',{'users':users,'notifications':notifications,
+                                                'unseen_count':unseen_count})
 def edit_perscription(request):
     return render(request,'doctor/edit-perscription.html')
 def perscription(request):
     prescription= Prescription.objects.all()
-    return render(request,'doctor/perscriptions.html',{'prescriptions':prescription})
+    notifications = Notification.objects.all()
+    unseen_count = Notification.objects.filter(seen=False).count()
+    return render(request,'doctor/perscriptions.html',{'prescriptions':prescription,'notifications':notifications,
+                                                'unseen_count':unseen_count})
 def about_perscription(request):
     return render(request,'doctor/about-percription.html')
 
 def dis_dr_dash_content(request):
-    return render(request,'doctor/dash_content.html')
+    notifications = Notification.objects.all()
+    unseen_count = Notification.objects.filter(seen=False).count()
+    return render(request,'doctor/dash_content.html',{'notifications':notifications,
+                                                'unseen_count':unseen_count})
 
 def edit_appointment(request):
-    return render(request,'doctor/edit-appointment.html')
+    notifications = Notification.objects.all()
+    unseen_count = Notification.objects.filter(seen=False).count()
+    return render(request,'doctor/edit-appointment.html',{'notifications':notifications,
+                                                'unseen_count':unseen_count})
 def dis_appointment(request):
+    notifications = Notification.objects.all()
+    unseen_count = Notification.objects.filter(seen=False).count()
     appointment=Appointment.objects.all()
-    return render(request,'doctor/appointments.html',{'appointment':appointment})
+    return render(request,'doctor/appointments.html',{'appointment':appointment,'notifications':notifications,
+                                                'unseen_count':unseen_count})
 def about_appointment(request):
     return render(request,'doctor/about-appointment.html')
 def test_notification(request):
     return render(request,'doctor/view_notification.html')
 def dis_history(request):
+    notifications = Notification.objects.all()
+    unseen_count = Notification.objects.filter(seen=False).count()
     histories = PatientHistory.objects.all()
-    return render(request,'doctor/histories.html',{'histories':histories})
+    return render(request,'doctor/histories.html',{'histories':histories,'notifications':notifications,
+                                                'unseen_count':unseen_count})
 def add_history(request):
+    notifications = Notification.objects.all()
+    unseen_count = Notification.objects.filter(seen=False).count()
     users= User.objects.all()
     added_history=False
     if request.method == 'POST':
@@ -202,10 +246,14 @@ def add_history(request):
             # You can add appropriate error handling or redirect to an error page
             pass
         # return redirect('add-appointment') 
-        return render(request,'doctor/add_history.html',{'added_history':added_history,'users':users})
-    return render(request,'doctor/add_history.html',{'users':users})
+        return render(request,'doctor/add_history.html',{'added_history':added_history,'users':users,'notifications':notifications,
+                                                'unseen_count':unseen_count})
+    return render(request,'doctor/add_history.html',{'users':users,'notifications':notifications,
+                                                'unseen_count':unseen_count})
 
 def edit_history(request,history_no):
+    notifications = Notification.objects.all()
+    unseen_count = Notification.objects.filter(seen=False).count()
     users= User.objects.all()
     editing_history=False
     history = PatientHistory.objects.get(pk=history_no)
@@ -239,10 +287,14 @@ def edit_history(request,history_no):
             # You can add appropriate error handling or redirect to an error page
             pass
         # return redirect('add-appointment') 
-        return render(request,'doctor/edit_history.html',{'editing_history':editing_history,'users':users})
-    return render(request,'doctor/edit_history.html',{'users':users,'history':history})
+        return render(request,'doctor/edit_history.html',{'editing_history':editing_history,'users':users,'notifications':notifications,
+                                                'unseen_count':unseen_count})
+    return render(request,'doctor/edit_history.html',{'users':users,'history':history,'notifications':notifications,
+                                                'unseen_count':unseen_count})
 
 def create_appointment(request):
+    notifications = Notification.objects.all()
+    unseen_count = Notification.objects.filter(seen=False).count()
     user=User.objects.all()
     registered=False
     if request.method == 'POST':
@@ -280,7 +332,9 @@ def create_appointment(request):
             # Handle the case where the doctor is not found
             # You can add appropriate error handling or redirect to an error page
             pass
-        return render(request, 'doctor/add-appointment.html',{'registered':registered}) # Redirect to a success page or another URL
+        return render(request, 'doctor/add-appointment.html',{'registered':registered,'notifications':notifications,
+                                                'unseen_count':unseen_count}) # Redirect to a success page or another URL
 
-    return render(request, 'doctor/add-appointment.html',{'users':user})
+    return render(request, 'doctor/add-appointment.html',{'users':user,'notifications':notifications,
+                                                'unseen_count':unseen_count})
 

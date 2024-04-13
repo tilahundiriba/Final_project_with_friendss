@@ -289,27 +289,21 @@
 									</div>
 								</div>
 							</li>
-							<!-- <li class="nav-item">
-								<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
-								 aria-expanded="false">
-									<span id="bellCount" class="ti-announcement" data-count="0"></span>
-								</a>
-								<div class="dropdown-menu proclinic-box-shadow2 notifications animated flipInY">
-									<h5>Notifications</h5>
-									<a class="dropdown-item" href="#" id="notify">
-										<span class="ti-wheelchair"></span> New Patient Added</a>
-									
-								</div>
-							</li> -->
                             <li class="nav-item">
-                                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                                    <span id="bellCount" class="ti-announcement" data-count="0"></span>
+                                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+                                  aria-expanded="false">
+                                  <span id="bellCount" class="ti-announcement" data-count="{{unseen_count}}"></span>
                                 </a>
-                                <div class="dropdown-menu proclinic-box-shadow2 notifications animated flipInY">
-                                    <h5>Notifications</h5>
-                                    <ul id="notificationList"></ul> <!-- Empty <ul> element to contain the notifications -->
+                                <div class="dropdown-menu proclinic-box-shadow2 notifications animated flipInY" >
+                                  <h5>Notifications</h5>
+                                  <ul style="overflow: auto; max-height: 300px; max-width: 200px;">
+                                
+                                    {% include 'admin_dash/seeNotifications.html' %}
+                                
+                                  </ul> <!-- Empty <ul> element to contain the notifications -->
                                 </div>
-                            </li>
+                              </li>
+                        
                             
 							<li class="nav-item">
 								<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"

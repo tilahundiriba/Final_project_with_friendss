@@ -72,7 +72,10 @@ def poster(request):
         message=request.POST.get('message')
         notification=Notification(message=message)
         notification.save()
-    return render(request,'admin_dash/write-notifications.html')
+    notifications = Notification.objects.all()
+    unseen_count = Notification.objects.filter(seen=False).count()
+    return render(request,'admin_dash/write-notifications.html',{'notifications':notifications,
+                                                   'unseen_count':unseen_count})
 
 # @login_required
 def login_view(request):
@@ -161,8 +164,10 @@ def createUserAccount(request):
         created=True
         # Redirect to account list after account creation
         return render(request, 'admin_dash/add_staff.html',{'created':created})
-
-    return render(request, 'admin_dash/add_staff.html')
+    notifications = Notification.objects.all()
+    unseen_count = Notification.objects.filter(seen=False).count()
+    return render(request, 'admin_dash/add_staff.html',{'notifications':notifications,
+                                                   'unseen_count':unseen_count})
 def dis_login2(request):
     return render(request,'admin_dash/login.html')
 def dis_base(request):
@@ -212,9 +217,16 @@ def display_users(request):
             'special':user_info.specialty,
         }
         combined_data.append(user_dict)
-    return render(request,'admin_dash/staffs.html',{'combined_datas':combined_data})
+    notifications = Notification.objects.all()
+    unseen_count = Notification.objects.filter(seen=False).count()
+    return render(request,'admin_dash/staffs.html',{'combined_datas':combined_data,
+                                                    'notifications':notifications,
+                                                    'unseen_count':unseen_count})
 def dis_user_registration(request):
-    return render(request,'admin_dash/add-staff.html')
+    notifications = Notification.objects.all()
+    unseen_count = Notification.objects.filter(seen=False).count()
+    return render(request,'admin_dash/add-staff.html',{'notifications':notifications,
+                                                    'unseen_count':unseen_count})
 def dis_web_home(request):
     return render(request,'admin_dash/web_home.html')
 def edit_staff(request):
@@ -222,14 +234,13 @@ def edit_staff(request):
 def view_staff(request,user_id):
     user = get_object_or_404(User, pk=user_id)
     user_profile_info = get_object_or_404(UserProfileInfo2, user_id=user_id)
+    notifications = Notification.objects.all()
+    unseen_count = Notification.objects.filter(seen=False).count()
+    return render(request,'admin_dash/view_staff.html',{'user':user,
+                                                        'user_profile_info':user_profile_info,
+                                                        'notifications':notifications,
+                                                    'unseen_count':unseen_count})
 
-    return render(request,'admin_dash/view_staff.html',{'user':user,'user_profile_info':user_profile_info})
-
-
-
-from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth import authenticate, login
 
 @login_required
 def change_credentials(request):

@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from django.shortcuts import get_object_or_404
-from admin_app .models import UserProfileInfo2
+from admin_app .models import UserProfileInfo2,Notification
 from receptionist_app.models import PatientRegister
 from.models import RoomInformation,VitalInformation,Medication,BedInformation
 from django.contrib.auth.models import User
@@ -8,11 +8,17 @@ from django.contrib.auth.decorators import login_required
 
 @login_required
 def nurse_profile(request):
+    notifications = Notification.objects.all()
+    unseen_count = Notification.objects.filter(seen=False).count()
     user = request.user
-    return render(request, 'nurse_dash/profile.html', {'user': user})
+    return render(request, 'nurse_dash/profile.html', {'user': user,
+                                                       'notifications':notifications,
+                                                       'unseen_count':unseen_count})
 
 @login_required
 def nurse_profile_update(request, user_id):
+    notifications = Notification.objects.all()
+    unseen_count = Notification.objects.filter(seen=False).count()
     user = get_object_or_404(User, pk=user_id)
     if request.user != user:  # Ensure user can only update their own profile
         return redirect('show_nurse_profile')
@@ -25,10 +31,15 @@ def nurse_profile_update(request, user_id):
         user_profile.save()
         return redirect('show_nurse_profile')
     
-    return render(request, 'nurse_dash/update_profile.html', {'user_id': user_id, 'user_profile': user_profile})
+    return render(request, 'nurse_dash/update_profile.html', {'user_id': user_id, 
+                                                              'user_profile': user_profile,
+                                                              'notifications':notifications,
+                                                       'unseen_count':unseen_count})
 
 
 def add_medication(request):
+    notifications = Notification.objects.all()
+    unseen_count = Notification.objects.filter(seen=False).count()
     users= User.objects.all()
     registered=False
     if request.method == 'POST':
@@ -52,12 +63,23 @@ def add_medication(request):
         )
         med.save()
         registered=True
-        return render(request,'nurse_dash/add_medication.html',{'registered':registered,'users':users})
-    return render(request,'nurse_dash/add_medication.html',{'users':users})
+        return render(request,'nurse_dash/add_medication.html',{'registered':registered,
+                                                                'users':users,
+                                                                'notifications':notifications,
+                                                       'unseen_count':unseen_count})
+    return render(request,'nurse_dash/add_medication.html',{'users':users,
+                                                            'notifications':notifications,
+                                                       'unseen_count':unseen_count})
 def dis_medication(request):
+    notifications = Notification.objects.all()
+    unseen_count = Notification.objects.filter(seen=False).count()
     medications = Medication.objects.all()
-    return render(request,'nurse_dash/dis_medication.html',{'medications':medications})
+    return render(request,'nurse_dash/dis_medication.html',{'medications':medications,
+                                                            'notifications':notifications,
+                                                       'unseen_count':unseen_count})
 def edit_medication(request,med_no):
+    notifications = Notification.objects.all()
+    unseen_count = Notification.objects.filter(seen=False).count()
     medications = Medication.objects.get(Med_no=med_no)
     users= User.objects.all()
     if request.method == 'POST':
@@ -78,8 +100,13 @@ def edit_medication(request,med_no):
         medications.Drugs=drug
         medications.save()
         return redirect('dis_medication')
-    return render(request,'nurse_dash/edit_medication.html',{'medications':medications,'users':users})
+    return render(request,'nurse_dash/edit_medication.html',{'medications':medications,
+                                                             'users':users,
+                                                             'notifications':notifications,
+                                                       'unseen_count':unseen_count})
 def add_vital_info(request):
+    notifications = Notification.objects.all()
+    unseen_count = Notification.objects.filter(seen=False).count()
     users= User.objects.all()
     registered=False
     if request.method == 'POST':
@@ -117,9 +144,15 @@ def add_vital_info(request):
         )
         vital.save()
         registered=True
-        return render(request,'nurse_dash/add-vital_info.html',{'registered':registered}) # Redirect to a success page or another URL
-    return render(request,'nurse_dash/add-vital_info.html',{'users':users})
+        return render(request,'nurse_dash/add-vital_info.html',{'registered':registered,
+                                                                'notifications':notifications,
+                                                       'unseen_count':unseen_count}) # Redirect to a success page or another URL
+    return render(request,'nurse_dash/add-vital_info.html',{'users':users,
+                                                            'notifications':notifications,
+                                                       'unseen_count':unseen_count})
 def add_room(request):
+    notifications = Notification.objects.all()
+    unseen_count = Notification.objects.filter(seen=False).count()
     registered=False
     if request.method == 'POST':
         room_block = request.POST.get('block_no')
@@ -136,9 +169,14 @@ def add_room(request):
         )
         room_info.save()
         registered=True
-        return render(request,'nurse_dash/add-room.html',{'registered':registered})  # Redirect to a success page or another URL
-    return render(request,'nurse_dash/add-room.html')
+        return render(request,'nurse_dash/add-room.html',{'registered':registered,
+                                                          'notifications':notifications,
+                                                       'unseen_count':unseen_count})  # Redirect to a success page or another URL
+    return render(request,'nurse_dash/add-room.html',{'notifications':notifications,
+                                                       'unseen_count':unseen_count})
 def edit_room(request,bed_no):
+    notifications = Notification.objects.all()
+    unseen_count = Notification.objects.filter(seen=False).count()
     rooms = RoomInformation.objects.get(Bed_no=bed_no)
     if request.method == 'POST':
         room_block = request.POST.get('block_no')
@@ -153,11 +191,17 @@ def edit_room(request,bed_no):
         rooms.Room_type=room_type
         rooms.save()
         return redirect('dis_room')
-    return render(request,'nurse_dash/edit-room.html',{'rooms':rooms})
+    return render(request,'nurse_dash/edit-room.html',{'rooms':rooms,'notifications':notifications,
+                                                       'unseen_count':unseen_count})
 def dis_room(request):
+    notifications = Notification.objects.all()
+    unseen_count = Notification.objects.filter(seen=False).count()
     room =RoomInformation.objects.all()
-    return render(request,'nurse_dash/rooms.html',{'rooms':room})
+    return render(request,'nurse_dash/rooms.html',{'rooms':room,'notifications':notifications,
+                                                       'unseen_count':unseen_count})
 def allocate_room(request):
+    notifications = Notification.objects.all()
+    unseen_count = Notification.objects.filter(seen=False).count()
     registered=False
     if request.method == 'POST':
         patient_id = request.POST.get('patient_id')
@@ -175,15 +219,29 @@ def allocate_room(request):
             Room_type=room_type,
         )
         registered=True
-        return render(request,'nurse_dash/Room_allocation.html',{'registered':registered})
-    return render(request,'nurse_dash/Room_allocation.html')
+        return render(request,'nurse_dash/Room_allocation.html',{'registered':registered,'notifications':notifications,
+                                                       'unseen_count':unseen_count})
+    return render(request,'nurse_dash/Room_allocation.html',{'notifications':notifications,
+                                                       'unseen_count':unseen_count})
 def dis_bed_allocation(request):
+    notifications = Notification.objects.all()
+    unseen_count = Notification.objects.filter(seen=False).count()
     alloc =BedInformation.objects.all()
-    return render(request,'nurse_dash/allocations.html',{'allocs':alloc})
+    return render(request,'nurse_dash/allocations.html',{'allocs':alloc,'notifications':notifications,
+                                                       'unseen_count':unseen_count})
 def dis_vitals(request):
+    notifications = Notification.objects.all()
+    unseen_count = Notification.objects.filter(seen=False).count()
     vitals =VitalInformation.objects.all()
-    return render(request,'nurse_dash/vital_infos.html',{'vitals':vitals})
+    return render(request,'nurse_dash/vital_infos.html',{'vitals':vitals,'notifications':notifications,
+                                                       'unseen_count':unseen_count})
 def nurse_dash(request):
-    return render(request,'nurse_dash/nurse_dash.html')
+    notifications = Notification.objects.all()
+    unseen_count = Notification.objects.filter(seen=False).count()
+    return render(request,'nurse_dash/nurse_dash.html',{'notifications':notifications,
+                                                       'unseen_count':unseen_count})
 def dis_nurse_dash_content(request):
-    return render(request,'nurse_dash/dash_content.html')
+    notifications = Notification.objects.all()
+    unseen_count = Notification.objects.filter(seen=False).count()
+    return render(request,'nurse_dash/dash_content.html',{'notifications':notifications,
+                                                       'unseen_count':unseen_count})
