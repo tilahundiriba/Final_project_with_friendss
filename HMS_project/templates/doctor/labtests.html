@@ -98,7 +98,17 @@
 											<!-- <td>{{lab.Doctor_ID}}</td> -->
 											<td>{{lab.Lab_number}}</td>
 											<td>{{lab.Admit_date}}</td>
-											<td>{{lab.Is_tested}}</td>
+											{%  if lab.Is_tested %}
+											<td>
+												<span class="badge badge-success">Completed</span>
+											</td>
+											{% else %}
+										
+											<td>
+												<span class="badge badge-warning">Pending</span>
+											</td>
+											{% endif %}
+										
 										
 											<td><a href="#" class="btn btn-outline-danger  mb-0"><span
 														class="ti-trash"></span></a>

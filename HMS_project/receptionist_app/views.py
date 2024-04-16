@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils.crypto import get_random_string
 from .models import PatientRegister
-from admin_app.models import User
+from admin_app.models import User,Notification
 from django.db.models import Q
 from django import *
 from admin_app .models import UserProfileInfo2
@@ -13,11 +13,17 @@ from django.contrib.auth.decorators import login_required
 
 @login_required
 def rece_profile(request):
+    notifications = Notification.objects.all()
+    unseen_count = Notification.objects.filter(seen=False).count()
     user = request.user
-    return render(request, 'receptionist_dash/profile.html', {'user': user})
+    return render(request, 'receptionist_dash/profile.html', {'user': user,
+                                                              'notifications':notifications,
+                                                              'unseen_count':unseen_count})
 
 @login_required
 def rece_profile_update(request, user_id):
+    notifications = Notification.objects.all()
+    unseen_count = Notification.objects.filter(seen=False).count()
     user = get_object_or_404(User, pk=user_id)
     if request.user != user:  # Ensure user can only update their own profile
         return redirect('show_rece_profile')
@@ -30,16 +36,30 @@ def rece_profile_update(request, user_id):
         user_profile.save()
         return redirect('show_rece_profile')
 
-    return render(request, 'receptionist_dash/update_profile.html', {'user_id': user_id, 'user_profile': user_profile})
+    return render(request, 'receptionist_dash/update_profile.html', {'user_id': user_id,
+                                                                      'user_profile': user_profile
+                                                                      ,
+                                                              'notifications':notifications,
+                                                              'unseen_count':unseen_count})
 
 
 def receptionist_dash(request):
-    return render(request,'receptionist_dash/receptionist_dash.html')
+    notifications = Notification.objects.all()
+    unseen_count = Notification.objects.filter(seen=False).count()
+    return render(request,'receptionist_dash/receptionist_dash.html',{
+                                                              'notifications':notifications,
+                                                              'unseen_count':unseen_count})
 def receptionist_dash_content(request):
-    return render(request,'receptionist_dash/dash_content.html')
+    notifications = Notification.objects.all()
+    unseen_count = Notification.objects.filter(seen=False).count()
+    return render(request,'receptionist_dash/dash_content.html',{
+                                                              'notifications':notifications,
+                                                              'unseen_count':unseen_count})
 
 def add_patient(request):
     users= User.objects.all()
+    notifications = Notification.objects.all()
+    unseen_count = Notification.objects.filter(seen=False).count()
     register=False
     if request.method == 'POST':
         first_name = request.POST.get('first_name')
@@ -85,11 +105,21 @@ def add_patient(request):
         cache.set('patient_count', patient_count)
         messages.success(request, 'Patient data sent successfully.')
         register=True
-    return render(request, 'receptionist_dash/add-patient.html',{'register':register,'users':users})  # Render the form template initially
+    return render(request, 'receptionist_dash/add-patient.html',{'register':register,
+                                                                 'users':users
+                                                                 ,
+                                                              'notifications':notifications,
+                                                              'unseen_count':unseen_count})  # Render the form template initially
 def check_patient_data(request):
+    notifications = Notification.objects.all()
+    unseen_count = Notification.objects.filter(seen=False).count()
     patient_count = cache.get('patient_count', 0)
     patients = PatientRegister.objects.filter(is_checked=False)
-    return render(request, 'doctor/unchecked_patient.html', {'patients': patients ,'patient_count': patient_count})
+    return render(request, 'doctor/unchecked_patient.html', {'patients': patients 
+                                                             ,'patient_count': patient_count
+                                                             ,
+                                                              'notifications':notifications,
+                                                              'unseen_count':unseen_count})
 
 def check_patient(request, patient_id):
     patient = get_object_or_404(PatientRegister, patient_id=patient_id)
@@ -105,14 +135,22 @@ def check_patient(request, patient_id):
 
 
 def existing_patient(request):
+    notifications = Notification.objects.all()
+    unseen_count = Notification.objects.filter(seen=False).count()
     form=False
     if request.method == 'POST':
         users= User.objects.all()
         patient_id = request.POST.get('patient_id')
         patient = get_object_or_404(PatientRegister, patient_id=patient_id)
         form=True
-        return render(request, 'receptionist_dash/existing_patient.html', {'patients': patient,'users':users,'form':form})
-    return render(request, 'receptionist_dash/existing_patient.html', {'form': form})
+        return render(request, 'receptionist_dash/existing_patient.html', {'patients': patient,
+                                                                           'users':users,'form':form
+                                                                           ,
+                                                              'notifications':notifications,
+                                                              'unseen_count':unseen_count})
+    return render(request, 'receptionist_dash/existing_patient.html', {'form': form,
+                                                              'notifications':notifications,
+                                                              'unseen_count':unseen_count})
 def delete_patient(request):
     if request.method == 'POST':
         search_query = request.POST.get('search_query')
@@ -140,28 +178,28 @@ def delete_patient(request):
     else:
         patients = PatientRegister.objects.all()
 
-    return render(request, 'receptionist_dash/patients.html', {'patients': patients})
+    return render(request, 'receptionist_dash/patients.html', {'patients': patients
+                                                               })
 def dis_patient(request):
+    notifications = Notification.objects.all()
+    unseen_count = Notification.objects.filter(seen=False).count()
     patients = PatientRegister.objects.all()
-    return render(request,'receptionist_dash/patients.html', {'patients':patients})
+    return render(request,'receptionist_dash/patients.html', {'patients':patients
+                                                              ,
+                                                              'notifications':notifications,
+                                                              'unseen_count':unseen_count})
 def about_patient(request):
     return render(request, 'receptionist_dash/about-patient.html')  # Render the form template initially
-def receptionist_dash(request):
-    return render(request,'receptionist_dash/receptionist_dash.html')
-def receptionist_dash_content(request):
-    return render(request,'receptionist_dash/dash_content.html')
 def edit_patient(request,patient_id):
-     try:
+    notifications = Notification.objects.all()
+    unseen_count = Notification.objects.filter(seen=False).count()
+    try:
        patientid = get_object_or_404(PatientRegister, pk=patient_id)
        users= User.objects.all()
        return render(request,'receptionist_dash/edit-patient.html',{'patientid':patientid,'users':users})
-     except PatientRegister.DoesNotExist:
+    except PatientRegister.DoesNotExist:
        return render(request,'receptionist_dash/edit-patient.html',{'message':'patient  not found'})
 
-
-    # return render(request,'receptionist_dash/edit-patient.html')
-def dis_forms(request):
-    return render(request,'receptionist_dash/form.html')
 def update_patient(request,patient_id):
    first_name = request.POST.get('first_name')
    middle_name = request.POST.get('middle_name')

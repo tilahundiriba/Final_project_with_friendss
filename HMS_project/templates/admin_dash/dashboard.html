@@ -114,7 +114,9 @@
       <div class="h-100">
 
         <div class="sidebar-logo">
-          <a href="#">LOGO</a>
+          <img src="{% static 'images/hospital_logo3.png' %}" alt="NOOOOOOo" class="rounded-circle" width="100"
+            height="100">
+
         </div>
 
         <ul class="sidebar-nav">
@@ -234,7 +236,8 @@
         <div class="container top-brand">
           <nav class="navbar navbar-default">
             <div class="navbar-header">
-              <div class="sidebar-header"> <a href="index.html">LOGO</a>
+              <div class="sidebar-header"> <a href="#"><img src="{% static 'images/hospital_logo3.png' %}" class="logo"
+                    alt="logo" style="width: 50px; height: 50px; border-radius: 50%;"></a>
               </div>
             </div>
             <ul class="nav justify-content-end">
@@ -273,12 +276,12 @@
                   aria-expanded="false">
                   <span id="bellCount" class="ti-announcement" data-count="{{unseen_count}}"></span>
                 </a>
-                <div class="dropdown-menu proclinic-box-shadow2 notifications animated flipInY" >
+                <div class="dropdown-menu proclinic-box-shadow2 notifications animated flipInY">
                   <h5>Notifications</h5>
                   <ul style="overflow: auto; max-height: 300px; max-width: 200px;">
-                
+
                     {% include 'admin_dash/seeNotifications.html' %}
-                
+
                   </ul> <!-- Empty <ul> element to contain the notifications -->
                 </div>
               </li>
@@ -309,7 +312,7 @@
         {% include 'admin_dash/navbar.html' %}
         <!-- /Menu -->
         <!-- Breadcrumb -->
- 
+
         {% block content %}
 
         <body>
@@ -380,7 +383,7 @@
                     </div>
                   </div>
                   <!-- /Widget Item -->
-              
+
                   <!-- Widget Item -->
                   <div class="col-md-4">
                     <div class="widget-area proclinic-box-shadow color-yellow">

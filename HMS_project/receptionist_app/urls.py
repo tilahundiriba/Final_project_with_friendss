@@ -11,7 +11,6 @@ urlpatterns = [
   path('edit-patient/<str:patient_id>/', views.edit_patient, name='edit-patient'),
   path('about_patient/', views.about_patient, name='about_patient'),
   path('dis_patient/', views.dis_patient, name='dis_patient'),
-  path('dis_form/', views.dis_forms, name='dis_form'),
   path('delete_patient/', views.delete_patient, name='delete_patient'),
   path('update_patient/<str:patient_id>/', views.update_patient, name='update_patient'), 
   path('profile/<int:user_id>/', views.rece_profile_update, name='update_rece_profile'),
