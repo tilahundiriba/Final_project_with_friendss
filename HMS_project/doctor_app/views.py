@@ -181,16 +181,50 @@ def add_perscription(request):
             # You can add appropriate error handling or redirect to an error page
             pass
         # return redirect('add-appointment') 
-        return render(request,'doctor/add-perscription.html',{'register':registered,'notifications':notifications,
-                                                'unseen_count':unseen_count})
+        return render(request,'doctor/add-perscription.html',{'register':registered,
+                                                              'notifications':notifications,
+                                                'unseen_count':unseen_count,
+                                                'users':users})
     return render(request,'doctor/add-perscription.html',{'users':users,'notifications':notifications,
                                                 'unseen_count':unseen_count})
-def edit_perscription(request):
-    return render(request,'doctor/edit-perscription.html')
+def edit_perscription(request,prec_number):
+    users=User.objects.all()
+    prescription= Prescription.objects.get(Prec_number=prec_number)
+    notifications = Notification.objects.all()
+    unseen_count = Notification.objects.filter(seen=False).count()
+    if request.method == 'POST':
+        patientid = request.POST.get('patient_id')
+        prec_no = request.POST.get('pec_no')
+        prec_date = request.POST.get('pres_date')
+        p_name = request.POST.get('name')
+        doctor_name = request.POST.get('dr_name')
+        prec = request.POST.get('prescription')
+        # Create an instance of Prescription model and save it
+        try:
+            patient = get_object_or_404( PatientRegister,patient_id=patientid)
+            doctor = get_object_or_404(User, username=doctor_name)
+        
+            prescription.PatientID=patient
+            prescription.Prec_date=prec_date
+            prescription.Prec_number=prec_no
+            prescription.Doctor_ID=doctor
+            prescription.Patient_full_name=p_name
+            prescription.Precscriptions=prec
+            prescription.save()
+            
+        except PatientRegister.DoesNotExist:
+            pass
+        except UserProfileInfo2.DoesNotExist:
+            pass
+        return redirect('perscriptions')
+    return render(request,'doctor/edit-perscription.html',{'users':users,'notifications':notifications,
+                                                'unseen_count':unseen_count,
+                                                'prescriptions':prescription})
 def perscription(request):
     prescription= Prescription.objects.all()
     notifications = Notification.objects.all()
     unseen_count = Notification.objects.filter(seen=False).count()
+    
     return render(request,'doctor/perscriptions.html',{'prescriptions':prescription,'notifications':notifications,
                                                 'unseen_count':unseen_count})
 def about_perscription(request):
@@ -202,11 +236,34 @@ def dis_dr_dash_content(request):
     return render(request,'doctor/dash_content.html',{'notifications':notifications,
                                                 'unseen_count':unseen_count})
 
-def edit_appointment(request):
+def edit_appointment(request,app_number):
     notifications = Notification.objects.all()
     unseen_count = Notification.objects.filter(seen=False).count()
+    appointments = Appointment.objects.get(App_number=app_number)
+    if request.method == 'POST': 
+
+        patientid = request.POST.get('patient_id')
+        app_no = request.POST.get('app_no')
+        app_date = request.POST.get('app_date')
+        time_slot = request.POST.get('time_slot')
+        doctor_name = request.POST.get('dr_name')
+        app_reseon = request.POST.get('problem')
+        app_status = request.POST.get('app_status')
+        patient = get_object_or_404( PatientRegister,patient_id=patientid)
+        doctor = get_object_or_404(User, username=doctor_name)
+        
+        appointments.App_number =app_no
+        appointments.PatientID =patient
+        appointments.App_date =app_date
+        appointments.Time_slot =time_slot
+        appointments.App_reseon =app_reseon
+        appointments.Doctor_ID =doctor
+        appointments.App_status =app_status
+        appointments.save()
+        return redirect('dis-appointment')
     return render(request,'doctor/edit-appointment.html',{'notifications':notifications,
-                                                'unseen_count':unseen_count})
+                                                'unseen_count':unseen_count,
+                                                'appointments':appointments})
 def dis_appointment(request):
     notifications = Notification.objects.all()
     unseen_count = Notification.objects.filter(seen=False).count()

@@ -6,8 +6,7 @@
 <html>
 
 
-<!-- Mirrored from www.konnectplugins.com/proclinic/Horizontal/edit-appointment.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 24 Jan 2022 10:42:01 GMT -->
-
+<!-- Mirrored from www.konnectplugins.com/proclinic/Horizontal/add-appointment.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 24 Jan 2022 10:42:01 GMT -->
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,6 +14,8 @@
 	{% block 'title' %}
 	<title>Edit Appointment</title>
 	{% endblock %}
+	<!-- Fav  Icon Link -->
+
 </head>
 
 <body>
@@ -26,32 +27,37 @@
 		</div>
 	</div>
 	<!--/Pre Loader -->
-	<!-- Color Changer -->
-	<!-- /Color Changer -->
 	<div class="wrapper">
 		<!-- Page Content -->
 		<div id="content">
-
-			<div class="container mt-0">
-				<div class="row breadcrumb-bar">
-					<div class="col-md-6">
-						<h3 class="block-title">Edit Appointment</h3>
-					</div>
-					<div class="col-md-6">
-						<ol class="breadcrumb">
-							<li class="breadcrumb-item">
-								<a href="#">
-									<span class="ti-home"></span>
-								</a>
-							</li>
-							<li class="breadcrumb-item">Appointments</li>
-							<li class="breadcrumb-item ">Edit Appointment</li>
-						</ol>
+				<!-- Top Navigation -->
+		
+				<!-- /Top Navigation -->
+			
+				<!-- Breadcrumb -->
+				<!-- Page Title -->
+				<div class="container mt-0">
+					<div class="row breadcrumb-bar">
+						<div class="col-md-6">
+							<h3 class="block-title">Edit Appointment</h3>
+						</div>
+						<div class="col-md-6">
+							<ol class="breadcrumb">
+								<li class="breadcrumb-item">
+									<a href="#">
+										<span class="ti-home"></span>
+									</a>
+								</li>
+								<li class="breadcrumb-item">Appointments</li>
+								<li class="breadcrumb-item ">Edit Appointment</li>
+							</ol>
+						</div>
 					</div>
 				</div>
-			</div>
 			<!-- /Page Title -->
-
+	<!-- Top Navigation -->
+	
+	<!-- /Top Navigation -->
 			<!-- /Breadcrumb -->
 			<!-- Main Content -->
 			<div class="container">
@@ -61,74 +67,85 @@
 					<div class="col-md-12">
 						<div class="widget-area-2 proclinic-box-shadow">
 							<h3 class="widget-title">Edit Appointment</h3>
-							<form>
+							<form action="{% url 'edit-appointment' appointments.App_number  %}" method="post">
+								{% csrf_token %}
 								<div class="form-row">
 									<div class="form-group col-md-6">
-										<label for="patient-name">Patient ID</label>
-										<input type="text" value="P654T" class="form-control" placeholder="Patient ID"
-											id="patient-id">
+										<label for="patient-id">Patient ID</label>
+										<input type="text" class="form-control" value="{{appointments.PatientID}}" placeholder="Patient ID" id="patient-id" name="patient_id">
 									</div>
 									<div class="form-group col-md-6">
-										<label for="department">Department</label>
-										<select class="form-control" id="department">
-											<option>Neuro</option>
-											<option selected>Ortho</option>
-											<option>General</option>
+										<label for="app_no">App. Number</label>
+										<input type="text" class="form-control" value="{{appointments.App_number}}" placeholder="App. Number" id="app_no" name="app_no">
+									</div>
+									<div class="form-group col-md-6">
+										<label for="dr_name">Doctor Name</label>
+									
+										
+										<select class="form-control" id="dr_name" name="dr_name">
+										
+											<option value="{{appointments.Doctor_ID}}">{{appointments.Doctor_ID}}</option>
+										
 										</select>
-									</div>
-									<div class="form-group col-md-6">
-										<label for="doctor-name">Doctor Name</label>
-										<input type="text" value="Dr Kiran Sharma" placeholder="Doctor Name"
-											class="form-control" id="doctor-name">
+										
 									</div>
 									<div class="form-group col-md-6">
 										<label for="appointment-date">Appointment Date</label>
-										<input type="date" value="2018-11-12" placeholder="Appointment Date"
-											class="form-control" id="appointment-date">
+										<input type="date" class="form-control" id="appointment-date" name="app_date">
 									</div>
 									<div class="form-group col-md-6">
 										<label for="time-slot">Time Slot</label>
-										<select class="form-control" id="time-slot">
+										<select class="form-control" id="time-slot" name="time_slot">
+											<option selected disabled>Choose Time</option>
 											<option>10AM-11AM</option>
 											<option>11AM-12pm</option>
 											<option>12PM-01PM</option>
 											<option>2PM-3PM</option>
 											<option>3PM-4PM</option>
-											<option selected>4PM-5PM</option>
+											<option>4PM-5PM</option>
 											<option>6PM-7PM</option>
 											<option>7PM-8PM</option>
 											<option>8PM-9PM</option>
 										</select>
 									</div>
 									<div class="form-group col-md-6">
-										<label for="token-number">Token Number <small>(Auto Generated)</small></label>
-										<input type="text" value="58" placeholder="Token Number" class="form-control"
-											id="token-number">
+										<label for="app_status">Status</label>
+										<!-- <input type="text" placeholder="Status" class="form-control" id="app_status" name="status"> -->
+										<select class="form-control" id="app_status" name="app_status">
+											<option selected disabled>Choose Status</option>
+											<option value="Completed">Completed</option>
+											<option value="Pending">Pending</option>
+											<option value="Cancelled">Cancelled</option>
+											
+										</select>
 									</div>
 									<div class="form-group col-md-12">
 										<label for="problem">Problem</label>
-										<textarea placeholder="Problem" class="form-control" id="problem"
-											rows="3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur convallis egestas aliquet. Nunc ullamcorper massa in magna pulvinar, a eleifend felis condimentum.</textarea>
+										<textarea placeholder="Problem" class="form-control" id="problem" rows="3" name="problem">{{appointments.App_reseon}}</textarea>
 									</div>
-
+																		
+								
 									<div class="form-group col-md-6 mb-3">
-										<button type="submit" class="btn btn-primary btn-lg">Update</button>
+										<button type="submit" class="btn btn-primary btn-lg">Submit</button>
 									</div>
 								</div>
 							</form>
 							<!-- Alerts-->
+							{% if registered %}
 							<div class="alert alert-success alert-dismissible fade show" role="alert">
-								<strong>Successfully Updated!</strong> Appointment updated
+								<strong>Successfully Done!</strong> Appointment token Generated
 								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 									<span aria-hidden="true">×</span>
 								</button>
 							</div>
+							{% else %}
 							<div class="alert alert-warning alert-dismissible fade show" role="alert">
 								<strong>Holy guacamole!</strong> You should check in on some of those fields below.
 								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 									<span aria-hidden="true">×</span>
 								</button>
 							</div>
+							{% endif %}
 							<!-- /Alerts-->
 						</div>
 					</div>
@@ -139,9 +156,7 @@
 			<!--Copy Rights-->
 			<div class="container">
 				<div class="d-sm-flex justify-content-center">
-					<span class="text-muted text-center d-block d-sm-inline-block">Copyright © 2018 <a
-							href="http://www.konnectplugins.com/" target="_blank">konnectcode</a>. All rights
-						reserved.</span>
+				  <span class="text-muted text-center d-block d-sm-inline-block">Copyright © 2018 <a href="http://www.konnectplugins.com/" target="_blank">konnectcode</a>. All rights reserved.</span>
 				</div>
 			</div>
 			<!-- /Copy Rights-->
@@ -158,7 +173,6 @@
 </body>
 
 
-<!-- Mirrored from www.konnectplugins.com/proclinic/Horizontal/edit-appointment.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 24 Jan 2022 10:42:01 GMT -->
-
+<!-- Mirrored from www.konnectplugins.com/proclinic/Horizontal/add-appointment.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 24 Jan 2022 10:42:01 GMT -->
 </html>
 {% endblock %}
