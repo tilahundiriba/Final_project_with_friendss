@@ -58,12 +58,19 @@
             <p><strong style="font-size: large;">Patient ID:&nbsp;</strong>{{ request.PatientID}}</p>
             <p><strong style="font-size: large;">lab. type:&nbsp;</strong>{{ request.Lab_type}}</p>
             <p><strong style="font-size: large;">Doctor Name:&nbsp;</strong>{{ request.Doctor_ID}}</p>
-            <p><strong style="font-size: large;">Status:&nbsp;</strong>{{ request.Is_tested}}</p>
+            {% if request.Is_payed  %}
+            <p><strong style="font-size: large;">Payment Status:&nbsp;</strong> <span class="badge badge-success">Completed</span></p>
+              {% else %}
+              <p><strong style="font-size: large;">Payment Status:&nbsp;</strong ><span class="badge badge-danger">Pending</span></p>
+              {% endif %}
+            <p><strong style="font-size: large;">Lab No.:&nbsp;</strong>{{ request.Lab_number}}</p>
             <p><strong style="font-size: large;">Admitted Date:&nbsp;</strong>{{ request.Admit_date}}</p>
             <form action="{% url 'checked_request' request.PatientID %}">
+              {% if request.Is_payed and request.Is_tested  %}
               <button type='submit' class="btn btn-outline-primary mt-3 mb-0 me-4"><span class="ti-eye"></span>
                 Tested</button>
-              <a href="#" class="btn btn-outline-info mt-3 mb-0"><span class="ti-pencil-alt"></span>
+                {% endif %}
+              <a href="{% url 'add_lab_result' request.Lab_number %}" class="btn btn-outline-info mt-3 mb-0"><span class="ti-pencil-alt"></span>
                 Test</a>
             </form>
 

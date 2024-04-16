@@ -58,8 +58,8 @@
             <p><strong style="font-size: large;">Patient ID:&nbsp;</strong>{{ pay.PatientID}}</p>
             <p><strong style="font-size: large;">lab. type:&nbsp;</strong>{{ pay.Lab_type}}</p>
             <p><strong style="font-size: large;">Doctor Name:&nbsp;</strong>{{ pay.Doctor_ID}}</p>
-            <p><strong style="font-size: large;">Status:&nbsp;</strong>{{ pay.Is_tested}}</p>
-            <p><strong style="font-size: large;">Payment:&nbsp;</strong>{{ pay.Is_payed}}</p>
+            <!-- <p><strong style="font-size: large;">Status:&nbsp;</strong>{{ pay.Is_tested}}</p>
+            <p><strong style="font-size: large;">Payment:&nbsp;</strong>{{ pay.Is_payed}}</p> -->
             <p><strong style="font-size: large;">Admitted Date:&nbsp;</strong>{{ pay.Admit_date}}</p>
             <form action="{% url 'checked_payment_request' pay.PatientID %}">
               <button type='submit' class="btn btn-outline-primary mt-3 mb-0 me-4"><span class="ti-eye"></span>

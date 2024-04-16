@@ -1,4 +1,4 @@
-{% extends 'doctor/dr_dash.html' %}
+{% extends 'laboratory_dash/lab_dashboard.html' %}
 {% load static %}
 {% block content %}
 <!DOCTYPE html>
@@ -11,7 +11,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	{% block 'title' %}
-	<title>Add Laboratory Test</title>
+	<title>Add Laboratory Result</title>
 	{% endblock %}
 	<!-- Fav  Icon Link -->
 
@@ -34,14 +34,12 @@
 		<div id="content">
 				<!-- Top Navigation -->
 		
-				<!-- /Menu -->
-				{% include 'doctor/navbar.html' %}
-				<!-- Breadcrumb -->
+			
 				<!-- Page Title -->
 				<div class="container mt-0">
 					<div class="row breadcrumb-bar">
 						<div class="col-md-6">
-							<h3 class="block-title">Add Laboratory Test</h3>
+							<h3 class="block-title">Add Laboratory Result</h3>
 						</div>
 						<div class="col-md-6">
 							<ol class="breadcrumb">
@@ -51,7 +49,7 @@
 									</a>
 								</li>
 								<li class="breadcrumb-item active">Laboratory</li>
-								<li class="breadcrumb-item ">Add Laboratory</li>
+								<li class="breadcrumb-item "> Laboratory Result </li>
 							</ol>
 						</div>
 					</div>
@@ -66,53 +64,39 @@
 					<!-- Widget Item -->
 					<div class="col-md-12">
 						<div class="widget-area-2 proclinic-box-shadow">
-							<h3 class="widget-title">Add Laboratory</h3>
-							<form action="{% url 'add_lab' %}" method="post">
+							<h3 class="widget-title"> Laboratory Result</h3>
+							<form action="{% url 'add_lab_result' lab_result.Lab_number %}" method="post">
 								{% csrf_token %}
 								<div class="form-row">
 									
 									
 									<div class="form-group col-md-6">
 										<label for="age">Patient ID</label>
-										<input type="text" placeholder="Patient ID" class="form-control" id="age" name="patient_id">
+										<input type="text" placeholder="Patient ID" value="{{lab_result.PatientID}}" class="form-control" id="age" name="patient_id">
 									</div>
-                                    <div class="form-group col-md-6">
-										<label for="dob">Admitted date</label>
-										<input type="date" placeholder="Date of Prescription" class="form-control" id="dob" name="admited_date">
-									</div>
+                                  
 									<div class="form-group col-md-6">
 										<label for="phone">Lab. Number</label>
-										<input type="text" placeholder="Lab. Number" class="form-control" id="phone" name="lab_no">
+										<input type="text" placeholder="Lab. Number" value="{{lab_result.Lab_number}}" class="form-control" id="phone" name="lab_no">
 									</div>
 									<div class="form-group col-md-6">
-										<label for="email">Doctor Name</label>
-										<input type="text" placeholder="Doctor Name" class="form-control" id="dr_name" name="dr_name">
-									</div>
+										<label for="tech_name">Technician Name</label>
+										<!-- <input type="text" placeholder="Technician Name" class="form-control" id="tech_name" name="tech_name"> -->
+                                        <select class="form-control" id="tech_name" name="tech_name">
+											<option>Select Technician Name</option>
+											{% for user in users %}
+											<option value="{{user.username}}">{{user.username}}</option>
+											{% endfor %}
+										</select>
+                                    </div>
 							
-									<div class="form-group col-md-12">
-										<label for="time-slot">Laboratory Type</label>
-									</div>
 								
-									<div class="form-group col-md-3">
-										
-										<input type="checkbox" id="blood_test" name="blood_test">
-										<label for="blood_test">Blood </label>
+									<div class="form-group col-md-6">
+										<label for="lab_result">Laboratory Result</label>
+										<textarea placeholder="Laboratory Results....." class="form-control" id="lab_result" rows="3" name="lab_result"></textarea>
 									</div>									
-									<div class="form-group col-md-3">
-										
-										<input type="checkbox" id="urine_test" name="urine_test">
-										<label for="urine_test">Urine </label>
-									</div>									
-									<div class="form-group col-md-3">
-										
-										<input type="checkbox" id="ctscan_test" name="ctscan_test">
-										<label for="ctscan_test">CT Scan </label>
-									</div>									
-									<div class="form-group col-md-3">
-										
-										<input type="checkbox" id="x-ray_test" name="x-ray_test">
-										<label for="x-ray_test">X-rays </label>
-									</div>									
+																		
+																	
 									
 							
 									<div class="form-group col-md-6 mb-3">

@@ -60,8 +60,24 @@ def add_lab(request):
         patientid = request.POST.get('patient_id')
         lab_number = request.POST.get('lab_no')
         admit_date = request.POST.get('admited_date')
-        lab_type = request.POST.get('lab_type')
         doctor_name = request.POST.get('dr_name')
+        checkbox1 = request.POST.get('blood_test') == 'on'
+        checkbox2 = request.POST.get('urine_test') == 'on'
+        checkbox3 = request.POST.get('ctscan_test') == 'on'
+        checkbox4 = request.POST.get('x-ray_test') == 'on'
+        lab_type = ''
+
+        if checkbox1:
+            lab_type += 'Blood '
+        if checkbox2:
+            lab_type += 'Urine '
+        if checkbox3:
+            lab_type += 'CT Scan '
+        if checkbox4:
+            lab_type += 'X-ray '
+
+# Remove the trailing space if lab_type is not empty
+        lab_type = lab_type.strip() if lab_type else None
         # Create an instance of Appointment model and save it
         try:
             patient = get_object_or_404( PatientRegister,patient_id=patientid)
@@ -206,6 +222,12 @@ def dis_history(request):
     unseen_count = Notification.objects.filter(seen=False).count()
     histories = PatientHistory.objects.all()
     return render(request,'doctor/histories.html',{'histories':histories,'notifications':notifications,
+                                                'unseen_count':unseen_count})
+def dis_lab_results(request):
+    notifications = Notification.objects.all()
+    unseen_count = Notification.objects.filter(seen=False).count()
+    lab_results = Laboratory.objects.filter(Is_tested=True, Is_payed=True)
+    return render(request,'doctor/lab_results.html',{'lab_results':lab_results,'notifications':notifications,
                                                 'unseen_count':unseen_count})
 def add_history(request):
     notifications = Notification.objects.all()

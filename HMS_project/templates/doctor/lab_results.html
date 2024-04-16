@@ -1,0 +1,89 @@
+{% extends 'doctor/dr_dash.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lab Results</title>
+</head>
+
+<body>
+  <div class="wrapper">
+    <!-- Page Content -->
+    <div id="content">
+
+  <div class="container home">
+    <div class="container mt-0">
+      <div class="row breadcrumb-bar">
+        <div class="col-md-6">
+          <h3 class="block-title">Laboratories</h3>
+        </div>
+        <div class="col-md-6">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a href="index.html">
+                <span class="ti-home"></span>
+              </a>
+            </li>
+            <li class="breadcrumb-item active">Laboratories</li>
+            <li class="breadcrumb-item "> Laboratories Results</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      {% if messages %}
+      {% for message in messages %}
+      <div class="alert alert-success">
+        {{ message }}
+      </div>
+      {% endfor %}
+      {% endif %}
+      <!-- <p class="wiget-title color-yellow "> Remaning unchecked patients are : {{ patient_count }}</p> -->
+  
+      {% for lab_result in lab_results %}
+    
+    
+    {% if request.user == lab_result.Doctor_ID %}
+      <div class="col-md-6">
+        <div class="widget-area proclinic-box-shadow color-red" style="padding: 10px 20px; min-width: 250px;">
+
+          <div class="widget-right" style="min-width: 250px; width: 400px;">
+
+            <h3 class="wiget-title color-green ">Patient Laboratories Results</h3>
+
+            <p><strong style="font-size: large;">Patient ID:&nbsp;</strong>{{ lab_result.PatientID}}</p>
+            <p><strong style="font-size: large;">Lab Type:&nbsp;</strong>{{ lab_result.Lab_type}}</p>
+            <p><strong style="font-size: large;">Lab Results:&nbsp;</strong>{{ lab_result.Lab_result}}</p>
+            <p><strong style="font-size: large;"> Lab Number:&nbsp;</strong>{{ lab_result.Lab_number}}</p>
+            <p><strong style="font-size: large;">Technician Name:&nbsp;</strong>{{ lab_result.Technician_ID}}</p>
+          
+        
+              <a href="{% url 'add_history' %}" class="btn btn-outline-info mt-3 mb-0"><span class="ti-plus"></span>
+                Add Prescription</a>
+       
+
+          </div>
+        </div>
+      </div>
+    
+     {% endif %}
+      {% endfor %}
+    
+    </div>
+    
+  </div>
+</div>
+</div>
+<script>
+
+
+
+</script>
+</body>
+
+</html>
+{% endblock %}
