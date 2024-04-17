@@ -179,28 +179,6 @@
                         </ul>
                     </li>
       
-                    <li class="sidebar-item">
-                        <a href="#" class="sidebar-link">
-                            <i class="fa-regular fa-bell pe-2"></i>
-                            Notifications </a>
-
-                    </li>
-                    <!-- <li class="sidebar-header">Setting</li> -->
-                    <li class="sidebar-item">
-                        <a href="#" class="sidebar-link collapsed" data-bs-target="#multi" data-bs-toggle="collapse"
-                            aria-expanded="false">
-                            <i class="fa-solid fa-gear pe-2"></i>
-                            Setting
-                        </a>
-                        <ul id="multi" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
-                            <li class="sidebar-item">
-                                <a href="{% url 'show_casher_profile' %}" class="sidebar-link collapsed" aria-expanded="false">Profile</a>
-                            </li>
-                            <li class="sidebar-item">
-                                <a href="{% url 'logout' %}" class="sidebar-link">Logout</a>
-                            </li>
-                        </ul>
-                    </li>
                 </ul>
             </div>
         </aside>
@@ -225,31 +203,7 @@
 									<span title="Fullscreen" class="ti-fullscreen fullscreen"></span>
 								</a>							
 							</li>
-							<li class="nav-item">
-								<a class="nav-link" data-toggle="modal" data-target=".proclinic-modal-lg">
-									<span class="ti-search"></span>
-								</a>
-								<div class="modal fade proclinic-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
-									<div class="modal-dialog modal-lorvens">
-										<div class="modal-content proclinic-box-shadow2">
-											<div class="modal-header">
-												<h5 class="modal-title">Search Staffs:</h5>
-												<span class="ti-close" data-dismiss="modal" aria-label="Close">
-												</span>
-											</div>
-											<div class="modal-body">
-												<form>
-													<div class="form-group">
-														<input type="text" class="form-control" id="search-term" placeholder="Type text here">
-														<button type="button" class="btn btn-lorvens proclinic-bg">
-															<span class="ti-location-arrow"></span> Search</button>
-													</div>
-												</form>
-											</div>
-										</div>
-									</div>
-								</div>
-							</li>
+						
                             <li class="nav-item">
                                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
                                   aria-expanded="false">
@@ -275,11 +229,8 @@
 								
 								<div class="dropdown-menu proclinic-box-shadow2 profile animated flipInY">
 									<h5>{{ request.user.username }}</h5>
-									<a class="dropdown-item" href="#">
-										<span class="ti-settings"></span> Settings</a>
-										
-									<a class="dropdown-item" href="#">
-										<span class="ti-help-alt"></span> Help</a>
+									<a class="dropdown-item" href="{% url 'show_casher_profile' %}">
+										<span class="ti-image"></span> Profile</a>
 									<a class="dropdown-item" href="{% url 'logout' %}">
 										<span class="ti-power-off"></span> Logout</a>
 								</div>

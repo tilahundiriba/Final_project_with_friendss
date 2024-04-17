@@ -44,6 +44,34 @@ from .models import User, UserProfileInfo2
 from django.shortcuts import render
 from .models import Notification
 
+
+@login_required
+def admin_profile(request):
+    user = request.user
+    notifications = Notification.objects.all()
+    unseen_count = Notification.objects.filter(seen=False).count()
+    return render(request, 'admin_dash/admin_profile.html', {'user': user,'notifications':notifications,
+                                                        'unseen_count':unseen_count})
+
+@login_required
+def profile_update_admin(request, user_id):
+    user = get_object_or_404(User, pk=user_id)
+    if request.user != user:  # Ensure user can only update their own profile
+        return redirect('admin_profile')
+    
+    user_profile, created = UserProfileInfo2.objects.get_or_create(user=user)
+    
+    if request.method == 'POST':
+        profile_pic = request.FILES.get('profile_pic')
+        user_profile.profile_pic = profile_pic
+        user_profile.save()
+        return redirect('admin_profile')
+    notifications = Notification.objects.all()
+    unseen_count = Notification.objects.filter(seen=False).count()
+    return render(request, 'doctor/update_profile.html', {'user_id': user_id,
+                                                           'user_profile': user_profile,
+                                                           'notifications':notifications,
+                                                        'unseen_count':unseen_count})
 def notification_view(request):
     # Fetch all notifications that haven't been seen by the user
     notifications = Notification.objects.all()
