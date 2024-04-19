@@ -29,7 +29,7 @@ from django.views import View
 from .models import Notification
 from receptionist_app.models import PatientRegister
 from doctor_app.models import Appointment
-from casher_app.models import PaymentModel,Discharge
+from casher_app.models import PaymentModel,Discharge,ServicePayment
 import csv
 import openpyxl
 from reportlab.lib.pagesizes import letter
@@ -140,7 +140,8 @@ def login_view(request):
             # User authentication failed
             return HttpResponse('Invalid username or password')
     else:
-        return render(request, 'admin_dash/login.html', {})
+        return render(request, 'admin_dash/login.html')
+    return render(request, 'admin_dash/login.html')
 
 #@login_required
 def logout_view(request):
@@ -150,10 +151,49 @@ def approve_departure(request):
     notifications = Notification.objects.all()
     unseen_count = Notification.objects.filter(seen=False).count()
     unapproved = Discharge.objects.filter(Approval=False, Status='Completed', Reffer_to__isnull=False)
-
     return render(request,'admin_dash/discharge_approval.html',{'notifications':notifications,
                                                                 'unseen_count':unseen_count,
                                                                 'unapproved':unapproved})
+def dis_service(request):
+    notifications = Notification.objects.all()
+    unseen_count = Notification.objects.filter(seen=False).count()
+    services = ServicePayment.objects.all()
+    return render(request,'admin_dash/services.html',{'notifications':notifications,
+                                                                'unseen_count':unseen_count,
+                                                                'services':services})
+def add_service(request):
+    notifications = Notification.objects.all()
+    unseen_count = Notification.objects.filter(seen=False).count()
+    if request.method=='POST':
+        service_name=request.POST.get('service_name')
+        service_cost=request.POST.get('scost')
+        paye_method=request.POST.get('pmethod')
+        notification=ServicePayment.objects.create(
+            Services=service_name,
+            Payment_method=paye_method,
+            Payment=service_cost
+            )
+        return redirect('add_service')
+    return render(request,'admin_dash/add-service.html',{'notifications':notifications,
+                                                                'unseen_count':unseen_count
+                                                                })
+def edit_service(request,service):
+    notifications = Notification.objects.all()
+    unseen_count = Notification.objects.filter(seen=False).count()
+    services = get_object_or_404(ServicePayment, Services=service)
+    if request.method=='POST':
+        service_name=request.POST.get('service_name')
+        service_cost=request.POST.get('scost')
+        paye_method=request.POST.get('pmethod')
+        services.Services=service_name
+        services.Payment_method=paye_method
+        services.Payment=service_cost
+        services.save()   
+        return redirect('dis_service')
+    return render(request,'admin_dash/edit-service.html',{'notifications':notifications,
+                                                                'unseen_count':unseen_count,
+                                                                'services':services
+                                                                })
 # @login_required
 def createUserAccount(request):
     created=False

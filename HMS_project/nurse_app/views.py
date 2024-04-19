@@ -51,13 +51,13 @@ def add_medication(request):
         remark = request.POST.get('remark')
       
         patient = get_object_or_404( PatientRegister,patient_id=patient_id)
-        nurse_name = get_object_or_404( User,username=nurse_name)
+        nurse_names = get_object_or_404( User,username=nurse_name)
         med = Medication(
             Patient_id=patient,
             Med_time=med_time,
             Bed_no=bed_no,
             Remark=remark,
-            Nurse_name=nurse_name,
+            Nurse_name=nurse_names,
             Drugs=drug,
            
         )
@@ -218,6 +218,9 @@ def allocate_room(request):
             Alloc_date=all_date,
             Room_type=room_type,
         )
+        room = get_object_or_404(RoomInformation, Room_no=bed_no)
+        room.Status = 'Occupied'  # Update status to 'Occupied' or any other value as needed
+        room.save()
         registered=True
         return render(request,'nurse_dash/Room_allocation.html',{'registered':registered,'notifications':notifications,
                                                        'unseen_count':unseen_count})

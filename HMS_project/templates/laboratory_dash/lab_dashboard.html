@@ -142,7 +142,21 @@
                             </li>
                         </ul>
                     </li>
-             
+                    <li class="sidebar-item">
+                        <a href="#" class="sidebar-link collapsed" data-bs-target="#setting" data-bs-toggle="collapse"
+                            aria-expanded="false">
+                     
+                            <i class="fa-solid fa-language pe-2"></i>
+                            Language
+                        </a>
+                        <ul id="setting" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                            <li class="sidebar-item">
+                                <a href="#" class="sidebar-link">
+                                    <div id="google_translate_element" class=""></div></a>
+                            </li>
+                            
+                        </ul>
+                    </li>
 
                     
                 </ul>
@@ -339,37 +353,19 @@
                     <i class="fa-regular fa-moon"></i>
                     <i class="fa-regular fa-sun"></i>
                 </a>
-                <!-- <footer class="footer">
-                    <div class="container-fluid">
-                        <div class="row text-muted">
-                            <div class="col-6 text-start">
-                                <p class="mb-0">
-                                    <a href="#" class="text-muted">
-                                        <strong>CodzSwod</strong>
-                                    </a>
-                                </p>
-                            </div>
-                            <div class="col-6 text-end">
-                                <ul class="list-inline">
-                                    <li class="list-inline-item">
-                                        <a href="#" class="text-muted">Contact</a>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a href="#" class="text-muted">About Us</a>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a href="#" class="text-muted">Terms</a>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a href="#" class="text-muted">Booking</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </footer> -->
+                
         </div>
     </div>
+    <!-- <script src="http://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <script>
+  
+      function googleTranslateElementInit() {
+        new google.translate.TranslateElement(
+          { pageLanguage: 'en', defaultLanguage: 'en' },
+          'google_translate_element'
+        );
+      } 
+    </script> -->
     <script src="{% static 'js2/jquery-3.2.1.min.js' %}"></script>
 	<!-- Popper Library-->
 	<script src="{% static 'js2/popper.min.js' %}"></script>

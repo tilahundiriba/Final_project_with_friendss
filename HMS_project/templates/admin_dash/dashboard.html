@@ -196,7 +196,41 @@
               </li>
             </ul>
           </li>
-
+          <li class="sidebar-item">
+            <a href="#" class="sidebar-link collapsed" data-bs-target="#service" data-bs-toggle="collapse"
+                aria-expanded="false">
+         
+                <i class="fa-brands fa-servicestack pe-2"></i>
+                            Services
+            </a>
+            <ul id="service" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                <li class="sidebar-item">
+                    <a href="{% url 'add_service' %}" class="sidebar-link">
+                        Add Service</a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="{% url 'dis_service' %}" class="sidebar-link">
+                        View Service</a>
+                </li>
+                
+            </ul>
+        </li>
+          <li class="sidebar-item">
+            <a href="#" class="sidebar-link collapsed" data-bs-target="#setting" data-bs-toggle="collapse"
+                aria-expanded="false">
+         
+                <i class="fa-solid fa-language pe-2"></i>
+                            Language
+            </a>
+            <ul id="setting" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                <li class="sidebar-item">
+                    <a href="#" class="sidebar-link">
+                        <div id="google_translate_element" class=""></div></a>
+                </li>
+                
+            </ul>
+        </li>
+          
         </ul>
       </div>
     </aside>
@@ -547,6 +581,16 @@
       </a> -->
     </div>
   </div>
+  <!-- <script src="http://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+  <script>
+
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement(
+        { pageLanguage: 'en', defaultLanguage: 'en' },
+        'google_translate_element'
+      );
+    } 
+  </script> -->
   <script src="{% static 'js2/jquery-3.2.1.min.js' %}"></script>
   <!-- Popper Library-->
   <script src="{% static 'js2/popper.min.js' %}"></script>

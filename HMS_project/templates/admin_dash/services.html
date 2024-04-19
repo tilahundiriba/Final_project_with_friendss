@@ -1,21 +1,18 @@
-
-{% extends 'nurse_dash/nurse_dash.html' %}
+{% extends 'admin_dash/dashboard.html' %}
 {% load static %}
 {% block content %}
 
 <!DOCTYPE html>
 <html>
-
-
-<!-- Mirrored from www.konnectplugins.com/proclinic/Horizontal/rooms.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 24 Jan 2022 10:42:01 GMT -->
+<!-- Mirrored from www.konnectplugins.com/proclinic/Horizontal/doctors.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 24 Jan 2022 10:42:01 GMT -->
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	{% block 'title' %}
-	<title>Room List</title>
+	<title>All Services</title>
 	{% endblock %}
-
+	
 </head>
 
 <body>
@@ -27,20 +24,17 @@
 		</div>
 	</div>
 	<!--/Pre Loader -->
-	<!-- Color Changer -->
 
-	<!-- /Color Changer -->
 	<div class="wrapper">
 		<!-- Page Content -->
 		<div id="content">
 				<!-- Top Navigation -->
-			
-		
+				
 				<!-- Page Title -->
 				<div class="container mt-0">
 					<div class="row breadcrumb-bar">
 						<div class="col-md-6">
-							<h3 class="block-title">Allotments</h3>
+							<h3 class="block-title">Services</h3>
 						</div>
 						<div class="col-md-6">
 							<ol class="breadcrumb">
@@ -49,15 +43,14 @@
 										<span class="ti-home"></span>
 									</a>
 								</li>
-								<li class="breadcrumb-item active">Allotments</li>
-								<li class="breadcrumb-item ">All Allotments</li>
+								<li class="breadcrumb-item active">Services</li>
+								<li class="breadcrumb-item ">All Services</li>
 							</ol>
 						</div>
 					</div>
 				</div>
 			<!-- /Page Title -->
 
-			<!-- /Breadcrumb -->
 			<!-- Main Content -->
 			<div class="container">
 
@@ -65,59 +58,31 @@
 					<!-- Widget Item -->
 					<div class="col-md-12">
 						<div class="widget-area-2 proclinic-box-shadow">
-							<h3 class="widget-title">Rooms List</h3>
+							<h3 class="widget-title">Service List</h3>
 							<div class="table-responsive mb-3">
 								<table id="tableId" class="table table-bordered table-striped">
 									<thead>
 										<tr>
-											<th class="no-sort">
-												<div class="custom-control custom-checkbox">
-													<input class="custom-control-input" type="checkbox" id="select-all">
-													<label class="custom-control-label" for="select-all"></label>
-												</div>
-											</th>
-											<th>Room Block</th>
-											<th>Room Number</th>
-											<th>Room Type</th>
-											<th>Bed Number</th>
-											<th>Status</th>
+									
+											<th>Service Name</th>
+											<th>Service Cost</th>
 											<th>Actions</th>
-                                            
-											
 										</tr>
 									</thead>
-                                    <tbody>
-										{% for room in rooms %}
-                                        <tr>
-                                            <td>
-                                                <div class="custom-control custom-checkbox">
-                                                    <input class="custom-control-input" type="checkbox" id="1">
-                                                    <label class="custom-control-label" for="1"></label>
-                                                </div>
-                                            </td>
-                                            <td>{{room.Room_block}}</td>
-                                            <td>{{room.Room_no}}</td>
-                                            <td>{{room.Room_type}}</td>
-                                            <td>{{room.Bed_no}}</td>
-                                            {% if room.Status == 'Occupied' %}
-                                            <td>
-                                                <span class="badge badge-warning">{{room.Status}}</span>
-                                            </td>
-											{% else %}
+									<tbody>
+										{% for service in services %}
+										<tr>
+										
+											<td>{{service.Services}}</td>
+											<td>{{service.Payment}}</td>
 											<td>
-                                                <span class="badge badge-success">{{room.Status}}</span>
-                                            </td>
-											{% endif %}
-                                            <td>
-												<a href="#" class="btn btn-outline-danger"><span class="ti-trash"></span> </a>
-												<a href="{% url 'edit_room' room.Bed_no %}" class="btn btn-outline-primary "><span class="ti-pencil-alt"></span></a>
+												<a href="#" class="btn btn-outline-danger "><span class="ti-trash"></span></a> 
+												<a href="{% url 'edit_service' service.Services %}" class="btn btn-outline-primary "><span class="ti-pencil-alt"></span></a> 
 												<a href="#" class="btn btn-outline-info "><span class="ti-eye"></span></a>
-                                            </td>
-                                        </tr>
-                                      
-                                     {% endfor %}
-                                     
-                                    </tbody>
+											</td>
+										</tr>
+										{% endfor %}
+									</tbody>
                                 </table>
                                 
 								<!--Export links-->
@@ -161,10 +126,11 @@
 	<a id="back-to-top" href="#" class="back-to-top">
 		<span class="ti-angle-up"></span>
 	</a>
+	<!-- /Back to Top -->
 
 </body>
 
 
-<!-- Mirrored from www.konnectplugins.com/proclinic/Horizontal/rooms.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 24 Jan 2022 10:42:01 GMT -->
+<!-- Mirrored from www.konnectplugins.com/proclinic/Horizontal/doctors.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 24 Jan 2022 10:42:01 GMT -->
 </html>
 {% endblock %}

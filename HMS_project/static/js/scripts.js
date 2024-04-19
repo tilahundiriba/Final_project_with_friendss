@@ -29,3 +29,9 @@ function isLight(){
 if(isLight()){
     toggleRootClass();
 }
+function googleTranslateElementInit() {
+    new google.translate.TranslateElement(
+      { pageLanguage: 'en', defaultLanguage: 'en' },
+      'google_translate_element'
+    );
+  }

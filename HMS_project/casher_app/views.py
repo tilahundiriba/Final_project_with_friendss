@@ -40,7 +40,7 @@ def casher_dash(request):
     unseen_count = Notification.objects.filter(seen=False).count()
     return render(request,'casher_dash/casher_dash.html',{'notifications':notifications,'unseen_count':unseen_count})
 from datetime import datetime
-from nurse_app.models import BedInformation
+from nurse_app.models import BedInformation,RoomInformation
 def add_discharge(request):
     users = User.objects.all()
     payed = False
@@ -55,6 +55,8 @@ def add_discharge(request):
         
         try:
             patient = get_object_or_404(PatientRegister, patient_id=patient_id)
+            p = get_object_or_404(BedInformation, Patient_id=patient_id)
+            pt=p.Bed_no
             casher = get_object_or_404(User, username=casher_name)
             discharge_instance = Discharge(
                 Patient_id=patient,
@@ -73,7 +75,9 @@ def add_discharge(request):
                 discharge_instance.No_days = (discharge_date - alloc_date).days
             
             discharge_instance.save()
-            
+            bed = get_object_or_404(RoomInformation, Bed_no=pt)
+            bed.Status = 'Vacant'  # Update status to 'Vacant' or any other value as needed
+            bed.save()
         except PatientRegister.DoesNotExist:
             # Handle the case where the patient is not found
             # You can add appropriate error handling or redirect to an error page
