@@ -1,0 +1,79 @@
+{% extends 'admin_dash/dashboard.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Approve Departure</title>
+</head>
+
+<body>
+  <div class="wrapper">
+    <!-- Page Content -->
+    <div id="content">
+
+  <div class="container home">
+    <div class="container mt-0">
+      <div class="row breadcrumb-bar">
+        <div class="col-md-6">
+          <h3 class="block-title">Patients</h3>
+        </div>
+        <div class="col-md-6">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a href="index.html">
+                <span class="ti-home"></span>
+              </a>
+            </li>
+            <li class="breadcrumb-item active">Patients</li>
+            <li class="breadcrumb-item ">UnApproved Patients</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      
+  
+      {% for approve in unapproved %}
+    
+      <div class="col-md-6">
+        <div class="widget-area proclinic-box-shadow color-red" style="padding: 10px 20px; min-width: 250px;">
+
+          <div class="widget-right justify-content-center" style="min-width: 250px;">
+
+            <h3 class="wiget-title color-green text-center">Approve Departure</h3>
+
+            <p><strong style="font-size: large;">Patient ID:&nbsp;</strong>{{ approve.Patient_id}}</p>
+            <p><strong style="font-size: large;">Reason:&nbsp;</strong>{{ approve.Reason}}</p>
+            <p><strong style="font-size: large;">Reffered To:&nbsp;</strong>{{ approve.Reffer_to}}</p>
+            <p><strong style="font-size: large;"> Payement:&nbsp;</strong>{{ approve.Status}}</p>
+            <p><strong style="font-size: large;">Departure Date:&nbsp;</strong>{{ approve.Departure_date}}</p>
+            <form action="{% url 'approve_discharges' approve.Discharge_no %}">
+              <button type='submit' class="btn btn-outline-primary mt-3 mb-0 me-4"><span class="ti-eye"></span>
+                Approve</button>
+              
+            </form>
+
+          </div>
+        </div>
+      </div>
+    
+      {% endfor %}
+    
+    </div>
+    
+  </div>
+</div>
+</div>
+<script>
+
+
+
+</script>
+</body>
+
+</html>
+{% endblock %}

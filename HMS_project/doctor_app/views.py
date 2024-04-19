@@ -38,19 +38,21 @@ def profile_update_doc(request, user_id):
                                                            'notifications':notifications,
                                                         'unseen_count':unseen_count})
 
-
+@login_required
 def dis_dr_dash(request):
     notifications = Notification.objects.all()
     unseen_count = Notification.objects.filter(seen=False).count()
     return render(request,'doctor/dr_dash.html',{
                                                 'notifications':notifications,
                                                 'unseen_count':unseen_count})
+@login_required
 def dis_labtest(request):
     labs= Laboratory.objects.all()
     notifications = Notification.objects.all()
     unseen_count = Notification.objects.filter(seen=False).count()
     return render(request,'doctor/labtests.html',{'labs':labs,'notifications':notifications,
                                                 'unseen_count':unseen_count})
+@login_required
 def add_lab(request):
     users=User.objects.all()
     notifications = Notification.objects.all()
@@ -109,6 +111,7 @@ def add_lab(request):
     return render(request,'doctor/add_lab.html',{'users':users,'notifications':notifications,
                                                 'unseen_count':unseen_count})
 # views for getting untested lab request and render it
+@login_required
 def check_request(request):
     request_count = cache.get('request_count', 0)
     requests = Laboratory.objects.filter(Is_tested=False)
@@ -119,6 +122,7 @@ def check_request(request):
                                                                  'notifications':notifications,
                                                 'unseen_count':unseen_count})
 # views for testing the lab for single patient 
+@login_required
 def checked_request(request, patient_id):
     lab_request = get_object_or_404(Laboratory, PatientID=patient_id)
     lab_request.Is_tested = True
@@ -129,11 +133,13 @@ def checked_request(request, patient_id):
     cache.set('request_count', request_count)
     return redirect('check_request')
 # views for getting unpayed lab request and render it
+@login_required
 def check_payment_request(request):
     request_count = cache.get('request_count', 0)
     payments = Laboratory.objects.filter(Is_payed=False)
     return render(request, 'casher_dash/lab_payments.html', {'payments': payments ,'request_count': request_count})
 # views for paying the lab payment for each patient
+@login_required
 def checked_payment_request(request, patient_id):
     pay_request = get_object_or_404(Laboratory, PatientID=patient_id)
     pay_request.Is_payed = True
@@ -144,6 +150,7 @@ def checked_payment_request(request, patient_id):
     cache.set('request_count', request_count)
     return redirect('check_payment_request')
 # view for tadding prescriptions 
+@login_required
 def add_perscription(request):
     users=User.objects.all()
     notifications = Notification.objects.all()
@@ -187,6 +194,7 @@ def add_perscription(request):
                                                 'users':users})
     return render(request,'doctor/add-perscription.html',{'users':users,'notifications':notifications,
                                                 'unseen_count':unseen_count})
+@login_required
 def edit_perscription(request,prec_number):
     users=User.objects.all()
     prescription= Prescription.objects.get(Prec_number=prec_number)
@@ -220,6 +228,7 @@ def edit_perscription(request,prec_number):
     return render(request,'doctor/edit-perscription.html',{'users':users,'notifications':notifications,
                                                 'unseen_count':unseen_count,
                                                 'prescriptions':prescription})
+@login_required
 def perscription(request):
     prescription= Prescription.objects.all()
     notifications = Notification.objects.all()
@@ -229,13 +238,13 @@ def perscription(request):
                                                 'unseen_count':unseen_count})
 def about_perscription(request):
     return render(request,'doctor/about-percription.html')
-
+@login_required
 def dis_dr_dash_content(request):
     notifications = Notification.objects.all()
     unseen_count = Notification.objects.filter(seen=False).count()
     return render(request,'doctor/dash_content.html',{'notifications':notifications,
                                                 'unseen_count':unseen_count})
-
+@login_required
 def edit_appointment(request,app_number):
     notifications = Notification.objects.all()
     unseen_count = Notification.objects.filter(seen=False).count()
@@ -264,6 +273,7 @@ def edit_appointment(request,app_number):
     return render(request,'doctor/edit-appointment.html',{'notifications':notifications,
                                                 'unseen_count':unseen_count,
                                                 'appointments':appointments})
+@login_required
 def dis_appointment(request):
     notifications = Notification.objects.all()
     unseen_count = Notification.objects.filter(seen=False).count()
@@ -274,18 +284,21 @@ def about_appointment(request):
     return render(request,'doctor/about-appointment.html')
 def test_notification(request):
     return render(request,'doctor/view_notification.html')
+@login_required
 def dis_history(request):
     notifications = Notification.objects.all()
     unseen_count = Notification.objects.filter(seen=False).count()
     histories = PatientHistory.objects.all()
     return render(request,'doctor/histories.html',{'histories':histories,'notifications':notifications,
                                                 'unseen_count':unseen_count})
+@login_required
 def dis_lab_results(request):
     notifications = Notification.objects.all()
     unseen_count = Notification.objects.filter(seen=False).count()
     lab_results = Laboratory.objects.filter(Is_tested=True, Is_payed=True)
     return render(request,'doctor/lab_results.html',{'lab_results':lab_results,'notifications':notifications,
                                                 'unseen_count':unseen_count})
+@login_required
 def add_history(request):
     notifications = Notification.objects.all()
     unseen_count = Notification.objects.filter(seen=False).count()
@@ -329,7 +342,7 @@ def add_history(request):
                                                 'unseen_count':unseen_count})
     return render(request,'doctor/add_history.html',{'users':users,'notifications':notifications,
                                                 'unseen_count':unseen_count})
-
+@login_required
 def update_history(request, history_no):
         patient_id = request.POST.get('patient_id')
         date = request.POST.get('date')
@@ -352,7 +365,7 @@ def update_history(request, history_no):
         return redirect('dis_history')  # Redirect to a success URL
   
 
-
+@login_required
 def edit_history(request, history_no):
     notifications = Notification.objects.all()
     unseen_count = Notification.objects.filter(seen=False).count()
@@ -375,7 +388,7 @@ def edit_history(request, history_no):
        
 
 
-
+@login_required
 def create_appointment(request):
     notifications = Notification.objects.all()
     unseen_count = Notification.objects.filter(seen=False).count()

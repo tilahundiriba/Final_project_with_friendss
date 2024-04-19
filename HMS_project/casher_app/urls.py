@@ -8,7 +8,8 @@ from doctor_app.views import check_payment_request,checked_payment_request
 
 urlpatterns = [
  
-  path('bill/', views.dis_bill, name='bill'),
+  path('discharges/', views.dis_discharge, name='discharges'),
+  path('approve_discharges/<int:discharge_no>/', views.approve_discharge_request, name='approve_discharges'),
   path('add-payment/', views.add_payment, name='add-payment'),
   path('add-discharge/', views.add_discharge, name='add-discharge'),
   path('about-payment/', views.about_payment, name='about_payment'),

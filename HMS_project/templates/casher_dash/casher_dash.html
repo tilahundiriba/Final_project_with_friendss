@@ -149,7 +149,7 @@
                                 <a href="{% url 'add-discharge' %}" class="sidebar-link">Add Discharge</a>
                             </li>
                             <li class="sidebar-item">
-                                <a href="#" class="sidebar-link">View Discharge</a>
+                                <a href="{% url 'discharges' %}" class="sidebar-link">View Discharge</a>
                             </li>
                             <li class="sidebar-item">
                                 <a href="#" class="sidebar-link">About Discharge</a>
@@ -165,6 +165,25 @@
                      
                             <i class="fa-solid fa-wallet pe-2"></i>
                             Lab. Payment
+                        </a>
+                        <ul id="feed" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                            <li class="sidebar-item">
+                                <a href="{% url 'check_payment_request' %}" class="sidebar-link">Lab Payment</a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a href="#" class="sidebar-link">Send Lab Fee</a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a href="#" class="sidebar-link">View Lab Result</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="#" class="sidebar-link collapsed" data-bs-target="#feed" data-bs-toggle="collapse"
+                            aria-expanded="false">
+                     
+                            <i class="fa-solid fa-setting pe-2"></i>
+                            Setting
                         </a>
                         <ul id="feed" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                             <li class="sidebar-item">

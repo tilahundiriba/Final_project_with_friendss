@@ -12,6 +12,7 @@ from django.conf.urls.static import static
 # ]
 urlpatterns = [
     path('poster/', views.poster, name='poster'),
+    path('approve_departures/', views.approve_departure, name='approve_departure'),
     path('seen_notifications/<int:id>/', views.mark_notification_as_seen, name='seen_notifications'),
     path('admin_profile/', views.admin_profile, name='admin_profile'),
     path('admin_profile_update/<int:user_id>/', views.profile_update_admin, name='admin_profile_update'),
