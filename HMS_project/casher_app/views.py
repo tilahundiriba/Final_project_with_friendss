@@ -120,38 +120,60 @@ def add_payment(request):
     notifications = Notification.objects.all()
     unseen_count = Notification.objects.filter(seen=False).count()
     users = User.objects.all()
-    payed=False
+    for_card = get_object_or_404(ServicePayment, id=1)
+    for_blood = get_object_or_404(ServicePayment, id=2)
+    for_urine = get_object_or_404(ServicePayment, id=3)
+    for_xray = get_object_or_404(ServicePayment, id=4)
+    for_ctscan = get_object_or_404(ServicePayment, id=5)
+
+    payed = False
     if request.method == 'POST':
         patient_id = request.POST.get('patient_id')
         casher_name = request.POST.get('cashier_name')
         added_date = request.POST.get('adminssion_date')
         pay_no = request.POST.get('payment_no')
-        f_payment = request.POST.get('food_payment')
-        f_p_amount = float(request.POST.get('food_p_amount'))
-        b_payment = request.POST.get('bed_payment')
-        b_p_amount = float(request.POST.get('bed_p_amount'))
-        c_payment = request.POST.get('card_payment')
-        c_p_amount = float(request.POST.get('card_p_amount'))
-        l_payment = request.POST.get('lab_payment')
-        l_p_amount = float(request.POST.get('lab_p_amount'))
-        other_payment = request.POST.get('other')
-        other_p_amount = float(request.POST.get('other_amount'))
-        payemnt_method = request.POST.get('payment_type')
-        total =f_p_amount + b_p_amount +c_p_amount+l_p_amount+other_p_amount
-     
+        payment_method = request.POST.get('payment_type')
+        blood_p_amount = request.POST.get('blood_test') == 'on'
+        urine_p_amount = request.POST.get('urine_test') == 'on'
+        ctscan_p_amount = request.POST.get('ctscan_test') == 'on'
+        x_ray_test = request.POST.get('x-ray_test') == 'on'
+        f_p_amount = request.POST.get('food_payment') == 'on'
+        b_p_amount = request.POST.get('bed_payment') == 'on'
+        c_p_amount = request.POST.get('card_payment') == 'on'
+        
+        # Initialize variables
+        f_p = b_p = c_p = bl_p = ur_p = ct_p = xr_p = 0
+        
+        if f_p_amount:
+            f_p = float(for_card.Payment)
+        if b_p_amount:
+            b_p = float(for_card.Payment)
+        if c_p_amount:
+            c_p = float(for_card.Payment)
+        if blood_p_amount:
+            bl_p = float(for_blood.Payment)
+        if urine_p_amount:
+            ur_p = float(for_urine.Payment)
+        if ctscan_p_amount:
+            ct_p = float(for_ctscan.Payment)
+        if x_ray_test:
+            xr_p = float(for_xray.Payment)
+        
+        lab_payment = bl_p + ur_p + ct_p + xr_p
+        total = f_p + b_p + c_p + bl_p + ur_p + ct_p + xr_p
         try:
-            patient = get_object_or_404( PatientRegister,patient_id=patient_id)
+            patient = get_object_or_404(PatientRegister, patient_id=patient_id)
             casher = get_object_or_404(User, username=casher_name)
             payment = PaymentModel.objects.create(
                 Patient_id=patient,
                 Pay_number=pay_no,
                 Admit_date=added_date,
-                Lab_payment=l_p_amount,
-                Food_payment=f_p_amount,
-                Service_payment=other_p_amount,
-                Card_payment=c_p_amount,
-                Bed_payment=b_p_amount,
-                Pay_method=payemnt_method,
+                Lab_payment=lab_payment,
+                Food_payment=f_p,
+                Service_payment=lab_payment,
+                Card_payment=c_p,
+                Bed_payment=b_p,
+                Pay_method=payment_method,
                 Total=total,
                 Casher_id=casher
             )
@@ -159,28 +181,36 @@ def add_payment(request):
             # Handle the case where the patient is not found
             # You can add appropriate error handling or redirect to an error page
             pass
-        except UserProfileInfo2.DoesNotExist:
-            # Handle the case where the doctor is not found
+        except User.DoesNotExist:
+            # Handle the case where the cashier is not found
             # You can add appropriate error handling or redirect to an error page
             pass
-        payed=True
+        payed = True
         return redirect("add-payment")
+    
     payment = ServicePayment.objects.all()
-    return render(request,'casher_dash/add-payment.html',{'payments':payment,
-                                                          'payed':payed,
-                                                          'users':users,
-                                                          'notifications':notifications,
-                                                            'unseen_count':unseen_count})
-def about_payment(request):
+    return render(request, 'casher_dash/add-payment.html', {'payments': payment,
+                                                            'payed': payed,
+                                                            'users': users,
+                                                            'notifications': notifications,
+                                                            'unseen_count': unseen_count})
+
+def about_payment(request,pay_number,patient_id):
     notifications = Notification.objects.all()
     unseen_count = Notification.objects.filter(seen=False).count()
+    payments = get_object_or_404(PaymentModel, Pay_number=pay_number)
+    patients = get_object_or_404(PatientRegister, patient_id=patient_id)
     return render(request,'casher_dash/about-payment.html',{'notifications':notifications,
-                                                            'unseen_count':unseen_count})
+                                                            'unseen_count':unseen_count,
+                                                            'payments':payments,
+                                                            'patients':patients})
 def dis_payment(request):
     notifications = Notification.objects.all()
     unseen_count = Notification.objects.filter(seen=False).count()
+    payments = PaymentModel.objects.all()
     return render(request,'casher_dash/payments.html',{'notifications':notifications,
-                                                            'unseen_count':unseen_count})
+                                                            'unseen_count':unseen_count,
+                                                            'payments':payments})
 def invoice(request):
     notifications = Notification.objects.all()
     unseen_count = Notification.objects.filter(seen=False).count()

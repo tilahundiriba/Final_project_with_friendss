@@ -13,7 +13,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	{% block 'title' %}
-	<title>ProClinic-Bootstrap4 Hospital Admin</title>
+	<title>Invoice</title>
 	{% endblock %}
 	<!-- Fav  Icon Link -->
 	<style>
@@ -25,7 +25,7 @@
 			#forprint,
 			#forprint * {
 				visibility: visible;
-				
+
 			}
 
 			#forprint {
@@ -72,8 +72,8 @@
 						<!-- Invoice Head -->
 						<div class="row ">
 							<div class="col-sm-6 mb-5">
-								<img src="{% static 'images2/logo-dark.png' %}" alt="logo hospital"
-									class="img-thumbnail">
+								<img src="{% static 'images/hospital_logo3.png' %}" alt="logo hospital"
+									class="img-thumbnail" style="height: 100px; width: 100px;">
 								<br>
 								<br>
 								<span>Street Address</span>
@@ -87,9 +87,9 @@
 								<h3>INVOICE</h3>
 								<br>
 								<br>
-								<span>Invoice # [123]</span>
+								<span>Invoice # {{payments.Pay_number}}</span>
 								<br>
-								<span>Date: Nov 16, 2018</span>
+								<span>Date: {{payments.Admit_date}}</span>
 							</div>
 						</div>
 						<!-- /Invoice Head -->
@@ -97,57 +97,51 @@
 						<div class="row">
 							<div class="col-sm-6 mb-5">
 								<h6 class="proclinic-text-color">PATIENT DETAILS:</h6>
-								<span><strong>Name:</strong> Daniel</span>
+								<span><strong>Name:</strong> {{patients.first_name}}&nbsp;&nbsp;
+									{{patients.middle_name}}</span>
 								<br>
-								<span><strong>Age:</strong> 20</span>
+								<span><strong>Age:</strong> {{patients.age}}</span>
 								<br>
-								<span><strong>Address: </strong>60-21/100, Smith street</span>
+								<span><strong>Address: </strong>{{patients.city}}</span>
 								<br>
-								<span>Banglore, India</span>
+								<span>{{patients.region}}&nbsp;&nbsp; {{patients.country}}</span>
 								<br>
-								<span><strong>Phone:</strong> +91 12345 67890</span>
+								<span><strong>Phone:</strong> {{patients.phone_number}}</span>
 							</div>
 							<div class="col-sm-6 mb-5">
-								<span><strong>Patient ID:</strong> PI675</span>
+								<span><strong>Patient ID:</strong> {{patients.patient_id}}</span>
 								<br>
 								<span><strong>Total Days:</strong> 10</span>
 								<br>
-								<span><strong>Payment Type:</strong> Credit Card</span>
-								<br>
-								<span>1234 5678 9012 3456</span>
-								<br>
-								<span>Paypal</span>
+								<span><strong>Payment Type:</strong> {{payments.Pay_method}}</span>
+
 							</div>
 							<div class="col-sm-12 mb-2">
-								<strong class="proclinic-text-color">Services:</strong>
+								<strong class="proclinic-text-color">Service Payements:</strong>
 							</div>
 							<div class="col-sm-12">
 								<table class="table table-bordered table-striped table-invioce">
 									<thead>
 										<tr>
-											<th scope="col">#</th>
-											<th scope="col">Service</th>
-											<th scope="col">Unit Cost</th>
-											<th scope="col">Discount <small>(%)</small></th>
-											<th scope="col">Total</th>
+											<th>Food</th>
+											<th>Bed</th>
+											<th>Laboratories</th>
+											<th>Card </th>
+											<th>Total</th>
 										</tr>
 									</thead>
 									<tbody>
+									
 										<tr>
-											<th scope="row">1</th>
-											<td>Chest X-ray</td>
-											<td>$ 120</td>
-											<td>10</td>
-											<td>$ 108</td>
-										</tr>
-										<tr>
-											<th scope="row">2</th>
-											<td>Injury Operation</td>
-											<td>$ 1000</td>
-											<td>20</td>
-											<td>$ 800</td>
+
+											<td>{{payments.Food_payment}}</td>
+											<td>{{payments.Bed_payment}}</td>
+											<td>{{payments.Lab_payment}}</td>
+											<td>{{payments.Card_payment}}</td>
+											<td>{{payments.Total}}</td>
 										</tr>
 
+									
 									</tbody>
 								</table>
 							</div>

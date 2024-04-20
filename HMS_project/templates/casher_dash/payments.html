@@ -12,7 +12,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	{% block 'title' %}
-	<title>ProClinic-Bootstrap4 Hospital Admin</title>
+	<title>Payments</title>
 	{% endblock %}
 	<!-- Fav  Icon Link -->
 
@@ -75,15 +75,17 @@
 													<label class="custom-control-label" for="select-all"></label>
 												</div>
 											</th>
-											<th>Patient Name</th>
-											<th>Doctor Name</th>
+											<th>Patient ID</th>
 											<th>Service Name</th>
 											<th>Charges</th>
-											<th>Discount <small>(%)</small></th>
+											<th>Payment Method</th>
+											<th>Payment Date</th>
 											<th>Status</th>
+											<th>Actions</th>
 										</tr>
 									</thead>
                                     <tbody>
+                                        {% for payment in payments %}
                                         <tr>
                                             <td>
                                                 <div class="custom-control custom-checkbox">
@@ -91,191 +93,39 @@
                                                     <label class="custom-control-label" for="1"></label>
                                                 </div>
                                             </td>
-                                            <td>Manoj Kumar</td>
-                                            <td>Daniel Smith</td>
-                                            <td>X-ray</td>
-                                            <td>$500</td>
-                                            <td>5</td>
+                                            <td>{{payment.Patient_id}}</td>
+                                            {% if payment.Food_payment and payment.Bed_payment and payment.Card_payment and payment.Lab_payment %}
+                                            <td>All</td>
+                                            {% elif payment.Food_payment %}
+                                            <td>Food</td>
+                                            {% elif payment.Bed_payment %}
+                                            <td>Bed</td>
+                                            {% elif payment.Card_payment %}
+                                            <td>Card</td>
+                                            {% elif payment.Lab_payment %}
+                                            <td>Laboratory</td>
+                                       
+                                            {% endif %}
+                                             
+                                            <td>{{payment.Total}}</td>
+                                            <td>{{payment.Pay_method}}</td>
+                                            <td>{{payment.Admit_date}}</td>
+                                            {% if payment.Food_payment and payment.Bed_payment and payment.Card_payment and payment.Lab_payment %}
                                             <td>
-                                                <span class="badge badge-success">completed</span>
+                                                <span class="badge badge-success">Completed</span>
+                                            </td>
+                                            {% else %}
+                                            <td>
+                                                <span class="badge badge-warning">Incompleted</span>
+                                            </td>
+                                            {% endif %}
+                                            <td>
+                                                <a href="#" class="btn btn-outline-primary"><span
+                                                    class="ti-pencil-alt"></span></a>
+                                                    <a href="{% url 'about_payment' payment.Pay_number payment.Patient_id %}" class="btn btn-outline-info"><span class="ti-eye"></span></a>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="custom-control custom-checkbox">
-                                                    <input class="custom-control-input" type="checkbox" id="2">
-                                                    <label class="custom-control-label" for="2"></label>
-                                                </div>
-                                            </td>
-                                            <td>Riya</td>
-                                            <td>Daniel Smith</td>
-                                            <td>ECG</td>
-                                            <td>$120</td>
-                                            <td>10</td>
-                                            <td>
-                                                <span class="badge badge-success">completed</span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="custom-control custom-checkbox">
-                                                    <input class="custom-control-input" type="checkbox" id="3">
-                                                    <label class="custom-control-label" for="3"></label>
-                                                </div>
-                                            </td>
-                                            <td>Susan</td>
-                                            <td>Daniel Smith</td>
-                                            <td>Dental</td>
-                                            <td>$190</td>
-                                            <td>8</td>
-                                            <td>
-                                                <span class="badge badge-warning">Pending</span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="custom-control custom-checkbox">
-                                                    <input class="custom-control-input" type="checkbox" id="4">
-                                                    <label class="custom-control-label" for="4"></label>
-                                                </div>
-                                            </td>
-                                            <td>Manoj Kumar</td>
-                                            <td>Daniel Smith</td>
-                                            <td>X-ray</td>
-                                            <td>$500</td>
-                                            <td>5</td>
-                                            <td>
-                                                <span class="badge badge-danger">cancelled</span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="custom-control custom-checkbox">
-                                                    <input class="custom-control-input" type="checkbox" id="5">
-                                                    <label class="custom-control-label" for="5"></label>
-                                                </div>
-                                            </td>
-                                            <td>Riya</td>
-                                            <td>Daniel Smith</td>
-                                            <td>ECG</td>
-                                            <td>$120</td>
-                                            <td>10</td>
-                                            <td>
-                                                <span class="badge badge-success">completed</span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="custom-control custom-checkbox">
-                                                    <input class="custom-control-input" type="checkbox" id="6">
-                                                    <label class="custom-control-label" for="6"></label>
-                                                </div>
-                                            </td>
-                                            <td>Susan</td>
-                                            <td>Daniel Smith</td>
-                                            <td>Dental</td>
-                                            <td>$190</td>
-                                            <td>8</td>
-                                            <td>
-                                                <span class="badge badge-warning">Pending</span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="custom-control custom-checkbox">
-                                                    <input class="custom-control-input" type="checkbox" id="7">
-                                                    <label class="custom-control-label" for="7"></label>
-                                                </div>
-                                            </td>
-                                            <td>Manoj Kumar</td>
-                                            <td>Daniel Smith</td>
-                                            <td>X-ray</td>
-                                            <td>$500</td>
-                                            <td>5</td>
-                                            <td>
-                                                <span class="badge badge-success">completed</span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="custom-control custom-checkbox">
-                                                    <input class="custom-control-input" type="checkbox" id="8">
-                                                    <label class="custom-control-label" for="8"></label>
-                                                </div>
-                                            </td>
-                                            <td>Riya</td>
-                                            <td>Daniel Smith</td>
-                                            <td>ECG</td>
-                                            <td>$120</td>
-                                            <td>10</td>
-                                            <td>
-                                                <span class="badge badge-success">completed</span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="custom-control custom-checkbox">
-                                                    <input class="custom-control-input" type="checkbox" id="9">
-                                                    <label class="custom-control-label" for="9"></label>
-                                                </div>
-                                            </td>
-                                            <td>Susan</td>
-                                            <td>Daniel Smith</td>
-                                            <td>Dental</td>
-                                            <td>$190</td>
-                                            <td>8</td>
-                                            <td>
-                                                <span class="badge badge-warning">Pending</span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="custom-control custom-checkbox">
-                                                    <input class="custom-control-input" type="checkbox" id="10">
-                                                    <label class="custom-control-label" for="10"></label>
-                                                </div>
-                                            </td>
-                                            <td>Manoj Kumar</td>
-                                            <td>Daniel Smith</td>
-                                            <td>X-ray</td>
-                                            <td>$500</td>
-                                            <td>5</td>
-                                            <td>
-                                                <span class="badge badge-danger">cancelled</span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="custom-control custom-checkbox">
-                                                    <input class="custom-control-input" type="checkbox" id="11">
-                                                    <label class="custom-control-label" for="11"></label>
-                                                </div>
-                                            </td>
-                                            <td>Riya</td>
-                                            <td>Daniel Smith</td>
-                                            <td>ECG</td>
-                                            <td>$120</td>
-                                            <td>10</td>
-                                            <td>
-                                                <span class="badge badge-success">completed</span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="custom-control custom-checkbox">
-                                                    <input class="custom-control-input" type="checkbox" id="12">
-                                                    <label class="custom-control-label" for="12"></label>
-                                                </div>
-                                            </td>
-                                            <td>Susan</td>
-                                            <td>Daniel Smith</td>
-                                            <td>Dental</td>
-                                            <td>$190</td>
-                                            <td>8</td>
-                                            <td>
-                                                <span class="badge badge-warning">Pending</span>
-                                            </td>
-                                        </tr>
+                                       {% endfor %}
                                     </tbody>
                                 </table>
                                 
