@@ -10,7 +10,12 @@ from django import *
 from admin_app .models import UserProfileInfo2
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-
+from .utils import generate_password,generate_username
+from django.contrib.auth.hashers import make_password
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
+from HMS_project import settings
 @login_required
 def rece_profile(request):
     notifications = Notification.objects.all()
@@ -99,7 +104,37 @@ def add_patient(request):
         doctor_name=doctor,
         symptom=symptom,
                 )
+        username = generate_username(first_name, middle_name)
+        password = generate_password()
 
+        # Create the user
+        hashed_password = make_password(password)
+        user = User.objects.create_user(username=username,
+                                        password=password)
+
+        # Create user profile
+        user_profile = UserProfileInfo2.objects.create(
+            user=user
+  
+        )
+        # Send email with username and password
+        context = {
+            'first_name':first_name,
+            'middle_name':middle_name,
+            'username': username,
+            'password': password
+           
+        }
+        html_message = render_to_string('receptionist_dash/email_tamplates.html', context)
+        plain_message = strip_tags(html_message)
+        send_mail(
+            'Account Created',
+            plain_message,
+            settings.EMAIL_HOST_USER,
+            [email],
+            html_message=html_message,
+            fail_silently=False,
+        )
         patient_count = cache.get('patient_count', 0)
         patient_count += 1
         cache.set('patient_count', patient_count)

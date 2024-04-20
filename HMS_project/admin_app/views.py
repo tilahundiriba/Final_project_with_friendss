@@ -129,6 +129,8 @@ def login_view(request):
                         return redirect('receptionist_dash')  # Redirect to home URL after login
                     elif user_profile.role =='technician':
                         return redirect('lab_dashboard')
+                    else:
+                        return redirect('write_feedback')
                 else:
                     return redirect('change_credentials')
                 # else:

@@ -10,6 +10,21 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
+def technician_list(request):
+    # Get all distinct technician IDs from the Laboratory model
+    technician_ids = Laboratory.objects.values_list('Technician_ID', flat=True).distinct()
+
+    technicians_with_test_counts = []
+    for technician_id in technician_ids:
+        # Get the technician user object using the technician ID
+        technician = User.objects.get(username=technician_id)
+
+        # Count the number of laboratory tests assigned to the technician
+        test_count = Laboratory.objects.filter(Technician_ID=technician_id).count()
+
+        technicians_with_test_counts.append((technician, test_count))
+    
+    return render(request, 'doctor/testtech.html', {'technicians_with_test_counts': technicians_with_test_counts})
 @login_required
 def doc_profile(request):
     user = request.user
@@ -63,6 +78,7 @@ def add_lab(request):
         lab_number = request.POST.get('lab_no')
         admit_date = request.POST.get('admited_date')
         doctor_name = request.POST.get('dr_name')
+        techn_name = request.POST.get('techn_name')
         checkbox1 = request.POST.get('blood_test') == 'on'
         checkbox2 = request.POST.get('urine_test') == 'on'
         checkbox3 = request.POST.get('ctscan_test') == 'on'
@@ -84,11 +100,13 @@ def add_lab(request):
         try:
             patient = get_object_or_404( PatientRegister,patient_id=patientid)
             doctor = get_object_or_404(User, username=doctor_name)
+            technic = get_object_or_404(User, username=techn_name)
             lab = Laboratory(
                 PatientID=patient,
                 Admit_date=admit_date,
                 Lab_number=lab_number,
                 Doctor_ID=doctor,
+                Technician_ID=technic,
                 Lab_type=lab_type,
                 # Assign values to other fields similarly
             )
