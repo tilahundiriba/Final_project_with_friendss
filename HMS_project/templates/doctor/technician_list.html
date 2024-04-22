@@ -1,11 +1,32 @@
 <h3 class="widget-title">Laboratory Technician List</h3>
 <div class="table-responsive mb-3">
     <ul>
-        {% for technician, test_count in technicians_with_test_counts %}
-        <li>{{ technician.user.username }} - Patients Assigned: {{ test_count }}</li>
-        {% endfor %}
+        
+        <li></li>
+  
     </ul>
+    <table id="tableId" class="table table-bordered table-striped">
+        <thead>
+       
+            <tr>
+          
+        
+                <th>Technician Name</th>
+                <th>Number of Tasks Assigned</th>
+    
+            </tr>
+        </thead>
+        <tbody>
+            {% for technician, test_count in technicians_with_test_counts %}
+            <tr>
+               
+                <td>{{ technician }} </td>
+                <td> {{ test_count }} </td>
+            </tr>
 
+            {% endfor %}
+        </tbody>
+    </table>
 
 
 </div>

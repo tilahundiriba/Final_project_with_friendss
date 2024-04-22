@@ -17,14 +17,17 @@ def technician_list(request):
     technicians_with_test_counts = []
     for technician_id in technician_ids:
         # Get the technician user object using the technician ID
-        technician = User.objects.get(username=technician_id)
+        technician = User.objects.get(pk=technician_id)
 
-        # Count the number of laboratory tests assigned to the technician
-        test_count = Laboratory.objects.filter(Technician_ID=technician_id).count()
+        # Count the number of untested laboratory tests assigned to the technician
+        untested_test_count = Laboratory.objects.filter(Technician_ID=technician_id, Is_tested=False).count()
+
+        # If there are no untested tests, set the test count to 0
+        test_count = untested_test_count if untested_test_count > 0 else 0
 
         technicians_with_test_counts.append((technician, test_count))
     
-    return render(request, 'doctor/testtech.html', {'technicians_with_test_counts': technicians_with_test_counts})
+    return render(request, 'doctor/technician_list.html', {'technicians_with_test_counts': technicians_with_test_counts})
 @login_required
 def doc_profile(request):
     user = request.user
@@ -73,6 +76,20 @@ def add_lab(request):
     notifications = Notification.objects.all()
     unseen_count = Notification.objects.filter(seen=False).count()
     registered=False
+    technician_ids = Laboratory.objects.values_list('Technician_ID', flat=True).distinct()
+
+    technicians_with_test_counts = []
+    for technician_id in technician_ids:
+        # Get the technician user object using the technician ID
+        technician = User.objects.get(pk=technician_id)
+
+        # Count the number of untested laboratory tests assigned to the technician
+        untested_test_count = Laboratory.objects.filter(Technician_ID=technician_id, Is_tested=False).count()
+
+        # If there are no untested tests, set the test count to 0
+        test_count = untested_test_count if untested_test_count > 0 else 0
+
+        technicians_with_test_counts.append((technician, test_count))
     if request.method == 'POST':
         patientid = request.POST.get('patient_id')
         lab_number = request.POST.get('lab_no')
@@ -125,9 +142,12 @@ def add_lab(request):
             # You can add appropriate error handling or redirect to an error page
             pass
         return render(request,'doctor/add_lab.html',{'register':registered,'notifications':notifications,
-                                                'unseen_count':unseen_count})
+                                               'unseen_count':unseen_count,
+                                               'technicians_with_test_counts':technicians_with_test_counts})
+    
     return render(request,'doctor/add_lab.html',{'users':users,'notifications':notifications,
-                                                'unseen_count':unseen_count})
+                                                'unseen_count':unseen_count,
+                                                'technicians_with_test_counts':technicians_with_test_counts})
 # views for getting untested lab request and render it
 @login_required
 def check_request(request):
