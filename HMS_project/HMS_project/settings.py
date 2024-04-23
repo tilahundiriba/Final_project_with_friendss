@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 from django.views.decorators.cache import never_cache
 from django.utils.decorators import method_decorator
 from pathlib import Path
+from django.utils import timezone
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -58,6 +59,7 @@ INSTALLED_APPS = [
    'laboratory_app',
        'channels',
        'patient_app',
+       'celery',
 ]
 
 MIDDLEWARE = [
@@ -73,6 +75,18 @@ MIDDLEWARE = [
 ]
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 ROOT_URLCONF = 'HMS_project.urls'
+
+
+
+
+# Redis broker configuration
+CELERY_BROKER_URL = 'redis://localhost:6379/0'
+CELERY_BEAT_SCHEDULE = {
+    'send-notification': {
+        'task': 'doctor_app.tasks.send_notification',
+        'schedule': timezone.timedelta(minutes=15),  # Run every 15 minutes
+    },
+}
 
 TEMPLATES = [
     {

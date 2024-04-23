@@ -10,6 +10,15 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
+from HMS_project import settings
+from twilio.rest import Client
+from django.http import HttpResponse
+from datetime import datetime, timedelta
+from twilio.base.exceptions import TwilioRestException
+
 def technician_list(request):
     # Get all distinct technician IDs from the Laboratory model
     technician_ids = Laboratory.objects.values_list('Technician_ID', flat=True).distinct()
@@ -453,6 +462,8 @@ def create_appointment(request):
         # Create an instance of Appointment model and save it
             patient = get_object_or_404( PatientRegister,patient_id=patientid)
             doctor = get_object_or_404(User, username=doctor_name)
+            uemail= patient.email
+            phone_number=patient.phone_number
             appointment = Appointment(
                 PatientID=patient,
                 App_number=app_number,
@@ -464,8 +475,8 @@ def create_appointment(request):
 
                 # Assign values to other fields similarly
             )
-            appointment.save()
             registered=True
+            appointment.save()
         except PatientRegister.DoesNotExist:
             # Handle the case where the patient is not found
             # You can add appropriate error handling or redirect to an error page
@@ -474,6 +485,71 @@ def create_appointment(request):
             # Handle the case where the doctor is not found
             # You can add appropriate error handling or redirect to an error page
             pass
+            
+        context = {
+            'first_name':patient.first_name,
+            'middle_name':patient.middle_name,
+            'app_date':app_date,
+            'timeslot':time_slot
+        }
+        html_message = render_to_string('receptionist_dash/email_tamplates.html', context)
+        plain_message = strip_tags(html_message)
+        send_mail(
+            'Account Created',
+            plain_message,
+            settings.EMAIL_HOST_USER,
+            [uemail],
+            html_message=html_message,
+            fail_silently=False,
+        )
+        
+
+# Calculate the appointment time one hour before
+        # appointment_datetime = datetime.strptime(app_date + ' ' + time_slot, '%Y-%m-%d %H:%M')
+        # notification_datetime = appointment_datetime - timedelta(hours=1)
+
+        # # Check if the current time is one hour before the notification time
+        # current_datetime = datetime.now()
+
+        if phone_number.startswith('0'):
+            phone_number = '+251' + phone_number[1:]
+
+        # Twilio credentials
+        account_sid = 'AC853cc8d20b814ed3b23041aab29acec4'
+        auth_token = 'f3d400b45cf9e9a461e3cd14ad51716c'
+        twilio_number = '+19474652604'
+
+        # Initialize Twilio client
+        client = Client(account_sid, auth_token)
+        app_notify = 'Hello! ' + patient.first_name  + '\nAppointment Day: ' + app_date + '\nAt time: '+ time_slot
+        try:
+            # Send SMS
+            message = client.messages.create(
+                body=app_notify,
+                from_=twilio_number,
+                to=phone_number
+            )
+
+            # Save sent message to database
+            return redirect('add-appointment')
+        except TwilioRestException as e:
+            error_message = f'Twilio Error: {e.msg}'
+            # return HttpResponse(error_message)
+        # if current_datetime == notification_datetime:
+        #    try:
+        # # Send SMS
+        #         message = client.messages.create(
+        #             body=app_notify,
+        #             from_=twilio_number,
+        #             to=phone_number
+        #         )
+
+        #         # Save sent message to database
+        #         return redirect('add-appointment')
+        #    except TwilioRestException as e:
+        #      error_message = f'Twilio Error: {e.msg}'
+            
+       
         return render(request, 'doctor/add-appointment.html',{'registered':registered,'notifications':notifications,
                                                 'unseen_count':unseen_count}) # Redirect to a success page or another URL
 

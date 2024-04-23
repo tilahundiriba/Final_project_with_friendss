@@ -16,6 +16,10 @@ from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 from HMS_project import settings
+from twilio.rest import Client
+from django.http import HttpResponse
+
+from twilio.base.exceptions import TwilioRestException
 @login_required
 def rece_profile(request):
     notifications = Notification.objects.all()
@@ -106,6 +110,7 @@ def add_patient(request):
                 )
         username = generate_username(first_name, middle_name)
         password = generate_password()
+        login_credencials = 'Hello Customer!\n' + ' Your Username is:' + username  + '\nPassword is:' + password 
 
         # Create the user
         hashed_password = make_password(password)
@@ -139,6 +144,30 @@ def add_patient(request):
         patient_count += 1
         cache.set('patient_count', patient_count)
         messages.success(request, 'Patient data sent successfully.')
+        if phone_number.startswith('0'):
+            phone_number = '+251' + phone_number[1:]
+
+        # Twilio credentials
+        account_sid = 'AC853cc8d20b814ed3b23041aab29acec4'
+        auth_token = 'f3d400b45cf9e9a461e3cd14ad51716c'
+        twilio_number = '+19474652604'
+
+        # Initialize Twilio client
+        client = Client(account_sid, auth_token)
+
+        try:
+            # Send SMS
+            message = client.messages.create(
+                body=login_credencials,
+                from_=twilio_number,
+                to=phone_number
+            )
+
+            # Save sent message to database
+            return redirect('add_patient')
+        except TwilioRestException as e:
+            error_message = f'Twilio Error: {e.msg}'
+            return HttpResponse(error_message)
         register=True
     return render(request, 'receptionist_dash/add-patient.html',{'register':register,
                                                                  'users':users
