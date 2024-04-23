@@ -1,0 +1,55 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  
+    <title>Email Template</title>
+ 
+    <!-- Add Bootstrap CSS link here -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Add Font Awesome CSS link here -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        /* Custom styles */
+        .container {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .title {
+            color: #007bff;
+        }
+        .lead {
+            color: #6c757d;
+        }
+        .icon {
+            font-size: 24px;
+            margin-right: 10px;
+        }
+        .logo {
+            width: 100px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="#" alt="Hospital Logo" class="logo">
+        <h1 class="mt-4 title">Hello Dear:&nbsp; {{ first_name }}&nbsp; {{ middle_name }}!</h1>
+        <p>Your appointment information:</p>
+        <ul>
+            <li><i class="fas fa-user-md icon"></i><strong>Your appointment hold On &nbsp;</strong> {{ app_date }}</li>
+            <li><i class="fas fa-key icon"></i><strong>At </strong> {{ timeslot }} time.</li>
+        </ul>
+        <p>If you have any questions or need assistance, please don't hesitate to contact us.</p>
+        <p class="mb-0">Best regards,</p>
+        <p class="mb-0">Shashemene Specialized Referral Hospital</p>
+    </div>
+    <!-- Add Bootstrap JS scripts here -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <!-- Add Font Awesome JS script here -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
+</body>
+</html>

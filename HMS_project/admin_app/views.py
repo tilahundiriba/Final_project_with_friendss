@@ -38,6 +38,15 @@ from reportlab.lib import colors
 from django.shortcuts import render, get_object_or_404
 from .models import User, UserProfileInfo2
 from .models import Notification
+# views.py
+
+from django.shortcuts import render
+from django.template.loader import render_to_string
+
+def display_patients(request):
+    # Render the template you want to include as a string
+    included_content = render_to_string('receptionist_dash/patients.html', request=request)
+    return render(request, 'admin_dash/patients.html', {'included_content': included_content})
 
 
 # @login_required

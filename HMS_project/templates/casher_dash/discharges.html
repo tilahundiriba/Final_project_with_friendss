@@ -15,7 +15,38 @@
     <title>Discharge</title>
     {% endblock %}
     <!-- Fav  Icon Link -->
+<style>
+    .pagination {
+			margin-top: 20px;
+			text-align: center;
+			/* Center the pagination links */
+		}
 
+		.pagination a {
+			display: inline-block;
+			margin: 0 5px;
+			/* Add space between pagination links */
+			padding: 8px 12px;
+			/* Increase padding for larger size */
+			font-size: 16px;
+			/* Increase font size */
+			color: #007bff;
+			/* Change text color */
+			border: 1px solid #007bff;
+			/* Add border */
+			border-radius: 5px;
+			/* Add border radius */
+			text-decoration: none;
+			/* Remove underline */
+		}
+
+		.pagination a:hover {
+			background-color: #007bff;
+			/* Change background color on hover */
+			color: #fff;
+			/* Change text color on hover */
+		}
+</style>
 </head>
 
 <body>
@@ -137,19 +168,7 @@
                                 <!--Export links-->
                                 <nav aria-label="Page navigation example">
                                     <ul class="pagination justify-content-center export-pagination">
-                                        <li class="page-item">
-                                            <a class="page-link" href="#"><span class="ti-download"></span> csv</a>
-                                        </li>
-                                        <li class="page-item">
-                                            <a class="page-link" href="#"><span class="ti-printer"></span> print</a>
-                                        </li>
-                                        <li class="page-item">
-                                            <a class="page-link" href="#"><span class="ti-file"></span> PDF</a>
-                                        </li>
-                                        <li class="page-item">
-                                            <a class="page-link" href="#"><span class="ti-align-justify"></span>
-                                                Excel</a>
-                                        </li>
+                                        
                                     </ul>
                                 </nav>
                                 <!-- /Export links-->
@@ -182,6 +201,47 @@
     </a>
     <!-- /Back to Top -->
     <!-- Jquery Library-->
+    <script>
+		// JavaScript code for pagination
+		document.addEventListener('DOMContentLoaded', function () {
+			// Get the table rows and calculate total pages
+			var tableRows = document.querySelectorAll('#tableId tbody tr');
+			var totalPages = Math.ceil(tableRows.length / 5);
+
+			// Generate pagination links
+			var paginationContainer = document.querySelector('.pagination');
+			for (var i = 1; i <= totalPages; i++) {
+				var pageLink = document.createElement('a');
+				pageLink.href = '#';
+				pageLink.textContent = i;
+				pageLink.addEventListener('click', function (event) {
+					event.preventDefault();
+					showPage(parseInt(this.textContent));
+				});
+				paginationContainer.appendChild(pageLink);
+			}
+
+			// Function to show page
+			function showPage(pageNumber) {
+				// Hide all table rows
+				tableRows.forEach(function (row) {
+					row.style.display = 'none';
+				});
+
+				// Calculate start and end indexes for current page
+				var startIndex = (pageNumber - 1) * 5;
+				var endIndex = startIndex + 5;
+
+				// Show table rows for current page
+				for (var i = startIndex; i < endIndex && i < tableRows.length; i++) {
+					tableRows[i].style.display = '';
+				}
+			}
+
+			// Show the first page by default
+			showPage(1);
+		});
+	</script>
 
 </body>
 
