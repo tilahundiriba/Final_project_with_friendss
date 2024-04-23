@@ -15,7 +15,15 @@
 	<title>Payments</title>
 	{% endblock %}
 	<!-- Fav  Icon Link -->
-
+<style>
+	[data-toggle="tooltip"]::before {
+  font-size: 14px; /* Adjust font size */
+  color: #137cc3; /* Font color */
+  background-color: #333; /* Background color */
+  border-radius: 4px; /* Border radius */
+  padding: 4px 8px; /* Padding */
+}
+</style>
 </head>
 
 <body>
@@ -120,9 +128,10 @@
                                             </td>
                                             {% endif %}
                                             <td>
-                                                <a href="#" class="btn btn-outline-primary"><span
+                                                <a href="#" class="btn btn-outline-primary" data-toggle="tooltip" title="EDIT PAYMENT"><span
                                                     class="ti-pencil-alt"></span></a>
-                                                    <a href="{% url 'about_payment' payment.Pay_number payment.Patient_id %}" class="btn btn-outline-info"><span class="ti-eye"></span></a>
+                                                    <a href="{% url 'about_payment' payment.Pay_number payment.Patient_id %}"
+													 class="btn btn-outline-info" data-toggle="tooltip" title="VIEW DETAILS"><span class="ti-eye"></span></a>
                                             </td>
                                         </tr>
                                        {% endfor %}

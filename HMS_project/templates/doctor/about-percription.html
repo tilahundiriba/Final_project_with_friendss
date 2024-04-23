@@ -6,316 +6,214 @@
 <html>
 
 
-<!-- Mirrored from www.konnectplugins.com/proclinic/Horizontal/about-patient.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 24 Jan 2022 10:42:01 GMT -->
+<!-- Mirrored from www.konnectplugins.com/proclinic/Horizontal/about-payment.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 24 Jan 2022 10:42:01 GMT -->
+
 <head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	{% block 'title' %}
-<title>About Prescriptions</title>
-{% endblock %}
+	<title>Priscriptions</title>
+	{% endblock %}
+	<!-- Fav  Icon Link -->
+	<style>
+		@media print {
+			body * {
+				visibility: hidden;
+			}
+
+			#forprint,
+			#forprint * {
+				visibility: visible;
+
+			}
+
+			#forprint {
+				width: 100%;
+				position: absolute;
+				top: 0;
+				left: 0;
+				/* Reset position to prevent absolute positioning */
+			}
+		}
+	</style>
 </head>
 
-<body>
-	<!-- Pre Loader -->
-	<div class="loading">
-		<div class="spinner">
-			<div class="double-bounce1"></div>
-			<div class="double-bounce2"></div>
-		</div>
-	</div>
-	<!--/Pre Loader -->
-	<!-- Color Changer -->
 
-	<!-- /Color Changer -->
-	<div class="wrapper">
-		<!-- Page Content -->
-		<div id="content">
-		
-				<!-- /Menu -->
-				{% include 'doctor/navbar.html' %}
-				<!-- Breadcrumb -->
-				<!-- Page Title -->
-				<div class="container mt-0">
-					<div class="row breadcrumb-bar">
+<div class="wrapper">
+	<!-- Page Content -->
+	<div id="content">
+
+		<!-- Page Title -->
+		<div class="container mt-0">
+			<div class="row breadcrumb-bar">
 				<div class="col-md-6">
-					<h3 class="block-title">Patient Details</h3>
+					<h3 class="block-title">Drug Priscriptions</h3>
 				</div>
 				<div class="col-md-6">
-					<ol class="breadcrumb">						
+					<ol class="breadcrumb">
 						<li class="breadcrumb-item">
 							<a href="index.html">
 								<span class="ti-home"></span>
 							</a>
-                        </li>
-                        <li class="breadcrumb-item">Patients</li>
-						<li class="breadcrumb-item active">Patient Details</li>
+						</li>
+						<li class="breadcrumb-item">Drug</li>
+						<li class="breadcrumb-item active">Drug Priscriptions</li>
 					</ol>
 				</div>
 			</div>
-			</div>
-			<!-- /Page Title -->
-
-			<!-- /Breadcrumb -->
-			<!-- Main Content -->
-			<div class="container">
-
-				<div class="row">
-					<!-- Widget Item -->
-					<div class="col-md-6">
-						<div class="widget-area-2 proclinic-box-shadow">
-							<h3 class="widget-title">Patient Details</h3>
-							<div class="table-responsive">
-								<table class="table table-bordered">
-									<tbody>
-										<tr>											
-											<td><strong>Name</strong></td>
-											<td>Daniel Smith</td>
-										</tr>
-										<tr>
-											<td><strong>Date Of Birth</strong> </td>
-											<td>26-10-1989</td>
-										</tr>
-										<tr>
-											<td><strong>Gender</strong></td>
-											<td>Male</td>
-										</tr>
-										<tr>
-											<td><strong>Address</strong></td>
-											<td>Koramangala 
-                                                Banglore, India</td>
-										</tr>
-										<tr>
-											<td><strong>Phone </strong></td>
-											<td>+91 11111 11111</td>
-										</tr>
-										<tr>
-											<td><strong>Email</strong></td>
-											<td>your@email.com</td>
-                                        </tr>									
-									</tbody>
-								</table>
-							</div>
-							
-								<!--Export links-->
-								<nav aria-label="Page navigation example">
-									<ul class="pagination justify-content-center export-pagination">
-										<li class="page-item">
-											<a class="page-link" href="#"><span class="ti-download"></span> csv</a>
-										</li>
-										<li class="page-item">
-											<a class="page-link" href="#"><span class="ti-printer"></span>  print</a>
-										</li>
-										<li class="page-item">
-											<a class="page-link" href="#"><span class="ti-file"></span> PDF</a>
-										</li>
-										<li class="page-item">
-											<a class="page-link" href="#"><span class="ti-align-justify"></span> Excel</a>
-										</li>
-									</ul>
-								</nav>
-								<!-- /Export links-->
-                            <button type="button" class="btn btn-success mb-3"><span class="ti-pencil-alt"></span> Edit Patient</button>
-                            <button type="button" class="btn btn-danger mb-3"><span class="ti-trash"></span> Delete Patient</button>
-                            <button type="button" class="btn btn-info mb-3"><span class="ti-arrow-down"></span> Download File</button>
-						</div>
-					</div>
-                    <!-- /Widget Item -->
-                    <!-- Widget Item -->
-					<div class="col-md-6">
-						<div class="widget-area-2 proclinic-box-shadow">
-							<h3 class="widget-title">Patient Visits</h3>
-							<div class="table-responsive">
-								<table class="table table-bordered table-striped">
-									<thead>
-										<tr>										
-											<th>Doctor Name</th>
-											<th>Cost</th>
-											<th>Visit Date</th>
-											<th>Status</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>											
-											<td>Manoj Kumar</td>
-											<td>$30</td>
-											<td>12-03-2018</td>
-											<td>Resheduled</td>
-										</tr>
-										<tr>
-											<td>Riya </td>
-											<td>$26</td>
-											<td>12-10-2018</td>
-											<td>Operation</td>
-										</tr>
-										<tr>
-											<td>Paul</td>
-											<td>$46</td>
-											<td>45-10-2018</td>
-											<td>Fever</td>
-										</tr>
-										<tr>
-											<td>Manoj Kumar</td>
-											<td>$30</td>
-											<td>12-03-2018</td>
-											<td>Ortho</td>
-										</tr>
-										<tr>
-											<td>Riya </td>
-											<td>26</td>
-											<td>12-10-2018</td>
-											<td>General Check-up</td>
-										</tr>
-										<tr>
-											<td>Paul</td>
-											<td>46</td>
-											<td>45-10-2018</td>
-											<td>Injury</td>
-										</tr>										
-									</tbody>
-								</table>
-								
-								<!--Export links-->
-								<nav aria-label="Page navigation example">
-									<ul class="pagination justify-content-center export-pagination">
-										<li class="page-item">
-											<a class="page-link" href="#"><span class="ti-download"></span> csv</a>
-										</li>
-										<li class="page-item">
-											<a class="page-link" href="#"><span class="ti-printer"></span>  print</a>
-										</li>
-										<li class="page-item">
-											<a class="page-link" href="#"><span class="ti-file"></span> PDF</a>
-										</li>
-										<li class="page-item">
-											<a class="page-link" href="#"><span class="ti-align-justify"></span> Excel</a>
-										</li>
-									</ul>
-								</nav>
-								<!-- /Export links-->
-							</div>
-						</div>
-					</div>
-                    <!-- /Widget Item -->
-                     <!-- Widget Item -->
-					<div class="col-md-12">
-						<div class="widget-area-2 proclinic-box-shadow">
-							<h3 class="widget-title">Patient Payment Transactions</h3>
-							<div class="table-responsive">
-								<table class="table table-bordered table-striped">
-									<thead>
-										<tr>										
-											<th>Date</th>
-											<th>Cost</th>
-											<th>Discount</th>
-											<th>Payment Type</th>
-											<th>Invoive</th>
-											<th>Status</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>											
-											<td>12-03-2018</td>
-											<td>$300</td>
-											<td>15%</td>
-											<td>Check</td>
-											<td><button type="button" class="btn btn-outline-info mb-0"><span class="ti-arrow-down"></span> Invoice</button></td>
-											<td><span class="badge badge-warning">Pending</span></td>
-                                        </tr>
-                                        <tr>											
-											<td>12-03-2018</td>
-											<td>$130</td>
-											<td>5%</td>
-											<td>Credit Card</td>
-											<td><button type="button" class="btn btn-outline-info mb-0"><span class="ti-arrow-down"></span> Invoice</button></td>
-											<td><span class="badge badge-success">Completed</span></td>
-                                        </tr>
-                                        <tr>											
-											<td>12-03-2018</td>
-											<td>$30</td>
-											<td>5%</td>
-											<td>Credit Card</td>
-											<td><button type="button" class="btn btn-outline-info mb-0"><span class="ti-arrow-down"></span> Invoice</button></td>
-											<td><span class="badge badge-danger">Cancelled</span></td>
-                                        </tr>
-                                        <tr>											
-											<td>12-03-2018</td>
-											<td>$30</td>
-											<td>5%</td>
-											<td>Cash</td>
-											<td><button type="button" class="btn btn-outline-info mb-0"><span class="ti-arrow-down"></span> Invoice</button></td>
-											<td><span class="badge badge-success">Completed</span></td>
-                                        </tr>
-                                        <tr>											
-											<td>12-03-2018</td>
-											<td>$30</td>
-											<td>5%</td>
-											<td>Credit Card</td>
-											<td><button type="button" class="btn btn-outline-info mb-0"><span class="ti-arrow-down"></span> Invoice</button></td>
-											<td><span class="badge badge-success">Completed</span></td>
-                                        </tr>
-                                        <tr>											
-											<td>12-03-2018</td>
-											<td>$30</td>
-											<td>5%</td>
-											<td>Insurance</td>
-											<td><button type="button" class="btn btn-outline-info mb-0"><span class="ti-arrow-down"></span> Invoice</button></td>
-											<td><span class="badge badge-success">Completed</span></td>
-                                        </tr>
-                                        <tr>											
-											<td>12-03-2018</td>
-											<td>$30</td>
-											<td>5%</td>
-											<td>Credit Card</td>
-											<td><button type="button" class="btn btn-outline-info mb-0"><span class="ti-arrow-down"></span> Invoice</button></td>
-											<td><span class="badge badge-success">Completed</span></td>
-										</tr>									
-									</tbody>
-								</table>
-								
-								<!--Export links-->
-								<nav aria-label="Page navigation example">
-									<ul class="pagination justify-content-center export-pagination">
-										<li class="page-item">
-											<a class="page-link" href="#"><span class="ti-download"></span> csv</a>
-										</li>
-										<li class="page-item">
-											<a class="page-link" href="#"><span class="ti-printer"></span>  print</a>
-										</li>
-										<li class="page-item">
-											<a class="page-link" href="#"><span class="ti-file"></span> PDF</a>
-										</li>
-										<li class="page-item">
-											<a class="page-link" href="#"><span class="ti-align-justify"></span> Excel</a>
-										</li>
-									</ul>
-								</nav>
-								<!-- /Export links-->
-							</div>
-						</div>
-					</div>
-					<!-- /Widget Item -->
-				</div>
-			</div>
-			<!-- /Main Content -->
-			<!--Copy Rights-->
-			<div class="container">
-				<div class="d-sm-flex justify-content-center">
-				  <span class="text-muted text-center d-block d-sm-inline-block">Copyright © 2018 <a href="http://www.konnectplugins.com/" target="_blank">konnectcode</a>. All rights reserved.</span>
-				</div>
-			</div>
-			<!-- /Copy Rights-->
 		</div>
-		<!-- /Page Content -->
+		<!-- /Breadcrumb -->
+		<!-- Main Content -->
+		<div class="container" id="forprint">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="widget-area-2 proclinic-box-shadow pb-3">
+						<!-- Invoice Head -->
+						<div class="row ">
+							<div class="col-sm-6 mb-5">
+								<img src="{% static 'images/hospital_logo3.png' %}" alt="logo hospital"
+									class="img-thumbnail" style="height: 100px; width: 100px;">
+								<br>
+								<br>
+								<span>Ethiopia</span>
+								<br>
+								<span>[Shashemene, ST 1224]</span>
+								<br>
+								<span class="pr-2">Phone: +251 96 712 3456</span>
+								<span>Fax: 432 1231 3456</span>
+							</div>
+							<div class="col-sm-6 text-md-right mb-5">
+								<h3>PRISCRIPTIONS</h3>
+								<br>
+								<br>
+								<span>Prescription # {{priscriptions.Prec_number}}</span>
+								<br>
+								<span>Date: {{priscriptions.Prec_date}}</span>
+							</div>
+						</div>
+						<!-- /Invoice Head -->
+						<!-- Invoice Content -->
+						<div class="row">
+							<div class="col-sm-6 mb-5">
+								<h6 class="proclinic-text-color">PATIENT DETAILS:</h6>
+								<span><strong>Name:</strong> {{patient_info.first_name}}&nbsp;&nbsp;
+									{{patient_info.middle_name}} &nbsp;&nbsp;
+									{{patient_info.last_name}}</span>
+								<br>
+								<span><strong>Gender:</strong> {{patient_info.gender}}</span>
+								<br>
+								<span><strong>Age:</strong> {{patient_info.age}}</span>
+								<br>
+								<span><strong>Address: </strong>{{patient_info.city}}</span>
+								<br>
+								<span>{{patient_info.region}}&nbsp;&nbsp; {{patients.country}}</span>
+								<br>
+								<span><strong>Phone:</strong> {{patient_info.phone_number}}</span>
+							</div>
+							<!-- <div class="col-sm-6 mb-5">
+								<span><strong>Patient ID:</strong> {{patients.patient_id}}</span>
+								<br>
+								<span><strong>Total Days:</strong> 10</span>
+								<br>
+								<span><strong>Payment Type:</strong> {{payments.Pay_method}}</span>
+
+							</div> -->
+							<div class="col-sm-12 mb-2">
+								<strong class="proclinic-text-color">Priscriptions:</strong>
+							</div>
+							<div class="col-sm-12">
+								<table class="table table-bordered table-striped table-invioce">
+									<thead>
+										<tr>
+											<th>#</th>
+											<th>Priscriptions</th>
+											<th>Priscription Date</th>
+											
+										</tr>
+									</thead>
+									<tbody>
+									
+										<tr>
+
+											<td>1</td>
+											<td>{{priscriptions.Precscriptions}}</td>
+											<td>{{priscriptions.Prec_date}}</td>
+										</tr>
+
+									
+									</tbody>
+								</table>
+							</div>
+							<div class="col-sm-4 ml-auto">
+								<table class="table table-bordered table-striped">
+									<tbody>
+										<tr>
+											<th>Doctor Name</th>
+											<th>Signature</th>
+										</tr>
+									
+
+										<tr>
+											<td>{{priscriptions.Doctor_ID}}</td>
+											<td><img src="{% static 'images/signature.png' %}" alt="Signature" style="height: 50px; height: 20px;"></td>
+										</tr>
+									
+									</tbody>
+								</table>
+							</div>
+
+							<div class="col-sm-12">
+								<div class="border p-4">
+									<strong>Note:</strong>
+									Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur id illo
+									incidunt, iste libero quisquam? A aut cumque
+									fuga fugit iusto libero officia optio quasi, quisquam saepe voluptate
+									voluptatibus voluptatum.
+									<br>
+									<br>
+									<strong class="f12">Signature</strong>
+									<img src="{% static 'images/signature.png' %}" alt="Signature" style="height: 100px; height: 50px;">
+								</div>
+							</div>
+
+						</div>
+
+						<!-- /Invoice Content -->
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-12">
+			<nav aria-label="Page navigation example">
+				<ul class="pagination justify-content-center export-pagination mt-3 mb-0">
+					<li class="page-item">
+						<button class="page-link" onclick="window.print()"><span class="ti-printer"
+								id="print_button"></span> print</button>
+					</li>
+					<li class="page-item">
+						<a class="page-link" href="#"><span class="ti-file"></span> PDF</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+		<!-- /Main Content -->
+		<!--Copy Rights-->
+		<div class="container">
+			<div class="d-sm-flex justify-content-center">
+				<span class="text-muted text-center d-block d-sm-inline-block">Copyright © 2018 <a
+						href="http://www.konnectplugins.com/" target="_blank">konnectcode</a>. All rights
+					reserved.</span>
+			</div>
+		</div>
+		<!-- /Copy Rights-->
 	</div>
-	<!-- Back to Top -->
-	<a id="back-to-top" href="#" class="back-to-top">
-		<span class="ti-angle-up"></span>
-	</a>
-	<!-- /Back to Top -->
-	<!-- Jquery Library-->
+	<!-- /Page Content -->
+</div>
+<!-- Back to Top -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"
+	integrity="sha512-qZvrmS2ekKPF2mSznTQsxqPgnpkI4DNTlrdUmTzrDgektczlKNRRhy5X5AAOnx5S09ydFYWWNSfcEqDTTHgtNA=="
+	crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 
-</body>
-
-
-<!-- Mirrored from www.konnectplugins.com/proclinic/Horizontal/about-patient.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 24 Jan 2022 10:42:01 GMT -->
-</html>
 {% endblock %}

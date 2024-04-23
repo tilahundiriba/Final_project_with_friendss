@@ -274,8 +274,15 @@ def perscription(request):
     
     return render(request,'doctor/perscriptions.html',{'prescriptions':prescription,'notifications':notifications,
                                                 'unseen_count':unseen_count})
-def about_perscription(request):
-    return render(request,'doctor/about-percription.html')
+def about_perscription(request,prec_number, patient_id):
+    notifications = Notification.objects.all()
+    unseen_count = Notification.objects.filter(seen=False).count()
+    patient_info = get_object_or_404( PatientRegister,patient_id=patient_id)
+    prec = get_object_or_404(Prescription, Prec_number=prec_number)
+    return render(request,'doctor/about-percription.html',{'patient_info':patient_info,
+                                                           'priscriptions':prec,
+                                                           'notifications':notifications,
+                                                           'unseen_count':unseen_count})
 @login_required
 def dis_dr_dash_content(request):
     notifications = Notification.objects.all()

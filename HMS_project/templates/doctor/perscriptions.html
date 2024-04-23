@@ -100,7 +100,7 @@
 														class="ti-trash"></span></a>
 												<a href="{% url 'edit_perscription' pres.Prec_number %}" class="btn btn-outline-primary "><span
 														class="ti-pencil-alt"></span></a>
-												<a href="#" class="btn btn-outline-info "><span
+												<a href="{% url 'about_perscription' pres.Prec_number pres.PatientID %}" class="btn btn-outline-info "><span
 														class="ti-eye"></span></a>
 											</td>
 										</tr>
