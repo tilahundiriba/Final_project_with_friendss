@@ -55,15 +55,15 @@
 
             <h3 class="wiget-title color-green text-center">Patients</h3>
 
-            <p><strong style="font-size: large;">Patient ID:&nbsp;</strong>{{ patient.patient_id}}</p>
-            <p><strong style="font-size: large;">First Name:&nbsp;</strong>{{ patient.first_name}}</p>
-            <p><strong style="font-size: large;">Last Name:&nbsp;</strong>{{ patient.last_name}}</p>
-            <p><strong style="font-size: large;"> Age:&nbsp;</strong>{{ patient.age}}</p>
-            <p><strong style="font-size: large;">Doctor Name:&nbsp;</strong>{{ patient.doctor_name}}</p>
+            <p><strong style="font-size: large;">&nbsp;&nbsp;Patient ID:&nbsp;</strong>{{ patient.patient_id}}</p>
+            <p><strong style="font-size: large;">&nbsp;&nbsp;First Name:&nbsp;</strong>{{ patient.first_name}}</p>
+            <p><strong style="font-size: large;">&nbsp;&nbsp;Last Name:&nbsp;</strong>{{ patient.last_name}}</p>
+            <p><strong style="font-size: large;">&nbsp;&nbsp; Age:&nbsp;</strong>{{ patient.age}}</p>
+            <p><strong style="font-size: large;">&nbsp;&nbsp;Doctor Name:&nbsp;</strong>{{ patient.doctor_name}}</p>
             <form action="{% url 'check_patient' patient.patient_id %}">
-              <button type='submit' class="btn btn-outline-primary mt-3 mb-0 me-4"><span class="ti-eye"></span>
+              <button type='submit' class="btn btn-outline-primary mt-3 mb-0 me-4"><span class="ti-check-box"></span>
                 Checked</button>
-              <a href="{% url 'add_history' %}" class="btn btn-outline-info mt-3 mb-0"><span class="ti-pencil-alt"></span>
+              <a href="{% url 'add_history' %}" class="btn btn-outline-info mt-3 mb-0"><span class="ti-plus"></span>
                 History</a>
             </form>
 

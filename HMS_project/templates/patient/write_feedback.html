@@ -1,4 +1,4 @@
-{% extends 'admin_dash/web_home.html' %}
+{% extends 'patient/patient_dash.html' %}
 {% load static %}
 {% block content %}
 
@@ -59,16 +59,26 @@
 
 			<!-- /Breadcrumb -->
 			<!-- Main Content -->
-			<div class="container">
+			<div class="container d-flex justify-content-center">
 
 				<div class="row">
 					<!-- Widget Item -->
 					<div class="col-md-12">
 						<div class="widget-area-2 proclinic-box-shadow">
 							<h3 class="widget-title">Write Feedbacks</h3>
-							<form action="{% url 'poster' %}" method="post">
+							<form action="" method="post">
 								{% csrf_token %}
-                                <div class="form-group col-md-6">
+                                <div class="form-group col-md-12">
+                                    <label for="name">Name</label>
+                                  
+                                    <input id="name" name="name"  class="form-control"  placeholder="your name....."></input>
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <label for="email">Feedbacks</label>
+                                  
+                                    <input id="email" name="email"  class="form-control" placeholder="example@gmail.com....."></input>
+                                </div>
+                                <div class="form-group col-md-12">
                                     <label for="message">Feedbacks</label>
                                   
                                     <textarea id="message" name="message" rows="4" class="form-control" cols="50" placeholder="Feedbacks....."></textarea>
@@ -76,7 +86,7 @@
 								
 								
 									<div class="form-group col-md-6 mb-3">
-										<button type="submit" class="btn btn-primary btn-lg">Submit</button>
+										<button type="submit" class="btn btn-primary btn-lg">Send</button>
 									</div>
 								</div>
 							</form>

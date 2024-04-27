@@ -46,11 +46,11 @@
 
             <h3 class="wiget-title color-green text-center">Approve Departure</h3>
 
-            <p><strong style="font-size: large;">Patient ID:&nbsp;</strong>{{ approve.Patient_id}}</p>
-            <p><strong style="font-size: large;">Reason:&nbsp;</strong>{{ approve.Reason}}</p>
-            <p><strong style="font-size: large;">Reffered To:&nbsp;</strong>{{ approve.Reffer_to}}</p>
-            <p><strong style="font-size: large;"> Payement:&nbsp;</strong>{{ approve.Status}}</p>
-            <p><strong style="font-size: large;">Departure Date:&nbsp;</strong>{{ approve.Departure_date}}</p>
+            <p><strong style="font-size: large;">&nbsp;&nbsp;Patient ID:&nbsp;</strong>{{ approve.Patient_id}}</p>
+            <p><strong style="font-size: large;">&nbsp;&nbsp;Reason:&nbsp;</strong>{{ approve.Reason}}</p>
+            <p><strong style="font-size: large;">&nbsp;&nbsp;Reffered To:&nbsp;</strong>{{ approve.Reffer_to}}</p>
+            <p><strong style="font-size: large;">&nbsp;&nbsp; Payement:&nbsp;</strong>{{ approve.Status}}</p>
+            <p><strong style="font-size: large;">&nbsp;&nbsp;Departure Date:&nbsp;</strong>{{ approve.Departure_date}}</p>
             <form action="{% url 'approve_discharges' approve.Discharge_no %}">
               {% csrf_token %}
               <button type='submit' class="btn btn-outline-primary mt-3 mb-0 me-4"><span class="ti-check-box"></span>

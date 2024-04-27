@@ -139,7 +139,7 @@ def login_view(request):
                     elif user_profile.role =='technician':
                         return redirect('lab_dashboard')
                     else:
-                        return redirect('write_feedback')
+                        return redirect('patient_dash')
                 else:
                     return redirect('change_credentials')
                 # else:
@@ -152,7 +152,7 @@ def login_view(request):
             return HttpResponse('Invalid username or password')
     else:
         return render(request, 'admin_dash/login.html')
-    return render(request, 'admin_dash/login.html')
+    # return render(request, 'admin_dash/login.html')
 
 #@login_required
 def logout_view(request):

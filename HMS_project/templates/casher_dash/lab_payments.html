@@ -54,11 +54,10 @@
           <div class="widget-right justify-content-center">
 
             <h3 class="wiget-title color-green text-center">Lab Payment Requests</h3>
-
-            <p><strong style="font-size: large;">Patient ID:&nbsp;</strong>{{ pay.PatientID}}</p>
-            <p><strong style="font-size: large;">lab. type:&nbsp;</strong>{{ pay.Lab_type}}</p>
-            <p><strong style="font-size: large;">Doctor Name:&nbsp;</strong>{{ pay.Doctor_ID}}</p>
-            <p><strong style="font-size: large;">Admitted Date:&nbsp;</strong>{{ pay.Admit_date}}</p>
+            <p><strong style="font-size: large;">&nbsp;&nbsp;Patient ID:&nbsp;</strong>{{ pay.PatientID}}</p>
+            <p><strong style="font-size: large;">&nbsp;&nbsp;lab. type:&nbsp;</strong>{{ pay.Lab_type}}</p>
+            <p><strong style="font-size: large;">&nbsp;&nbsp;Doctor Name:&nbsp;</strong>{{ pay.Doctor_ID}}</p>
+            <p><strong style="font-size: large;">&nbsp;&nbsp;Admitted Date:&nbsp;</strong>{{ pay.Admit_date}}</p>
       <form action="{% url 'checked_payment_request' pay.Lab_number %}" method="post">
         {% csrf_token %}
         <button type="submit" class="btn btn-outline-info mt-3 mb-0 me-4"><span class="ti-check-box"></span>

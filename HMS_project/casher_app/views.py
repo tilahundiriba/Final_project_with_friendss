@@ -190,8 +190,7 @@ def add_payment(request,patient_id):
             pass
         payed = True
         return redirect("dis_payment")
-    
-    payment = ServicePayment.objects.all()
+    payment = ServicePayment.objects.values('Payment_method').distinct()
     return render(request, 'casher_dash/add-payment.html', {'payments': payment,
                                                             'payed': payed,
                                                             'cashers': cashers,
