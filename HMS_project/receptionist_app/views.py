@@ -4,10 +4,10 @@ from django.contrib import messages
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils.crypto import get_random_string
 from .models import PatientRegister
-from admin_app.models import User,Notification
+from admin_app.models import User,Notification,UserProfileInfo2
 from django.db.models import Q
 from django import *
-from admin_app .models import UserProfileInfo2
+from doctor_app.models import PatientHistory
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from .utils import generate_password,generate_username
@@ -20,6 +20,31 @@ from twilio.rest import Client
 from django.http import HttpResponse
 
 from twilio.base.exceptions import TwilioRestException
+def doctor_list(request):
+    # Get all distinct doctor IDs from the PatientHistory model
+    doctor_ids = PatientHistory.objects.values_list('Doctor_ID', flat=True).distinct()
+
+    doctors_with_specialty = []
+    for doctor_id in doctor_ids:
+        # Get the doctor user object using the doctor ID
+        doctor = User.objects.get(pk=doctor_id)
+
+        # Get the doctor's specialty from UserInfo2 table
+        try:
+            specialty = doctor.userprofileinfo2.specialty
+        except UserProfileInfo2.DoesNotExist:
+            specialty = None
+
+        # Count the number of untested tests assigned to the doctor
+        untested_test_count = PatientHistory.objects.filter(Doctor_ID=doctor_id, Is_checked=False).count()
+
+        # If there are no untested tests, set the test count to 0
+        test_count = untested_test_count if untested_test_count > 0 else 0
+
+        doctors_with_specialty.append((doctor, specialty, test_count))
+    
+    return render(request, 'receptionist_dash/doctor_lists.html', {'doctors_with_specialty': doctors_with_specialty})
+
 @login_required
 def rece_profile(request):
     notifications = Notification.objects.all()
@@ -66,10 +91,31 @@ def receptionist_dash_content(request):
                                                               'unseen_count':unseen_count})
 
 def add_patient(request):
-    users= User.objects.all()
+    doctors = User.objects.filter(userprofileinfo2__role='doctor')
+    recep = User.objects.filter(userprofileinfo2__role='receptionist')
     notifications = Notification.objects.all()
     unseen_count = Notification.objects.filter(seen=False).count()
     register=False
+    doctor_ids = PatientHistory.objects.values_list('Doctor_ID', flat=True).distinct()
+
+    doctors_with_specialty = []
+    for doctor_id in doctor_ids:
+        # Get the doctor user object using the doctor ID
+        doctor = User.objects.get(pk=doctor_id)
+
+        # Get the doctor's specialty from UserInfo2 table
+        try:
+            specialty = doctor.userprofileinfo2.specialty
+        except UserProfileInfo2.DoesNotExist:
+            specialty = None
+
+        # Count the number of untested tests assigned to the doctor
+        untested_test_count = PatientHistory.objects.filter(Doctor_ID=doctor_id, Is_checked=False).count()
+
+        # If there are no untested tests, set the test count to 0
+        test_count = untested_test_count if untested_test_count > 0 else 0
+
+        doctors_with_specialty.append((doctor, specialty, test_count))
     if request.method == 'POST':
         first_name = request.POST.get('first_name')
         middle_name = request.POST.get('middle_name')
@@ -167,13 +213,15 @@ def add_patient(request):
             return redirect('add_patient')
         except TwilioRestException as e:
             error_message = f'Twilio Error: {e.msg}'
-            return HttpResponse(error_message)
+            # return HttpResponse(error_message)
         register=True
     return render(request, 'receptionist_dash/add-patient.html',{'register':register,
-                                                                 'users':users
+                                                                 'users':doctors,
+                                                                 'receps':recep
                                                                  ,
                                                               'notifications':notifications,
-                                                              'unseen_count':unseen_count})  # Render the form template initially
+                                                              'unseen_count':unseen_count,
+                                                              'doctors_with_specialty':doctors_with_specialty})  # Render the form template initially
 def check_patient_data(request):
     notifications = Notification.objects.all()
     unseen_count = Notification.objects.filter(seen=False).count()
@@ -260,7 +308,9 @@ def edit_patient(request,patient_id):
     try:
        patientid = get_object_or_404(PatientRegister, pk=patient_id)
        users= User.objects.all()
-       return render(request,'receptionist_dash/edit-patient.html',{'patientid':patientid,'users':users})
+       return render(request,'receptionist_dash/edit-patient.html',{'patientid':patientid,'users':users,
+                                                                    'notifications':notifications,
+                                                                    'unseen_count':unseen_count})
     except PatientRegister.DoesNotExist:
        return render(request,'receptionist_dash/edit-patient.html',{'message':'patient  not found'})
 

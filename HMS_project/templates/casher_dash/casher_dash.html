@@ -128,13 +128,16 @@
                         </a>
                         <ul id="posts" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                             <li class="sidebar-item">
-                                <a href="{% url 'add-payment' %}" class="sidebar-link">Add Payment</a>
+                                <a href="#" class="sidebar-link">Add Payment</a>
                             </li>
                             <li class="sidebar-item">
                                 <a href="{% url 'dis_payment' %}" class="sidebar-link">View Payment</a>
                             </li>
                             <li class="sidebar-item">
-                                <a href="#" class="sidebar-link">About Payment</a>
+                                <a href="{% url 'card_payments' %}" class="sidebar-link">Card Payment</a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a href="{% url 'check_payment_request' %}" class="sidebar-link">Lab Payment</a>
                             </li>
 
                         </ul>
@@ -155,27 +158,6 @@
                                 <a href="#" class="sidebar-link">About Discharge</a>
                             </li>
 
-                        </ul>
-                    </li>
-              
-
-                    <li class="sidebar-item">
-                        <a href="#" class="sidebar-link collapsed" data-bs-target="#feed" data-bs-toggle="collapse"
-                            aria-expanded="false">
-                     
-                            <i class="fa-solid fa-wallet pe-2"></i>
-                            Lab. Payment
-                        </a>
-                        <ul id="feed" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
-                            <li class="sidebar-item">
-                                <a href="{% url 'check_payment_request' %}" class="sidebar-link">Lab Payment</a>
-                            </li>
-                            <li class="sidebar-item">
-                                <a href="#" class="sidebar-link">Send Lab Fee</a>
-                            </li>
-                            <li class="sidebar-item">
-                                <a href="#" class="sidebar-link">View Lab Result</a>
-                            </li>
                         </ul>
                     </li>
                     <li class="sidebar-item">

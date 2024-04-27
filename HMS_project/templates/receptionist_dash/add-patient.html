@@ -64,6 +64,7 @@
 					<!-- Widget Item -->
 					<div class="col-md-12">
 						<div class="widget-area-2 proclinic-box-shadow">
+							{% include 'receptionist_dash/doctor_lists.html' %}
 							<h3 class="widget-title">Add Patient</h3>
 							{% if messages %} {% for message in messages %}
 							<div class="alert alert-success">{{ message }}</div>
@@ -114,7 +115,7 @@
 										<label for="rece_name">Receptionist Name</label>
 											<select class="form-control" id="rece_name" name="rece_name">
 												<option selected disabled >Select Receptionist</option>
-												{% for user in users %}
+												{% for user in receps %}
 												<option value="{{user.username}}">{{user.username}}</option>
 											{% endfor %}
 											</select>

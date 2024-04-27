@@ -63,12 +63,12 @@
 					<div class="col-md-12">
 						<div class="widget-area-2 proclinic-box-shadow">
 							<h3 class="widget-title">Add Payment</h3>
-							<form action="{% url 'add-payment' %}" method="post">
+							<form action="{% url 'add-payment' patient_pay.patient_id %}" method="post">
 								 {% csrf_token %}
 								<div class="form-row">
 									<div class="form-group col-md-6">
 										<label for="patient-id">Patient ID</label>
-										<input type="text" class="form-control" placeholder="Patient ID" id="patient-id" name="patient_id">
+										<input type="text" value="{{patient_pay.patient_id}}" class="form-control" placeholder="Patient ID" id="patient-id" name="patient_id">
                                     </div>
 									<div class="form-group col-md-6">
 										<label for="adminssion-date">Admission Date</label>
@@ -79,8 +79,8 @@
 										<label for="cashier_name">Casher Name</label>
 										<!-- <input type="text" placeholder="cashier name" class="form-control" id="cashier_name" name="cashier_name"> -->
 										<select class="form-control" id="cashier_name" name="cashier_name">
-											<option disabled selected >Select Name</option>
-											{% for user in users %}
+											<option disabled selected >Select Casher Name</option>
+											{% for user in cashers %}
 										    
 										    <option value="{{ user.username }}">{{ user.username}}</option>
 											{% endfor %}
@@ -98,16 +98,7 @@
 									<div class="form-group col-md-6">
 										<h4 style="color: black;">Laboratory Services </h4>										
                                     </div>
-									 <!-- <div class="form-group col-md-6">
-										<label for="food_payment">Food Payment</label>
-										<select class="form-control" id="food_payment" name="food_payment" >
-											<option disabled selected >Select Service Name</option>
-											{% for pay in payments %}
-										    <option value="{{ pay.Services }}" data-cost-food="{{ pay.Payment }}">{{ pay.Services }}</option>
-											{% endfor %}
-											
-										</select>
-                                    </div> -->
+								
 									<div class="form-group col-md-2">
 										
 										<input type="checkbox" id="food_payment" name="food_payment">

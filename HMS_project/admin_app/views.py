@@ -28,7 +28,7 @@ from django.http import JsonResponse
 from django.views import View
 from .models import Notification
 from receptionist_app.models import PatientRegister
-from doctor_app.models import Appointment
+from doctor_app.models import Appointment,PatientHistory,Laboratory,Prescription
 from casher_app.models import PaymentModel,Discharge,ServicePayment
 import csv
 import openpyxl
@@ -268,49 +268,100 @@ def dis_dash(request):
     total_sum = total_sum or 0
     number_of_patient = PatientRegister.objects.count()
     number_of_app= Appointment.objects.count()
+    number_of_history = PatientHistory.objects.count()
+    number_of_Presc= Prescription.objects.count()
+    number_of_lab= Laboratory.objects.count()
     notifications = Notification.objects.all()
     unseen_count = Notification.objects.filter(seen=False).count()
     return render(request,'admin_dash/dashboard.html',{'number_patients':number_of_patient,
                                                    'number_of_app':number_of_app,
                                                    'total_amount':total_sum,
                                                    'notifications':notifications,
+                                                   'number_of_history':number_of_history,
+                                                   'number_of_Presc':number_of_Presc,
+                                                   'number_of_lab':number_of_lab,
+
                                                    'unseen_count':unseen_count})
 # @login_required
 def dis_dash_content(request):
     return render(request,'admin_dash/dash_content.html')
+# @login_required
+def refere_info(request,discharge_no,patient_id):
+    notifications = Notification.objects.all()
+    unseen_count = Notification.objects.filter(seen=False).count()
+    patient_info = get_object_or_404( PatientRegister,patient_id=patient_id)
+    disch = get_object_or_404(Discharge, Discharge_no=discharge_no)
+    history = PatientHistory.objects.filter(Patient_ID=patient_info.patient_id)
+    lab = Laboratory.objects.filter(PatientID=patient_info.patient_id)
+    prec = Prescription.objects.filter(PatientID=patient_info.patient_id)
+    return render(request,'admin_dash/refere_info.html',{'notifications':notifications,
+                                                         'unseen_count':unseen_count,
+                                                         'patient_info':patient_info,
+                                                         'disch':disch,
+                                                         'histories':history,
+                                                         'laboratories':lab,
+                                                         'prescriptions':prec}
+                  )
 # @login_required
 def dis_index(request):
     total_sum = PaymentModel.objects.aggregate(total_sum=Sum('Total'))['total_sum']
     total_sum = total_sum or 0
     number_of_patient = PatientRegister.objects.count()
     number_of_app= Appointment.objects.count()
+    number_of_history = PatientHistory.objects.count()
+    number_of_Presc= Prescription.objects.count()
+    number_of_lab= Laboratory.objects.count()
     notifications = Notification.objects.all()
     unseen_count = Notification.objects.filter(seen=False).count()
     return render(request,'admin_dash/index.html',{'number_patients':number_of_patient,
                                                    'number_of_app':number_of_app,
                                                    'total_amount':total_sum,
                                                    'notifications':notifications,
-                                                   'unseen_count':unseen_count})
+                                                   'unseen_count':unseen_count,
+                                                   'number_of_history':number_of_history,
+                                                   'number_of_Presc':number_of_Presc,
+                                                   'number_of_lab':number_of_lab,})
 # @login_required
+# def display_users(request):
+#     users= UserProfileInfo2.objects.all()
+#     user_names= User.objects.all()
+#     combined_data = []
+#     for user_info in users or user_names:
+#         user_dict = {
+#             'first_name': user_info.user.first_name,
+#             'last_name': user_info.user.last_name,
+#             'email': user_info.user.email,
+#             'role': user_info.role,
+#             'id':user_info.user.id,
+#             'special':user_info.specialty,
+#         }
+#         combined_data.append(user_dict)
+#     notifications = Notification.objects.all()
+#     unseen_count = Notification.objects.filter(seen=False).count()
+#     return render(request,'admin_dash/staffs.html',{'combined_datas':combined_data,
+#                                                     'notifications':notifications,
+#                                                     'unseen_count':unseen_count})
 def display_users(request):
-    users= UserProfileInfo2.objects.all()
-    user_names= User.objects.all()
+    users = UserProfileInfo2.objects.all()
     combined_data = []
-    for user_info in users or user_names:
-        user_dict = {
-            'first_name': user_info.user.first_name,
-            'last_name': user_info.user.last_name,
-            'email': user_info.user.email,
-            'role': user_info.role,
-            'id':user_info.user.id,
-            'special':user_info.specialty,
-        }
-        combined_data.append(user_dict)
+    for user_info in users:
+        # Check if the user has role and specialty information in UserProfileInfo2
+        if user_info.role and user_info.specialty:
+            user_dict = {
+                'first_name': user_info.user.first_name,
+                'last_name': user_info.user.last_name,
+                'email': user_info.user.email,
+                'role': user_info.role,
+                'id': user_info.user.id,
+                'special': user_info.specialty,
+            }
+            combined_data.append(user_dict)
     notifications = Notification.objects.all()
     unseen_count = Notification.objects.filter(seen=False).count()
-    return render(request,'admin_dash/staffs.html',{'combined_datas':combined_data,
-                                                    'notifications':notifications,
-                                                    'unseen_count':unseen_count})
+    return render(request, 'admin_dash/staffs.html', {'combined_datas': combined_data,
+                                                       'notifications': notifications,
+                                                       'unseen_count': unseen_count})
+
 # @login_required
 def dis_user_registration(request):
     notifications = Notification.objects.all()

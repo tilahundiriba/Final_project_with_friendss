@@ -23,6 +23,39 @@
   border-radius: 4px; /* Border radius */
   padding: 4px 8px; /* Padding */
 }
+
+		/* Custom CSS for pagination */
+		.pagination {
+			margin-top: 20px;
+			text-align: center;
+			/* Center the pagination links */
+		}
+
+		.pagination a {
+			display: inline-block;
+			margin: 0 5px;
+			/* Add space between pagination links */
+			padding: 8px 12px;
+			/* Increase padding for larger size */
+			font-size: 16px;
+			/* Increase font size */
+			color: #007bff;
+			/* Change text color */
+			border: 1px solid #007bff;
+			/* Add border */
+			border-radius: 5px;
+			/* Add border radius */
+			text-decoration: none;
+			/* Remove underline */
+		}
+
+		.pagination a:hover {
+			background-color: #007bff;
+			/* Change background color on hover */
+			color: #fff;
+			/* Change text color on hover */
+		}
+
 </style>
 </head>
 
@@ -141,18 +174,7 @@
 								<!--Export links-->
 								<nav aria-label="Page navigation example">
 									<ul class="pagination justify-content-center export-pagination">
-										<li class="page-item">
-											<a class="page-link" href="#"><span class="ti-download"></span> csv</a>
-										</li>
-										<li class="page-item">
-											<a class="page-link" href="#"><span class="ti-printer"></span>  print</a>
-										</li>
-										<li class="page-item">
-											<a class="page-link" href="#"><span class="ti-file"></span> PDF</a>
-										</li>
-										<li class="page-item">
-											<a class="page-link" href="#"><span class="ti-align-justify"></span> Excel</a>
-										</li>
+										
 									</ul>
 								</nav>
 								<!-- /Export links-->

@@ -86,7 +86,7 @@
 										
 										<select class="form-control" id="dr_name" name="dr_name">
 											<option>Choose Name</option>
-											{% for user in users %}
+											{% for user in doctors %}
 											<option value="{{user.username}}">{{user.username}}</option>
 											{% endfor %}
 										</select>

@@ -10,6 +10,8 @@ class PatientHistory(models.Model):
     DiseaseName=models.CharField(max_length=100)
     Nurse_ID=models.ForeignKey(User,on_delete=models.CASCADE)
     Doctor_ID=models.ForeignKey(User,on_delete=models.CASCADE,related_name='nurse_history_set',related_query_name='doctor_history')
+    Is_checked= models.BooleanField(default=False)
+    objects = models.Manager()
     def __str__(self):
         return f'{self.Patient_ID,self.Nurse_ID,self.Doctor_ID,self.DiseaseName}'
 

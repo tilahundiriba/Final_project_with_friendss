@@ -21,7 +21,7 @@
     <div class="container mt-0">
       <div class="row breadcrumb-bar">
         <div class="col-md-6">
-          <h3 class="block-title">Lab Payment Requests</h3>
+          <h3 class="block-title">Card Payment Requests</h3>
         </div>
         <div class="col-md-6">
           <ol class="breadcrumb">
@@ -30,7 +30,7 @@
                 <span class="ti-home"></span>
               </a>
             </li>
-            <li class="breadcrumb-item active">Lab Payment Requests</li>
+            <li class="breadcrumb-item active">Card Payment Requests</li>
             <li class="breadcrumb-item ">Unpayed Requests</li>
           </ol>
         </div>
@@ -53,21 +53,16 @@
 
           <div class="widget-right justify-content-center">
 
-            <h3 class="wiget-title color-green text-center">Lab Payment Requests</h3>
+            <h4 class="wiget-title color-green text-center">Card Payment Requests</h4>
 
-            <p><strong style="font-size: large;">Patient ID:&nbsp;</strong>{{ pay.PatientID}}</p>
-            <p><strong style="font-size: large;">lab. type:&nbsp;</strong>{{ pay.Lab_type}}</p>
-            <p><strong style="font-size: large;">Doctor Name:&nbsp;</strong>{{ pay.Doctor_ID}}</p>
-            <p><strong style="font-size: large;">Admitted Date:&nbsp;</strong>{{ pay.Admit_date}}</p>
-      <form action="{% url 'checked_payment_request' pay.Lab_number %}" method="post">
-        {% csrf_token %}
-        <button type="submit" class="btn btn-outline-info mt-3 mb-0 me-4"><span class="ti-check-box"></span>
-          Payed</button>
-          <a href="{% url 'add-payment' pay.PatientID %}" class="btn btn-outline-info mt-3 mb-0"><span class="ti-plus"></span>
-            Payment</a>
-      </form>
-             
-         
+            <p><strong style="font-size: large;">Patient ID:&nbsp;</strong>{{ pay.patient_id}}</p>
+            <p><strong style="font-size: large;">Patient Name:&nbsp;</strong>{{ pay.first_name}}&nbsp;{{ pay.middle_name}}</p>
+            <p><strong style="font-size: large;">Doctor Name:&nbsp;</strong>{{ pay.doctor_name}}</p>
+            <p><strong style="font-size: large;">Receptionist Name:&nbsp;</strong>{{ pay.receptinist_name}}</p>
+        
+              <a href="{% url 'add-payment' pay.patient_id %}" class="btn btn-outline-info mt-3 mb-0"><span class="ti-plus"></span>
+                Payment</a>
+          
 
           </div>
         </div>

@@ -36,7 +36,7 @@
     </div>
     <div class="row">
       
-  
+
       {% for approve in unapproved %}
     
       <div class="col-md-6">
@@ -52,11 +52,12 @@
             <p><strong style="font-size: large;"> Payement:&nbsp;</strong>{{ approve.Status}}</p>
             <p><strong style="font-size: large;">Departure Date:&nbsp;</strong>{{ approve.Departure_date}}</p>
             <form action="{% url 'approve_discharges' approve.Discharge_no %}">
-              <button type='submit' class="btn btn-outline-primary mt-3 mb-0 me-4"><span class="ti-eye"></span>
+              {% csrf_token %}
+              <button type='submit' class="btn btn-outline-primary mt-3 mb-0 me-4"><span class="ti-check-box"></span>
                 Approve</button>
-              
+                <a href="{% url 'refere_info' approve.Discharge_no approve.Patient_id %}" class="btn btn-outline-primary mt-3 mb-0"><span class="ti-plus">Refere Info</span></a> 
             </form>
-
+            
           </div>
         </div>
       </div>

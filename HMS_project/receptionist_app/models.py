@@ -19,6 +19,7 @@ class PatientRegister(models.Model):
     receptinist_name = models.ForeignKey(User, on_delete=models.CASCADE)
     doctor_name = models.ForeignKey(User, on_delete=models.CASCADE, related_name='doctor_patients')
     is_checked=models.BooleanField(default=False)
+    is_card=models.BooleanField(default=False)
     
     def __str__(self):
         return self.patient_id

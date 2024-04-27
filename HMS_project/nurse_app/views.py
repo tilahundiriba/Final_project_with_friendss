@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 from django.shortcuts import get_object_or_404
 from admin_app .models import UserProfileInfo2,Notification
+from doctor_app.models import PatientHistory
 from receptionist_app.models import PatientRegister
 from.models import RoomInformation,VitalInformation,Medication,BedInformation
 from django.contrib.auth.models import User
@@ -107,7 +108,8 @@ def edit_medication(request,med_no):
 def add_vital_info(request):
     notifications = Notification.objects.all()
     unseen_count = Notification.objects.filter(seen=False).count()
-    users= User.objects.all()
+    nurses = User.objects.filter(userprofileinfo2__role='nurse')
+    
     registered=False
     if request.method == 'POST':
         patient_id = request.POST.get('patient_id')
@@ -147,7 +149,7 @@ def add_vital_info(request):
         return render(request,'nurse_dash/add-vital_info.html',{'registered':registered,
                                                                 'notifications':notifications,
                                                        'unseen_count':unseen_count}) # Redirect to a success page or another URL
-    return render(request,'nurse_dash/add-vital_info.html',{'users':users,
+    return render(request,'nurse_dash/add-vital_info.html',{'users':nurses,
                                                             'notifications':notifications,
                                                        'unseen_count':unseen_count})
 def add_room(request):
@@ -199,6 +201,36 @@ def dis_room(request):
     room =RoomInformation.objects.all()
     return render(request,'nurse_dash/rooms.html',{'rooms':room,'notifications':notifications,
                                                        'unseen_count':unseen_count})
+def dis_patients(request):
+    # Retrieve notifications and count unseen notifications
+    notifications = Notification.objects.all()
+    unseen_count = Notification.objects.filter(seen=False).count()
+
+    # Retrieve PatientHistory objects for the current nurse user
+    patients_history = PatientHistory.objects.filter(Nurse_ID=request.user)
+
+    # Construct a list of dictionaries containing patient information
+    patients_info = []
+    for patient_history in patients_history:
+        # Retrieve corresponding patient register
+        patient_register = patient_history.Patient_ID
+
+        # Construct patient_info dictionary with patient information
+        patient_info = {
+            'first_name': patient_register.first_name,
+            'last_name': patient_register.middle_name,
+            'hist_date': patient_history.Date,
+            'doctor_id': patient_history.Doctor_ID,
+            'patient_id': patient_history.Patient_ID_id,
+            # Add other fields as needed
+        }
+        patients_info.append(patient_info)
+
+    return render(request, 'nurse_dash/patient_to_check.html', {
+        'patients': patients_info,
+        'notifications': notifications,
+        'unseen_count': unseen_count
+    })
 def allocate_room(request):
     notifications = Notification.objects.all()
     unseen_count = Notification.objects.filter(seen=False).count()

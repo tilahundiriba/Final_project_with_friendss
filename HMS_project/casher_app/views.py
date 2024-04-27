@@ -5,7 +5,7 @@ from admin_app.models import UserProfileInfo2,Notification
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from receptionist_app.models import PatientRegister
-
+from django.core.paginator import Paginator
 @login_required
 def profile(request):
     user = request.user
@@ -42,7 +42,7 @@ def casher_dash(request):
 from datetime import datetime
 from nurse_app.models import BedInformation,RoomInformation
 def add_discharge(request):
-    users = User.objects.all()
+    cashers = User.objects.filter(userprofileinfo2__role='casher')
     payed = False
     
     if request.method == 'POST':
@@ -94,7 +94,7 @@ def add_discharge(request):
     unseen_count = Notification.objects.filter(seen=False).count()
     
     return render(request, 'casher_dash/add-discharge.html', {
-        'users': users,
+        'cashers': cashers,
         'notifications': notifications,
         'unseen_count': unseen_count,
         'payed': payed  # Pass the 'payed' variable to the template
@@ -116,10 +116,11 @@ def approve_discharge_request(request, discharge_no):
     dis_request.Approval = True
     dis_request.save()
     return redirect('approve_departure')
-def add_payment(request):
+def add_payment(request,patient_id):
     notifications = Notification.objects.all()
+    patient_pay = get_object_or_404(PatientRegister, patient_id=patient_id)
     unseen_count = Notification.objects.filter(seen=False).count()
-    users = User.objects.all()
+    cashers = User.objects.filter(userprofileinfo2__role='casher')
     for_card = get_object_or_404(ServicePayment, id=1)
     for_blood = get_object_or_404(ServicePayment, id=2)
     for_urine = get_object_or_404(ServicePayment, id=3)
@@ -128,7 +129,7 @@ def add_payment(request):
 
     payed = False
     if request.method == 'POST':
-        patient_id = request.POST.get('patient_id')
+        patientid = request.POST.get('patient_id')
         casher_name = request.POST.get('cashier_name')
         added_date = request.POST.get('adminssion_date')
         pay_no = request.POST.get('payment_no')
@@ -162,7 +163,7 @@ def add_payment(request):
         lab_payment = bl_p + ur_p + ct_p + xr_p
         total = f_p + b_p + c_p + bl_p + ur_p + ct_p + xr_p
         try:
-            patient = get_object_or_404(PatientRegister, patient_id=patient_id)
+            patient = get_object_or_404(PatientRegister, patient_id=patientid)
             casher = get_object_or_404(User, username=casher_name)
             payment = PaymentModel.objects.create(
                 Patient_id=patient,
@@ -177,6 +178,8 @@ def add_payment(request):
                 Total=total,
                 Casher_id=casher
             )
+            patient_pay.is_card=True
+            patient_pay.save()
         except PatientRegister.DoesNotExist:
             # Handle the case where the patient is not found
             # You can add appropriate error handling or redirect to an error page
@@ -186,12 +189,13 @@ def add_payment(request):
             # You can add appropriate error handling or redirect to an error page
             pass
         payed = True
-        return redirect("add-payment")
+        return redirect("dis_payment")
     
     payment = ServicePayment.objects.all()
     return render(request, 'casher_dash/add-payment.html', {'payments': payment,
                                                             'payed': payed,
-                                                            'users': users,
+                                                            'cashers': cashers,
+                                                            'patient_pay': patient_pay,
                                                             'notifications': notifications,
                                                             'unseen_count': unseen_count})
 
@@ -216,4 +220,14 @@ def invoice(request):
     unseen_count = Notification.objects.filter(seen=False).count()
     return render(request,'casher_dash/invoice.html',{'notifications':notifications,
                                                             'unseen_count':unseen_count})
+def card_payments(request):
+    notifications = Notification.objects.all()
+    unseen_count = Notification.objects.filter(seen=False).count()
+    card_payments = PatientRegister.objects.filter(is_card=False)
+    paginator = Paginator(card_payments, 4)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request,'casher_dash/card_payments.html',{'notifications':notifications,
+                                                            'unseen_count':unseen_count,
+                                                            'page_obj':page_obj})
 #casher view end here.

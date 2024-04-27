@@ -93,8 +93,8 @@
 										<label for="nr_name">Nr. Name</label>
 
 										<select class="form-control" id="nr_name" name="nr_name">
-											<option>Select Name</option>
-											{% for user in users %}
+											<option>Select Nurse Name</option>
+											{% for user in nurses %}
 											<option value="{{user.username}}">{{user.username}}</option>
 											{% endfor %}
 										</select>
@@ -103,7 +103,7 @@
 										<label for="dr_name">Dr. Name</label>
 										<select class="form-control" id="dr_name" name="dr_name">
 											<option>Select Name</option>
-											{% for user in users %}
+											{% for user in doctors %}
 											<option value="{{user.username}}">{{user.username}}</option>
 											{% endfor %}
 										</select>

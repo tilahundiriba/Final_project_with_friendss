@@ -1,0 +1,36 @@
+
+
+<h3 class="widget-title">Doctor List</h3>
+<div class="table-responsive mb-3">
+    <ul>
+        
+        <li></li>
+  
+    </ul>
+    <table id="tableId" class="table table-bordered table-striped">
+        <thead>
+       
+            <tr>
+          
+        
+                <th>Doctor Name</th>
+                <th>Specialty</th>
+                <th>Number of Tasks Assigned</th>
+    
+            </tr>
+        </thead>
+        <tbody>
+            {% for technician,specialty ,test_count in doctors_with_specialty %}
+            <tr>
+               
+                <td>{{ technician }} </td>
+                <td> {{ specialty }} </td>
+                <td> {{ test_count }} </td>
+            </tr>
+
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+</div>
