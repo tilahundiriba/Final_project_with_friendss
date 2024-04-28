@@ -1,0 +1,231 @@
+{% extends 'admin_dash/dashboard.html' %}
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.konnectplugins.com/proclinic/Horizontal/about-payment.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 24 Jan 2022 10:42:01 GMT -->
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	{% block 'title' %}
+	<title>General Reports</title>
+	{% endblock %}
+	<!-- Fav  Icon Link -->
+	<style>
+		@media print {
+			body * {
+				visibility: hidden;
+			}
+
+			#forprint,
+			#forprint * {
+				visibility: visible;
+
+			}
+
+			#forprint {
+				width: 100%;
+				position: absolute;
+				top: 0;
+				left: 0;
+				/* Reset position to prevent absolute positioning */
+			}
+		}
+	</style>
+</head>
+
+
+<div class="wrapper">
+	<!-- Page Content -->
+	<div id="content">
+
+		<!-- Page Title -->
+		<div class="container mt-0">
+			<div class="row breadcrumb-bar">
+				<div class="col-md-6">
+					<h3 class="block-title">General Reports</h3>
+				</div>
+				<div class="col-md-6">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item">
+							<a href="index.html">
+								<span class="ti-home"></span>
+							</a>
+						</li>
+						<li class="breadcrumb-item">Reports</li>
+						<li class="breadcrumb-item active">General Reports</li>
+					</ol>
+				</div>
+			</div>
+		</div>
+		<!-- /Breadcrumb -->
+		<!-- Main Content -->
+		<div class="container" id="forprint">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="widget-area-2 proclinic-box-shadow pb-3">
+						<!-- Invoice Head -->
+						<div class="row ">
+							<h3 class="proclinic-text-color d-flex justify-content-center">SHASHEMENE SPECIALISED REFFERAL HOSPITAL</h3>
+							<div class="col-sm-6 mb-5">
+								<img src="{% static 'images/hospital_logo3.png' %}" alt="logo hospital"
+									class="img-thumbnail" style="height: 100px; width: 100px;">
+									
+								<br>
+								<br>
+								<span>Ethiopia</span>
+								<br>
+								<span>[Shashemene, ST 1224]</span>
+								<br>
+								<span class="pr-2">Phone: +251 96 712 3456</span> <br>
+								<span>Fax: 432 1231 3456</span>
+							</div>
+							<div class="col-sm-6 text-md-right mb-5">
+								<h3>REPORTS</h3>
+								<br>
+								<br>
+								<span>Report # 1</span>
+								<br>
+								<span>Date: {{context.current_time}}</span>
+							</div>
+						</div>
+						<!-- /Invoice Head -->
+						<!-- Invoice Content -->
+						<div class="row">
+							<div class="col-sm-12 ms-5 mb-5 me-5" style="max-width: 1000px;">
+								<h6 class="proclinic-text-color">REPORT DETAILS:</h6>
+								<p>A total patients registered until nows are <strong>&nbsp;&nbsp;{{number_of_patient}}&nbsp;&nbsp;</strong> 
+									from this <strong>&nbsp;&nbsp;{{female_patient}}&nbsp;&nbsp;</strong> are female and the rest 
+									<strong>&nbsp;&nbsp;{{male_patient}}&nbsp;&nbsp;</strong> are male.  From this patients total 
+									<strong>&nbsp;&nbsp;{{number_of_history}}&nbsp;&nbsp;</strong> number of histories and 
+									<strong>&nbsp;&nbsp;{{number_of_vitals}}&nbsp;&nbsp;</strong> vital informations recorded from this 
+									<strong>&nbsp;&nbsp;{{checked_of_history}}&nbsp;&nbsp;</strong> are done and 
+									<strong>&nbsp;&nbsp;{{number_of_Presc}}&nbsp;&nbsp;</strong> total medicines are orderd for them and the rest 
+									<strong>&nbsp;&nbsp;{{uncheked_history}}&nbsp;&nbsp;</strong>are ongoing. 
+									A total laboratory ordered until nows are <strong>&nbsp;&nbsp;{{number_of_lab}}&nbsp;&nbsp;</strong> 
+									from this <strong>&nbsp;&nbsp;{{tested_of_lab}}&nbsp;&nbsp;</strong> are done and the rest 
+									<strong>&nbsp;&nbsp;{{untested_lab}}&nbsp;&nbsp;</strong> are ongoing.
+									A total appointments held until nows are <strong>&nbsp;&nbsp;{{number_of_app}}&nbsp;&nbsp;</strong> 
+									from this <strong>&nbsp;&nbsp;{{number_of_completed}}&nbsp;&nbsp;</strong> are done  
+									<strong>&nbsp;&nbsp;{{number_of_pending}}&nbsp;&nbsp;</strong> are ongoing.and 
+									<strong>&nbsp;&nbsp;{{number_of_cancelled}}&nbsp;&nbsp;</strong> are cancelled. 
+									A total bed we have are <strong>&nbsp;&nbsp;{{number_of_bed}}&nbsp;&nbsp;</strong> 
+									from this <strong>&nbsp;&nbsp;{{Occupied_of_bed}}&nbsp;&nbsp;</strong> are Occupied and the rest  
+									<strong>&nbsp;&nbsp;{{free_bed}}&nbsp;&nbsp;</strong> free. 
+									A total patients departured until now are <strong>&nbsp;&nbsp;{{number_of_departure}}&nbsp;&nbsp;</strong> 
+									from this <strong>&nbsp;&nbsp;{{patients_with_refere_to}}&nbsp;&nbsp;</strong> are refered to other hospital and the rest  
+									<strong>&nbsp;&nbsp;{{patients_without_refere_to}}&nbsp;&nbsp;</strong> are complete their threatments.
+									A total payment done until now are <strong>&nbsp;&nbsp;{{number_of_payment}}&nbsp;&nbsp;</strong> 
+									from this <strong>&nbsp;&nbsp;{{number_of_cash}}&nbsp;&nbsp;</strong> are payed in cash and the rest  
+									<strong>&nbsp;&nbsp;{{number_of_insurance}}&nbsp;&nbsp;</strong> are covered by insurance.
+
+									
+								</p>
+								
+							</div>
+						
+							<div class="col-sm-12 mb-2">
+								<strong class="proclinic-text-color">Revenue Status</strong>
+							</div>
+							<div class="col-sm-12">
+								<table class="table table-bordered table-striped table-invioce">
+									<thead>
+										<tr>
+											<th>#</th>
+											<th>Cash Payed</th>
+											<th>Covered By Insurance</th>
+											<th>Total</th>
+											
+										</tr>
+									</thead>
+									<tbody>
+									
+										<tr>
+
+											<td>1</td>
+											<td>{{cash_total_sum}}</td>
+											<td>{{insurance_total_sum}}</td>
+											<td>{{total_sum}}</td>
+										</tr>
+
+									
+									</tbody>
+								</table>
+							</div>
+							<div class="col-sm-4 ml-auto">
+								<table class="table table-bordered table-striped">
+									<tbody>
+										<tr>
+											<th>Reported by</th>
+											<th>Signature</th>
+										</tr>
+									
+
+										<tr>
+											<td>{{request.user}}</td>
+											<td><img src="{% static 'images/signature.png' %}" alt="Signature" style="height: 50px; height: 20px;"></td>
+										</tr>
+									
+									</tbody>
+								</table>
+							</div>
+
+							<div class="col-sm-12">
+								<div class="border p-4">
+									<strong>Note:</strong>
+									Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur id illo
+									incidunt, iste libero quisquam? A aut cumque
+									fuga fugit iusto libero officia optio quasi, quisquam saepe voluptate
+									voluptatibus voluptatum.
+									<br>
+									<br>
+									<strong class="f12">Signature</strong>
+									<img src="{% static 'images/signature.png' %}" alt="Signature" style="height: 100px; height: 50px;">
+								</div>
+							</div>
+
+						</div>
+
+						<!-- /Invoice Content -->
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-12">
+			<nav aria-label="Page navigation example">
+				<ul class="pagination justify-content-center export-pagination mt-3 mb-0">
+					<li class="page-item">
+						<button class="page-link" onclick="window.print()"><span class="ti-printer"
+								id="print_button"></span> print</button>
+					</li>
+					<li class="page-item">
+						<a class="page-link" href="#"><span class="ti-file"></span> PDF</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+		<!-- /Main Content -->
+		<!--Copy Rights-->
+		<div class="container">
+			<div class="d-sm-flex justify-content-center">
+				<span class="text-muted text-center d-block d-sm-inline-block">Copyright © 2018 <a
+						href="http://www.konnectplugins.com/" target="_blank">konnectcode</a>. All rights
+					reserved.</span>
+			</div>
+		</div>
+		<!-- /Copy Rights-->
+	</div>
+	<!-- /Page Content -->
+</div>
+<!-- Back to Top -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"
+	integrity="sha512-qZvrmS2ekKPF2mSznTQsxqPgnpkI4DNTlrdUmTzrDgektczlKNRRhy5X5AAOnx5S09ydFYWWNSfcEqDTTHgtNA=="
+	crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+{% endblock %}

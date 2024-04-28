@@ -28,6 +28,7 @@ urlpatterns = [
     path('dis_base/', views.dis_base, name='dis_base'),
     path('patients/', views.display_patients, name='display_patients'),
     path('refere_info/<int:discharge_no>/<str:patient_id>/', views.refere_info, name='refere_info'),
+    path('general_report/', views.general_report, name='general_report'),
     # admin dashboard path
     path('dis_dash/', views.dis_dash, name='dis_dash'),
     path('dis_dash_content/', views.dis_dash_content, name='dis_dash_content'),

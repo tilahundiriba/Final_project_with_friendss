@@ -30,6 +30,7 @@ from .models import Notification
 from receptionist_app.models import PatientRegister
 from doctor_app.models import Appointment,PatientHistory,Laboratory,Prescription
 from casher_app.models import PaymentModel,Discharge,ServicePayment
+from nurse_app.models import RoomInformation,VitalInformation
 import csv
 import openpyxl
 from reportlab.lib.pagesizes import letter
@@ -39,7 +40,7 @@ from django.shortcuts import render, get_object_or_404
 from .models import User, UserProfileInfo2
 from .models import Notification
 # views.py
-
+from datetime import datetime
 from django.shortcuts import render
 from django.template.loader import render_to_string
 
@@ -80,13 +81,82 @@ def notification_view(request):
     # Fetch all notifications that haven't been seen by the user
     notifications = Notification.objects.all()
     unseen_count = Notification.objects.filter(seen=False).count()
-    
-    # Display the count of unseen messages to the user
-    # return render(request, 'notifications.html', {'unseen_count': unseen_count})
     return render(request, 'admin_dash/seeNotifications.html', {'notifications': notifications,'unseen_count': unseen_count})
+def general_report(request):
+    # Fetch all notifications that haven't been seen by the user
+    current_time = datetime.now()  # Get the current system time
 
-from django.shortcuts import redirect
-from .models import Notification
+    context = {
+        # Other context data
+        'current_time': current_time # Pass the current time to the template
+    }
+    total_sum = PaymentModel.objects.aggregate(total_sum=Sum('Total'))['total_sum']
+    total_sum = total_sum or 0
+    number_of_payment = PaymentModel.objects.count()
+    number_of_cash = PaymentModel.objects.filter(Pay_method='Cash').count()
+    number_of_insurance= number_of_payment - number_of_cash
+    cash_total_sums = PaymentModel.objects.filter(Pay_method='Cash').aggregate(total_sum=Sum('Total'))
+    #cash_total_sum = cash_total_sums or 0
+    cash_total_sum = cash_total_sums['total_sum'] or 0
+    # Calculate total sum of payments for insurance
+    insurance_total_sums = PaymentModel.objects.filter(Pay_method='Insurance').aggregate(total_sum=Sum('Total'))
+    insurance_total_sum = insurance_total_sums['total_sum'] or 0
+    #insurance_total_sum = insurance_total_sums or 0
+    number_of_patient = PatientRegister.objects.count()
+    number_of_app= Appointment.objects.count()
+    number_of_bed= RoomInformation.objects.count()
+    Occupied_of_bed= RoomInformation.objects.filter(Status='Occupied').count()
+    free_bed = number_of_bed - Occupied_of_bed
+    number_of_departure= Discharge.objects.count()
+    patients_with_refere_to = Discharge.objects.exclude(Reffer_to='').count()
+    patients_without_refere_to = number_of_departure - patients_with_refere_to
+    number_of_cancelled= Appointment.objects.filter(App_status='Cancelled').count()
+    number_of_pending= Appointment.objects.filter(App_status='Pending').count()
+    number_of_completed= Appointment.objects.filter(App_status='Completed').count()
+    number_of_history = PatientHistory.objects.count()
+    checked_of_history = PatientHistory.objects.filter(Is_checked=True).count()
+    uncheked_history = number_of_history - checked_of_history
+    number_of_Presc= Prescription.objects.count()
+    number_of_vitals= VitalInformation.objects.count()
+    number_of_lab= Laboratory.objects.count()
+    tested_of_lab= Laboratory.objects.filter(Is_tested=True).count()
+    untested_lab = number_of_lab - tested_of_lab
+    female_patient = PatientRegister.objects.filter(gender='female').count()
+    male_patient = number_of_patient - female_patient
+    notifications = Notification.objects.all()
+    unseen_count = Notification.objects.filter(seen=False).count()
+    return render(request, 'admin_dash/general_report.html', 
+                  {'notifications': notifications,
+                    'unseen_count': unseen_count,
+                    'number_of_patient': number_of_patient,
+                    'female_patient': female_patient,
+                    'male_patient': male_patient,
+                    'number_of_departure': number_of_departure,
+                    'patients_with_refere_to': patients_with_refere_to,
+                    'patients_without_refere_to': patients_without_refere_to,
+                    'number_of_history': number_of_history,
+                    'checked_of_history': checked_of_history,
+                    'uncheked_history': uncheked_history,
+                    'number_of_Presc': number_of_Presc,
+                    'number_of_lab': number_of_lab,
+                    'tested_of_lab': tested_of_lab,
+                    'untested_lab': untested_lab,
+                    'number_of_app': number_of_app,
+                    'number_of_cancelled': number_of_cancelled,
+                    'number_of_pending': number_of_pending,
+                    'number_of_completed': number_of_completed,
+                    'number_of_bed': number_of_bed,
+                    'Occupied_of_bed': Occupied_of_bed,
+                    'free_bed': free_bed,
+                    'total_sum': total_sum,
+                    'number_of_cash': number_of_cash,
+                    'cash_total_sum': cash_total_sum,
+                    'number_of_insurance': number_of_insurance,
+                    'insurance_total_sum': insurance_total_sum,
+                    'number_of_vitals': number_of_vitals,
+                    'number_of_payment': number_of_payment,
+                    'context': context
+                    })
 
 def mark_notification_as_seen(request, id):
     # Get the notification by ID

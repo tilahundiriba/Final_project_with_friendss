@@ -192,7 +192,7 @@
                 <a href="#" class="sidebar-link">Add Report</a>
               </li>
               <li class="sidebar-item">
-                <a href="#" class="sidebar-link">View Report</a>
+                <a href="{% url 'general_report' %}" class="sidebar-link">View Report</a>
               </li>
             </ul>
           </li>
@@ -308,13 +308,12 @@
           </div>
           <!--/Pre Loader -->
           <!-- Color Changer -->
-
+        
           <!-- /Color Changer -->
-          <div class="wrapper">
+          <div class="wrapper">		
             <!-- Page Content -->
             <div id="content">
-              <!-- Top Navigation -->
-
+        
               <!-- Page Title -->
               <div class="container mt-0">
                 <div class="row breadcrumb-bar">
@@ -345,8 +344,9 @@
                         <span class="ti-user"></span>
                       </div>
                       <div class="widget-right">
-                        <h4 class="wiget-title">Patients</h4>
+                        <h4 class="wiget-title text-success">Total Patients</h4>
                         <span class="numeric color-red">{{number_patients}}</span>
+                        
                         <p class="inc-dec mb-0"><span class="ti-angle-up"></span> +20% Increased</p>
                       </div>
                     </div>
@@ -356,34 +356,74 @@
                   <div class="col-md-4">
                     <div class="widget-area proclinic-box-shadow color-green">
                       <div class="widget-left">
-                        <span class="ti-bar-chart"></span>
+                        <span class="ti-timer"></span>
                       </div>
                       <div class="widget-right">
-                        <h4 class="wiget-title">Appointments</h4>
+                        <h4 class="wiget-title text-success">Total Appointments </h4>
                         <span class="numeric color-green">{{number_of_app}}</span>
                         <p class="inc-dec mb-0"><span class="ti-angle-down"></span> +15% Increased</p>
                       </div>
                     </div>
                   </div>
                   <!-- /Widget Item -->
-
                   <!-- Widget Item -->
                   <div class="col-md-4">
                     <div class="widget-area proclinic-box-shadow color-yellow">
                       <div class="widget-left">
-                        <span class="ti-money"></span>
+                        <span class="ti-wallet"></span>
                       </div>
                       <div class="widget-right">
-                        <h4 class="wiget-title">Total Revenue</h4>
+                        <h4 class="wiget-title text-success">Total Revenue</h4>
                         <span class="numeric color-yellow">${{total_amount}}</span>
+                        <p class="inc-dec mb-0"><span class="ti-angle-up"></span> +10% Increased</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="widget-area proclinic-box-shadow color-red">
+                      <div class="widget-left">
+                        <span class="ti-na"></span>
+                      </div>
+                    
+                      <div class="widget-right">
+                        <h4 class="wiget-title text-success">Total Prescriptions</h4>
+                        <span class="numeric color-red">{{number_of_Presc}}</span>
+                        
+                        <p class="inc-dec mb-0"><span class="ti-angle-up"></span> +20% Increased</p>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- /Widget Item -->
+                  <!-- Widget Item -->
+                  <div class="col-md-4">
+                    <div class="widget-area proclinic-box-shadow color-green">
+                      <div class="widget-left">
+                        <span class="ti-bookmark-alt"></span>
+                      </div>
+                      <div class="widget-right">
+                        <h4 class="wiget-title text-success">Total Histories</h4>
+                        <span class="numeric color-green">{{number_of_history}}</span>
+                        <p class="inc-dec mb-0"><span class="ti-angle-down"></span> +15% Increased</p>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- /Widget Item -->
+                  <!-- Widget Item -->
+                  <div class="col-md-4">
+                    <div class="widget-area proclinic-box-shadow color-yellow">
+                      <div class="widget-left">
+                        <span class=" ti-filter"></span>
+                      </div>
+                      <div class="widget-right">
+                        <h4 class="wiget-title text-success">Total Laboratories</h4>
+                        <span class="numeric color-yellow">{{number_of_lab}}</span>
                         <p class="inc-dec mb-0"><span class="ti-angle-up"></span> +10% Increased</p>
                       </div>
                     </div>
                   </div>
                   <!-- /Widget Item -->
                 </div>
-
-
+        
                 <div class="row">
                   <!-- Widget Item -->
                   <div class="col-md-6">
@@ -402,7 +442,7 @@
                   </div>
                   <!-- /Widget Item -->
                 </div>
-
+        
                 <div class="row">
                   <!-- Widget Item -->
                   <div class="col-md-12">
@@ -488,7 +528,7 @@
                   </div>
                   <!-- /Widget Item -->
                 </div>
-
+        
                 <div class="row">
                   <!-- Widget Item -->
                   <div class="col-sm-6">
@@ -543,20 +583,19 @@
                           </tbody>
                         </table>
                       </div>
-
+        
                     </div>
                   </div>
                   <!-- /Widget Item -->
-
+        
                 </div>
-
+        
               </div>
               <!-- /Main Content -->
               <!--Copy Rights-->
               <div class="container">
                 <div class="d-sm-flex justify-content-center">
-                  <span class="text-muted text-center d-block d-sm-inline-block">Copyright © 2024 <a
-                      href="#" target="_blank">CS Student</a>. All rights reserved.</span>
+                  <span class="text-muted text-center d-block d-sm-inline-block">Copyright © 2018 <a href="http://www.konnectplugins.com/" target="_blank">konnectcode</a>. All rights reserved.</span>
                 </div>
               </div>
               <!-- /Copy Rights-->
@@ -569,7 +608,7 @@
           </a>
           <!-- /Back to Top -->
           <!-- Jquery Library-->
-
+        
         </body>
 
 
