@@ -216,7 +216,7 @@ def add_patient(request):
             # return HttpResponse(error_message)
         register=True
     return render(request, 'receptionist_dash/add-patient.html',{'register':register,
-                                                                 'users':doctors,
+                                                                 'doctors':doctors,
                                                                  'receps':recep
                                                                  ,
                                                               'notifications':notifications,
@@ -247,16 +247,20 @@ def check_patient(request, patient_id):
 
 
 def existing_patient(request):
+    
     notifications = Notification.objects.all()
     unseen_count = Notification.objects.filter(seen=False).count()
     form=False
     if request.method == 'POST':
-        users= User.objects.all()
+        doctors = User.objects.filter(userprofileinfo2__role='doctor')
+        recep = User.objects.filter(userprofileinfo2__role='receptionist')
         patient_id = request.POST.get('patient_id')
         patient = get_object_or_404(PatientRegister, patient_id=patient_id)
         form=True
         return render(request, 'receptionist_dash/existing_patient.html', {'patients': patient,
-                                                                           'users':users,'form':form
+                                                                           'doctors':doctors,
+                                                                           'receps':recep,
+                                                                           'form':form
                                                                            ,
                                                               'notifications':notifications,
                                                               'unseen_count':unseen_count})

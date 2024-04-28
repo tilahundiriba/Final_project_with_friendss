@@ -127,7 +127,7 @@
 
 
                                             <option selected disabled>Select Receptionist</option>
-                                            {% for user in users %}
+                                            {% for user in receps %}
                                             <option value="{{user.username}}">{{user.username}}</option>
                                             {% endfor %}
                                         </select>
@@ -166,7 +166,7 @@
                                         <label for="assidoc">Assigned Doctor</label>
                                         <select class="form-control" id="assidoc" name="assidoc">
                                             <option selected disabled>Select Doctor</option>
-                                            {% for user in users %}
+                                            {% for user in doctors %}
                                             <option value="{{user.username}}">{{user.username}}</option>
                                             {% endfor %}
 

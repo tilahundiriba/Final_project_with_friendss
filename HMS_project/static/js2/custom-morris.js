@@ -79,6 +79,22 @@
   });
   }
   
+  if($("#donutMorris2").length == 1){
+   var $donutData = [
+    { label: "Pending", value: 30 },
+    { label: "Completed", value: 29 }
+   
+  ];
+  Morris.Donut({
+    element: 'donutMorris2',
+    data: $donutData,
+    barSize: 0.1,
+    labelColor: '#3e5569',
+    resize: true, //defaulted to true
+    colors: ['#FFAA2A', '#22c6ab']
+  });
+  }
+  
   // visit chart
   if($("#visitMorris").length == 1){
   var chart = Morris.Area({

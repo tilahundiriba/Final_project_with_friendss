@@ -424,6 +424,7 @@ def display_users(request):
                 'role': user_info.role,
                 'id': user_info.user.id,
                 'special': user_info.specialty,
+                'is_active': user_info.user.is_active,
             }
             combined_data.append(user_dict)
     notifications = Notification.objects.all()

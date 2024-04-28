@@ -107,6 +107,7 @@
 											<th> Email </th>
 											<th> Role</th>
 											<th>Specialization</th>
+											<th>Status</th>
 											<th>Actions</th>
 										</tr>
 									</thead>
@@ -125,6 +126,12 @@
 											<td>{{user_name.email}}</td>
 											<td>{{user_name.role}}</td>
 											<td>{{user_name.special}}</td>
+											{% if user_name.is_active  %}
+											<td><span class="badge badge-success">Active</span></td>
+											{% else  %}
+											
+											<td><span class="badge badge-warning">Deactive</span></td>
+											{% endif %}
 											<td>
 												<a href="#" class="btn btn-outline-danger "><span class="ti-trash"></span></a> 
 												<a href="#" class="btn btn-outline-primary "><span class="ti-pencil-alt"></span></a> 
