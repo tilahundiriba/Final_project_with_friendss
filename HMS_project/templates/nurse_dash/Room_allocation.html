@@ -72,15 +72,12 @@
 										<label for="patien-id">Patient ID</label>
 										<input type="text" placeholder="Patient ID" class="form-control" id="patien-id" name="patient_id">
 									</div>
-										<div class="form-group col-md-6">
-										<label for="allot-date">Allotment Date</label>
-										<input type="date" placeholder="Allotment Date" class="form-control" id="allot-date" name="allot-date">
-									</div>
-									<div class="form-group col-md-4">
+									
+									<div class="form-group col-md-6">
 										<label for="room-number">Room Number</label>
 										<input type="text" class="form-control" placeholder="Room Number" id="room-number" name="room-number">
 									</div>
-									<div class="form-group col-md-4">
+									<div class="form-group col-md-6">
 										<label for="room-type">Room Type</label>
 										<select class="form-control" id="room-type" name="room-type">
 											<option value="ICU">ICU</option>
@@ -93,7 +90,7 @@
 								
 									
 									
-									<div class="form-group col-md-4">
+									<div class="form-group col-md-6">
 										<label for="bedid">Bed No</label>
 										<input type="text" placeholder="bed id" class="form-control" id="bed no" name="bed_no">
 									</div> 
@@ -108,7 +105,7 @@
 										</div>
 									</div>
 									<div class="form-group col-md-6 mb-3">
-										<button type="submit" class="btn btn-primary btn-lg">Allot Room</button>
+										<button type="submit" class="btn btn-primary btn-lg">Allocate</button>
 									</div>
 								</div>
 							</form>
@@ -121,12 +118,7 @@
 								</button>
 							</div>
 							{% endif %}
-							<div class="alert alert-warning alert-dismissible fade show" role="alert">
-								<strong>Holy guacamole!</strong> You should check in on some of those fields below.
-								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-									<span aria-hidden="true">×</span>
-								</button>
-							</div>
+						
 							<!-- /Alerts-->
 						</div>
 					</div>

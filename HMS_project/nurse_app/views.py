@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from django.shortcuts import get_object_or_404
-from admin_app .models import UserProfileInfo2,Notification
+from admin_app .models import UserProfileInfo,Notification
 from doctor_app.models import PatientHistory
 from receptionist_app.models import PatientRegister
 from.models import RoomInformation,VitalInformation,Medication,BedInformation
@@ -24,7 +24,7 @@ def nurse_profile_update(request, user_id):
     if request.user != user:  # Ensure user can only update their own profile
         return redirect('show_nurse_profile')
     
-    user_profile, created = UserProfileInfo2.objects.get_or_create(user=user)
+    user_profile, created = UserProfileInfo.objects.get_or_create(user=user)
     
     if request.method == 'POST':
         profile_pic = request.FILES.get('profile_pic')
@@ -108,13 +108,11 @@ def edit_medication(request,med_no):
 def add_vital_info(request):
     notifications = Notification.objects.all()
     unseen_count = Notification.objects.filter(seen=False).count()
-    nurses = User.objects.filter(userprofileinfo2__role='nurse')
+    nurses = User.objects.filter(userprofileinfo__role='nurse')
     
     registered=False
     if request.method == 'POST':
         patient_id = request.POST.get('patient_id')
-        vital_no = request.POST.get('VIN')
-        date = request.POST.get('date')
         Heart_Rate = request.POST.get('Heart_Rate')
         bloodpre = request.POST.get('bloodpre')
         resRate = request.POST.get('resRate')
@@ -130,7 +128,6 @@ def add_vital_info(request):
         nurse_name = get_object_or_404( User,username=nurse_name)
         vital = VitalInformation(
             Patient_id=patient,
-            Vital_info_no=vital_no,
             H_rate=Heart_Rate,
             B_pressure=bloodpre,
             Body_temp=bodytemp,
@@ -141,7 +138,6 @@ def add_vital_info(request):
             Oxy_satu=oxysatu,
             B_gluc_level=bloodglu,
             R_rate=resRate,
-            D_record=date,
             Remark=remark,
         )
         vital.save()
@@ -239,7 +235,6 @@ def allocate_room(request):
         patient_id = request.POST.get('patient_id')
         room_no = request.POST.get('room-number')
         bed_no = request.POST.get('bed_no')
-        all_date = request.POST.get('allot-date')
         room_type = request.POST.get('room-type')
         patient = get_object_or_404( PatientRegister,patient_id=patient_id)
         room = get_object_or_404( RoomInformation,Room_no=room_no)
@@ -247,7 +242,6 @@ def allocate_room(request):
             Patient_id=patient,
             Room_no=room,
             Bed_no=bed_no,
-            Alloc_date=all_date,
             Room_type=room_type,
         )
         room = get_object_or_404(RoomInformation, Room_no=bed_no)

@@ -62,21 +62,14 @@
 								{% csrf_token %}
 								<div class="form-row">
 									<div class="form-group col-md-6">
-										<label for="patient-name">Patient Name</label>
-										<input type="text" class="form-control" placeholder="Patient name" value="{{prescriptions.Patient_full_name}}" id="patient-name" name="name">
-									</div>
-									<div class="form-group col-md-6">
-										<label for="dob">Prescription date</label>
-										<input type="date" placeholder="Date of Prescription" value="{{prescriptions.Prec_date}}" class="form-control" id="dob" name="pres_date">
-									</div>
-									<div class="form-group col-md-6">
 										<label for="age">Patient ID</label>
 										<input type="text" placeholder="Patient ID" value="{{prescriptions.PatientID}}" class="form-control" id="age" name="patient_id">
 									</div>
 									<div class="form-group col-md-6">
-										<label for="phone">Pres. Number</label>
-										<input type="text" placeholder="Pres. Number" value="{{prescriptions.Prec_number}}" class="form-control" id="phone" name="pec_no">
+										<label for="patient-name">Patient Name</label>
+										<input type="text" class="form-control" placeholder="Patient name" value="{{prescriptions.Patient_full_name}}" id="patient-name" name="name">
 									</div>
+								
 									<div class="form-group col-md-6">
 										<label for="dr_name">Doctor Name</label>
 										<select class="form-control" id="dr_name" name="dr_name">
@@ -85,7 +78,7 @@
 										</select>
 									</div>
 							
-									<div class="form-group col-md-12">
+									<div class="form-group col-md-6">
 										<label for="exampleFormControlTextarea1">Prescription</label>
 										<textarea placeholder="Prescription" class="form-control" id="exampleFormControlTextarea1" rows="3" name="prescription">{{prescriptions.Precscriptions}}</textarea>
 									</div>
@@ -101,13 +94,6 @@
 							{% if registered %}
 							<div class="alert alert-success alert-dismissible fade show" role="alert">
 								<strong>Successfully Done!</strong> Please add payment now
-								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-									<span aria-hidden="true">×</span>
-								</button>
-							</div>
-							{% else %}
-							<div class="alert alert-warning alert-dismissible fade show" role="alert">
-								<strong>Holy guacamole!</strong> You should check in on some of those fields below.
 								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 									<span aria-hidden="true">×</span>
 								</button>

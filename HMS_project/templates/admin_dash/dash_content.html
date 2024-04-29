@@ -1,39 +1,23 @@
      {% extends 'admin_dash/dashboard.html' %}
      {% load static %}
      {% block content %}
-     
-     <!DOCTYPE html>
-<html>
+
+
 <!-- Mirrored from www.konnectplugins.com/proclinic/Horizontal/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 24 Jan 2022 10:41:58 GMT -->
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	
 	{% block 'title' %}
 	<title>Admin Dashboard</title>
 	{% endblock %}
-	<!-- Fav  Icon Link -->
+
 </head>
 
-<body>
-	<!-- Pre Loader -->
-	<div class="loading">
-		<div class="spinner">
-			<div class="double-bounce1"></div>
-			<div class="double-bounce2"></div>
-		</div>
-	</div>
-	<!--/Pre Loader -->
-	<!-- Color Changer -->
 
-	<!-- /Color Changer -->
+
 	<div class="wrapper">		
 		<!-- Page Content -->
 		<div id="content">
-			<!-- Top Navigation -->
-		{% include 'admin_dash/navbar.html' %}
-			<!-- /Menu -->
-			<!-- Breadcrumb -->
+
 			<!-- Page Title -->
 			<div class="container mt-0">
 				<div class="row breadcrumb-bar">
@@ -64,8 +48,9 @@
 								<span class="ti-user"></span>
 							</div>
 							<div class="widget-right">
-								<h4 class="wiget-title">Patients</h4>
-								<span class="numeric color-red">348</span>
+								<h4 class="wiget-title text-success">Total Patients</h4>
+								<span class="numeric color-red">{{number_patients}}</span>
+								
 								<p class="inc-dec mb-0"><span class="ti-angle-up"></span> +20% Increased</p>
 							</div>
 						</div>
@@ -75,12 +60,12 @@
 					<div class="col-md-4">
 						<div class="widget-area proclinic-box-shadow color-green">
 							<div class="widget-left">
-								<span class="ti-bar-chart"></span>
+								<span class="ti-timer"></span>
 							</div>
 							<div class="widget-right">
-								<h4 class="wiget-title">Appointments</h4>
-								<span class="numeric color-green">1585</span>
-								<p class="inc-dec mb-0"><span class="ti-angle-down"></span> -15% Decreased</p>
+								<h4 class="wiget-title text-success">Total Appointments </h4>
+								<span class="numeric color-green">{{number_of_app}}</span>
+								<p class="inc-dec mb-0"><span class="ti-angle-down"></span> +15% Increased</p>
 							</div>
 						</div>
 					</div>
@@ -89,11 +74,53 @@
 					<div class="col-md-4">
 						<div class="widget-area proclinic-box-shadow color-yellow">
 							<div class="widget-left">
-								<span class="ti-money"></span>
+								<span class="ti-wallet"></span>
 							</div>
 							<div class="widget-right">
-								<h4 class="wiget-title">Total Revenue</h4>
-								<span class="numeric color-yellow">$7300</span>
+								<h4 class="wiget-title text-success">Total Revenue</h4>
+								<span class="numeric color-yellow">${{total_amount}}</span>
+								<p class="inc-dec mb-0"><span class="ti-angle-up"></span> +10% Increased</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="widget-area proclinic-box-shadow color-red">
+							<div class="widget-left">
+								<span class="ti-na"></span>
+							</div>
+						
+							<div class="widget-right">
+								<h4 class="wiget-title text-success">Total Prescriptions</h4>
+								<span class="numeric color-red">{{number_of_Presc}}</span>
+								
+								<p class="inc-dec mb-0"><span class="ti-angle-up"></span> +20% Increased</p>
+							</div>
+						</div>
+					</div>
+					<!-- /Widget Item -->
+					<!-- Widget Item -->
+					<div class="col-md-4">
+						<div class="widget-area proclinic-box-shadow color-green">
+							<div class="widget-left">
+								<span class="ti-bookmark-alt"></span>
+							</div>
+							<div class="widget-right">
+								<h4 class="wiget-title text-success">Total Histories</h4>
+								<span class="numeric color-green">{{number_of_history}}</span>
+								<p class="inc-dec mb-0"><span class="ti-angle-down"></span> +15% Increased</p>
+							</div>
+						</div>
+					</div>
+					<!-- /Widget Item -->
+					<!-- Widget Item -->
+					<div class="col-md-4">
+						<div class="widget-area proclinic-box-shadow color-yellow">
+							<div class="widget-left">
+								<span class=" ti-filter"></span>
+							</div>
+							<div class="widget-right">
+								<h4 class="wiget-title text-success">Total Laboratories</h4>
+								<span class="numeric color-yellow">{{number_of_lab}}</span>
 								<p class="inc-dec mb-0"><span class="ti-angle-up"></span> +10% Increased</p>
 							</div>
 						</div>
@@ -120,7 +147,6 @@
 					<!-- /Widget Item -->
 				</div>
 
-				
 
 				<div class="row">
 					<!-- Widget Item -->
@@ -132,56 +158,16 @@
 					</div>
 					<!-- /Widget Item -->
 					<!-- Widget Item -->
-					<div class="col-md-6">
-						<div class="widget-area-2 progress-status proclinic-box-shadow">
-							<h3 class="widget-title">Doctors Availability</h3>
-							<div class="table-responsive">
-								<table class="table table-bordered">
-									<thead>
-										<tr>
-											<th>Doctor</th>
-											<th>Speciality</th>
-											<th>Availability</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td>Rajesh</td>
-											<td>Dental</td>
-											<td>
-												<span class="badge badge-success">Available</span>
-											</td>
-										</tr>
-										<tr>
-											<td>Riya</td>
-											<td>Ortho</td>
-											<td>
-												<span class="badge badge-warning">On Leave</span>
-											</td>
-										</tr>
-										<tr>
-											<td>Siri</td>
-											<td>Skin</td>
-											<td>
-												<span class="badge badge-danger">Not Available</span>
-											</td>
-										</tr>
-										<tr>
-											<td>Rajesh</td>
-											<td>Dental</td>
-											<td>
-												<span class="badge badge-success">Available</span>
-											</td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-
+					<div class="col-sm-6">
+						<div class="widget-area-2 proclinic-box-shadow">
+							<h3 class="widget-title">Payments Status</h3>
+							<div id="donutMorris2" class="chart-home"></div>
 						</div>
 					</div>
 					<!-- /Widget Item -->
-
-				</div>
+				
+					
+					
 				<div class="row">
 					<!-- Widget Item -->
 					<div class="col-md-12">
@@ -267,6 +253,10 @@
 					</div>
 					<!-- /Widget Item -->
 				</div>
+					<!-- /Widget Item -->
+
+				</div>
+
 			</div>
 			<!-- /Main Content -->
 			<!--Copy Rights-->
@@ -286,9 +276,4 @@
 	<!-- /Back to Top -->
 	<!-- Jquery Library-->
 
-</body>
-
-
-<!-- Mirrored from www.konnectplugins.com/proclinic/Horizontal/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 24 Jan 2022 10:42:01 GMT -->
-</html>
       {% endblock %}

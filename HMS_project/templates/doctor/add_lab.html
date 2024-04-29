@@ -77,17 +77,10 @@
 										<label for="age">Patient ID</label>
 										<input type="text" placeholder="Patient ID" class="form-control" id="age" name="patient_id">
 									</div>
-                                    <div class="form-group col-md-6">
-										<label for="dob">Admitted date</label>
-										<input type="date" placeholder="Date of Prescription" class="form-control" id="dob" name="admited_date">
-									</div>
-									<div class="form-group col-md-6">
-										<label for="phone">Lab. Number</label>
-										<input type="text" placeholder="Lab. Number" class="form-control" id="phone" name="lab_no">
-									</div>
+                            
 									<div class="form-group col-md-6">
 										<label for="email">Doctor Name</label>
-										<input type="text" placeholder="Doctor Name" class="form-control" id="dr_name" name="dr_name">
+										
 										<select class="form-control" id="dr_name" name="dr_name">
 											<option>Select Doctor Name</option>
 											{% for user in doctors %}
@@ -96,8 +89,11 @@
 										</select>
 									</div>
 							
-									<div class="form-group col-md-12">
+									<div class="form-group col-md-6">
 										<label for="time-slot">Laboratory Type</label>
+									</div>
+									<div class="form-group col-md-6">
+										<label for="techn_name">Technician Name</label>
 									</div>
 								
 									<div class="form-group col-md-1">
@@ -121,7 +117,7 @@
 										<label for="x-ray_test">X-rays </label>
 									</div>									
 									<div class="form-group col-md-6">
-										<label for="techn_name">Technician Name</label>
+										
 										<select class="form-control" id="dr_name" name="dr_name">
 											<option>Select Technician Name</option>
 											{% for user in techs %}
@@ -139,13 +135,6 @@
 							{% if register %}
 							<div class="alert alert-success alert-dismissible fade show" role="alert">
 								<strong>Successfully Done!</strong> Please add payment now
-								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-									<span aria-hidden="true">×</span>
-								</button>
-							</div>
-							{% else %}
-							<div class="alert alert-warning alert-dismissible fade show" role="alert">
-								<strong>Holy guacamole!</strong> You should check in on some of those fields below.
 								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 									<span aria-hidden="true">×</span>
 								</button>

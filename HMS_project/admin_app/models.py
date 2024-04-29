@@ -7,16 +7,18 @@ from django.contrib.auth.models import User
 
 # 1. 👇 Add the following line
 class Notification(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)  # Associate each notification with a user
     message = models.TextField(max_length=500)
     timestamp = models.DateTimeField(auto_now_add=True)
     seen = models.BooleanField(default=False)
+
     def __str__(self):
         return self.message
 
-class UserProfileInfo2(models.Model):
+class UserProfileInfo(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    role = models.CharField(max_length=100,null=True)  # Add profession field
-    specialty = models.CharField(max_length=100)  # Add profession field
+    role = models.TextField(max_length=100)  # Add profession field
+    specialty = models.TextField(max_length=100)  # Add profession field
     password_changed = models.BooleanField(default=False)
     profile_pic = models.ImageField(upload_to='profile_pics',default='default.jpg', blank=True)
 
@@ -44,23 +46,6 @@ class UserProfile(AbstractUser):
 def __str__(self):
     return f"{self.reset_key}"
 
-
-# models.py
-from django.db import models
-from django.utils import timezone
-
-class BedAllocation(models.Model):
-    patient_id = models.IntegerField()
-    alloc_date = models.DateField(default=timezone.now)
-    departure_date = models.DateField(null=True, blank=True)
-
-    def count_days_stayed(self):
-        if self.departure_date:
-            days_stayed = (self.departure_date - self.alloc_date).days
-            return days_stayed
-        else:
-            # If departure date is not set, return None or handle it as needed
-            return 0
 
 
 

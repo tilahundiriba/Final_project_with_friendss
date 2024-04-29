@@ -77,26 +77,6 @@
 										<input type="text" class="form-control" placeholder="Patient ID" id="patient-id" name="patient_id">
 									</div>
 									<div class="form-group col-md-6">
-										<label for="app_no">App. Number</label>
-										<input type="text" class="form-control" placeholder="App. Number" id="app_no" name="app_no">
-									</div>
-									<div class="form-group col-md-6">
-										<label for="dr_name">Doctor Name</label>
-									
-										
-										<select class="form-control" id="dr_name" name="dr_name">
-											<option>Choose Name</option>
-											{% for user in doctors %}
-											<option value="{{user.username}}">{{user.username}}</option>
-											{% endfor %}
-										</select>
-										
-									</div>
-									<div class="form-group col-md-6">
-										<label for="appointment-date">Appointment Date</label>
-										<input type="date" placeholder="Appointment Date" class="form-control" id="appointment-date" name="app_date">
-									</div>
-									<div class="form-group col-md-6">
 										<label for="time-slot">Time Slot</label>
 										<select class="form-control" id="time-slot" name="time_slot">
 											<option selected disabled>Choose Time</option>
@@ -111,6 +91,20 @@
 											<option>8PM-9PM</option>
 										</select>
 									</div>
+									<div class="form-group col-md-6">
+										<label for="dr_name">Doctor Name</label>
+									
+										
+										<select class="form-control" id="dr_name" name="dr_name">
+											<option>Choose Name</option>
+											{% for user in doctors %}
+											<option value="{{user.username}}">{{user.username}}</option>
+											{% endfor %}
+										</select>
+										
+									</div>
+							
+									
 									<div class="form-group col-md-6">
 										<label for="app_status">Status</label>
 										<!-- <input type="text" placeholder="Status" class="form-control" id="app_status" name="status"> -->
@@ -141,13 +135,7 @@
 									<span aria-hidden="true">×</span>
 								</button>
 							</div>
-							{% else %}
-							<div class="alert alert-warning alert-dismissible fade show" role="alert">
-								<strong>Holy guacamole!</strong> You should check in on some of those fields below.
-								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-									<span aria-hidden="true">×</span>
-								</button>
-							</div>
+					
 							{% endif %}
 							<!-- /Alerts-->
 						</div>

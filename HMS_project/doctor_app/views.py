@@ -3,7 +3,7 @@ from django.shortcuts import render
 from .models import  Appointment,Prescription,Laboratory,PatientHistory
 from receptionist_app.models import PatientRegister
 from django.shortcuts import get_object_or_404
-from admin_app.models import UserProfileInfo2,Notification
+from admin_app.models import UserProfileInfo,Notification
 from django.core.cache import cache
 from django.contrib import messages
 from django.contrib.auth.models import User
@@ -51,7 +51,7 @@ def profile_update_doc(request, user_id):
     if request.user != user:  # Ensure user can only update their own profile
         return redirect('show_doctor_profile')
     
-    user_profile, created = UserProfileInfo2.objects.get_or_create(user=user)
+    user_profile, created = UserProfileInfo.objects.get_or_create(user=user)
     
     if request.method == 'POST':
         profile_pic = request.FILES.get('profile_pic')
@@ -81,8 +81,8 @@ def dis_labtest(request):
                                                 'unseen_count':unseen_count})
 @login_required
 def add_lab(request):
-    doctors = User.objects.filter(userprofileinfo2__role='doctor')
-    techs = User.objects.filter(userprofileinfo2__role='technician')
+    doctors = User.objects.filter(userprofileinfo__role='doctor')
+    techs = User.objects.filter(userprofileinfo__role='technician')
     notifications = Notification.objects.all()
     unseen_count = Notification.objects.filter(seen=False).count()
     registered=False
@@ -102,8 +102,6 @@ def add_lab(request):
         technicians_with_test_counts.append((technician, test_count))
     if request.method == 'POST':
         patientid = request.POST.get('patient_id')
-        lab_number = request.POST.get('lab_no')
-        admit_date = request.POST.get('admited_date')
         doctor_name = request.POST.get('dr_name')
         techn_name = request.POST.get('techn_name')
         checkbox1 = request.POST.get('blood_test') == 'on'
@@ -130,8 +128,6 @@ def add_lab(request):
             technic = get_object_or_404(User, username=techn_name)
             lab = Laboratory(
                 PatientID=patient,
-                Admit_date=admit_date,
-                Lab_number=lab_number,
                 Doctor_ID=doctor,
                 Technician_ID=technic,
                 Lab_type=lab_type,
@@ -147,7 +143,7 @@ def add_lab(request):
             # Handle the case where the patient is not found
             # You can add appropriate error handling or redirect to an error page
             pass
-        except UserProfileInfo2.DoesNotExist:
+        except UserProfileInfo.DoesNotExist:
             # Handle the case where the doctor is not found
             # You can add appropriate error handling or redirect to an error page
             pass
@@ -203,14 +199,12 @@ def checked_payment_request(request, lab_number):
 # view for tadding prescriptions 
 @login_required
 def add_perscription(request):
-    doctors = User.objects.filter(userprofileinfo2__role='doctor')
+    doctors = User.objects.filter(userprofileinfo__role='doctor')
     notifications = Notification.objects.all()
     unseen_count = Notification.objects.filter(seen=False).count()
     registered=False
     if request.method == 'POST':
         patientid = request.POST.get('patient_id')
-        prec_number = request.POST.get('pec_no')
-        prec_date = request.POST.get('pres_date')
         p_name = request.POST.get('name')
         doctor_name = request.POST.get('dr_name')
         prec = request.POST.get('prescription')
@@ -220,8 +214,6 @@ def add_perscription(request):
             doctor = get_object_or_404(User, username=doctor_name)
             presc = Prescription(
                 PatientID=patient,
-                Prec_date=prec_date,
-                Prec_number=prec_number,
                 Doctor_ID=doctor,
                 Patient_full_name=p_name,
                 Precscriptions=prec,
@@ -234,7 +226,7 @@ def add_perscription(request):
             # Handle the case where the patient is not found
             # You can add appropriate error handling or redirect to an error page
             pass
-        except UserProfileInfo2.DoesNotExist:
+        except UserProfileInfo.DoesNotExist:
             # Handle the case where the doctor is not found
             # You can add appropriate error handling or redirect to an error page
             pass
@@ -273,7 +265,7 @@ def edit_perscription(request,prec_number):
             
         except PatientRegister.DoesNotExist:
             pass
-        except UserProfileInfo2.DoesNotExist:
+        except UserProfileInfo.DoesNotExist:
             pass
         return redirect('perscriptions')
     return render(request,'doctor/edit-perscription.html',{'users':users,'notifications':notifications,
@@ -360,12 +352,11 @@ def dis_lab_results(request):
 def add_history(request):
     notifications = Notification.objects.all()
     unseen_count = Notification.objects.filter(seen=False).count()
-    doctors = User.objects.filter(userprofileinfo2__role='doctor')
-    nurses = User.objects.filter(userprofileinfo2__role='nurse')
+    doctors = User.objects.filter(userprofileinfo__role='doctor')
+    nurses = User.objects.filter(userprofileinfo__role='nurse')
     added_history=False
     if request.method == 'POST':
         patient_id = request.POST.get('patient_id')
-        date = request.POST.get('date')
         syptoms = request.POST.get('symptom')
         disease = request.POST.get('disease')
         doctor_name = request.POST.get('dr_name')
@@ -379,7 +370,6 @@ def add_history(request):
             history = PatientHistory(
                 Patient_ID=patient,
                 Sympthom=syptoms,
-                Date=date,
                 Doctor_ID=doctor,
                 DiseaseName=disease,
                 Nurse_ID = nurse
@@ -392,7 +382,7 @@ def add_history(request):
             # Handle the case where the patient is not found
             # You can add appropriate error handling or redirect to an error page
             pass
-        except UserProfileInfo2.DoesNotExist:
+        except UserProfileInfo.DoesNotExist:
             # Handle the case where the doctor is not found
             # You can add appropriate error handling or redirect to an error page
             pass
@@ -451,11 +441,10 @@ def edit_history(request, history_no):
 def create_appointment(request):
     notifications = Notification.objects.all()
     unseen_count = Notification.objects.filter(seen=False).count()
-    doctors = User.objects.filter(userprofileinfo2__role='doctor')
+    doctors = User.objects.filter(userprofileinfo__role='doctor')
     registered=False
     if request.method == 'POST':
         patientid = request.POST.get('patient_id')
-        app_number = request.POST.get('app_no')
         app_date = request.POST.get('app_date')
         time_slot = request.POST.get('time_slot')
         doctor_name = request.POST.get('dr_name')
@@ -471,11 +460,10 @@ def create_appointment(request):
             phone_number=patient.phone_number
             appointment = Appointment(
                 PatientID=patient,
-                App_number=app_number,
                 App_date=app_date,
                 Time_slot=time_slot,
                 Doctor_ID=doctor,
-                App_reseon=app_reseon,
+                App_reason=app_reseon,
                 App_status=app_status,
 
                 # Assign values to other fields similarly
@@ -486,7 +474,7 @@ def create_appointment(request):
             # Handle the case where the patient is not found
             # You can add appropriate error handling or redirect to an error page
             pass
-        except UserProfileInfo2.DoesNotExist:
+        except UserProfileInfo.DoesNotExist:
             # Handle the case where the doctor is not found
             # You can add appropriate error handling or redirect to an error page
             pass

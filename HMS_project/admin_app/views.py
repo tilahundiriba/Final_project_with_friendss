@@ -14,10 +14,9 @@ from HMS_project import settings
 from .utils import generate_username, generate_password
 from django.contrib.auth.models import User
 from django.shortcuts import render
-from .models import UserProfileInfo2
+from .models import UserProfileInfo
 # from .models import PatientChange
 from django.http import HttpResponse, HttpResponseRedirect
-from .models import BedAllocation
 from django.db.models import Sum
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserChangeForm
@@ -37,7 +36,7 @@ from reportlab.lib.pagesizes import letter
 from reportlab.platypus import SimpleDocTemplate, Table,TableStyle
 from reportlab.lib import colors
 from django.shortcuts import render, get_object_or_404
-from .models import User, UserProfileInfo2
+from .models import User, UserProfileInfo
 from .models import Notification
 # views.py
 from datetime import datetime
@@ -64,7 +63,7 @@ def profile_update_admin(request, user_id):
     if request.user != user:  # Ensure user can only update their own profile
         return redirect('admin_profile')
     
-    user_profile, created = UserProfileInfo2.objects.get_or_create(user=user)
+    user_profile, created = UserProfileInfo.objects.get_or_create(user=user)
     
     if request.method == 'POST':
         profile_pic = request.FILES.get('profile_pic')
@@ -192,7 +191,7 @@ def login_view(request):
         if user is not None:
             # Check if user's profession matches
             try:
-                user_profile = UserProfileInfo2.objects.get(user=user)
+                user_profile = UserProfileInfo.objects.get(user=user)
                 # if user_profile.role:
                 login(request, user)
                 if user_profile.password_changed:
@@ -214,7 +213,7 @@ def login_view(request):
                     return redirect('change_credentials')
                 # else:
                 #     return HttpResponse('Invalid profession for the user')
-            except UserProfileInfo2.DoesNotExist:
+            except UserProfileInfo.DoesNotExist:
                 return HttpResponse('User does not have a role...!!!')
 
         else:
@@ -298,7 +297,7 @@ def createUserAccount(request):
                                         password=password)
 
         # Create user profile
-        user_profile = UserProfileInfo2.objects.create(
+        user_profile = UserProfileInfo.objects.create(
             user=user,
             role=role,
             specialty=special
@@ -342,19 +341,36 @@ def dis_dash(request):
     number_of_Presc= Prescription.objects.count()
     number_of_lab= Laboratory.objects.count()
     notifications = Notification.objects.all()
+
     unseen_count = Notification.objects.filter(seen=False).count()
+    cash_total_sums = PaymentModel.objects.filter(Pay_method='Cash').aggregate(total_sum=Sum('Total'))
+    cash_total_sum = cash_total_sums['total_sum'] or 0
+    insurance_total_sums = PaymentModel.objects.filter(Pay_method='Insurance').aggregate(total_sum=Sum('Total'))
+    insurance_total_sum = insurance_total_sums['total_sum'] or 0
+    number_of_cancelled= Appointment.objects.filter(App_status='Cancelled').count()
+    number_of_pending= Appointment.objects.filter(App_status='Pending').count()
+    number_of_completed= Appointment.objects.filter(App_status='Completed').count()
     return render(request,'admin_dash/dashboard.html',{'number_patients':number_of_patient,
                                                    'number_of_app':number_of_app,
                                                    'total_amount':total_sum,
                                                    'notifications':notifications,
                                                    'number_of_history':number_of_history,
                                                    'number_of_Presc':number_of_Presc,
+                                                   'cash_total_sum':cash_total_sum,
+                                                   'insurance_total_sum':insurance_total_sum,
                                                    'number_of_lab':number_of_lab,
-
+                                                   'number_of_cancelled':number_of_cancelled,
+                                                   'number_of_pending':number_of_pending,
+                                                   'number_of_completed':number_of_completed,
                                                    'unseen_count':unseen_count})
 # @login_required
 def dis_dash_content(request):
-    return render(request,'admin_dash/dash_content.html')
+    cash_total_sums = PaymentModel.objects.filter(Pay_method='Cash').aggregate(total_sum=Sum('Total'))
+    cash_total_sum = cash_total_sums['total_sum'] or 0
+    insurance_total_sums = PaymentModel.objects.filter(Pay_method='Insurance').aggregate(total_sum=Sum('Total'))
+    insurance_total_sum = insurance_total_sums['total_sum'] or 0
+    return render(request,'admin_dash/dash_content.html',{'cash_total_sum':cash_total_sum,
+                                                          'insurance_total_sum':insurance_total_sum})
 # @login_required
 def refere_info(request,discharge_no,patient_id):
     notifications = Notification.objects.all()
@@ -383,6 +399,13 @@ def dis_index(request):
     number_of_lab= Laboratory.objects.count()
     notifications = Notification.objects.all()
     unseen_count = Notification.objects.filter(seen=False).count()
+    cash_total_sums = PaymentModel.objects.filter(Pay_method='Cash').aggregate(total_sum=Sum('Total'))
+    cash_total_sum = cash_total_sums['total_sum'] or 0
+    insurance_total_sums = PaymentModel.objects.filter(Pay_method='Insurance').aggregate(total_sum=Sum('Total'))
+    insurance_total_sum = insurance_total_sums['total_sum'] or 0
+    number_of_cancelled= Appointment.objects.filter(App_status='Cancelled').count()
+    number_of_pending= Appointment.objects.filter(App_status='Pending').count()
+    number_of_completed= Appointment.objects.filter(App_status='Completed').count()
     return render(request,'admin_dash/index.html',{'number_patients':number_of_patient,
                                                    'number_of_app':number_of_app,
                                                    'total_amount':total_sum,
@@ -390,29 +413,16 @@ def dis_index(request):
                                                    'unseen_count':unseen_count,
                                                    'number_of_history':number_of_history,
                                                    'number_of_Presc':number_of_Presc,
-                                                   'number_of_lab':number_of_lab,})
-# @login_required
-# def display_users(request):
-#     users= UserProfileInfo2.objects.all()
-#     user_names= User.objects.all()
-#     combined_data = []
-#     for user_info in users or user_names:
-#         user_dict = {
-#             'first_name': user_info.user.first_name,
-#             'last_name': user_info.user.last_name,
-#             'email': user_info.user.email,
-#             'role': user_info.role,
-#             'id':user_info.user.id,
-#             'special':user_info.specialty,
-#         }
-#         combined_data.append(user_dict)
-#     notifications = Notification.objects.all()
-#     unseen_count = Notification.objects.filter(seen=False).count()
-#     return render(request,'admin_dash/staffs.html',{'combined_datas':combined_data,
-#                                                     'notifications':notifications,
-#                                                     'unseen_count':unseen_count})
+                                                   'cash_total_sum':cash_total_sum,
+                                                   'insurance_total_sum':insurance_total_sum,
+                                                   'number_of_lab':number_of_lab,
+                                                   'number_of_cancelled':number_of_cancelled,
+                                                   'number_of_pending':number_of_pending,
+                                                   'number_of_completed':number_of_completed,
+                                                   })
+
 def display_users(request):
-    users = UserProfileInfo2.objects.all()
+    users = UserProfileInfo.objects.all()
     combined_data = []
     for user_info in users:
         # Check if the user has role and specialty information in UserProfileInfo2
@@ -446,7 +456,7 @@ def edit_staff(request):
 # @login_required
 def view_staff(request,user_id):
     user = get_object_or_404(User, pk=user_id)
-    user_profile_info = get_object_or_404(UserProfileInfo2, user_id=user_id)
+    user_profile_info = get_object_or_404(UserProfileInfo, user_id=user_id)
     notifications = Notification.objects.all()
     unseen_count = Notification.objects.filter(seen=False).count()
     return render(request,'admin_dash/view_staff.html',{'users':user,
@@ -464,7 +474,7 @@ def change_credentials(request):
         confirm_new_password = request.POST['confirm_new_password']
 
         user = request.user  # Use the authenticated user directly
-        user_profile = UserProfileInfo2.objects.get(user=user)
+        user_profile = UserProfileInfo.objects.get(user=user)
         # Verify the current password
         if user.check_password(current_password):
             if new_password == confirm_new_password:
@@ -496,16 +506,6 @@ def success_message(request):
     # You can customize this view to display a success message or redirect to a different page
     return HttpResponse("Password changed successfully.")
 
-
-
-# views.py
-
-
-def bed_allocation_detail(request):
-    bed_allocation_instance = BedAllocation.objects.all()
-    return render(request, 'admin_app/testNodays.html', {'bed_allocation_instance': bed_allocation_instance})
-
-# view for handling the document saving format start
 # @login_required
 def save_data(request, format):
     queryset = PatientRegister.objects.all()  # Fetch data from your model

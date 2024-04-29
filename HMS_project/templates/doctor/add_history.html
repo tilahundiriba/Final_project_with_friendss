@@ -74,10 +74,16 @@
 										<input type="text" class="form-control" placeholder="Patient id" id="patient_id" name="patient_id">
 									</div>
 									<div class="form-group col-md-6">
-										<label for="date">Date</label>
-										<input type="date" class="form-control" id="date" name="date">
+										<label for="nr_name">Nr. Name</label>
+
+										<select class="form-control" id="nr_name" name="nr_name">
+											<option>Select Nurse Name</option>
+											{% for user in nurses %}
+											<option value="{{user.username}}">{{user.username}}</option>
+											{% endfor %}
+										</select>
 									</div>
-									<div class="form-group col-md-6">
+									<div class="form-group col-md-12">
 										<label for="symptom">Symptoms</label>
 										<textarea placeholder="symptom" class="form-control" id="symptom" rows="3" name="symptom"></textarea>
 									</div>
@@ -89,16 +95,7 @@
 								
 								
 								
-									<div class="form-group col-md-6">
-										<label for="nr_name">Nr. Name</label>
-
-										<select class="form-control" id="nr_name" name="nr_name">
-											<option>Select Nurse Name</option>
-											{% for user in nurses %}
-											<option value="{{user.username}}">{{user.username}}</option>
-											{% endfor %}
-										</select>
-									</div>
+								
                                     <div class="form-group col-md-6">
 										<label for="dr_name">Dr. Name</label>
 										<select class="form-control" id="dr_name" name="dr_name">

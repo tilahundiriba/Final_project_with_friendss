@@ -62,7 +62,7 @@
 						<div class="widget-area-2 proclinic-box-shadow"  >
 							<h3 class="widget-title" style="margin-left: 35%;">Your Profile</h3>
                             {% if request.user.is_authenticated %}
-                            <img src="{{ user.userprofileinfo2.profile_pic.url}}" alt="NOOOOOOo"
+                            <img src="{{ user.userprofileinfo.profile_pic.url}}" alt="NOOOOOOo"
                             class="rounded-circle"
                             width="200"
                             height="200" style="margin-left: 30%; margin-bottom: 10%;">

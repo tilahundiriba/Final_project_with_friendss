@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils.crypto import get_random_string
 from .models import PatientRegister
-from admin_app.models import User,Notification,UserProfileInfo2
+from admin_app.models import User,Notification,UserProfileInfo
 from django.db.models import Q
 from django import *
 from doctor_app.models import PatientHistory
@@ -31,8 +31,8 @@ def doctor_list(request):
 
         # Get the doctor's specialty from UserInfo2 table
         try:
-            specialty = doctor.userprofileinfo2.specialty
-        except UserProfileInfo2.DoesNotExist:
+            specialty = doctor.userprofileinfo.specialty
+        except UserProfileInfo.DoesNotExist:
             specialty = None
 
         # Count the number of untested tests assigned to the doctor
@@ -62,7 +62,7 @@ def rece_profile_update(request, user_id):
     if request.user != user:  # Ensure user can only update their own profile
         return redirect('show_rece_profile')
 
-    user_profile, created = UserProfileInfo2.objects.get_or_create(user=user)
+    user_profile, created = UserProfileInfo.objects.get_or_create(user=user)
 
     if request.method == 'POST':
         profile_pic = request.FILES.get('profile_pic')
@@ -91,8 +91,8 @@ def receptionist_dash_content(request):
                                                               'unseen_count':unseen_count})
 
 def add_patient(request):
-    doctors = User.objects.filter(userprofileinfo2__role='doctor')
-    recep = User.objects.filter(userprofileinfo2__role='receptionist')
+    doctors = User.objects.filter(userprofileinfo__role='doctor')
+    recep = User.objects.filter(userprofileinfo__role='receptionist')
     notifications = Notification.objects.all()
     unseen_count = Notification.objects.filter(seen=False).count()
     register=False
@@ -105,8 +105,8 @@ def add_patient(request):
 
         # Get the doctor's specialty from UserInfo2 table
         try:
-            specialty = doctor.userprofileinfo2.specialty
-        except UserProfileInfo2.DoesNotExist:
+            specialty = doctor.userprofileinfo.specialty
+        except UserProfileInfo.DoesNotExist:
             specialty = None
 
         # Count the number of untested tests assigned to the doctor
@@ -164,7 +164,7 @@ def add_patient(request):
                                         password=password)
 
         # Create user profile
-        user_profile = UserProfileInfo2.objects.create(
+        user_profile = UserProfileInfo.objects.create(
             user=user
   
         )

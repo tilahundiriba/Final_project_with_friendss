@@ -1,10 +1,9 @@
 from django.contrib import admin
-from .models import UserProfile,BedAllocation,UserProfileInfo2
+from .models import UserProfile,UserProfileInfo
 # Register your models here.
 
 admin.site.register(UserProfile)
-admin.site.register(BedAllocation)
-admin.site.register(UserProfileInfo2)
+admin.site.register(UserProfileInfo)
 
 # 👇 1. Add this line import notification model
 from .models import Notification

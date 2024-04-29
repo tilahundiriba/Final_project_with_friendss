@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from .models import PaymentModel,ServicePayment,Discharge
 from django.shortcuts import get_object_or_404
-from admin_app.models import UserProfileInfo2,Notification
+from admin_app.models import UserProfileInfo,Notification
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from receptionist_app.models import PatientRegister
@@ -21,7 +21,7 @@ def casher_profile_update(request, user_id):
     if request.user != user:  # Ensure user can only update their own profile
         return redirect('show_casher_profile')
     
-    user_profile, created = UserProfileInfo2.objects.get_or_create(user=user)
+    user_profile, created = UserProfileInfo.objects.get_or_create(user=user)
     
     if request.method == 'POST':
         profile_pic = request.FILES.get('profile_pic')
@@ -42,13 +42,12 @@ def casher_dash(request):
 from datetime import datetime
 from nurse_app.models import BedInformation,RoomInformation
 def add_discharge(request):
-    cashers = User.objects.filter(userprofileinfo2__role='casher')
+    cashers = User.objects.filter(userprofileinfo__role='casher')
     payed = False
     
     if request.method == 'POST':
         patient_id = request.POST.get('patient_id')
         casher_name = request.POST.get('casher_name')
-        discharge_date = request.POST.get('discharge_date')
         reffer = request.POST.get('reffere')
         status = request.POST.get('status')
         reason = request.POST.get('reason')
@@ -60,7 +59,6 @@ def add_discharge(request):
             casher = get_object_or_404(User, username=casher_name)
             discharge_instance = Discharge(
                 Patient_id=patient,
-                Departure_date=discharge_date,
                 Reason=reason,
                 Casher_name=casher,
                 Reffer_to=reffer,
@@ -120,7 +118,7 @@ def add_payment(request,patient_id):
     notifications = Notification.objects.all()
     patient_pay = get_object_or_404(PatientRegister, patient_id=patient_id)
     unseen_count = Notification.objects.filter(seen=False).count()
-    cashers = User.objects.filter(userprofileinfo2__role='casher')
+    cashers = User.objects.filter(userprofileinfo__role='casher')
     for_card = get_object_or_404(ServicePayment, id=1)
     for_blood = get_object_or_404(ServicePayment, id=2)
     for_urine = get_object_or_404(ServicePayment, id=3)
@@ -131,8 +129,6 @@ def add_payment(request,patient_id):
     if request.method == 'POST':
         patientid = request.POST.get('patient_id')
         casher_name = request.POST.get('cashier_name')
-        added_date = request.POST.get('adminssion_date')
-        pay_no = request.POST.get('payment_no')
         payment_method = request.POST.get('payment_type')
         blood_p_amount = request.POST.get('blood_test') == 'on'
         urine_p_amount = request.POST.get('urine_test') == 'on'
@@ -167,8 +163,6 @@ def add_payment(request,patient_id):
             casher = get_object_or_404(User, username=casher_name)
             payment = PaymentModel.objects.create(
                 Patient_id=patient,
-                Pay_number=pay_no,
-                Admit_date=added_date,
                 Lab_payment=lab_payment,
                 Food_payment=f_p,
                 Service_payment=lab_payment,

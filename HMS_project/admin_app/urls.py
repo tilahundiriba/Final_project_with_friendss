@@ -5,11 +5,6 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 
-
-# urlpatterns = [
-#     path('generate-report-pdf/', generate_report_pdf, name='generate_report_pdf'),
-#     # Add more URL patterns as needed
-# ]
 urlpatterns = [
     path('poster/', views.poster, name='poster'),
     path('approve_departures/', views.approve_departure, name='approve_departure'),
@@ -35,7 +30,6 @@ urlpatterns = [
     path('user_log/', views.login_view, name='user_log'),
     path('index/', views.dis_index, name='index'),
     path('', views.dis_web_home, name='web_home'),
-    path('test_no_days/', views.bed_allocation_detail, name='dis_room'),
     path('dis_login2/', views.dis_login2, name='dis_login2'),
     path('save_data/<str:format>/', views.save_data, name='save_data'),
     path('dispaly_users/', views.display_users, name='display_users'),

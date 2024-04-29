@@ -27,10 +27,6 @@
   <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
   <link rel="stylesheet" href="{% static 'fontawesome/css/all.min.css' %}">
   <link rel="stylesheet" href="{% static 'css/dashboard.css' %}" />
-  <!-- <script
-      src="https://kit.fontawesome.com/ae360af17e.js"
-      crossorigin="anonymous"
-    ></script> -->
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 
@@ -274,7 +270,7 @@
               <li class="nav-item">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
                   aria-expanded="false">
-                  <img src="{{ user.userprofileinfo2.profile_pic.url}}" alt="NOOOOOOo" class="rounded-circle" width="40"
+                  <img src="{{ user.userprofileinfo.profile_pic.url}}" alt="NOOOOOOo" class="rounded-circle" width="40"
                     height="40">
                 </a>
 
@@ -443,6 +439,28 @@
                   <!-- /Widget Item -->
                 </div>
         
+               
+        
+                <div class="row">
+                  <!-- Widget Item -->
+                  <div class="col-sm-6">
+                    <div class="widget-area-2 proclinic-box-shadow">
+                      <h3 class="widget-title">Appointments Status</h3>
+                      <div id="donutMorris" class="chart-home"></div>
+                    </div>
+                  </div>
+                  <!-- /Widget Item -->
+                  <!-- Widget Item -->
+                  <div class="col-sm-6">
+                    <div class="widget-area-2 proclinic-box-shadow">
+                      <h3 class="widget-title">Payments Status</h3>
+                      <div id="donutMorris2" class="chart-home"></div>
+                    </div>
+                  </div>
+                  <!-- /Widget Item -->
+              
+        
+                </div>
                 <div class="row">
                   <!-- Widget Item -->
                   <div class="col-md-12">
@@ -528,28 +546,6 @@
                   </div>
                   <!-- /Widget Item -->
                 </div>
-        
-                <div class="row">
-                  <!-- Widget Item -->
-                  <div class="col-sm-6">
-                    <div class="widget-area-2 proclinic-box-shadow">
-                      <h3 class="widget-title">Appointments Status</h3>
-                      <div id="donutMorris" class="chart-home"></div>
-                    </div>
-                  </div>
-                  <!-- /Widget Item -->
-                  <!-- Widget Item -->
-                  <div class="col-sm-6">
-                    <div class="widget-area-2 proclinic-box-shadow">
-                      <h3 class="widget-title">Payments Status</h3>
-                      <div id="donutMorris" class="chart-home"></div>
-                    </div>
-                  </div>
-                  <!-- /Widget Item -->
-              
-        
-                </div>
-        
               </div>
               <!-- /Main Content -->
               <!--Copy Rights-->
@@ -568,7 +564,24 @@
           </a>
           <!-- /Back to Top -->
           <!-- Jquery Library-->
-        
+          <script>
+            var insurance = "{{insurance_total_sum}}"
+            var cash = "{{cash_total_sum}}"
+            if($("#donutMorris2").length == 1){
+           var $donutData = [
+            { label: "Cash", value: cash },
+            { label: "Insurance", value: insurance }
+          ];
+          Morris.Donut({
+            element: 'donutMorris2',
+            data: $donutData,
+            barSize: 0.1,
+            labelColor: '#3e5569',
+            resize: true, //defaulted to true
+            colors: ['#FFAA2A', '#22c6ab']
+          });
+          }
+          </script>
         </body>
 
 
@@ -605,20 +618,39 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"></script>
   <script src="{% static 'js/scripts.js' %}"></script>
   <script>
+    var insurance = "{{insurance_total_sum}}"
+    var cash = "{{cash_total_sum}}"
     if($("#donutMorris2").length == 1){
-   var $donutData = [
-    { label: "Cash", value: 30 },
-    { label: "Insurance", value: 29 }
+   var $donutData2 = [
+    { label: "Cash", value: cash },
+    { label: "Insurance", value: insurance }
   ];
   Morris.Donut({
     element: 'donutMorris2',
-    data: $donutData,
+    data: $donutData2,
     barSize: 0.1,
     labelColor: '#3e5569',
     resize: true, //defaulted to true
     colors: ['#FFAA2A', '#22c6ab']
   });
   }
+  var cancelled = "{{number_of_cancelled}}"
+  var pending = "{{number_of_pending}}"
+  var completed = "{{number_of_completed}}"
+  if($("#donutMorris").length == 1){
+   var $donutData = [
+    { label: "Pending", value: pending },
+    { label: "Completed", value: completed },
+    { label: "Cancelled", value: cancelled }
+  ];
+  Morris.Donut({
+    element: 'donutMorris',
+    data: $donutData,
+    barSize: 0.1,
+    labelColor: '#3e5569',
+    resize: true, //defaulted to true
+    colors: ['#FFAA2A', '#ef6e6e', '#22c6ab']
+  });}
   </script>
 </body>
 

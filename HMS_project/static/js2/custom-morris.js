@@ -63,11 +63,14 @@
     resize: true
   });
   // morris donut charts
+  var cancelled = "{{number_of_cancelled}}"
+  var pending = "{{number_of_pending}}"
+  var completed = "{{number_of_completed}}"
   if($("#donutMorris").length == 1){
    var $donutData = [
-    { label: "Pending", value: 30 },
-    { label: "Completed", value: 29 },
-    { label: "Cancelled", value: 45 }
+    { label: "Pending", value: pending },
+    { label: "Completed", value: completed },
+    { label: "Cancelled", value: cancelled }
   ];
   Morris.Donut({
     element: 'donutMorris',
@@ -78,16 +81,17 @@
     colors: ['#FFAA2A', '#ef6e6e', '#22c6ab']
   });
   }
-  
+  var insurance = "{{insurance_total_sum}}"
+  var cash = "{{cash_total_sum}}"
   if($("#donutMorris2").length == 1){
-   var $donutData = [
-    { label: "Pending", value: 30 },
-    { label: "Completed", value: 29 }
+   var $donutData2 = [
+    { label: "Cash", value: cash },
+    { label: "Insurance", value: insurance }
    
   ];
   Morris.Donut({
     element: 'donutMorris2',
-    data: $donutData,
+    data: $donutData2,
     barSize: 0.1,
     labelColor: '#3e5569',
     resize: true, //defaulted to true
