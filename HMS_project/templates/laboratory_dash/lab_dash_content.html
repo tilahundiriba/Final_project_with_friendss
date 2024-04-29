@@ -4,157 +4,235 @@
 
 
 
-</nav>
-<main class="content px-3 py-2">
-<div class="container-fluid">
-   <div class="mb-3">
-     <h4>Dashboard</h4>
-   </div>
-   <div class="row">
-     <div class="col-12 col-md-6 d-flex">
-       <div class="card flex-fill border-0 illustration">
-         <div class="card-body p-0 d-flex flex-fill">
-           <div class="row g-0 w-100">
-             <div class="col-6">
-               <div class="p-3 m-1">
-                 <h1>200</h1>
-                 <p class="mb-0" style="font-size: large">Employees</p>
-               </div>
-             </div>
+<body>
+  <!-- Pre Loader -->
+  <div class="loading">
+    <div class="spinner">
+      <div class="double-bounce1"></div>
+      <div class="double-bounce2"></div>
+    </div>
+  </div>
+  <!--/Pre Loader -->
+  <!-- Color Changer -->
 
-             <div class="col-6 align-self-end text-end">
-               <img src="{% static 'images/staffs.png' %}" class="img-fluid illustration-img" alt="" />
-             </div>
-           </div>
-         </div>
-       </div>
-     </div>
+  <!-- /Color Changer -->
+  <div class="wrapper">		
+    <!-- Page Content -->
+    <div id="content">
 
-     <div class="col-12 col-md-6 d-flex">
-       <div class="card flex-fill border-0 illustration">
-         <div class="card-body p-0 d-flex flex-fill">
-           <div class="row g-0 w-100">
-             <div class="col-6">
-               <div class="p-3 m-1">
-                 <h1>45</h1>
-                 <p class="mb-0" style="font-size: large">Doctors</p>
-               </div>
-             </div>
-             <div class="col-6 align-self-end text-end">
-               <img src="{% static 'images/staffs.png' %}" class="img-fluid illustration-img" alt="" />
-             </div>
-           </div>
-         </div>
-       </div>
-     </div>
-     <div class="col-12 col-md-6 d-flex">
-       <div class="card flex-fill border-0 illustration">
-         <div class="card-body p-0 d-flex flex-fill">
-           <div class="row g-0 w-100">
-             <div class="col-6">
-               <div class="p-3 m-1">
-                 <h1>390</h1>
-                 <p class="mb-0" style="font-size: large">Patients</p>
-               </div>
-             </div>
-             <div class="col-6 align-self-end text-end">
-               <img src="{% static 'images/staffs.png' %}" class="img-fluid illustration-img" alt="" />
-             </div>
-           </div>
-         </div>
-       </div>
-     </div>
-     <div class="col-12 col-md-6 d-flex">
-       <div class="card flex-fill border-0">
-         <div class="card-body py-4">
-           <div class="d-flex align-items-start">
-             <div class="flex-grow-1" style="width:10px; margin:auto;">
-               <canvas id="myChart"></canvas>
+      <!-- Page Title -->
+      <div class="container mt-0">
+        <div class="row breadcrumb-bar">
+          <div class="col-md-6">
+            <h3 class="block-title">Quick Statistics</h3>
+          </div>
+          <div class="col-md-6">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item">
+                <a href="index.html">
+                  <span class="ti-home"></span>
+                </a>
+              </li>
+              <li class="breadcrumb-item active">Dashboard</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+      <!-- /Page Title -->
+      <!-- /Breadcrumb -->
+      <!-- Main Content -->
+      <div class="container home">
+        <div class="row">
+          <!-- Widget Item -->
+          <div class="col-md-4">
+            <div class="widget-area proclinic-box-shadow color-red">
+              <div class="widget-left">
+                <span class="ti-user"></span>
+              </div>
+              <div class="widget-right">
+                <h4 class="wiget-title text-success">Total Patients</h4>
+                <span class="numeric color-red">54</span>
+                
+                <p class="inc-dec mb-0"><span class="ti-angle-up"></span> +20% Increased</p>
+              </div>
+            </div>
+          </div>
+          <!-- /Widget Item -->
+          <!-- Widget Item -->
+          <div class="col-md-4">
+            <div class="widget-area proclinic-box-shadow color-green">
+              <div class="widget-left">
+                <span class="ti-timer"></span>
+              </div>
+              <div class="widget-right">
+                <h4 class="wiget-title text-success">Total Appointments </h4>
+                <span class="numeric color-green">53</span>
+                <p class="inc-dec mb-0"><span class="ti-angle-down"></span> +15% Increased</p>
+              </div>
+            </div>
+          </div>
+          <!-- /Widget Item -->
+          <!-- Widget Item -->
+          <div class="col-md-4">
+            <div class="widget-area proclinic-box-shadow color-yellow">
+              <div class="widget-left">
+                <span class="ti-wallet"></span>
+              </div>
+              <div class="widget-right">
+                <h4 class="wiget-title text-success">Total Revenue</h4>
+                <span class="numeric color-yellow">$435</span>
+                <p class="inc-dec mb-0"><span class="ti-angle-up"></span> +10% Increased</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="widget-area proclinic-box-shadow color-red">
+              <div class="widget-left">
+                <span class="ti-na"></span>
+              </div>
+            
+              <div class="widget-right">
+                <h4 class="wiget-title text-success">Total Prescriptions</h4>
+                <span class="numeric color-red">52</span>
+                
+                <p class="inc-dec mb-0"><span class="ti-angle-up"></span> +20% Increased</p>
+              </div>
+            </div>
+          </div>
+          <!-- /Widget Item -->
+          <!-- Widget Item -->
+          <div class="col-md-4">
+            <div class="widget-area proclinic-box-shadow color-green">
+              <div class="widget-left">
+                <span class="ti-bookmark-alt"></span>
+              </div>
+              <div class="widget-right">
+                <h4 class="wiget-title text-success">Total Histories</h4>
+                <span class="numeric color-green">53</span>
+                <p class="inc-dec mb-0"><span class="ti-angle-down"></span> +15% Increased</p>
+              </div>
+            </div>
+          </div>
+          <!-- /Widget Item -->
+          <!-- Widget Item -->
+          <div class="col-md-4">
+            <div class="widget-area proclinic-box-shadow color-yellow">
+              <div class="widget-left">
+                <span class=" ti-filter"></span>
+              </div>
+              <div class="widget-right">
+                <h4 class="wiget-title text-success">Total Laboratories</h4>
+                <span class="numeric color-yellow">35</span>
+                <p class="inc-dec mb-0"><span class="ti-angle-up"></span> +10% Increased</p>
+              </div>
+            </div>
+          </div>
+          <!-- /Widget Item -->
+        </div>
 
-               <script>
-                 var xValues = [
-                   "Italy",
-                   "France",
-                   "Spain",
-                   "USA",
-                   "Argentina",
-                 ];
-                 var yValues = [55, 45, 35, 25, 15];
-                 var barColors = [
-                   "#ff9999",
-                   "#80ff00",
-                   "#00bfff",
-                   "#ffbf00",
-                   "#b34d4d",
-                 ];
 
-                 new Chart("myChart", {
-                   type: "bar",
-                   data: {
-                     labels: xValues,
-                     datasets: [
-                       {
-                         backgroundColor: barColors,
-                         data: yValues,
-                       },
-                     ],
-                   },
-                   options: {
-                     legend: { display: false },
-                     title: {
-                       display: true,
-                       text: "Users Number In Hospital",
-                     },
-                     responsive: true, // Enable responsiveness
-                     maintainAspectRatio: false,
-                   },
-                 });
-               </script>
-             </div>
-           </div>
-         </div>
-       </div>
-     </div>
-   </div>
-   <!-- Table Element -->
-   <div class="card border-0">
-     <div class="card-header">
-       <h5 class="card-title">Basic Table</h5>
-       <h6 class="card-subtitle text-muted text-center">
-         Patient List
-       </h6>
-     </div>
-     <div class="card-body">
-       <table class="table">
-         <thead>
-           <tr>
-             <th scope="col">#</th>
-             <th scope="col">First</th>
-             <th scope="col">Last</th>
-             <th scope="col">Handle</th>
-           </tr>
-         </thead>
-         <tbody>
-           <tr>
-             <th scope="row">1</th>
-             <td>Mark</td>
-             <td>Otto</td>
-             <td>@mdo</td>
-           </tr>
-           <tr>
-             <th scope="row">2</th>
-             <td>Jacob</td>
-             <td>Thornton</td>
-             <td>@fat</td>
-           </tr>
-           <tr>
-             <th scope="row">3</th>
-             <td colspan="2">Larry the Bird</td>
-             <td>@twitter</td>
-           </tr>
-         </tbody>
-       </table>
-     </div>
-   </div>
- </div> 
+        <div class="row">
+          <!-- Widget Item -->
+          <div class="col-md-12">
+            <div class="widget-area-2 proclinic-box-shadow">
+              <h3 class="widget-title">Appointments</h3>
+              <div class="table-responsive">
+                <table class="table table-bordered table-striped">
+                  <thead>
+                    <tr>
+                      <th>Patient Name</th>
+                      <th>Doctor</th>
+                      <th>Check-Up</th>
+                      <th>Date</th>
+                      <th>Time</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Rajesh</td>
+                      <td>Manoj Kumar</td>
+                      <td>Dental</td>
+                      <td>12-10-2018</td>
+                      <td>12:10PM</td>
+                      <td>
+                        <span class="badge badge-success">Completed</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Riya</td>
+                      <td>Daniel </td>
+                      <td>Ortho</td>
+                      <td>12-10-2018</td>
+                      <td>1:10PM</td>
+                      <td>
+                        <span class="badge badge-warning">Pending</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Siri</td>
+                      <td>Daniel </td>
+                      <td>Ortho</td>
+                      <td>12-10-2018</td>
+                      <td>1:30PM</td>
+                      <td>
+                        <span class="badge badge-danger">Cancelled</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Rajesh</td>
+                      <td>Manoj Kumar</td>
+                      <td>Dental</td>
+                      <td>12-10-2018</td>
+                      <td>12:10PM</td>
+                      <td>
+                        <span class="badge badge-success">Completed</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Riya</td>
+                      <td>Daniel </td>
+                      <td>Ortho</td>
+                      <td>12-10-2018</td>
+                      <td>1:10PM</td>
+                      <td>
+                        <span class="badge badge-warning">Pending</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Siri</td>
+                      <td>Daniel </td>
+                      <td>Ortho</td>
+                      <td>12-10-2018</td>
+                      <td>1:30PM</td>
+                      <td>
+                        <span class="badge badge-danger">Cancelled</span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <!-- /Widget Item -->
+        </div>
+      </div>
+      <!-- /Main Content -->
+      <!--Copy Rights-->
+      <div class="container">
+        <div class="d-sm-flex justify-content-center">
+          <span class="text-muted text-center d-block d-sm-inline-block">Copyright © 2018 <a href="http://www.konnectplugins.com/" target="_blank">konnectcode</a>. All rights reserved.</span>
+        </div>
+      </div>
+      <!-- /Copy Rights-->
+    </div>
+    <!-- /Page Content -->
+  </div>
+  <!-- Back to Top -->
+  <a id="back-to-top" href="#" class="back-to-top">
+    <span class="ti-angle-up"></span>
+  </a>
+  <!-- /Back to Top -->
+
+</body>
  {% endblock %}
