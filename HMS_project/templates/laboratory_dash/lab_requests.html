@@ -37,14 +37,7 @@
       </div>
     </div>
     <div class="row">
-      <!-- {% if messages %}
-      {% for message in messages %}
-      <div class="alert alert-success">
-        {{ message }}
-      </div>
-      {% endfor %}
-      {% endif %} -->
-      <p class="wiget-title color-yellow "> Remaning untested requests are : {{ request_count }}</p>
+
 
       {% for request in requests %}
 
@@ -70,8 +63,8 @@
               <button type='submit' class="btn btn-outline-primary mt-3 mb-0 me-4"><span class="ti-eye"></span>
                 Tested</button>
                 {% endif %}
-              <a href="{% url 'add_lab_result' request.Lab_number %}" class="btn btn-outline-info mt-3 mb-0"><span class="ti-pencil-alt"></span>
-                Test</a>
+              <a href="{% url 'add_lab_result' request.Lab_number %}" class="btn btn-outline-info mt-3 mb-0"><span class="ti-plus"></span>
+                Test Result</a>
             </form>
 
           </div>

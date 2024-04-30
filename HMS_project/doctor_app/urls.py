@@ -18,7 +18,7 @@ urlpatterns = [
     path('update_history/<int:history_no>/', views.update_history, name='update_history'),
    
 
-    path('about-appointment/', views.about_appointment, name='about-appointment'),
+    path('about-appointment/<int:app_number>/', views.about_appointment, name='about-appointment'),
     path('add-appointment/', views.create_appointment, name='add-appointment'),
     path('edit-appointment/<str:app_number>/', views.edit_appointment, name='edit-appointment'),
     path('appointments/', views.dis_appointment, name='dis-appointment'),

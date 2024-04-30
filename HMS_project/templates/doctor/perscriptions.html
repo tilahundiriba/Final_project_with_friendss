@@ -64,44 +64,33 @@
 								<table id="tableId" class="table table-bordered table-striped">
 									<thead>
 										<tr>
-											<!-- <th class="no-sort">
-												<div class="custom-control custom-checkbox">
-													<input class="custom-control-input" type="checkbox" id="select-all">
-													<label class="custom-control-label" for="select-all"></label>
-												</div>
-											</th> -->
+									
 											<th>Patient ID</th>
 											<th>Patient Name</th>
 											<th>Doctor ID</th>
-											<th>Prescription Number</th>
-											<th>Prescription Date</th>
 											<th>Prescriptions</th>
+											<th>Prescription Date</th>
+											
 											<th>Actions</th>
 										</tr>
 									</thead>
 									<tbody>
 										{% for pres in prescriptions %}
 										<tr>
-											<!-- <td>
-												<div class="custom-control custom-checkbox">
-													<input class="custom-control-input" type="checkbox">
-													<label class="custom-control-label"></label>
-												</div>
-											</td> -->
+									
 											<td>{{pres.PatientID}}</td>
 											<td>{{pres.Patient_full_name}}</td>
 											<td>{{pres.Doctor_ID}}</td>
-											<td>{{pres.Prec_number}}</td>
-											<td>{{pres.Prec_date}}</td>
 											<td>{{pres.Precscriptions}}</td>
+											<td>{{pres.Prec_date}}</td>
+						
 
 											<td>
-												<a href="#" class="btn btn-outline-danger"><span
-														class="ti-trash"></span></a>
+											
 												<a href="{% url 'edit_perscription' pres.Prec_number %}" class="btn btn-outline-primary "><span
-														class="ti-pencil-alt"></span></a>
+														class="ti-pencil-alt"></span>EDIT</a>
 												<a href="{% url 'about_perscription' pres.Prec_number pres.PatientID %}" class="btn btn-outline-info "><span
-														class="ti-eye"></span></a>
+														class="ti-eye"></span>DETAILS</a>
 											</td>
 										</tr>
 										{% endfor %}
@@ -114,11 +103,7 @@
 										
 									</ul>
 								</nav>
-								<!-- /Export links-->
-								<button type="button" class="btn btn-danger mt-3 mb-0"><span class="ti-trash"></span>
-									DELETE</button>
-								<button type="button" class="btn btn-primary mt-3 mb-0"><span
-										class="ti-pencil-alt"></span> EDIT</button>
+						
 							</div>
 						</div>
 					</div>

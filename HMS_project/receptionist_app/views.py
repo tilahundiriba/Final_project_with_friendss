@@ -304,8 +304,13 @@ def dis_patient(request):
                                                               ,
                                                               'notifications':notifications,
                                                               'unseen_count':unseen_count})
-def about_patient(request):
-    return render(request, 'receptionist_dash/about-patient.html')  # Render the form template initially
+def about_patient(request,patient_id):
+    notifications = Notification.objects.all()
+    unseen_count = Notification.objects.filter(seen=False).count()
+    patients = get_object_or_404(PatientRegister, pk=patient_id)
+    return render(request, 'receptionist_dash/about-patient.html',{'patients':patients,
+                                                                   'notifications':notifications,
+                                                                   'unseen_count':unseen_count})  # Render the form template initially
 def edit_patient(request,patient_id):
     notifications = Notification.objects.all()
     unseen_count = Notification.objects.filter(seen=False).count()

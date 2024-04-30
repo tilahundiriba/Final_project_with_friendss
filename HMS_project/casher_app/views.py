@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from receptionist_app.models import PatientRegister
 from django.core.paginator import Paginator
+from doctor_app.models import Laboratory
 @login_required
 def profile(request):
     user = request.user
@@ -36,9 +37,15 @@ def casher_profile_update(request, user_id):
                                                                'unseen_count':unseen_count})
 
 def casher_dash(request):
+    card_payment=PatientRegister.objects.filter(is_card=False).count()
+    lab_payment=Laboratory.objects.filter(Is_payed=False).count()
+    # card_payment=PatientRegister.objects.filter(is_card=False)
     notifications = Notification.objects.all()
     unseen_count = Notification.objects.filter(seen=False).count()
-    return render(request,'casher_dash/casher_dash.html',{'notifications':notifications,'unseen_count':unseen_count})
+    return render(request,'casher_dash/casher_dash.html',{'notifications':notifications,
+                                                          'unseen_count':unseen_count,
+                                                          'card_payment':card_payment,
+                                                          'lab_payment':lab_payment})
 from datetime import datetime
 from nurse_app.models import BedInformation,RoomInformation
 def add_discharge(request):
@@ -100,7 +107,12 @@ def add_discharge(request):
 def casher_dash_content(request):
     notifications = Notification.objects.all()
     unseen_count = Notification.objects.filter(seen=False).count()
-    return render(request,'casher_dash/casher_dash_content.html',{'notifications':notifications,'unseen_count':unseen_count})
+    card_payment=PatientRegister.objects.filter(is_card=False).count()
+    lab_payment=Laboratory.objects.filter(Is_payed=False).count()
+    return render(request,'casher_dash/casher_dash_content.html',{'notifications':notifications,
+                                                                  'unseen_count':unseen_count,
+                                                                  'card_payment':card_payment,
+                                                                  'lab_payment':lab_payment})
 def dis_discharge(request):
     notifications = Notification.objects.all()
     unseen_count = Notification.objects.filter(seen=False).count()

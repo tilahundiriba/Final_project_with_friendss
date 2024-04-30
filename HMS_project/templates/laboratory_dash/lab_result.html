@@ -74,23 +74,6 @@
 										<label for="age">Patient ID</label>
 										<input type="text" placeholder="Patient ID" value="{{lab_result.PatientID}}" class="form-control" id="age" name="patient_id">
 									</div>
-                                  
-									<div class="form-group col-md-6">
-										<label for="phone">Lab. Number</label>
-										<input type="text" placeholder="Lab. Number" value="{{lab_result.Lab_number}}" class="form-control" id="phone" name="lab_no">
-									</div>
-									<div class="form-group col-md-6">
-										<label for="tech_name">Technician Name</label>
-										<!-- <input type="text" placeholder="Technician Name" class="form-control" id="tech_name" name="tech_name"> -->
-                                        <select class="form-control" id="tech_name" name="tech_name">
-											<option>Select Technician Name</option>
-											{% for user in users %}
-											<option value="{{user.username}}">{{user.username}}</option>
-											{% endfor %}
-										</select>
-                                    </div>
-							
-								
 									<div class="form-group col-md-6">
 										<label for="lab_result">Laboratory Result</label>
 										<textarea placeholder="Laboratory Results....." class="form-control" id="lab_result" rows="3" name="lab_result"></textarea>
@@ -107,18 +90,12 @@
 							<!-- Alerts-->
 							{% if register %}
 							<div class="alert alert-success alert-dismissible fade show" role="alert">
-								<strong>Successfully Done!</strong> Please add payment now
+								<strong>Successfully Done!</strong> Please add another test!
 								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 									<span aria-hidden="true">×</span>
 								</button>
 							</div>
-							{% else %}
-							<div class="alert alert-warning alert-dismissible fade show" role="alert">
-								<strong>Holy guacamole!</strong> You should check in on some of those fields below.
-								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-									<span aria-hidden="true">×</span>
-								</button>
-							</div>
+						
 							{% endif %}
 							<!-- /Alerts-->
 						</div>

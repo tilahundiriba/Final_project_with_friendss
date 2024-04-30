@@ -101,15 +101,11 @@
 											<td>{{history.Nurse_ID}}</td>
 											<td>{{history.History_No}}</td>
 											<td>{{history.Date}}</td>
-											<!-- <td>
-												<span class="badge badge-success">{{history.history_status}}</span>
-											</td> -->
-											<td><a href="#" class="btn btn-outline-danger mt-3 mb-0"><span
-														class="ti-trash"></span></a>
-												<a href="{% url 'edit_history' history.History_No %}" class="btn btn-outline-primary mt-3 mb-0"><span
-														class="ti-pencil-alt"></span></a>
-												<a href="#" class="btn btn-outline-info mt-3 mb-0"><span
-															class="ti-eye"></span></a>
+
+											<td>
+												<a href="{% url 'edit_history' history.History_No %}" class="btn btn-outline-primary"><span
+														class="ti-pencil-alt"></span>EDIT</a>
+												
 											</td>
 										</tr>
 

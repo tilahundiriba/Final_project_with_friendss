@@ -69,9 +69,11 @@ def profile_update_doc(request, user_id):
 def dis_dr_dash(request):
     notifications = Notification.objects.all()
     unseen_count = Notification.objects.filter(seen=False).count()
+    appointment=Appointment.objects.all()
     return render(request,'doctor/dr_dash.html',{
                                                 'notifications':notifications,
-                                                'unseen_count':unseen_count})
+                                                'unseen_count':unseen_count,
+                                                'appointments':appointment})
 @login_required
 def dis_labtest(request):
     labs= Laboratory.objects.all()
@@ -292,8 +294,10 @@ def about_perscription(request,prec_number, patient_id):
 def dis_dr_dash_content(request):
     notifications = Notification.objects.all()
     unseen_count = Notification.objects.filter(seen=False).count()
+    appointment=Appointment.objects.all()
     return render(request,'doctor/dash_content.html',{'notifications':notifications,
-                                                'unseen_count':unseen_count})
+                                                'unseen_count':unseen_count,
+                                                'appointments':appointment})
 @login_required
 def edit_appointment(request,app_number):
     notifications = Notification.objects.all()
@@ -330,8 +334,9 @@ def dis_appointment(request):
     appointment=Appointment.objects.all()
     return render(request,'doctor/appointments.html',{'appointment':appointment,'notifications':notifications,
                                                 'unseen_count':unseen_count})
-def about_appointment(request):
-    return render(request,'doctor/about-appointment.html')
+def about_appointment(request,app_number):
+    app = get_object_or_404(Appointment, App_number=app_number)
+    return render(request,'doctor/about-appointment.html',{'appointemts':app})
 def test_notification(request):
     return render(request,'doctor/view_notification.html')
 @login_required

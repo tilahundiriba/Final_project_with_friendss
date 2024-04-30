@@ -86,7 +86,7 @@
 										<!-- <input type="text" placeholder="nurse id" class="form-control" id="nurseid" name="nurseid"> -->
 										<select class="form-control" id="nurseid" name="nurseid">
 											<option>Select Name</option>
-											{% for user in users  %}
+											{% for user in nurses  %}
 											<option value="{{user.username}}">{{user.username}}</option>
 										{% endfor  %}
 										</select>

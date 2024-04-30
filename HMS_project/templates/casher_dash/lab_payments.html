@@ -60,8 +60,10 @@
             <p><strong style="font-size: large;">&nbsp;&nbsp;Admitted Date:&nbsp;</strong>{{ pay.Admit_date}}</p>
       <form action="{% url 'checked_payment_request' pay.Lab_number %}" method="post">
         {% csrf_token %}
+        
         <button type="submit" class="btn btn-outline-info mt-3 mb-0 me-4"><span class="ti-check-box"></span>
           Payed</button>
+        
           <a href="{% url 'add-payment' pay.PatientID %}" class="btn btn-outline-info mt-3 mb-0"><span class="ti-plus"></span>
             Payment</a>
       </form>

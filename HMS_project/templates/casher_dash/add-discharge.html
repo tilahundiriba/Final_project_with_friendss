@@ -70,10 +70,7 @@
 										<label for="patient-id">Patient ID</label>
 										<input type="text" class="form-control" placeholder="Patient ID" id="patient-id" name="patient_id">
                                     </div>
-									<div class="form-group col-md-6">
-										<label for="adminssion-date">Discharge Date</label>
-										<input type="date" placeholder="Discharge Date" class="form-control" id="adminssion-date" name="discharge_date">
-                                    </div>	
+								
 						
 									<div class="form-group col-md-6">
 										<label for="cashier_name">Casher Name</label>
@@ -101,7 +98,7 @@
 								
 						
                                 
-									<div class="form-group col-md-6">
+									<div class="form-group col-md-12">
 										<label for="payment-type">Status</label>
 									
 										<select class="form-control" id="status" name="status">
@@ -116,18 +113,19 @@
                                     </div>
 			
 									<div class="form-group col-md-6 mb-3">
-										<button type="submit" class="btn btn-primary btn-lg">Submit</button>
+										<button type="submit" class="btn btn-primary btn-lg">Departed</button>
 									</div>
 								</div>
 							</form>
 							<!-- Alerts-->
+							{% if depatred %}
 							<div class="alert alert-success alert-dismissible fade show" role="alert">
 								<strong>Successfully Done!</strong> Payment added
 								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 									<span aria-hidden="true">×</span>
 								</button>
 							</div>
-							
+							{% endif %}
 							<!-- /Alerts-->
 						</div>
 					</div>

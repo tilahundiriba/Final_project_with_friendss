@@ -42,6 +42,7 @@ def add_medication(request):
     notifications = Notification.objects.all()
     unseen_count = Notification.objects.filter(seen=False).count()
     users= User.objects.all()
+    nurses = User.objects.filter(userprofileinfo__role='nurse')
     registered=False
     if request.method == 'POST':
         patient_id = request.POST.get('patient_id')
@@ -65,10 +66,10 @@ def add_medication(request):
         med.save()
         registered=True
         return render(request,'nurse_dash/add_medication.html',{'registered':registered,
-                                                                'users':users,
+                                                                'nurses':nurses,
                                                                 'notifications':notifications,
                                                        'unseen_count':unseen_count})
-    return render(request,'nurse_dash/add_medication.html',{'users':users,
+    return render(request,'nurse_dash/add_medication.html',{'nurses':nurses,
                                                             'notifications':notifications,
                                                        'unseen_count':unseen_count})
 def dis_medication(request):
@@ -267,10 +268,52 @@ def dis_vitals(request):
 def nurse_dash(request):
     notifications = Notification.objects.all()
     unseen_count = Notification.objects.filter(seen=False).count()
+
+
+    # Retrieve PatientHistory objects for the current nurse user
+    patients_history = PatientHistory.objects.filter(Nurse_ID=request.user)
+
+    # Construct a list of dictionaries containing patient information
+    patients_info = []
+    for patient_history in patients_history:
+        # Retrieve corresponding patient register
+        patient_register = patient_history.Patient_ID
+
+        # Construct patient_info dictionary with patient information
+        patient_info = {
+            'first_name': patient_register.first_name,
+            'last_name': patient_register.middle_name,
+            'hist_date': patient_history.Date,
+            'doctor_id': patient_history.Doctor_ID,
+            'patient_id': patient_history.Patient_ID_id,
+            # Add other fields as needed
+        }
+        patients_info.append(patient_info)
     return render(request,'nurse_dash/nurse_dash.html',{'notifications':notifications,
-                                                       'unseen_count':unseen_count})
+                                                       'unseen_count':unseen_count,
+                                                       'patients_info':patients_info})
 def dis_nurse_dash_content(request):
     notifications = Notification.objects.all()
     unseen_count = Notification.objects.filter(seen=False).count()
+      # Retrieve PatientHistory objects for the current nurse user
+    patients_history = PatientHistory.objects.filter(Nurse_ID=request.user)
+
+    # Construct a list of dictionaries containing patient information
+    patients_info = []
+    for patient_history in patients_history:
+        # Retrieve corresponding patient register
+        patient_register = patient_history.Patient_ID
+
+        # Construct patient_info dictionary with patient information
+        patient_info = {
+            'first_name': patient_register.first_name,
+            'last_name': patient_register.middle_name,
+            'hist_date': patient_history.Date,
+            'doctor_id': patient_history.Doctor_ID,
+            'patient_id': patient_history.Patient_ID_id,
+            # Add other fields as needed
+        }
+        patients_info.append(patient_info)
     return render(request,'nurse_dash/dash_content.html',{'notifications':notifications,
-                                                       'unseen_count':unseen_count})
+                                                       'unseen_count':unseen_count,
+                                                       'patients_info':patients_info})

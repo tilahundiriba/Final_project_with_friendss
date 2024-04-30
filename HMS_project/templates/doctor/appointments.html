@@ -103,12 +103,7 @@
 								<table id="tableId" class="table table-bordered table-striped">
 									<thead>
 										<tr>
-											<!-- <th class="no-sort">
-												<div class="custom-control custom-checkbox">
-													<input class="custom-control-input" type="checkbox" id="select-all">
-													<label class="custom-control-label" for="select-all"></label>
-												</div>
-											</th> -->
+									
 											<th>Appointment No</th>
 											<th>Patient ID</th>
 											<th>Time Slot</th>
@@ -122,12 +117,7 @@
 									<tbody>
 										{% for app in appointment %}
 										<tr>
-											<!-- <td>
-												<div class="custom-control custom-checkbox">
-													<input class="custom-control-input" type="checkbox">
-													<label class="custom-control-label"></label>
-												</div>
-											</td> -->
+										
 											<td>{{app.App_number}}</td>
 											<td>{{app.PatientID}}</td>
 											<td>{{app.Time_slot}}</td>
@@ -154,7 +144,7 @@
 												<a href="{% url 'edit-appointment' app.App_number %}"
 													class="btn btn-outline-primary mt-3 mb-0"><span
 														class="ti-pencil-alt"></span></a>
-												<a href="#" class="btn btn-outline-info mt-3 mb-0"><span
+												<a href="{% url 'about-appointment' app.App_number %}" class="btn btn-outline-info mt-3 mb-0"><span
 														class="ti-eye"></span></a>
 											</td>
 										</tr>

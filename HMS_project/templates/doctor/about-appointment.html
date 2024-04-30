@@ -17,111 +17,10 @@
 </head>
 
 <body>
-	<!-- Pre Loader -->
-	<div class="loading">
-		<div class="spinner">
-			<div class="double-bounce1"></div>
-			<div class="double-bounce2"></div>
-		</div>
-	</div>
-	<!--/Pre Loader -->
-	<!-- Color Changer -->
 
-	<!-- /Color Changer -->
 	<div class="wrapper">
 		<!-- Page Content -->
 		<div id="content">
-				<!-- Top Navigation -->
-	{% include 'doctor/navbar.html' %}
-				<!-- /Top Navigation -->
-				<!-- Menu -->
-				<div class="container menu-nav" id="container-min">
-					<nav class="navbar navbar-expand-lg proclinic-bg text-white">
-						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-						 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-							<span class="ti-menu text-white"></span>
-						</button>
-				
-						<div class="collapse navbar-collapse" id="navbarSupportedContent">
-							<ul class="navbar-nav mr-auto">
-						
-								<li class="nav-item dropdown">
-									<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
-										aria-haspopup="true" aria-expanded="false"><span class="ti-wheelchair"></span>
-										Patients</a>
-									<div class="dropdown-menu">
-										<a class="dropdown-item" href="add-patient.html">add History</a>
-										<a class="dropdown-item" href="patients.html">View History</a>
-								
-									</div>
-								</li>
-								<li class="nav-item dropdown">
-									<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
-										aria-haspopup="true" aria-expanded="false"><span class="ti-user"></span> Doctors</a>
-									<div class="dropdown-menu">
-										<a class="dropdown-item" href="{% url 'dis_dr_dash' %}">Home</a>
-										<a class="dropdown-item" href="{% url 'dis_dr_dash_content' %}">Dashboard</a>
-										
-									</div>
-								</li>
-								<li class="nav-item dropdown active">
-									<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
-										aria-haspopup="true" aria-expanded="false"><span class="ti-pencil-alt"></span>
-										Appointments</a>
-									<div class="dropdown-menu">
-										<a class="dropdown-item" href="{% url 'add-appointment' %}">Add Appointment</a>
-										<a class="dropdown-item" href="{% url 'dis-appointment' %}">All Appointments</a>
-										<a class="dropdown-item" href="{% url 'about-appointment' %}">Appointment Details</a>
-										<a class="dropdown-item" href="#">Edit Appointment</a>
-									</div>
-								</li>
-								<!-- <li class="nav-item dropdown">
-									<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
-										aria-haspopup="true" aria-expanded="false"><span class="ti-money"></span>
-										Payments</a>
-									<div class="dropdown-menu">
-										<a class="dropdown-item" href="add-payment.html">Add Payment</a>
-										<a class="dropdown-item" href="payments.html">All Payments</a>
-										<a class="dropdown-item" href="about-payment.html">Payment Invoice</a>
-									</div>
-								</li>
-								<li class="nav-item dropdown">
-									<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
-										aria-haspopup="true" aria-expanded="false"><span class="ti-key"></span> Room
-										Allotments</a>
-									<div class="dropdown-menu">
-										<a class="dropdown-item" href="add-room.html">Add Room Allotment</a>
-										<a class="dropdown-item" href="rooms.html">All Rooms</a>
-										<a class="dropdown-item" href="edit-room.html">Edit Room Allotment</a>
-									</div>
-								</li> -->
-								<!-- <li class="nav-item dropdown">
-									<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
-										aria-haspopup="true" aria-expanded="false"><span class="ti-layout-tab"></span> UI
-										Kit</a>
-									<div class="dropdown-menu">
-										<a class="dropdown-item" href="typography.html">Typography</a>
-										<a class="dropdown-item" href="buttons.html">Buttons</a>
-								
-									</div>
-								</li> -->
-								<!-- <li class="nav-item dropdown">
-									<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
-										aria-haspopup="true" aria-expanded="false"><span class="ti-file"></span> Other
-										Pages</a>
-									<div class="dropdown-menu">
-										<a class="dropdown-item" href="login.html">Login </a>
-										<a class="dropdown-item" href="sign-up.html">Sign Up</a>
-									
-									</div>
-								</li> -->
-							</ul>
-						</div>
-					</nav>
-				</div>
-				<!-- /Menu -->
-			<!-- Breadcrumb -->
-			<!-- Page Title -->
 			<div class="container mt-0">
 				<div class="row breadcrumb-bar">
 					<div class="col-md-6">
@@ -155,52 +54,33 @@
                                     <tbody>
                                         <tr>
                                             <td><strong>Patient ID</strong></td>
-                                            <td>PT56</td>
+                                            <td>{{appointemts.PatientID}}</td>
                                         </tr>
-                                        <tr>
-                                            <td><strong>Department</strong></td>
-                                            <td>Dental</td>
-                                        </tr>
+                                      
                                         <tr>
                                             <td><strong>Doctor Name</strong></td>
-                                            <td>Dr Kiran Sharma</td>
+                                            <td>{{appointemts.Doctor_ID}}</td>
                                         </tr>
                                         <tr>
                                             <td><strong>Appointment Date</strong></td>
-                                            <td>16-nov-2018</td>
+                                            <td>{{appointemts.App_date}}</td>
                                         </tr>
                                         <tr>
                                             <td><strong>Time Slot </strong></td>
-                                            <td>10AM-11AM</td>
+                                            <td>{{appointemts.Time_slot}}</td>
                                         </tr>
                                         <tr>
-                                            <td><strong>Token Number </strong></td>
-                                            <td>27</td>
+                                            <td><strong>App. Number </strong></td>
+                                            <td>{{appointemts.App_number}}</td>
                                         </tr>
                                         <tr>
                                             <td><strong>Problem</strong></td>
-                                            <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur convallis egestas aliquet.
-                                                Nunc ullamcorper massa in magna pulvinar, a eleifend felis condimentum.</td>
+                                            <td>{{appointemts.App_reason}}</td>
                                         </tr>
                                     </tbody>
                                 </table>
                                 <!--Export links-->
-                                <nav aria-label="Page navigation example">
-                                    <ul class="pagination export-pagination">
-                                        <li class="page-item">
-                                            <a class="page-link" href="#"><span class="ti-download"></span> csv</a>
-                                        </li>
-                                        <li class="page-item">
-                                            <a class="page-link" href="#"><span class="ti-printer"></span> print</a>
-                                        </li>
-                                        <li class="page-item">
-                                            <a class="page-link" href="#"><span class="ti-file"></span> PDF</a>
-                                        </li>
-                                        <li class="page-item">
-                                            <a class="page-link" href="#"><span class="ti-align-justify"></span> Excel</a>
-                                        </li>
-                                    </ul>
-                                </nav>
+                      
                                 <!-- /Export links-->
                                 <button type="button" class="btn btn-success mb-3"><span class="ti-pencil-alt"></span> Edit
                                     Appointment</button>

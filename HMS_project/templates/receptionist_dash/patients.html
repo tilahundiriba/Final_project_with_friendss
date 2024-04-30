@@ -116,13 +116,8 @@
 									<table id="mytable" class="table table-bordered table-striped ">
 										<thead>
 											<tr>
-												<!-- <td>
-												<div class="custom-control custom-checkbox">
-													<input class="custom-control-input" type="checkbox" id="1">
-													<label class="custom-control-label" for="1"></label>
-												</div>
-											</td> -->
-												<th>Check</th>
+										
+											
 
 												<th>Patient ID</th>
 												<th>First Name</th>
@@ -139,8 +134,7 @@
 												<th>Kebele</th>
 												<th>Dr Name</th>
 												<th>Rt Name</th>
-												<th>checked</th>
-
+												
 												<th>Actions</th>
 
 
@@ -150,16 +144,8 @@
 										<tbody>
 											{% for patient in patients %}
 											<tr>
-												<!-- <td>
-												<div class="custom-control custom-checkbox">
-													<input class="custom-control-input" type="checkbox" id="1">
-													<label class="custom-control-label" for="1"></label>
-												</div>
-											</td> -->
-												<td>
-													<input type="checkbox" name="patient_delete"
-														value="{{ patient.patient_id }}">
-												</td>
+										
+											
 												<td>{{patient.patient_id}}</td>
 												<td>{{patient.first_name}}</td>
 												<td>{{patient.middle_name}}</td>
@@ -176,17 +162,15 @@
 												<td>{{patient.kebele}}</td>
 												<td>{{patient.doctor_name}}</td>
 												<td>{{patient.receptinist_name}}</td>
-												<td>{{patient.is_checked}}</td>
+											
 
 												<td>
-													<button name='delete'
-														class="delete-link btn btn-outline-danger"><span
-															class="ti-trash"></span> </button>
-													<a href="{% url 'edit-patient' patient.patient_id %}"
-														class="btn btn-outline-primary "><span
-															class="ti-pencil-alt"></span></a>
-													<a href="#" class="btn btn-outline-info "><span
-															class="ti-eye"></span></a>
+												
+													<a href="{% url 'about_patient' patient.patient_id %}"
+														class="btn btn-outline-info "><span
+															class="ti-eye"></span>DETAILS</a>
+												
+												
 												</td>
 												{% endfor %}
 											</tr>

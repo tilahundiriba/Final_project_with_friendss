@@ -105,7 +105,7 @@
 					<!-- Widget Item -->
 					<div class="col-md-12">
 						<div class="widget-area-2 proclinic-box-shadow">
-							<h3 class="widget-title">Payments List</h3>
+							<h3 class="widget-title">Patient Payment Transactions</h3>
 							<div class="table-responsive mb-3">
 								<table id="tableId" class="table table-bordered table-striped">
 									<thead>
@@ -121,7 +121,7 @@
 											<th>Charges</th>
 											<th>Payment Method</th>
 											<th>Payment Date</th>
-											<th>Status</th>
+											<th>Invoice</th>
 											<th>Actions</th>
 										</tr>
 									</thead>
@@ -151,20 +151,16 @@
                                             <td>{{payment.Total}}</td>
                                             <td>{{payment.Pay_method}}</td>
                                             <td>{{payment.Admit_date}}</td>
-                                            {% if payment.Food_payment and payment.Bed_payment and payment.Card_payment and payment.Lab_payment %}
+                                            
                                             <td>
-                                                <span class="badge badge-success">Completed</span>
+												<a href="{% url 'about_payment' payment.Pay_number payment.Patient_id %}"
+												class="btn btn-outline-info" data-toggle="tooltip" title="VIEW DETAILS"><span class="ti-arrow-down"></span>Invoice</a>
                                             </td>
-                                            {% else %}
-                                            <td>
-                                                <span class="badge badge-warning">Incompleted</span>
-                                            </td>
-                                            {% endif %}
+                                        
                                             <td>
                                                 <a href="#" class="btn btn-outline-primary" data-toggle="tooltip" title="EDIT PAYMENT"><span
-                                                    class="ti-pencil-alt"></span></a>
-                                                    <a href="{% url 'about_payment' payment.Pay_number payment.Patient_id %}"
-													 class="btn btn-outline-info" data-toggle="tooltip" title="VIEW DETAILS"><span class="ti-eye"></span></a>
+                                                    class="ti-pencil-alt"></span>Edit</a>
+                                                
                                             </td>
                                         </tr>
                                        {% endfor %}

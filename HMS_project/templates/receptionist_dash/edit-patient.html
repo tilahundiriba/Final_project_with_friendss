@@ -146,6 +146,7 @@
     <button type="submit" class="btn btn-primary">Update</button>
 </form>
 </div>
+{% if registered %}
 							<!-- Alerts-->
 							<div class="alert alert-success alert-dismissible fade show" role="alert">
 								<strong>Successfully Updated!</strong> Please add payment now
@@ -153,13 +154,8 @@
 									<span aria-hidden="true">×</span>
 								</button>
 							</div>
-							<div class="alert alert-warning alert-dismissible fade show" role="alert">
-								<strong>Holy guacamole!</strong> You should check in on some of those fields below.
-								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-									<span aria-hidden="true">×</span>
-								</button>
-							</div>
-							<!-- /Alerts-->
+							{% endif %}
+							
 						</div>
 					</div>
 					<!-- /Widget Item -->
