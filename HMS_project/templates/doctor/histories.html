@@ -103,6 +103,10 @@
 											<td>{{history.Date}}</td>
 
 											<td>
+												{% if request.user.userprofileinfo.role == 'admin' %}
+												<a href="#" class="btn btn-outline-danger"><span
+														class="ti-trash"></span>DELETE</a>
+														{% endif %}
 												<a href="{% url 'edit_history' history.History_No %}" class="btn btn-outline-primary"><span
 														class="ti-pencil-alt"></span>EDIT</a>
 												

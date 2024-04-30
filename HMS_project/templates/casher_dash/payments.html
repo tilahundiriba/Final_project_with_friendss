@@ -158,6 +158,10 @@
                                             </td>
                                         
                                             <td>
+												{% if request.user.userprofileinfo.role == 'admin' %}
+                                                <a href="#" class="btn btn-outline-danger" data-toggle="tooltip" title="DELETE PAYMENT"><span
+                                                    class="ti-trash"></span>Delete</a>
+													{% endif %}
                                                 <a href="#" class="btn btn-outline-primary" data-toggle="tooltip" title="EDIT PAYMENT"><span
                                                     class="ti-pencil-alt"></span>Edit</a>
                                                 
@@ -173,9 +177,7 @@
 										
 									</ul>
 								</nav>
-								<!-- /Export links-->
-								<button type="button" class="btn btn-danger mt-3 mb-0"><span class="ti-trash"></span> DELETE</button>
-								<button type="button" class="btn btn-primary mt-3 mb-0"><span class="ti-pencil-alt"></span> EDIT</button>
+
 							</div>
 						</div>
 					</div>

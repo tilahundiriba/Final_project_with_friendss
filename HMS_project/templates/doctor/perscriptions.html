@@ -86,7 +86,10 @@
 						
 
 											<td>
-											
+												{% if request.user.userprofileinfo.role == 'admin' %}
+												<a href="#" class="btn btn-outline-danger "><span
+														class="ti-trash"></span>DELETE</a>
+											{% endif %}
 												<a href="{% url 'edit_perscription' pres.Prec_number %}" class="btn btn-outline-primary "><span
 														class="ti-pencil-alt"></span>EDIT</a>
 												<a href="{% url 'about_perscription' pres.Prec_number pres.PatientID %}" class="btn btn-outline-info "><span

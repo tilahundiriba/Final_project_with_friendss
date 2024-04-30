@@ -77,15 +77,21 @@
                                             <td><strong>Problem</strong></td>
                                             <td>{{appointemts.App_reason}}</td>
                                         </tr>
+                                        <tr>
+                                            <td><strong>Status</strong></td>
+                                            <td>{{appointemts.App_status}}</td>
+                                        </tr>
                                     </tbody>
                                 </table>
                                 <!--Export links-->
                       
                                 <!-- /Export links-->
-                                <button type="button" class="btn btn-success mb-3"><span class="ti-pencil-alt"></span> Edit
-                                    Appointment</button>
+                                <a href="{% url 'edit-appointment' appointemts.App_number %}" class="btn btn-success mb-3"><span class="ti-pencil-alt"></span> Edit
+                                    Appointment</a>
+									{% if request.user.userprofileinfo.role == 'admin' %}
                                 <button type="button" class="btn btn-danger mb-3"><span class="ti-trash"></span> Delete
                                     Appointment</button>
+									{% endif %}
                             </div>
                         </div>
                     </div>

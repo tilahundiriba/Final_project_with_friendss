@@ -90,14 +90,14 @@
 											<td>{{lab.Technician_ID}}</td>
 											
 											<td>{{lab.Admit_date}}</td>
-										
-										
-											<td><a href="#" class="btn btn-outline-danger  mb-0"><span
-														class="ti-trash"></span></a>
+											<td>
+										{% if request.user.userprofileinfo.role == 'admin' %}
+											<a href="#" class="btn btn-outline-danger  mb-0"><span
+														class="ti-trash"></span>DELETE</a>
+										{% endif %}
 												<a href="#" class="btn btn-outline-primary  mb-0"><span
-														class="ti-pencil-alt"></span></a>
-												<a href="#" class="btn btn-outline-info  mb-0"><span
-															class="ti-eye"></span></a>
+														class="ti-pencil-alt"></span>EDIT</a>
+											
 											</td>
 										</tr>
 

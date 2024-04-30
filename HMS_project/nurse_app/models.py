@@ -8,13 +8,12 @@ class RoomInformation(models.Model):
     Bed_no=models.BigIntegerField(primary_key=True)
     Room_type=models.CharField(max_length=100)
     Status=models.TextField(max_length=100)
-    class Meta:
-        unique_together = (('Room_no', 'Bed_no'),)
+
 
 class BedInformation(models.Model):
     Patient_id=models.ForeignKey(PatientRegister,on_delete=models.CASCADE)
-    Room_no=models.ForeignKey(RoomInformation,on_delete=models.CASCADE)
-    Bed_no=models.BigIntegerField()
+    Room_num=models.BigIntegerField()
+    Bed_num=models.ForeignKey(RoomInformation,on_delete=models.CASCADE)
     Room_type=models.CharField(max_length=100)
     Alloc_date = models.DateField(auto_now_add=True)
 

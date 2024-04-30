@@ -41,7 +41,6 @@ def nurse_profile_update(request, user_id):
 def add_medication(request):
     notifications = Notification.objects.all()
     unseen_count = Notification.objects.filter(seen=False).count()
-    users= User.objects.all()
     nurses = User.objects.filter(userprofileinfo__role='nurse')
     registered=False
     if request.method == 'POST':
@@ -231,6 +230,7 @@ def dis_patients(request):
 def allocate_room(request):
     notifications = Notification.objects.all()
     unseen_count = Notification.objects.filter(seen=False).count()
+    roo_info = RoomInformation.objects.all()
     registered=False
     if request.method == 'POST':
         patient_id = request.POST.get('patient_id')
@@ -238,14 +238,14 @@ def allocate_room(request):
         bed_no = request.POST.get('bed_no')
         room_type = request.POST.get('room-type')
         patient = get_object_or_404( PatientRegister,patient_id=patient_id)
-        room = get_object_or_404( RoomInformation,Room_no=room_no)
+        bed_nos = get_object_or_404( RoomInformation,Bed_no=bed_no)
         bed_info = BedInformation.objects.create(
             Patient_id=patient,
-            Room_no=room,
-            Bed_no=bed_no,
+            Room_num=room_no,
+            Bed_num=bed_nos,
             Room_type=room_type,
         )
-        room = get_object_or_404(RoomInformation, Room_no=bed_no)
+        room = get_object_or_404(RoomInformation, Bed_no=bed_no)
         room.Status = 'Occupied'  # Update status to 'Occupied' or any other value as needed
         room.save()
         registered=True

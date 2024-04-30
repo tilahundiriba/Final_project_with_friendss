@@ -110,7 +110,7 @@
       <div class="h-100">
 
         <div class="sidebar-logo">
-          <img src="{% static 'images/hospital_logo3.png' %}" alt="NOOOOOOo" class="rounded-circle" width="70"
+          <img src="{% static 'images/hospital_logo3.png' %}" alt="LOGO" class="rounded-circle" width="70"
             height="70">
 
         </div>
@@ -145,14 +145,174 @@
             <ul id="posts" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
               <li class="sidebar-item">
 
-                <a href="#" class="sidebar-link">Add New Patient</a>
+                <a href="{% url 'add_patient' %}" class="sidebar-link">Add Patient</a>
               </li>
               <li class="sidebar-item">
-                <a href="{% url 'display_patients' %}" class="sidebar-link">Patient History</a>
+
+                <a href="{% url 'dis_patient' %}" class="sidebar-link">View Patients</a>
+              </li>
+            
+             
+            </ul>
+          </li>
+          <li class="sidebar-item">
+            <a href="#" class="sidebar-link collapsed" data-bs-target="#hist" data-bs-toggle="collapse"
+              aria-expanded="false"><i class="fa-solid fa-hospital-user pe-2"></i>
+              History
+            </a>
+            <ul id="hist" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+              <li class="sidebar-item">
+
+                <a href="{% url 'add_history' %}" class="sidebar-link">Add Histories</a>
               </li>
               <li class="sidebar-item">
-                <a href="{% url 'approve_departure' %}" class="sidebar-link">Approve Discharge</a>
+
+                <a href="{% url 'dis_history' %}" class="sidebar-link">View History</a>
               </li>
+          
+            </ul>
+          </li>
+          <li class="sidebar-item">
+            <a href="#" class="sidebar-link collapsed" data-bs-target="#app" data-bs-toggle="collapse"
+              aria-expanded="false"><i class="fa-solid fa-hospital-user pe-2"></i>
+              Appointments
+            </a>
+            <ul id="app" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+              <li class="sidebar-item">
+
+                <a href="{% url 'add-appointment' %}" class="sidebar-link">Add Appointment</a>
+              </li>
+              <li class="sidebar-item">
+
+                <a href="{% url 'dis-appointment' %}" class="sidebar-link">View Appointment</a>
+              </li>
+          
+            </ul>
+          </li>
+          <li class="sidebar-item">
+            <a href="#" class="sidebar-link collapsed" data-bs-target="#setting" data-bs-toggle="collapse"
+                aria-expanded="false">
+         
+                <i class="fa-solid fa-language pe-2"></i>
+                            Language
+            </a>
+            <ul id="setting" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                <li class="sidebar-item">
+                    <a href="#" class="sidebar-link">
+                        <div id="google_translate_element" class=""></div></a>
+                </li>
+                
+            </ul>
+        </li>
+          <li class="sidebar-item">
+            <a href="#" class="sidebar-link collapsed" data-bs-target="#prec" data-bs-toggle="collapse"
+              aria-expanded="false"><i class="fa-solid fa-hospital-user pe-2"></i>
+              Prescriptions
+            </a>
+            <ul id="prec" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+              <li class="sidebar-item">
+
+                <a href="{% url 'add_perscription' %}" class="sidebar-link">Add Prescription</a>
+              </li>
+              <li class="sidebar-item">
+
+                <a href="{% url 'perscriptions' %}" class="sidebar-link">View Prescription</a>
+              </li>
+          
+            </ul>
+          </li>
+          <li class="sidebar-item">
+            <a href="#" class="sidebar-link collapsed" data-bs-target="#lab" data-bs-toggle="collapse"
+              aria-expanded="false"><i class="fa-solid fa-hospital-user pe-2"></i>
+              Laboratory
+            </a>
+            <ul id="lab" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+              <li class="sidebar-item">
+
+                <a href="{% url 'add_lab' %}" class="sidebar-link">Add Laboratory</a>
+              </li>
+              <li class="sidebar-item">
+
+                <a href="{% url 'lab_tests' %}" class="sidebar-link">View Laboratory</a>
+              </li>
+              <li class="sidebar-item">
+
+                <a href="{% url 'dis_lab_result' %}" class="sidebar-link">View Result</a>
+              </li>
+          
+            </ul>
+          </li>
+          <li class="sidebar-item">
+            <a href="#" class="sidebar-link collapsed" data-bs-target="#vital" data-bs-toggle="collapse"
+              aria-expanded="false"><i class="fa-solid fa-hospital-user pe-2"></i>
+              Vital Information
+            </a>
+            <ul id="vital" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+              <li class="sidebar-item">
+
+                <a href="{% url 'vital_info' %}" class="sidebar-link">Add Vitals</a>
+              </li>
+              <li class="sidebar-item">
+
+                <a href="{% url 'dis_vitals' %}" class="sidebar-link">View Vitals</a>
+              </li>
+           
+          
+            </ul>
+          </li>
+          <li class="sidebar-item">
+            <a href="#" class="sidebar-link collapsed" data-bs-target="#room" data-bs-toggle="collapse"
+              aria-expanded="false"><i class="fa-solid fa-hospital-user pe-2"></i>
+              Rooms
+            </a>
+            <ul id="room" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+              <li class="sidebar-item">
+
+                <a href="{% url 'add_room' %}" class="sidebar-link">Add Room</a>
+              </li>
+              <li class="sidebar-item">
+
+                <a href="{% url 'dis_room' %}" class="sidebar-link">View Room</a>
+              </li>
+          
+            </ul>
+          </li>
+          <li class="sidebar-item">
+            <a href="#" class="sidebar-link collapsed" data-bs-target="#bed" data-bs-toggle="collapse"
+              aria-expanded="false"><i class="fa-solid fa-hospital-user pe-2"></i>
+              Bed Allocations
+            </a>
+            <ul id="bed" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+              <li class="sidebar-item">
+
+                <a href="{% url 'allocate_room' %}" class="sidebar-link">Allocate Bed</a>
+              </li>
+              <li class="sidebar-item">
+
+                <a href="{% url 'dis_allocate_bed' %}" class="sidebar-link">View Allocated</a>
+              </li>
+          
+            </ul>
+          </li>
+          <li class="sidebar-item">
+            <a href="#" class="sidebar-link collapsed" data-bs-target="#dep" data-bs-toggle="collapse"
+              aria-expanded="false"><i class="fa-solid fa-hospital-user pe-2"></i>
+              Departure
+            </a>
+            <ul id="dep" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+              <li class="sidebar-item">
+
+                <a href="{% url 'add-discharge' %}" class="sidebar-link">Add Departed</a>
+              </li>
+              <li class="sidebar-item">
+
+                <a href="{% url 'discharges' %}" class="sidebar-link">View Departed</a>
+              </li>
+              <li class="sidebar-item">
+
+                <a href="{% url 'approve_departure' %}" class="sidebar-link">Approve Departed</a>
+              </li>
+          
             </ul>
           </li>
           <li class="sidebar-item">
@@ -178,6 +338,7 @@
               </li>
             </ul>
           </li>
+          
           <li class="sidebar-item">
             <a href="#" class="sidebar-link collapsed" data-bs-target="#report" data-bs-toggle="collapse"
               aria-expanded="false"><i class="fa-solid fa-envelopes-bulk pe-2"></i>
@@ -211,21 +372,7 @@
                 
             </ul>
         </li>
-          <li class="sidebar-item">
-            <a href="#" class="sidebar-link collapsed" data-bs-target="#setting" data-bs-toggle="collapse"
-                aria-expanded="false">
-         
-                <i class="fa-solid fa-language pe-2"></i>
-                            Language
-            </a>
-            <ul id="setting" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
-                <li class="sidebar-item">
-                    <a href="#" class="sidebar-link">
-                        <div id="google_translate_element" class=""></div></a>
-                </li>
-                
-            </ul>
-        </li>
+        
           
         </ul>
       </div>
@@ -593,7 +740,7 @@
       </a> -->
     </div>
   </div>
-  <!-- <script src="http://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+  <script src="http://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
   <script>
 
     function googleTranslateElementInit() {
@@ -602,7 +749,7 @@
         'google_translate_element'
       );
     } 
-  </script> -->
+  </script>
   <script src="{% static 'js2/jquery-3.2.1.min.js' %}"></script>
   <!-- Popper Library-->
   <script src="{% static 'js2/popper.min.js' %}"></script>

@@ -70,12 +70,7 @@
 								<table id="tableId" class="table table-bordered table-striped">
 									<thead>
 										<tr>
-											<th class="no-sort">
-												<div class="custom-control custom-checkbox">
-													<input class="custom-control-input" type="checkbox" id="select-all">
-													<label class="custom-control-label" for="select-all"></label>
-												</div>
-											</th>
+										
 											<th>Patient ID</th>
 											<th>Room Number</th>
 											<th>Room Type</th>
@@ -89,12 +84,7 @@
                                     <tbody>
 										{% for alloc in allocs %}
                                         <tr>
-                                            <td>
-                                                <div class="custom-control custom-checkbox">
-                                                    <input class="custom-control-input" type="checkbox" id="1">
-                                                    <label class="custom-control-label" for="1"></label>
-                                                </div>
-                                            </td>
+                                        
                                             <td>{{alloc.Patient_id}}</td>
                                             <td>{{alloc.Room_no}}</td>
                                             <td>{{alloc.Room_type}}</td>
@@ -102,7 +92,9 @@
                                             <td>{{alloc.Alloc_date}}</td>
                                          
                                             <td>
-												
+												{% if request.user.userprofileinfo.role == 'admin' %}
+												<a href="#" class="btn btn-outline-danger "><span class="ti-trash"></span>DELETE</a>
+												{% endif %}
 												<a href="#" class="btn btn-outline-primary "><span class="ti-pencil-alt"></span>EDIT</a>
 												
                                             </td>

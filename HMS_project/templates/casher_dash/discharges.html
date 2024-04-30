@@ -141,8 +141,10 @@
                                     </ul>
                                 </nav>
                                 <!-- /Export links-->
+                                {% if request.user.userprofileinfo.role == 'admin' %}
                                 <button type="button" class="btn btn-danger mt-3 mb-0"><span class="ti-trash"></span>
                                     DELETE</button>
+                                    {% endif %}
                                 <button type="button" class="btn btn-primary mt-3 mb-0"><span
                                         class="ti-pencil-alt"></span> EDIT</button>
                             </div>
