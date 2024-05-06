@@ -65,19 +65,61 @@
                     <div class="col-md-12">
                         <div class="widget-area-2 proclinic-box-shadow">
                             {% if form %}
-                            <form action="{% url 'existing_patient' %}" method="post">
+                            <form action="{% url 'existing_patient' %}" method="post" onsubmit="return validateSearch()">
                                 {% csrf_token %}
                                 <div class="form-row">
                                 <div class="form-group col-md-10">
                                     <input class="form-control form-control-lg" type="text" name="patient_id"
-                                        placeholder="Patient Search...">
+                                        placeholder="Patient Search..." id="patientSearchInput" oninput="validateInput()">
+                                    <div id="errorContainer" class="text-danger"></div> <!-- Error message container -->
+
                                 </div>
                                 <div class="form-group  col-md-2">
                                     <button type="submit" class="btn btn-primary btn-lg">Search</button>
                                 </div>
                             </div>
                             </form>
-                            <form action="{% url 'update_patient' patients.patient_id %}" method='post'>
+{% comment %} form valiadtion for Search {% endcomment %}
+<script>
+    function validateInput() {
+        var input = document.getElementById("patientSearchInput");
+        var value = input.value.trim();
+        var errorContainer = document.getElementById("errorContainer");
+
+        // Check if the input is empty or starts with "SH" and has a total length of 8 characters
+        if (value === "" || (value.startsWith("SH") && value.length === 8)) {
+            input.style.borderColor = "green"; // Set border color to green for correct input
+            input.style.borderWidth="2px";
+            errorContainer.innerText = ""; // Clear error message
+        } else {
+            input.style.borderColor = "red"; // Set border color to red for incorrect input
+            input.style.borderWidth = "2px";
+            errorContainer.innerText = "Invalid search criteria. Please enter a value starting with 'SH' and containing a total of 8 characters.";
+        }
+    }
+
+    function validateSearch() {
+        var value = document.getElementById("patientSearchInput").value.trim();
+        var errorContainer = document.getElementById("errorContainer");
+
+        // Check if the input is empty
+        if (value === "") {
+            errorContainer.innerText = "Please enter a search criteria."; // Display error message
+            return false; // Prevent form submission
+        }
+
+        // Check if the input starts with "SH" and has a total length of 8 characters
+        if (value.startsWith("SH") && value.length === 8) {
+            errorContainer.innerText = ""; // Clear error message
+            return true; // Valid input, allow form submission
+        } else {
+            errorContainer.innerText = "Invalid search criteria. Please enter a value starting with 'SH' and containing a total of 8 characters.";
+            return false; // Prevent form submission
+        }
+    }
+</script>
+
+                            <form action="{% url 'update_patient' patients.patient_id %}" method='post' onsubmit="return validateForm()" name="patientForm">
                                 {% csrf_token %}
                                 <div class="form-row">
 
@@ -85,16 +127,22 @@
                                         <label for="first-name">First Name</label>
                                         <input type="text" class="form-control" value="{{patients.first_name}}"
                                             placeholder="First name" id="first-name" name="first_name">
+                                            <div id="firstNameError" class="text-danger"></div>
+
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="middle-name">Middle Name</label>
                                         <input type="text" value="{{patients.middle_name}}" class="form-control"
                                             placeholder="Middle name" id="middle-name" name="middle_name">
+                                            <div id="middleNameError" class="text-danger"></div>
+
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="last-name">Last Name</label>
                                         <input type="text" class="form-control" value="{{patients.last_name}}"
-                                            placeholder="Last name" id="last-name" name="last_name">
+                                    placeholder="Last name" id="last-name" name="last_name">
+                                    <div id="lastNameError" class="text-danger"></div>
+
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="gender">Gender</label>
@@ -103,6 +151,8 @@
 
 
                                         </select>
+                                        <div id="genderError" class="text-danger"></div>
+
                                     </div>
 
                                     <div class="form-group col-md-6">
@@ -110,16 +160,22 @@
                                         <label for="birth-date">Date of Birth</label>
                                         <input type="date" value="{{patients.birth_date}}" class="form-control"
                                             id="birth-date" name="birth_date">
+                                            <div id="birthDateError" class="text-danger"></div>
+
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="age">Age</label>
-                                        <input type="number" value="{{patients.age}}" class="form-control"
+                                        <input type="text" value="{{patients.age}}" class="form-control"
                                             placeholder="Age" id="age" name="age">
+                                            <div id="ageError" class="text-danger"></div>
+
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="phone-number">Phone Number</label>
                                         <input type="text" class="form-control" value="{{patients.phone_number}}"
                                             placeholder="Phone number" id="phone-number" name="phone_number">
+                                            <div id="phoneNumberError" class="text-danger"></div>
+
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="rece_name">Receptionist Name</label>
@@ -131,26 +187,36 @@
                                             <option value="{{user.username}}">{{user.username}}</option>
                                             {% endfor %}
                                         </select>
+                                        <div id="receNameError" class="text-danger"></div>
+
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="email">Email</label>
                                         <input type="email" value="{{patients.email}}" class="form-control"
                                             placeholder="Email" id="email" name="email">
+                                            <div id="emailError" class="text-danger"></div>
+
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="country">Country</label>
                                         <input type="text" value="{{patients.country}}" class="form-control"
                                             placeholder="Country" id="country" name="country">
+                                            <div id="countryError" class="text-danger"></div>
+
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="city">City</label>
                                         <input type="text" value="{{patients.city}}" class="form-control"
                                             placeholder="City" id="city" name="city">
+                                            <div id="cityError" class="text-danger"></div>
+
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="region">Region</label>
                                         <input type="text" value="{{patients.region}}" class="form-control"
                                             placeholder="Region" id="region" name="region">
+                                            <div id="regionError" class="text-danger"></div>
+
                                     </div>
 
 
@@ -160,6 +226,7 @@
                                         <label for="kebele">Kebele</label>
                                         <input type="text" value="{{patients.kebele}}" placeholder="kebele"
                                             class="form-control" id="kebele" name="kebele">
+                                            <div id="kebeleError" class="text-danger"></div>
 
                                     </div>
                                     <div class="form-group col-md-6">
@@ -171,10 +238,14 @@
                                             {% endfor %}
 
                                         </select>
+                                        <div id="assiDocError" class="text-danger"></div>
+
                                     </div>
                                     <div class="form-group col-md-12">
 										<label for="symptom">Symptoms</label>
 										<textarea placeholder="symptom" class="form-control" id="symptom" rows="3" name="symptom">{{patients.symptom}}</textarea>
+                                        <div id="symptomError" class="text-danger"></div>
+
 									</div>
 
                                 </div>
@@ -238,7 +309,175 @@
         <span class="ti-angle-up"></span>
     </a>
 
+{% comment %} form validation {% endcomment %}
+<script>
+    function validateForm() {
+        var firstName = document.forms["patientForm"]["first_name"].value.trim();
+        var lastName = document.forms["patientForm"]["last_name"].value.trim();
+        var middleName = document.forms["patientForm"]["middle_name"].value.trim();
+        var gender = document.forms["patientForm"]["gender"].value;
+        var birthDate = document.forms["patientForm"]["birth_date"].value;
+        var age = document.forms["patientForm"]["age"].value.trim(); // Parse age as float
+        var phoneNumber = document.forms["patientForm"]["phone_number"].value;
+        var receName = document.forms["patientForm"]["rece_name"].value;
+        var email = document.forms["patientForm"]["email"].value.trim();
+        var country = document.forms["patientForm"]["country"].value.trim();
+        var city = document.forms["patientForm"]["city"].value.trim();
+        var region = document.forms["patientForm"]["region"].value.trim();
+        var kebele = document.forms["patientForm"]["kebele"].value.trim();
+        var assiDoc = document.forms["patientForm"]["assidoc"].value;
+        var symptom = document.forms["patientForm"]["symptom"].value.trim();
 
+        var nameRegex = /^[a-zA-Z]+$/;
+        var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        var phoneRegex = /^09\d{8}$/; // Ensures '09' prefix and a total of 10 digits
+
+        function setFieldStatus(element, isValid) {
+            if (!isValid) {
+                element.style.borderColor = "red";
+            } else {
+                element.style.borderColor = "green";
+            }
+        }
+
+        setFieldStatus(document.getElementById("first-name"), firstName && firstName.match(nameRegex));
+        setFieldStatus(document.getElementById("last-name"), lastName && lastName.match(nameRegex));
+        setFieldStatus(document.getElementById("middle-name"), middleName.match(nameRegex));
+        setFieldStatus(document.getElementById("gender"), gender !== "");
+        setFieldStatus(document.getElementById("birth-date"), birthDate !== "");
+        setFieldStatus(document.getElementById("age"), age !== "" && age > 0 && age < 100);
+        setFieldStatus(document.getElementById("phone-number"), phoneNumber.match(phoneRegex));
+        setFieldStatus(document.getElementById("rece_name"), receName !== "");
+        setFieldStatus(document.getElementById("email"), !email || email.match(emailRegex));
+        setFieldStatus(document.getElementById("country"), country !== "");
+        setFieldStatus(document.getElementById("city"), city !== "");
+        setFieldStatus(document.getElementById("region"), region !== "");
+        setFieldStatus(document.getElementById("kebele"), kebele !== "");
+        setFieldStatus(document.getElementById("assidoc"), assiDoc !== "");
+        setFieldStatus(document.getElementById("symptom"), symptom !== "");
+
+        // Validation checks
+        if (!firstName) {
+            document.getElementById("firstNameError").innerText = "First name is required";
+            return false;
+        } else if (!firstName.match(nameRegex)) {
+            document.getElementById("firstNameError").innerText = "First name must contain only characters";
+            return false;
+        } else {
+            document.getElementById("firstNameError").innerText = "";
+        }
+
+        if (!lastName) {
+            document.getElementById("lastNameError").innerText = "Last name is required";
+            return false;
+        } else if (!lastName.match(nameRegex)) {
+            document.getElementById("lastNameError").innerText = "Last name must contain only characters";
+            return false;
+        } else {
+            document.getElementById("lastNameError").innerText = "";
+        }
+
+        if (!middleName.match(nameRegex)) {
+            document.getElementById("middleNameError").innerText = "Middle name must contain only characters";
+            return false;
+        } else {
+            document.getElementById("middleNameError").innerText = "";
+        }
+
+        if (gender === "") {
+            document.getElementById("genderError").innerText = "Gender is required";
+            return false;
+        } else {
+            document.getElementById("genderError").innerText = "";
+        }
+
+        if (birthDate === "") {
+            document.getElementById("birthDateError").innerText = "Date of birth is required";
+            return false;
+        } else {
+            document.getElementById("birthDateError").innerText = "";
+        }
+
+        if (age > 0 && age < 1) {
+            // Allow decimal values between 0 and 1
+            document.getElementById("ageError").innerText = "";
+        } else if (Number.isInteger(age) && age >= 1 && age < 100) {
+            // Only accept integer values between 1 and 99
+            document.getElementById("ageError").innerText = "";
+        } else {
+            document.getElementById("ageError").innerText = "Age must be a decimal between 0 and 1 or an integer between 1 and 99";
+            return false;
+        }
+
+
+        if (!phoneNumber.match(phoneRegex)) {
+            document.getElementById("phoneNumberError").innerText = "Phone number must start with '09' and be 10 digits long";
+            return false;
+        } else {
+            document.getElementById("phoneNumberError").innerText = "";
+        }
+
+        if (receName === "") {
+            document.getElementById("receNameError").innerText = "Receptionist name is required";
+            return false;
+        } else {
+            document.getElementById("receNameError").innerText = "";
+        }
+
+        if (email && !email.match(emailRegex)) {
+            document.getElementById("emailError").innerText = "Invalid email format";
+            return false;
+        } else {
+            document.getElementById("emailError").innerText = "";
+        }
+
+        if (!country) {
+            document.getElementById("countryError").innerText = "Country is required";
+            return false;
+        } else {
+            document.getElementById("countryError").innerText = "";
+        }
+
+        if (!city) {
+            document.getElementById("cityError").innerText = "City is required";
+            return false;
+        } else {
+            document.getElementById("cityError").innerText = "";
+        }
+
+        if (!region) {
+            document.getElementById("regionError").innerText = "Region is required";
+            return false;
+        } else {
+            document.getElementById("regionError").innerText = "";
+        }
+
+        if (!kebele) {
+            document.getElementById("kebeleError").innerText = "Kebele is required";
+            return false;
+        } else {
+            document.getElementById("kebeleError").innerText = "";
+        }
+
+        if (assiDoc === "") {
+            document.getElementById("assiDocError").innerText = "Assigned Doctor is required";
+            return false;
+        } else {
+            document.getElementById("assiDocError").innerText = "";
+        }
+
+        if (!symptom) {
+            document.getElementById("symptomError").innerText = "Symptoms are required";
+            return false;
+        } else {
+            document.getElementById("symptomError").innerText = "";
+        }
+
+        return true;
+    }
+</script>
+
+{% comment %} end of form validation {% endcomment %}
 </body>
 
 

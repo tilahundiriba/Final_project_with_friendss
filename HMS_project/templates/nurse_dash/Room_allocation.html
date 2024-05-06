@@ -65,17 +65,18 @@
 					<div class="col-md-12">
 						<div class="widget-area-2 proclinic-box-shadow">
 							<h3 class="widget-title">Add Bed Allotment</h3>
-                            <form action="{% url 'allocate_room' %}" method="post">
+							<form action="{% url 'allocate_room' %}" method="post" onsubmit="return validateForm()">
 								{% csrf_token %}
 								<div class="form-row">
 									<div class="form-group col-md-6">
 										<label for="patien-id">Patient ID</label>
 										<input type="text" placeholder="Patient ID" class="form-control" id="patien-id" name="patient_id">
+										<div id="patientIdError" class="error-text"></div>
 									</div>
-									
 									<div class="form-group col-md-6">
 										<label for="room-number">Room Number</label>
 										<input type="text" class="form-control" placeholder="Room Number" id="room-number" name="room-number">
+										<div id="roomNumberError" class="error-text"></div>
 									</div>
 									<div class="form-group col-md-6">
 										<label for="room-type">Room Type</label>
@@ -85,17 +86,11 @@
 											<option value="AC Room">AC Room</option>
 										</select>
 									</div>
-									
-								
-								
-									
-									
 									<div class="form-group col-md-6">
-										<label for="bedid">Bed No</label>
-										<input type="text" placeholder="bed id" class="form-control" id="bed no" name="bed_no">
-									</div> 
-									
-																		
+										<label for="bed-no">Bed No</label>
+										<input type="text" placeholder="Bed No" class="form-control" id="bed-no" name="bed_no">
+										<div id="bedNoError" class="error-text"></div>
+									</div>
 									<div class="form-check col-md-12 mb-2">
 										<div class="text-left">
 											<div class="custom-control custom-checkbox">
@@ -109,6 +104,54 @@
 									</div>
 								</div>
 							</form>
+							<script>
+								function validateForm() {
+									// Validate Patient ID
+									var patientId = document.getElementById("patien-id").value.trim();
+									var patientIdError = document.getElementById("patientIdError");
+									if (patientId === "" || patientId.length !== 8 || !patientId.startsWith("SH")) {
+										patientIdError.innerText = "Patient ID must start with 'SH' and be 8 characters long";
+										patientIdError.style.color = "red";
+										document.getElementById("patien-id").style.borderColor = "red";
+										return false;
+									} else {
+										patientIdError.innerText = "";
+										document.getElementById("patien-id").style.borderColor = "green";
+									}
+							
+									// Validate Room Number
+									var roomNumber = document.getElementById("room-number").value.trim();
+									var roomNumberError = document.getElementById("roomNumberError");
+									if (roomNumber === "" || !roomNumber.match(/^R\d+$/)) {
+										roomNumberError.innerText = "Room Number must start with 'R' and have at least one digit after 'R'";
+										roomNumberError.style.color = "red";
+										document.getElementById("room-number").style.borderColor = "red";
+										return false;
+									} else {
+										roomNumberError.innerText = "";
+										document.getElementById("room-number").style.borderColor = "green";
+									}
+							
+									// Validate Bed No
+									var bedNo = document.getElementById("bed-no").value.trim();
+									var bedNoError = document.getElementById("bedNoError");
+									if (bedNo === "") {
+										bedNoError.innerText = "Bed No cannot be empty";
+										bedNoError.style.color = "red";
+										document.getElementById("bed-no").style.borderColor = "red";
+										return false;
+									} else {
+										bedNoError.innerText = "";
+										document.getElementById("bed-no").style.borderColor = "green";
+									}
+							
+									// If all validations pass, return true to submit the form
+									return true;
+								}
+							</script>
+							
+							
+							
 							
 						{% if registered %}
 							<div class="alert alert-success alert-dismissible fade show" role="alert">

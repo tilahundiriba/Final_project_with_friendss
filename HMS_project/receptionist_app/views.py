@@ -252,8 +252,8 @@ def existing_patient(request):
     unseen_count = Notification.objects.filter(seen=False).count()
     form=False
     if request.method == 'POST':
-        doctors = User.objects.filter(userprofileinfo2__role='doctor')
-        recep = User.objects.filter(userprofileinfo2__role='receptionist')
+        doctors = User.objects.filter(userprofileinfo__role='doctor')
+        recep = User.objects.filter(userprofileinfo__role='receptionist')
         patient_id = request.POST.get('patient_id')
         patient = get_object_or_404(PatientRegister, patient_id=patient_id)
         form=True

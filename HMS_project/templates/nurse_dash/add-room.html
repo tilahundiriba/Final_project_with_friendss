@@ -67,16 +67,18 @@
 					<div class="col-md-12">
 						<div class="widget-area-2 proclinic-box-shadow">
 							<h3 class="widget-title">Add Room </h3>
-							<form action="{% url 'add_room' %}" method="post">
+							<form action="{% url 'add_room' %}" method="post" onsubmit="return validateForm()">
 								{% csrf_token %}
 								<div class="form-row">
 									<div class="form-group col-md-6">
 										<label for="room-block">Block Number</label>
 										<input type="text" class="form-control" placeholder="Room Block" id="room-block" name="block_no">
+										<div id="blockNumberError" class="error-text"></div>
 									</div>
 									<div class="form-group col-md-6">
 										<label for="room-number">Room Number</label>
 										<input type="text" class="form-control" placeholder="Room Number" id="room-number" name="room_no">
+										<div id="roomNumberError" class="error-text"></div>
 									</div>
 									<div class="form-group col-md-6">
 										<label for="room-type">Room Type</label>
@@ -89,13 +91,13 @@
 									<div class="form-group col-md-6">
 										<label for="bed-number">Bed Number</label>
 										<input type="text" placeholder="Bed Number" class="form-control" id="bed-number" name="bed_no">
+										<div id="bedNumberError" class="error-text"></div>
 									</div>
 									<div class="form-group col-md-6">
 										<label for="bed-status">Status</label>
 										<input type="text" placeholder="room status" class="form-control" id="bed-status" name="status">
+										<div id="bedStatusError" class="error-text"></div>
 									</div>
-									
-																		
 									<div class="form-check col-md-12 mb-2">
 										<div class="text-left">
 											<div class="custom-control custom-checkbox">
@@ -109,6 +111,74 @@
 									</div>
 								</div>
 							</form>
+							
+							<script>
+								function validateForm() {
+									// Validate Block Number
+									var blockNumber = document.getElementById("room-block").value.trim();
+									var blockNumberError = document.getElementById("blockNumberError");
+									if (blockNumber === "" || !blockNumber.startsWith("B")) {
+										blockNumberError.innerText = "Block Number cannot be empty and must start with 'B'";
+										blockNumberError.style.color = "red";
+										document.getElementById("room-block").style.borderColor = "red";
+										return false;
+									} else {
+										blockNumberError.innerText = "";
+										document.getElementById("room-block").style.borderColor = "green";
+									}
+							
+									// Validate Room Number
+									var roomNumber = document.getElementById("room-number").value.trim();
+									var roomNumberError = document.getElementById("roomNumberError");
+									if (roomNumber === "" || !roomNumber.startsWith("R")) {
+										roomNumberError.innerText = "Room Number cannot be empty and must start with 'R'";
+										roomNumberError.style.color = "red";
+										document.getElementById("room-number").style.borderColor = "red";
+										return false;
+									} else {
+										roomNumberError.innerText = "";
+										document.getElementById("room-number").style.borderColor = "green";
+									}
+							
+									// Validate Bed Number
+									var bedNumber = document.getElementById("bed-number").value.trim();
+									var bedNumberError = document.getElementById("bedNumberError");
+									if (bedNumber === "") {
+										bedNumberError.innerText = "Bed Number cannot be empty";
+										bedNumberError.style.color = "red";
+										document.getElementById("bed-number").style.borderColor = "red";
+										return false;
+									} else {
+										bedNumberError.innerText = "";
+										document.getElementById("bed-number").style.borderColor = "green";
+									}
+							
+									// Validate Bed Status
+									var bedStatus = document.getElementById("bed-status").value.trim();
+									var bedStatusError = document.getElementById("bedStatusError");
+									if (bedStatus === "") {
+										bedStatusError.innerText = "Bed Status cannot be empty";
+										bedStatusError.style.color = "red";
+										document.getElementById("bed-status").style.borderColor = "red";
+										return false;
+									} else {
+										bedStatusError.innerText = "";
+										document.getElementById("bed-status").style.borderColor = "green";
+									}
+							
+									// Validate Confirmation Checkbox
+									var confirmationCheckbox = document.getElementById("ex-check-2");
+									if (!confirmationCheckbox.checked) {
+										alert("Please confirm by checking the checkbox");
+										return false;
+									}
+							
+									// If all validations pass, return true to submit the form
+									return true;
+								}
+							</script>
+							
+							
 							<!-- Alerts-->
 							{% if registered %}
 							<div class="alert alert-success alert-dismissible fade show" role="alert">
