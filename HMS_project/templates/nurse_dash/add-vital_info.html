@@ -8,14 +8,15 @@
 
 <!-- Mirrored from www.konnectplugins.com/proclinic/Horizontal/edit-room.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 24 Jan 2022 10:42:01 GMT -->
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	{% block 'title' %}
-	<title>Edit Room</title>
-	{% endblock %}
-	<!-- Fav  Icon Link -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    {% block title %}
+        <title>Edit Room</title>
+    {% endblock %}
+    <!-- Fav  Icon Link -->
 </head>
+
 
 <body>
 	<!-- Pre Loader -->
@@ -65,50 +66,69 @@
 					<div class="col-md-12">
 						<div class="widget-area-2 proclinic-box-shadow">
 							<h3 class="widget-title">Vital Informations</h3>
-							<form action="{% url 'vital_info' %}" method="post">
+							<form action="{% url 'vital_info' %}" method="post" onsubmit="return validateForm()" id="formId">
 								{% csrf_token %}
 								<div class="form-row">
 									<div class="form-group col-md-6">
-										<label for="patient-id">Patient ID</label>
-										<input type="text" class="form-control" placeholder="Patient ID" id="patient-id" name="patient_id">
+										<label for="patient_id">Patient ID</label>
+										<input type="text" class="form-control" placeholder="Patient id" id="patient_id" name="patient_id">
+										<div id="patientIdError" class="text-danger"></div>
 									</div>
 								
 									<div class="form-group col-md-6">
 										<label for="HeartRate">Heart Rate</label>
 										<input type="text" placeholder="heart rate" class="form-control" id="HeartRate" name="Heart_Rate">
+										<div id="heartRateError" class="error-text"></div>
+
 									</div>
 								
 									<div class="form-group col-md-6">
 										<label for="bloodpre">Blood Pressure</label>
 										<input type="text" placeholder="blood pressure" class="form-control" id="bloodpre" name="bloodpre">
+										<div id="bloodPressureError" class="error-text"></div>
+
 									</div>
 									<div class="form-group col-md-6">
 										<label for="resRate">Respiratory Rate</label>
 										<input type="text" placeholder="respiratory rate" class="form-control" id="resRate" name="resRate">
+										<div id="respiratoryRateError" class="error-text"></div>
+
 									</div>
 									<div class="form-group col-md-6">
 										<label for="bodytemp">Body Temprature</label>
 										<input type="text" placeholder="body temprature" class="form-control" id="bodytemp" name="bodytemp">
+										<div id="bodyTemperatureError" class="error-text"></div>
+
 									</div>
 									<div class="form-group col-md-6">
 										<label for="oxysatu">Oxygen Saturation</label>
 										<input type="text" placeholder="oxygen saturation" class="form-control" id="oxysatu" name="oxysatu">
+										<div id="oxygenSaturationError" class="error-text"></div>
+
 									</div>
 									<div class="form-group col-md-6">
 										<label for="painlev">Pain Level</label>
 										<input type="text" placeholder="Pain level" class="form-control" id="painlev" name="painlev">
+										<div id="painLevelError" class="error-text"></div>
+
 									</div>
 									<div class="form-group col-md-6">
 										<label for="height">Height</label>
 										<input type="text" placeholder="height" class="form-control" id="height" name="height">
+										<div id="heightError" class="error-text"></div>
+
 									</div>
 									<div class="form-group col-md-6">
 										<label for="weight">Weight</label>
 										<input type="text" placeholder="weight" class="form-control" id="weight" name="weight">
+										<div id="weightError" class="error-text"></div>
+
 									</div>
 									<div class="form-group col-md-6">
 										<label for="bloodglu">Blood Glucose level</label>
 										<input type="text" placeholder="blood glucose level" class="form-control" id="bloodglu" name="bloodglu">
+										<div id="bloodGlucoseLevelError" class="error-text"></div>
+
 									</div>
 									<div class="form-group col-md-6">
 										<label for="nurseid">Nursing ID</label>
@@ -118,11 +138,15 @@
 											<option value="{{user.username}}">{{user.username}}</option>
 											{% endfor %}
 										</select>
+										<div id="nursingIdError" class="error-text"></div>
+
 										<!-- <input type="text" placeholder="nursing id" class="form-control" id="nurseid" name="nurseid"> -->
 									</div>
 									<div class="form-group col-md-6">
 										<label for="exampleFormControlTextarea1">Remark</label>
 										<textarea placeholder="remark" class="form-control" id="exampleFormControlTextarea1" rows="3" name="remark"></textarea>
+										<div id="remarkError" class="error-text"></div>
+
 									</div>
 									<!-- <div class="form-group col-md-6">
 										<label for="gender">Gender</label>
@@ -147,6 +171,161 @@
 									</div>
 								</div>
 							</form>
+							<script>
+								function validateForm() {
+								        // Validate Patient ID
+										var patientId = document.getElementById("patient_id");
+										if (patientId.value.trim().length !== 8 || !patientId.value.trim().startsWith("SH")) {
+											patientId.style.borderColor = "red";
+											document.getElementById("patientIdError").innerText = "Patient ID must start with 'SH' and be 8 characters long";
+											return false;
+										} else {
+											patientId.style.borderColor = "green";
+											document.getElementById("patientIdError").innerText = "";
+										}
+								
+										// Validate Heart Rate
+										var heartRate = document.getElementById("HeartRate");
+										if (heartRate.value.trim() === "" || isNaN(heartRate.value.trim())) {
+											heartRate.style.borderColor = "red";
+											document.getElementById("heartRateError").innerText = "Heart Rate must be a number";
+											heartRateError.style.color = "red";
+
+											return false;
+										} else {
+											heartRate.style.borderColor = "green";
+											document.getElementById("heartRateError").innerText = "";
+										}
+								
+										// Validate Blood Pressure
+										var bloodPressure = document.getElementById("bloodpre");
+										if (bloodPressure.value.trim() === "" || isNaN(bloodPressure.value.trim())) {
+											bloodPressure.style.borderColor = "red";
+											document.getElementById("bloodPressureError").innerText = "Blood Pressure must be a number";
+											bloodPressureError.style.color = "red";
+
+											return false;
+										} else {
+											bloodPressure.style.borderColor = "green";
+											document.getElementById("bloodPressureError").innerText = "";
+										}
+									// Validate Respiratory Rate
+									   var respiratoryRate = document.getElementById("resRate");
+										if (respiratoryRate.value.trim() === "" || isNaN(respiratoryRate.value.trim())) {
+											respiratoryRate.style.borderColor = "red";
+											document.getElementById("resRateError").innerText = "Respiratory Rate must be a number";
+											resRateError.style.color = "red";
+
+											return false;
+										} else {
+											respiratoryRate.style.borderColor = "green";
+											document.getElementById("resRateError").innerText = "";
+										}
+							
+								
+							
+									// Validate Body Temperature
+									var bodyTemperature = document.getElementById("bodytemp").value.trim();
+									if (isNaN(bodyTemperature)) {
+										document.getElementById("bodytempError").innerText = "Body Temperature must be a number";
+										document.getElementById("bodytemp").style.borderColor = "red";
+										isValid = false;
+									} else {
+										document.getElementById("bodytempError").innerText = "";
+										document.getElementById("bodytemp").style.borderColor = "green";
+									}
+							
+									// Validate Oxygen Saturation
+									var oxygenSaturation = document.getElementById("oxysatu").value.trim();
+									if (isNaN(oxygenSaturation)) {
+										document.getElementById("oxysatuError").innerText = "Oxygen Saturation must be a number";
+										document.getElementById("oxysatu").style.borderColor = "red";
+										isValid = false;
+									} else {
+										document.getElementById("oxysatuError").innerText = "";
+										document.getElementById("oxysatu").style.borderColor = "green";
+									}
+							
+									// Validate Pain Level
+									var painLevel = document.getElementById("painlev").value.trim();
+									if (isNaN(painLevel)) {
+										document.getElementById("painlevError").innerText = "Pain Level must be a number";
+										document.getElementById("painlev").style.borderColor = "red";
+										isValid = false;
+									} else {
+										document.getElementById("painlevError").innerText = "";
+										document.getElementById("painlev").style.borderColor = "green";
+									}
+							
+									// Validate Height
+									var height = document.getElementById("height").value.trim();
+									if (isNaN(height)) {
+										document.getElementById("heightError").innerText = "Height must be a number";
+										document.getElementById("height").style.borderColor = "red";
+										isValid = false;
+									} else {
+										document.getElementById("heightError").innerText = "";
+										document.getElementById("height").style.borderColor = "green";
+									}
+							
+									// Validate Weight
+									var weight = document.getElementById("weight").value.trim();
+									if (isNaN(weight)) {
+										document.getElementById("weightError").innerText = "Weight must be a number";
+										document.getElementById("weight").style.borderColor = "red";
+										isValid = false;
+									} else {
+										document.getElementById("weightError").innerText = "";
+										document.getElementById("weight").style.borderColor = "green";
+									}
+							
+									// Validate Blood Glucose Level
+									var bloodGlucoseLevel = document.getElementById("bloodglu").value.trim();
+									if (isNaN(bloodGlucoseLevel)) {
+										document.getElementById("bloodgluError").innerText = "Blood Glucose Level must be a number";
+										document.getElementById("bloodglu").style.borderColor = "red";
+										isValid = false;
+									} else {
+										document.getElementById("bloodgluError").innerText = "";
+										document.getElementById("bloodglu").style.borderColor = "green";
+									}
+							
+									// Validate Nursing ID
+									var nurseId = document.getElementById("nurseid").value;
+									if (nurseId === "Select Name") {
+										document.getElementById("nurseidError").innerText = "Please select a nurse";
+										document.getElementById("nurseid").style.borderColor = "red";
+										isValid = false;
+									} else {
+										document.getElementById("nurseidError").innerText = "";
+										document.getElementById("nurseid").style.borderColor = "green";
+									}
+							
+									// Validate Remark
+									var remark = document.getElementById("exampleFormControlTextarea1").value.trim();
+									if (!remark) {
+										document.getElementById("remarkError").innerText = "Remark cannot be empty";
+										document.getElementById("exampleFormControlTextarea1").style.borderColor = "red";
+										isValid = false;
+									} else {
+										document.getElementById("remarkError").innerText = "";
+										document.getElementById("exampleFormControlTextarea1").style.borderColor = "green";
+									}
+							
+									return isValid;
+								}
+							
+								function submitForm(event) {
+									if (!validateForm()) {
+										event.preventDefault(); // Prevent form submission
+									}
+								}
+							
+								document.getElementById("formId").addEventListener("submit", submitForm);
+							</script>
+							
+							
+							
 								<!-- Alerts-->
 								{% if registered %}
 								<div class="alert alert-success alert-dismissible fade show" role="alert">

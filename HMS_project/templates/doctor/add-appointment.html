@@ -69,12 +69,13 @@
 					<div class="col-md-12">
 						<div class="widget-area-2 proclinic-box-shadow">
 							<h3 class="widget-title">Add Appointment</h3>
-							<form action="{% url 'add-appointment' %}" method="post">
+							<form action="{% url 'add-appointment' %}" method="post" onsubmit="return validateForm()">
 								{% csrf_token %}
 								<div class="form-row">
 									<div class="form-group col-md-6">
 										<label for="patient-id">Patient ID</label>
 										<input type="text" class="form-control" placeholder="Patient ID" id="patient-id" name="patient_id">
+										<div id="patientIdError" class="text-danger"></div>
 									</div>
 									<div class="form-group col-md-6">
 										<label for="time-slot">Time Slot</label>
@@ -90,43 +91,106 @@
 											<option>7PM-8PM</option>
 											<option>8PM-9PM</option>
 										</select>
+										<div id="timeSlotError" class="text-danger"></div>
 									</div>
 									<div class="form-group col-md-6">
 										<label for="dr_name">Doctor Name</label>
-									
-										
 										<select class="form-control" id="dr_name" name="dr_name">
 											<option>Choose Name</option>
 											{% for user in doctors %}
 											<option value="{{user.username}}">{{user.username}}</option>
 											{% endfor %}
 										</select>
-										
+										<div id="drNameError" class="text-danger"></div>
 									</div>
-							
-									
 									<div class="form-group col-md-6">
 										<label for="app_status">Status</label>
-										<!-- <input type="text" placeholder="Status" class="form-control" id="app_status" name="status"> -->
 										<select class="form-control" id="app_status" name="app_status">
 											<option selected disabled>Choose Status</option>
 											<option value="Completed">Completed</option>
 											<option value="Pending">Pending</option>
 											<option value="Cancelled">Cancelled</option>
-											
 										</select>
+										<div id="appStatusError" class="text-danger"></div>
 									</div>
 									<div class="form-group col-md-12">
 										<label for="problem">Problem</label>
 										<textarea placeholder="Problem" class="form-control" id="problem" rows="3" name="problem"></textarea>
+										<div id="problemError" class="text-danger"></div>
 									</div>
-																		
-								
 									<div class="form-group col-md-6 mb-3">
 										<button type="submit" class="btn btn-primary btn-lg">Submit</button>
 									</div>
 								</div>
 							</form>
+							<script>
+								function validateForm() {
+									var patientId = document.getElementById("patient-id");
+									var timeSlot = document.getElementById("time-slot");
+									var drName = document.getElementById("dr_name");
+									var appStatus = document.getElementById("app_status");
+									var problem = document.getElementById("problem");
+							
+									// Check if patient ID is empty
+									if (patientId.value.trim() === "") {
+										patientId.style.borderColor = "red";
+										document.getElementById("patientIdError").innerText = "Patient ID cannot be empty";
+										return false;
+									} else if (!patientId.value.trim().startsWith("SH") || patientId.value.trim().length !== 8) {
+										patientId.style.borderColor = "red";
+										document.getElementById("patientIdError").innerText = "Patient ID must start with 'SH' and be 8 characters long";
+										return false;
+									} else {
+										patientId.style.borderColor = "green";
+										document.getElementById("patientIdError").innerText = "";
+									}
+							
+									// Check if time slot is selected
+									if (timeSlot.value.trim() === "Choose Time") {
+										timeSlot.style.borderColor = "red";
+										document.getElementById("timeSlotError").innerText = "Please choose a time slot";
+										return false;
+									} else {
+										timeSlot.style.borderColor = "green";
+										document.getElementById("timeSlotError").innerText = "";
+									}
+							
+									// Check if doctor name is selected
+									if (drName.value.trim() === "Choose Name") {
+										drName.style.borderColor = "red";
+										document.getElementById("drNameError").innerText = "Please choose a Doctor Name";
+										return false;
+									} else {
+										drName.style.borderColor = "green";
+										document.getElementById("drNameError").innerText = "";
+									}
+							
+									// Check if appointment status is selected
+									if (appStatus.value.trim() === "Choose Status") {
+										appStatus.style.borderColor = "red";
+										document.getElementById("appStatusError").innerText = "Please choose an Appointment Status";
+										return false;
+									} else {
+										appStatus.style.borderColor = "green";
+										document.getElementById("appStatusError").innerText = "";
+									}
+							
+									// Check if problem is empty
+									if (problem.value.trim() === "") {
+										problem.style.borderColor = "red";
+										document.getElementById("problemError").innerText = "Problem cannot be empty";
+										return false;
+									} else {
+										problem.style.borderColor = "green";
+										document.getElementById("problemError").innerText = "";
+									}
+							
+									// All fields are valid
+									return true;
+								}
+							</script>
+							
+							
 							<!-- Alerts-->
 							{% if registered %}
 							<div class="alert alert-success alert-dismissible fade show" role="alert">

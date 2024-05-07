@@ -52,59 +52,81 @@
 					<div class="col-sm-6 auth-box">
 						<div class="proclinic-box-shadow">
 							<h3 class="widget-title">Login</h3>
-							<form action="{% url 'user_log' %}" method="post">
+							<form action="{% url 'user_log' %}" method="post" onsubmit="return validateLoginForm()">
 								{% csrf_token %}
 								<!-- form-group -->
 								<div class="form-group row">
 									<div class="col-sm-12">
-										<input name="username" placeholder="Username" class="form-control"
-										 >
+										<input id="username" name="username" placeholder="Username" class="form-control">
+										<div id="usernameError" class="text-danger"></div>
 									</div>
 								</div>
 								<!-- /.form-group -->
 								<!-- form-group -->
 								<div class="form-group row">
 									<div class="col-sm-12">
-										<input type="password" placeholder="Password" name="password" class="form-control">
+										<input type="password" id="password" placeholder="Password" name="password" class="form-control">
+										<div id="passwordError" class="text-danger"></div>
 									</div>
 								</div>
-								<!-- <div class="form-group row">
-									<div class="col-sm-12">
-										<select name="role" class="form-control" style="height: 60px;">
-										 <option selected value="Choose Your Role">Choose Your Role</option>
-										 <option value="admin">Admin</option>
-										 <option value="doctor">Doctor</option>
-										 <option value="nurse">Nurse</option>
-										 <option value="receptionist">Receptionist</option>
-										 <option value="technician">Technician</option>
-										 <option value="casher">Casher</option>
-								
-									</select>
-									</div>
-								</div> -->
 								<!-- /.form-group -->
-								<!-- Check Box -->		
 								<div class="form-check row">
 									<div class="col-sm-12 text-left">
 										<div class="custom-control custom-checkbox">
-											<input class="custom-control-input" type="checkbox" id="ex-check-2">
-											<label class="custom-control-label" for="ex-check-2">Remember Me</label>
+											<input class="custom-control-input" type="checkbox" id="rememberMe">
+											<label class="custom-control-label" for="rememberMe">Remember Me</label>
 										</div>
 									</div>
 								</div>
-								<!-- /Check Box -->	
-								<!-- Login Button -->			
+								<!-- /Check Box -->    
+								<!-- Login Button -->            
 								<div class="button-btn-block">
 									<input type="submit" class="btn btn-primary btn-lg btn-block" value="Login"/>
 								</div>
-								<!-- /Login Button -->	
-								<!-- Links -->	
+								<!-- /Login Button -->    
+								<!-- Links -->    
 								<div class="auth-footer-text">
 									<small>Forget Password,
 										<a href="{% url 'password_reset' %}">Reset</a> Here</small>
 								</div>
 								<!-- /Links -->
 							</form>
+							
+							<script>
+								function validateLoginForm() {
+									var username = document.getElementById("username").value.trim();
+									var password = document.getElementById("password").value.trim();
+									var rememberMe = document.getElementById("rememberMe").checked;
+							
+									var usernameError = document.getElementById("usernameError");
+									var passwordError = document.getElementById("passwordError");
+							
+									var isValid = true;
+							
+									// Check if username is empty
+									if (username === "") {
+										usernameError.innerText = "Username is required";
+										document.getElementById("username").style.borderColor = "red";
+										isValid = false;
+									} else {
+										usernameError.innerText = "";
+										document.getElementById("username").style.borderColor = "green";
+									}
+							
+									// Check if password is empty
+									if (password === "") {
+										passwordError.innerText = "Password is required";
+										document.getElementById("password").style.borderColor = "red";
+										isValid = false;
+									} else {
+										passwordError.innerText = "";
+										document.getElementById("password").style.borderColor = "green";
+									}
+							
+									return isValid;
+								}
+							</script>
+							
 						</div>
 					</div>
 				</div>

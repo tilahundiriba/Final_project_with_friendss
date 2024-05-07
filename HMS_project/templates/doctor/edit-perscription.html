@@ -58,38 +58,95 @@
 					<div class="col-md-12">
 						<div class="widget-area-2 proclinic-box-shadow">
 							<h3 class="widget-title">Edit Prescriptions</h3>
-							<form action="{% url 'edit_perscription' prescriptions.Prec_number %}" method="post">
+							<form action="{% url 'edit_perscription' prescriptions.Prec_number %}" method="post" onsubmit="return validateForm()">
 								{% csrf_token %}
 								<div class="form-row">
 									<div class="form-group col-md-6">
 										<label for="age">Patient ID</label>
 										<input type="text" placeholder="Patient ID" value="{{prescriptions.PatientID}}" class="form-control" id="age" name="patient_id">
+										<div id="patientIdError" class="text-danger"></div>
 									</div>
 									<div class="form-group col-md-6">
 										<label for="patient-name">Patient Name</label>
 										<input type="text" class="form-control" placeholder="Patient name" value="{{prescriptions.Patient_full_name}}" id="patient-name" name="name">
+										<div id="patientNameError" class="text-danger"></div>
 									</div>
-								
 									<div class="form-group col-md-6">
 										<label for="dr_name">Doctor Name</label>
 										<select class="form-control" id="dr_name" name="dr_name">
 											<option value="{{prescriptions.Doctor_ID}}">{{prescriptions.Doctor_ID}}</option>
-									
 										</select>
+										<div id="drNameError" class="text-danger"></div>
 									</div>
-							
 									<div class="form-group col-md-6">
 										<label for="exampleFormControlTextarea1">Prescription</label>
 										<textarea placeholder="Prescription" class="form-control" id="exampleFormControlTextarea1" rows="3" name="prescription">{{prescriptions.Precscriptions}}</textarea>
+										<div id="prescriptionError" class="text-danger"></div>
 									</div>
-								
-																		
-							
 									<div class="form-group col-md-6 mb-3">
 										<button type="submit" class="btn btn-primary btn-lg">Update</button>
 									</div>
 								</div>
 							</form>
+                           <script>
+							function validateForm() {
+								var patientId = document.getElementById("age").value.trim();
+								var patientName = document.getElementById("patient-name").value.trim();
+								var drName = document.getElementById("dr_name").value.trim();
+								var prescription = document.getElementById("exampleFormControlTextarea1").value.trim();
+							
+								// Reset border colors
+								document.getElementById("age").style.borderColor = "";
+								document.getElementById("patient-name").style.borderColor = "";
+								document.getElementById("dr_name").style.borderColor = "";
+								document.getElementById("exampleFormControlTextarea1").style.borderColor = "";
+							
+								// Check if patient ID starts with "SH" and is exactly 8 characters long
+								if (patientId.length !== 8 || !patientId.startsWith("SH")) {
+									document.getElementById("patientIdError").innerText = "Patient ID must start with 'SH' and be 8 characters long";
+									document.getElementById("age").style.borderColor = "red";
+								} else {
+									document.getElementById("patientIdError").innerText = "";
+									document.getElementById("age").style.borderColor = "green";
+								}
+							
+								// Check if patient name is empty
+								if (patientName === "") {
+									document.getElementById("patientNameError").innerText = "Patient name is required";
+									document.getElementById("patient-name").style.borderColor = "red";
+								} else {
+									document.getElementById("patientNameError").innerText = "";
+									document.getElementById("patient-name").style.borderColor = "green";
+								}
+							
+								// Check if doctor name is empty
+								if (drName === "") {
+									document.getElementById("drNameError").innerText = "Doctor name is required";
+									document.getElementById("dr_name").style.borderColor = "red";
+								} else {
+									document.getElementById("drNameError").innerText = "";
+									document.getElementById("dr_name").style.borderColor = "green";
+								}
+							
+								// Check if prescription is empty
+								if (prescription === "") {
+									document.getElementById("prescriptionError").innerText = "Prescription is required";
+									document.getElementById("exampleFormControlTextarea1").style.borderColor = "red";
+								} else {
+									document.getElementById("prescriptionError").innerText = "";
+									document.getElementById("exampleFormControlTextarea1").style.borderColor = "green";
+								}
+							
+								// Return false if any field is invalid
+								if (patientId.length !== 8 || !patientId.startsWith("SH") || patientName === "" || drName === "" || prescription === "") {
+									return false;
+								}
+							
+								return true;
+							}
+							
+
+						   </script>							
 							<!-- Alerts-->
 							{% if registered %}
 							<div class="alert alert-success alert-dismissible fade show" role="alert">

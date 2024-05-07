@@ -16,6 +16,11 @@
 	<title>Registration From</title>
 	{% endblock %}
 	<!-- Fav  Icon Link -->
+	<style>
+        .error {
+            color: red; /* Set the color of error text to red */
+        }
+    </style>
 </head>
 
 <body>
@@ -65,23 +70,23 @@
 					<div class="col-md-12">
 						<div class="widget-area-2 proclinic-box-shadow">
 							<h3 class="widget-title">User Registration</h3>
-							<form action="{% url 'createUserAccount' %}" method="post">
+							<form action="{% url 'createUserAccount' %}" method="post" onsubmit="return validateForm()">
 								{% csrf_token %}
 								<div class="form-row">
 									<div class="form-group col-md-6">
 										<label for="fname">First Name</label>
-										<input type="text" placeholder="first name" class="form-control"
-											id="fname" name="first_name">
+										<input type="text" placeholder="First name" class="form-control" id="fname" name="first_name">
+										<div id="fnameError" class="error"></div>
 									</div>
 									<div class="form-group col-md-6">
 										<label for="last_name">Last Name</label>
-										<input type="text" placeholder="last name" class="form-control"
-											id="last_name" name="last_name">
+										<input type="text" placeholder="Last name" class="form-control" id="last_name" name="last_name">
+										<div id="lnameError" class="error"></div>
 									</div>
 									<div class="form-group col-md-6">
 										<label for="email">Email</label>
-										<input type="email" placeholder="example@gmail.com" class="form-control"
-											id="Email" name="email">
+										<input type="email" placeholder="example@gmail.com" class="form-control" id="Email" name="email">
+										<div id="emailError" class="error"></div>
 									</div>
 									<div class="form-group col-md-6">
 										<label for="role">Role</label>
@@ -93,6 +98,8 @@
 											<option value="receptionist">Receptionist</option>
 											<option value="admin">Admin</option>
 										</select>
+										<div id="roleError" class="error"></div>
+
 									</div>
 									<div class="form-group col-md-6">
 										<label for="speciality">Speciality</label>
@@ -103,12 +110,87 @@
 											<option value="Surgery">Surgery</option>
 											<option value="Pediatrics">Pediatrics</option>
 										</select>
+										<div id="specialityError" class="error"></div>
+
 									</div>
 									<div class="form-group col-md-12 mb-3">
 										<button type="submit" class="btn btn-primary btn-lg">Register</button>
 									</div>
 								</div>
 							</form>
+						
+							<script>
+								function validateForm() {
+									var fname = document.getElementById("fname").value.trim();
+									var lname = document.getElementById("last_name").value.trim();
+									var email = document.getElementById("Email").value.trim();
+									var role = document.getElementById("role").value;
+									var speciality = document.getElementById("speciality").value;
+						
+									var fnameError = document.getElementById("fnameError");
+									var lnameError = document.getElementById("lnameError");
+									var emailError = document.getElementById("emailError");
+						
+									var isValid = true;
+						
+									// Validate first name
+									if (!fname) {
+										fnameError.innerText = "First name is required";
+										document.getElementById("fname").style.borderColor = "red";
+										isValid = false;
+									} else {
+										fnameError.innerText = "";
+										document.getElementById("fname").style.borderColor = "green";
+									}
+						
+									// Validate last name
+									if (!lname) {
+										lnameError.innerText = "Last name is required";
+										document.getElementById("last_name").style.borderColor = "red";
+										isValid = false;
+									} else {
+										lnameError.innerText = "";
+										document.getElementById("last_name").style.borderColor = "green";
+									}
+						
+									// Validate email
+									if (!email) {
+										emailError.innerText = "Email is required";
+										document.getElementById("Email").style.borderColor = "red";
+										isValid = false;
+									} else if (!isValidEmail(email)) {
+										emailError.innerText = "Invalid email format";
+										document.getElementById("Email").style.borderColor = "red";
+										isValid = false;
+									} else {
+										emailError.innerText = "";
+										document.getElementById("Email").style.borderColor = "green";
+									}
+						
+                           // Validate role
+                                   if (role === "") {
+                                   document.getElementById("roleError").innerText = "Please select a role";
+                                   isValid = false;
+                                      } else {
+                                  document.getElementById("roleError").innerText = "";
+                                        }
+
+                               // Validate speciality
+                                    if (speciality === "") {
+                                    document.getElementById("specialityError").innerText = "Please select a speciality";
+                                    isValid = false;
+                                    } else {
+                                     document.getElementById("specialityError").innerText = "";
+                                           }
+									return isValid;
+								}
+						
+								// Function to validate email format
+								function isValidEmail(email) {
+									var emailRegex = /^\S+@\S+\.\S+$/;
+									return emailRegex.test(email);
+								}
+							</script>
 							<!-- Alerts-->
 							{% if created %}
 							<div class="alert alert-success alert-dismissible fade show" role="alert">

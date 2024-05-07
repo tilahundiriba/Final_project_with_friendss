@@ -65,46 +65,134 @@
 					<div class="col-md-12">
 						<div class="widget-area-2 proclinic-box-shadow">
 							<h3 class="widget-title">  Medication Record </h3>
-							<form action="{% url 'add_medication' %}" method="post">
+							<form action="{% url 'add_medication' %}" method="post" onsubmit="return validateForm()">
 								{% csrf_token %}
 								<div class="form-row">
 									<div class="form-group col-md-6">
 										<label for="pid">Patient ID</label>
 										<input type="text" class="form-control" placeholder="patient id" id="pid" name="patient_id">
+										<div id="patientIdError" class="error-text"></div>
 									</div>
-									
-                                    <div class="form-group col-md-6">
+									<div class="form-group col-md-6">
 										<label for="MediTime">Medication Time</label>
 										<input type="time" placeholder="medication time" class="form-control" id="MediTime" name="MediTime">
+										<div id="mediTimeError" class="error-text"></div>
 									</div>
 									<div class="form-group col-md-6">
 										<label for="Bedno">Bed Number</label>
 										<input type="text" placeholder="bed number" class="form-control" id="Bedno" name="Bedno">
+										<div id="bedNumberError" class="error-text"></div>
 									</div>
 									<div class="form-group col-md-6">
 										<label for="nurseid">Nurse Name</label>
-										<!-- <input type="text" placeholder="nurse id" class="form-control" id="nurseid" name="nurseid"> -->
 										<select class="form-control" id="nurseid" name="nurseid">
 											<option>Select Name</option>
 											{% for user in nurses  %}
 											<option value="{{user.username}}">{{user.username}}</option>
-										{% endfor  %}
+											{% endfor  %}
 										</select>
+										<div id="nurseNameError" class="error-text"></div>
 									</div>
 									<div class="form-group col-md-6">
 										<label for="Drug">Drugs</label>
 										<textarea placeholder="drug details" class="form-control" id="drugs" name="drugs" rows="1"></textarea>
-                                    </div>
+										<div id="drugsError" class="error-text"></div>
+									</div>
 									<div class="form-group col-md-6">
 										<label for="remark">Remark</label>
 										<input type="text" placeholder="remark" class="form-control" id="remark" name="remark">
+										<div id="remarkError" class="error-text"></div>
 									</div>
-									
 									<div class="form-group col-md-6 mb-3">
 										<button type="submit" class="btn btn-primary btn-lg">Submit</button>
 									</div>
 								</div>
 							</form>
+							<script>
+								function validateForm() {
+									// Validate Patient ID
+									var patientId = document.getElementById("pid").value.trim();
+									var patientIdError = document.getElementById("patientIdError");
+									if (patientId === "" || patientId.length !== 8 || !patientId.startsWith("SH")) {
+										patientIdError.innerText = "Patient ID must start with 'SH' and be 8 characters long";
+										patientIdError.style.color = "red";
+										document.getElementById("pid").style.borderColor = "red";
+										return false;
+									} else {
+										patientIdError.innerText = "";
+										document.getElementById("pid").style.borderColor = "green";
+									}
+							
+									// Validate Medication Time
+									var mediTime = document.getElementById("MediTime").value.trim();
+									var mediTimeError = document.getElementById("mediTimeError");
+									if (mediTime === "") {
+										mediTimeError.innerText = "Medication Time cannot be empty";
+										mediTimeError.style.color = "red";
+										document.getElementById("MediTime").style.borderColor = "red";
+										return false;
+									} else {
+										mediTimeError.innerText = "";
+										document.getElementById("MediTime").style.borderColor = "green";
+									}
+							
+									// Validate Bed Number
+									var bedNumber = document.getElementById("Bedno").value.trim();
+									var bedNumberError = document.getElementById("bedNumberError");
+									if (bedNumber === "") {
+										bedNumberError.innerText = "Bed Number cannot be empty";
+										bedNumberError.style.color = "red";
+										document.getElementById("Bedno").style.borderColor = "red";
+										return false;
+									} else {
+										bedNumberError.innerText = "";
+										document.getElementById("Bedno").style.borderColor = "green";
+									}
+							
+									// Validate Nurse Name
+									var nurseName = document.getElementById("nurseid").value.trim();
+									var nurseNameError = document.getElementById("nurseNameError");
+									if (nurseName === "Select Name") {
+										nurseNameError.innerText = "Please select a nurse";
+										nurseNameError.style.color = "red";
+										document.getElementById("nurseid").style.borderColor = "red";
+										return false;
+									} else {
+										nurseNameError.innerText = "";
+										document.getElementById("nurseid").style.borderColor = "green";
+									}
+							
+									// Validate Drugs
+									var drugs = document.getElementById("drugs").value.trim();
+									var drugsError = document.getElementById("drugsError");
+									if (drugs === "") {
+										drugsError.innerText = "Drug details cannot be empty";
+										drugsError.style.color = "red";
+										document.getElementById("drugs").style.borderColor = "red";
+										return false;
+									} else {
+										drugsError.innerText = "";
+										document.getElementById("drugs").style.borderColor = "green";
+									}
+							
+									// Validate Remark
+									var remark = document.getElementById("remark").value.trim();
+									var remarkError = document.getElementById("remarkError");
+									if (remark === "") {
+										remarkError.innerText = "Remark cannot be empty";
+										remarkError.style.color = "red";
+										document.getElementById("remark").style.borderColor = "red";
+										return false;
+									} else {
+										remarkError.innerText = "";
+										document.getElementById("remark").style.borderColor = "green";
+									}
+							
+									// If all validations pass, return true to submit the form
+									return true;
+								}
+							</script>
+							
 							{% if registered %}
 							<div class="alert alert-success alert-dismissible fade show" role="alert">
 								<strong>Successfully Done!</strong> Please check in Allotment list
