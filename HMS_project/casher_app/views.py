@@ -62,7 +62,7 @@ def add_discharge(request):
         try:
             patient = get_object_or_404(PatientRegister, patient_id=patient_id)
             p = get_object_or_404(BedInformation, Patient_id=patient_id)
-            pt=p.Bed_no
+            pt=p.Bed_num
             casher = get_object_or_404(User, username=casher_name)
             discharge_instance = Discharge(
                 Patient_id=patient,
@@ -71,15 +71,14 @@ def add_discharge(request):
                 Reffer_to=reffer,
                 Status=status
             )
-            
+            discharge_instance.save()
             # Calculate the number of days stayed
             bed_info = BedInformation.objects.filter(Patient_id=patient).first()
+            date = get_object_or_404(Discharge, Patient_id=patient_id)
             if bed_info:
                 alloc_date = bed_info.Alloc_date
-                discharge_date = datetime.strptime(discharge_date, '%Y-%m-%d').date()
+                discharge_date = date.Departure_date
                 discharge_instance.No_days = (discharge_date - alloc_date).days
-            
-            discharge_instance.save()
             bed = get_object_or_404(RoomInformation, Bed_no=pt)
             bed.Status = 'Vacant'  # Update status to 'Vacant' or any other value as needed
             bed.save()

@@ -83,6 +83,7 @@
                                             <th>Approval</th>
                                             <th>Payments</th>
                                             <th>Departure Date</th>
+                                            <th>Actions</th>
                                        
                                         </tr>
                                     </thead>
@@ -128,6 +129,8 @@
                                             {% endif %}
                                         {% endif %}
                                             <td>{{discharge.Departure_date}}</td>
+                                            <td>  <a href="#" class="btn btn-primary  mb-0"><span
+                                                class="ti-plus"></span> Payment</a></td>
                                            
                                         </tr>
                                         {% endfor %}
