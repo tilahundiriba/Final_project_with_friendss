@@ -1,0 +1,177 @@
+{% extends 'casher_dash/casher_dash.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.konnectplugins.com/proclinic/Horizontal/add-payment.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 24 Jan 2022 10:42:01 GMT -->
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+{% block 'title' %}
+	<title>Add Departure Payments</title>
+	{% endblock %}
+	<!-- Fav  Icon Link -->
+
+</head>
+
+<body>
+	<!-- Pre Loader -->
+	<div class="loading">
+		<div class="spinner">
+			<div class="double-bounce1"></div>
+			<div class="double-bounce2"></div>
+		</div>
+	</div>
+	<!--/Pre Loader -->
+	<!-- Color Changer -->
+
+	<!-- /Color Changer -->
+	<div class="wrapper">
+		<!-- Page Content -->
+		<div id="content">
+	
+				<!-- Page Title -->
+				<div class="container mt-0">
+					<div class="row breadcrumb-bar">
+						<div class="col-md-6">
+							<h3 class="block-title">Add Departure Payment</h3>
+						</div>
+						<div class="col-md-6">
+							<ol class="breadcrumb">
+								<li class="breadcrumb-item">
+									<a href="index.html">
+										<span class="ti-home"></span>
+									</a>
+								</li>
+								<li class="breadcrumb-item active">Payments</li>
+								<li class="breadcrumb-item ">Add Departure Payment</li>
+							</ol>
+						</div>
+					</div>
+				</div>
+			<!-- /Page Title -->
+
+			<!-- /Breadcrumb -->
+			<!-- Main Content -->
+			<div class="container">
+
+				<div class="row">
+					<!-- Widget Item -->
+					<div class="col-md-12">
+						<div class="widget-area-2 proclinic-box-shadow">
+							<h3 class="widget-title">Add Departure Payment</h3>
+							<form action="{% url 'deprture_payment' recent_payment.Patient_id %}" method="post">
+								 {% csrf_token %}
+								<div class="form-row">
+									<div class="form-group col-md-6">
+										<label for="patient-id">Patient ID</label>
+										<input type="text" value="{{recent_payment.Patient_id}}" class="form-control" placeholder="Patient ID" id="patient-id" name="patient_id">
+                                    </div>
+								
+						
+									<div class="form-group col-md-6">
+										<label for="cashier_name">Casher Name</label>
+										<!-- <input type="text" placeholder="cashier name" class="form-control" id="cashier_name" name="cashier_name"> -->
+										<select class="form-control" id="cashier_name" name="cashier_name">
+											<option disabled selected > Casher Name</option>
+											{% for user in cashers %}
+										    
+										    <option value="{{ user.username }}">{{ user.username}}</option>
+											{% endfor %}
+										
+										</select>
+									</div>
+									
+                                  	
+                                    <div class="form-group col-md-12">
+										<h4 style="color: black;">Basic Services</h4>										
+                                    </div>
+									
+                                
+									<div class="form-group col-md-6">
+										<label for="food_payment">Food Payment </label>
+										<input type="text" value="{{food_pay}}" class="form-control" id="food_payment" name="food_payment">
+										
+									</div>
+								
+									<div class="form-group col-md-6">
+                                        <label for="bed_payment">Bed Payment</label>
+										<input type="text" value="{{bed_pay}}" class="form-control" id="bed_payment" name="bed_payment">
+									
+									</div>
+									
+									
+								
+                                    <div class="form-group col-md-12">
+										<h4 style="color: black;">Payment Method</h4>										
+                                    </div>
+                                   
+									
+                                    <div class="form-group col-md-6">
+										<label for="payment-type">Payment Type</label>
+										
+										<select class="form-control" id="payment-type" name="payment_type" >
+											<option disabled selected >Payment Method</option>
+											{% for pay in payment %}
+										    <option value="{{ pay.Payment_method }}">{{ pay.Payment_method }}</option>
+											{% endfor %}
+										</select>
+										
+                                    </div>	
+                              
+                                    																
+								
+									<div class="form-group col-md-12 mb-3">
+										<button type="submit" class="btn btn-primary btn-lg">Submit</button>
+									</div>
+								</div>
+							</form>
+							<!-- Alerts-->
+							<div class="alert alert-success alert-dismissible fade show" role="alert">
+								<strong>Successfully Done!</strong> Add another one!
+								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+									<span aria-hidden="true">×</span>
+								</button>
+							</div>
+							
+							<!-- /Alerts-->
+						</div>
+					</div>
+					<!-- /Widget Item -->
+				</div>
+			</div>
+			<!-- /Main Content -->
+			<!--Copy Rights-->
+			<div class="container">
+				<div class="d-sm-flex justify-content-center">
+				  <span class="text-muted text-center d-block d-sm-inline-block">Copyright © 2018 <a href="http://www.konnectplugins.com/" target="_blank">konnectcode</a>. All rights reserved.</span>
+				</div>
+			</div>
+			<!-- /Copy Rights-->
+		</div>
+		<!-- /Page Content -->
+	</div>
+	<!-- Back to Top -->
+	<a id="back-to-top" href="#" class="back-to-top">
+		<span class="ti-angle-up"></span>
+	</a>
+	<!-- /Back to Top -->
+	
+
+
+
+
+
+
+
+	</script>
+
+</body>
+
+
+<!-- Mirrored from www.konnectplugins.com/proclinic/Horizontal/add-payment.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 24 Jan 2022 10:42:01 GMT -->
+</html>
+{% endblock %}

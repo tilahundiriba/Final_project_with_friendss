@@ -31,6 +31,7 @@ urlpatterns = [
     path('add_lab/', views.add_lab, name='add_lab'),
     path('lab_tests/', views.dis_labtest, name='lab_tests'),
     path('dis_lab_results/', views.dis_lab_results, name='dis_lab_results'),
+    path('edit_lab_test/<int:lab_number>/', views.edit_lab_test, name='edit_lab_test'),
     path('profile/<int:user_id>/', views.profile_update_doc, name='update_doctor_profile'),
     path('show_doctor_profile/',views.doc_profile, name='show_doctor_profile')
 

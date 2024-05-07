@@ -8,6 +8,7 @@ urlpatterns = [
   path('lab_dashboard/', views.dis_lab_dash, name='lab_dashboard'),
   path('lab_dash_content/', views.dis_lab_dash_content, name='lab_dash_content'),
   path('lab_result/<str:lab_number>/', views.add_lab_result, name='add_lab_result'),
+  path('edit_lab_result/<str:lab_number>/', views.edit_lab_result, name='edit_lab_result'),
   path('dis_lab_result/', views.dis_lab_result, name='dis_lab_result'),
   path('check_request/',check_request ,name='check_request'),
   path('checked_request/<str:patient_id>/', checked_request, name='checked_request'),

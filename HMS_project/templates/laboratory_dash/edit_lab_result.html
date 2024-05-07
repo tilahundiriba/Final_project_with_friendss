@@ -1,4 +1,4 @@
-{% extends 'doctor/dr_dash.html' %}
+{% extends 'laboratory_dash/lab_dashboard.html' %}
 {% load static %}
 {% block content %}
 <!DOCTYPE html>
@@ -11,7 +11,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	{% block 'title' %}
-	<title>Edit Patient History</title>
+	<title>Edit Laboratory Result</title>
 	{% endblock %}
 	<!-- Fav  Icon Link -->
 
@@ -34,14 +34,12 @@
 		<div id="content">
 				<!-- Top Navigation -->
 		
-				<!-- /Menu -->
-				
-				<!-- Breadcrumb -->
+			
 				<!-- Page Title -->
 				<div class="container mt-0">
 					<div class="row breadcrumb-bar">
 						<div class="col-md-6">
-							<h3 class="block-title">Edit Patient History</h3>
+							<h3 class="block-title">Edit Laboratory Result</h3>
 						</div>
 						<div class="col-md-6">
 							<ol class="breadcrumb">
@@ -50,8 +48,8 @@
 										<span class="ti-home"></span>
 									</a>
 								</li>
-								<li class="breadcrumb-item active">History</li>
-								<li class="breadcrumb-item ">Edit Patient History</li>
+								<li class="breadcrumb-item active">Laboratory</li>
+								<li class="breadcrumb-item "> Laboratory Result </li>
 							</ol>
 						</div>
 					</div>
@@ -66,66 +64,39 @@
 					<!-- Widget Item -->
 					<div class="col-md-12">
 						<div class="widget-area-2 proclinic-box-shadow">
-							<h3 class="widget-title">Edit Patient History</h3>
-							<form action="{% url 'update_history' history.History_No %}" method="post">
+							<h3 class="widget-title">Edit Laboratory Result</h3>
+							<form action="{% url 'edit_lab_result' lab_result.Lab_number %}" method="post">
 								{% csrf_token %}
 								<div class="form-row">
-									<div class="form-group col-md-6">
-										<label for="patient_id">Patient ID</label>
-										<input type="text" class="form-control" placeholder="Patient id" id="patient_id" value="{{ history.Patient_ID}}" name="patient_id">
-									</div>
-									<div class="form-group col-md-6">
-										<label for="nr_name">Nr. Name</label>
-
-										<select class="form-control" id="nr_name" name="nr_name">
-											<option>Coose Nurse Name</option>
-											{% for user in nurses %}
-											<option value="{{user.username}}">{{user.username}}</option>
-											{% endfor %}
-										</select>
-									</div>
-									<div class="form-group col-md-12">
-										<label for="symptom">Symptoms</label>
-										<textarea placeholder="symptom" class="form-control" id="symptom" rows="3" name="symptom">{{ history.Sympthom }}</textarea>
-									</div>
-									<div class="form-group col-md-6">
-										<label for="disease">Disease</label>
-										<!-- <input type="text" placeholder="disease" class="form-control" id="disease" name="disease"> -->
-										<textarea placeholder="disease" class="form-control" id="disease" rows="3" name="disease">{{ history.DiseaseName }}</textarea>
-									</div>
-								
-								
-								
-								
-                                    <div class="form-group col-md-6">
-										<label for="dr_name">Dr. Name</label>
-										<select class="form-control" id="dr_name" name="dr_name">
-											<option>Choose Doctor Name</option>
-											{% for user in doctors %}
-											<option value="{{user.username}}">{{user.username}}</option>
-											{% endfor %}
-										</select>
-										
-									</div>
-
 									
-								</div>
-								<div class="form-group col-md-6 mb-3">
-									<button type="submit" class="btn btn-primary btn-lg">Submit</button>
+									
+									<div class="form-group col-md-6">
+										<label for="age">Patient ID</label>
+										<input type="text" placeholder="Patient ID" value="{{lab_result.PatientID}}" class="form-control" id="age" name="patient_id">
+									</div>
+									<div class="form-group col-md-6">
+										<label for="lab_result">Laboratory Result</label>
+										<textarea  class="form-control" id="lab_result" rows="3" name="lab_result">{{lab_result.Lab_result}}</textarea>
+									</div>									
+																		
+																	
+									
+							
+									<div class="form-group col-md-6 mb-3">
+										<button type="submit" class="btn btn-primary btn-lg">Submit</button>
+									</div>
 								</div>
 							</form>
 							<!-- Alerts-->
-							{% if Editing_history %}
+							{% if register %}
 							<div class="alert alert-success alert-dismissible fade show" role="alert">
-								
-								<strong>Editng History Successfully Done!</strong> 
+								<strong>Successfully Done!</strong> Please add another test!
 								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 									<span aria-hidden="true">×</span>
 								</button>
-							
 							</div>
-							{% endif %}
 						
+							{% endif %}
 							<!-- /Alerts-->
 						</div>
 					</div>

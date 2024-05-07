@@ -12,6 +12,7 @@ urlpatterns = [
   path('approve_discharges/<int:discharge_no>/', views.approve_discharge_request, name='approve_discharges'),
   path('add-payment/<str:patient_id>/', views.add_payment, name='add-payment'),
   path('add-discharge/', views.add_discharge, name='add-discharge'),
+  path('deprture_payment/<str:patient_id>/', views.add_payment_for_patient, name='deprture_payment'),
   path('about-payment/<str:pay_number>/<str:patient_id>/', views.about_payment, name='about_payment'),
   path('payments/', views.dis_payment, name='dis_payment'),
   path('invoice/', views.invoice, name='invoice'),

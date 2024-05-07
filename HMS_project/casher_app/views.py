@@ -224,6 +224,42 @@ def invoice(request):
     unseen_count = Notification.objects.filter(seen=False).count()
     return render(request,'casher_dash/invoice.html',{'notifications':notifications,
                                                             'unseen_count':unseen_count})
+
+
+def add_payment_for_patient(request, patient_id):
+    # Assuming you have a Payment model with fields like patient_id, card_payment, lab_payment, bed_payment, food_payment, etc.
+    for_food = get_object_or_404(ServicePayment, id=6)
+    for_bed = get_object_or_404(ServicePayment, id=7)
+    # # Retrieve the most recent payment entry for the patient
+    cashers = User.objects.filter(userprofileinfo__role='casher')
+    payment = ServicePayment.objects.values('Payment_method').distinct()
+    notifications = Notification.objects.all()
+    unseen_count = Notification.objects.filter(seen=False).count()
+    recent_payment = PaymentModel.objects.filter(Patient_id=patient_id).latest('Admit_date')
+    if recent_payment.Bed_payment and recent_payment.Food_payment == 0.00:
+        recent_payment.Bed_payment = recent_payment.Food_payment = 1.0
+        food_pay= recent_payment.Bed_payment * for_food.Payment
+        bed_pay = recent_payment.Food_payment * for_bed.Payment
+    else:
+        food_pay= recent_payment.Bed_payment * for_food.Payment
+        bed_pay = recent_payment.Food_payment * for_bed.Payment
+    # # Add new payments to the existing payment entry
+    # recent_payment.Bed_payment += new_bed_payment_amount
+    # recent_payment.Food_payment += new_food_payment_amount
+
+    # # Save the updated payment entry
+    # recent_payment.save()
+
+    # Redirect to a relevant page
+    # return redirect('patient_detail', patient_id=patient_id)
+    return render(request,'casher_dash/departure_payment.html',{'recent_payment':recent_payment,
+                                                                'food_pay':food_pay,
+                                                                'bed_pay':bed_pay,
+                                                                'cashers':cashers,
+                                                                'payment':payment,
+                                                                'notifications':notifications,
+                                                                'unseen_count':unseen_count})
+
 def card_payments(request):
     notifications = Notification.objects.all()
     unseen_count = Notification.objects.filter(seen=False).count()

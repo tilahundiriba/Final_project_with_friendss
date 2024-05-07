@@ -240,39 +240,43 @@ def add_perscription(request):
     return render(request,'doctor/add-perscription.html',{'doctors':doctors,'notifications':notifications,
                                                 'unseen_count':unseen_count})
 @login_required
-def edit_perscription(request,prec_number):
-    users=User.objects.all()
-    prescription= Prescription.objects.get(Prec_number=prec_number)
+
+def edit_perscription(request, prec_number):
+    users = User.objects.all()
+    prescription = get_object_or_404(Prescription, Prec_number=prec_number)
     notifications = Notification.objects.all()
     unseen_count = Notification.objects.filter(seen=False).count()
+
     if request.method == 'POST':
         patientid = request.POST.get('patient_id')
-        prec_no = request.POST.get('pec_no')
-        prec_date = request.POST.get('pres_date')
         p_name = request.POST.get('name')
         doctor_name = request.POST.get('dr_name')
         prec = request.POST.get('prescription')
-        # Create an instance of Prescription model and save it
-        try:
-            patient = get_object_or_404( PatientRegister,patient_id=patientid)
-            doctor = get_object_or_404(User, username=doctor_name)
         
-            prescription.PatientID=patient
-            prescription.Prec_date=prec_date
-            prescription.Prec_number=prec_no
-            prescription.Doctor_ID=doctor
-            prescription.Patient_full_name=p_name
-            prescription.Precscriptions=prec
+        try:
+            patient = get_object_or_404(PatientRegister, patient_id=patientid)
+            doctor = get_object_or_404(User, username=doctor_name)
+
+            prescription.PatientID = patient
+            prescription.Doctor_ID = doctor
+            prescription.Patient_full_name = p_name
+            prescription.Precscriptions = prec
             prescription.save()
             
         except PatientRegister.DoesNotExist:
             pass
-        except UserProfileInfo.DoesNotExist:
+        except User.DoesNotExist:
             pass
-        return redirect('perscriptions')
-    return render(request,'doctor/edit-perscription.html',{'users':users,'notifications':notifications,
-                                                'unseen_count':unseen_count,
-                                                'prescriptions':prescription})
+
+        return redirect('perscriptions')  # Redirect after processing POST data
+
+    return render(request, 'doctor/edit-perscription.html', {
+        'users': users,
+        'notifications': notifications,
+        'unseen_count': unseen_count,
+        'prescriptions': prescription  # Pass prescription as a list for rendering
+    })
+
 @login_required
 def perscription(request):
     prescription= Prescription.objects.all()
@@ -337,6 +341,62 @@ def dis_appointment(request):
 def about_appointment(request,app_number):
     app = get_object_or_404(Appointment, App_number=app_number)
     return render(request,'doctor/about-appointment.html',{'appointemts':app})
+
+def edit_lab_test(request, lab_number):
+    doctors = User.objects.filter(userprofileinfo__role='doctor')
+    techs = User.objects.filter(userprofileinfo__role='technician')
+    notifications = Notification.objects.all()
+    unseen_count = Notification.objects.filter(seen=False).count()
+
+    lab = get_object_or_404(Laboratory, Lab_number=lab_number)
+
+    if request.method == 'POST':
+        patient_id = request.POST.get('patient_id')
+        doctor_name = request.POST.get('dr_name')
+        techn_name = request.POST.get('techn_name')
+        checkbox1 = request.POST.get('blood_test') == 'on'
+        checkbox2 = request.POST.get('urine_test') == 'on'
+        checkbox3 = request.POST.get('ctscan_test') == 'on'
+        checkbox4 = request.POST.get('x-ray_test') == 'on'
+        lab_type = ''
+
+        if checkbox1:
+            lab_type += 'Blood '
+        if checkbox2:
+            lab_type += 'Urine '
+        if checkbox3:
+            lab_type += 'CT Scan '
+        if checkbox4:
+            lab_type += 'X-ray '
+
+        # Remove the trailing space if lab_type is not empty
+        lab_type = lab_type.strip() if lab_type else None
+
+        try:
+            patient = get_object_or_404(PatientRegister, patient_id=patient_id)
+            doctor = get_object_or_404(User, username=doctor_name)
+            technic = get_object_or_404(User, username=techn_name)
+        
+            lab.PatientID = patient
+            lab.Doctor_ID = doctor
+            lab.Technician_ID = technic
+            lab.Lab_type = lab_type
+            lab.save()
+
+            return redirect('lab_tests')  # Redirect to lab tests page after successful update
+        except (PatientRegister.DoesNotExist, User.DoesNotExist):
+            # Handle the case where the patient or user is not found
+            # You can add appropriate error handling or redirect to an error page
+            pass
+
+    return render(request, 'doctor/edit_lab_test.html', {
+        'labs': lab,
+        'notifications': notifications,
+        'unseen_count': unseen_count,
+        'doctors': doctors,
+        'techs': techs
+    })
+
 def test_notification(request):
     return render(request,'doctor/view_notification.html')
 @login_required
@@ -423,14 +483,16 @@ def update_history(request, history_no):
 def edit_history(request, history_no):
     notifications = Notification.objects.all()
     unseen_count = Notification.objects.filter(seen=False).count()
-    users = User.objects.all()
+    doctors = User.objects.filter(userprofileinfo__role='doctor')
+    nurses = User.objects.filter(userprofileinfo__role='nurse')
    
     try:
         
         history1 = get_object_or_404(PatientHistory, pk=history_no)
         return render(request, 'doctor/edit_history.html', {
     
-        'users': users,
+        'doctors': doctors,
+        'nurses': nurses,
         'history': history1,
         'notifications': notifications,
         'unseen_count': unseen_count

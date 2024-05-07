@@ -82,7 +82,7 @@ def edit_medication(request,med_no):
     notifications = Notification.objects.all()
     unseen_count = Notification.objects.filter(seen=False).count()
     medications = Medication.objects.get(Med_no=med_no)
-    users= User.objects.all()
+    nurses = User.objects.filter(userprofileinfo__role='nurse')
     if request.method == 'POST':
         patient_id = request.POST.get('patient_id')
         med_time = request.POST.get('MediTime')
@@ -102,7 +102,7 @@ def edit_medication(request,med_no):
         medications.save()
         return redirect('dis_medication')
     return render(request,'nurse_dash/edit_medication.html',{'medications':medications,
-                                                             'users':users,
+                                                             'users':nurses,
                                                              'notifications':notifications,
                                                        'unseen_count':unseen_count})
 def add_vital_info(request):
@@ -148,6 +148,45 @@ def add_vital_info(request):
     return render(request,'nurse_dash/add-vital_info.html',{'users':nurses,
                                                             'notifications':notifications,
                                                        'unseen_count':unseen_count})
+def edit_vital_info(request,vital_info_no):
+    notifications = Notification.objects.all()
+    unseen_count = Notification.objects.filter(seen=False).count()
+    nurses = User.objects.filter(userprofileinfo__role='nurse')
+    vitals = get_object_or_404( VitalInformation,Vital_info_no=vital_info_no)
+   
+    if request.method == 'POST':
+        patient_id = request.POST.get('patient_id')
+        Heart_Rate = request.POST.get('Heart_Rate')
+        bloodpre = request.POST.get('bloodpre')
+        resRate = request.POST.get('resRate')
+        bodytemp = request.POST.get('bodytemp')
+        oxysatu = request.POST.get('oxysatu')
+        painlev = request.POST.get('painlev')
+        weight = request.POST.get('weight')
+        height = request.POST.get('height')
+        bloodglu = request.POST.get('bloodglu')
+        nurse_names = request.POST.get('nurseid')
+        remark = request.POST.get('remark')
+        patient = get_object_or_404( PatientRegister,patient_id=patient_id)
+        nurse_name = get_object_or_404( User,username=nurse_names)
+        vitals.Patient_id=patient
+        vitals.H_rate=Heart_Rate
+        vitals.B_pressure=bloodpre
+        vitals.Body_temp=bodytemp
+        vitals.Pain_level=painlev
+        vitals.Weight=weight
+        vitals.Height=height
+        vitals.Nurse_id=nurse_name
+        vitals.Oxy_satu=oxysatu
+        vitals.B_gluc_level=bloodglu
+        vitals.R_rate=resRate
+        vitals.Remark=remark
+        vitals.save()
+        return redirect('dis_vitals') # Redirect to a success page or another URL
+    return render(request,'nurse_dash/edit_vitals.html',{'users':nurses,
+                                                            'notifications':notifications,
+                                                       'unseen_count':unseen_count,
+                                                       'vitals':vitals})
 def add_room(request):
     notifications = Notification.objects.all()
     unseen_count = Notification.objects.filter(seen=False).count()

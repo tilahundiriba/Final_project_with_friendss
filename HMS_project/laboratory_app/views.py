@@ -70,3 +70,22 @@ def add_lab_result(request,lab_number):
                                                 'unseen_count':unseen_count,
                                                 'lab_result':lab_result,
                                                 'users':users})
+def edit_lab_result(request,lab_number):
+    lab_result = Laboratory.objects.get(Lab_number=lab_number)
+    notifications = Notification.objects.all()
+    unseen_count = Notification.objects.filter(seen=False).count()
+ 
+    if request.method == 'POST':
+        lab_res = request.POST.get('lab_result')
+        try:
+            lab_result.Lab_result=lab_res
+            lab_result.save()
+        except UserProfileInfo.DoesNotExist:
+            # Handle the case where the doctor is not found
+            # You can add appropriate error handling or redirect to an error page
+            pass
+        return redirect('check_request')
+    return render(request, 'laboratory_dash/edit_lab_result.html',{'notifications':notifications,
+                                                'unseen_count':unseen_count,
+                                                'lab_result':lab_result,
+                                                })

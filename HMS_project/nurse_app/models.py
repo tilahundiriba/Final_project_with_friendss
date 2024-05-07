@@ -8,7 +8,8 @@ class RoomInformation(models.Model):
     Bed_no=models.BigIntegerField(primary_key=True)
     Room_type=models.CharField(max_length=100)
     Status=models.TextField(max_length=100)
-
+    def __str__(self):
+        return f"Room {self.Room_no}, Bed {self.Bed_no}, Type: {self.Room_type}, Status: {self.Status}"
 
 class BedInformation(models.Model):
     Patient_id=models.ForeignKey(PatientRegister,on_delete=models.CASCADE)
