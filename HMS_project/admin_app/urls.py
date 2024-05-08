@@ -21,7 +21,7 @@ urlpatterns = [
     path('password_reset_confirm/<uidb64>/<token>/',auth_views.PasswordResetConfirmView.as_view(template_name='admin_app/password_reset_confirm.html'), name='password_reset_confirm'),
     path('password_reset_complete/', auth_views.PasswordResetCompleteView.as_view(template_name='admin_app/password_reset_complete.html'), name='password_reset_complete'),
     path('dis_base/', views.dis_base, name='dis_base'),
-    path('patients/', views.display_patients, name='display_patients'),
+    path('add_report/', views.add_report, name='add_report'),
     path('refere_info/<int:discharge_no>/<str:patient_id>/', views.refere_info, name='refere_info'),
     path('general_report/', views.general_report, name='general_report'),
     # admin dashboard path

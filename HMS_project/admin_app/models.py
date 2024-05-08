@@ -20,6 +20,12 @@ class Feedback(models.Model):
     Feedback= models.TextField(max_length=500)
     Added_no = models.DateTimeField(auto_now_add=True)
     Is_seen = models.BooleanField(default=False)
+class Report(models.Model):
+    Name = models.TextField(max_length=100,null=True)
+    Title = models.TextField(max_length=100,null=True)
+    Report_file= models.FileField(upload_to='documents/', blank=True)
+    Added_no = models.DateTimeField(auto_now_add=True)
+    Report_no = models.AutoField(primary_key=True)
 
 class UserProfileInfo(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)

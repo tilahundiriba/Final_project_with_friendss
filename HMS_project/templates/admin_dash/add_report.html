@@ -1,0 +1,214 @@
+{% extends 'admin_dash/dashboard.html' %}
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.konnectplugins.com/proclinic/Horizontal/add-doctor.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 24 Jan 2022 10:42:01 GMT -->
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	{% block 'title' %}
+	<title>Add Report</title>
+	{% endblock %}
+	<!-- Fav  Icon Link -->
+	<style>
+        .error {
+            color: red; /* Set the color of error text to red */
+        }
+    </style>
+</head>
+
+<body>
+	<!-- Pre Loader -->
+	<div class="loading">
+		<div class="spinner">
+			<div class="double-bounce1"></div>
+			<div class="double-bounce2"></div>
+		</div>
+	</div>
+	<!--/Pre Loader -->
+	<div class="wrapper">
+		<!-- Page Content -->
+		<div id="content">
+
+			<!-- Menu -->
+
+			<!-- /Menu -->
+			<!-- Breadcrumb -->
+			<!-- Page Title -->
+			<div class="container mt-0">
+				<div class="row breadcrumb-bar">
+					<div class="col-md-12">
+						<h3 class="block-title">Reports</h3>
+					</div>
+					<div class="col-md-12">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item">
+								<a href="index.html">
+									<span class="ti-home"></span>
+								</a>
+							</li>
+							<li class="breadcrumb-item active">Reports</li>
+							<li class="breadcrumb-item ">Add Reports</li>
+						</ol>
+					</div>
+				</div>
+			</div>
+			<!-- /Page Title -->
+
+			<!-- /Breadcrumb -->
+			<!-- Main Content -->
+			<div class="container d-flex justify-content-center">
+
+				<div class="row">
+					<!-- Widget Item -->
+					<div class="col-md-12">
+						<div class="widget-area-2 proclinic-box-shadow">
+							<h3 class="widget-title">Add Reports</h3>
+							<form action="{% url 'add_report' %}" method="post" onsubmit="return validateForm()" enctype="multipart/form-data">
+								{% csrf_token %}
+								<div class="form-row">
+									<div class="form-group col-md-12">
+										<label for="name">Name</label>
+										<input type="text" placeholder="name....." class="form-control" id="name" name="name">
+										<div id="fnameError" class="error"></div>
+									</div>
+									<div class="form-group col-md-12">
+										<label for="title">Report Title</label>
+										<input type="text" placeholder="report title" class="form-control" id="title" name="title">
+										<div id="lnameError" class="error"></div>
+									</div>
+									<div class="form-group col-md-12">
+										<label for="report_file">report_file</label>
+										<input type="file"  class="form-control" id="report_file" name="report_file">
+										<div id="emailError" class="error"></div>
+									</div>
+									
+									<div class="form-group col-md-12 mb-3">
+										<button type="submit" class="btn btn-primary btn-lg">Report</button>
+									</div>
+								</div>
+							</form>
+						
+							<!-- <script>
+								function validateForm() {
+									var fname = document.getElementById("fname").value.trim();
+									var lname = document.getElementById("last_name").value.trim();
+									var email = document.getElementById("Email").value.trim();
+									var role = document.getElementById("role").value;
+									var speciality = document.getElementById("speciality").value;
+						
+									var fnameError = document.getElementById("fnameError");
+									var lnameError = document.getElementById("lnameError");
+									var emailError = document.getElementById("emailError");
+						
+									var isValid = true;
+						
+									// Validate first name
+									if (!fname) {
+										fnameError.innerText = "First name is required";
+										document.getElementById("fname").style.borderColor = "red";
+										isValid = false;
+									} else {
+										fnameError.innerText = "";
+										document.getElementById("fname").style.borderColor = "green";
+									}
+						
+									// Validate last name
+									if (!lname) {
+										lnameError.innerText = "Last name is required";
+										document.getElementById("last_name").style.borderColor = "red";
+										isValid = false;
+									} else {
+										lnameError.innerText = "";
+										document.getElementById("last_name").style.borderColor = "green";
+									}
+						
+									// Validate email
+									if (!email) {
+										emailError.innerText = "Email is required";
+										document.getElementById("Email").style.borderColor = "red";
+										isValid = false;
+									} else if (!isValidEmail(email)) {
+										emailError.innerText = "Invalid email format";
+										document.getElementById("Email").style.borderColor = "red";
+										isValid = false;
+									} else {
+										emailError.innerText = "";
+										document.getElementById("Email").style.borderColor = "green";
+									}
+						
+                           // Validate role
+                                   if (role === "") {
+                                   document.getElementById("roleError").innerText = "Please select a role";
+                                   isValid = false;
+                                      } else {
+                                  document.getElementById("roleError").innerText = "";
+                                        }
+
+                               // Validate speciality
+                                    if (speciality === "") {
+                                    document.getElementById("specialityError").innerText = "Please select a speciality";
+                                    isValid = false;
+                                    } else {
+                                     document.getElementById("specialityError").innerText = "";
+                                           }
+									return isValid;
+								}
+						
+								// Function to validate email format
+								function isValidEmail(email) {
+									var emailRegex = /^\S+@\S+\.\S+$/;
+									return emailRegex.test(email);
+								}
+							</script> -->
+							<!-- Alerts-->
+							{% if created %}
+							<div class="alert alert-success alert-dismissible fade show" role="alert">
+								<strong>Successfully Done!</strong> Please Check in user list
+								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+									<span aria-hidden="true">×</span>
+								</button>
+							</div>
+							{% endif %}
+							<!-- <div class="alert alert-warning alert-dismissible fade show" role="alert">
+								<strong>Holy guacamole!</strong> You should check in on some of those fields below.
+								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+									<span aria-hidden="true">×</span>
+								</button>
+							</div> -->
+							<!-- /Alerts-->
+						</div>
+					</div>
+					<!-- /Widget Item -->
+				</div>
+			</div>
+			<!-- /Main Content -->
+			<!--Copy Rights-->
+			<!-- <div class="container">
+				<div class="d-sm-flex justify-content-center">
+				  <span class="text-muted text-center d-block d-sm-inline-block">Copyright © 2018 <a href="http://www.konnectplugins.com/" target="_blank">konnectcode</a>. All rights reserved.</span>
+				</div>
+			</div> -->
+			<!-- /Copy Rights-->
+		</div>
+		<!-- /Page Content -->
+	</div>
+	<!-- Back to Top -->
+	<a id="back-to-top" href="#" class="back-to-top">
+		<span class="ti-angle-up"></span>
+	</a>
+
+
+</body>
+
+
+<!-- Mirrored from www.konnectplugins.com/proclinic/Horizontal/add-doctor.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 24 Jan 2022 10:42:01 GMT -->
+
+</html>
+{% endblock %}

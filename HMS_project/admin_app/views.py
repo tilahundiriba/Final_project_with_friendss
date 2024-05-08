@@ -36,17 +36,27 @@ from reportlab.lib.pagesizes import letter
 from reportlab.platypus import SimpleDocTemplate, Table,TableStyle
 from reportlab.lib import colors
 from django.shortcuts import render, get_object_or_404
-from .models import User, UserProfileInfo,Feedback
+from .models import User, UserProfileInfo,Feedback,Report
 from .models import Notification
 # views.py
 from datetime import datetime
 from django.shortcuts import render
 from django.template.loader import render_to_string
 
-def display_patients(request):
-    # Render the template you want to include as a string
-    included_content = render_to_string('receptionist_dash/patients.html', request=request)
-    return render(request, 'admin_dash/patients.html', {'included_content': included_content})
+def add_report(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        title = request.POST.get('title')
+        document = request.FILES.get('report_file')
+        names = get_object_or_404(User, username=name)
+        report = Report(
+            Name=names,
+            Title=title,
+            Report_file=document
+        )
+        report.save()
+
+    return render(request, 'admin_dash/add_report.html')
 
 
 # @login_required
