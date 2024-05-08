@@ -14,6 +14,12 @@ class Notification(models.Model):
 
     def __str__(self):
         return self.message
+class Feedback(models.Model):
+    Name = models.TextField(max_length=100,null=True)
+    Email = models.EmailField(max_length=100,null=True)
+    Feedback= models.TextField(max_length=500)
+    Added_no = models.DateTimeField(auto_now_add=True)
+    Is_seen = models.BooleanField(default=False)
 
 class UserProfileInfo(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)

@@ -4,19 +4,22 @@ from django.contrib.auth.models import User
 
 class RoomInformation(models.Model):
     Room_block=models.TextField(max_length=100)
-    Room_no=models.BigIntegerField()
+    Room_no=models.TextField()
     Bed_no=models.BigIntegerField(primary_key=True)
     Room_type=models.CharField(max_length=100)
     Status=models.TextField(max_length=100)
     def __str__(self):
-        return f"Room {self.Room_no}, Bed {self.Bed_no}, Type: {self.Room_type}, Status: {self.Status}"
+        return f" {self.Bed_no}"
 
 class BedInformation(models.Model):
     Patient_id=models.ForeignKey(PatientRegister,on_delete=models.CASCADE)
-    Room_num=models.BigIntegerField()
+    Room_num=models.TextField()
+    Room_id=models.BigAutoField(primary_key=True)
     Bed_num=models.ForeignKey(RoomInformation,on_delete=models.CASCADE)
     Room_type=models.CharField(max_length=100)
     Alloc_date = models.DateField(auto_now_add=True)
+    def __str__(self):
+        return f"{self.Bed_num}"
 
 class VitalInformation(models.Model):
     Patient_id=models.ForeignKey(PatientRegister,on_delete=models.CASCADE,related_name='nurse_vitalinfo_set',related_query_name='nurse_vitalinfo_set')

@@ -295,6 +295,7 @@ def allocate_room(request):
 def dis_bed_allocation(request):
     notifications = Notification.objects.all()
     unseen_count = Notification.objects.filter(seen=False).count()
+    
     alloc =BedInformation.objects.all()
     return render(request,'nurse_dash/allocations.html',{'allocs':alloc,'notifications':notifications,
                                                        'unseen_count':unseen_count})

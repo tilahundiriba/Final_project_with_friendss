@@ -181,91 +181,58 @@
 				
 					
 					
+					{% if unseen_feedbacks %}
 				<div class="row">
 					<!-- Widget Item -->
 					<div class="col-md-12">
 						<div class="widget-area-2 proclinic-box-shadow">
-							<h3 class="widget-title">Appointments</h3>
+							<h3 class="widget-title">Feedbacks</h3>
 							<div class="table-responsive">
-								<table class="table table-bordered table-striped">
+								<table class="table table-bordered table-striped" id="mytable">
 									<thead>
 										<tr>
-											<th>Patient Name</th>
-											<th>Doctor</th>
-											<th>Check-Up</th>
+											<th> Name</th>
+											<th>Email</th>
+											<th>Feedbacks</th>
 											<th>Date</th>
-											<th>Time</th>
-											<th>Status</th>
+											<th>Actions</th>
+										
 										</tr>
 									</thead>
 									<tbody>
+										{% for feedback in unseen_feedbacks %}
 										<tr>
-											<td>Rajesh</td>
-											<td>Manoj Kumar</td>
-											<td>Dental</td>
-											<td>12-10-2018</td>
-											<td>12:10PM</td>
+											<td>{{ feedback.Name }}</td>
+											<td>{{ feedback.Email }}</td>
+											<td>{{ feedback.Feedback }}</td>
+											<td>{{ feedback.Added_no }}</td>
+									
 											<td>
-												<span class="badge badge-success">Completed</span>
+												<td>
+													<form action="{% url 'mark_as_read' feedback.Added_no  %}" method="post">
+														{% csrf_token %}
+														<button type="submit"
+														class="btn btn-outline-info "><span
+															class="ti-eye"></span>mark as read</button>
+													</form>
+												
+												</td>
 											</td>
 										</tr>
-										<tr>
-											<td>Riya</td>
-											<td>Daniel </td>
-											<td>Ortho</td>
-											<td>12-10-2018</td>
-											<td>1:10PM</td>
-											<td>
-												<span class="badge badge-warning">Pending</span>
-											</td>
-										</tr>
-										<tr>
-											<td>Siri</td>
-											<td>Daniel </td>
-											<td>Ortho</td>
-											<td>12-10-2018</td>
-											<td>1:30PM</td>
-											<td>
-												<span class="badge badge-danger">Cancelled</span>
-											</td>
-										</tr>
-										<tr>
-											<td>Rajesh</td>
-											<td>Manoj Kumar</td>
-											<td>Dental</td>
-											<td>12-10-2018</td>
-											<td>12:10PM</td>
-											<td>
-												<span class="badge badge-success">Completed</span>
-											</td>
-										</tr>
-										<tr>
-											<td>Riya</td>
-											<td>Daniel </td>
-											<td>Ortho</td>
-											<td>12-10-2018</td>
-											<td>1:10PM</td>
-											<td>
-												<span class="badge badge-warning">Pending</span>
-											</td>
-										</tr>
-										<tr>
-											<td>Siri</td>
-											<td>Daniel </td>
-											<td>Ortho</td>
-											<td>12-10-2018</td>
-											<td>1:30PM</td>
-											<td>
-												<span class="badge badge-danger">Cancelled</span>
-											</td>
-										</tr>
+										{% endfor %}
 									</tbody>
 								</table>
+								<nav aria-label="Page navigation example">
+									<ul class="pagination justify-content-center export-pagination">
+										
+									</ul>
+								</nav>
 							</div>
 						</div>
 					</div>
 					<!-- /Widget Item -->
 				</div>
+				{% endif %}
 					<!-- /Widget Item -->
 
 				</div>
@@ -289,7 +256,47 @@
 	<!-- /Back to Top -->
 	<!-- Jquery Library-->
 
+	<script>
+		// JavaScript code for pagination
+		document.addEventListener('DOMContentLoaded', function () {
+			// Get the table rows and calculate total pages
+			var tableRows = document.querySelectorAll('#mytable tbody tr');
+			var totalPages = Math.ceil(tableRows.length / 5);
 
+			// Generate pagination links
+			var paginationContainer = document.querySelector('.pagination');
+			for (var i = 1; i <= totalPages; i++) {
+				var pageLink = document.createElement('a');
+				pageLink.href = '#';
+				pageLink.textContent = i;
+				pageLink.addEventListener('click', function (event) {
+					event.preventDefault();
+					showPage(parseInt(this.textContent));
+				});
+				paginationContainer.appendChild(pageLink);
+			}
+
+			// Function to show page
+			function showPage(pageNumber) {
+				// Hide all table rows
+				tableRows.forEach(function (row) {
+					row.style.display = 'none';
+				});
+
+				// Calculate start and end indexes for current page
+				var startIndex = (pageNumber - 1) * 5;
+				var endIndex = startIndex + 5;
+
+				// Show table rows for current page
+				for (var i = startIndex; i < endIndex && i < tableRows.length; i++) {
+					tableRows[i].style.display = '';
+				}
+			}
+
+			// Show the first page by default
+			showPage(1);
+		});
+	</script>
 </body>
 
 

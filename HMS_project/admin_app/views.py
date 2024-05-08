@@ -36,7 +36,7 @@ from reportlab.lib.pagesizes import letter
 from reportlab.platypus import SimpleDocTemplate, Table,TableStyle
 from reportlab.lib import colors
 from django.shortcuts import render, get_object_or_404
-from .models import User, UserProfileInfo
+from .models import User, UserProfileInfo,Feedback
 from .models import Notification
 # views.py
 from datetime import datetime
@@ -343,6 +343,8 @@ def dis_dash(request):
     notifications = Notification.objects.all()
 
     unseen_count = Notification.objects.filter(seen=False).count()
+    unseen_feedbacks = Feedback.objects.filter(Is_seen=False)
+    unseen_feedbacks_count = Feedback.objects.filter(Is_seen=False).count()
     cash_total_sums = PaymentModel.objects.filter(Pay_method='Cash').aggregate(total_sum=Sum('Total'))
     cash_total_sum = cash_total_sums['total_sum'] or 0
     insurance_total_sums = PaymentModel.objects.filter(Pay_method='Insurance').aggregate(total_sum=Sum('Total'))
@@ -362,15 +364,22 @@ def dis_dash(request):
                                                    'number_of_cancelled':number_of_cancelled,
                                                    'number_of_pending':number_of_pending,
                                                    'number_of_completed':number_of_completed,
-                                                   'unseen_count':unseen_count})
+                                                   'unseen_count':unseen_count,
+                                                   'unseen_feedbacks':unseen_feedbacks,
+                                                   'unseen_feedbacks_count':unseen_feedbacks_count
+                                                   })
 # @login_required
 def dis_dash_content(request):
     cash_total_sums = PaymentModel.objects.filter(Pay_method='Cash').aggregate(total_sum=Sum('Total'))
     cash_total_sum = cash_total_sums['total_sum'] or 0
     insurance_total_sums = PaymentModel.objects.filter(Pay_method='Insurance').aggregate(total_sum=Sum('Total'))
     insurance_total_sum = insurance_total_sums['total_sum'] or 0
+    unseen_feedbacks = Feedback.objects.filter(Is_seen=False)
+    unseen_feedbacks_count = Feedback.objects.filter(Is_seen=False).count()
     return render(request,'admin_dash/dash_content.html',{'cash_total_sum':cash_total_sum,
-                                                          'insurance_total_sum':insurance_total_sum})
+                                                          'insurance_total_sum':insurance_total_sum,
+                                                          'unseen_feedbacks':unseen_feedbacks,
+                                                          'unseen_feedbacks_count':unseen_feedbacks_count})
 # @login_required
 def refere_info(request,discharge_no,patient_id):
     notifications = Notification.objects.all()
@@ -399,6 +408,8 @@ def dis_index(request):
     number_of_lab= Laboratory.objects.count()
     notifications = Notification.objects.all()
     unseen_count = Notification.objects.filter(seen=False).count()
+    unseen_feedbacks = Feedback.objects.filter(Is_seen=False)
+    unseen_feedbacks_count = Feedback.objects.filter(Is_seen=False).count()
     cash_total_sums = PaymentModel.objects.filter(Pay_method='Cash').aggregate(total_sum=Sum('Total'))
     cash_total_sum = cash_total_sums['total_sum'] or 0
     insurance_total_sums = PaymentModel.objects.filter(Pay_method='Insurance').aggregate(total_sum=Sum('Total'))
@@ -411,6 +422,8 @@ def dis_index(request):
                                                    'total_amount':total_sum,
                                                    'notifications':notifications,
                                                    'unseen_count':unseen_count,
+                                                   'unseen_feedbacks':unseen_feedbacks,
+                                                   'unseen_feedbacks_count':unseen_feedbacks_count,
                                                    'number_of_history':number_of_history,
                                                    'number_of_Presc':number_of_Presc,
                                                    'cash_total_sum':cash_total_sum,

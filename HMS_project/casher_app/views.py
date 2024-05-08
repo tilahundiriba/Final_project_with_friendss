@@ -61,7 +61,8 @@ def add_discharge(request):
         
         try:
             patient = get_object_or_404(PatientRegister, patient_id=patient_id)
-            p = get_object_or_404(BedInformation, Patient_id=patient_id)
+            # p = get_object_or_404(BedInformation, Patient_id=patient_id)
+            p = BedInformation.objects.filter(Patient_id=patient_id).first()
             pt=p.Bed_num
             casher = get_object_or_404(User, username=casher_name)
             discharge_instance = Discharge(
