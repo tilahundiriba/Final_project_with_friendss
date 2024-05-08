@@ -1,0 +1,216 @@
+{% extends 'admin_dash/dashboard.html' %}
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.konnectplugins.com/proclinic/Horizontal/appointments.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 24 Jan 2022 10:41:26 GMT -->
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	{% block 'title' %}
+	<title>Feedback List</title>
+	{% endblock %}
+	<!-- Fav  Icon Link -->
+	<style>
+		/* Custom CSS for pagination */
+		.pagination {
+			margin-top: 20px;
+			text-align: center;
+			/* Center the pagination links */
+		}
+
+		.pagination a {
+			display: inline-block;
+			margin: 0 5px;
+			/* Add space between pagination links */
+			padding: 8px 12px;
+			/* Increase padding for larger size */
+			font-size: 16px;
+			/* Increase font size */
+			color: #007bff;
+			/* Change text color */
+			border: 1px solid #007bff;
+			/* Add border */
+			border-radius: 5px;
+			/* Add border radius */
+			text-decoration: none;
+			/* Remove underline */
+		}
+
+		.pagination a:hover {
+			background-color: #007bff;
+			/* Change background color on hover */
+			color: #fff;
+			/* Change text color on hover */
+		}
+	</style>
+</head>
+
+<body>
+	<!-- Pre Loader -->
+	<div class="loading">
+		<div class="spinner">
+			<div class="double-bounce1"></div>
+			<div class="double-bounce2"></div>
+		</div>
+	</div>
+	<!--/Pre Loader -->
+	<!-- Color Changer -->
+
+	<!-- /Color Changer -->
+	<div class="wrapper">
+		<!-- Page Content -->
+		<div id="content">
+			<!-- Top Navigation -->
+
+
+			<!-- Page Title -->
+			<div class="container mt-0">
+				<div class="row breadcrumb-bar">
+					<div class="col-md-6">
+						<h3 class="block-title">Feedbacks</h3>
+					</div>
+					<div class="col-md-6">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item">
+								<a href="index.html">
+									<span class="ti-home"></span>
+								</a>
+							</li>
+							<li class="breadcrumb-item active">Feedbacks</li>
+							<li class="breadcrumb-item ">Feedbacks List</li>
+						</ol>
+					</div>
+				</div>
+			</div>
+			<!-- /Page Title -->
+
+			<!-- /Breadcrumb -->
+			<!-- Main Content -->
+			<div class="container">
+{% if unseen_feedbacks %}
+				<div class="row">
+					<!-- Widget Item -->
+					<div class="col-md-12">
+						<div class="widget-area-2 proclinic-box-shadow">
+							<h3 class="widget-title">Feedbacks List</h3>
+							<div class="table-responsive mb-3">
+								<table class="table table-bordered table-striped" id="mytable">
+									<thead>
+										<tr>
+											<th> Name</th>
+											<th>Email</th>
+											<th>Feedbacks</th>
+											<th>Date</th>
+											<th>Actions</th>
+										
+										</tr>
+									</thead>
+									<tbody>
+										{% for feedback in unseen_feedbacks %}
+										<tr>
+											<td>{{ feedback.Name }}</td>
+											<td>{{ feedback.Email }}</td>
+											<td>{{ feedback.Feedback }}</td>
+											<td>{{ feedback.Added_no }}</td>
+											<td>
+												<form action="{% url 'mark_as_read' feedback.Added_no  %}" method="post">
+													{% csrf_token %}
+													<button type="submit"
+													class="btn btn-outline-info "><span
+														class="ti-eye"></span>mark as read</button>
+												</form>
+											
+											</td>
+										</tr>
+										{% endfor %}
+									</tbody>
+								</table>
+
+								<!--Export links-->
+								<nav aria-label="Page navigation example">
+									<ul class="pagination justify-content-center export-pagination">
+										
+									</ul>
+								</nav>
+								
+							</div>
+						</div>
+					</div>
+					<!-- /Widget Item -->
+				</div>
+                {% endif %}
+			</div>
+			<!-- /Main Content -->
+			<!--Copy Rights-->
+			<div class="container">
+				<div class="d-sm-flex justify-content-center">
+					<span class="text-muted text-center d-block d-sm-inline-block">Copyright © 2018 <a
+							href="http://www.konnectplugins.com/" target="_blank">konnectcode</a>. All rights
+						reserved.</span>
+				</div>
+			</div>
+			<!-- /Copy Rights-->
+		</div>
+		<!-- /Page Content -->
+	</div>
+	<!-- Back to Top -->
+	<a id="back-to-top" href="#" class="back-to-top">
+		<span class="ti-angle-up"></span>
+	</a>
+	<!-- /Back to Top -->
+
+    <script>
+		// JavaScript code for pagination
+		document.addEventListener('DOMContentLoaded', function () {
+			// Get the table rows and calculate total pages
+			var tableRows = document.querySelectorAll('#mytable tbody tr');
+			var totalPages = Math.ceil(tableRows.length / 5);
+
+			// Generate pagination links
+			var paginationContainer = document.querySelector('.pagination');
+			for (var i = 1; i <= totalPages; i++) {
+				var pageLink = document.createElement('a');
+				pageLink.href = '#';
+				pageLink.textContent = i;
+				pageLink.addEventListener('click', function (event) {
+					event.preventDefault();
+					showPage(parseInt(this.textContent));
+				});
+				paginationContainer.appendChild(pageLink);
+			}
+
+			// Function to show page
+			function showPage(pageNumber) {
+				// Hide all table rows
+				tableRows.forEach(function (row) {
+					row.style.display = 'none';
+				});
+
+				// Calculate start and end indexes for current page
+				var startIndex = (pageNumber - 1) * 5;
+				var endIndex = startIndex + 5;
+
+				// Show table rows for current page
+				for (var i = startIndex; i < endIndex && i < tableRows.length; i++) {
+					tableRows[i].style.display = '';
+				}
+			}
+
+			// Show the first page by default
+			showPage(1);
+		});
+	</script>
+
+</body>
+
+
+<!-- Mirrored from www.konnectplugins.com/proclinic/Horizontal/appointments.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 24 Jan 2022 10:41:56 GMT -->
+
+</html>
+{% endblock %}

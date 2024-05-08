@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from django.shortcuts import get_object_or_404
-from admin_app.models import Feedback
+from admin_app.models import Feedback,Notification
 from receptionist_app.models import PatientRegister
 from doctor_app.models import Appointment,PatientHistory,Laboratory
 from django.core.exceptions import ObjectDoesNotExist
@@ -41,6 +41,13 @@ def Patient_info(request):
 def patient_dash(request):
 
     return render(request,'patient/patient_dash.html')
+def display_feedback(request):
+    notifications = Notification.objects.all()
+    unseen_count = Notification.objects.filter(seen=False).count()
+    unseen_feedbacks = Feedback.objects.filter(Is_seen=False)
+    return render(request,'admin_dash/display_feedback.html',{'unseen_feedbacks':unseen_feedbacks,
+                                                              'notifications':notifications,
+                                                              'unseen_count':unseen_count})
 def mark_as_read(request,added_no):
     patient_info = get_object_or_404( Feedback,Added_no=added_no)
     patient_info.Is_seen=True
