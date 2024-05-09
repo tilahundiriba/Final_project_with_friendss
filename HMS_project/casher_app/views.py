@@ -64,7 +64,7 @@ def add_discharge(request):
             # p = get_object_or_404(BedInformation, Patient_id=patient_id)
             p = BedAllocation.objects.filter(Patient_id=patient_id).first()
             pt=p.Bed_num
-            casher = get_object_or_404(User, username=casher_name)
+            casher = get_object_or_404(User, first_name=casher_name)
             discharge_instance = Discharge(
                 Patient_id=patient,
                 Reason=reason,
@@ -118,9 +118,23 @@ def dis_discharge(request):
     notifications = Notification.objects.all()
     unseen_count = Notification.objects.filter(seen=False).count()
     discharges = Discharge.objects.all()
+    context = []
+
+    for discharge in discharges:
+        recent_payment = PaymentModel.objects.filter(Patient_id=discharge.Patient_id).order_by('-Admit_date').first()
+        context.append({
+            'patient_id': discharge.Patient_id,
+            'no_days': discharge.No_days,
+            'reason': discharge.Reason,
+            'referred_to': discharge.Reffer_to,
+            'departure_date': discharge.Departure_date,
+            'food_payment': recent_payment.Food_payment if recent_payment else None,
+            'bed_payment': recent_payment.Bed_payment if recent_payment else None,
+            # Add other fields from Discharge and PaymentModel as needed
+        })
     return render(request,'casher_dash/discharges.html',{'notifications':notifications,
                                                          'unseen_count':unseen_count,
-                                                         'discharges':discharges})
+                                                         'discharges':context})
 @login_required
 def approve_discharge_request(request, discharge_no):
     dis_request = get_object_or_404(Discharge, Discharge_no=discharge_no)
@@ -136,7 +150,7 @@ def add_payment(request,patient_id):
     for_card = get_object_or_404(ServicePayment, id=1)
     for_blood = get_object_or_404(ServicePayment, id=2)
     for_urine = get_object_or_404(ServicePayment, id=3)
-    for_xray = get_object_or_404(ServicePayment, id=4)
+    for_xray = get_object_or_404(ServicePayment, id=7)
     for_ctscan = get_object_or_404(ServicePayment, id=5)
 
     payed = False
@@ -232,7 +246,7 @@ def invoice(request):
 def add_payment_for_patient(request, patient_id):
     # Assuming you have a Payment model with fields like patient_id, card_payment, lab_payment, bed_payment, food_payment, etc.
     for_food = get_object_or_404(ServicePayment, id=6)
-    for_bed = get_object_or_404(ServicePayment, id=7)
+    for_bed = get_object_or_404(ServicePayment, id=8)
     # # Retrieve the most recent payment entry for the patient
     cashers = User.objects.filter(userprofileinfo__role='casher')
     payment = ServicePayment.objects.values('Payment_method').distinct()

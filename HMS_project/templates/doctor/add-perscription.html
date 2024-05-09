@@ -76,7 +76,7 @@
 										<select class="form-control" id="dr_name" name="dr_name">
 											<option>Select Name</option>
 											{% for user in doctors %}
-											<option value="{{user.username}}">{{user.username}}</option>
+											<option value="{{ user.username }}">{{ user.first_name}}</option>
 											{% endfor %}
 										</select>
 										<div id="drNameError" class="text-danger"></div>

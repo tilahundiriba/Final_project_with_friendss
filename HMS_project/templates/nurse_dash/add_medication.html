@@ -88,7 +88,7 @@
 										<select class="form-control" id="nurseid" name="nurseid">
 											<option>Select Name</option>
 											{% for user in nurses  %}
-											<option value="{{user.username}}">{{user.username}}</option>
+											<option value="{{ user.username }}">{{ user.first_name}}</option>
 											{% endfor  %}
 										</select>
 										<div id="nurseNameError" class="error-text"></div>

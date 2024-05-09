@@ -107,9 +107,10 @@
 											<th>Appointment No</th>
 											<th>Patient ID</th>
 											<th>Time Slot</th>
-											<th>Appointment Date</th>
+											
 
 											<th>Problem</th>
+											<th>Appointment Date</th>
 											<th>Status</th>
 											<th>Actions</th>
 										</tr>
@@ -121,9 +122,10 @@
 											<td>{{app.App_number}}</td>
 											<td>{{app.PatientID}}</td>
 											<td>{{app.Time_slot}}</td>
-											<td>{{app.App_date}}</td>
+										
 
 											<td>{{app.App_reason}}</td>
+											<td>{{app.App_date}}</td>
 											{% if app.App_status == 'Completed' %}
 											<td>
 												<span class="badge badge-success">{{app.App_status}}</span>

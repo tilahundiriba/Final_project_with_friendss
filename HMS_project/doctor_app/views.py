@@ -126,8 +126,8 @@ def add_lab(request):
         # Create an instance of Appointment model and save it
         try:
             patient = get_object_or_404( PatientRegister,patient_id=patientid)
-            doctor = get_object_or_404(User, username=doctor_name)
-            technic = get_object_or_404(User, username=techn_name)
+            doctor = get_object_or_404(User, first_name=doctor_name)
+            technic = get_object_or_404(User, first_name=techn_name)
             lab = Laboratory(
                 PatientID=patient,
                 Doctor_ID=doctor,
@@ -213,7 +213,7 @@ def add_perscription(request):
         # Create an instance of Appointment model and save it
         try:
             patient = get_object_or_404( PatientRegister,patient_id=patientid)
-            doctor = get_object_or_404(User, username=doctor_name)
+            doctor = get_object_or_404(User, first_name=doctor_name)
             presc = Prescription(
                 PatientID=patient,
                 Doctor_ID=doctor,
@@ -255,7 +255,7 @@ def edit_perscription(request, prec_number):
         
         try:
             patient = get_object_or_404(PatientRegister, patient_id=patientid)
-            doctor = get_object_or_404(User, username=doctor_name)
+            doctor = get_object_or_404(User, first_name=doctor_name)
 
             prescription.PatientID = patient
             prescription.Doctor_ID = doctor
@@ -308,10 +308,7 @@ def edit_appointment(request,app_number):
     unseen_count = Notification.objects.filter(seen=False).count()
     appointments = Appointment.objects.get(App_number=app_number)
     if request.method == 'POST': 
-
         patientid = request.POST.get('patient_id')
-        app_no = request.POST.get('app_no')
-        app_date = request.POST.get('app_date')
         time_slot = request.POST.get('time_slot')
         doctor_name = request.POST.get('dr_name')
         app_reseon = request.POST.get('problem')
@@ -319,9 +316,7 @@ def edit_appointment(request,app_number):
         patient = get_object_or_404( PatientRegister,patient_id=patientid)
         doctor = get_object_or_404(User, username=doctor_name)
         
-        appointments.App_number =app_no
         appointments.PatientID =patient
-        appointments.App_date =app_date
         appointments.Time_slot =time_slot
         appointments.App_reseon =app_reseon
         appointments.Doctor_ID =doctor
@@ -430,8 +425,8 @@ def add_history(request):
         # Create an instance of Appointment model and save it
         try:
             patient = get_object_or_404( PatientRegister,patient_id=patient_id)
-            doctor = get_object_or_404(User, username=doctor_name)
-            nurse = get_object_or_404(User, username=nurse_name)
+            doctor = get_object_or_404(User, first_name=doctor_name)
+            nurse = get_object_or_404(User, first_name=nurse_name)
             history = PatientHistory(
                 Patient_ID=patient,
                 Sympthom=syptoms,
@@ -465,8 +460,8 @@ def update_history(request, history_no):
         doctor_name = request.POST.get('dr_name')
         nurse_name = request.POST.get('nr_name')
         history = PatientHistory.objects.get(pk=history_no)  
-        doctor = get_object_or_404(User, username=doctor_name)
-        nurse = get_object_or_404(User, username=nurse_name)
+        doctor = get_object_or_404(User, first_name=doctor_name)
+        nurse = get_object_or_404(User, first_name=nurse_name)
         patient = get_object_or_404( PatientRegister,patient_id=patient_id)
 
         history.Patient_ID= patient
@@ -512,7 +507,6 @@ def create_appointment(request):
     registered=False
     if request.method == 'POST':
         patientid = request.POST.get('patient_id')
-        app_date = request.POST.get('app_date')
         time_slot = request.POST.get('time_slot')
         doctor_name = request.POST.get('dr_name')
         app_reseon = request.POST.get('problem')
@@ -527,7 +521,6 @@ def create_appointment(request):
             phone_number=patient.phone_number
             appointment = Appointment(
                 PatientID=patient,
-                App_date=app_date,
                 Time_slot=time_slot,
                 Doctor_ID=doctor,
                 App_reason=app_reseon,
@@ -549,7 +542,6 @@ def create_appointment(request):
         context = {
             'first_name':patient.first_name,
             'middle_name':patient.middle_name,
-            'app_date':app_date,
             'timeslot':time_slot
         }
         html_message = render_to_string('doctor/email_templates.html', context)
@@ -581,7 +573,7 @@ def create_appointment(request):
 
         # Initialize Twilio client
         client = Client(account_sid, auth_token)
-        app_notify = 'Hello! ' + patient.first_name  + '\nAppointment Day: ' + app_date + '\nAt time: '+ time_slot
+        app_notify = 'Hello! ' + patient.first_name  + '\nAppointment Day: ' + '\nAt time: '+ time_slot
         try:
             # Send SMS
             message = client.messages.create(

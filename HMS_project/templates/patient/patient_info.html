@@ -264,11 +264,11 @@
 								</form>
 
 								<!--Export links-->
-								<!-- <nav aria-label="Page navigation example">
+								<nav aria-label="Page navigation example">
 									<ul class="pagination justify-content-center export-pagination">
 										
 									</ul>
-								</nav> -->
+								</nav>
 								<!-- /Export links-->
 
 							</div>
@@ -278,15 +278,7 @@
 				</div>
 			</div>
 			<!-- /Main Content -->
-			<!--Copy Rights-->
-			<div class="container">
-				<div class="d-sm-flex justify-content-center">
-					<span class="text-muted text-center d-block d-sm-inline-block">Copyright © 2018 <a
-							href="http://www.konnectplugins.com/" target="_blank">konnectcode</a>. All rights
-						reserved.</span>
-				</div>
-			</div>
-			<!-- /Copy Rights-->
+
 		</div>
 		<!-- /Page Content -->
 	</div>
@@ -300,7 +292,7 @@
 		// JavaScript code for pagination
 		document.addEventListener('DOMContentLoaded', function () {
 			// Get the table rows and calculate total pages
-			var tableRows = document.querySelectorAll('#mytable tbody tr');
+			var tableRows = document.querySelectorAll('#tableId tbody tr');
 			var totalPages = Math.ceil(tableRows.length / 5);
 
 			// Generate pagination links
@@ -340,9 +332,5 @@
 		
 		
 </body>
-
-
-<!-- Mirrored from www.konnectplugins.com/proclinic/Horizontal/patientss.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 24 Jan 2022 10:42:01 GMT -->
-
 </html>
 {% endblock %}

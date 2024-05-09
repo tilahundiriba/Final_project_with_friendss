@@ -48,8 +48,8 @@
                                     <span class="ti-home"></span>
                                 </a>
                             </li>
-                            <li class="breadcrumb-item">Discharge</li>
-                            <li class="breadcrumb-item active">All Discharge</li>
+                            <li class="breadcrumb-item active">Discharge</li>
+                            <li class="breadcrumb-item ">All Discharge</li>
                         </ol>
                     </div>
                 </div>
@@ -78,10 +78,9 @@
                                             <th>Patient ID</th>
                                             <th>Reason</th>
                                             <th>Reffere to</th>
-                                            <th>Rt Name</th>
                                             <th>Days Stayed</th>
-                                            <th>Approval</th>
-                                            <th>Payments</th>
+                                            <th>Food Payments</th>
+                                            <th>Bed Payments</th>
                                             <th>Departure Date</th>
                                             <th>Actions</th>
                                        
@@ -96,41 +95,14 @@
                                                     <label class="custom-control-label" for="1"></label>
                                                 </div>
                                             </td>
-                                            <td>{{discharge.Patient_id}}</td>
-                                            <td>{{discharge.Reason}}</td>
-                                            <td>{{discharge.Reffer_to}}</td>
-                                            <td>{{discharge.Casher_name}}</td>
-                                            <td>{{discharge.No_days}}</td>
-                                          
-                                        
-                                            {% if discharge.Approval %}
-                                                <td>
-                                                    <span class="badge badge-success">Approved</span>
-                                                </td>
-                                            {% else %}
-                                                <td>
-                                                    <span class="badge badge-warning">Pending</span>
-                                                </td>
-
-                                            {% endif %}
-                                    
-                                            {% if discharge.Status %}
-                                            {% if discharge.Status == 'Completed' %}
-                                                <td>
-                                                    <span class="badge badge-success">{{ discharge.Status }}</span>
-                                                </td>
-                                            {% elif discharge.Status == 'Pending' %}
-                                                <td>
-                                                    <span class="badge badge-warning">{{ discharge.Status }}</span>
-                                                </td>
-                                            {% elif discharge.Status == 'Cancelled' %}
-                                                <td>
-                                                    <span class="badge badge-danger">{{ discharge.Status }}</span>
-                                                </td>
-                                            {% endif %}
-                                        {% endif %}
-                                            <td>{{discharge.Departure_date}}</td>
-                                            <td>  <a href="{% url 'deprture_payment' discharge.Patient_id %}" class="btn btn-primary  mb-0"><span
+                                            <td>{{discharge.patient_id}}</td>
+                                            <td>{{discharge.reason}}</td>
+                                            <td>{{discharge.referred_to}}</td>
+                                            <td>{{discharge.no_days}}</td>
+                                            <td>{{discharge.food_payment}}</td>
+                                            <td>{{discharge.bed_payment}}</td>
+                                            <td>{{discharge.departure_date}}</td>
+                                            <td>  <a href="{% url 'deprture_payment' discharge.patient_id %}" class="btn btn-primary  mb-0"><span
                                                 class="ti-plus"></span> Payment</a></td>
                                            
                                         </tr>
@@ -149,8 +121,7 @@
                                 <button type="button" class="btn btn-danger mt-3 mb-0"><span class="ti-trash"></span>
                                     DELETE</button>
                                     {% endif %}
-                                <button type="button" class="btn btn-primary mt-3 mb-0"><span
-                                        class="ti-pencil-alt"></span> EDIT</button>
+                               
                             </div>
                         </div>
                     </div>
@@ -158,15 +129,7 @@
                 </div>
             </div>
             <!-- /Main Content -->
-            <!--Copy Rights-->
-            <div class="container">
-                <div class="d-sm-flex justify-content-center">
-                    <span class="text-muted text-center d-block d-sm-inline-block">Copyright © 2018 <a
-                            href="http://www.konnectplugins.com/" target="_blank">konnectcode</a>. All rights
-                        reserved.</span>
-                </div>
-            </div>
-            <!-- /Copy Rights-->
+
         </div>
         <!-- /Page Content -->
     </div>

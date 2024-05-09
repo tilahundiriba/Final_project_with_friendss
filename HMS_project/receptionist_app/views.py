@@ -338,8 +338,8 @@ def update_patient(request,patient_id):
    doctor_id = request.POST.get('assidoc')
    rece = request.POST.get('rece_name')
    symptom = request.POST.get('symptom')
-   recept = get_object_or_404(User, username=rece)
-   doctor = get_object_or_404(User, username=doctor_id)
+   recept = get_object_or_404(User, first_name=rece)
+   doctor = get_object_or_404(User, first_name=doctor_id)
    patient = PatientRegister.objects.get(pk=patient_id)
    patient.first_name=first_name
    patient.middle_name=middle_name
