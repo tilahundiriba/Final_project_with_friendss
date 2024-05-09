@@ -47,7 +47,7 @@ def casher_dash(request):
                                                           'card_payment':card_payment,
                                                           'lab_payment':lab_payment})
 from datetime import datetime
-from nurse_app.models import BedInformation,RoomInformation
+from nurse_app.models import BedAllocation,Rooms
 def add_discharge(request):
     cashers = User.objects.filter(userprofileinfo__role='casher')
     payed = False
@@ -62,7 +62,7 @@ def add_discharge(request):
         try:
             patient = get_object_or_404(PatientRegister, patient_id=patient_id)
             # p = get_object_or_404(BedInformation, Patient_id=patient_id)
-            p = BedInformation.objects.filter(Patient_id=patient_id).first()
+            p = BedAllocation.objects.filter(Patient_id=patient_id).first()
             pt=p.Bed_num
             casher = get_object_or_404(User, username=casher_name)
             discharge_instance = Discharge(
@@ -74,13 +74,14 @@ def add_discharge(request):
             )
             discharge_instance.save()
             # Calculate the number of days stayed
-            bed_info = BedInformation.objects.filter(Patient_id=patient).first()
+            bed_info = BedAllocation.objects.filter(Patient_id=patient).first()
             date = get_object_or_404(Discharge, Patient_id=patient_id)
             if bed_info:
                 alloc_date = bed_info.Alloc_date
                 discharge_date = date.Departure_date
                 discharge_instance.No_days = (discharge_date - alloc_date).days
-            bed = get_object_or_404(RoomInformation, Bed_no=pt)
+                discharge_instance.save()
+            bed = get_object_or_404(Rooms, Bed_no=pt)
             bed.Status = 'Vacant'  # Update status to 'Vacant' or any other value as needed
             bed.save()
         except PatientRegister.DoesNotExist:
@@ -126,6 +127,7 @@ def approve_discharge_request(request, discharge_no):
     dis_request.Approval = True
     dis_request.save()
     return redirect('approve_departure')
+
 def add_payment(request,patient_id):
     notifications = Notification.objects.all()
     patient_pay = get_object_or_404(PatientRegister, patient_id=patient_id)
@@ -237,13 +239,14 @@ def add_payment_for_patient(request, patient_id):
     notifications = Notification.objects.all()
     unseen_count = Notification.objects.filter(seen=False).count()
     recent_payment = PaymentModel.objects.filter(Patient_id=patient_id).latest('Admit_date')
-    if recent_payment.Bed_payment and recent_payment.Food_payment == 0.00:
-        recent_payment.Bed_payment = recent_payment.Food_payment = 1.0
-        food_pay= recent_payment.Bed_payment * for_food.Payment
-        bed_pay = recent_payment.Food_payment * for_bed.Payment
+    recent_discharge = Discharge.objects.filter(Patient_id=patient_id).latest('Departure_date')
+    if recent_discharge.No_days ==0:
+        recent_discharge.No_days=1 
+        food_pay= recent_discharge.No_days * for_food.Payment
+        bed_pay = recent_discharge.No_days * for_bed.Payment
     else:
-        food_pay= recent_payment.Bed_payment * for_food.Payment
-        bed_pay = recent_payment.Food_payment * for_bed.Payment
+        food_pay= recent_discharge.No_days * for_food.Payment
+        bed_pay = recent_discharge.No_days * for_bed.Payment
     # # Add new payments to the existing payment entry
     # recent_payment.Bed_payment += new_bed_payment_amount
     # recent_payment.Food_payment += new_food_payment_amount

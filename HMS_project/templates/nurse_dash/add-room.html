@@ -70,11 +70,7 @@
 							<form action="{% url 'add_room' %}" method="post" onsubmit="return validateForm()">
 								{% csrf_token %}
 								<div class="form-row">
-									<div class="form-group col-md-6">
-										<label for="room-block">Block Number</label>
-										<input type="text" class="form-control" placeholder="Room Block" id="room-block" name="block_no">
-										<div id="blockNumberError" class="error-text"></div>
-									</div>
+								
 									<div class="form-group col-md-6">
 										<label for="room-number">Room Number</label>
 										<input type="text" class="form-control" placeholder="Room Number" id="room-number" name="room_no">
@@ -196,13 +192,7 @@
 				</div>
 			</div>
 			<!-- /Main Content -->
-			<!--Copy Rights-->
-			<div class="container">
-				<div class="d-sm-flex justify-content-center">
-				  <span class="text-muted text-center d-block d-sm-inline-block">Copyright © 2018 <a href="http://www.konnectplugins.com/" target="_blank">konnectcode</a>. All rights reserved.</span>
-				</div>
-			</div>
-			<!-- /Copy Rights-->
+
 		</div>
 		<!-- /Page Content -->
 	</div>

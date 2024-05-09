@@ -207,7 +207,7 @@
 											<td>{{ feedback.Feedback }}</td>
 											<td>{{ feedback.Added_no }}</td>
 									
-											<td>
+											
 												<td>
 													<form action="{% url 'mark_as_read' feedback.Added_no  %}" method="post">
 														{% csrf_token %}
@@ -217,7 +217,7 @@
 													</form>
 												
 												</td>
-											</td>
+											
 										</tr>
 										{% endfor %}
 									</tbody>

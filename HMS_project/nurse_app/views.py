@@ -3,7 +3,7 @@ from django.shortcuts import get_object_or_404
 from admin_app .models import UserProfileInfo,Notification
 from doctor_app.models import PatientHistory
 from receptionist_app.models import PatientRegister
-from.models import RoomInformation,VitalInformation,Medication,BedInformation
+from.models import Rooms,VitalInformation,Medication,BedAllocation
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
@@ -192,13 +192,11 @@ def add_room(request):
     unseen_count = Notification.objects.filter(seen=False).count()
     registered=False
     if request.method == 'POST':
-        room_block = request.POST.get('block_no')
         room_no = request.POST.get('room_no')
         bed_no = request.POST.get('bed_no')
         status = request.POST.get('status')
         room_type = request.POST.get('room-type')
-        room_info = RoomInformation(
-            Room_block=room_block,
+        room_info = Rooms(
             Room_no=room_no,
             Bed_no=bed_no,
             Status=status,
@@ -214,14 +212,12 @@ def add_room(request):
 def edit_room(request,bed_no):
     notifications = Notification.objects.all()
     unseen_count = Notification.objects.filter(seen=False).count()
-    rooms = RoomInformation.objects.get(Bed_no=bed_no)
+    rooms = Rooms.objects.get(Bed_no=bed_no)
     if request.method == 'POST':
-        room_block = request.POST.get('block_no')
         room_no = request.POST.get('room_no')
         bed_noo = request.POST.get('bed_no')
         status = request.POST.get('status')
         room_type = request.POST.get('room-type')
-        rooms.Room_block=room_block
         rooms.Room_no=room_no
         rooms.Bed_no=bed_noo
         rooms.Status=status
@@ -233,7 +229,7 @@ def edit_room(request,bed_no):
 def dis_room(request):
     notifications = Notification.objects.all()
     unseen_count = Notification.objects.filter(seen=False).count()
-    room =RoomInformation.objects.all()
+    room =Rooms.objects.all()
     return render(request,'nurse_dash/rooms.html',{'rooms':room,'notifications':notifications,
                                                        'unseen_count':unseen_count})
 def dis_patients(request):
@@ -269,7 +265,7 @@ def dis_patients(request):
 def allocate_room(request):
     notifications = Notification.objects.all()
     unseen_count = Notification.objects.filter(seen=False).count()
-    roo_info = RoomInformation.objects.all()
+    roo_info = Rooms.objects.all()
     registered=False
     if request.method == 'POST':
         patient_id = request.POST.get('patient_id')
@@ -277,14 +273,14 @@ def allocate_room(request):
         bed_no = request.POST.get('bed_no')
         room_type = request.POST.get('room-type')
         patient = get_object_or_404( PatientRegister,patient_id=patient_id)
-        bed_nos = get_object_or_404( RoomInformation,Bed_no=bed_no)
-        bed_info = BedInformation.objects.create(
+        room_nos = get_object_or_404( Rooms,Room_no=room_no)
+        bed_info = BedAllocation.objects.create(
             Patient_id=patient,
-            Room_num=room_no,
-            Bed_num=bed_nos,
+            Room_num=room_nos,
+            Bed_num=bed_no,
             Room_type=room_type,
         )
-        room = get_object_or_404(RoomInformation, Bed_no=bed_no)
+        room = get_object_or_404(Rooms, Room_no=room_no)
         room.Status = 'Occupied'  # Update status to 'Occupied' or any other value as needed
         room.save()
         registered=True
@@ -296,7 +292,7 @@ def dis_bed_allocation(request):
     notifications = Notification.objects.all()
     unseen_count = Notification.objects.filter(seen=False).count()
     
-    alloc =BedInformation.objects.all()
+    alloc =BedAllocation.objects.all()
     return render(request,'nurse_dash/allocations.html',{'allocs':alloc,'notifications':notifications,
                                                        'unseen_count':unseen_count})
 def dis_vitals(request):
