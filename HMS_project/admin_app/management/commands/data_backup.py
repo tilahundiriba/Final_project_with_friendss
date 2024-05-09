@@ -1,12 +1,9 @@
 from django.core.management.base import BaseCommand
+from admin_app.tasks import backup_database
 
 class Command(BaseCommand):
-    help = 'Backup database data from all apps to CSV file'
-
-    def add_arguments(self, parser):
-        parser.add_argument('--interval', type=int, default=24, help='Interval in hours for backup')
+    help = 'Initiate backup process with specified interval'
 
     def handle(self, *args, **kwargs):
-        interval = kwargs['interval']
-        self.stdout.write(self.style.SUCCESS(f'Starting periodic backup with interval {interval} hours'))
-        # Your backup logic here
+        interval_hours = 1  # Set the interval to 24 hours
+        backup_database.apply_async((interval_hours,))

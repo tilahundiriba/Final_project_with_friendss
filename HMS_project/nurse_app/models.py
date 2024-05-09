@@ -35,7 +35,7 @@ class BedAllocation(models.Model):
     Room_type=models.CharField(max_length=100)
     Alloc_date = models.DateField(auto_now_add=True)
     def __str__(self):
-        return f"{self.Bed_num}{self.Room_num}"
+        return f"{self.Room_num}{self.Bed_num}"
 
 class VitalInformation(models.Model):
     Patient_id=models.ForeignKey(PatientRegister,on_delete=models.CASCADE,related_name='nurse_vitalinfo_set',related_query_name='nurse_vitalinfo_set')

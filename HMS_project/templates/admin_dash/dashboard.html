@@ -146,23 +146,23 @@
             
               <li class="sidebar-item">
 
-                <a href="{% url 'dis_patient' %}" class="sidebar-link"> Patients</a>
+                <a href="{% url 'patient' %}" class="sidebar-link"> Patients</a>
               </li>
               <li class="sidebar-item">
 
-                <a href="{% url 'dis_vitals' %}" class="sidebar-link"> Vitals</a>
+                <a href="{% url 'vitals' %}" class="sidebar-link"> Vitalinormations</a>
               </li>
               <li class="sidebar-item">
 
-                <a href="{% url 'dis-appointment' %}" class="sidebar-link"> Appointment</a>
+                <a href="{% url 'dis_appointment' %}" class="sidebar-link"> Appointments</a>
               </li>
               <li class="sidebar-item">
 
-                <a href="{% url 'dis_history' %}" class="sidebar-link">History</a>
+                <a href="{% url 'history' %}" class="sidebar-link">Histories</a>
               </li>
               <li class="sidebar-item">
 
-                <a href="{% url 'perscriptions' %}" class="sidebar-link"> Prescription</a>
+                <a href="{% url 'dis_perscription' %}" class="sidebar-link"> Prescriptions</a>
               </li>
             </ul>
           </li>
@@ -179,13 +179,14 @@
             
               <li class="sidebar-item">
 
-                <a href="{% url 'lab_tests' %}" class="sidebar-link"> Laboratory</a>
+                <a href="{% url 'laboratories' %}" class="sidebar-link"> Laboratories</a>
               </li>
               <li class="sidebar-item">
 
-                <a href="{% url 'dis_lab_result' %}" class="sidebar-link"> Result</a>
+                <a href="{% url 'medications' %}" class="sidebar-link"> Medications</a>
               </li>
-          
+             
+
             </ul>
           </li>
        
@@ -198,13 +199,16 @@
             <ul id="dep" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
               <li class="sidebar-item">
 
-                <a href="{% url 'discharges' %}" class="sidebar-link"> Departed</a>
+                <a href="{% url 'departed' %}" class="sidebar-link"> Departed</a>
               </li>
               <li class="sidebar-item">
 
                 <a href="{% url 'approve_departure' %}" class="sidebar-link">Approve Departed</a>
               </li>
-          
+              <li class="sidebar-item">
+
+                <a href="{% url 'payments' %}" class="sidebar-link"> Payments</a>
+              </li>
             </ul>
           </li>
           <li class="sidebar-item">

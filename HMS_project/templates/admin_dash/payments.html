@@ -1,5 +1,5 @@
 
-{% extends 'casher_dash/casher_dash.html' %}
+{% extends 'admin_dash/dashboard.html' %}
 {% load static %}
 {% block content %}
 <!DOCTYPE html>
@@ -121,7 +121,7 @@
 											<th>Charges</th>
 											<th>Payment Method</th>
 											<th>Payment Date</th>
-											<th>Invoice</th>
+											
 											<th>Actions</th>
 										</tr>
 									</thead>
@@ -152,19 +152,12 @@
                                             <td>{{payment.Pay_method}}</td>
                                             <td>{{payment.Admit_date}}</td>
                                             
-                                            <td>
-												<a href="{% url 'about_payment' payment.Pay_number payment.Patient_id %}"
-												class="btn btn-outline-info" data-toggle="tooltip" title="VIEW DETAILS"><span class="ti-arrow-down"></span>Invoice</a>
-                                            </td>
+                                          
                                         
                                             <td>
 												{% if request.user.userprofileinfo.role == 'admin' %}
                                                 <a href="#" class="btn btn-outline-danger" data-toggle="tooltip" title="DELETE PAYMENT"><span
                                                     class="ti-trash"></span>Delete</a>
-													{% endif %}
-													{% if request.user.userprofileinfo.role == 'casher' %}
-                                                <a href="#" class="btn btn-outline-primary" data-toggle="tooltip" title="EDIT PAYMENT"><span
-                                                    class="ti-pencil-alt"></span>Edit</a>
 													{% endif %}
                                                 
                                             </td>

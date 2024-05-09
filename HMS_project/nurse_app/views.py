@@ -52,7 +52,7 @@ def add_medication(request):
         remark = request.POST.get('remark')
       
         patient = get_object_or_404( PatientRegister,patient_id=patient_id)
-        nurse_names = get_object_or_404( User,first_name=nurse_name)
+        nurse_names = get_object_or_404( User,username=nurse_name)
         med = Medication(
             Patient_id=patient,
             Med_time=med_time,
@@ -90,7 +90,7 @@ def edit_medication(request,med_no):
         drug = request.POST.get('drugs')
         nurse_name = request.POST.get('nurseid')
         remark = request.POST.get('remark')
-        nurse_name = get_object_or_404( User,first_name=nurse_name)
+        nurse_name = get_object_or_404( User,username=nurse_name)
         patient = get_object_or_404( PatientRegister,patient_id=patient_id)
     
         medications.Patient_id=patient
@@ -125,7 +125,7 @@ def add_vital_info(request):
         nurse_name = request.POST.get('nurseid')
         remark = request.POST.get('remark')
         patient = get_object_or_404( PatientRegister,patient_id=patient_id)
-        nurse_name = get_object_or_404( User,first_name=nurse_name)
+        nurse_name = get_object_or_404( User,username=nurse_name)
         vital = VitalInformation(
             Patient_id=patient,
             H_rate=Heart_Rate,
@@ -168,7 +168,7 @@ def edit_vital_info(request,vital_info_no):
         nurse_names = request.POST.get('nurseid')
         remark = request.POST.get('remark')
         patient = get_object_or_404( PatientRegister,patient_id=patient_id)
-        nurse_name = get_object_or_404( User,first_name=nurse_names)
+        nurse_name = get_object_or_404( User,username=nurse_names)
         vitals.Patient_id=patient
         vitals.H_rate=Heart_Rate
         vitals.B_pressure=bloodpre
@@ -280,7 +280,7 @@ def allocate_room(request):
             Bed_num=bed_no,
             Room_type=room_type,
         )
-        room = get_object_or_404(Rooms, Room_no=room_no)
+        room = get_object_or_404(Rooms, Room_no=room_no,Bed_no=bed_no)
         room.Status = 'Occupied'  # Update status to 'Occupied' or any other value as needed
         room.save()
         registered=True
@@ -291,7 +291,6 @@ def allocate_room(request):
 def dis_bed_allocation(request):
     notifications = Notification.objects.all()
     unseen_count = Notification.objects.filter(seen=False).count()
-    
     alloc =BedAllocation.objects.all()
     return render(request,'nurse_dash/allocations.html',{'allocs':alloc,'notifications':notifications,
                                                        'unseen_count':unseen_count})
@@ -301,6 +300,7 @@ def dis_vitals(request):
     vitals =VitalInformation.objects.all()
     return render(request,'nurse_dash/vital_infos.html',{'vitals':vitals,'notifications':notifications,
                                                        'unseen_count':unseen_count})
+
 def nurse_dash(request):
     notifications = Notification.objects.all()
     unseen_count = Notification.objects.filter(seen=False).count()

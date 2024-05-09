@@ -1,4 +1,4 @@
-{% extends 'doctor/dr_dash.html' %}
+{% extends 'admin_dash/dashboard.html' %}
 {% load static %}
 {% block content %}
 
@@ -13,9 +13,43 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	{% block 'title' %}
-	<title>Histories List</title>
+	<title>Appointment List</title>
 	{% endblock %}
 	<!-- Fav  Icon Link -->
+	<style>
+		/* Custom CSS for pagination */
+		.pagination {
+			margin-top: 20px;
+			text-align: center;
+			/* Center the pagination links */
+		}
+
+		.pagination a {
+			display: inline-block;
+			margin: 0 5px;
+			/* Add space between pagination links */
+			padding: 8px 12px;
+			/* Increase padding for larger size */
+			font-size: 16px;
+			/* Increase font size */
+			color: #007bff;
+			/* Change text color */
+			border: 1px solid #007bff;
+			/* Add border */
+			border-radius: 5px;
+			/* Add border radius */
+			text-decoration: none;
+			/* Remove underline */
+		}
+
+		.pagination a:hover {
+			background-color: #007bff;
+			/* Change background color on hover */
+			color: #fff;
+			/* Change text color on hover */
+		}
+	</style>
+</head>
 
 <body>
 	<!-- Pre Loader -->
@@ -34,11 +68,12 @@
 		<div id="content">
 			<!-- Top Navigation -->
 
+
 			<!-- Page Title -->
 			<div class="container mt-0">
 				<div class="row breadcrumb-bar">
 					<div class="col-md-6">
-						<h3 class="block-title">Histories</h3>
+						<h3 class="block-title">Appointments</h3>
 					</div>
 					<div class="col-md-6">
 						<ol class="breadcrumb">
@@ -47,8 +82,8 @@
 									<span class="ti-home"></span>
 								</a>
 							</li>
-							<li class="breadcrumb-item active">Histories</li>
-							<li class="breadcrumb-item ">Histories List</li>
+							<li class="breadcrumb-item active">Appointments</li>
+							<li class="breadcrumb-item ">Appointments List</li>
 						</ol>
 					</div>
 				</div>
@@ -63,54 +98,54 @@
 					<!-- Widget Item -->
 					<div class="col-md-12">
 						<div class="widget-area-2 proclinic-box-shadow">
-							<h3 class="widget-title">Histories List</h3>
+							<h3 class="widget-title">Appointments List</h3>
 							<div class="table-responsive mb-3">
 								<table id="tableId" class="table table-bordered table-striped">
 									<thead>
 										<tr>
-											<!-- <th class="no-sort">
-												<div class="custom-control custom-checkbox">
-													<input class="custom-control-input" type="checkbox" id="select-all">
-													<label class="custom-control-label" for="select-all"></label>
-												</div>
-											</th> -->
-											
+									
+											<th>Appointment No</th>
 											<th>Patient ID</th>
-											<th>Symptoms</th>
-											<th>Disease</th>
-											<th>Dr. Name</th>
-											<th>Nr. Name</th>
-											<th>History No</th>
-											<th>Date</th>
+											<th>Time Slot</th>
+											
+
+											<th>Problem</th>
+											<th>Appointment Date</th>
+											<th>Status</th>
 											<th>Actions</th>
 										</tr>
 									</thead>
 									<tbody>
-										{% for history in histories %}
+										{% for app in appointment %}
 										<tr>
-											<!-- <td>
-												<div class="custom-control custom-checkbox">
-													<input class="custom-control-input" type="checkbox">
-													<label class="custom-control-label"></label>
-												</div>
-											</td> -->
-											<td>{{history.Patient_ID}}</td>
-											<td>{{history.Sympthom}}</td>
-											<td>{{history.DiseaseName}}</td>
-											<td>{{history.Doctor_ID}}</td>
-											<td>{{history.Nurse_ID}}</td>
-											<td>{{history.History_No}}</td>
-											<td>{{history.Date}}</td>
+										
+											<td>{{app.App_number}}</td>
+											<td>{{app.PatientID}}</td>
+											<td>{{app.Time_slot}}</td>
+										
 
+											<td>{{app.App_reason}}</td>
+											<td>{{app.App_date}}</td>
+											{% if app.App_status == 'Completed' %}
+											<td>
+												<span class="badge badge-success">{{app.App_status}}</span>
+											</td>
+											{% endif %}
+											{% if app.App_status == 'Pending' %}
+											<td>
+												<span class="badge badge-warning">{{app.App_status}}</span>
+											</td>
+											{% endif %}
+											{% if app.App_status == 'Cancelled' %}
+											<td>
+												<span class="badge badge-danger">{{app.App_status}}</span>
+											</td>
+											{% endif %}
 											<td>
 												{% if request.user.userprofileinfo.role == 'admin' %}
-												<a href="#" class="btn btn-outline-danger"><span
-														class="ti-trash"></span>DELETE</a>
-														{% endif %}
-														{% if request.user.userprofileinfo.role == 'doctor' %}
-												<a href="{% url 'edit_history' history.History_No %}" class="btn btn-outline-primary"><span
-														class="ti-pencil-alt"></span>EDIT</a>
-												{% endif %}
+												<button type="button" class="btn btn-danger mt-3 mb-0"><span class="ti-trash"></span>
+													DELETE</button>
+													{% endif %}
 											</td>
 										</tr>
 
@@ -122,14 +157,9 @@
 								<nav aria-label="Page navigation example">
 									<ul class="pagination justify-content-center export-pagination">
 										
-										
 									</ul>
 								</nav>
-								<!-- /Export links-->
-								<!-- <button type="button" class="btn btn-danger mt-3 mb-0"><span class="ti-trash"></span>
-									DELETE</button>
-								<button type="button" class="btn btn-primary mt-3 mb-0"><span
-										class="ti-pencil-alt"></span> EDIT</button> -->
+								
 							</div>
 						</div>
 					</div>
@@ -137,7 +167,7 @@
 				</div>
 			</div>
 			<!-- /Main Content -->
-
+		
 		</div>
 		<!-- /Page Content -->
 	</div>
@@ -146,6 +176,8 @@
 		<span class="ti-angle-up"></span>
 	</a>
 	<!-- /Back to Top -->
+
+
 
 </body>
 

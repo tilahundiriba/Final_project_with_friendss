@@ -1,4 +1,4 @@
-{% extends 'casher_dash/casher_dash.html' %}
+{% extends 'admin_dash/dashboard.html' %}
 {% load static %}
 {% block content %}
 <!DOCTYPE html>
@@ -102,10 +102,13 @@
                                             <td>{{discharge.food_payment}}</td>
                                             <td>{{discharge.bed_payment}}</td>
                                             <td>{{discharge.departure_date}}</td>
-                                            {% if request.user.userprofileinfo.role == 'casher' %}
-                                            <td>  <a href="{% url 'deprture_payment' discharge.patient_id %}" class="btn btn-primary  mb-0"><span
-                                                class="ti-plus"></span> Payment</a></td>
-                                           {% endif %}
+                                           
+                                            <td>   {% if request.user.userprofileinfo.role == 'admin' %}
+                                                <button type="button" class="btn btn-danger mt-3 mb-0"><span class="ti-trash"></span>
+                                                    DELETE</button>
+                                                    {% endif %}
+                                            </td> 
+                                            
                                         </tr>
                                         {% endfor %}
                                     </tbody>
@@ -117,11 +120,7 @@
                                         
                                     </ul>
                                 </nav>
-                                <!-- /Export links-->
-                                {% if request.user.userprofileinfo.role == 'admin' %}
-                                <button type="button" class="btn btn-danger mt-3 mb-0"><span class="ti-trash"></span>
-                                    DELETE</button>
-                                    {% endif %}
+                        
                                
                             </div>
                         </div>

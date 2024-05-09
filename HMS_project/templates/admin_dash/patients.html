@@ -1,0 +1,253 @@
+{% extends 'admin_dash/dashboard.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.konnectplugins.com/proclinic/Horizontal/patients.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 24 Jan 2022 10:42:01 GMT -->
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	{% block 'title' %}
+	<title>patient List</title>
+	{% endblock %}
+	<!-- Fav  Icon Link -->
+	<style>
+		.search-input {
+			padding: 8px;
+			border: 1px solid #dddddd;
+			border-radius: 4px;
+		}
+		.pagination {
+			margin-top: 20px;
+			text-align: center;
+			/* Center the pagination links */
+		}
+
+		.pagination a {
+			display: inline-block;
+			margin: 0 5px;
+			/* Add space between pagination links */
+			padding: 8px 12px;
+			/* Increase padding for larger size */
+			font-size: 16px;
+			/* Increase font size */
+			color: #007bff;
+			/* Change text color */
+			border: 1px solid #007bff;
+			/* Add border */
+			border-radius: 5px;
+			/* Add border radius */
+			text-decoration: none;
+			/* Remove underline */
+		}
+
+		.pagination a:hover {
+			background-color: #007bff;
+			/* Change background color on hover */
+			color: #fff;
+			/* Change text color on hover */
+		}
+	</style>
+
+</head>
+
+<body>
+	<!-- Pre Loader -->
+	<div class="loading">
+		<div class="spinner">
+			<div class="double-bounce1"></div>
+			<div class="double-bounce2"></div>
+		</div>
+	</div>
+	<!--/Pre Loader -->
+	<!-- Color Changer -->
+
+	<!-- /Color Changer -->
+	<div class="wrapper">
+		<!-- Page Content -->
+		<div id="content">
+			<!-- Top Navigation -->
+			<!-- Page Title -->
+			<div class="container mt-0">
+				<div class="row breadcrumb-bar">
+					<div class="col-md-6">
+						<h3 class="block-title">Patients</h3>
+					</div>
+					<div class="col-md-6">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item">
+								<a href="index.html">
+									<span class="ti-home"></span>
+								</a>
+							</li>
+							<li class="breadcrumb-item">Patients</li>
+							<li class="breadcrumb-item active">All Patients</li>
+						</ol>
+					</div>
+				</div>
+			</div>
+			<!-- /Page Title -->
+
+			<!-- /Breadcrumb -->
+			<!-- Main Content -->
+			<div class="container">
+
+				<div class="row">
+					<!-- Widget Item -->
+					<div class="col-md-12">
+						<div class="widget-area-2 proclinic-box-shadow">
+							<h3 class="widget-title">Patients List</h3>
+							<div class="table-responsive mb-3">
+								<form class="search-form" action="{% url 'delete_patient' %}" method="POST">
+									{% csrf_token %}
+									<div class="form-row">
+										<div class="form-group col-md-10">
+											<input class="form-control form-control-lg" type="text" name="search_query"
+												placeholder="Patient Search...">
+										</div>
+										<div class="form-group  col-md-2">
+											<button type="submit" class="btn btn-primary btn-lg">Search</button>
+										</div>
+									</div>
+									<table id="mytable" class="table table-bordered table-striped ">
+										<thead>
+											<tr>
+										
+											
+
+												<th>Patient ID</th>
+												<th>First Name</th>
+												<th>Last Name</th>
+
+												<th>Gender</th>
+
+												<th>Age</th>
+												<th>Phone Number</th>
+
+												<th>Country</th>
+												<th>City</th>
+
+												<th>Kebele</th>
+												<th>Dr Name</th>
+												<th>Rt Name</th>
+												
+												<th>Actions</th>
+
+
+
+											</tr>
+										</thead>
+										<tbody>
+											{% for patient in patients %}
+											<tr>
+										
+											
+												<td>{{patient.patient_id}}</td>
+												<td>{{patient.first_name}}</td>
+												<td>{{patient.middle_name}}</td>
+
+
+												<td>{{patient.gender}}</td>
+
+												<td>{{patient.age}}</td>
+												<td>{{patient.phone_number}}</td>
+
+												<td>{{patient.country}}</td>
+												<td>{{patient.city}}</td>
+
+												<td>{{patient.kebele}}</td>
+												<td>{{patient.doctor_name}}</td>
+												<td>{{patient.receptinist_name}}</td>
+											
+
+												<td>
+													{% if request.user.userprofileinfo.role == 'admin' %}
+													<button type="button" class="btn btn-danger mt-3 mb-0"><span class="ti-trash"></span>
+														DELETE</button>
+														{% endif %}
+												</td>
+												{% endfor %}
+											</tr>
+										</tbody>
+									</table>
+								</form>
+
+								<!--Export links-->
+								<nav aria-label="Page navigation example">
+									<ul class="pagination justify-content-center export-pagination">
+										
+									</ul>
+								</nav>
+								<!-- /Export links-->
+
+							</div>
+						</div>
+					</div>
+					<!-- /Widget Item -->
+				</div>
+			</div>
+			<!-- /Main Content -->
+
+		</div>
+		<!-- /Page Content -->
+	</div>
+	<!-- Back to Top -->
+	<a id="back-to-top" href="#" class="back-to-top">
+		<span class="ti-angle-up"></span>
+	</a>
+	<!-- /Back to Top -->
+
+	<script>
+		// JavaScript code for pagination
+		document.addEventListener('DOMContentLoaded', function () {
+			// Get the table rows and calculate total pages
+			var tableRows = document.querySelectorAll('#mytable tbody tr');
+			var totalPages = Math.ceil(tableRows.length / 5);
+
+			// Generate pagination links
+			var paginationContainer = document.querySelector('.pagination');
+			for (var i = 1; i <= totalPages; i++) {
+				var pageLink = document.createElement('a');
+				pageLink.href = '#';
+				pageLink.textContent = i;
+				pageLink.addEventListener('click', function (event) {
+					event.preventDefault();
+					showPage(parseInt(this.textContent));
+				});
+				paginationContainer.appendChild(pageLink);
+			}
+
+			// Function to show page
+			function showPage(pageNumber) {
+				// Hide all table rows
+				tableRows.forEach(function (row) {
+					row.style.display = 'none';
+				});
+
+				// Calculate start and end indexes for current page
+				var startIndex = (pageNumber - 1) * 5;
+				var endIndex = startIndex + 5;
+
+				// Show table rows for current page
+				for (var i = startIndex; i < endIndex && i < tableRows.length; i++) {
+					tableRows[i].style.display = '';
+				}
+			}
+
+			// Show the first page by default
+			showPage(1);
+		});
+	</script>
+		
+		
+</body>
+
+
+<!-- Mirrored from www.konnectplugins.com/proclinic/Horizontal/patients.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 24 Jan 2022 10:42:01 GMT -->
+
+</html>
+{% endblock %}

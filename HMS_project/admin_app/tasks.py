@@ -4,11 +4,10 @@ from django.utils import timezone
 import csv
 from django.apps import apps
 
-
 @shared_task
 def backup_database(interval):
     # Define the file path for the CSV backup
-    csv_file_path = 'backup.csv'  # Specify the desired file path
+    csv_file_path = 'admin_app/backup.csv'  # Specify the desired file path
     
     # Open the CSV file in write mode
     with open(csv_file_path, 'w', newline='') as csvfile:
@@ -30,7 +29,7 @@ def backup_database(interval):
                     writer.writerow([getattr(obj, field.name) for field in model._meta.fields])
     
     # Schedule next backup
-    schedule_next_backup.delay(interval)
+    schedule_next_backup.apply_async((interval,), countdown=interval * 3600)  # Convert hours to seconds
 
 
 @shared_task

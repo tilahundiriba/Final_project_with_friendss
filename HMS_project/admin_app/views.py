@@ -29,7 +29,7 @@ from .models import Notification
 from receptionist_app.models import PatientRegister
 from doctor_app.models import Appointment,PatientHistory,Laboratory,Prescription
 from casher_app.models import PaymentModel,Discharge,ServicePayment
-from nurse_app.models import RoomInformation,VitalInformation
+from nurse_app.models import RoomInformation,VitalInformation,Medication
 import csv
 import openpyxl
 from reportlab.lib.pagesizes import letter
@@ -43,6 +43,84 @@ from datetime import datetime
 from django.shortcuts import render
 from django.template.loader import render_to_string
 
+# @login_required
+def dis_appointment(request):
+    notifications = Notification.objects.all()
+    unseen_count = Notification.objects.filter(seen=False).count()
+    appointment=Appointment.objects.all()
+    return render(request,'admin_dash/appointments.html',{'appointment':appointment,'notifications':notifications,
+                                                'unseen_count':unseen_count})
+# @login_required
+def dis_history(request):
+    notifications = Notification.objects.all()
+    unseen_count = Notification.objects.filter(seen=False).count()
+    histories = PatientHistory.objects.all()
+    return render(request,'admin_dash/histories.html',{'histories':histories,'notifications':notifications,
+                                                'unseen_count':unseen_count})
+# @login_required
+def perscription(request):
+    prescription= Prescription.objects.all()
+    notifications = Notification.objects.all()
+    unseen_count = Notification.objects.filter(seen=False).count()
+    
+    return render(request,'admin_dash/prescriptions.html',{'prescriptions':prescription,'notifications':notifications,
+                                                'unseen_count':unseen_count})
+def dis_vitals(request):
+    notifications = Notification.objects.all()
+    unseen_count = Notification.objects.filter(seen=False).count()
+    vitals =VitalInformation.objects.all()
+    return render(request,'admin_dash/vital_infos.html',{'vitals':vitals,'notifications':notifications,
+                                                       'unseen_count':unseen_count})
+def dis_patient(request):
+    notifications = Notification.objects.all()
+    unseen_count = Notification.objects.filter(seen=False).count()
+    patients = PatientRegister.objects.all()
+    return render(request,'admin_dash/patients.html', {'patients':patients
+                                                              ,
+                                                              'notifications':notifications,
+                                                              'unseen_count':unseen_count})
+def dis_lab_result(request):
+    notifications = Notification.objects.all()
+    unseen_count = Notification.objects.filter(seen=False).count()
+    lab_results = Laboratory.objects.all()
+    return render(request, 'admin_dash/laboratories.html',{'notifications':notifications,
+                                                'unseen_count':unseen_count,
+                                                'lab_results':lab_results})
+def dis_payment(request):
+    notifications = Notification.objects.all()
+    unseen_count = Notification.objects.filter(seen=False).count()
+    payments = PaymentModel.objects.all()
+    return render(request,'admin_dash/payments.html',{'notifications':notifications,
+                                                            'unseen_count':unseen_count,
+                                                            'payments':payments})
+def dis_discharge(request):
+    notifications = Notification.objects.all()
+    unseen_count = Notification.objects.filter(seen=False).count()
+    discharges = Discharge.objects.all()
+    context = []
+
+    for discharge in discharges:
+        recent_payment = PaymentModel.objects.filter(Patient_id=discharge.Patient_id).order_by('-Admit_date').first()
+        context.append({
+            'patient_id': discharge.Patient_id,
+            'no_days': discharge.No_days,
+            'reason': discharge.Reason,
+            'referred_to': discharge.Reffer_to,
+            'departure_date': discharge.Departure_date,
+            'food_payment': recent_payment.Food_payment if recent_payment else None,
+            'bed_payment': recent_payment.Bed_payment if recent_payment else None,
+            # Add other fields from Discharge and PaymentModel as needed
+        })
+    return render(request,'admin_dash/departed.html',{'notifications':notifications,
+                                                         'unseen_count':unseen_count,
+                                                         'discharges':context})
+def dis_medication(request):
+    notifications = Notification.objects.all()
+    unseen_count = Notification.objects.filter(seen=False).count()
+    medications = Medication.objects.all()
+    return render(request,'admin_dash/medications.html',{'medications':medications,
+                                                            'notifications':notifications,
+                                                       'unseen_count':unseen_count})
 def add_report(request):
     if request.method == 'POST':
         name = request.POST.get('name')

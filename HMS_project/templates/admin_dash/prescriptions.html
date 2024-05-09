@@ -1,4 +1,4 @@
-{% extends 'doctor/dr_dash.html' %}
+{% extends 'admin_dash/dashboard.html' %}
 {% load static %}
 {% block content %}
 <!DOCTYPE html>
@@ -87,15 +87,10 @@
 
 											<td>
 												{% if request.user.userprofileinfo.role == 'admin' %}
-												<a href="#" class="btn btn-outline-danger "><span
-														class="ti-trash"></span>DELETE</a>
-											{% endif %}
-											{% if request.user.userprofileinfo.role == 'admin' %}
-												<a href="{% url 'edit_perscription' pres.Prec_number %}" class="btn btn-outline-primary "><span
-														class="ti-pencil-alt"></span>EDIT</a>
-												<a href="{% url 'about_perscription' pres.Prec_number pres.PatientID %}" class="btn btn-outline-info "><span
-														class="ti-eye"></span>DETAILS</a>
-														{% endif %}
+												<button type="button" class="btn btn-danger mt-3 mb-0"><span class="ti-trash"></span>
+													DELETE</button>
+													{% endif %}
+										
 											</td>
 										</tr>
 										{% endfor %}
