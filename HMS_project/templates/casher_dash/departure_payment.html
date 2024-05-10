@@ -74,15 +74,8 @@
 						
 									<div class="form-group col-md-6">
 										<label for="cashier_name">Casher Name</label>
-										<!-- <input type="text" placeholder="cashier name" class="form-control" id="cashier_name" name="cashier_name"> -->
-										<select class="form-control" id="cashier_name" name="cashier_name">
-											<option disabled selected > Casher Name</option>
-											{% for user in cashers %}
-										    
-										    <option value="{{ user.first_name }}">{{ user.first_name}}&nbsp;{{ user.last_name}}</option>
-											{% endfor %}
-										
-										</select>
+										<input type="text" placeholder="cashier name" value="{{recent_payment.Casher_id}}" class="form-control" id="cashier_name" name="cashier_name">
+						
 									</div>
 									
                                   	

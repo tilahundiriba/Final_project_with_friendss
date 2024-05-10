@@ -79,7 +79,7 @@
 										<select class="form-control" id="nr_name" name="nr_name">
 											<option>Select Nurse Name</option>
 											{% for user in nurses %}
-											<option value="{{user.username}}">{{user.username}}</option>
+											<option value="{{user.username}}">{{user.first_name}}</option>
 											{% endfor %}
 										</select>
 										<div id="nrNameError" class="text-danger"></div>
@@ -99,7 +99,7 @@
 										<select class="form-control" id="dr_name" name="dr_name">
 											<option>Select Name</option>
 											{% for user in doctors %}
-											<option value="{{ user.first_name }}">{{ user.first_name}}&nbsp;{{ user.last_name}}</option>
+											<option value="{{ user.username }}">{{ user.first_name}}</option>
 											{% endfor %}
 										</select>
 										<div id="drNameError" class="text-danger"></div>

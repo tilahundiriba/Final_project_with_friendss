@@ -209,22 +209,41 @@ def add_room(request):
                                                        'unseen_count':unseen_count})  # Redirect to a success page or another URL
     return render(request,'nurse_dash/add-room.html',{'notifications':notifications,
                                                        'unseen_count':unseen_count})
-def edit_room(request,bed_no):
+def edit_room(request,room_no):
     notifications = Notification.objects.all()
     unseen_count = Notification.objects.filter(seen=False).count()
-    rooms = Rooms.objects.get(Bed_no=bed_no)
+    rooms = Rooms.objects.get(Room_no=room_no)
     if request.method == 'POST':
-        room_no = request.POST.get('room_no')
+        room_num = request.POST.get('room_no')
         bed_noo = request.POST.get('bed_no')
         status = request.POST.get('status')
         room_type = request.POST.get('room-type')
-        rooms.Room_no=room_no
+        rooms.Room_no=room_num
         rooms.Bed_no=bed_noo
         rooms.Status=status
         rooms.Room_type=room_type
         rooms.save()
         return redirect('dis_room')
     return render(request,'nurse_dash/edit-room.html',{'rooms':rooms,'notifications':notifications,
+                                                       'unseen_count':unseen_count})
+def edit_allocation(request,room_id):
+    notifications = Notification.objects.all()
+    unseen_count = Notification.objects.filter(seen=False).count()
+    allocations = BedAllocation.objects.get(Room_id=room_id)
+    if request.method == 'POST':
+        patient_id = request.POST.get('patient_id')
+        room_num = request.POST.get('room-number')
+        bed_noo = request.POST.get('bed_no')
+        room_type = request.POST.get('room-type')
+        patient = get_object_or_404( PatientRegister,Patient_id=patient_id)
+        room_nums = get_object_or_404( Rooms,Room_no=room_num)
+        allocations.Patient_id=patient
+        allocations.Room_num=room_nums
+        allocations.Bed_num=bed_noo
+        allocations.Room_type=room_type
+        allocations.save()
+        return redirect('dis_allocate_bed')
+    return render(request,'nurse_dash/edit_allocations.html',{'rooms':allocations,'notifications':notifications,
                                                        'unseen_count':unseen_count})
 def dis_room(request):
     notifications = Notification.objects.all()

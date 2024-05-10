@@ -241,42 +241,58 @@ def invoice(request):
     unseen_count = Notification.objects.filter(seen=False).count()
     return render(request,'casher_dash/invoice.html',{'notifications':notifications,
                                                             'unseen_count':unseen_count})
-
+from decimal import Decimal
 
 def add_payment_for_patient(request, patient_id):
     # Assuming you have a Payment model with fields like patient_id, card_payment, lab_payment, bed_payment, food_payment, etc.
     for_food = get_object_or_404(ServicePayment, id=6)
     for_bed = get_object_or_404(ServicePayment, id=8)
-    # # Retrieve the most recent payment entry for the patient
+    # Retrieve the most recent payment entry for the patient
     cashers = User.objects.filter(userprofileinfo__role='casher')
     payment = ServicePayment.objects.values('Payment_method').distinct()
     notifications = Notification.objects.all()
     unseen_count = Notification.objects.filter(seen=False).count()
     recent_payment = PaymentModel.objects.filter(Patient_id=patient_id).latest('Admit_date')
     recent_discharge = Discharge.objects.filter(Patient_id=patient_id).latest('Departure_date')
-    if recent_discharge.No_days ==0:
-        recent_discharge.No_days=1 
-        food_pay= recent_discharge.No_days * for_food.Payment
-        bed_pay = recent_discharge.No_days * for_bed.Payment
-    else:
-        food_pay= recent_discharge.No_days * for_food.Payment
-        bed_pay = recent_discharge.No_days * for_bed.Payment
-    # # Add new payments to the existing payment entry
-    # recent_payment.Bed_payment += new_bed_payment_amount
-    # recent_payment.Food_payment += new_food_payment_amount
+    
+    if recent_discharge.No_days == 0:
+        recent_discharge.No_days = 0
 
-    # # Save the updated payment entry
-    # recent_payment.save()
+    food_pay = recent_discharge.No_days * for_food.Payment
+    bed_pay = recent_discharge.No_days * for_bed.Payment
 
-    # Redirect to a relevant page
-    # return redirect('patient_detail', patient_id=patient_id)
-    return render(request,'casher_dash/departure_payment.html',{'recent_payment':recent_payment,
-                                                                'food_pay':food_pay,
-                                                                'bed_pay':bed_pay,
-                                                                'cashers':cashers,
-                                                                'payment':payment,
-                                                                'notifications':notifications,
-                                                                'unseen_count':unseen_count})
+    if request.method == 'POST':
+        patientid = request.POST.get('patient_id')
+        casher_name = request.POST.get('cashier_name')
+        food_payment = float(request.POST.get('food_payment'))
+        bed_payment = float(request.POST.get('bed_payment'))
+        payment_type = request.POST.get('payment_type')
+
+        cashername = get_object_or_404(User, username=casher_name)
+        patient_ids = get_object_or_404(PatientRegister, patient_id=patientid)
+
+        summation = food_payment + bed_payment
+
+        recent_payment.Bed_payment = bed_payment
+        recent_payment.Food_payment = food_payment
+        recent_payment.Casher_id = cashername
+        recent_payment.Patient_id = patient_ids
+        recent_payment.payment_type = payment_type
+        recent_payment.Total += Decimal(str(summation))
+        recent_payment.save()
+
+        return redirect('discharges')
+
+    return render(request, 'casher_dash/departure_payment.html', {
+        'recent_payment': recent_payment,
+        'food_pay': food_pay,
+        'bed_pay': bed_pay,
+        'cashers': cashers,
+        'payment': payment,
+        'notifications': notifications,
+        'unseen_count': unseen_count
+    })
+
 
 def card_payments(request):
     notifications = Notification.objects.all()

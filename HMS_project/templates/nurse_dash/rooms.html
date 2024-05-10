@@ -112,7 +112,7 @@
 												{% if request.user.userprofileinfo.role == 'admin' %}
 												<a href="#" class="btn btn-outline-danger "><span class="ti-trash"></span>DELETE</a>
 												{% endif %}
-												<a href="#" class="btn btn-outline-primary "><span class="ti-pencil-alt"></span>EDIT</a>
+												<a href="{% url 'edit_room' room.Room_no %}" class="btn btn-outline-primary "><span class="ti-pencil-alt"></span>EDIT</a>
 												
                                             </td>
                                         </tr>
