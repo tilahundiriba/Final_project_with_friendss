@@ -64,7 +64,7 @@ def add_discharge(request):
             # p = get_object_or_404(BedInformation, Patient_id=patient_id)
             p = BedAllocation.objects.filter(Patient_id=patient_id).first()
             pt=p.Bed_num
-            casher = get_object_or_404(User, first_name=casher_name)
+            casher = get_object_or_404(User, username=casher_name)
             discharge_instance = Discharge(
                 Patient_id=patient,
                 Reason=reason,
@@ -118,6 +118,8 @@ def dis_discharge(request):
     notifications = Notification.objects.all()
     unseen_count = Notification.objects.filter(seen=False).count()
     discharges = Discharge.objects.all()
+    for_food = get_object_or_404(ServicePayment, id=6)
+    for_bed = get_object_or_404(ServicePayment, id=8)
     context = []
 
     for discharge in discharges:
@@ -128,8 +130,8 @@ def dis_discharge(request):
             'reason': discharge.Reason,
             'referred_to': discharge.Reffer_to,
             'departure_date': discharge.Departure_date,
-            'food_payment': recent_payment.Food_payment if recent_payment else None,
-            'bed_payment': recent_payment.Bed_payment if recent_payment else None,
+            'food_payment': discharge.No_days * for_food.Payment if discharge.No_days else None,
+            'bed_payment': discharge.No_days * for_bed.Payment if discharge.No_days else None,
             # Add other fields from Discharge and PaymentModel as needed
         })
     return render(request,'casher_dash/discharges.html',{'notifications':notifications,
@@ -256,10 +258,10 @@ def add_payment_for_patient(request, patient_id):
     recent_discharge = Discharge.objects.filter(Patient_id=patient_id).latest('Departure_date')
     
     if recent_discharge.No_days == 0:
-        recent_discharge.No_days = 0
-
-    food_pay = recent_discharge.No_days * for_food.Payment
-    bed_pay = recent_discharge.No_days * for_bed.Payment
+        food_pay = bed_pay =0
+    else:
+        food_pay = recent_discharge.No_days * for_food.Payment
+        bed_pay = recent_discharge.No_days * for_bed.Payment
 
     if request.method == 'POST':
         patientid = request.POST.get('patient_id')
@@ -271,14 +273,14 @@ def add_payment_for_patient(request, patient_id):
         cashername = get_object_or_404(User, username=casher_name)
         patient_ids = get_object_or_404(PatientRegister, patient_id=patientid)
 
-        summation = food_payment + bed_payment
+        summation = food_payment + bed_payment + float(recent_payment.Card_payment) + float(recent_payment.Lab_payment)
 
         recent_payment.Bed_payment = bed_payment
         recent_payment.Food_payment = food_payment
         recent_payment.Casher_id = cashername
         recent_payment.Patient_id = patient_ids
         recent_payment.payment_type = payment_type
-        recent_payment.Total += Decimal(str(summation))
+        recent_payment.Total = Decimal(str(summation))
         recent_payment.save()
 
         return redirect('discharges')
