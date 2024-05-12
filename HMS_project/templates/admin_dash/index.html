@@ -91,7 +91,7 @@
 							</div>
 							<div class="widget-right">
 								<h4 class="wiget-title text-success">Total Revenue</h4>
-								<span class="numeric color-yellow">${{total_amount}}</span>
+								<span class="numeric color-yellow">{{total_amount}}Birr</span>
 								<p class="inc-dec mb-0"><span class="ti-angle-up"></span> +10% Increased</p>
 							</div>
 						</div>
@@ -207,7 +207,7 @@
 											<td>{{ feedback.Feedback }}</td>
 											<td>{{ feedback.Added_no }}</td>
 									
-											<td>
+											
 												<td>
 													<form action="{% url 'mark_as_read' feedback.Added_no  %}" method="post">
 														{% csrf_token %}
@@ -217,7 +217,7 @@
 													</form>
 												
 												</td>
-											</td>
+											
 										</tr>
 										{% endfor %}
 									</tbody>
@@ -239,13 +239,7 @@
 
 			</div>
 			<!-- /Main Content -->
-			<!--Copy Rights-->
-			<div class="container">
-				<div class="d-sm-flex justify-content-center">
-				  <span class="text-muted text-center d-block d-sm-inline-block">Copyright © 2018 <a href="http://www.konnectplugins.com/" target="_blank">konnectcode</a>. All rights reserved.</span>
-				</div>
-			</div>
-			<!-- /Copy Rights-->
+
 		</div>
 		<!-- /Page Content -->
 	</div>

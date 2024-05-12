@@ -1,5 +1,5 @@
 from django.urls import path
-from receptionist_app.views import check_patient,check_patient_data
+from receptionist_app.views import check_patient_data
 from . import views
 from django.conf import settings
 from django.conf.urls.static import static
@@ -12,7 +12,7 @@ urlpatterns = [
  
     path('dis_dr_dash_content/', views.dis_dr_dash_content, name='dis_dr_dash_content'),
 
-    path('add_history/', views.add_history, name='add_history'),
+    path('add_history/<str:patient_id>/', views.add_history, name='add_history'),
     path('dis_history/', views.dis_history, name='dis_history'),
     path('edit_history/<int:history_no>/', views.edit_history, name='edit_history'),
     path('update_history/<int:history_no>/', views.update_history, name='update_history'),
@@ -23,11 +23,11 @@ urlpatterns = [
     path('edit-appointment/<str:app_number>/', views.edit_appointment, name='edit-appointment'),
     path('appointments/', views.dis_appointment, name='dis-appointment'),
     path('perscriptions/', views.perscription, name='perscriptions'),
-    path('add_perscription/', views.add_perscription, name='add_perscription'),
+    path('add_perscription/<int:lab_number>/', views.add_perscription, name='add_perscription'),
+    path('add_perscription_second/', views.add_perscription_second, name='add_perscription_second'),
     path('edit_perscription/<str:prec_number>/', views.edit_perscription, name='edit_perscription'),
     path('about_perscription/<str:prec_number>/<str:patient_id>/', views.about_perscription, name='about_perscription'),
     path('check_patient_data/', check_patient_data, name='check_patient_data'),
-    path('check_patient/<str:patient_id>/', check_patient, name='check_patient'),
     path('add_lab/', views.add_lab, name='add_lab'),
     path('lab_tests/', views.dis_labtest, name='lab_tests'),
     path('dis_lab_results/', views.dis_lab_results, name='dis_lab_results'),

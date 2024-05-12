@@ -1,0 +1,199 @@
+
+{% extends 'admin_dash/dashboard.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.konnectplugins.com/proclinic/Horizontal/payments.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 24 Jan 2022 10:42:01 GMT -->
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	{% block 'title' %}
+	<title>Payments</title>
+	{% endblock %}
+	<!-- Fav  Icon Link -->
+<style>
+	[data-toggle="tooltip"]::before {
+  font-size: 14px; /* Adjust font size */
+  color: #137cc3; /* Font color */
+  background-color: #333; /* Background color */
+  border-radius: 4px; /* Border radius */
+  padding: 4px 8px; /* Padding */
+}
+
+		/* Custom CSS for pagination */
+		.pagination {
+			margin-top: 20px;
+			text-align: center;
+			/* Center the pagination links */
+		}
+
+		.pagination a {
+			display: inline-block;
+			margin: 0 5px;
+			/* Add space between pagination links */
+			padding: 8px 12px;
+			/* Increase padding for larger size */
+			font-size: 16px;
+			/* Increase font size */
+			color: #007bff;
+			/* Change text color */
+			border: 1px solid #007bff;
+			/* Add border */
+			border-radius: 5px;
+			/* Add border radius */
+			text-decoration: none;
+			/* Remove underline */
+		}
+
+		.pagination a:hover {
+			background-color: #007bff;
+			/* Change background color on hover */
+			color: #fff;
+			/* Change text color on hover */
+		}
+
+</style>
+</head>
+
+<body>
+	<!-- Pre Loader -->
+	<div class="loading">
+		<div class="spinner">
+			<div class="double-bounce1"></div>
+			<div class="double-bounce2"></div>
+		</div>
+	</div>
+	<!--/Pre Loader -->
+	<!-- Color Changer -->
+
+	<!-- /Color Changer -->
+	<div class="wrapper">
+		<!-- Page Content -->
+		<div id="content">
+				<!-- Top Navigation -->
+		
+				<!-- Page Title -->
+				<div class="container mt-0">
+					<div class="row breadcrumb-bar">
+						<div class="col-md-6">
+							<h3 class="block-title">Payments</h3>
+						</div>
+						<div class="col-md-6">
+							<ol class="breadcrumb">
+								<li class="breadcrumb-item">
+									<a href="index.html">
+										<span class="ti-home"></span>
+									</a>
+								</li>
+								<li class="breadcrumb-item">Payments</li>
+								<li class="breadcrumb-item active">All Payments</li>
+							</ol>
+						</div>
+					</div>
+				</div>
+			<!-- /Page Title -->
+
+			<!-- /Breadcrumb -->
+			<!-- Main Content -->
+			<div class="container">
+
+				<div class="row">
+					<!-- Widget Item -->
+					<div class="col-md-12">
+						<div class="widget-area-2 proclinic-box-shadow">
+							<h3 class="widget-title">Patient Payment Transactions</h3>
+							<div class="table-responsive mb-3">
+								<table id="tableId" class="table table-bordered table-striped">
+									<thead>
+										<tr>
+											<th class="no-sort">
+												<div class="custom-control custom-checkbox">
+													<input class="custom-control-input" type="checkbox" id="select-all">
+													<label class="custom-control-label" for="select-all"></label>
+												</div>
+											</th>
+											<th>Patient ID</th>
+											<th>Service Name</th>
+											<th>Charges</th>
+											<th>Payment Method</th>
+											<th>Payment Date</th>
+											
+											<th>Actions</th>
+										</tr>
+									</thead>
+                                    <tbody>
+                                        {% for payment in payments %}
+                                        <tr>
+                                            <td>
+                                                <div class="custom-control custom-checkbox">
+                                                    <input class="custom-control-input" type="checkbox" id="1">
+                                                    <label class="custom-control-label" for="1"></label>
+                                                </div>
+                                            </td>
+                                            <td>{{payment.Patient_id}}</td>
+                                            {% if payment.Food_payment and payment.Bed_payment and payment.Card_payment and payment.Lab_payment %}
+                                            <td>All</td>
+                                            {% elif payment.Food_payment %}
+                                            <td>Food</td>
+                                            {% elif payment.Bed_payment %}
+                                            <td>Bed</td>
+                                            {% elif payment.Card_payment %}
+                                            <td>Card</td>
+                                            {% elif payment.Lab_payment %}
+                                            <td>Laboratory</td>
+                                       
+                                            {% endif %}
+                                             
+                                            <td>{{payment.Total}}</td>
+                                            <td>{{payment.Pay_method}}</td>
+                                            <td>{{payment.Admit_date}}</td>
+                                            
+                                          
+                                        
+                                            <td>
+												{% if request.user.userprofileinfo.role == 'admin' %}
+                                                <a href="#" class="btn btn-outline-danger" data-toggle="tooltip" title="DELETE PAYMENT"><span
+                                                    class="ti-trash"></span>Delete</a>
+													{% endif %}
+                                                
+                                            </td>
+                                        </tr>
+                                       {% endfor %}
+                                    </tbody>
+                                </table>
+                                
+								<!--Export links-->
+								<nav aria-label="Page navigation example">
+									<ul class="pagination justify-content-center export-pagination">
+										
+									</ul>
+								</nav>
+
+							</div>
+						</div>
+					</div>
+					<!-- /Widget Item -->
+				</div>
+			</div>
+			<!-- /Main Content -->
+
+		</div>
+		<!-- /Page Content -->
+	</div>
+	<!-- Back to Top -->
+	<a id="back-to-top" href="#" class="back-to-top">
+		<span class="ti-angle-up"></span>
+	</a>
+	<!-- /Back to Top -->
+	<!-- Jquery Library-->
+	
+</body>
+
+
+<!-- Mirrored from www.konnectplugins.com/proclinic/Horizontal/payments.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 24 Jan 2022 10:42:01 GMT -->
+</html>
+{% endblock %}

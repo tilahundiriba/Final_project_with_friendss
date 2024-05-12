@@ -107,9 +107,10 @@
 												<a href="#" class="btn btn-outline-danger"><span
 														class="ti-trash"></span>DELETE</a>
 														{% endif %}
+														{% if request.user.userprofileinfo.role == 'doctor' %}
 												<a href="{% url 'edit_history' history.History_No %}" class="btn btn-outline-primary"><span
 														class="ti-pencil-alt"></span>EDIT</a>
-												
+												{% endif %}
 											</td>
 										</tr>
 
@@ -136,15 +137,7 @@
 				</div>
 			</div>
 			<!-- /Main Content -->
-			<!--Copy Rights-->
-			<div class="container">
-				<div class="d-sm-flex justify-content-center">
-					<span class="text-muted text-center d-block d-sm-inline-block">Copyright © 2018 <a
-							href="http://www.konnectplugins.com/" target="_blank">konnectcode</a>. All rights
-						reserved.</span>
-				</div>
-			</div>
-			<!-- /Copy Rights-->
+
 		</div>
 		<!-- /Page Content -->
 	</div>

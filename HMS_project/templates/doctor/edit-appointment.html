@@ -76,25 +76,27 @@
 										<div id="patientIdError" class="text-danger"></div>
 									</div>
 									<div class="form-group col-md-6">
-										<label for="time-slot">Time Slot</label>
-										<select class="form-control" id="time-slot" name="time_slot">
-											<option selected disabled>Choose Time</option>
-											<option>10AM-11AM</option>
-											<option>11AM-12pm</option>
-											<option>12PM-01PM</option>
-											<option>2PM-3PM</option>
-											<option>3PM-4PM</option>
-											<option>4PM-5PM</option>
-											<option>6PM-7PM</option>
-											<option>7PM-8PM</option>
-											<option>8PM-9PM</option>
-										</select>
+										<label for="app_date">Appointment Date</label>
+										<input type="text" class="form-control" value="{{appointments.Appointment_date}}" id="app_date" name="app_date">
+										<div id="patientIdError" class="text-danger"></div>
+									</div>
+									<div class="form-group col-md-3">
+										<label for="start_time">Start Time </label>
+										<input type="text" class="form-control" value="{{appointments.Start_Time}}" id="start_time" name="start_time">
+										<div id="timeSlotError" class="text-danger"></div>
+									</div>
+									<div class="form-group col-md-3">
+										<label for="end_time">End Time </label>
+										<input type="text" class="form-control" value="{{appointments.End_Time}}" id="end_time" name="end_time">
 										<div id="timeSlotError" class="text-danger"></div>
 									</div>
 									<div class="form-group col-md-6">
 										<label for="dr_name">Doctor Name</label>
 										<select class="form-control" id="dr_name" name="dr_name">
-											<option value="{{appointments.Doctor_ID}}">{{appointments.Doctor_ID}}</option>
+											<option>Choose Name</option>
+											{% for user in doctors %}
+											<option value="{{ user.username }}">{{ user.first_name}}</option>
+											{% endfor %}
 										</select>
 										<div id="drNameError" class="text-danger"></div>
 									</div>
@@ -108,9 +110,9 @@
 										</select>
 										<div id="appStatusError" class="text-danger"></div>
 									</div>
-									<div class="form-group col-md-12">
+									<div class="form-group col-md-6">
 										<label for="problem">Problem</label>
-										<textarea placeholder="Problem" class="form-control" id="problem" rows="3" name="problem">{{appointments.App_reseon}}</textarea>
+										<textarea placeholder="Problem" class="form-control" id="problem" rows="3" name="problem">{{appointments.App_reason}}</textarea>
 										<div id="problemError" class="text-danger"></div>
 									</div>
 									<div class="form-group col-md-6 mb-3">
@@ -199,13 +201,7 @@
 				</div>
 			</div>
 			<!-- /Main Content -->
-			<!--Copy Rights-->
-			<div class="container">
-				<div class="d-sm-flex justify-content-center">
-				  <span class="text-muted text-center d-block d-sm-inline-block">Copyright © 2018 <a href="http://www.konnectplugins.com/" target="_blank">konnectcode</a>. All rights reserved.</span>
-				</div>
-			</div>
-			<!-- /Copy Rights-->
+	
 		</div>
 		<!-- /Page Content -->
 	</div>

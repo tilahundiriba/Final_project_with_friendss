@@ -167,11 +167,11 @@
                     <li class="sidebar-item">
                         <a href="#" class="sidebar-link collapsed" data-bs-target="#posts" data-bs-toggle="collapse"
                             aria-expanded="false"><i class="fa-solid fa-hospital-user pe-2"></i>
-                            Histories
+                            Patients History
                         </a>
                         <ul id="posts" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                             <li class="sidebar-item">
-                                <a href="{% url 'add_history' %}" class="sidebar-link">Add History</a>
+                                <a href="#" class="sidebar-link">Add History</a>
                             </li>
                             <li class="sidebar-item">
                                 <a href="{% url 'dis_history' %}" class="sidebar-link">View History</a>
@@ -206,7 +206,7 @@
                         </a>
                         <ul id="auth2" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                             <li class="sidebar-item">
-                                <a href="{% url 'add_perscription' %}" class="sidebar-link">Set Prescription</a>
+                                <a href="{% url 'add_perscription_second' %}" class="sidebar-link">Set Prescription</a>
                             </li>
                            
                             <li class="sidebar-item">
@@ -269,7 +269,7 @@
                 <div class="container top-brand">
 					<nav class="navbar navbar-default">			
 						<div class="navbar-header">
-							<div class="sidebar-header"> <a href="index.html">
+							<div class="sidebar-header"> <a href="#">
                                 <img src="{% static 'images/hospital_logo3.png' %}" class="logo" alt="logo" style="width: 50px; height: 50px; border-radius: 50%;"></a>
 							</div>
 						</div>
@@ -306,9 +306,9 @@
 								</a>
 								<div class="dropdown-menu proclinic-box-shadow2 profile animated flipInY">
 									<h5>{{user.username}}</h5>
-									<a class="dropdown-item" href="{% url 'show_doctor_profile' %}">
+									<a class="dropdown-item text-dark" href="{% url 'show_doctor_profile' %}">
 										<span class="ti-image"></span> Profile</a>
-									<a class="dropdown-item" href="{% url 'logout' %}">
+									<a class="dropdown-item text-dark" href="{% url 'logout' %}">
 										<span class="ti-power-off"></span> Logout</a>
 								</div>
 							</li>
@@ -367,8 +367,8 @@
                                   <span class="ti-user"></span>
                                 </div>
                                 <div class="widget-right">
-                                  <h4 class="wiget-title text-success">Total Patients</h4>
-                                  <span class="numeric color-red">49</span>
+                                  <h4 class="wiget-title text-success">Remaning Patients To Check</h4>
+                                  <span class="numeric color-red">{{patient_count}}</span>
                                   
                                  
                                 </div>
@@ -382,8 +382,8 @@
                                   <span class="ti-timer"></span>
                                 </div>
                                 <div class="widget-right">
-                                  <h4 class="wiget-title text-success">Total Appointments </h4>
-                                  <span class="numeric color-green">40</span>
+                                  <h4 class="wiget-title text-success">Remaning Appointment Pending</h4>
+                                  <span class="numeric color-green">{{app_count}}</span>
                                   
                                 </div>
                               </div>
@@ -393,11 +393,11 @@
                             <div class="col-md-4">
                               <div class="widget-area proclinic-box-shadow color-yellow">
                                 <div class="widget-left">
-                                  <span class="ti-wallet"></span>
+                                  <span class="ti-filter"></span>
                                 </div>
                                 <div class="widget-right">
-                                  <h4 class="wiget-title text-success">Total Revenue</h4>
-                                  <span class="numeric color-yellow">$4000</span>
+                                  <h4 class="wiget-title text-success">Remaning Laboratories Ready</h4>
+                                  <span class="numeric color-yellow">{{lab_requests}}/span>
                                   
                                 </div>
                               </div>

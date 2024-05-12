@@ -174,7 +174,7 @@
                 <div class="container top-brand">
 					<nav class="navbar navbar-default">			
 						<div class="navbar-header">
-							<div class="sidebar-header"> <a href="index.html"><img src="{% static 'images/hospital_logo3.png' %}" class="logo" alt="logo" style="width: 50px; height: 50px; border-radius: 50%;"></a>
+							<div class="sidebar-header"> <a href="#"><img src="{% static 'images/hospital_logo3.png' %}" class="logo" alt="logo" style="width: 50px; height: 50px; border-radius: 50%;"></a>
 							</div>
 						</div>
 						<ul class="nav justify-content-end">
@@ -209,10 +209,10 @@
 								
 								<div class="dropdown-menu proclinic-box-shadow2 profile animated flipInY">
 									<h5>{{ request.user.username }}</h5>
-									<a class="dropdown-item" href="{% url 'show_tech_profile' %}">
+									<a class="dropdown-item text-dark" href="{% url 'show_tech_profile' %}">
 										<span class="ti-image"></span> Profile</a>
 					
-									<a class="dropdown-item" href="{% url 'logout' %}">
+									<a class="dropdown-item text-dark" href="{% url 'logout' %}">
 										<span class="ti-power-off"></span> Logout</a>
 								</div>
 							</li>
@@ -258,52 +258,14 @@
                           </div>
                         </div>
                         <!-- /Page Title -->
-                        <!-- /Breadcrumb -->
+
                         <!-- Main Content -->
                         <div class="container home">
                           <div class="row">
+
+                        
                             <!-- Widget Item -->
-                            <div class="col-md-4">
-                              <div class="widget-area proclinic-box-shadow color-red">
-                                <div class="widget-left">
-                                  <span class="ti-user"></span>
-                                </div>
-                                <div class="widget-right">
-                                  <h4 class="wiget-title text-success">Total Patients</h4>
-                                  <span class="numeric color-red">54</span>
-                                  
-                                  <p class="inc-dec mb-0"><span class="ti-angle-up"></span> +20% Increased</p>
-                                </div>
-                              </div>
-                            </div>
-                            <!-- /Widget Item -->
-                            <!-- Widget Item -->
-                            <div class="col-md-4">
-                              <div class="widget-area proclinic-box-shadow color-green">
-                                <div class="widget-left">
-                                  <span class="ti-timer"></span>
-                                </div>
-                                <div class="widget-right">
-                                  <h4 class="wiget-title text-success">Total Appointments </h4>
-                                  <span class="numeric color-green">53</span>
-                                  <p class="inc-dec mb-0"><span class="ti-angle-down"></span> +15% Increased</p>
-                                </div>
-                              </div>
-                            </div>
-                            <!-- /Widget Item -->
-                            <!-- Widget Item -->
-                            <div class="col-md-4">
-                              <div class="widget-area proclinic-box-shadow color-yellow">
-                                <div class="widget-left">
-                                  <span class="ti-wallet"></span>
-                                </div>
-                                <div class="widget-right">
-                                  <h4 class="wiget-title text-success">Total Revenue</h4>
-                                  <span class="numeric color-yellow">$435</span>
-                                  <p class="inc-dec mb-0"><span class="ti-angle-up"></span> +10% Increased</p>
-                                </div>
-                              </div>
-                            </div>
+                           
                             <div class="col-md-4">
                               <div class="widget-area proclinic-box-shadow color-red">
                                 <div class="widget-left">
@@ -311,10 +273,9 @@
                                 </div>
                               
                                 <div class="widget-right">
-                                  <h4 class="wiget-title text-success">Total Prescriptions</h4>
-                                  <span class="numeric color-red">52</span>
+                                  <h4 class="wiget-title text-success">Remaning Test Unpayed And Untested</h4>
+                                  <span class="numeric color-red">{{unpayed_count}}</span>
                                   
-                                  <p class="inc-dec mb-0"><span class="ti-angle-up"></span> +20% Increased</p>
                                 </div>
                               </div>
                             </div>
@@ -326,9 +287,8 @@
                                   <span class="ti-bookmark-alt"></span>
                                 </div>
                                 <div class="widget-right">
-                                  <h4 class="wiget-title text-success">Total Histories</h4>
-                                  <span class="numeric color-green">53</span>
-                                  <p class="inc-dec mb-0"><span class="ti-angle-down"></span> +15% Increased</p>
+                                  <h4 class="wiget-title text-success">Remaning Test Payed And Untested</h4>
+                                  <span class="numeric color-green">{{payed_count}}</span>
                                 </div>
                               </div>
                             </div>
@@ -342,7 +302,7 @@
                                 <div class="widget-right">
                                   <h4 class="wiget-title text-success">Total Laboratories</h4>
                                   <span class="numeric color-yellow">35</span>
-                                  <p class="inc-dec mb-0"><span class="ti-angle-up"></span> +10% Increased</p>
+
                                 </div>
                               </div>
                             </div>
@@ -463,7 +423,7 @@
                 
         </div>
     </div>
-    <!-- <script src="http://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <script src="http://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
     <script>
   
       function googleTranslateElementInit() {
@@ -472,7 +432,7 @@
           'google_translate_element'
         );
       } 
-    </script> -->
+    </script> 
     <script src="{% static 'js2/jquery-3.2.1.min.js' %}"></script>
 	<!-- Popper Library-->
 	<script src="{% static 'js2/popper.min.js' %}"></script>

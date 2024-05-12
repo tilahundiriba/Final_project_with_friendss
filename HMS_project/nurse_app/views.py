@@ -3,14 +3,14 @@ from django.shortcuts import get_object_or_404
 from admin_app .models import UserProfileInfo,Notification
 from doctor_app.models import PatientHistory
 from receptionist_app.models import PatientRegister
-from.models import RoomInformation,VitalInformation,Medication,BedInformation
+from.models import Rooms,VitalInformation,Medication,BedAllocation
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
 @login_required
 def nurse_profile(request):
     notifications = Notification.objects.all()
-    unseen_count = Notification.objects.filter(seen=False).count()
+    unseen_count = Notification.objects.filter(Seen=False).count()
     user = request.user
     return render(request, 'nurse_dash/profile.html', {'user': user,
                                                        'notifications':notifications,
@@ -19,7 +19,7 @@ def nurse_profile(request):
 @login_required
 def nurse_profile_update(request, user_id):
     notifications = Notification.objects.all()
-    unseen_count = Notification.objects.filter(seen=False).count()
+    unseen_count = Notification.objects.filter(Seen=False).count()
     user = get_object_or_404(User, pk=user_id)
     if request.user != user:  # Ensure user can only update their own profile
         return redirect('show_nurse_profile')
@@ -40,7 +40,7 @@ def nurse_profile_update(request, user_id):
 
 def add_medication(request):
     notifications = Notification.objects.all()
-    unseen_count = Notification.objects.filter(seen=False).count()
+    unseen_count = Notification.objects.filter(Seen=False).count()
     nurses = User.objects.filter(userprofileinfo__role='nurse')
     registered=False
     if request.method == 'POST':
@@ -73,14 +73,14 @@ def add_medication(request):
                                                        'unseen_count':unseen_count})
 def dis_medication(request):
     notifications = Notification.objects.all()
-    unseen_count = Notification.objects.filter(seen=False).count()
+    unseen_count = Notification.objects.filter(Seen=False).count()
     medications = Medication.objects.all()
     return render(request,'nurse_dash/dis_medication.html',{'medications':medications,
                                                             'notifications':notifications,
                                                        'unseen_count':unseen_count})
 def edit_medication(request,med_no):
     notifications = Notification.objects.all()
-    unseen_count = Notification.objects.filter(seen=False).count()
+    unseen_count = Notification.objects.filter(Seen=False).count()
     medications = Medication.objects.get(Med_no=med_no)
     nurses = User.objects.filter(userprofileinfo__role='nurse')
     if request.method == 'POST':
@@ -107,7 +107,7 @@ def edit_medication(request,med_no):
                                                        'unseen_count':unseen_count})
 def add_vital_info(request):
     notifications = Notification.objects.all()
-    unseen_count = Notification.objects.filter(seen=False).count()
+    unseen_count = Notification.objects.filter(Seen=False).count()
     nurses = User.objects.filter(userprofileinfo__role='nurse')
     
     registered=False
@@ -150,7 +150,7 @@ def add_vital_info(request):
                                                        'unseen_count':unseen_count})
 def edit_vital_info(request,vital_info_no):
     notifications = Notification.objects.all()
-    unseen_count = Notification.objects.filter(seen=False).count()
+    unseen_count = Notification.objects.filter(Seen=False).count()
     nurses = User.objects.filter(userprofileinfo__role='nurse')
     vitals = get_object_or_404( VitalInformation,Vital_info_no=vital_info_no)
    
@@ -189,16 +189,14 @@ def edit_vital_info(request,vital_info_no):
                                                        'vitals':vitals})
 def add_room(request):
     notifications = Notification.objects.all()
-    unseen_count = Notification.objects.filter(seen=False).count()
+    unseen_count = Notification.objects.filter(Seen=False).count()
     registered=False
     if request.method == 'POST':
-        room_block = request.POST.get('block_no')
         room_no = request.POST.get('room_no')
         bed_no = request.POST.get('bed_no')
         status = request.POST.get('status')
         room_type = request.POST.get('room-type')
-        room_info = RoomInformation(
-            Room_block=room_block,
+        room_info = Rooms(
             Room_no=room_no,
             Bed_no=bed_no,
             Status=status,
@@ -211,18 +209,16 @@ def add_room(request):
                                                        'unseen_count':unseen_count})  # Redirect to a success page or another URL
     return render(request,'nurse_dash/add-room.html',{'notifications':notifications,
                                                        'unseen_count':unseen_count})
-def edit_room(request,bed_no):
+def edit_room(request,room_no):
     notifications = Notification.objects.all()
-    unseen_count = Notification.objects.filter(seen=False).count()
-    rooms = RoomInformation.objects.get(Bed_no=bed_no)
+    unseen_count = Notification.objects.filter(Seen=False).count()
+    rooms = Rooms.objects.get(Room_no=room_no)
     if request.method == 'POST':
-        room_block = request.POST.get('block_no')
-        room_no = request.POST.get('room_no')
+        room_num = request.POST.get('room_no')
         bed_noo = request.POST.get('bed_no')
         status = request.POST.get('status')
         room_type = request.POST.get('room-type')
-        rooms.Room_block=room_block
-        rooms.Room_no=room_no
+        rooms.Room_no=room_num
         rooms.Bed_no=bed_noo
         rooms.Status=status
         rooms.Room_type=room_type
@@ -230,19 +226,38 @@ def edit_room(request,bed_no):
         return redirect('dis_room')
     return render(request,'nurse_dash/edit-room.html',{'rooms':rooms,'notifications':notifications,
                                                        'unseen_count':unseen_count})
+def edit_allocation(request,room_id):
+    notifications = Notification.objects.all()
+    unseen_count = Notification.objects.filter(Seen=False).count()
+    allocations = BedAllocation.objects.get(Room_id=room_id)
+    if request.method == 'POST':
+        patient_id = request.POST.get('patient_id')
+        room_num = request.POST.get('room-number')
+        bed_noo = request.POST.get('bed_no')
+        room_type = request.POST.get('room-type')
+        patient = get_object_or_404( PatientRegister,patient_id=patient_id)
+        room_nums = get_object_or_404( Rooms,Room_no=room_num)
+        allocations.Patient_id=patient
+        allocations.Room_num=room_nums
+        allocations.Bed_num=bed_noo
+        allocations.Room_type=room_type
+        allocations.save()
+        return redirect('dis_allocate_bed')
+    return render(request,'nurse_dash/edit_allocations.html',{'rooms':allocations,'notifications':notifications,
+                                                       'unseen_count':unseen_count})
 def dis_room(request):
     notifications = Notification.objects.all()
-    unseen_count = Notification.objects.filter(seen=False).count()
-    room =RoomInformation.objects.all()
+    unseen_count = Notification.objects.filter(Seen=False).count()
+    room =Rooms.objects.all()
     return render(request,'nurse_dash/rooms.html',{'rooms':room,'notifications':notifications,
                                                        'unseen_count':unseen_count})
 def dis_patients(request):
     # Retrieve notifications and count unseen notifications
     notifications = Notification.objects.all()
-    unseen_count = Notification.objects.filter(seen=False).count()
+    unseen_count = Notification.objects.filter(Seen=False).count()
 
     # Retrieve PatientHistory objects for the current nurse user
-    patients_history = PatientHistory.objects.filter(Nurse_ID=request.user)
+    patients_history = PatientHistory.objects.filter(Nurse_ID=request.user).order_by('-Date')
 
     # Construct a list of dictionaries containing patient information
     patients_info = []
@@ -268,8 +283,8 @@ def dis_patients(request):
     })
 def allocate_room(request):
     notifications = Notification.objects.all()
-    unseen_count = Notification.objects.filter(seen=False).count()
-    roo_info = RoomInformation.objects.all()
+    unseen_count = Notification.objects.filter(Seen=False).count()
+    room_info = Rooms.objects.exclude(Status='Occupied')
     registered=False
     if request.method == 'POST':
         patient_id = request.POST.get('patient_id')
@@ -277,38 +292,42 @@ def allocate_room(request):
         bed_no = request.POST.get('bed_no')
         room_type = request.POST.get('room-type')
         patient = get_object_or_404( PatientRegister,patient_id=patient_id)
-        bed_nos = get_object_or_404( RoomInformation,Bed_no=bed_no)
-        bed_info = BedInformation.objects.create(
+        room_nos = get_object_or_404( Rooms,Room_no=room_no)
+        bed_info = BedAllocation.objects.create(
             Patient_id=patient,
-            Room_num=room_no,
-            Bed_num=bed_nos,
+            Room_num=room_nos,
+            Bed_num=bed_no,
             Room_type=room_type,
         )
-        room = get_object_or_404(RoomInformation, Bed_no=bed_no)
+        room = get_object_or_404(Rooms, Room_no=room_no,Bed_no=bed_no)
         room.Status = 'Occupied'  # Update status to 'Occupied' or any other value as needed
         room.save()
         registered=True
         return render(request,'nurse_dash/Room_allocation.html',{'registered':registered,'notifications':notifications,
                                                        'unseen_count':unseen_count})
-    return render(request,'nurse_dash/Room_allocation.html',{'notifications':notifications,
-                                                       'unseen_count':unseen_count})
+    return render(request,'nurse_dash/Room_allocation.html',{
+        'notifications':notifications,
+        'room_info':room_info,
+          'unseen_count':unseen_count})
 def dis_bed_allocation(request):
     notifications = Notification.objects.all()
-    unseen_count = Notification.objects.filter(seen=False).count()
-    
-    alloc =BedInformation.objects.all()
+    unseen_count = Notification.objects.filter(Seen=False).count()
+    alloc =BedAllocation.objects.all()
     return render(request,'nurse_dash/allocations.html',{'allocs':alloc,'notifications':notifications,
                                                        'unseen_count':unseen_count})
 def dis_vitals(request):
     notifications = Notification.objects.all()
-    unseen_count = Notification.objects.filter(seen=False).count()
+    unseen_count = Notification.objects.filter(Seen=False).count()
     vitals =VitalInformation.objects.all()
     return render(request,'nurse_dash/vital_infos.html',{'vitals':vitals,'notifications':notifications,
                                                        'unseen_count':unseen_count})
+
 def nurse_dash(request):
     notifications = Notification.objects.all()
-    unseen_count = Notification.objects.filter(seen=False).count()
-
+    unseen_count = Notification.objects.filter(Seen=False).count()
+    room_info = Rooms.objects.exclude(Status='Occupied').count()
+    bed_info = Rooms.objects.exclude(Status='Occupied').count()
+    bed_occupied = Rooms.objects.filter(Status='Occupied').count()
 
     # Retrieve PatientHistory objects for the current nurse user
     patients_history = PatientHistory.objects.filter(Nurse_ID=request.user)
@@ -330,11 +349,17 @@ def nurse_dash(request):
         }
         patients_info.append(patient_info)
     return render(request,'nurse_dash/nurse_dash.html',{'notifications':notifications,
+                                                       'room_info':room_info,
+                                                       'bed_info':bed_info,
+                                                       'bed_occupied':bed_occupied,
                                                        'unseen_count':unseen_count,
                                                        'patients_info':patients_info})
 def dis_nurse_dash_content(request):
     notifications = Notification.objects.all()
-    unseen_count = Notification.objects.filter(seen=False).count()
+    unseen_count = Notification.objects.filter(Seen=False).count()
+    room_info = Rooms.objects.exclude(Status='Occupied').count()
+    bed_info = Rooms.objects.exclude(Status='Occupied').count()
+    bed_occupied = Rooms.objects.filter(Status='Occupied').count()
       # Retrieve PatientHistory objects for the current nurse user
     patients_history = PatientHistory.objects.filter(Nurse_ID=request.user)
 
@@ -356,4 +381,7 @@ def dis_nurse_dash_content(request):
         patients_info.append(patient_info)
     return render(request,'nurse_dash/dash_content.html',{'notifications':notifications,
                                                        'unseen_count':unseen_count,
+                                                        'room_info':room_info,
+                                                       'bed_info':bed_info,
+                                                       'bed_occupied':bed_occupied,
                                                        'patients_info':patients_info})

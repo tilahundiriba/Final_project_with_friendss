@@ -13,7 +13,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	{% block 'title' %}
-	<title>Add Room</title>
+	<title>Edit Room</title>
 	{% endblock %}
 	<!-- Fav  Icon Link -->
 
@@ -41,7 +41,7 @@
 				<div class="container mt-0">
 					<div class="row breadcrumb-bar">
 						<div class="col-md-6">
-							<h3 class="block-title">Add Room and Bed</h3>
+							<h3 class="block-title">Edit Room </h3>
 						</div>
 						<div class="col-md-6">
 							<ol class="breadcrumb">
@@ -50,8 +50,8 @@
 										<span class="ti-home"></span>
 									</a>
 								</li>
-								<li class="breadcrumb-item">Room Allotments</li>
-								<li class="breadcrumb-item ">Add Room Allotment</li>
+								<li class="breadcrumb-item">Rooms</li>
+								<li class="breadcrumb-item ">Edit Rooms</li>
 							</ol>
 						</div>
 					</div>
@@ -67,13 +67,10 @@
 					<div class="col-md-12">
 						<div class="widget-area-2 proclinic-box-shadow">
 							<h3 class="widget-title">Edit Room Allotment</h3>
-							<form action="{% url 'edit_room' rooms.Bed_no %}" method="post">
+							<form action="{% url 'edit_room' rooms.Room_no %}" method="post">
 								{% csrf_token %}
 								<div class="form-row">
-									<div class="form-group col-md-6">
-										<label for="room-block">Block Number</label>
-										<input type="text" class="form-control" value="{{rooms.Room_block}}"  placeholder="Room Block" id="room-block" name="block_no">
-									</div>
+
 									<div class="form-group col-md-6">
 										<label for="room-number">Room Number</label>
 										<input type="text" class="form-control" value="{{rooms.Room_no}}" placeholder="Room Number" id="room-number" name="room_no">
@@ -92,18 +89,11 @@
 									</div>
 									<div class="form-group col-md-6">
 										<label for="bed-status">Status</label>
-										<input type="text" placeholder="Allotment Date" value="{{rooms.Status}}" class="form-control" id="bed-status" name="status">
+										<input type="text" placeholder="Status" value="{{rooms.Status}}" class="form-control" id="bed-status" name="status">
 									</div>
 									
 																		
-									<div class="form-check col-md-12 mb-2">
-										<div class="text-left">
-											<div class="custom-control custom-checkbox">
-												<input class="custom-control-input" type="checkbox" id="ex-check-2">
-												<label class="custom-control-label" for="ex-check-2">Please Confirm</label>
-											</div>
-										</div>
-									</div>
+							
 									<div class="form-group col-md-6 mb-3">
 										<button type="submit" class="btn btn-primary btn-lg">Edit Room</button>
 									</div>
@@ -112,18 +102,12 @@
 							<!-- Alerts-->
 							{% if registered %}
 							<div class="alert alert-success alert-dismissible fade show" role="alert">
-								<strong>Successfully Done!</strong> Please check in Allotment list
+								<strong>Successfully Done!</strong> Please check in Rooms list
 								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 									<span aria-hidden="true">×</span>
 								</button>
 							</div>
-							{% else %}
-							<div class="alert alert-warning alert-dismissible fade show" role="alert">
-								<strong>Holy guacamole!</strong> You should check in on some of those fields below.
-								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-									<span aria-hidden="true">×</span>
-								</button>
-							</div>
+						
 							{% endif %}
 							<!-- /Alerts-->
 						</div>
@@ -132,13 +116,7 @@
 				</div>
 			</div>
 			<!-- /Main Content -->
-			<!--Copy Rights-->
-			<div class="container">
-				<div class="d-sm-flex justify-content-center">
-				  <span class="text-muted text-center d-block d-sm-inline-block">Copyright © 2018 <a href="http://www.konnectplugins.com/" target="_blank">konnectcode</a>. All rights reserved.</span>
-				</div>
-			</div>
-			<!-- /Copy Rights-->
+
 		</div>
 		<!-- /Page Content -->
 	</div>

@@ -81,6 +81,23 @@ ROOT_URLCONF = 'HMS_project.urls'
 
 # Redis broker configuration
 CELERY_BROKER_URL = 'redis://localhost:6379/0'
+CELERY_BROKER_URL = 'amqp://localhost'
+import os
+from celery import Celery
+
+# Set the default Django settings module for the 'celery' program.
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'HMS_project.settings')
+
+app = Celery('HMS_project')
+
+# Using a string here means the worker doesn't have to serialize
+# the configuration object to child processes.
+app.config_from_object('django.conf:settings', namespace='CELERY')
+
+# Load task modules from all registered Django app configs.
+app.autodiscover_tasks()
+
+
 CELERY_BEAT_SCHEDULE = {
     'send-notification': {
         'task': 'doctor_app.tasks.send_notification',
@@ -168,6 +185,7 @@ DESIGNATED_ADMIN_USERNAME = 'admin'
 #         'PORT':'5432',
 #     }
 # }
+
 DATABASES = {
     'default': {
         'ENGINE':'django.db.backends.postgresql',
@@ -178,6 +196,8 @@ DATABASES = {
         'PORT':'5432',
     }
 }
+
+
 # DATABASES = {
 #     'default': {
 #         'ENGINE':'django.db.backends.postgresql',
@@ -196,16 +216,16 @@ DATABASES = {
 #    }
 # }
 # 
-# DATABASES = {
-#     'default': {
-#         'ENGINE':'django.db.backends.postgresql',
-#         'NAME':'nf',
-#         'USER':'postgres',
-#         'PASSWORD':'362588',
-#         'HOST':'localhost',
-#         'PORT':'5432',
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE':'django.db.backends.postgresql',
+        'NAME':'mgmg',
+        'USER':'postgres',
+        'PASSWORD':'362588',
+        'HOST':'localhost',
+        'PORT':'5432',
+    }
+}
 
 
 # Password validation

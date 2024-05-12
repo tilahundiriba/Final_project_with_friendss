@@ -17,14 +17,7 @@
 </head>
 
 <body>
-	<!-- Pre Loader -->
-	<div class="loading">
-		<div class="spinner">
-			<div class="double-bounce1"></div>
-			<div class="double-bounce2"></div>
-		</div>
-	</div>
-	<!--/Pre Loader -->
+
 	<!-- Color Changer -->
 
 	<!-- /Color Changer -->
@@ -125,7 +118,7 @@
 			<select class="form-control" id="assidoc" name="doctor_name">
 				<option selected disabled>Select Doctor</option>
 				{% for user in users %}
-					<option value="{{user.username}}">{{user.username}}</option>
+					<option value="{{user.username}}">{{user.first_name}}</option>
 				{% endfor %}
 			
 			</select>
@@ -135,7 +128,7 @@
 				<select class="form-control" id="rece_name" name="rece_name">
 					<option selected disabled >Select Receptionist</option>
 					{% for user in users %}
-					<option value="{{user.username}}">{{user.username}}</option>
+					<option value="{{user.username}}">{{user.first_name}}</option>
 				{% endfor %}
 				</select>
 		</div>
@@ -149,7 +142,7 @@
 {% if registered %}
 							<!-- Alerts-->
 							<div class="alert alert-success alert-dismissible fade show" role="alert">
-								<strong>Successfully Updated!</strong> Please add payment now
+								<strong>Successfully Updated!</strong> Please edit another!!
 								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 									<span aria-hidden="true">×</span>
 								</button>
@@ -162,13 +155,7 @@
 				</div>
 			</div>
 			<!-- /Main Content -->
-			<!--Copy Rights-->
-			<div class="container">
-				<div class="d-sm-flex justify-content-center">
-				  <span class="text-muted text-center d-block d-sm-inline-block">Copyright © 2018 <a href="http://www.konnectplugins.com/" target="_blank">konnectcode</a>. All rights reserved.</span>
-				</div>
-			</div>
-			<!-- /Copy Rights-->
+
 		</div>
 		<!-- /Page Content -->
 	</div>

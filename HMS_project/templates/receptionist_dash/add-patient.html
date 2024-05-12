@@ -130,7 +130,7 @@
 											<select class="form-control" id="rece_name" name="rece_name">
 												<option selected disabled >Select Receptionist</option>
 												{% for user in receps %}
-												<option value="{{user.username}}">{{user.username}}</option>
+												<option value="{{user.username}}">{{user.first_name}}</option>
 											{% endfor %}
 											</select>
 											<div id="receNameError" class="text-danger"></div>
@@ -181,7 +181,7 @@
 										<select class="form-control" id="assidoc" name="assidoc">
 											<option selected disabled>Select Doctor</option>
 											{% for user in doctors %}
-												<option value="{{user.username}}">{{user.username}}</option>
+												<option value="{{user.username}}">{{user.first_name}}</option>
 											{% endfor %}
 										
 										</select>
@@ -203,18 +203,12 @@
 							<!-- Alerts-->
 							{% if register %}
 							<div class="alert alert-success alert-dismissible fade show" role="alert">
-								<strong>Successfully Done!</strong> Please add payment now
+								<strong>Successfully Done!</strong> Please add new patient now
 								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 									<span aria-hidden="true">×</span>
 								</button>
 							</div>
-							{% else %}
-							<div class="alert alert-warning alert-dismissible fade show" role="alert">
-								<strong>Holy guacamole!</strong> You should check in on some of those fields below.
-								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-									<span aria-hidden="true">×</span>
-								</button>
-							</div>
+
 							{% endif %}
 							<!-- /Alerts-->
 						</div>
@@ -223,15 +217,7 @@
 				</div>
 			</div>
 			<!-- /Main Content -->
-			<!--Copy Rights-->
-			<div class="container">
-				<div class="d-sm-flex justify-content-center">
-					<span class="text-muted text-center d-block d-sm-inline-block">Copyright © 2018 <a
-							href="http://www.konnectplugins.com/" target="_blank">konnectcode</a>. All rights
-						reserved.</span>
-				</div>
-			</div>
-			<!-- /Copy Rights-->
+
 		</div>
 		<!-- /Page Content -->
 	</div>

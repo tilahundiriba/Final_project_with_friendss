@@ -8,64 +8,23 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                <li class="nav-item dropdown ">
+                    <a class="nav-link dropdown-toggle text-white" data-toggle="dropdown" href="#" role="button"
                         aria-haspopup="true" aria-expanded="false"><span class="ti-home"></span>
                         Dashboard</a>
                     
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                <li class="nav-item dropdown ">
+                    <a class="nav-link dropdown-toggle text-white" data-toggle="dropdown" href="{% url 'write_feedback' %}" role="button"
                         aria-haspopup="true" aria-expanded="false"><span class="ti-wheelchair"></span>
-                        Profile</a>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="add-patient.html">Add profile </a>
-                        <a class="dropdown-item" href="patients.html">Update profile </a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
-                        aria-haspopup="true" aria-expanded="false"><span class="ti-wheelchair"></span>
-                         Payments</a>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#" >Add payment</a>
-                        <a class="dropdown-item" href="{% url 'dis_payment' %}">View payments</a>
-                        <a class="dropdown-item" href="#">About Payment</a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
-                        aria-haspopup="true" aria-expanded="false"><span class="ti-wheelchair"></span>
-                        Bill</a>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">Set Bill </a>
-                        <a class="dropdown-item" href="{% url 'invoice' %}">View Bill </a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
-                        aria-haspopup="true" aria-expanded="false"><span class="ti-wheelchair"></span>
-                        Laboratory Payment</a>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="{% url 'check_payment_request' %}">Lab Payment </a>
-                        <a class="dropdown-item" href="#" >Send Lab Fee </a>
-                        <a class="dropdown-item" href="#" >View Lab Result </a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
-                        aria-haspopup="true" aria-expanded="false"><span class="ti-wheelchair"></span>
-                        Notification</a>
+                        Feedback</a>
                    
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                    <a class="nav-link dropdown-toggle text-white" data-toggle="dropdown" href="{% url 'patient_info' %}" role="button"
                         aria-haspopup="true" aria-expanded="false"><span class="ti-wheelchair"></span>
-                        Setting</a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="{% url 'show_casher_profile' %}" >Profile</a>
-                            <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
-                        </div>
+                        Information</a>
+                       
                 </li>
             </ul>
         </div>

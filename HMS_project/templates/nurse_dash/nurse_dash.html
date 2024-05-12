@@ -131,12 +131,13 @@
                             <li class="sidebar-item">
                                 <a href="{% url 'vital_info' %}" class="sidebar-link">Add Vital Info</a>
                             </li>
-                            <li class="sidebar-item">
-                                <a href="{% url 'dis_patients' %}" class="sidebar-link">View Patients</a>
-                            </li>
+                           
                             <li class="sidebar-item">
                                 <a href="{% url 'dis_vitals' %}" class="sidebar-link">View Information</a>
                             </li>
+                            <li class="sidebar-item">
+                              <a href="{% url 'dis_patients' %}" class="sidebar-link">View Patients</a>
+                          </li>
                         </ul>
                     </li>
                     <li class="sidebar-item">
@@ -186,7 +187,7 @@
                                 <a href="{% url 'allocate_room' %}" class="sidebar-link">Allocate Bed</a>
                             </li>
                             <li class="sidebar-item">
-                                <a href="{% url 'dis_allocate_bed' %}" class="sidebar-link">View Allocate</a>
+                                <a href="{% url 'dis_allocate_bed' %}" class="sidebar-link">View Allocated</a>
                             </li>
                            
                         </ul>
@@ -223,7 +224,7 @@
                 <div class="container top-brand">
 					<nav class="navbar navbar-default">			
 						<div class="navbar-header">
-							<div class="sidebar-header"> <a href="index.html"><img src="{% static 'images/hospital_logo3.png' %}" class="logo" alt="logo" style="width: 50px; height: 50px; border-radius: 50%;"></a>
+							<div class="sidebar-header"> <a href="#"><img src="{% static 'images/hospital_logo3.png' %}" class="logo" alt="logo" style="width: 50px; height: 50px; border-radius: 50%;"></a>
 							</div>
 						</div>
 						<ul class="nav justify-content-end">
@@ -258,9 +259,9 @@
 								
 								<div class="dropdown-menu proclinic-box-shadow2 profile animated flipInY">
 									<h5>{{ request.user.username }}</h5>
-									<a class="dropdown-item" href="{% url 'show_nurse_profile' %}">
+									<a class="dropdown-item text-dark" href="{% url 'show_nurse_profile' %}">
 										<span class="ti-image"></span> Profile</a>
-									<a class="dropdown-item" href="{% url 'logout' %}">
+									<a class="dropdown-item text-dark" href="{% url 'logout' %}">
 										<span class="ti-power-off"></span> Logout</a>
 								</div>
 							</li>
@@ -315,11 +316,11 @@
                             <div class="col-md-4">
                               <div class="widget-area proclinic-box-shadow color-red">
                                 <div class="widget-left">
-                                  <span class="ti-user"></span>
+                                  <span class="ti-layout-column2"></span>
                                 </div>
                                 <div class="widget-right">
-                                  <h4 class="wiget-title text-success">Total Patients</h4>
-                                  <span class="numeric color-red">664</span>
+                                  <h4 class="wiget-title text-success">Rooms Available</h4>
+                                  <span class="numeric color-red">{{room_info}}</span>
                                   
                                   
                                 </div>
@@ -330,11 +331,11 @@
                             <div class="col-md-4">
                               <div class="widget-area proclinic-box-shadow color-green">
                                 <div class="widget-left">
-                                  <span class="ti-timer"></span>
+                                  <span class="ti-layout-width-default"></span>
                                 </div>
                                 <div class="widget-right">
-                                  <h4 class="wiget-title text-success">Total Appointments </h4>
-                                  <span class="numeric color-green">38</span>
+                                  <h4 class="wiget-title text-success">Beds Available </h4>
+                                  <span class="numeric color-green">{{bed_info}}</span>
                                  
                                 </div>
                               </div>
@@ -344,11 +345,11 @@
                             <div class="col-md-4">
                               <div class="widget-area proclinic-box-shadow color-yellow">
                                 <div class="widget-left">
-                                  <span class="ti-wallet"></span>
+                                  <span class="ti-layout-menu-v"></span>
                                 </div>
                                 <div class="widget-right">
-                                  <h4 class="wiget-title text-success">Total Revenue</h4>
-                                  <span class="numeric color-yellow">$3000</span>
+                                  <h4 class="wiget-title text-success">Allocated Beds</h4>
+                                  <span class="numeric color-yellow">{{bed_occupied}}</span>
                                   
                                 </div>
                               </div>
@@ -434,7 +435,7 @@
                
         </div>
     </div>
-    <!-- <script src="http://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <script src="http://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
     <script>
   
       function googleTranslateElementInit() {
@@ -443,7 +444,7 @@
           'google_translate_element'
         );
       } 
-    </script> -->
+    </script> 
     <script src="{% static 'js2/jquery-3.2.1.min.js' %}"></script>
 	<!-- Popper Library-->
 	<script src="{% static 'js2/popper.min.js' %}"></script>

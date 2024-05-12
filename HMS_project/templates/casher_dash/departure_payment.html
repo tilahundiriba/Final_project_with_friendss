@@ -74,15 +74,8 @@
 						
 									<div class="form-group col-md-6">
 										<label for="cashier_name">Casher Name</label>
-										<!-- <input type="text" placeholder="cashier name" class="form-control" id="cashier_name" name="cashier_name"> -->
-										<select class="form-control" id="cashier_name" name="cashier_name">
-											<option disabled selected > Casher Name</option>
-											{% for user in cashers %}
-										    
-										    <option value="{{ user.username }}">{{ user.username}}</option>
-											{% endfor %}
-										
-										</select>
+										<input type="text" placeholder="cashier name" value="{{recent_payment.Casher_id}}" class="form-control" id="cashier_name" name="cashier_name">
+						
 									</div>
 									
                                   	
@@ -144,13 +137,7 @@
 				</div>
 			</div>
 			<!-- /Main Content -->
-			<!--Copy Rights-->
-			<div class="container">
-				<div class="d-sm-flex justify-content-center">
-				  <span class="text-muted text-center d-block d-sm-inline-block">Copyright © 2018 <a href="http://www.konnectplugins.com/" target="_blank">konnectcode</a>. All rights reserved.</span>
-				</div>
-			</div>
-			<!-- /Copy Rights-->
+	
 		</div>
 		<!-- /Page Content -->
 	</div>

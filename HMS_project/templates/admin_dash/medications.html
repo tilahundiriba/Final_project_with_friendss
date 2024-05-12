@@ -1,0 +1,166 @@
+
+{% extends 'admin_dash/dashboard.html' %}
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.konnectplugins.com/proclinic/Horizontal/rooms.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 24 Jan 2022 10:42:01 GMT -->
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	{% block 'title' %}
+	<title>Medication List</title>
+	{% endblock %}
+	<script>
+		// Function to toggle delete button visibility
+		function toggleDeleteButton() {
+			var deleteButton = document.getElementById("deleteButton");
+			var checkboxes = document.querySelectorAll("input[type='checkbox']");
+			var checked = false;
+			checkboxes.forEach(function(checkbox) {
+				if (checkbox.checked) {
+					checked = true;
+				}
+			});
+			deleteButton.style.display = checked ? "inline-block" : "none";
+		}
+	
+		// Function to confirm delete
+		function confirmDelete() {
+			return confirm("Are you sure you want to delete selected items?");
+		}
+	</script>
+</head>
+
+<body>
+	<!-- Pre Loader -->
+	<div class="loading">
+		<div class="spinner">
+			<div class="double-bounce1"></div>
+			<div class="double-bounce2"></div>
+		</div>
+	</div>
+	<!--/Pre Loader -->
+	<!-- Color Changer -->
+
+	<!-- /Color Changer -->
+	<div class="wrapper">
+		<!-- Page Content -->
+		<div id="content">
+				<!-- Top Navigation -->
+			
+
+				<!-- Page Title -->
+				<div class="container mt-0">
+					<div class="row breadcrumb-bar">
+						<div class="col-md-6">
+							<h3 class="block-title">Medications</h3>
+						</div>
+						<div class="col-md-6">
+							<ol class="breadcrumb">
+								<li class="breadcrumb-item">
+									<a href="index.html">
+										<span class="ti-home"></span>
+									</a>
+								</li>
+								<li class="breadcrumb-item active">Medications</li>
+								<li class="breadcrumb-item ">All Medications</li>
+							</ol>
+						</div>
+					</div>
+				</div>
+			<!-- /Page Title -->
+
+			<!-- /Breadcrumb -->
+			<!-- Main Content -->
+			<div class="container">
+
+				<div class="row">
+					<!-- Widget Item -->
+					<div class="col-md-12">
+						<div class="widget-area-2 proclinic-box-shadow">
+							<h3 class="widget-title">Medications List</h3>
+							<div class="table-responsive mb-3">
+								<table id="tableId" class="table table-bordered table-striped">
+									<thead>
+										<tr>
+											<th class="no-sort">
+												<div class="custom-control custom-checkbox">
+													<input class="custom-control-input" type="checkbox" id="select-all">
+													<label class="custom-control-label" for="select-all"></label>
+												</div>
+											</th>
+											<th>Patient ID</th>
+											<th>Bed Number</th>
+											<th>Drugs</th>
+											<th>Medicaion Time</th>
+											<th>Nurse Name</th>
+											<th>Remark</th>
+											<th>Actions</th>
+                                            
+											
+										</tr>
+									</thead>
+                                    <tbody>
+										{% for med in medications %}
+                                        <tr>
+                                            <td>
+												<div class="custom-control custom-checkbox">
+													<input class="custom-control-input" type="checkbox" id="{{med.Med_no}}" onclick="toggleDeleteButton()">
+													<label class="custom-control-label" for="{{med.Med_no}}"></label>
+												</div>
+											</td>
+                                            <td>{{med.Patient_id}}</td>
+                                            <td>{{med.Bed_no}}</td>
+                                            <td>{{med.Drugs}}</td>
+                                            <td>{{med.Med_time}}</td>
+                                            <td>{{med.Nurse_name}}</td>
+                                            <td>{{med.Remark}}</td>
+                                           
+											<td style="display: none;" id="deleteButton">
+												{% if request.user.userprofileinfo.role == 'admin' %}
+												<a href="{% url 'delete_medication' med.Med_no  %}" class="btn btn-outline-danger" onclick="return confirmDelete();">
+													<span class="ti-trash"></span>DELETE
+												</a>
+												{% endif %}
+											</td>
+                                        </tr>
+                                      
+                                     {% endfor %}
+                                     
+                                    </tbody>
+                                </table>
+                                
+								<!--Export links-->
+								<nav aria-label="Page navigation example">
+									<ul class="pagination justify-content-center export-pagination">
+										
+									</ul>
+								</nav>
+								
+							</div>
+						</div>
+					</div>
+					<!-- /Widget Item -->
+				</div>
+			</div>
+			<!-- /Main Content -->
+
+		</div>
+		<!-- /Page Content -->
+	</div>
+	<!-- Back to Top -->
+	<a id="back-to-top" href="#" class="back-to-top">
+		<span class="ti-angle-up"></span>
+	</a>
+
+</body>
+
+
+<!-- Mirrored from www.konnectplugins.com/proclinic/Horizontal/rooms.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 24 Jan 2022 10:42:01 GMT -->
+</html>
+{% endblock %}

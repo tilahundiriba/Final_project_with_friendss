@@ -8,7 +8,7 @@ class PatientHistory(models.Model):
     symptom2 = models.TextField(max_length=200 ,null=True)
     History_No=models.AutoField(primary_key=True)
     DiseaseName=models.TextField(max_length=100)
-    Nurse_ID=models.ForeignKey(User,on_delete=models.CASCADE)
+    Nurse_ID=models.TextField(max_length=200 ,null=True)
     Doctor_ID=models.ForeignKey(User,on_delete=models.CASCADE,related_name='nurse_history_set',related_query_name='doctor_history')
     Is_checked= models.BooleanField(default=False)
  
@@ -19,7 +19,9 @@ class Appointment(models.Model):
     PatientID=models.ForeignKey(PatientRegister, on_delete=models.CASCADE)
     App_number=models.BigAutoField(primary_key=True)
     App_date=models.DateField(auto_now_add=True)
-    Time_slot=models.TimeField(max_length=100)
+    Appointment_date=models.DateField(null=True)
+    Start_Time=models.TimeField(max_length=100,null=True)
+    End_Time=models.TimeField(max_length=100,null=True)
     Doctor_ID=models.ForeignKey(User,on_delete=models.CASCADE)
     App_reason = models.TextField(max_length=200)
     App_status = models.TextField(max_length=100)
@@ -43,5 +45,6 @@ class Laboratory(models.Model):
     Technician_ID=models.ForeignKey(User,on_delete=models.CASCADE,related_name='laboratory_send_set',related_query_name='laboratory_send_set',null=True)
     Is_tested= models.BooleanField(default=False)
     Is_payed= models.BooleanField(default=False)
+    Is_prescriped= models.BooleanField(default=False)
     def __str__(self):
         return f'{self.PatientID}'

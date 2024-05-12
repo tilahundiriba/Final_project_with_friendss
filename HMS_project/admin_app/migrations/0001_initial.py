@@ -19,6 +19,7 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
+<<<<<<< HEAD
             name='Feedback',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
@@ -50,6 +51,8 @@ class Migration(migrations.Migration):
             ],
         ),
         migrations.CreateModel(
+=======
+>>>>>>> 943419a7f6e3ec4940efdce6b19f5a7e0114da74
             name='UserProfile',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),

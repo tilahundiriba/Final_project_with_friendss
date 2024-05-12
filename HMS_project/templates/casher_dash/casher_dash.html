@@ -127,9 +127,7 @@
                             Payments
                         </a>
                         <ul id="posts" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
-                            <li class="sidebar-item">
-                                <a href="#" class="sidebar-link">Add Payment</a>
-                            </li>
+                           
                             <li class="sidebar-item">
                                 <a href="{% url 'dis_payment' %}" class="sidebar-link">View Payment</a>
                             </li>
@@ -154,10 +152,6 @@
                             <li class="sidebar-item">
                                 <a href="{% url 'discharges' %}" class="sidebar-link">View Discharge</a>
                             </li>
-                            <li class="sidebar-item">
-                                <a href="#" class="sidebar-link">About Discharge</a>
-                            </li>
-
                         </ul>
                     </li>
                     <li class="sidebar-item">
@@ -191,7 +185,7 @@
                 <div class="container top-brand">
 					<nav class="navbar navbar-default">			
 						<div class="navbar-header">
-							<div class="sidebar-header"> <a href="index.html"><img src="{% static 'images/hospital_logo3.png' %}" class="logo" alt="logo" style="width: 50px; height: 50px; border-radius: 50%;"></a>
+							<div class="sidebar-header"> <a href="#"><img src="{% static 'images/hospital_logo3.png' %}" class="logo" alt="logo" style="width: 50px; height: 50px; border-radius: 50%;"></a>
 							</div>
 						</div>
 						<ul class="nav justify-content-end">
@@ -226,9 +220,9 @@
 								
 								<div class="dropdown-menu proclinic-box-shadow2 profile animated flipInY">
 									<h5>{{ request.user.username }}</h5>
-									<a class="dropdown-item" href="{% url 'show_casher_profile' %}">
+									<a class="dropdown-item text-dark" href="{% url 'show_casher_profile' %}">
 										<span class="ti-image"></span> Profile</a>
-									<a class="dropdown-item" href="{% url 'logout' %}">
+									<a class="dropdown-item text-dark" href="{% url 'logout' %}">
 										<span class="ti-power-off"></span> Logout</a>
 								</div>
 							</li>
@@ -465,7 +459,7 @@
             window.location.replace("{% url 'user_log' %}");
         }
     </script>
-    <!-- <script src="http://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <script src="http://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
     <script>
   
       function googleTranslateElementInit() {
@@ -474,7 +468,9 @@
           'google_translate_element'
         );
       } 
-    </script> -->
+
+    </script> 
+
     <script src="{% static 'js2/jquery-3.2.1.min.js' %}"></script>
 	<!-- Popper Library-->
 	<script src="{% static 'js2/popper.min.js' %}"></script>

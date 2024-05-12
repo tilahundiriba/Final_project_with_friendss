@@ -131,11 +131,11 @@
 
 									</div>
 									<div class="form-group col-md-6">
-										<label for="nurseid">Nursing ID</label>
+										<label for="nurseid">Nurse Name</label>
 										<select class="form-control" id="nurseid" name="nurseid">
 											<option>Select Name</option>
 											{% for user in users %}
-											<option value="{{user.username}}">{{user.username}}</option>
+											<option value="{{ user.username }}">{{ user.first_name}}</option>
 											{% endfor %}
 										</select>
 										<div id="nursingIdError" class="error-text"></div>
@@ -148,25 +148,11 @@
 										<div id="remarkError" class="error-text"></div>
 
 									</div>
-									<!-- <div class="form-group col-md-6">
-										<label for="gender">Gender</label>
-										<select class="form-control" id="gender">
-											<option>Male</option>
-											<option>Female</option>
-											<option>Other</option>
-										</select>
-									</div> -->
+
 									
 																	
-									<div class="form-check col-md-12 mb-2">
-										<div class="text-left">
-											<div class="custom-control custom-checkbox">
-												<input class="custom-control-input" type="checkbox" id="ex-check-2">
-												<label class="custom-control-label" for="ex-check-2">Please Confirm</label>
-											</div>
-										</div>
-									</div>
-									<div class="form-group col-md-6 mb-3">
+								
+									<div class="form-group col-md-12 mb-3">
 										<button type="submit" class="btn btn-primary btn-lg">Submit</button>
 									</div>
 								</div>
@@ -349,13 +335,7 @@
 				</div>
 			</div>
 			<!-- /Main Content -->
-			<!--Copy Rights-->
-			<div class="container">
-				<div class="d-sm-flex justify-content-center">
-				  <span class="text-muted text-center d-block d-sm-inline-block">Copyright © 2018 <a href="http://www.konnectplugins.com/" target="_blank">konnectcode</a>. All rights reserved.</span>
-				</div>
-			</div>
-			<!-- /Copy Rights-->
+
 		</div>
 		<!-- /Page Content -->
 	</div>

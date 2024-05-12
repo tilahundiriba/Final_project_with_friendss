@@ -81,7 +81,7 @@
             <select class="form-control" id="dr_name" name="dr_name">
                 <option>Select Doctor Name</option>
                 {% for user in doctors %}
-                <option value="{{user.username}}">{{user.username}}</option>
+                <option value="{{ user.username }}">{{ user.first_name}}</option>
                 {% endfor %}
             </select>
             <div id="drNameError" class="text-danger"></div>
@@ -105,7 +105,7 @@
             <select class="form-control" id="techn_name" name="techn_name">
                 <option>Select Technician Name</option>
                 {% for user in techs %}
-                <option value="{{user.username}}">{{user.username}}</option>
+                <option value="{{ user.username }}">{{ user.first_name}}</option>
                 {% endfor %}
             </select>
             <div id="technNameError" class="text-danger"></div>
@@ -194,13 +194,7 @@
 				</div>
 			</div>
 			<!-- /Main Content -->
-			<!--Copy Rights-->
-			<div class="container">
-				<div class="d-sm-flex justify-content-center">
-				  <span class="text-muted text-center d-block d-sm-inline-block">Copyright © 2018 <a href="http://www.konnectplugins.com/" target="_blank">konnectcode</a>. All rights reserved.</span>
-				</div>
-			</div>
-			<!-- /Copy Rights-->
+		
 		</div>
 		<!-- /Page Content -->
 	</div>

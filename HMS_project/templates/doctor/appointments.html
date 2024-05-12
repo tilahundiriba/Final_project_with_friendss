@@ -106,10 +106,13 @@
 									
 											<th>Appointment No</th>
 											<th>Patient ID</th>
-											<th>Time Slot</th>
+											<th>Start Time</th>
+											<th>End Time</th>
 											<th>Appointment Date</th>
+											
 
 											<th>Problem</th>
+											<th>Created Date</th>
 											<th>Status</th>
 											<th>Actions</th>
 										</tr>
@@ -120,10 +123,13 @@
 										
 											<td>{{app.App_number}}</td>
 											<td>{{app.PatientID}}</td>
-											<td>{{app.Time_slot}}</td>
-											<td>{{app.App_date}}</td>
+											<td>{{app.Start_Time}}</td>
+											<td>{{app.End_Time}}</td>
+											<td>{{app.Appointment_date}}</td>
+										
 
 											<td>{{app.App_reason}}</td>
+											<td>{{app.App_date}}</td>
 											{% if app.App_status == 'Completed' %}
 											<td>
 												<span class="badge badge-success">{{app.App_status}}</span>
@@ -140,9 +146,19 @@
 											</td>
 											{% endif %}
 											<td>
+											{% if request.user.userprofileinfo.role == 'doctor' %}
+											
 												<a href="{% url 'about-appointment' app.App_number %}" class="btn btn-outline-info"><span
 														class="ti-eye"></span>DETAILS</a>
-											</td>
+											
+											{% endif %}
+											{% if request.user.userprofileinfo.role == 'admin' %}
+											
+												<a href="#" class="btn btn-outline-danger"><span
+														class="ti-trash"></span>DELETE</a>
+											
+											{% endif %}
+										</td>
 										</tr>
 
 										{% endfor %}
@@ -163,15 +179,7 @@
 				</div>
 			</div>
 			<!-- /Main Content -->
-			<!--Copy Rights-->
-			<div class="container">
-				<div class="d-sm-flex justify-content-center">
-					<span class="text-muted text-center d-block d-sm-inline-block">Copyright © 2018 <a
-							href="http://www.konnectplugins.com/" target="_blank">konnectcode</a>. All rights
-						reserved.</span>
-				</div>
-			</div>
-			<!-- /Copy Rights-->
+		
 		</div>
 		<!-- /Page Content -->
 	</div>

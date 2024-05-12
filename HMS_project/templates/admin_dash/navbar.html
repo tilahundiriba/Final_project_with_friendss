@@ -8,25 +8,46 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+                    <a class="nav-link dropdown-toggle text-white" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
                      aria-expanded="false"><span class="ti-home"></span> Dashboard</a>
                   
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
-                     aria-expanded="false"><span class="ti-wheelchair"></span> Patients</a>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">Add New Patient</a>
-                        <a class="dropdown-item" href="#">Patient History</a>
-                        <a class="dropdown-item" href="#">Approve Discharge</a>
-                    </div>
-                </li>
                 <li class="nav-item dropdown active">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+                    <a class="nav-link dropdown-toggle text-white" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
                      aria-expanded="false"><span class="ti-user"></span> Staffs</a>
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="{% url 'createUserAccount' %}">Add New Staff</a>
                         <a class="dropdown-item" href="{% url 'display_users' %}">View Staff</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-white" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+                     aria-expanded="false"><span class="ti-wheelchair"></span> Patients</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="{% url 'patient' %}">Patients</a>
+                        <a class="dropdown-item" href="{% url 'vitals' %}">Vital informations</a>
+                        <a class="dropdown-item" href="{% url 'dis_appointment' %}">Appointments</a>
+                        <a class="dropdown-item" href="{% url 'history' %}">Histories</a>
+                        <a class="dropdown-item" href="{% url 'dis_perscription' %}">Prescriptions</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown active">
+                    <a class="nav-link dropdown-toggle text-white" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+                     aria-expanded="false"><span class="ti-user"></span> Laboratory</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="{% url 'laboratories' %}">Laboratories</a>
+                        <a class="dropdown-item" href="{% url 'medications' %}">Medications</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-white" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+                     aria-expanded="false"><span class="ti-wheelchair"></span> Departure</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="{% url 'departed' %}">Departed</a>
+                        <a class="dropdown-item" href="{% url 'approve_departure' %}">Approve Departure</a>
+                        <a class="dropdown-item" href="{% url 'payments' %}">Payments</a>
+                        <a class="dropdown-item" href="{% url 'history' %}">Histories</a>
+                        <a class="dropdown-item" href="{% url 'dis_perscription' %}">Prescriptions</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown">
@@ -35,33 +56,38 @@
                         Notification</a>
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="{% url 'poster' %}" >Write Notifications</a>
-                            <a class="dropdown-item" href="#">View Notifications</a>
+                            
                         </div>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                    <a class="nav-link dropdown-toggle text-white" data-toggle="dropdown" href="#" role="button"
                         aria-haspopup="true" aria-expanded="false"><span class="ti-wheelchair"></span>
                         Feedbacks</a>
                         <div class="dropdown-menu">
                           
-                            <a class="dropdown-item" href="#">View Feedback</a>
+                            <a class="dropdown-item" href="{% url 'display_feedback' %}">View Feedback</a>
                         </div>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                    <a class="nav-link dropdown-toggle text-white" data-toggle="dropdown" href="#" role="button"
                         aria-haspopup="true" aria-expanded="false"><span class="ti-wheelchair"></span>
                         Reports</a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#" >Add Report</a>
-                            <a class="dropdown-item" href="#">View Report</a>
+                            <a class="dropdown-item" href="{% url 'add_report' %}" >Add Report</a>
+                            <a class="dropdown-item" href="{% url 'general_report' %}">View Report</a>
                         </div>
                 </li>
-                 
-         
-            
-         
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+                    <a class="nav-link dropdown-toggle text-white" data-toggle="dropdown" href="#" role="button"
+                        aria-haspopup="true" aria-expanded="false"><span class="ti-wheelchair"></span>
+                        Services</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="{% url 'add_service' %}" >Add Service</a>
+                            <a class="dropdown-item" href="{% url 'dis_service' %}">View Services</a>
+                        </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-white" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
                      aria-expanded="false"><span class="ti-file"></span> Other Pages</a>
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="login.html">Login </a>

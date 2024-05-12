@@ -9,56 +9,44 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                    <a class="nav-link dropdown-toggle text-white" data-toggle="dropdown" href="#" role="button"
                         aria-haspopup="true" aria-expanded="false"><span class="ti-home"></span>
                         Dashboard</a>
                     
                 </li>
            
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                    <a class="nav-link dropdown-toggle text-white" data-toggle="dropdown" href="#" role="button"
                         aria-haspopup="true" aria-expanded="false"><span class="ti-wheelchair"></span>
                         Patients</a>
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="{% url 'add_patient' %}">Add New Patient</a>
                         <a class="dropdown-item" href="{% url 'dis_patient' %}" >View Patients</a>
-                        <a class="dropdown-item" href="#">Edit Patient</a>
-                        <a class="dropdown-item" href="#">About Patients</a>
+                        <a class="dropdown-item" href="{% url 'existing_patient' %}">Existing Patient</a>
+                        
                     </div>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                    <a class="nav-link dropdown-toggle text-white" data-toggle="dropdown" href="#" role="button"
                         aria-haspopup="true" aria-expanded="false"><span class="ti-wheelchair"></span>
-                        Payment</a>
+                        Languages</a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="add-patient.html">Send Payment</a>
+                        <a class="dropdown-item" href="#">  <div id="google_translate_element" class=""></div></a>
+                        
+                        
                     </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
-                        aria-haspopup="true" aria-expanded="false"><span class="ti-wheelchair"></span>
-                        Others</a>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">Registration</a>
-                        <a class="dropdown-item" href="#">View Appointment</a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
-                        aria-haspopup="true" aria-expanded="false"><span class="ti-wheelchair"></span>
-                        Notification</a>
-                   
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
-                        aria-haspopup="true" aria-expanded="false"><span class="ti-wheelchair"></span>
-                        Setting</a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="{% url 'show_rece_profile' %}"  >Profile</a>
-                            <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
-                        </div>
                 </li>
             </ul>
         </div>
     </nav>
+    <script src="http://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <script>
+
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement(
+                { pageLanguage: 'en', defaultLanguage: 'en' },
+                'google_translate_element'
+            );
+        } 
+    </script>
 </div>
