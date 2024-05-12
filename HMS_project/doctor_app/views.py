@@ -477,13 +477,13 @@ def dis_lab_results(request):
     return render(request,'doctor/lab_results.html',{'lab_results':lab_results,'notifications':notifications,
                                                 'unseen_count':unseen_count})
 @login_required
-def add_history(request,patient_id):
-    patients = get_object_or_404( PatientRegister,patient_id=patient_id)
+def add_history(request, patient_id):
+    patients = get_object_or_404(PatientRegister, patient_id=patient_id)
     notifications = Notification.objects.all()
     unseen_count = Notification.objects.filter(Seen=False).count()
     doctors = User.objects.filter(userprofileinfo__role='doctor')
     nurses = User.objects.filter(userprofileinfo__role='nurse')
-    added_history=False
+    added_history = False
     if request.method == 'POST':
         patientid = request.POST.get('patient_id')
         syptom = request.POST.get('symptom')
@@ -491,26 +491,23 @@ def add_history(request,patient_id):
         disease = request.POST.get('disease')
         doctor_name = request.POST.get('dr_name')
         nurse_name = request.POST.get('nr_name')
- 
-        # Create an instance of Appointment model and save it
+        
         try:
-            patient = get_object_or_404( PatientRegister,patient_id=patientid)
+            patient = get_object_or_404(PatientRegister, patient_id=patientid)
             doctor = get_object_or_404(User, username=doctor_name)
-            nurse = get_object_or_404(User, username=nurse_name)
+            
             history = PatientHistory(
                 Patient_ID=patient,
                 symptom2=syptom,
                 Sympthom=detailsyptoms,
                 Doctor_ID=doctor,
                 DiseaseName=disease,
-                Nurse_ID = nurse
-
-                # Assign values to other fields similarly
+                Nurse_ID=nurse_name
             )
             history.save()
             patients.is_checked = True
             patients.save()
-            messages.success(request, 'Patient is  checked successfully.')
+            messages.success(request, 'Patient is checked successfully.')
 
             patient_count = cache.get('patient_count', 0)
             patient_count -= 1
@@ -518,17 +515,16 @@ def add_history(request,patient_id):
             
         except PatientRegister.DoesNotExist:
             # Handle the case where the patient is not found
-            # You can add appropriate error handling or redirect to an error page
             pass
         except UserProfileInfo.DoesNotExist:
             # Handle the case where the doctor is not found
-            # You can add appropriate error handling or redirect to an error page
             pass
-        # return redirect('add-appointment') 
+        
         return redirect('check_patient_data')
-    return render(request,'doctor/add_history.html',{'doctors':doctors,'nurses':nurses,'notifications':notifications,
-                                                'unseen_count':unseen_count,
-                                                'patients':patients})
+    
+    return render(request, 'doctor/add_history.html', {'doctors': doctors, 'nurses': nurses, 'notifications': notifications,
+                                                       'unseen_count': unseen_count, 'patients': patients})
+
 @login_required
 def update_history(request, history_no):
         patient_id = request.POST.get('patient_id')

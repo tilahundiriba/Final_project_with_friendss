@@ -43,6 +43,18 @@ from datetime import datetime
 from django.shortcuts import render
 from django.template.loader import render_to_string
 
+
+from django.shortcuts import redirect
+
+def delete_medication(request, med_no):
+    # Retrieve the medication object
+    medication = Medication.objects.get(Med_no=med_no)
+        # Delete the medication
+    medication.delete()
+        # Redirect to a success page or back to the medications list
+    return redirect('medications')
+
+
 # @login_required
 def dis_appointment(request):
     notifications = Notification.objects.all()

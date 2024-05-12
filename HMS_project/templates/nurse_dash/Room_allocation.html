@@ -75,7 +75,13 @@
 									</div>
 									<div class="form-group col-md-6">
 										<label for="room-number">Room Number</label>
-										<input type="text" class="form-control" placeholder="Room Number" id="room-number" name="room-number">
+										<!-- <input type="text" class="form-control" placeholder="Room Number" id="room-number" name="room-number"> -->
+										<select class="form-control" id="room-number" name="room-number">
+											<option selected disabled >Select Rooms</option>
+											{% for room in room_info %}
+											<option value="{{room.Room_no}}">{{room.Room_no}}</option>
+											{% endfor %}
+										</select>
 										<div id="roomNumberError" class="error-text"></div>
 									</div>
 									<div class="form-group col-md-6">
@@ -88,17 +94,16 @@
 									</div>
 									<div class="form-group col-md-6">
 										<label for="bed-no">Bed No</label>
-										<input type="text" placeholder="Bed No" class="form-control" id="bed-no" name="bed_no">
+										<!-- <input type="text" placeholder="Bed No" class="form-control" id="bed-no" name="bed_no"> -->
+										<select class="form-control" id="bed-no" name="bed_no">
+											<option selected disabled >Select Beds</option>
+											{% for room in room_info %}
+											<option value="{{room.Bed_no}}">{{room.Bed_no}}</option>
+											{% endfor %}
+										</select>
 										<div id="bedNoError" class="error-text"></div>
 									</div>
-									<div class="form-check col-md-12 mb-2">
-										<div class="text-left">
-											<div class="custom-control custom-checkbox">
-												<input class="custom-control-input" type="checkbox" id="ex-check-2">
-												<label class="custom-control-label" for="ex-check-2">Please Confirm</label>
-											</div>
-										</div>
-									</div>
+							
 									<div class="form-group col-md-6 mb-3">
 										<button type="submit" class="btn btn-primary btn-lg">Allocate</button>
 									</div>

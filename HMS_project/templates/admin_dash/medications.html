@@ -15,7 +15,25 @@
 	{% block 'title' %}
 	<title>Medication List</title>
 	{% endblock %}
-
+	<script>
+		// Function to toggle delete button visibility
+		function toggleDeleteButton() {
+			var deleteButton = document.getElementById("deleteButton");
+			var checkboxes = document.querySelectorAll("input[type='checkbox']");
+			var checked = false;
+			checkboxes.forEach(function(checkbox) {
+				if (checkbox.checked) {
+					checked = true;
+				}
+			});
+			deleteButton.style.display = checked ? "inline-block" : "none";
+		}
+	
+		// Function to confirm delete
+		function confirmDelete() {
+			return confirm("Are you sure you want to delete selected items?");
+		}
+	</script>
 </head>
 
 <body>
@@ -91,11 +109,11 @@
 										{% for med in medications %}
                                         <tr>
                                             <td>
-                                                <div class="custom-control custom-checkbox">
-                                                    <input class="custom-control-input" type="checkbox" id="1">
-                                                    <label class="custom-control-label" for="1"></label>
-                                                </div>
-                                            </td>
+												<div class="custom-control custom-checkbox">
+													<input class="custom-control-input" type="checkbox" id="{{med.Med_no}}" onclick="toggleDeleteButton()">
+													<label class="custom-control-label" for="{{med.Med_no}}"></label>
+												</div>
+											</td>
                                             <td>{{med.Patient_id}}</td>
                                             <td>{{med.Bed_no}}</td>
                                             <td>{{med.Drugs}}</td>
@@ -103,15 +121,13 @@
                                             <td>{{med.Nurse_name}}</td>
                                             <td>{{med.Remark}}</td>
                                            
-                                            
-                                        
-                                            <td>
+											<td style="display: none;" id="deleteButton">
 												{% if request.user.userprofileinfo.role == 'admin' %}
-												<a href="#" class="btn btn-outline-danger"><span class="ti-trash"></span>DELETE</a>
+												<a href="{% url 'delete_medication' med.Med_no  %}" class="btn btn-outline-danger" onclick="return confirmDelete();">
+													<span class="ti-trash"></span>DELETE
+												</a>
 												{% endif %}
-												
-												
-                                            </td>
+											</td>
                                         </tr>
                                       
                                      {% endfor %}

@@ -8,7 +8,7 @@ class PatientHistory(models.Model):
     symptom2 = models.TextField(max_length=200 ,null=True)
     History_No=models.AutoField(primary_key=True)
     DiseaseName=models.TextField(max_length=100)
-    Nurse_ID=models.ForeignKey(User,on_delete=models.CASCADE)
+    Nurse_ID=models.TextField(max_length=200 ,null=True)
     Doctor_ID=models.ForeignKey(User,on_delete=models.CASCADE,related_name='nurse_history_set',related_query_name='doctor_history')
     Is_checked= models.BooleanField(default=False)
  

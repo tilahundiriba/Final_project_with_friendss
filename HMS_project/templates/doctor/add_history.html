@@ -77,7 +77,7 @@
 									<div class="form-group col-md-6">
 										<label for="nr_name">Nr. Name</label>
 										<select class="form-control" id="nr_name" name="nr_name">
-											<option>Select Nurse Name</option>
+											<option selected disabled>Select Nurse Name</option>
 											{% for user in nurses %}
 											<option value="{{user.username}}">{{user.first_name}}</option>
 											{% endfor %}
@@ -132,14 +132,14 @@
 									}
 							
 									// Check if nurse name is selected
-									if (nrName.value.trim() === "Select Nurse Name") {
-										nrName.style.borderColor = "red";
-										document.getElementById("nrNameError").innerText = "Please select a Nurse Name";
-										return false;
-									} else {
-										nrName.style.borderColor = "green";
-										document.getElementById("nrNameError").innerText = "";
-									}
+									// if (nrName.value.trim() === "Select Nurse Name") {
+									// 	nrName.style.borderColor = "red";
+									// 	document.getElementById("nrNameError").innerText = "Please select a Nurse Name";
+									// 	return false;
+									// } else {
+									// 	nrName.style.borderColor = "green";
+									// 	document.getElementById("nrNameError").innerText = "";
+									// }
 							
 									// Check if symptom is not empty
 									if (symptom.value.trim() === "") {

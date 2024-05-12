@@ -257,7 +257,7 @@ def dis_patients(request):
     unseen_count = Notification.objects.filter(Seen=False).count()
 
     # Retrieve PatientHistory objects for the current nurse user
-    patients_history = PatientHistory.objects.filter(Nurse_ID=request.user)
+    patients_history = PatientHistory.objects.filter(Nurse_ID=request.user).order_by('-Date')
 
     # Construct a list of dictionaries containing patient information
     patients_info = []
@@ -284,7 +284,7 @@ def dis_patients(request):
 def allocate_room(request):
     notifications = Notification.objects.all()
     unseen_count = Notification.objects.filter(Seen=False).count()
-    roo_info = Rooms.objects.all()
+    room_info = Rooms.objects.exclude(Status='Occupied')
     registered=False
     if request.method == 'POST':
         patient_id = request.POST.get('patient_id')
@@ -305,8 +305,10 @@ def allocate_room(request):
         registered=True
         return render(request,'nurse_dash/Room_allocation.html',{'registered':registered,'notifications':notifications,
                                                        'unseen_count':unseen_count})
-    return render(request,'nurse_dash/Room_allocation.html',{'notifications':notifications,
-                                                       'unseen_count':unseen_count})
+    return render(request,'nurse_dash/Room_allocation.html',{
+        'notifications':notifications,
+        'room_info':room_info,
+          'unseen_count':unseen_count})
 def dis_bed_allocation(request):
     notifications = Notification.objects.all()
     unseen_count = Notification.objects.filter(Seen=False).count()
