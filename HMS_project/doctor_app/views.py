@@ -70,7 +70,13 @@ def dis_dr_dash(request):
     notifications = Notification.objects.all()
     unseen_count = Notification.objects.filter(Seen=False).count()
     appointment=Appointment.objects.all()
+    app_count=Appointment.objects.filter(Status='Pending').count()
+    patient_count=PatientRegister.objects.filter(is_checked=False,is_card=True).count()
+    lab_requests = Laboratory.objects.filter(Is_tested=True,Is_prescriped=False,Is_payed=True).count()
     return render(request,'doctor/dr_dash.html',{
+                                                'app_count':app_count,
+                                                'patient_count':patient_count,
+                                                'lab_requests':lab_requests,
                                                 'notifications':notifications,
                                                 'unseen_count':unseen_count,
                                                 'appointments':appointment})
@@ -342,7 +348,13 @@ def dis_dr_dash_content(request):
     notifications = Notification.objects.all()
     unseen_count = Notification.objects.filter(Seen=False).count()
     appointment=Appointment.objects.all()
+    app_count=Appointment.objects.filter(App_status='Pending').count()
+    patient_count=PatientRegister.objects.filter(is_checked=False,is_card=True).count()
+    lab_requests = Laboratory.objects.filter(Is_tested=True,Is_prescriped=False,Is_payed=True).count()
     return render(request,'doctor/dash_content.html',{'notifications':notifications,
+                                                'app_count':app_count,
+                                                'patient_count':patient_count,
+                                                'lab_requests':lab_requests,
                                                 'unseen_count':unseen_count,
                                                 'appointments':appointment})
 from datetime import datetime

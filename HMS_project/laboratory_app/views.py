@@ -36,13 +36,23 @@ def tech_profile_update(request, user_id):
 def dis_lab_dash(request):
     notifications = Notification.objects.all()
     unseen_count = Notification.objects.filter(Seen=False).count()
-    return render(request, 'laboratory_dash/lab_dashboard.html',{'notifications':notifications,
-                                                'unseen_count':unseen_count})
+    unpayed_count = Laboratory.objects.filter(Is_tested=False,Is_payed=False).count()
+    payed_count = Laboratory.objects.filter(Is_tested=False,Is_payed=True).count()
+    return render(request, 'laboratory_dash/lab_dashboard.html',{
+        'notifications':notifications,
+        'unpayed_count':unpayed_count,
+        'payed_count':payed_count,
+        'unseen_count':unseen_count})
 def dis_lab_dash_content(request):
     notifications = Notification.objects.all()
     unseen_count = Notification.objects.filter(Seen=False).count()
-    return render(request, 'laboratory_dash/lab_dash_content.html',{'notifications':notifications,
-                                                'unseen_count':unseen_count})
+    unpayed_count = Laboratory.objects.filter(Is_tested=False,Is_payed=False).count()
+    payed_count = Laboratory.objects.filter(Is_tested=False,Is_payed=True).count()
+    return render(request, 'laboratory_dash/lab_dash_content.html',{
+        'unpayed_count':unpayed_count,
+        'payed_count':payed_count,
+        'notifications':notifications,
+        'unseen_count':unseen_count})
 def dis_lab_result(request):
     notifications = Notification.objects.all()
     unseen_count = Notification.objects.filter(Seen=False).count()
