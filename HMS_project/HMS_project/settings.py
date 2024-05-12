@@ -158,17 +158,26 @@ DESIGNATED_ADMIN_USERNAME = 'admin'
 #          'PORT':'5432',
    #}}
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE':'django.db.backends.postgresql',
+#         'NAME':'test',
+#         'USER':'tilish',
+#         'PASSWORD':'14241224',
+#         'HOST':'localhost',
+#         'PORT':'5432',
+#     }
+# }
 DATABASES = {
     'default': {
         'ENGINE':'django.db.backends.postgresql',
-        'NAME':'test',
-        'USER':'tilish',
-        'PASSWORD':'14241224',
+        'NAME':'Hospital',
+        'USER':'postgres',    
+        'PASSWORD':'211',
         'HOST':'localhost',
         'PORT':'5432',
     }
 }
-
 # DATABASES = {
 #     'default': {
 #         'ENGINE':'django.db.backends.postgresql',
