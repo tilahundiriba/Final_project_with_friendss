@@ -1,13 +1,17 @@
 <div class="widget-right" >
     {% for notification in notifications %}
-    {% if notification.seen == True %}
-    <p class="wiget-title text-success" style="font-size: smaller;"> {{notification.message}}</p>
-    <p class="wiget-title text-success" style="font-size: smaller;"> {{notification.timestamp}}</p>
+    {% if notification.Seen == True %}
+    <p class="wiget-title text-success" style="font-size: smaller;"> {{notification.Name}}</p>
+    <hr>
+    <p class="wiget-title text-success" style="font-size: smaller;"> {{notification.Message}}</p>
+    <p class="wiget-title text-success" style="font-size: smaller;"> {{notification.Timestamp}}</p>
     <hr>
 
     {% else %}
-    <p class="wiget-title text-danger " style="font-size: smaller;"> {{notification.message}}</p>
-    <p class="wiget-title text-danger" style="font-size: smaller;"> {{notification.timestamp}}</p>
+    <p class="wiget-title text-danger " style="font-size: smaller;"> {{notification.Name}}</p>
+    <hr>
+    <p class="wiget-title text-warning " style="font-size: smaller;"> {{notification.Message}}</p>
+    <p class="wiget-title text-warning " style="font-size: smaller;"> {{notification.Timestamp}}</p>
     <a href="{% url 'seen_notifications' notification.id %}" class="btn btn-outline-primary "><span class="ti-eye"></span>Seen</a>
  
     <hr>

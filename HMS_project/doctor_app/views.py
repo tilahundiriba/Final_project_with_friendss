@@ -41,7 +41,7 @@ def technician_list(request):
 def doc_profile(request):
     user = request.user
     notifications = Notification.objects.all()
-    unseen_count = Notification.objects.filter(seen=False).count()
+    unseen_count = Notification.objects.filter(Seen=False).count()
     return render(request, 'doctor/profile_show.html', {'user': user,'notifications':notifications,
                                                         'unseen_count':unseen_count})
 
@@ -59,7 +59,7 @@ def profile_update_doc(request, user_id):
         user_profile.save()
         return redirect('show_doctor_profile')
     notifications = Notification.objects.all()
-    unseen_count = Notification.objects.filter(seen=False).count()
+    unseen_count = Notification.objects.filter(Seen=False).count()
     return render(request, 'doctor/update_profile.html', {'user_id': user_id,
                                                            'user_profile': user_profile,
                                                            'notifications':notifications,
@@ -68,7 +68,7 @@ def profile_update_doc(request, user_id):
 # @login_required
 def dis_dr_dash(request):
     notifications = Notification.objects.all()
-    unseen_count = Notification.objects.filter(seen=False).count()
+    unseen_count = Notification.objects.filter(Seen=False).count()
     appointment=Appointment.objects.all()
     return render(request,'doctor/dr_dash.html',{
                                                 'notifications':notifications,
@@ -78,7 +78,7 @@ def dis_dr_dash(request):
 def dis_labtest(request):
     labs= Laboratory.objects.all()
     notifications = Notification.objects.all()
-    unseen_count = Notification.objects.filter(seen=False).count()
+    unseen_count = Notification.objects.filter(Seen=False).count()
     return render(request,'doctor/labtests.html',{'labs':labs,'notifications':notifications,
                                                 'unseen_count':unseen_count})
 @login_required
@@ -86,7 +86,7 @@ def add_lab(request):
     doctors = User.objects.filter(userprofileinfo__role='doctor')
     techs = User.objects.filter(userprofileinfo__role='technician')
     notifications = Notification.objects.all()
-    unseen_count = Notification.objects.filter(seen=False).count()
+    unseen_count = Notification.objects.filter(Seen=False).count()
     registered=False
     technician_ids = Laboratory.objects.values_list('Technician_ID', flat=True).distinct()
 
@@ -162,7 +162,7 @@ def check_request(request):
     request_count = cache.get('request_count', 0)
     requests = Laboratory.objects.filter(Is_tested=False)
     notifications = Notification.objects.all()
-    unseen_count = Notification.objects.filter(seen=False).count()
+    unseen_count = Notification.objects.filter(Seen=False).count()
     return render(request, 'laboratory_dash/lab_requests.html', {'requests': requests ,
                                                                  'request_count': request_count,
                                                                  'notifications':notifications,
@@ -200,10 +200,54 @@ def checked_payment_request(request, lab_number):
     return redirect('check_payment_request')
 # view for tadding prescriptions 
 @login_required
-def add_perscription(request):
+def add_perscription(request,lab_number):
+    labs = get_object_or_404( Laboratory,Lab_number=lab_number)
+    patient_names = get_object_or_404( PatientRegister,patient_id=labs.PatientID)
     doctors = User.objects.filter(userprofileinfo__role='doctor')
     notifications = Notification.objects.all()
-    unseen_count = Notification.objects.filter(seen=False).count()
+    unseen_count = Notification.objects.filter(Seen=False).count()
+    registered=False
+    if request.method == 'POST':
+        patientid = request.POST.get('patient_id')
+        p_name = request.POST.get('name')
+        doctor_name = request.POST.get('dr_name')
+        prec = request.POST.get('prescription')
+        # Create an instance of Appointment model and save it
+        try:
+            patient = get_object_or_404( PatientRegister,patient_id=patientid)
+            doctor = get_object_or_404(User, username=doctor_name)
+            presc = Prescription(
+                PatientID=patient,
+                Doctor_ID=doctor,
+                Patient_full_name=p_name,
+                Precscriptions=prec,
+
+                # Assign values to other fields similarly
+            )
+            presc.save()
+            labs.Is_prescriped=True
+            labs.save()
+            registered=True
+        except PatientRegister.DoesNotExist:
+            # Handle the case where the patient is not found
+            # You can add appropriate error handling or redirect to an error page
+            pass
+        except UserProfileInfo.DoesNotExist:
+            # Handle the case where the doctor is not found
+            # You can add appropriate error handling or redirect to an error page
+            pass
+        # return redirect('add-appointment') 
+        return redirect('dis_lab_results')
+    return render(request,'doctor/add-perscription.html',{'doctors':doctors,
+                                                          'notifications':notifications,
+                                                          'labs':labs,
+                                                          'patient_names':patient_names.first_name + ' ' + patient_names.middle_name,
+                                                'unseen_count':unseen_count})
+@login_required
+def add_perscription_second(request):
+    doctors = User.objects.filter(userprofileinfo__role='doctor')
+    notifications = Notification.objects.all()
+    unseen_count = Notification.objects.filter(Seen=False).count()
     registered=False
     if request.method == 'POST':
         patientid = request.POST.get('patient_id')
@@ -233,11 +277,10 @@ def add_perscription(request):
             # You can add appropriate error handling or redirect to an error page
             pass
         # return redirect('add-appointment') 
-        return render(request,'doctor/add-perscription.html',{'register':registered,
-                                                              'notifications':notifications,
-                                                'unseen_count':unseen_count,
-                                                'doctors':doctors})
-    return render(request,'doctor/add-perscription.html',{'doctors':doctors,'notifications':notifications,
+        return redirect('perscriptions')
+    return render(request,'doctor/add_prescr_second.html',{'doctors':doctors,
+                                                          'notifications':notifications,
+                                                          'registered':registered,
                                                 'unseen_count':unseen_count})
 @login_required
 
@@ -245,7 +288,7 @@ def edit_perscription(request, prec_number):
     users = User.objects.all()
     prescription = get_object_or_404(Prescription, Prec_number=prec_number)
     notifications = Notification.objects.all()
-    unseen_count = Notification.objects.filter(seen=False).count()
+    unseen_count = Notification.objects.filter(Seen=False).count()
 
     if request.method == 'POST':
         patientid = request.POST.get('patient_id')
@@ -281,13 +324,13 @@ def edit_perscription(request, prec_number):
 def perscription(request):
     prescription= Prescription.objects.all()
     notifications = Notification.objects.all()
-    unseen_count = Notification.objects.filter(seen=False).count()
+    unseen_count = Notification.objects.filter(Seen=False).count()
     
     return render(request,'doctor/perscriptions.html',{'prescriptions':prescription,'notifications':notifications,
                                                 'unseen_count':unseen_count})
 def about_perscription(request,prec_number, patient_id):
     notifications = Notification.objects.all()
-    unseen_count = Notification.objects.filter(seen=False).count()
+    unseen_count = Notification.objects.filter(Seen=False).count()
     patient_info = get_object_or_404( PatientRegister,patient_id=patient_id)
     prec = get_object_or_404(Prescription, Prec_number=prec_number)
     return render(request,'doctor/about-percription.html',{'patient_info':patient_info,
@@ -297,39 +340,64 @@ def about_perscription(request,prec_number, patient_id):
 @login_required
 def dis_dr_dash_content(request):
     notifications = Notification.objects.all()
-    unseen_count = Notification.objects.filter(seen=False).count()
+    unseen_count = Notification.objects.filter(Seen=False).count()
     appointment=Appointment.objects.all()
     return render(request,'doctor/dash_content.html',{'notifications':notifications,
                                                 'unseen_count':unseen_count,
                                                 'appointments':appointment})
+from datetime import datetime
+
 @login_required
-def edit_appointment(request,app_number):
+def edit_appointment(request, app_number):
+    doctors = User.objects.filter(userprofileinfo__role='doctor')
     notifications = Notification.objects.all()
-    unseen_count = Notification.objects.filter(seen=False).count()
+    unseen_count = Notification.objects.filter(Seen=False).count()
     appointments = Appointment.objects.get(App_number=app_number)
-    if request.method == 'POST': 
+    
+    start_time_parsed = None
+    end_time_parsed = None
+    
+    if request.method == 'POST':
         patientid = request.POST.get('patient_id')
-        time_slot = request.POST.get('time_slot')
+        start_time = request.POST.get('start_time')
+        end_time = request.POST.get('end_time')
         doctor_name = request.POST.get('dr_name')
         app_reseon = request.POST.get('problem')
+        app_date = request.POST.get('app_date')
         app_status = request.POST.get('app_status')
-        patient = get_object_or_404( PatientRegister,patient_id=patientid)
+        # app_date_parsed = datetime.strptime(app_date, '%Y-%m-%d').date()
+        patient = get_object_or_404(PatientRegister, patient_id=patientid)
         doctor = get_object_or_404(User, username=doctor_name)
         
-        appointments.PatientID =patient
-        appointments.Time_slot =time_slot
-        appointments.App_reseon =app_reseon
-        appointments.Doctor_ID =doctor
-        appointments.App_status =app_status
-        appointments.save()
+        try:
+            start_time_parsed = datetime.strptime(start_time, '%I:%M %p').time()
+            end_time_parsed = datetime.strptime(end_time, '%I:%M %p').time()
+            app_date_parsed = datetime.strptime(app_date, '%B %d, %Y').date()
+            appointments.PatientID = patient
+            appointments.Time_slot = start_time_parsed
+            appointments.Time_slot = end_time_parsed
+            appointments.Appointment_date = app_date_parsed
+            appointments.App_reseon = app_reseon
+            appointments.Doctor_ID = doctor
+            appointments.App_status = app_status
+            appointments.save()
+        except ValueError:
+            # Handle the case where the input string is not in the correct format
+            pass
+        
+       
+        
         return redirect('dis-appointment')
-    return render(request,'doctor/edit-appointment.html',{'notifications':notifications,
-                                                'unseen_count':unseen_count,
-                                                'appointments':appointments})
+    
+    return render(request, 'doctor/edit-appointment.html', {'notifications': notifications,
+                                                             'unseen_count': unseen_count,
+                                                             'doctors': doctors,
+                                                             'appointments': appointments})
+
 @login_required
 def dis_appointment(request):
     notifications = Notification.objects.all()
-    unseen_count = Notification.objects.filter(seen=False).count()
+    unseen_count = Notification.objects.filter(Seen=False).count()
     appointment=Appointment.objects.all()
     return render(request,'doctor/appointments.html',{'appointment':appointment,'notifications':notifications,
                                                 'unseen_count':unseen_count})
@@ -341,7 +409,7 @@ def edit_lab_test(request, lab_number):
     doctors = User.objects.filter(userprofileinfo__role='doctor')
     techs = User.objects.filter(userprofileinfo__role='technician')
     notifications = Notification.objects.all()
-    unseen_count = Notification.objects.filter(seen=False).count()
+    unseen_count = Notification.objects.filter(Seen=False).count()
 
     lab = get_object_or_404(Laboratory, Lab_number=lab_number)
 
@@ -397,39 +465,42 @@ def test_notification(request):
 @login_required
 def dis_history(request):
     notifications = Notification.objects.all()
-    unseen_count = Notification.objects.filter(seen=False).count()
+    unseen_count = Notification.objects.filter(Seen=False).count()
     histories = PatientHistory.objects.all()
     return render(request,'doctor/histories.html',{'histories':histories,'notifications':notifications,
                                                 'unseen_count':unseen_count})
 @login_required
 def dis_lab_results(request):
     notifications = Notification.objects.all()
-    unseen_count = Notification.objects.filter(seen=False).count()
-    lab_results = Laboratory.objects.filter(Is_tested=True, Is_payed=True)
+    unseen_count = Notification.objects.filter(Seen=False).count()
+    lab_results = Laboratory.objects.filter(Is_tested=True, Is_payed=True,Is_prescriped=False)
     return render(request,'doctor/lab_results.html',{'lab_results':lab_results,'notifications':notifications,
                                                 'unseen_count':unseen_count})
 @login_required
-def add_history(request):
+def add_history(request,patient_id):
+    patients = get_object_or_404( PatientRegister,patient_id=patient_id)
     notifications = Notification.objects.all()
-    unseen_count = Notification.objects.filter(seen=False).count()
+    unseen_count = Notification.objects.filter(Seen=False).count()
     doctors = User.objects.filter(userprofileinfo__role='doctor')
     nurses = User.objects.filter(userprofileinfo__role='nurse')
     added_history=False
     if request.method == 'POST':
-        patient_id = request.POST.get('patient_id')
-        syptoms = request.POST.get('symptom')
+        patientid = request.POST.get('patient_id')
+        syptom = request.POST.get('symptom')
+        detailsyptoms = request.POST.get('detailsymptom')
         disease = request.POST.get('disease')
         doctor_name = request.POST.get('dr_name')
         nurse_name = request.POST.get('nr_name')
  
         # Create an instance of Appointment model and save it
         try:
-            patient = get_object_or_404( PatientRegister,patient_id=patient_id)
+            patient = get_object_or_404( PatientRegister,patient_id=patientid)
             doctor = get_object_or_404(User, username=doctor_name)
             nurse = get_object_or_404(User, username=nurse_name)
             history = PatientHistory(
                 Patient_ID=patient,
-                Sympthom=syptoms,
+                symptom2=syptom,
+                Sympthom=detailsyptoms,
                 Doctor_ID=doctor,
                 DiseaseName=disease,
                 Nurse_ID = nurse
@@ -437,7 +508,14 @@ def add_history(request):
                 # Assign values to other fields similarly
             )
             history.save()
-            added_history=True
+            patients.is_checked = True
+            patients.save()
+            messages.success(request, 'Patient is  checked successfully.')
+
+            patient_count = cache.get('patient_count', 0)
+            patient_count -= 1
+            cache.set('patient_count', patient_count)
+            
         except PatientRegister.DoesNotExist:
             # Handle the case where the patient is not found
             # You can add appropriate error handling or redirect to an error page
@@ -447,10 +525,10 @@ def add_history(request):
             # You can add appropriate error handling or redirect to an error page
             pass
         # return redirect('add-appointment') 
-        return render(request,'doctor/add_history.html',{'added_history':added_history,'doctors':doctors,'nurses':nurses,'notifications':notifications,
-                                                'unseen_count':unseen_count})
+        return redirect('check_patient_data')
     return render(request,'doctor/add_history.html',{'doctors':doctors,'nurses':nurses,'notifications':notifications,
-                                                'unseen_count':unseen_count})
+                                                'unseen_count':unseen_count,
+                                                'patients':patients})
 @login_required
 def update_history(request, history_no):
         patient_id = request.POST.get('patient_id')
@@ -477,7 +555,7 @@ def update_history(request, history_no):
 @login_required
 def edit_history(request, history_no):
     notifications = Notification.objects.all()
-    unseen_count = Notification.objects.filter(seen=False).count()
+    unseen_count = Notification.objects.filter(Seen=False).count()
     doctors = User.objects.filter(userprofileinfo__role='doctor')
     nurses = User.objects.filter(userprofileinfo__role='nurse')
    
@@ -502,14 +580,16 @@ def edit_history(request, history_no):
 @login_required
 def create_appointment(request):
     notifications = Notification.objects.all()
-    unseen_count = Notification.objects.filter(seen=False).count()
+    unseen_count = Notification.objects.filter(Seen=False).count()
     doctors = User.objects.filter(userprofileinfo__role='doctor')
     registered=False
     if request.method == 'POST':
         patientid = request.POST.get('patient_id')
-        time_slot = request.POST.get('time_slot')
+        start_time= request.POST.get('start_time')
+        end_time= request.POST.get('end_time')
         doctor_name = request.POST.get('dr_name')
         app_reseon = request.POST.get('problem')
+        app_date = request.POST.get('app_date')
         app_status = request.POST.get('app_status')
      
         # Extract other fields similarly
@@ -521,7 +601,9 @@ def create_appointment(request):
             phone_number=patient.phone_number
             appointment = Appointment(
                 PatientID=patient,
-                Time_slot=time_slot,
+                Start_Time=start_time,
+                End_Time=end_time,
+                Appointment_date=app_date,
                 Doctor_ID=doctor,
                 App_reason=app_reseon,
                 App_status=app_status,
@@ -542,7 +624,7 @@ def create_appointment(request):
         context = {
             'first_name':patient.first_name,
             'middle_name':patient.middle_name,
-            'timeslot':time_slot
+            'timeslot':start_time
         }
         html_message = render_to_string('doctor/email_templates.html', context)
         plain_message = strip_tags(html_message)
@@ -573,7 +655,7 @@ def create_appointment(request):
 
         # Initialize Twilio client
         client = Client(account_sid, auth_token)
-        app_notify = 'Hello! ' + patient.first_name  + '\nAppointment Day: ' + '\nAt time: '+ time_slot
+        app_notify = 'Hello! ' + patient.first_name  + '\nAppointment Day: '+ app_date + '\nAt time: '+ start_time
         try:
             # Send SMS
             message = client.messages.create(

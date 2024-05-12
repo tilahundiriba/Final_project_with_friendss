@@ -67,6 +67,15 @@
 							<form action="{% url 'poster' %}" method="post">
 								{% csrf_token %}
                                 <div class="form-group col-md-12">
+                                    <label for="message">Name</label>
+                                  
+                                    <input id="name" type="text" name="name" class="form-control"  placeholder="Name....."></input>
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <label for="title">Title</label>
+                                    <input id="title" type="text" name="title" class="form-control"  placeholder="titles....."></input>
+                                </div>
+                                <div class="form-group col-md-12">
                                     <label for="message">Messages</label>
                                   
                                     <textarea id="message" name="message" rows="4" class="form-control" cols="50" placeholder="Messages....."></textarea>

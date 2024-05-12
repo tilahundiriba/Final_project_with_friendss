@@ -46,14 +46,14 @@ from django.template.loader import render_to_string
 # @login_required
 def dis_appointment(request):
     notifications = Notification.objects.all()
-    unseen_count = Notification.objects.filter(seen=False).count()
+    unseen_count = Notification.objects.filter(Seen=False).count()
     appointment=Appointment.objects.all()
     return render(request,'admin_dash/appointments.html',{'appointment':appointment,'notifications':notifications,
                                                 'unseen_count':unseen_count})
 # @login_required
 def dis_history(request):
     notifications = Notification.objects.all()
-    unseen_count = Notification.objects.filter(seen=False).count()
+    unseen_count = Notification.objects.filter(Seen=False).count()
     histories = PatientHistory.objects.all()
     return render(request,'admin_dash/histories.html',{'histories':histories,'notifications':notifications,
                                                 'unseen_count':unseen_count})
@@ -61,19 +61,19 @@ def dis_history(request):
 def perscription(request):
     prescription= Prescription.objects.all()
     notifications = Notification.objects.all()
-    unseen_count = Notification.objects.filter(seen=False).count()
+    unseen_count = Notification.objects.filter(Seen=False).count()
     
     return render(request,'admin_dash/prescriptions.html',{'prescriptions':prescription,'notifications':notifications,
                                                 'unseen_count':unseen_count})
 def dis_vitals(request):
     notifications = Notification.objects.all()
-    unseen_count = Notification.objects.filter(seen=False).count()
+    unseen_count = Notification.objects.filter(Seen=False).count()
     vitals =VitalInformation.objects.all()
     return render(request,'admin_dash/vital_infos.html',{'vitals':vitals,'notifications':notifications,
                                                        'unseen_count':unseen_count})
 def dis_patient(request):
     notifications = Notification.objects.all()
-    unseen_count = Notification.objects.filter(seen=False).count()
+    unseen_count = Notification.objects.filter(Seen=False).count()
     patients = PatientRegister.objects.all()
     return render(request,'admin_dash/patients.html', {'patients':patients
                                                               ,
@@ -81,21 +81,21 @@ def dis_patient(request):
                                                               'unseen_count':unseen_count})
 def dis_lab_result(request):
     notifications = Notification.objects.all()
-    unseen_count = Notification.objects.filter(seen=False).count()
+    unseen_count = Notification.objects.filter(Seen=False).count()
     lab_results = Laboratory.objects.all()
     return render(request, 'admin_dash/laboratories.html',{'notifications':notifications,
                                                 'unseen_count':unseen_count,
                                                 'lab_results':lab_results})
 def dis_payment(request):
     notifications = Notification.objects.all()
-    unseen_count = Notification.objects.filter(seen=False).count()
+    unseen_count = Notification.objects.filter(Seen=False).count()
     payments = PaymentModel.objects.all()
     return render(request,'admin_dash/payments.html',{'notifications':notifications,
                                                             'unseen_count':unseen_count,
                                                             'payments':payments})
 def dis_discharge(request):
     notifications = Notification.objects.all()
-    unseen_count = Notification.objects.filter(seen=False).count()
+    unseen_count = Notification.objects.filter(Seen=False).count()
     discharges = Discharge.objects.all()
     context = []
 
@@ -116,7 +116,7 @@ def dis_discharge(request):
                                                          'discharges':context})
 def dis_medication(request):
     notifications = Notification.objects.all()
-    unseen_count = Notification.objects.filter(seen=False).count()
+    unseen_count = Notification.objects.filter(Seen=False).count()
     medications = Medication.objects.all()
     return render(request,'admin_dash/medications.html',{'medications':medications,
                                                             'notifications':notifications,
@@ -141,7 +141,7 @@ def add_report(request):
 def admin_profile(request):
     user = request.user
     notifications = Notification.objects.all()
-    unseen_count = Notification.objects.filter(seen=False).count()
+    unseen_count = Notification.objects.filter(Seen=False).count()
     return render(request, 'admin_dash/admin_profile.html', {'user': user,'notifications':notifications,
                                                         'unseen_count':unseen_count})
 
@@ -159,7 +159,7 @@ def profile_update_admin(request, user_id):
         user_profile.save()
         return redirect('admin_profile')
     notifications = Notification.objects.all()
-    unseen_count = Notification.objects.filter(seen=False).count()
+    unseen_count = Notification.objects.filter(Seen=False).count()
     return render(request, 'doctor/update_profile.html', {'user_id': user_id,
                                                            'user_profile': user_profile,
                                                            'notifications':notifications,
@@ -167,7 +167,7 @@ def profile_update_admin(request, user_id):
 def notification_view(request):
     # Fetch all notifications that haven't been seen by the user
     notifications = Notification.objects.all()
-    unseen_count = Notification.objects.filter(seen=False).count()
+    unseen_count = Notification.objects.filter(Seen=False).count()
     return render(request, 'admin_dash/seeNotifications.html', {'notifications': notifications,'unseen_count': unseen_count})
 def general_report(request):
     # Fetch all notifications that haven't been seen by the user
@@ -211,7 +211,7 @@ def general_report(request):
     female_patient = PatientRegister.objects.filter(gender='female').count()
     male_patient = number_of_patient - female_patient
     notifications = Notification.objects.all()
-    unseen_count = Notification.objects.filter(seen=False).count()
+    unseen_count = Notification.objects.filter(Seen=False).count()
     return render(request, 'admin_dash/general_report.html', 
                   {'notifications': notifications,
                     'unseen_count': unseen_count,
@@ -250,7 +250,7 @@ def mark_notification_as_seen(request, id):
     notification = Notification.objects.get(id=id)
     
     # Mark the notification as seen
-    notification.seen = True
+    notification.Seen = True
     notification.save()
     if 'unseen_count' in request.session:
         request.session['unseen_count'] = max(0, request.session.get('unseen_count', 0) - 1)
@@ -259,10 +259,16 @@ def mark_notification_as_seen(request, id):
 def poster(request):
     if request.method=='POST':
         message=request.POST.get('message')
-        notification=Notification(message=message)
+        name=request.POST.get('name')
+        title=request.POST.get('title')
+        notification=Notification(
+            Message=message,
+            Name=name,
+            Title=title
+            )
         notification.save()
     notifications = Notification.objects.all()
-    unseen_count = Notification.objects.filter(seen=False).count()
+    unseen_count = Notification.objects.filter(Seen=False).count()
     return render(request,'admin_dash/write-notifications.html',{'notifications':notifications,
                                                    'unseen_count':unseen_count})
 
@@ -317,21 +323,21 @@ def logout_view(request):
     return redirect(reverse('user_log'))
 def approve_departure(request):
     notifications = Notification.objects.all()
-    unseen_count = Notification.objects.filter(seen=False).count()
+    unseen_count = Notification.objects.filter(Seen=False).count()
     unapproved = Discharge.objects.filter(Approval=False, Status='Completed', Reffer_to__isnull=False)
     return render(request,'admin_dash/discharge_approval.html',{'notifications':notifications,
                                                                 'unseen_count':unseen_count,
                                                                 'unapproved':unapproved})
 def dis_service(request):
     notifications = Notification.objects.all()
-    unseen_count = Notification.objects.filter(seen=False).count()
+    unseen_count = Notification.objects.filter(Seen=False).count()
     services = ServicePayment.objects.all()
     return render(request,'admin_dash/services.html',{'notifications':notifications,
                                                                 'unseen_count':unseen_count,
                                                                 'services':services})
 def add_service(request):
     notifications = Notification.objects.all()
-    unseen_count = Notification.objects.filter(seen=False).count()
+    unseen_count = Notification.objects.filter(Seen=False).count()
     if request.method=='POST':
         service_name=request.POST.get('service_name')
         service_cost=request.POST.get('scost')
@@ -347,7 +353,7 @@ def add_service(request):
                                                                 })
 def edit_service(request,service):
     notifications = Notification.objects.all()
-    unseen_count = Notification.objects.filter(seen=False).count()
+    unseen_count = Notification.objects.filter(Seen=False).count()
     services = get_object_or_404(ServicePayment, Services=service)
     if request.method=='POST':
         service_name=request.POST.get('service_name')
@@ -411,7 +417,7 @@ def createUserAccount(request):
         # Redirect to account list after account creation
         return render(request, 'admin_dash/add_staff.html',{'created':created})
     notifications = Notification.objects.all()
-    unseen_count = Notification.objects.filter(seen=False).count()
+    unseen_count = Notification.objects.filter(Seen=False).count()
     return render(request, 'admin_dash/add_staff.html',{'notifications':notifications,
                                                    'unseen_count':unseen_count})
 def dis_login2(request):
@@ -430,7 +436,7 @@ def dis_dash(request):
     number_of_lab= Laboratory.objects.count()
     notifications = Notification.objects.all()
 
-    unseen_count = Notification.objects.filter(seen=False).count()
+    unseen_count = Notification.objects.filter(Seen=False).count()
     unseen_feedbacks = Feedback.objects.filter(Is_seen=False)
     unseen_feedbacks_count = Feedback.objects.filter(Is_seen=False).count()
     cash_total_sums = PaymentModel.objects.filter(Pay_method='Cash').aggregate(total_sum=Sum('Total'))
@@ -471,7 +477,7 @@ def dis_dash_content(request):
 # @login_required
 def refere_info(request,discharge_no,patient_id):
     notifications = Notification.objects.all()
-    unseen_count = Notification.objects.filter(seen=False).count()
+    unseen_count = Notification.objects.filter(Seen=False).count()
     patient_info = get_object_or_404( PatientRegister,patient_id=patient_id)
     disch = get_object_or_404(Discharge, Discharge_no=discharge_no)
     history = PatientHistory.objects.filter(Patient_ID=patient_info.patient_id)
@@ -495,7 +501,7 @@ def dis_index(request):
     number_of_Presc= Prescription.objects.count()
     number_of_lab= Laboratory.objects.count()
     notifications = Notification.objects.all()
-    unseen_count = Notification.objects.filter(seen=False).count()
+    unseen_count = Notification.objects.filter(Seen=False).count()
     unseen_feedbacks = Feedback.objects.filter(Is_seen=False)
     unseen_feedbacks_count = Feedback.objects.filter(Is_seen=False).count()
     cash_total_sums = PaymentModel.objects.filter(Pay_method='Cash').aggregate(total_sum=Sum('Total'))
@@ -539,7 +545,7 @@ def display_users(request):
             }
             combined_data.append(user_dict)
     notifications = Notification.objects.all()
-    unseen_count = Notification.objects.filter(seen=False).count()
+    unseen_count = Notification.objects.filter(Seen=False).count()
     return render(request, 'admin_dash/staffs.html', {'combined_datas': combined_data,
                                                        'notifications': notifications,
                                                        'unseen_count': unseen_count})
@@ -547,7 +553,7 @@ def display_users(request):
 # @login_required
 def dis_user_registration(request):
     notifications = Notification.objects.all()
-    unseen_count = Notification.objects.filter(seen=False).count()
+    unseen_count = Notification.objects.filter(Seen=False).count()
     return render(request,'admin_dash/add-staff.html',{'notifications':notifications,
                                                     'unseen_count':unseen_count})
 def dis_web_home(request):
@@ -559,7 +565,7 @@ def view_staff(request,user_id):
     user = get_object_or_404(User, pk=user_id)
     user_profile_info = get_object_or_404(UserProfileInfo, user_id=user_id)
     notifications = Notification.objects.all()
-    unseen_count = Notification.objects.filter(seen=False).count()
+    unseen_count = Notification.objects.filter(Seen=False).count()
     return render(request,'admin_dash/view_staff.html',{'users':user,
                                                         'user_profile_info':user_profile_info,
                                                         'notifications':notifications,

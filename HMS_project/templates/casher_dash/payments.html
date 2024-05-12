@@ -145,7 +145,8 @@
                                             <td>Card</td>
                                             {% elif payment.Lab_payment %}
                                             <td>Laboratory</td>
-                                       
+                                       {% else %}
+									   <td>None</td>
                                             {% endif %}
                                              
                                             <td>{{payment.Total}}</td>
