@@ -325,7 +325,9 @@ def dis_vitals(request):
 def nurse_dash(request):
     notifications = Notification.objects.all()
     unseen_count = Notification.objects.filter(Seen=False).count()
-
+    room_info = Rooms.objects.exclude(Status='Occupied').count()
+    bed_info = Rooms.objects.exclude(Status='Occupied').count()
+    bed_occupied = Rooms.objects.filter(Status='Occupied').count()
 
     # Retrieve PatientHistory objects for the current nurse user
     patients_history = PatientHistory.objects.filter(Nurse_ID=request.user)
@@ -347,11 +349,17 @@ def nurse_dash(request):
         }
         patients_info.append(patient_info)
     return render(request,'nurse_dash/nurse_dash.html',{'notifications':notifications,
+                                                       'room_info':room_info,
+                                                       'bed_info':bed_info,
+                                                       'bed_occupied':bed_occupied,
                                                        'unseen_count':unseen_count,
                                                        'patients_info':patients_info})
 def dis_nurse_dash_content(request):
     notifications = Notification.objects.all()
     unseen_count = Notification.objects.filter(Seen=False).count()
+    room_info = Rooms.objects.exclude(Status='Occupied').count()
+    bed_info = Rooms.objects.exclude(Status='Occupied').count()
+    bed_occupied = Rooms.objects.filter(Status='Occupied').count()
       # Retrieve PatientHistory objects for the current nurse user
     patients_history = PatientHistory.objects.filter(Nurse_ID=request.user)
 
@@ -373,4 +381,7 @@ def dis_nurse_dash_content(request):
         patients_info.append(patient_info)
     return render(request,'nurse_dash/dash_content.html',{'notifications':notifications,
                                                        'unseen_count':unseen_count,
+                                                        'room_info':room_info,
+                                                       'bed_info':bed_info,
+                                                       'bed_occupied':bed_occupied,
                                                        'patients_info':patients_info})

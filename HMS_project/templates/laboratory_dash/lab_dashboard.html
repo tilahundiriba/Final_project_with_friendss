@@ -258,52 +258,14 @@
                           </div>
                         </div>
                         <!-- /Page Title -->
-                        <!-- /Breadcrumb -->
+
                         <!-- Main Content -->
                         <div class="container home">
                           <div class="row">
+
+                        
                             <!-- Widget Item -->
-                            <div class="col-md-4">
-                              <div class="widget-area proclinic-box-shadow color-red">
-                                <div class="widget-left">
-                                  <span class="ti-user"></span>
-                                </div>
-                                <div class="widget-right">
-                                  <h4 class="wiget-title text-success">Total Patients</h4>
-                                  <span class="numeric color-red">54</span>
-                                  
-                                  <p class="inc-dec mb-0"><span class="ti-angle-up"></span> +20% Increased</p>
-                                </div>
-                              </div>
-                            </div>
-                            <!-- /Widget Item -->
-                            <!-- Widget Item -->
-                            <div class="col-md-4">
-                              <div class="widget-area proclinic-box-shadow color-green">
-                                <div class="widget-left">
-                                  <span class="ti-timer"></span>
-                                </div>
-                                <div class="widget-right">
-                                  <h4 class="wiget-title text-success">Total Appointments </h4>
-                                  <span class="numeric color-green">53</span>
-                                  <p class="inc-dec mb-0"><span class="ti-angle-down"></span> +15% Increased</p>
-                                </div>
-                              </div>
-                            </div>
-                            <!-- /Widget Item -->
-                            <!-- Widget Item -->
-                            <div class="col-md-4">
-                              <div class="widget-area proclinic-box-shadow color-yellow">
-                                <div class="widget-left">
-                                  <span class="ti-wallet"></span>
-                                </div>
-                                <div class="widget-right">
-                                  <h4 class="wiget-title text-success">Total Revenue</h4>
-                                  <span class="numeric color-yellow">$435</span>
-                                  <p class="inc-dec mb-0"><span class="ti-angle-up"></span> +10% Increased</p>
-                                </div>
-                              </div>
-                            </div>
+                           
                             <div class="col-md-4">
                               <div class="widget-area proclinic-box-shadow color-red">
                                 <div class="widget-left">
@@ -311,10 +273,9 @@
                                 </div>
                               
                                 <div class="widget-right">
-                                  <h4 class="wiget-title text-success">Total Prescriptions</h4>
-                                  <span class="numeric color-red">52</span>
+                                  <h4 class="wiget-title text-success">Remaning Test Unpayed And Untested</h4>
+                                  <span class="numeric color-red">{{unpayed_count}}</span>
                                   
-                                  <p class="inc-dec mb-0"><span class="ti-angle-up"></span> +20% Increased</p>
                                 </div>
                               </div>
                             </div>
@@ -326,9 +287,8 @@
                                   <span class="ti-bookmark-alt"></span>
                                 </div>
                                 <div class="widget-right">
-                                  <h4 class="wiget-title text-success">Total Histories</h4>
-                                  <span class="numeric color-green">53</span>
-                                  <p class="inc-dec mb-0"><span class="ti-angle-down"></span> +15% Increased</p>
+                                  <h4 class="wiget-title text-success">Remaning Test Payed And Untested</h4>
+                                  <span class="numeric color-green">{{payed_count}}</span>
                                 </div>
                               </div>
                             </div>
@@ -342,7 +302,7 @@
                                 <div class="widget-right">
                                   <h4 class="wiget-title text-success">Total Laboratories</h4>
                                   <span class="numeric color-yellow">35</span>
-                                  <p class="inc-dec mb-0"><span class="ti-angle-up"></span> +10% Increased</p>
+
                                 </div>
                               </div>
                             </div>
