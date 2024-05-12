@@ -15,7 +15,25 @@
 	{% block 'title' %}
 	<title>Vital Info List</title>
 	{% endblock %}
-
+	<script>
+		// Function to toggle delete button visibility
+		function toggleDeleteButton() {
+			var deleteButton = document.getElementById("deleteButton");
+			var checkboxes = document.querySelectorAll("input[type='checkbox']");
+			var checked = false;
+			checkboxes.forEach(function(checkbox) {
+				if (checkbox.checked) {
+					checked = true;
+				}
+			});
+			deleteButton.style.display = checked ? "inline-block" : "none";
+		}
+	
+		// Function to confirm delete
+		function confirmDelete() {
+			return confirm("Are you sure you want to delete selected items?");
+		}
+	</script>
 </head>
 
 <body>
@@ -69,7 +87,8 @@
 								<table id="tableId" class="table table-bordered table-striped">
 									<thead>
 										<tr>
-										
+											<th>select</th>
+
 											<th>Patient ID </th>
 											<th>Heart Rate</th>
 											<th>Blood Pressure</th>
@@ -85,7 +104,10 @@
                                     <tbody>
 										{% for vital in vitals %}
                                         <tr>
-                                          
+											<td><div class="custom-control custom-checkbox">
+												<input class="custom-control-input" type="checkbox" id="{{vital.Patient_id}}" onclick="toggleDeleteButton()">
+												<label class="custom-control-label" for="{{vital.Patient_id}}"></label>
+											</div></td>
                                             <td>{{vital.Patient_id}}</td>
                                             <td>{{vital.H_rate}}</td>
                                             <td>{{vital.B_pressure}}</td>
@@ -94,7 +116,13 @@
                                             <td>{{vital.Oxy_satu}}</td>
                                             <td>{{vital.B_gluc_level}}</td>
                                            
-                                            
+                                            <td style="display: none;" id="deleteButton">
+												{% if request.user.userprofileinfo.role == 'admin' %}
+												<a href="{% url 'delete_vital' vital.Patient_id %}" class="btn btn-outline-danger" onclick="return confirmDelete();">
+													<span class="ti-trash"></span>DELETE
+												</a>
+												{% endif %}
+											</td>
                                         
                                         </tr>
                                       
@@ -106,8 +134,9 @@
                                 <table id="tableId" class="table table-bordered table-striped">
 									<thead>
 										<tr>
-										
-										
+											<th>select</th>
+
+											<th>Patient ID </th>
 											<th>Pain Level</th>
 											<th>Weight</th>
 											<th>Height</th>
@@ -124,7 +153,11 @@
 										{% for vital in vitals %}
                                         <tr>
                                           
-                                    
+											<td><div class="custom-control custom-checkbox">
+												<input class="custom-control-input" type="checkbox" id="{{vital.Patient_id}}" onclick="toggleDeleteButton()">
+												<label class="custom-control-label" for="{{vital.Patient_id}}"></label>
+											</div></td>
+											<td>{{vital.Patient_id}}</td>
                                             <td>{{vital.Pain_level}}</td>
                                             <td>{{vital.Weight}}</td>
                                             <td>{{vital.Height}}</td>
@@ -133,12 +166,13 @@
                                             <td>{{vital.Remark}}</td>
                                             <td>{{vital.D_record}}</td>
                                             
-                                            <td>
+											<td style="display: none;" id="deleteButton">
 												{% if request.user.userprofileinfo.role == 'admin' %}
-												<button type="button" class="btn btn-danger mt-3 mb-0"><span class="ti-trash"></span>
-													DELETE</button>
-													{% endif %}
-                                            </td>
+												<a href="{% url 'delete_vital' vital.Patient_id %}" class="btn btn-outline-danger" onclick="return confirmDelete();">
+													<span class="ti-trash"></span>DELETE
+												</a>
+												{% endif %}
+											</td>
                                         </tr>
                                       
                                      {% endfor %}

@@ -38,6 +38,8 @@ from reportlab.lib import colors
 from django.shortcuts import render, get_object_or_404
 from .models import User, UserProfileInfo,Feedback,Report
 from .models import Notification
+from doctor_app.models import Laboratory
+
 # views.py
 from datetime import datetime
 from django.shortcuts import render
@@ -54,6 +56,61 @@ def delete_medication(request, med_no):
         # Redirect to a success page or back to the medications list
     return redirect('medications')
 
+def delete_labratory(request, lab_number):
+    # Retrieve the medication object
+    laboratory = Laboratory.objects.get(Lab_number=lab_number)
+        # Delete the medication
+    laboratory.delete()
+        # Redirect to a success page or back to the medications list
+    return redirect('delete_labratory')
+
+def delete_patient(request, patientid):
+    # Retrieve the medication object
+    patientRegister = PatientRegister.objects.get(patient_id=patientid)
+        # Delete the medication
+    patientRegister.delete()
+        # Redirect to a success page or back to the medications list
+    return redirect('delete_patient')  
+
+def delete_vital(request, patientid):
+    # Retrieve the medication object
+    vitalInformation = VitalInformation.objects.get(patient_id=patientid)
+        # Delete the medication
+    vitalInformation.delete()
+        # Redirect to a success page or back to the medications list
+    return redirect('delete_vital') 
+
+def delete_appointment(request, app_number):
+    # Retrieve the medication object
+    appointment = Appointment.objects.get(App_number=app_number)
+        # Delete the medication
+    appointment.delete()
+        # Redirect to a success page or back to the medications list
+    return redirect('delete_appointment') 
+
+def delete_history(request, patient_idh):
+    # Retrieve the medication object
+    patientHistory = PatientHistory.objects.get(Patient_ID=patient_idh)
+        # Delete the medication
+    patientHistory.delete()
+        # Redirect to a success page or back to the medications list
+    return redirect('delete_history') 
+
+def delete_prescription(request, prec_no):
+    # Retrieve the medication object
+    prescription = Prescription.objects.get(Prec_number=prec_no)
+        # Delete the medication
+    prescription.delete()
+        # Redirect to a success page or back to the medications list
+    return redirect('delete_prescription')  
+
+def delete_discharge(request, dis_num):
+    # Retrieve the medication object
+    prescription = Prescription.objects.get(Discharge_no=dis_num)
+        # Delete the medication
+    prescription.delete()
+        # Redirect to a success page or back to the medications list
+    return redirect('delete_discharge') 
 
 # @login_required
 def dis_appointment(request):

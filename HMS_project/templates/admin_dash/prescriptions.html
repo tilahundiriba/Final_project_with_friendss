@@ -9,7 +9,25 @@
 <!-- Mirrored from www.konnectplugins.com/proclinic/Horizontal/patients.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 24 Jan 2022 10:42:01 GMT -->
 
 <head>
-
+	<script>
+		// Function to toggle delete button visibility
+		function toggleDeleteButton() {
+			var deleteButton = document.getElementById("deleteButton");
+			var checkboxes = document.querySelectorAll("input[type='checkbox']");
+			var checked = false;
+			checkboxes.forEach(function(checkbox) {
+				if (checkbox.checked) {
+					checked = true;
+				}
+			});
+			deleteButton.style.display = checked ? "inline-block" : "none";
+		}
+	
+		// Function to confirm delete
+		function confirmDelete() {
+			return confirm("Are you sure you want to delete selected items?");
+		}
+	</script>
 </head>
 
 <body>
@@ -64,7 +82,8 @@
 								<table id="tableId" class="table table-bordered table-striped">
 									<thead>
 										<tr>
-									
+											<th>select</th>
+
 											<th>Patient ID</th>
 											<th>Patient Name</th>
 											<th>Doctor ID</th>
@@ -77,7 +96,11 @@
 									<tbody>
 										{% for pres in prescriptions %}
 										<tr>
-									
+											<td>
+												<div class="custom-control custom-checkbox">
+													<input class="custom-control-input" type="checkbox" id="{{pres.Prec_number}}" onclick="toggleDeleteButton()">
+													<label class="custom-control-label" for="{{pres.Prec_number}}"></label>
+												</div></td>
 											<td>{{pres.PatientID}}</td>
 											<td>{{pres.Patient_full_name}}</td>
 											<td>{{pres.Doctor_ID}}</td>
@@ -85,12 +108,12 @@
 											<td>{{pres.Prec_date}}</td>
 						
 
-											<td>
+											<td style="display: none;" id="deleteButton">
 												{% if request.user.userprofileinfo.role == 'admin' %}
-												<button type="button" class="btn btn-danger mt-3 mb-0"><span class="ti-trash"></span>
-													DELETE</button>
-													{% endif %}
-										
+												<a href="{% url 'delete_prescription' pres.Prec_number %}" class="btn btn-outline-danger" onclick="return confirmDelete();">
+													<span class="ti-trash"></span>DELETE
+												</a>
+												{% endif %}
 											</td>
 										</tr>
 										{% endfor %}

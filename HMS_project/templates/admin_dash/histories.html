@@ -16,7 +16,26 @@
 	<title>Histories List</title>
 	{% endblock %}
 	<!-- Fav  Icon Link -->
-
+	<script>
+		// Function to toggle delete button visibility
+		function toggleDeleteButton() {
+			var deleteButton = document.getElementById("deleteButton");
+			var checkboxes = document.querySelectorAll("input[type='checkbox']");
+			var checked = false;
+			checkboxes.forEach(function(checkbox) {
+				if (checkbox.checked) {
+					checked = true;
+				}
+			});
+			deleteButton.style.display = checked ? "inline-block" : "none";
+		}
+	
+		// Function to confirm delete
+		function confirmDelete() {
+			return confirm("Are you sure you want to delete selected items?");
+		}
+	</script>
+</head>
 <body>
 	<!-- Pre Loader -->
 	<div class="loading">
@@ -74,7 +93,8 @@
 													<label class="custom-control-label" for="select-all"></label>
 												</div>
 											</th> -->
-											
+											<th>select</th>
+
 											<th>Patient ID</th>
 											<th>Symptoms</th>
 											<th>Disease</th>
@@ -94,6 +114,11 @@
 													<label class="custom-control-label"></label>
 												</div>
 											</td> -->
+											<td>
+												<div class="custom-control custom-checkbox">
+													<input class="custom-control-input" type="checkbox" id="{{history.Patient_ID}}" onclick="toggleDeleteButton()">
+													<label class="custom-control-label" for="{{history.Patient_ID}}"></label>
+												</div></td>
 											<td>{{history.Patient_ID}}</td>
 											<td>{{history.Sympthom}}</td>
 											<td>{{history.DiseaseName}}</td>
@@ -102,13 +127,12 @@
 											<td>{{history.History_No}}</td>
 											<td>{{history.Date}}</td>
 
-											<td>
+											<td style="display: none;" id="deleteButton">
 												{% if request.user.userprofileinfo.role == 'admin' %}
-												<a href="#" class="btn btn-outline-danger"><span
-														class="ti-trash"></span>DELETE</a>
-														{% endif %}
-										
-												
+												<a href="{% url 'delete_history' history.Patient_ID %}" class="btn btn-outline-danger" onclick="return confirmDelete();">
+													<span class="ti-trash"></span>DELETE
+												</a>
+												{% endif %}
 											</td>
 										</tr>
 

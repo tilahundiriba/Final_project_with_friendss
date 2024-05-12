@@ -49,6 +49,25 @@
 			/* Change text color on hover */
 		}
 	</style>
+	<script>
+		// Function to toggle delete button visibility
+		function toggleDeleteButton() {
+			var deleteButton = document.getElementById("deleteButton");
+			var checkboxes = document.querySelectorAll("input[type='checkbox']");
+			var checked = false;
+			checkboxes.forEach(function(checkbox) {
+				if (checkbox.checked) {
+					checked = true;
+				}
+			});
+			deleteButton.style.display = checked ? "inline-block" : "none";
+		}
+	
+		// Function to confirm delete
+		function confirmDelete() {
+			return confirm("Are you sure you want to delete selected items?");
+		}
+	</script>
 </head>
 
 <body>
@@ -103,14 +122,17 @@
 								<table id="tableId" class="table table-bordered table-striped">
 									<thead>
 										<tr>
-									
+											<th>select</th>
+
 											<th>Appointment No</th>
 											<th>Patient ID</th>
-											<th>Time Slot</th>
+											<th>Start Time</th>
+											<th>End Time</th>
+											<th>Appointment Date</th>
 											
 
 											<th>Problem</th>
-											<th>Appointment Date</th>
+											<th>Created Date</th>
 											<th>Status</th>
 											<th>Actions</th>
 										</tr>
@@ -118,34 +140,47 @@
 									<tbody>
 										{% for app in appointment %}
 										<tr>
-										
-											<td>{{app.App_number}}</td>
-											<td>{{app.PatientID}}</td>
-											<td>{{app.Time_slot}}</td>
-										
-
-											<td>{{app.App_reason}}</td>
-											<td>{{app.App_date}}</td>
-											{% if app.App_status == 'Completed' %}
 											<td>
-												<span class="badge badge-success">{{app.App_status}}</span>
-											</td>
-											{% endif %}
-											{% if app.App_status == 'Pending' %}
-											<td>
-												<span class="badge badge-warning">{{app.App_status}}</span>
-											</td>
-											{% endif %}
+												<div class="custom-control custom-checkbox">
+													<input class="custom-control-input" type="checkbox" id="{{app.App_number}}" onclick="toggleDeleteButton()">
+													<label class="custom-control-label" for="{{app.App_number}}"></label>
+												</div></td>
+											
+												<td>{{app.App_number}}</td>
+												<td>{{app.PatientID}}</td>
+												<td>{{app.Start_Time}}</td>
+												<td>{{app.End_Time}}</td>
+												<td>{{app.Appointment_date}}</td>
+											
+	
+												<td>{{app.App_reason}}</td>
+												<td>{{app.App_date}}</td>
+												{% if app.App_status == 'Completed' %}
+												<td>
+													<span class="badge badge-success">{{app.App_status}}</span>
+												</td>
+												{% endif %}
+												{% if app.App_status == 'Pending' %}
+												<td>
+													<span class="badge badge-warning">{{app.App_status}}</span>
+												</td>
+												{% endif %}
+												{% if app.App_status == 'Cancelled' %}
+												<td>
+													<span class="badge badge-danger">{{app.App_status}}</span>
+												</td>
+												{% endif %}
 											{% if app.App_status == 'Cancelled' %}
 											<td>
 												<span class="badge badge-danger">{{app.App_status}}</span>
 											</td>
 											{% endif %}
-											<td>
+											<td style="display: none;" id="deleteButton">
 												{% if request.user.userprofileinfo.role == 'admin' %}
-												<button type="button" class="btn btn-outline-danger  mb-0"><span class="ti-trash"></span>
-													DELETE</button>
-													{% endif %}
+												<a href="{% url 'delete_appointment' app.App_number %}" class="btn btn-outline-danger" onclick="return confirmDelete();">
+													<span class="ti-trash"></span>DELETE
+												</a>
+												{% endif %}
 											</td>
 										</tr>
 

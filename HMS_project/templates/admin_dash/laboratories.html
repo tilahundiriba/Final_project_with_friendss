@@ -16,7 +16,26 @@
 	<title>Lab Result List</title>
 	{% endblock %}
 	<!-- Fav  Icon Link -->
-
+	<script>
+		// Function to toggle delete button visibility
+		function toggleDeleteButton() {
+			var deleteButton = document.getElementById("deleteButton");
+			var checkboxes = document.querySelectorAll("input[type='checkbox']");
+			var checked = false;
+			checkboxes.forEach(function(checkbox) {
+				if (checkbox.checked) {
+					checked = true;
+				}
+			});
+			deleteButton.style.display = checked ? "inline-block" : "none";
+		}
+	
+		// Function to confirm delete
+		function confirmDelete() {
+			return confirm("Are you sure you want to delete selected items?");
+		}
+	</script>
+</head>
 <body>
 	<!-- Pre Loader -->
 	<div class="loading">
@@ -69,7 +88,7 @@
 									<thead>
 										<tr>
 									
-									
+											<th>select</th>
 											<th>Patient ID</th>
 											<th>Lab. Type</th>
                                             <th>Lab Results</th>
@@ -83,20 +102,23 @@
 									<tbody>
 										{% for lab in lab_results %}
 										<tr>
-									
+											<td>
+											<div class="custom-control custom-checkbox">
+												<input class="custom-control-input" type="checkbox" id="{{lab.Lab_number}}" onclick="toggleDeleteButton()">
+												<label class="custom-control-label" for="{{lab.Lab_number}}"></label>
+											</div></td>
 											<td>{{lab.PatientID}}</td>
 											<td>{{lab.Lab_type}}</td>
                                             <td>{{lab.Lab_result}}</td>
 											<td>{{lab.Technician_ID}}</td>
 											
 											<td>{{lab.Admit_date}}</td>
-											<td>
-										{% if request.user.userprofileinfo.role == 'admin' %}
-											<a href="#" class="btn btn-outline-danger  mb-0"><span
-														class="ti-trash"></span>DELETE</a>
-										{% endif %}
-
-											
+											<td style="display: none;" id="deleteButton">
+												{% if request.user.userprofileinfo.role == 'admin' %}
+												<a href="{% url 'delete_labratory' lab.Lab_number  %}" class="btn btn-outline-danger" onclick="return confirmDelete();">
+													<span class="ti-trash"></span>DELETE
+												</a>
+												{% endif %}
 											</td>
 										</tr>
 

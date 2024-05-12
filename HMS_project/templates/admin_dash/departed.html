@@ -15,7 +15,25 @@
     <title>Discharge</title>
     {% endblock %}
     <!-- Fav  Icon Link -->
-
+	<script>
+		// Function to toggle delete button visibility
+		function toggleDeleteButton() {
+			var deleteButton = document.getElementById("deleteButton");
+			var checkboxes = document.querySelectorAll("input[type='checkbox']");
+			var checked = false;
+			checkboxes.forEach(function(checkbox) {
+				if (checkbox.checked) {
+					checked = true;
+				}
+			});
+			deleteButton.style.display = checked ? "inline-block" : "none";
+		}
+	
+		// Function to confirm delete
+		function confirmDelete() {
+			return confirm("Are you sure you want to delete selected items?");
+		}
+	</script>
 </head>
 
 <body>
@@ -69,12 +87,8 @@
                                 <table id="tableId" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
-                                            <th class="no-sort">
-                                                <div class="custom-control custom-checkbox">
-                                                    <input class="custom-control-input" type="checkbox" id="select-all">
-                                                    <label class="custom-control-label" for="select-all"></label>
-                                                </div>
-                                            </th>
+                                            <th>select</th>
+
                                             <th>Patient ID</th>
                                             <th>Reason</th>
                                             <th>Reffere to</th>
@@ -90,11 +104,10 @@
                                         {% for discharge in discharges %}
                                         <tr>
                                             <td>
-                                                <div class="custom-control custom-checkbox">
-                                                    <input class="custom-control-input" type="checkbox" id="1">
-                                                    <label class="custom-control-label" for="1"></label>
-                                                </div>
-                                            </td>
+												<div class="custom-control custom-checkbox">
+													<input class="custom-control-input" type="checkbox" id="{{discharge.Discharge_no}}" onclick="toggleDeleteButton()">
+													<label class="custom-control-label" for="{{discharge.Discharge_no}}"></label>
+												</div></td>
                                             <td>{{discharge.patient_id}}</td>
                                             <td>{{discharge.reason}}</td>
                                             <td>{{discharge.referred_to}}</td>
@@ -103,11 +116,13 @@
                                             <td>{{discharge.bed_payment}}</td>
                                             <td>{{discharge.departure_date}}</td>
                                            
-                                            <td>   {% if request.user.userprofileinfo.role == 'admin' %}
-                                                <button type="button" class="btn btn-outline-danger mb-0"><span class="ti-trash"></span>
-                                                    DELETE</button>
-                                                    {% endif %}
-                                            </td> 
+                                            <td style="display: none;" id="deleteButton">
+												{% if request.user.userprofileinfo.role == 'admin' %}
+												<a href="{% url 'delete_discharge' discharge.Discharge_no %}" class="btn btn-outline-danger" onclick="return confirmDelete();">
+													<span class="ti-trash"></span>DELETE
+												</a>
+												{% endif %}
+											</td>
                                             
                                         </tr>
                                         {% endfor %}

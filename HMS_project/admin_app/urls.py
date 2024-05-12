@@ -46,6 +46,16 @@ urlpatterns = [
     path('view_staff/<int:user_id>/', views.view_staff, name='view_staff'),
     path('deactivate/<int:user_id>/', views.deactivate, name='deactivate'),
     path('delete_medication/<int:med_no>/', views.delete_medication, name='delete_medication'),
+    path('delete_labratory/<int:lab_number>/', views.delete_labratory, name='delete_labratory'),
+    path('delete_patient/<str:patientid>/', views.delete_patient, name='delete_patient'),
+    path('delete_vital/<str:patientid>/', views.delete_vital, name='delete_vital'),
+    path('delete_appointment/<int:app_number>/', views.delete_appointment, name='delete_appointment'),
+    path('delete_history/<str:patient_idh>/', views.delete_history, name='delete_history'),
+    path('delete_prescription/<int:prec_no>/', views.delete_prescription, name='delete_prescription'),
+    path('delete_discharge/<int:dis_num>/', views.delete_discharge, name='delete_discharge'),
+
+
+
     
 ] 
 

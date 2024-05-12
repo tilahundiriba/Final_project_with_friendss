@@ -52,7 +52,25 @@
 			/* Change text color on hover */
 		}
 	</style>
-
+	<script>
+		// Function to toggle delete button visibility
+		function toggleDeleteButton() {
+			var deleteButton = document.getElementById("deleteButton");
+			var checkboxes = document.querySelectorAll("input[type='checkbox']");
+			var checked = false;
+			checkboxes.forEach(function(checkbox) {
+				if (checkbox.checked) {
+					checked = true;
+				}
+			});
+			deleteButton.style.display = checked ? "inline-block" : "none";
+		}
+	
+		// Function to confirm delete
+		function confirmDelete() {
+			return confirm("Are you sure you want to delete selected items?");
+		}
+	</script>
 </head>
 
 <body>
@@ -118,6 +136,7 @@
 											<tr>
 										
 											
+												<th>select</th>
 
 												<th>Patient ID</th>
 												<th>First Name</th>
@@ -144,8 +163,11 @@
 										<tbody>
 											{% for patient in patients %}
 											<tr>
-										
-											
+												<td>
+													<div class="custom-control custom-checkbox">
+														<input class="custom-control-input" type="checkbox" id="{{patient.patient_id}}" onclick="toggleDeleteButton()">
+														<label class="custom-control-label" for="{{patient.patient_id}}"></label>
+													</div></td>
 												<td>{{patient.patient_id}}</td>
 												<td>{{patient.first_name}}</td>
 												<td>{{patient.middle_name}}</td>
@@ -164,11 +186,12 @@
 												<td>{{patient.receptinist_name}}</td>
 											
 
-												<td>
+												<td style="display: none;" id="deleteButton">
 													{% if request.user.userprofileinfo.role == 'admin' %}
-													<button type="button" class="btn btn-outline-danger mb-0"><span class="ti-trash"></span>
-														DELETE</button>
-														{% endif %}
+													<a href="{% url 'delete_patient' patient.patient_id %}" class="btn btn-outline-danger" onclick="return confirmDelete();">
+														<span class="ti-trash"></span>DELETE
+													</a>
+													{% endif %}
 												</td>
 												{% endfor %}
 											</tr>
