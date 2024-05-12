@@ -186,10 +186,20 @@ DESIGNATED_ADMIN_USERNAME = 'admin'
 #     }
 # }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE':'django.db.backends.postgresql',
+#         'NAME':'Hospital',
+#         'USER':'postgres',    
+#         'PASSWORD':'211',
+#         'HOST':'localhost',
+#         'PORT':'5432',
+#     }
+# }
 DATABASES = {
     'default': {
         'ENGINE':'django.db.backends.postgresql',
-        'NAME':'Hospital',
+        'NAME':'sha',
         'USER':'postgres',    
         'PASSWORD':'211',
         'HOST':'localhost',
@@ -216,16 +226,16 @@ DATABASES = {
 #    }
 # }
 # 
-DATABASES = {
-    'default': {
-        'ENGINE':'django.db.backends.postgresql',
-        'NAME':'mgmg',
-        'USER':'postgres',
-        'PASSWORD':'362588',
-        'HOST':'localhost',
-        'PORT':'5432',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE':'django.db.backends.postgresql',
+#         'NAME':'mgmg',
+#         'USER':'postgres',
+#         'PASSWORD':'362588',
+#         'HOST':'localhost',
+#         'PORT':'5432',
+#     }
+# }
 
 
 # Password validation
