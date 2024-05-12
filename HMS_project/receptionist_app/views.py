@@ -48,7 +48,7 @@ def doctor_list(request):
 @login_required
 def rece_profile(request):
     notifications = Notification.objects.all()
-    unseen_count = Notification.objects.filter(seen=False).count()
+    unseen_count = Notification.objects.filter(Seen=False).count()
     user = request.user
     return render(request, 'receptionist_dash/profile.html', {'user': user,
                                                               'notifications':notifications,
@@ -57,7 +57,7 @@ def rece_profile(request):
 @login_required
 def rece_profile_update(request, user_id):
     notifications = Notification.objects.all()
-    unseen_count = Notification.objects.filter(seen=False).count()
+    unseen_count = Notification.objects.filter(Seen=False).count()
     user = get_object_or_404(User, pk=user_id)
     if request.user != user:  # Ensure user can only update their own profile
         return redirect('show_rece_profile')
@@ -79,13 +79,13 @@ def rece_profile_update(request, user_id):
 
 def receptionist_dash(request):
     notifications = Notification.objects.all()
-    unseen_count = Notification.objects.filter(seen=False).count()
+    unseen_count = Notification.objects.filter(Seen=False).count()
     return render(request,'receptionist_dash/receptionist_dash.html',{
                                                               'notifications':notifications,
                                                               'unseen_count':unseen_count})
 def receptionist_dash_content(request):
     notifications = Notification.objects.all()
-    unseen_count = Notification.objects.filter(seen=False).count()
+    unseen_count = Notification.objects.filter(Seen=False).count()
     return render(request,'receptionist_dash/dash_content.html',{
                                                               'notifications':notifications,
                                                               'unseen_count':unseen_count})
@@ -94,7 +94,7 @@ def add_patient(request):
     doctors = User.objects.filter(userprofileinfo__role='doctor')
     recep = User.objects.filter(userprofileinfo__role='receptionist')
     notifications = Notification.objects.all()
-    unseen_count = Notification.objects.filter(seen=False).count()
+    unseen_count = Notification.objects.filter(Seen=False).count()
     register=False
     doctor_ids = PatientHistory.objects.values_list('Doctor_ID', flat=True).distinct()
 
@@ -194,9 +194,9 @@ def add_patient(request):
             phone_number = '+251' + phone_number[1:]
 
         # Twilio credentials
-        account_sid = 'AC853cc8d20b814ed3b23041aab29acec4'
-        auth_token = 'f3d400b45cf9e9a461e3cd14ad51716c'
-        twilio_number = '+19474652604'
+        account_sid = 'ACfa34a64a48ac610545ce9cee8c70bb15'
+        auth_token = 'a4c42e61f3487ad86f7bea242dbacb07'
+        twilio_number = '+14844984613'
 
         # Initialize Twilio client
         client = Client(account_sid, auth_token)
@@ -224,7 +224,7 @@ def add_patient(request):
                                                               'doctors_with_specialty':doctors_with_specialty})  # Render the form template initially
 def check_patient_data(request):
     notifications = Notification.objects.all()
-    unseen_count = Notification.objects.filter(seen=False).count()
+    unseen_count = Notification.objects.filter(Seen=False).count()
     patient_count = cache.get('patient_count', 0)
     patients = PatientRegister.objects.filter(is_checked=False)
     return render(request, 'doctor/unchecked_patient.html', {'patients': patients 
@@ -249,7 +249,7 @@ def check_patient(request, patient_id):
 def existing_patient(request):
     
     notifications = Notification.objects.all()
-    unseen_count = Notification.objects.filter(seen=False).count()
+    unseen_count = Notification.objects.filter(Seen=False).count()
     form=False
     if request.method == 'POST':
         doctors = User.objects.filter(userprofileinfo__role='doctor')
@@ -298,7 +298,7 @@ def delete_patient(request):
                                                                })
 def dis_patient(request):
     notifications = Notification.objects.all()
-    unseen_count = Notification.objects.filter(seen=False).count()
+    unseen_count = Notification.objects.filter(Seen=False).count()
     patients = PatientRegister.objects.all()
     return render(request,'receptionist_dash/patients.html', {'patients':patients
                                                               ,
@@ -306,14 +306,14 @@ def dis_patient(request):
                                                               'unseen_count':unseen_count})
 def about_patient(request,patient_id):
     notifications = Notification.objects.all()
-    unseen_count = Notification.objects.filter(seen=False).count()
+    unseen_count = Notification.objects.filter(Seen=False).count()
     patients = get_object_or_404(PatientRegister, pk=patient_id)
     return render(request, 'receptionist_dash/about-patient.html',{'patients':patients,
                                                                    'notifications':notifications,
                                                                    'unseen_count':unseen_count})  # Render the form template initially
 def edit_patient(request,patient_id):
     notifications = Notification.objects.all()
-    unseen_count = Notification.objects.filter(seen=False).count()
+    unseen_count = Notification.objects.filter(Seen=False).count()
     try:
        patientid = get_object_or_404(PatientRegister, pk=patient_id)
        users= User.objects.all()
@@ -338,8 +338,8 @@ def update_patient(request,patient_id):
    doctor_id = request.POST.get('assidoc')
    rece = request.POST.get('rece_name')
    symptom = request.POST.get('symptom')
-   recept = get_object_or_404(User, first_name=rece)
-   doctor = get_object_or_404(User, first_name=doctor_id)
+   recept = get_object_or_404(User, username=rece)
+   doctor = get_object_or_404(User, username=doctor_id)
    patient = PatientRegister.objects.get(pk=patient_id)
    patient.first_name=first_name
    patient.middle_name=middle_name

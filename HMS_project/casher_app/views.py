@@ -11,7 +11,7 @@ from doctor_app.models import Laboratory
 def profile(request):
     user = request.user
     notifications = Notification.objects.all()
-    unseen_count = Notification.objects.filter(seen=False).count()
+    unseen_count = Notification.objects.filter(Seen=False).count()
     return render(request, 'casher_dash/profile.html', {'user': user,
                                                         'notifications':notifications,
                                                         'unseen_count':unseen_count})
@@ -30,7 +30,7 @@ def casher_profile_update(request, user_id):
         user_profile.save()
         return redirect('show_casher_profile')
     notifications = Notification.objects.all()
-    unseen_count = Notification.objects.filter(seen=False).count()
+    unseen_count = Notification.objects.filter(Seen=False).count()
     return render(request, 'casher_dash/update_profile.html', {'user_id': user_id, 
                                                                'user_profile': user_profile,
                                                                'notifications':notifications,
@@ -41,7 +41,7 @@ def casher_dash(request):
     lab_payment=Laboratory.objects.filter(Is_payed=False).count()
     # card_payment=PatientRegister.objects.filter(is_card=False)
     notifications = Notification.objects.all()
-    unseen_count = Notification.objects.filter(seen=False).count()
+    unseen_count = Notification.objects.filter(Seen=False).count()
     return render(request,'casher_dash/casher_dash.html',{'notifications':notifications,
                                                           'unseen_count':unseen_count,
                                                           'card_payment':card_payment,
@@ -97,7 +97,7 @@ def add_discharge(request):
         return redirect("add-discharge")  # Redirect to the same page after saving
     
     notifications = Notification.objects.all()
-    unseen_count = Notification.objects.filter(seen=False).count()
+    unseen_count = Notification.objects.filter(Seen=False).count()
     
     return render(request, 'casher_dash/add-discharge.html', {
         'cashers': cashers,
@@ -107,7 +107,7 @@ def add_discharge(request):
     })
 def casher_dash_content(request):
     notifications = Notification.objects.all()
-    unseen_count = Notification.objects.filter(seen=False).count()
+    unseen_count = Notification.objects.filter(Seen=False).count()
     card_payment=PatientRegister.objects.filter(is_card=False).count()
     lab_payment=Laboratory.objects.filter(Is_payed=False).count()
     return render(request,'casher_dash/casher_dash_content.html',{'notifications':notifications,
@@ -116,7 +116,7 @@ def casher_dash_content(request):
                                                                   'lab_payment':lab_payment})
 def dis_discharge(request):
     notifications = Notification.objects.all()
-    unseen_count = Notification.objects.filter(seen=False).count()
+    unseen_count = Notification.objects.filter(Seen=False).count()
     discharges = Discharge.objects.all()
     for_food = get_object_or_404(ServicePayment, id=6)
     for_bed = get_object_or_404(ServicePayment, id=8)
@@ -147,7 +147,7 @@ def approve_discharge_request(request, discharge_no):
 def add_payment(request,patient_id):
     notifications = Notification.objects.all()
     patient_pay = get_object_or_404(PatientRegister, patient_id=patient_id)
-    unseen_count = Notification.objects.filter(seen=False).count()
+    unseen_count = Notification.objects.filter(Seen=False).count()
     cashers = User.objects.filter(userprofileinfo__role='casher')
     for_card = get_object_or_404(ServicePayment, id=1)
     for_blood = get_object_or_404(ServicePayment, id=2)
@@ -224,7 +224,7 @@ def add_payment(request,patient_id):
 
 def about_payment(request,pay_number,patient_id):
     notifications = Notification.objects.all()
-    unseen_count = Notification.objects.filter(seen=False).count()
+    unseen_count = Notification.objects.filter(Seen=False).count()
     payments = get_object_or_404(PaymentModel, Pay_number=pay_number)
     patients = get_object_or_404(PatientRegister, patient_id=patient_id)
     return render(request,'casher_dash/about-payment.html',{'notifications':notifications,
@@ -233,14 +233,14 @@ def about_payment(request,pay_number,patient_id):
                                                             'patients':patients})
 def dis_payment(request):
     notifications = Notification.objects.all()
-    unseen_count = Notification.objects.filter(seen=False).count()
+    unseen_count = Notification.objects.filter(Seen=False).count()
     payments = PaymentModel.objects.all()
     return render(request,'casher_dash/payments.html',{'notifications':notifications,
                                                             'unseen_count':unseen_count,
                                                             'payments':payments})
 def invoice(request):
     notifications = Notification.objects.all()
-    unseen_count = Notification.objects.filter(seen=False).count()
+    unseen_count = Notification.objects.filter(Seen=False).count()
     return render(request,'casher_dash/invoice.html',{'notifications':notifications,
                                                             'unseen_count':unseen_count})
 from decimal import Decimal
@@ -253,7 +253,7 @@ def add_payment_for_patient(request, patient_id):
     cashers = User.objects.filter(userprofileinfo__role='casher')
     payment = ServicePayment.objects.values('Payment_method').distinct()
     notifications = Notification.objects.all()
-    unseen_count = Notification.objects.filter(seen=False).count()
+    unseen_count = Notification.objects.filter(Seen=False).count()
     recent_payment = PaymentModel.objects.filter(Patient_id=patient_id).latest('Admit_date')
     recent_discharge = Discharge.objects.filter(Patient_id=patient_id).latest('Departure_date')
     
@@ -298,7 +298,7 @@ def add_payment_for_patient(request, patient_id):
 
 def card_payments(request):
     notifications = Notification.objects.all()
-    unseen_count = Notification.objects.filter(seen=False).count()
+    unseen_count = Notification.objects.filter(Seen=False).count()
     card_payments = PatientRegister.objects.filter(is_card=False)
     paginator = Paginator(card_payments, 4)
     page_number = request.GET.get('page')

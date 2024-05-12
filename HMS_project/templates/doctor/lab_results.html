@@ -62,7 +62,7 @@
             <p><strong style="font-size: large;">Technician Name:&nbsp;</strong>{{ lab_result.Technician_ID}}</p>
           
         
-              <a href="{% url 'add_history' %}" class="btn btn-outline-info mt-3 mb-0"><span class="ti-plus"></span>
+              <a href="{% url 'add_perscription' lab_result.Lab_number %}" class="btn btn-outline-info mt-3 mb-0"><span class="ti-plus"></span>
                 Add Prescription</a>
        
 

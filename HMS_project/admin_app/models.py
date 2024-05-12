@@ -7,13 +7,20 @@ from django.contrib.auth.models import User
 
 # 1. 👇 Add the following line
 class Notification(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)  # Associate each notification with a user
-    message = models.TextField(max_length=500)
-    timestamp = models.DateTimeField(auto_now_add=True)
-    seen = models.BooleanField(default=False)
+    Name = models.TextField(max_length=100)  # Associate each notification with a user
+    Message = models.TextField(max_length=500)
+    Title = models.TextField(max_length=100)
+    Timestamp = models.DateTimeField(auto_now_add=True)
+    Seen = models.BooleanField(default=False)
+class UserNotification(models.Model):
+    Name = models.TextField(max_length=100)  # Associate each notification with a user
+    Message = models.TextField(max_length=500)
+    Title = models.TextField(max_length=100)
+    Timestamp = models.DateTimeField(auto_now_add=True)
+    Seen = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.message
+        return self.Message
 class Feedback(models.Model):
     Name = models.TextField(max_length=100,null=True)
     Email = models.EmailField(max_length=100,null=True)

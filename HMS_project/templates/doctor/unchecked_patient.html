@@ -47,7 +47,7 @@
       {% for patient in patients %}
     
     
-    {% if request.user == patient.doctor_name %}
+ 
       <div class="col-md-6">
         <div class="widget-area proclinic-box-shadow color-red" style="padding: 10px 20px; min-width: 250px;">
 
@@ -60,18 +60,20 @@
             <p><strong style="font-size: large;">&nbsp;&nbsp;Last Name:&nbsp;</strong>{{ patient.last_name}}</p>
             <p><strong style="font-size: large;">&nbsp;&nbsp; Age:&nbsp;</strong>{{ patient.age}}</p>
             <p><strong style="font-size: large;">&nbsp;&nbsp;Doctor Name:&nbsp;</strong>{{ patient.doctor_name}}</p>
-            <form action="{% url 'check_patient' patient.patient_id %}">
-              <button type='submit' class="btn btn-outline-primary mt-3 mb-0 me-4"><span class="ti-check-box"></span>
-                Checked</button>
-              <a href="{% url 'add_history' %}" class="btn btn-outline-info mt-3 mb-0"><span class="ti-plus"></span>
+            {% if patient.is_card == True %}
+            <p><strong style="font-size: large;">&nbsp;&nbsp;Payment Status:&nbsp;</strong><span class="badge badge-success">Completed</span></p>
+          {% else %}
+          <p><strong style="font-size: large;">&nbsp;&nbsp;Payment Status:&nbsp;</strong><span class="badge badge-warning">Pending</span></p>
+           {% endif %}
+              <a href="{% url 'add_history' patient.patient_id %}" class="btn btn-outline-info mt-3 mb-0"><span class="ti-plus"></span>
                 History</a>
-            </form>
+           
 
           </div>
         </div>
       </div>
     
-     {% endif %}
+    
       {% endfor %}
     
     </div>

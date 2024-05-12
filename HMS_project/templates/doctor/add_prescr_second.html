@@ -58,23 +58,23 @@
 					<div class="col-md-12">
 						<div class="widget-area-2 proclinic-box-shadow">
 							<h3 class="widget-title">Add Prescriptions</h3>
-							<form action="{% url 'add_perscription' labs.Lab_number %}" method="post" onsubmit="return validateForm()">
+							<form action="{% url 'add_perscription_second' %}" method="post" onsubmit="return validateForm()">
 								{% csrf_token %}
 								<div class="form-row">
 									<div class="form-group col-md-6">
 										<label for="age">Patient ID</label>
-										<input type="text" placeholder="Patient ID" value="{{ labs.PatientID }}" class="form-control" id="age" name="patient_id">
+										<input type="text" placeholder="Patient ID" class="form-control" id="age" name="patient_id">
 										<div id="patientIdError" class="text-danger"></div>
 									</div>
 									<div class="form-group col-md-6">
 										<label for="patient-name">Patient Name</label>
-										<input type="text" class="form-control"  value="{{ patient_names }}" placeholder="Patient name" id="patient-name" name="name">
+										<input type="text" class="form-control"   placeholder="Patient name" id="patient-name" name="name">
 										<div id="patientNameError" class="text-danger"></div>
 									</div>
 									<div class="form-group col-md-6">
 										<label for="dr_name">Doctor Name</label>
 
-											<input type="text" placeholder="Patient ID" value="{{ labs.Doctor_ID }}" class="form-control" id="dr_name" name="dr_name">
+											<input type="text" placeholder="Patient ID"  class="form-control" id="dr_name" name="dr_name">
 
 										
 										<div id="drNameError" class="text-danger"></div>
