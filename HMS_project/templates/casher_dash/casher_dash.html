@@ -127,9 +127,7 @@
                             Payments
                         </a>
                         <ul id="posts" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
-                            <li class="sidebar-item">
-                                <a href="#" class="sidebar-link">Add Payment</a>
-                            </li>
+                           
                             <li class="sidebar-item">
                                 <a href="{% url 'dis_payment' %}" class="sidebar-link">View Payment</a>
                             </li>
@@ -154,10 +152,6 @@
                             <li class="sidebar-item">
                                 <a href="{% url 'discharges' %}" class="sidebar-link">View Discharge</a>
                             </li>
-                            <li class="sidebar-item">
-                                <a href="#" class="sidebar-link">About Discharge</a>
-                            </li>
-
                         </ul>
                     </li>
                     <li class="sidebar-item">
@@ -474,7 +468,9 @@
           'google_translate_element'
         );
       } 
-    </script>
+
+    </script> 
+
     <script src="{% static 'js2/jquery-3.2.1.min.js' %}"></script>
 	<!-- Popper Library-->
 	<script src="{% static 'js2/popper.min.js' %}"></script>

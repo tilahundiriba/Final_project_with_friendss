@@ -14,27 +14,29 @@
                         Dashboard</a>
                     
                 </li>
+              
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
-                        aria-haspopup="true" aria-expanded="false"><span class="ti-wheelchair"></span>
-                        Profile</a>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="add-patient.html">Add profile </a>
-                        <a class="dropdown-item" href="patients.html">Update profile </a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                    <a class="nav-link dropdown-toggle text-white" data-toggle="dropdown" href="#" role="button"
                         aria-haspopup="true" aria-expanded="false"><span class="ti-wheelchair"></span>
                          Payments</a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#" >Add payment</a>
                         <a class="dropdown-item" href="{% url 'dis_payment' %}">View payments</a>
-                        <a class="dropdown-item" href="#">About Payment</a>
+                        <a class="dropdown-item" href="{% url 'card_payments' %}" >Card Payment</a>
+                        <a class="dropdown-item" href="{% url 'check_payment_request' %}" >Lab payment</a>
+                       
                     </div>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                    <a class="nav-link dropdown-toggle text-white" data-toggle="dropdown" href="#" role="button"
+                        aria-haspopup="true" aria-expanded="false"><span class="ti-wheelchair"></span>
+                        Discharge</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="{% url 'add-discharge' %}">Add Discharge</a>
+                        <a class="dropdown-item" href="{% url 'discharges' %}" >View Discharge</a> 
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-white" data-toggle="dropdown" href="#" role="button"
                         aria-haspopup="true" aria-expanded="false"><span class="ti-wheelchair"></span>
                         Bill</a>
                     <div class="dropdown-menu">
@@ -43,29 +45,12 @@
                     </div>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                    <a class="nav-link dropdown-toggle text-white" data-toggle="dropdown" href="#" role="button"
                         aria-haspopup="true" aria-expanded="false"><span class="ti-wheelchair"></span>
                         Laboratory Payment</a>
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="{% url 'check_payment_request' %}">Lab Payment </a>
-                        <a class="dropdown-item" href="#" >Send Lab Fee </a>
-                        <a class="dropdown-item" href="#" >View Lab Result </a>
                     </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
-                        aria-haspopup="true" aria-expanded="false"><span class="ti-wheelchair"></span>
-                        Notification</a>
-                   
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
-                        aria-haspopup="true" aria-expanded="false"><span class="ti-wheelchair"></span>
-                        Setting</a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="{% url 'show_casher_profile' %}" >Profile</a>
-                            <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
-                        </div>
                 </li>
             </ul>
         </div>

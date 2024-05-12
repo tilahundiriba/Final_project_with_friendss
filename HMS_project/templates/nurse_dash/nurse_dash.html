@@ -131,12 +131,13 @@
                             <li class="sidebar-item">
                                 <a href="{% url 'vital_info' %}" class="sidebar-link">Add Vital Info</a>
                             </li>
-                            <li class="sidebar-item">
-                                <a href="{% url 'dis_patients' %}" class="sidebar-link">View Patients</a>
-                            </li>
+                           
                             <li class="sidebar-item">
                                 <a href="{% url 'dis_vitals' %}" class="sidebar-link">View Information</a>
                             </li>
+                            <li class="sidebar-item">
+                              <a href="{% url 'dis_patients' %}" class="sidebar-link">View Patients</a>
+                          </li>
                         </ul>
                     </li>
                     <li class="sidebar-item">
@@ -186,7 +187,7 @@
                                 <a href="{% url 'allocate_room' %}" class="sidebar-link">Allocate Bed</a>
                             </li>
                             <li class="sidebar-item">
-                                <a href="{% url 'dis_allocate_bed' %}" class="sidebar-link">View Allocate</a>
+                                <a href="{% url 'dis_allocate_bed' %}" class="sidebar-link">View Allocated</a>
                             </li>
                            
                         </ul>
@@ -434,7 +435,7 @@
                
         </div>
     </div>
-    <!-- <script src="http://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <script src="http://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
     <script>
   
       function googleTranslateElementInit() {
@@ -443,7 +444,7 @@
           'google_translate_element'
         );
       } 
-    </script> -->
+    </script> 
     <script src="{% static 'js2/jquery-3.2.1.min.js' %}"></script>
 	<!-- Popper Library-->
 	<script src="{% static 'js2/popper.min.js' %}"></script>

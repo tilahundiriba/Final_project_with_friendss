@@ -34,20 +34,21 @@
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="{% url 'add-appointment' %}">Add Appointment </a>
                         <a class="dropdown-item" href="{% url 'dis-appointment' %}">View Appointment </a>
-                        <a class="dropdown-item" href="#">Edit Appointment </a>
-                        <a class="dropdown-item" href="#">About Appointments </a>
                     </div>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle text-white" data-toggle="dropdown" href="#" role="button"
                         aria-haspopup="true" aria-expanded="false"><span class="ti-wheelchair"></span>
-                        Laboratory</a>
+                        Prescriptions</a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="{% url 'add_lab' %}">Add Lab Test </a>
-                        <a class="dropdown-item" href="{% url 'lab_tests' %}" > View Lab Test</a>
-                        <a class="dropdown-item" href="#" > View Lab Result</a>
+                        <a class="dropdown-item" href="{% url 'add_perscription' %}">Set Prescription </a>
+                    
+                        <a class="dropdown-item" href="{% url 'perscriptions' %}">View Prescription</a>
+                       
                     </div>
+                    
                 </li>
+
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle text-white" data-toggle="dropdown" href="#" role="button"
                             aria-haspopup="true" aria-expanded="false"><span class="ti-wheelchair"></span>
@@ -61,14 +62,20 @@
                         
                     </li>
                 
+
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle text-white" data-toggle="dropdown" href="#" role="button"
                         aria-haspopup="true" aria-expanded="false"><span class="ti-wheelchair"></span>
-                        Notification</a>
-                   
+                        Laboratory</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="{% url 'add_lab' %}">Add Lab Test </a>
+                        <a class="dropdown-item" href="{% url 'lab_tests' %}" > View Lab Test</a>
+                        <a class="dropdown-item" href="{% url 'dis_lab_results' %}" > View Lab Result</a>
+                    </div>
                 </li>
+                 
+                
 
-     
             </ul>
             </ul>
         </div>
