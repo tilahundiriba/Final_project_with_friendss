@@ -175,16 +175,16 @@ DESIGNATED_ADMIN_USERNAME = 'admin'
 #          'PORT':'5432',
    #}}
 
-DATABASES = {
-    'default': {
-        'ENGINE':'django.db.backends.postgresql',
-        'NAME':'test',
-        'USER':'tilish',
-        'PASSWORD':'14241224',
-        'HOST':'localhost',
-        'PORT':'5432',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE':'django.db.backends.postgresql',
+#         'NAME':'test',
+#         'USER':'tilish',
+#         'PASSWORD':'14241224',
+#         'HOST':'localhost',
+#         'PORT':'5432',
+#     }
+# }
 
 # DATABASES = {
 #     'default': {
@@ -197,12 +197,12 @@ DATABASES = {
 #     }
 # }
 
-# DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.sqlite3',
-#        'NAME': BASE_DIR / 'db.sqlite3',  # Adjust the path to your SQLite database file
-#    }
-# }
+DATABASES = {
+   'default': {
+       'ENGINE': 'django.db.backends.sqlite3',
+       'NAME': BASE_DIR / 'db.sqlite3',  # Adjust the path to your SQLite database file
+   }
+}
 # 
 # DATABASES = {
 #     'default': {

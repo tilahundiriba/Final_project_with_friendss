@@ -17,36 +17,12 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle text-white" data-toggle="dropdown" href="#" role="button"
                         aria-haspopup="true" aria-expanded="false"><span class="ti-wheelchair"></span>
-                        Profile</a>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="add-patient.html">Add profile </a>
-                        <a class="dropdown-item" href="patients.html">Update profile </a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle text-white" data-toggle="dropdown" href="#" role="button"
-                        aria-haspopup="true" aria-expanded="false"><span class="ti-wheelchair"></span>
                         Laboratory</a>
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="#">Send Result</a>
-                        <a class="dropdown-item" href="#">View Result</a>
+                        <a class="dropdown-item" href="{% url 'dis_lab_result' %}">View Result</a>
                         <a class="dropdown-item" href="{% url 'check_request' %}">Lab Requests</a>
                     </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle text-white" data-toggle="dropdown" href="#" role="button"
-                        aria-haspopup="true" aria-expanded="false"><span class="ti-wheelchair"></span>
-                        Notification</a>
-                   
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle text-white" data-toggle="dropdown" href="#" role="button"
-                        aria-haspopup="true" aria-expanded="false"><span class="ti-wheelchair"></span>
-                        Setting</a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="{% url 'show_tech_profile' %}"   >Profile</a>
-                            <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
-                        </div>
                 </li>
             </ul>
         </div>
