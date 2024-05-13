@@ -59,7 +59,7 @@ INSTALLED_APPS = [
    'laboratory_app',
        'channels',
        'patient_app',
-       'celery',
+    #    'celery',
 ]
 
 MIDDLEWARE = [
@@ -82,28 +82,28 @@ ROOT_URLCONF = 'HMS_project.urls'
 # Redis broker configuration
 CELERY_BROKER_URL = 'redis://localhost:6379/0'
 CELERY_BROKER_URL = 'amqp://localhost'
-import os
-from celery import Celery
+# import os
+# from celery import Celery
 
-# Set the default Django settings module for the 'celery' program.
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'HMS_project.settings')
+# # Set the default Django settings module for the 'celery' program.
+# os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'HMS_project.settings')
 
-app = Celery('HMS_project')
+# app = Celery('HMS_project')
 
-# Using a string here means the worker doesn't have to serialize
-# the configuration object to child processes.
-app.config_from_object('django.conf:settings', namespace='CELERY')
+# # Using a string here means the worker doesn't have to serialize
+# # the configuration object to child processes.
+# app.config_from_object('django.conf:settings', namespace='CELERY')
 
-# Load task modules from all registered Django app configs.
-app.autodiscover_tasks()
+# # Load task modules from all registered Django app configs.
+# app.autodiscover_tasks()
 
 
-CELERY_BEAT_SCHEDULE = {
-    'send-notification': {
-        'task': 'doctor_app.tasks.send_notification',
-        'schedule': timezone.timedelta(minutes=15),  # Run every 15 minutes
-    },
-}
+# CELERY_BEAT_SCHEDULE = {
+#     'send-notification': {
+#         'task': 'doctor_app.tasks.send_notification',
+#         'schedule': timezone.timedelta(minutes=15),  # Run every 15 minutes
+#     },
+# }
 
 TEMPLATES = [
     {
@@ -178,7 +178,7 @@ DESIGNATED_ADMIN_USERNAME = 'admin'
 # DATABASES = {
 #     'default': {
 #         'ENGINE':'django.db.backends.postgresql',
-#         'NAME':'test',
+#         'NAME':'FinalDatabase',
 #         'USER':'tilish',
 #         'PASSWORD':'14241224',
 #         'HOST':'localhost',
@@ -196,6 +196,7 @@ DESIGNATED_ADMIN_USERNAME = 'admin'
 #         'PORT':'5432',
 #     }
 # }
+
 DATABASES = {
     'default': {
         'ENGINE':'django.db.backends.postgresql',
@@ -206,6 +207,17 @@ DATABASES = {
         'PORT':'5432',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE':'django.db.backends.postgresql',
+#         'NAME':'sha',
+#         'USER':'postgres',    
+#         'PASSWORD':'211',
+#         'HOST':'localhost',
+#         'PORT':'5432',
+#     }
+# }
 
 
 # DATABASES = {

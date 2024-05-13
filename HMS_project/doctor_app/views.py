@@ -70,7 +70,7 @@ def dis_dr_dash(request):
     notifications = Notification.objects.all()
     unseen_count = Notification.objects.filter(Seen=False).count()
     appointment=Appointment.objects.all()
-    app_count=Appointment.objects.filter(Status='Pending').count()
+    app_count=Appointment.objects.filter(App_status='Pending').count()
     patient_count=PatientRegister.objects.filter(is_checked=False,is_card=True).count()
     lab_requests = Laboratory.objects.filter(Is_tested=True,Is_prescriped=False,Is_payed=True).count()
     return render(request,'doctor/dr_dash.html',{

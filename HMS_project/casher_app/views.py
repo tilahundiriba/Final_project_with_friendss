@@ -39,11 +39,14 @@ def casher_profile_update(request, user_id):
 def casher_dash(request):
     card_payment=PatientRegister.objects.filter(is_card=False).count()
     lab_payment=Laboratory.objects.filter(Is_payed=False).count()
-    # card_payment=PatientRegister.objects.filter(is_card=False)
+    card_payment_request=PatientRegister.objects.filter(is_card=False)
+    lab_payment_request=Laboratory.objects.filter(Is_payed=False)
     notifications = Notification.objects.all()
     unseen_count = Notification.objects.filter(Seen=False).count()
     return render(request,'casher_dash/casher_dash.html',{'notifications':notifications,
                                                           'unseen_count':unseen_count,
+                                                          'card_payment_request':card_payment_request,
+                                                          'lab_payment_request':lab_payment_request,
                                                           'card_payment':card_payment,
                                                           'lab_payment':lab_payment})
 from datetime import datetime
@@ -109,9 +112,13 @@ def casher_dash_content(request):
     notifications = Notification.objects.all()
     unseen_count = Notification.objects.filter(Seen=False).count()
     card_payment=PatientRegister.objects.filter(is_card=False).count()
+    lab_payment_request=Laboratory.objects.filter(Is_payed=False)
+    card_payment_request=PatientRegister.objects.filter(is_card=False)
     lab_payment=Laboratory.objects.filter(Is_payed=False).count()
     return render(request,'casher_dash/casher_dash_content.html',{'notifications':notifications,
                                                                   'unseen_count':unseen_count,
+                                                                  'lab_payment_request':lab_payment_request,
+                                                                  'card_payment_request':card_payment_request,
                                                                   'card_payment':card_payment,
                                                                   'lab_payment':lab_payment})
 def dis_discharge(request):

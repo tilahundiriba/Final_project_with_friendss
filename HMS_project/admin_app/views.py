@@ -46,71 +46,101 @@ from django.shortcuts import render
 from django.template.loader import render_to_string
 
 
-from django.shortcuts import redirect
 
-def delete_medication(request, med_no):
-    # Retrieve the medication object
-    medication = Medication.objects.get(Med_no=med_no)
-        # Delete the medication
-    medication.delete()
+
+def registration_years(request):
+    # Get the current year
+    current_year = datetime.now().year
+
+    # Create a list of years from 2022 to the current year
+    years = list(range(2022, current_year + 1))
+
+    # Query the database to count registrations for each year
+    registration_counts = [
+        {
+            'year': year,
+            'count': Appointment.objects.filter(App_date__year=year).count()  # Replace YourModel and date_of_registration with your actual model and field names
+        }
+        for year in years
+    ]
+    context= {'registration_counts':registration_counts}
+    return JsonResponse({'registration_years': registration_counts})
+
+def delete_medication(request):
+    if 'delete' in request.POST:
+        # Handle deletion of selected employees
+        med_delete = request.POST.getlist('med_delete')
+        Medication.objects.filter(Med_no__in=med_delete).delete()
         # Redirect to a success page or back to the medications list
     return redirect('medications')
 
-def delete_labratory(request, lab_number):
-    # Retrieve the medication object
-    laboratory = Laboratory.objects.get(Lab_number=lab_number)
-        # Delete the medication
-    laboratory.delete()
+def delete_labratory(request):
+    if 'delete' in request.POST:
+        # Handle deletion of selected employees
+        lab_delete = request.POST.getlist('lab_delete')
+        Laboratory.objects.filter(Lab_number__in=lab_delete).delete()
         # Redirect to a success page or back to the medications list
-    return redirect('delete_labratory')
 
-def delete_patient(request, patientid):
-    # Retrieve the medication object
-    patientRegister = PatientRegister.objects.get(patient_id=patientid)
-        # Delete the medication
-    patientRegister.delete()
-        # Redirect to a success page or back to the medications list
-    return redirect('delete_patient')  
+    return redirect('laboratories')
 
-def delete_vital(request, patientid):
+def delete_patient(request):
     # Retrieve the medication object
-    vitalInformation = VitalInformation.objects.get(patient_id=patientid)
-        # Delete the medication
-    vitalInformation.delete()
+    if 'delete' in request.POST:
+        # Handle deletion of selected employees
+        patientid = request.POST.getlist('patient_delete')
+        PatientRegister.objects.filter(patient_id__in=patientid).delete()
         # Redirect to a success page or back to the medications list
-    return redirect('delete_vital') 
+    return redirect('patient')  
 
-def delete_appointment(request, app_number):
+def delete_vital(request):
     # Retrieve the medication object
-    appointment = Appointment.objects.get(App_number=app_number)
-        # Delete the medication
-    appointment.delete()
+    if 'delete' in request.POST:
+        # Handle deletion of selected employees
+        vital_no = request.POST.getlist('vital_delete')
+        VitalInformation.objects.filter(Vital_info_no__in=vital_no).delete()
         # Redirect to a success page or back to the medications list
-    return redirect('delete_appointment') 
+    return redirect('vitals') 
 
-def delete_history(request, patient_idh):
-    # Retrieve the medication object
-    patientHistory = PatientHistory.objects.get(Patient_ID=patient_idh)
-        # Delete the medication
-    patientHistory.delete()
+def delete_appointment(request):
+    if 'delete' in request.POST:
+        # Handle deletion of selected employees
+        app_delete = request.POST.getlist('app_delete')
+        Appointment.objects.filter(App_number__in=app_delete).delete()
         # Redirect to a success page or back to the medications list
-    return redirect('delete_history') 
+        return redirect('dis_appointment') 
 
-def delete_prescription(request, prec_no):
+def delete_history(request):
     # Retrieve the medication object
-    prescription = Prescription.objects.get(Prec_number=prec_no)
-        # Delete the medication
-    prescription.delete()
+    if 'delete' in request.POST:
+        # Handle deletion of selected employees
+        his_delete = request.POST.getlist('his_delete')
+        PatientHistory.objects.filter(History_No__in=his_delete).delete()
         # Redirect to a success page or back to the medications list
-    return redirect('delete_prescription')  
+    return redirect('history') 
 
-def delete_discharge(request, dis_num):
-    # Retrieve the medication object
-    prescription = Prescription.objects.get(Discharge_no=dis_num)
-        # Delete the medication
-    prescription.delete()
+def delete_prescription(request):
+    if 'delete' in request.POST:
+        # Handle deletion of selected employees
+        pres_delete = request.POST.getlist('pres_delete')
+        Prescription.objects.filter(Prec_number__in=pres_delete).delete()
         # Redirect to a success page or back to the medications list
-    return redirect('delete_discharge') 
+    return redirect('dis_perscription')  
+def delete_payment(request):
+     # Retrieve the medication object
+    if 'delete' in request.POST:
+        # Handle deletion of selected employees
+        pay_delete = request.POST.getlist('pay_delete')
+        PaymentModel.objects.filter(Pay_number__in=pay_delete).delete()
+        # Redirect to a success page or back to the medications list
+    return redirect('payments')  
+
+def delete_discharge(request):
+    if 'delete' in request.POST:
+        # Handle deletion of selected employees
+        dis_delete = request.POST.getlist('dis_delete')
+        Discharge.objects.filter(Discharge_no__in=dis_delete).delete()
+        # Redirect to a success page or back to the medications list
+    return redirect('departed') 
 
 # @login_required
 def dis_appointment(request):
@@ -174,6 +204,7 @@ def dis_discharge(request):
             'patient_id': discharge.Patient_id,
             'no_days': discharge.No_days,
             'reason': discharge.Reason,
+            'Discharge_no': discharge.Discharge_no,
             'referred_to': discharge.Reffer_to,
             'departure_date': discharge.Departure_date,
             'food_payment': recent_payment.Food_payment if recent_payment else None,
@@ -539,10 +570,26 @@ def dis_dash_content(request):
     insurance_total_sum = insurance_total_sums['total_sum'] or 0
     unseen_feedbacks = Feedback.objects.filter(Is_seen=False)
     unseen_feedbacks_count = Feedback.objects.filter(Is_seen=False).count()
+      # Get the current year
+    current_year = datetime.now().year
+
+    # Create a list of years from 2022 to the current year
+    years = list(range(2022, current_year + 1))
+
+    # Query the database to count registrations for each year
+    registration_counts = [
+        {
+            'year': year,
+            'count': Appointment.objects.filter(App_date__year=year).count()  # Replace YourModel and date_of_registration with your actual model and field names
+        }
+        for year in years
+    ]
+    context= {'registration_counts':registration_counts}
     return render(request,'admin_dash/dash_content.html',{'cash_total_sum':cash_total_sum,
                                                           'insurance_total_sum':insurance_total_sum,
                                                           'unseen_feedbacks':unseen_feedbacks,
-                                                          'unseen_feedbacks_count':unseen_feedbacks_count})
+                                                          'unseen_feedbacks_count':unseen_feedbacks_count,
+                                                          'context':context})
 # @login_required
 def refere_info(request,discharge_no,patient_id):
     notifications = Notification.objects.all()
@@ -580,6 +627,20 @@ def dis_index(request):
     number_of_cancelled= Appointment.objects.filter(App_status='Cancelled').count()
     number_of_pending= Appointment.objects.filter(App_status='Pending').count()
     number_of_completed= Appointment.objects.filter(App_status='Completed').count()
+    current_year = datetime.now().year
+
+    # Create a list of years from 2022 to the current year
+    years = list(range(2022, current_year + 1))
+
+    # Query the database to count registrations for each year
+    registration_counts = [
+        {
+            'year': year,
+            'count': Appointment.objects.filter(App_date__year=year).count()  # Replace YourModel and date_of_registration with your actual model and field names
+        }
+        for year in years
+    ]
+    context= {'registration_counts':registration_counts}
     return render(request,'admin_dash/index.html',{'number_patients':number_of_patient,
                                                    'number_of_app':number_of_app,
                                                    'total_amount':total_sum,
@@ -592,6 +653,7 @@ def dis_index(request):
                                                    'cash_total_sum':cash_total_sum,
                                                    'insurance_total_sum':insurance_total_sum,
                                                    'number_of_lab':number_of_lab,
+                                                   'context':context,
                                                    'number_of_cancelled':number_of_cancelled,
                                                    'number_of_pending':number_of_pending,
                                                    'number_of_completed':number_of_completed,

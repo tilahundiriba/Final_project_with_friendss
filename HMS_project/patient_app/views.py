@@ -43,7 +43,7 @@ def patient_dash(request):
     return render(request,'patient/patient_dash.html')
 def display_feedback(request):
     notifications = Notification.objects.all()
-    unseen_count = Notification.objects.filter(seen=False).count()
+    unseen_count = Notification.objects.filter(Seen=False).count()
     unseen_feedbacks = Feedback.objects.filter(Is_seen=False)
     return render(request,'admin_dash/display_feedback.html',{'unseen_feedbacks':unseen_feedbacks,
                                                               'notifications':notifications,

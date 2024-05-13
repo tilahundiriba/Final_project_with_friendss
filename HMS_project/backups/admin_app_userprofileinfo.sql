@@ -1,0 +1,13 @@
+INSERT INTO "admin_app_userprofileinfo" VALUES ('4','','','False','default.jpg','4');
+INSERT INTO "admin_app_userprofileinfo" VALUES ('2','doctor','Radiology','True','default.jpg','2');
+INSERT INTO "admin_app_userprofileinfo" VALUES ('3','receptionist','Psychiatry','True','default.jpg','3');
+INSERT INTO "admin_app_userprofileinfo" VALUES ('5','casher','Psychiatry','True','default.jpg','6');
+INSERT INTO "admin_app_userprofileinfo" VALUES ('1','nurse','Psychiatry','True','profile_pics/wallpaperflare.com_wallpaper_5_cvY7Kv4.jpg','1');
+INSERT INTO "admin_app_userprofileinfo" VALUES ('6','','','False','default.jpg','8');
+INSERT INTO "admin_app_userprofileinfo" VALUES ('8','technician','Psychiatry','True','default.jpg','10');
+INSERT INTO "admin_app_userprofileinfo" VALUES ('9','','','False','default.jpg','11');
+INSERT INTO "admin_app_userprofileinfo" VALUES ('10','','','False','default.jpg','12');
+INSERT INTO "admin_app_userprofileinfo" VALUES ('11','','','False','default.jpg','13');
+INSERT INTO "admin_app_userprofileinfo" VALUES ('12','nurse','Psychiatry','True','default.jpg','14');
+INSERT INTO "admin_app_userprofileinfo" VALUES ('13','','','False','default.jpg','15');
+INSERT INTO "admin_app_userprofileinfo" VALUES ('7','admin','Psychiatry','True','profile_pics/wallpaperflare.com_wallpaper_5_9xRaem6.jpg','9');

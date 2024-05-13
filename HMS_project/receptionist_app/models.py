@@ -8,7 +8,7 @@ class PatientRegister(models.Model):
     last_name = models.TextField(max_length=100)
     gender = models.TextField(max_length=10)
     birth_date = models.DateField()
-    age = models.IntegerField()
+    age = models.DecimalField(max_digits=3, decimal_places=1)   
     phone_number = models.CharField(max_length=20)
     email = models.EmailField(max_length=100)
     country = models.TextField(max_length=100)
