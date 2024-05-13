@@ -92,9 +92,7 @@
                                             <td>{{alloc.Alloc_date}}</td>
                                          
                                             <td>
-												{% if request.user.userprofileinfo.role == 'admin' %}
-												<a href="#" class="btn btn-outline-danger "><span class="ti-trash"></span>DELETE</a>
-												{% endif %}
+
 												<a href="{% url 'edit_allocations' alloc.Room_id %}" class="btn btn-outline-primary "><span class="ti-pencil-alt"></span>EDIT</a>
 												
                                             </td>

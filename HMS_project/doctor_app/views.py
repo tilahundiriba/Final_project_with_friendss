@@ -6,6 +6,7 @@ from django.shortcuts import get_object_or_404
 from admin_app.models import UserProfileInfo,Notification
 from django.core.cache import cache
 from django.contrib import messages
+from django.http import Http404
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
@@ -117,7 +118,7 @@ def add_lab(request):
         checkbox3 = request.POST.get('ctscan_test') == 'on'
         checkbox4 = request.POST.get('x-ray_test') == 'on'
         lab_type = ''
-
+        
         if checkbox1:
             lab_type += 'Blood '
         if checkbox2:
@@ -147,14 +148,9 @@ def add_lab(request):
             cache.set('request_count', request_count)
             messages.success(request, 'Laboratory test sent successfully.') 
             registered=True
-        except PatientRegister.DoesNotExist:
-            # Handle the case where the patient is not found
-            # You can add appropriate error handling or redirect to an error page
-            pass
-        except UserProfileInfo.DoesNotExist:
-            # Handle the case where the doctor is not found
-            # You can add appropriate error handling or redirect to an error page
-            pass
+        except Http404:
+            messages.error(request, 'Users Does not exist!!')
+            return render(request, 'doctor/add_lab.html')
         return render(request,'doctor/add_lab.html',{'register':registered,'notifications':notifications,
                                                'unseen_count':unseen_count,
                                                'technicians_with_test_counts':technicians_with_test_counts})
@@ -234,16 +230,15 @@ def add_perscription(request,lab_number):
             labs.Is_prescriped=True
             labs.save()
             registered=True
-        except PatientRegister.DoesNotExist:
-            # Handle the case where the patient is not found
-            # You can add appropriate error handling or redirect to an error page
-            pass
-        except UserProfileInfo.DoesNotExist:
-            # Handle the case where the doctor is not found
-            # You can add appropriate error handling or redirect to an error page
-            pass
-        # return redirect('add-appointment') 
-        return redirect('dis_lab_results')
+            return redirect('dis_lab_results')
+        except Http404:
+            messages.error(request, 'Users Does not exist!!')
+            return render(request,'doctor/add-perscription.html',{'doctors':doctors,
+                                                          'notifications':notifications,
+                                                          'labs':labs,
+                                                          'patient_names':patient_names.first_name + ' ' + patient_names.middle_name,
+                                                'unseen_count':unseen_count}) 
+        
     return render(request,'doctor/add-perscription.html',{'doctors':doctors,
                                                           'notifications':notifications,
                                                           'labs':labs,
@@ -274,16 +269,14 @@ def add_perscription_second(request):
             )
             presc.save()
             registered=True
-        except PatientRegister.DoesNotExist:
-            # Handle the case where the patient is not found
-            # You can add appropriate error handling or redirect to an error page
-            pass
-        except UserProfileInfo.DoesNotExist:
-            # Handle the case where the doctor is not found
-            # You can add appropriate error handling or redirect to an error page
-            pass
-        # return redirect('add-appointment') 
-        return redirect('perscriptions')
+            return redirect('perscriptions')
+        except Http404:
+            messages.error(request, 'Users Does not exist!!')
+            return render(request,'doctor/add_prescr_second.html',{'doctors':doctors,
+                                                          'notifications':notifications,
+                                                          'registered':registered,
+                                                'unseen_count':unseen_count}) 
+        
     return render(request,'doctor/add_prescr_second.html',{'doctors':doctors,
                                                           'notifications':notifications,
                                                           'registered':registered,
@@ -311,13 +304,15 @@ def edit_perscription(request, prec_number):
             prescription.Patient_full_name = p_name
             prescription.Precscriptions = prec
             prescription.save()
-            
-        except PatientRegister.DoesNotExist:
-            pass
-        except User.DoesNotExist:
-            pass
-
-        return redirect('perscriptions')  # Redirect after processing POST data
+            return redirect('perscriptions')
+        except Http404:
+            messages.error(request, 'Users Does not exist!!')
+            return render(request, 'doctor/edit-perscription.html', {
+            'users': users,
+            'notifications': notifications,
+            'unseen_count': unseen_count,
+            'prescriptions': prescription  # Pass prescription as a list for rendering
+        })
 
     return render(request, 'doctor/edit-perscription.html', {
         'users': users,
@@ -377,7 +372,6 @@ def edit_appointment(request, app_number):
         app_reseon = request.POST.get('problem')
         app_date = request.POST.get('app_date')
         app_status = request.POST.get('app_status')
-        # app_date_parsed = datetime.strptime(app_date, '%Y-%m-%d').date()
         patient = get_object_or_404(PatientRegister, patient_id=patientid)
         doctor = get_object_or_404(User, username=doctor_name)
         
@@ -393,13 +387,13 @@ def edit_appointment(request, app_number):
             appointments.Doctor_ID = doctor
             appointments.App_status = app_status
             appointments.save()
-        except ValueError:
-            # Handle the case where the input string is not in the correct format
-            pass
-        
-       
-        
-        return redirect('dis-appointment')
+            return redirect('dis-appointment')
+        except Http404:
+            messages.error(request, 'Users or Patient Does not exist!!')
+            return render(request, 'doctor/edit-appointment.html', {'notifications': notifications,
+                                                             'unseen_count': unseen_count,
+                                                             'doctors': doctors,
+                                                             'appointments': appointments})
     
     return render(request, 'doctor/edit-appointment.html', {'notifications': notifications,
                                                              'unseen_count': unseen_count,
@@ -459,10 +453,15 @@ def edit_lab_test(request, lab_number):
             lab.save()
 
             return redirect('lab_tests')  # Redirect to lab tests page after successful update
-        except (PatientRegister.DoesNotExist, User.DoesNotExist):
-            # Handle the case where the patient or user is not found
-            # You can add appropriate error handling or redirect to an error page
-            pass
+        except Http404:
+            messages.error(request, 'Users or Patient Does not exist!!')
+            return render(request, 'doctor/edit_lab_test.html', {
+        'labs': lab,
+        'notifications': notifications,
+        'unseen_count': unseen_count,
+        'doctors': doctors,
+        'techs': techs
+    })
 
     return render(request, 'doctor/edit_lab_test.html', {
         'labs': lab,
@@ -524,16 +523,11 @@ def add_history(request, patient_id):
             patient_count = cache.get('patient_count', 0)
             patient_count -= 1
             cache.set('patient_count', patient_count)
-            
-        except PatientRegister.DoesNotExist:
-            # Handle the case where the patient is not found
-            pass
-        except UserProfileInfo.DoesNotExist:
-            # Handle the case where the doctor is not found
-            pass
-        
-        return redirect('check_patient_data')
-    
+            return redirect('check_patient_data')
+        except Http404:
+            messages.error(request, 'Users or Patient Does not exist!!')
+            return render(request, 'doctor/add_history.html', {'doctors': doctors, 'nurses': nurses, 'notifications': notifications,
+                                                       'unseen_count': unseen_count, 'patients': patients})
     return render(request, 'doctor/add_history.html', {'doctors': doctors, 'nurses': nurses, 'notifications': notifications,
                                                        'unseen_count': unseen_count, 'patients': patients})
 
@@ -549,15 +543,18 @@ def update_history(request, history_no):
         doctor = get_object_or_404(User, username=doctor_name)
         nurse = get_object_or_404(User, username=nurse_name)
         patient = get_object_or_404( PatientRegister,patient_id=patient_id)
-
-        history.Patient_ID= patient
-        history.Sympthom = symptoms
-        history.DiseaseName = disease
-        history.Nurse_ID= nurse
-        history.Doctor_ID = doctor
-        history.Date = date
-        history.save()
-        return redirect('dis_history')  # Redirect to a success URL
+        try:
+            history.Patient_ID= patient
+            history.Sympthom = symptoms
+            history.DiseaseName = disease
+            history.Nurse_ID= nurse
+            history.Doctor_ID = doctor
+            history.Date = date
+            history.save()
+            return redirect('dis_history')  # Redirect to a success URL
+        except Http404:
+            messages.error(request, 'Users or Patient Does not exist!!')
+            return redirect('dis_history') 
   
 
 @login_required
@@ -578,10 +575,9 @@ def edit_history(request, history_no):
         'notifications': notifications,
         'unseen_count': unseen_count
     })  # Redirect to a success URL
-    except PatientHistory.DoesNotExist:
-            # Handle the case where the user (doctor or nurse) is not found
-            # You can add appropriate error handling or redirect to an error page
-        return redirect('dis_history')
+    except Http404:
+            messages.error(request, 'Users or Patient Does not exist!!')
+            return render(request,'doctor/histories.html')
        
 
 
@@ -599,7 +595,7 @@ def create_appointment(request):
         app_reseon = request.POST.get('problem')
         app_date = request.POST.get('app_date')
         app_status = request.POST.get('app_status')
-     
+        
         # Extract other fields similarly
         try:
         # Create an instance of Appointment model and save it
@@ -620,14 +616,10 @@ def create_appointment(request):
             )
             registered=True
             appointment.save()
-        except PatientRegister.DoesNotExist:
-            # Handle the case where the patient is not found
-            # You can add appropriate error handling or redirect to an error page
-            pass
-        except UserProfileInfo.DoesNotExist:
-            # Handle the case where the doctor is not found
-            # You can add appropriate error handling or redirect to an error page
-            pass
+        except Http404:
+            messages.error(request, 'Users or Patient Does not exist!!')
+            return render(request, 'doctor/add-appointment.html',{'doctors':doctors,'notifications':notifications,
+                                                'unseen_count':unseen_count})
             
         context = {
             'first_name':patient.first_name,
@@ -646,20 +638,13 @@ def create_appointment(request):
         )
         
 
-# Calculate the appointment time one hour before
-        # appointment_datetime = datetime.strptime(app_date + ' ' + time_slot, '%Y-%m-%d %H:%M')
-        # notification_datetime = appointment_datetime - timedelta(hours=1)
-
-        # # Check if the current time is one hour before the notification time
-        # current_datetime = datetime.now()
-
         if phone_number.startswith('0'):
             phone_number = '+251' + phone_number[1:]
 
         # Twilio credentials
-        account_sid = 'AC853cc8d20b814ed3b23041aab29acec4'
-        auth_token = 'f3d400b45cf9e9a461e3cd14ad51716c'
-        twilio_number = '+19474652604'
+        account_sid = 'ACfa34a64a48ac610545ce9cee8c70bb15'
+        auth_token = 'a4c42e61f3487ad86f7bea242dbacb07'
+        twilio_number = '+14844984613'
 
         # Initialize Twilio client
         client = Client(account_sid, auth_token)
@@ -676,22 +661,6 @@ def create_appointment(request):
             return redirect('add-appointment')
         except TwilioRestException as e:
             error_message = f'Twilio Error: {e.msg}'
-            # return HttpResponse(error_message)
-        # if current_datetime == notification_datetime:
-        #    try:
-        # # Send SMS
-        #         message = client.messages.create(
-        #             body=app_notify,
-        #             from_=twilio_number,
-        #             to=phone_number
-        #         )
-
-        #         # Save sent message to database
-        #         return redirect('add-appointment')
-        #    except TwilioRestException as e:
-        #      error_message = f'Twilio Error: {e.msg}'
-            
-       
         return render(request, 'doctor/add-appointment.html',{'registered':registered,'notifications':notifications,
                                                 'unseen_count':unseen_count}) # Redirect to a success page or another URL
 

@@ -110,6 +110,14 @@
 										<!-- Error message for status -->
 										<div id="statusError" class="error"></div>
 									</div>
+									{% if messages %}
+									<ul class="messages">
+										{% for message in messages %}
+										<li{% if message.tags %} class="{{ message.tags }}" {% endif %} style="color: red;">
+											{{message }}</li>
+											{% endfor %}
+									</ul>
+									{% endif %}
 									<div class="form-group col-md-12">
 										<button type="submit" class="btn btn-primary btn-lg">Departed</button>
 									</div>
@@ -156,18 +164,18 @@
 		}
 	
 		// Validate Refer To
-		var referTo = document.getElementById("reffere").value.trim();
-		var referToError = document.getElementById("referToError");
-		if (!referTo) {
-			referToError.innerText = "Refer To cannot be empty";
-			referToError.classList.add("error-message");
-			document.getElementById("reffere").style.borderColor = "red";
-			isValid = false;
-		} else {
-			referToError.innerText = "";
-			referToError.classList.remove("error-message");
-			document.getElementById("reffere").style.borderColor = "green";
-		}
+		// var referTo = document.getElementById("reffere").value.trim();
+		// var referToError = document.getElementById("referToError");
+		// if (!referTo) {
+		// 	referToError.innerText = "Refer To cannot be empty";
+		// 	referToError.classList.add("error-message");
+		// 	document.getElementById("reffere").style.borderColor = "red";
+		// 	isValid = false;
+		// } else {
+		// 	referToError.innerText = "";
+		// 	referToError.classList.remove("error-message");
+		// 	document.getElementById("reffere").style.borderColor = "green";
+		// }
 	
 
         // Validate Status

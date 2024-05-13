@@ -6,6 +6,7 @@
 
 
 <!-- Mirrored from www.konnectplugins.com/proclinic/Horizontal/edit-patient.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 24 Jan 2022 10:42:01 GMT -->
+
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,26 +25,26 @@
 	<div class="wrapper">
 		<!-- Page Content -->
 		<div id="content">
-			
-				<!-- Page Title -->
-				<div class="container mt-0">
-					<div class="row breadcrumb-bar">
-						<div class="col-md-6">
-							<h3 class="block-title">Edit Patient</h3>
-						</div>
-						<div class="col-md-6">
-							<ol class="breadcrumb">
-								<li class="breadcrumb-item">
-									<a href="index.html">
-										<span class="ti-home"></span>
-									</a>
-								</li>
-								<li class="breadcrumb-item">Patients</li>
-								<li class="breadcrumb-item active">Edit Patient</li>
-							</ol>
-						</div>
+
+			<!-- Page Title -->
+			<div class="container mt-0">
+				<div class="row breadcrumb-bar">
+					<div class="col-md-6">
+						<h3 class="block-title">Edit Patient</h3>
+					</div>
+					<div class="col-md-6">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item">
+								<a href="index.html">
+									<span class="ti-home"></span>
+								</a>
+							</li>
+							<li class="breadcrumb-item">Patients</li>
+							<li class="breadcrumb-item active">Edit Patient</li>
+						</ol>
 					</div>
 				</div>
+			</div>
 			<!-- /Page Title -->
 
 			<!-- /Breadcrumb -->
@@ -55,109 +56,131 @@
 					<div class="col-md-12">
 						<div class="widget-area-2 proclinic-box-shadow">
 							<h3 class="widget-title">Edit Patient</h3>
-		<form method="POST" action="{% url 'update_patient' patientid.patient_id %}" >
-    {% csrf_token %}
-    <div class="form-row">
+							<form method="POST" action="{% url 'update_patient' patientid.patient_id %}">
+								{% csrf_token %}
+								<div class="form-row">
 
-		<div class="form-group col-md-6">
-			<label for="patient_id">Patient ID</label>
-			<input type="text" class="form-control" id="patient_id" name="patient_id" value="{{ patientid.patient_id }}">
-		</div>
-        <div class="form-group col-md-6">
-            <label for="first_name">First Name</label>
-            <input type="text" class="form-control" id="first_name" name="first_name" value="{{ patientid.first_name }}">
-        </div>
-        <div class="form-group col-md-6">
-            <label for="middle_name">Middle Name</label>
-            <input type="text" class="form-control" id="middle_name" name="middle_name" value="{{ patientid.middle_name }}">
-        </div>
-        <div class="form-group col-md-6">
-            <label for="last_name">Last Name</label>
-            <input type="text" class="form-control" id="last_name" name="last_name" value="{{patientid.last_name }}">
-        </div>
-		<div class="form-group col-md-6">
+									<div class="form-group col-md-6">
+										<label for="patient_id">Patient ID</label>
+										<input type="text" class="form-control" id="patient_id" name="patient_id"
+											value="{{ patientid.patient_id }}">
+									</div>
+									<div class="form-group col-md-6">
+										<label for="first_name">First Name</label>
+										<input type="text" class="form-control" id="first_name" name="first_name"
+											value="{{ patientid.first_name }}">
+									</div>
+									<div class="form-group col-md-6">
+										<label for="middle_name">Middle Name</label>
+										<input type="text" class="form-control" id="middle_name" name="middle_name"
+											value="{{ patientid.middle_name }}">
+									</div>
+									<div class="form-group col-md-6">
+										<label for="last_name">Last Name</label>
+										<input type="text" class="form-control" id="last_name" name="last_name"
+											value="{{patientid.last_name }}">
+									</div>
+									<div class="form-group col-md-6">
 
-			<label for="birth-date">Date of Birth</label>
-			<input type="date" class="form-control" id="birth-date" name="birth_date">
-		</div>
-        <div class="form-group col-md-6">
-            <label for="age">Age</label>
-            <input type="number" class="form-control" id="age" name="age" value="{{ patientid.age }}">
-        </div>
-    
-    {% comment %} <div class="form-row"> {% endcomment %}
-        <div class="form-group col-md-6">
-            <label for="phone_number">Phone Number</label>
-            <input type="text" class="form-control" id="phone_number" name="phone_number" value="{{ patientid.phone_number }}">
-        </div>
-        <div class="form-group col-md-6">
-            <label for="email">Email</label>
-            <input type="email" class="form-control" id="email" name="email" value="{{ patientid.email }}">
-        </div>
-        <div class="form-group col-md-6">
-            <label for="country">Country</label>
-            <input type="text" class="form-control" id="country" name="country" value="{{ patientid.country }}">
-        </div>
- 
-    {% comment %} <div class="form-row"> {% endcomment %}
-        <div class="form-group col-md-6">
-            <label for="city">City</label>
-            <input type="text" class="form-control" id="city" name="city" value="{{ patientid.city }}">
-        </div>
-        <div class="form-group col-md-6">
-            <label for="region">Region</label>
-            <input type="text" class="form-control" id="region" name="region" value="{{ patientid.region }}">
-        </div>
-        <div class="form-group col-md-6">
-            <label for="kebele">Kebele</label>
-            <input type="text" class="form-control" id="kebele" name="kebele" value="{{ patientid.kebele }}">
-        </div>
-    
-		<div class="form-group col-md-6">
-			<label for="assidoc"> Doctor Name</label>
-			<select class="form-control" id="assidoc" name="doctor_name">
-				<option selected disabled>Select Doctor</option>
-				{% for user in users %}
-					<option value="{{user.username}}">{{user.first_name}}</option>
-				{% endfor %}
-			
-			</select>
-		</div>
-		<div class="form-group col-md-6">
-			<label for="rece_name">Receptionist Name</label>
-				<select class="form-control" id="rece_name" name="rece_name">
-					<option selected disabled >Select Receptionist</option>
-					{% for user in users %}
-					<option value="{{user.username}}">{{user.first_name}}</option>
-				{% endfor %}
-				</select>
-		</div>
-		<div class="form-group col-md-12">
-			<label for="symptom">Symptoms</label>
-			<textarea placeholder="symptom" class="form-control" id="symptom" rows="3" name="symptom">{{ patientid.symptom }}</textarea>
-		</div>
-    <button type="submit" class="btn btn-primary">Update</button>
-</form>
-</div>
-{% if registered %}
-							<!-- Alerts-->
-							<div class="alert alert-success alert-dismissible fade show" role="alert">
-								<strong>Successfully Updated!</strong> Please edit another!!
-								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-									<span aria-hidden="true">×</span>
-								</button>
-							</div>
-							{% endif %}
-							
+										<label for="birth-date">Date of Birth</label>
+										<input type="date" class="form-control" id="birth-date" name="birth_date">
+									</div>
+									<div class="form-group col-md-6">
+										<label for="age">Age</label>
+										<input type="number" class="form-control" id="age" name="age"
+											value="{{ patientid.age }}">
+									</div>
+
+									{% comment %} <div class="form-row"> {% endcomment %}
+										<div class="form-group col-md-6">
+											<label for="phone_number">Phone Number</label>
+											<input type="text" class="form-control" id="phone_number"
+												name="phone_number" value="{{ patientid.phone_number }}">
+										</div>
+										<div class="form-group col-md-6">
+											<label for="email">Email</label>
+											<input type="email" class="form-control" id="email" name="email"
+												value="{{ patientid.email }}">
+										</div>
+										<div class="form-group col-md-6">
+											<label for="country">Country</label>
+											<input type="text" class="form-control" id="country" name="country"
+												value="{{ patientid.country }}">
+										</div>
+
+										{% comment %} <div class="form-row"> {% endcomment %}
+											<div class="form-group col-md-6">
+												<label for="city">City</label>
+												<input type="text" class="form-control" id="city" name="city"
+													value="{{ patientid.city }}">
+											</div>
+											<div class="form-group col-md-6">
+												<label for="region">Region</label>
+												<input type="text" class="form-control" id="region" name="region"
+													value="{{ patientid.region }}">
+											</div>
+											<div class="form-group col-md-6">
+												<label for="kebele">Kebele</label>
+												<input type="text" class="form-control" id="kebele" name="kebele"
+													value="{{ patientid.kebele }}">
+											</div>
+
+											<div class="form-group col-md-6">
+												<label for="assidoc"> Doctor Name</label>
+												<select class="form-control" id="assidoc" name="doctor_name">
+													<option selected disabled>Select Doctor</option>
+													{% for user in users %}
+													<option value="{{user.username}}">{{user.first_name}}</option>
+													{% endfor %}
+
+												</select>
+											</div>
+											<div class="form-group col-md-6">
+												<label for="rece_name">Receptionist Name</label>
+												<select class="form-control" id="rece_name" name="rece_name">
+													<option selected disabled>Select Receptionist</option>
+													{% for user in users %}
+													<option value="{{user.username}}">{{user.first_name}}</option>
+													{% endfor %}
+												</select>
+											</div>
+											<div class="form-group col-md-12">
+												<label for="symptom">Symptoms</label>
+												<textarea placeholder="symptom" class="form-control" id="symptom"
+													rows="3" name="symptom">{{ patientid.symptom }}</textarea>
+											</div>
+											{% if messages %}
+											<ul class="messages">
+												{% for message in messages %}
+												<li{% if message.tags %} class="{{ message.tags }}" {% endif %} style="color: red;">{{
+													message }}</li>
+													{% endfor %}
+											</ul>
+											{% endif %}
+											<button type="submit" class="btn btn-primary">Update</button>
+
+							</form>
+
 						</div>
-					</div>
-					<!-- /Widget Item -->
-				</div>
-			</div>
-			<!-- /Main Content -->
+						{% if registered %}
+						<!-- Alerts-->
+						<div class="alert alert-success alert-dismissible fade show" role="alert">
+							<strong>Successfully Updated!</strong> Please edit another!!
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+								<span aria-hidden="true">×</span>
+							</button>
+						</div>
+						{% endif %}
 
+					</div>
+				</div>
+				<!-- /Widget Item -->
+			</div>
 		</div>
-		<!-- /Page Content -->
+		<!-- /Main Content -->
+
+	</div>
+	<!-- /Page Content -->
 	</div>
 	<!-- Back to Top -->
 	<a id="back-to-top" href="#" class="back-to-top">
@@ -170,5 +193,6 @@
 
 
 <!-- Mirrored from www.konnectplugins.com/proclinic/Horizontal/edit-patient.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 24 Jan 2022 10:42:01 GMT -->
+
 </html>
 {% endblock %}

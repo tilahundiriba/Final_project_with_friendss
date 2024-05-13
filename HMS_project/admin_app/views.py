@@ -22,6 +22,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserChangeForm
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.http import Http404
 from django.shortcuts import render
 from django.http import JsonResponse
 from django.views import View
@@ -226,14 +227,20 @@ def add_report(request):
         name = request.POST.get('name')
         title = request.POST.get('title')
         document = request.FILES.get('report_file')
-        names = get_object_or_404(User, username=name)
+        
+        try:
+            names = get_object_or_404(User, username=name)  
+        except Http404:
+            messages.error(request, 'Users Does not exist!!')
+            return render(request, 'admin_dash/add_report.html')
         report = Report(
-            Name=names,
-            Title=title,
-            Report_file=document
-        )
+                Name=names,
+                Title=title,
+                Report_file=document
+            )
         report.save()
-
+        messages.success(request, 'Report added successfully.')
+        return redirect('add_report')
     return render(request, 'admin_dash/add_report.html')
 
 
@@ -408,11 +415,12 @@ def login_view(request):
                 # else:
                 #     return HttpResponse('Invalid profession for the user')
             except UserProfileInfo.DoesNotExist:
-                return HttpResponse('User does not have a role...!!!')
+                messages.error(request, 'User does not have a role')
+                return render(request, 'admin_dash/login.html')
 
         else:
-            # User authentication failed
-            return HttpResponse('Invalid username or password')
+            messages.error(request, 'Invalid username or password')
+            return render(request, 'admin_dash/login.html')
     else:
         return render(request, 'admin_dash/login.html')
     # return render(request, 'admin_dash/login.html')
@@ -806,6 +814,11 @@ def save_data(request, format):
 def deactivate(request, user_id):
     user_deactive = get_object_or_404(User, id=user_id)
     user_deactive.is_active = False
+    user_deactive.save()
+    return redirect('display_users')
+def activate(request, user_id):
+    user_deactive = get_object_or_404(User, id=user_id)
+    user_deactive.is_active = True
     user_deactive.save()
     return redirect('display_users')
 

@@ -151,7 +151,14 @@
 
 									
 																	
-								
+									{% if messages %}
+									<ul class="messages">
+										{% for message in messages %}
+										<li{% if message.tags %} class="{{ message.tags }}" {% endif %} style="color: red;">
+											{{message }}</li>
+											{% endfor %}
+									</ul>
+									{% endif %}
 									<div class="form-group col-md-12 mb-3">
 										<button type="submit" class="btn btn-primary btn-lg">Submit</button>
 									</div>
@@ -217,13 +224,7 @@
 										<span aria-hidden="true">×</span>
 									</button>
 								</div>
-								{% else %}
-								<div class="alert alert-warning alert-dismissible fade show" role="alert">
-									<strong>Holy guacamole!</strong> You should check in on some of those fields below.
-									<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-										<span aria-hidden="true">×</span>
-									</button>
-								</div>
+							
 								{% endif %}
 							
 						</div>

@@ -7,6 +7,8 @@ from django.contrib.auth.decorators import login_required
 from receptionist_app.models import PatientRegister
 from django.core.paginator import Paginator
 from doctor_app.models import Laboratory
+from django.contrib import messages
+from django.http import Http404
 @login_required
 def profile(request):
     user = request.user
@@ -87,17 +89,13 @@ def add_discharge(request):
             bed = get_object_or_404(Rooms, Bed_no=pt)
             bed.Status = 'Vacant'  # Update status to 'Vacant' or any other value as needed
             bed.save()
-        except PatientRegister.DoesNotExist:
-            # Handle the case where the patient is not found
-            # You can add appropriate error handling or redirect to an error page
-            pass
-        except User.DoesNotExist:
-            # Handle the case where the casher is not found
-            # You can add appropriate error handling or redirect to an error page
-            pass
+            payed = True
+            return redirect("add-discharge")
+        except Http404:
+            messages.error(request, 'Users or Patient Does not exist!!')
+            return render(request, 'casher_dash/add-discharge.html')
         
-        payed = True
-        return redirect("add-discharge")  # Redirect to the same page after saving
+          # Redirect to the same page after saving
     
     notifications = Notification.objects.all()
     unseen_count = Notification.objects.filter(Seen=False).count()
@@ -211,16 +209,17 @@ def add_payment(request,patient_id):
             )
             patient_pay.is_card=True
             patient_pay.save()
-        except PatientRegister.DoesNotExist:
-            # Handle the case where the patient is not found
-            # You can add appropriate error handling or redirect to an error page
-            pass
-        except User.DoesNotExist:
-            # Handle the case where the cashier is not found
-            # You can add appropriate error handling or redirect to an error page
-            pass
-        payed = True
-        return redirect("dis_payment")
+            payed = True
+            return redirect("dis_payment")
+        except Http404:
+            messages.error(request, 'Users Does not exist!!')
+            payment = ServicePayment.objects.values('Payment_method').distinct()
+            return render(request, 'casher_dash/add-payment.html', {'payments': payment,
+                                                            'payed': payed,
+                                                            'cashers': cashers,
+                                                            'patient_pay': patient_pay,
+                                                            'notifications': notifications,
+                                                            'unseen_count': unseen_count})
     payment = ServicePayment.objects.values('Payment_method').distinct()
     return render(request, 'casher_dash/add-payment.html', {'payments': payment,
                                                             'payed': payed,
@@ -276,21 +275,30 @@ def add_payment_for_patient(request, patient_id):
         food_payment = float(request.POST.get('food_payment'))
         bed_payment = float(request.POST.get('bed_payment'))
         payment_type = request.POST.get('payment_type')
-
-        cashername = get_object_or_404(User, username=casher_name)
-        patient_ids = get_object_or_404(PatientRegister, patient_id=patientid)
-
         summation = food_payment + bed_payment + float(recent_payment.Card_payment) + float(recent_payment.Lab_payment)
+        try:
+            cashername = get_object_or_404(User, username=casher_name)
+            patient_ids = get_object_or_404(PatientRegister, patient_id=patientid)
+            recent_payment.Bed_payment = bed_payment
+            recent_payment.Food_payment = food_payment
+            recent_payment.Casher_id = cashername
+            recent_payment.Patient_id = patient_ids
+            recent_payment.payment_type = payment_type
+            recent_payment.Total = Decimal(str(summation))
+            recent_payment.save()
 
-        recent_payment.Bed_payment = bed_payment
-        recent_payment.Food_payment = food_payment
-        recent_payment.Casher_id = cashername
-        recent_payment.Patient_id = patient_ids
-        recent_payment.payment_type = payment_type
-        recent_payment.Total = Decimal(str(summation))
-        recent_payment.save()
-
-        return redirect('discharges')
+            return redirect('discharges')
+        except Http404:
+            messages.error(request, 'Users or Patient Does not exist!!')
+            return render(request, 'casher_dash/departure_payment.html', {
+                'recent_payment': recent_payment,
+                'food_pay': food_pay,
+                'bed_pay': bed_pay,
+                'cashers': cashers,
+                'payment': payment,
+                'notifications': notifications,
+                'unseen_count': unseen_count
+            })
 
     return render(request, 'casher_dash/departure_payment.html', {
         'recent_payment': recent_payment,

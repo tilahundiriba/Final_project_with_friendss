@@ -7,6 +7,7 @@
 
 
 <!-- Mirrored from www.konnectplugins.com/proclinic/Horizontal/add-appointment.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 24 Jan 2022 10:42:01 GMT -->
+
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -30,36 +31,36 @@
 	<div class="wrapper">
 		<!-- Page Content -->
 		<div id="content">
-				<!-- Top Navigation -->
-		
-				<!-- /Top Navigation -->
-				<!-- Menu -->
-				{% include 'doctor/navbar.html' %}
-				<!-- /Menu -->
-				<!-- Breadcrumb -->
-				<!-- Page Title -->
-				<div class="container mt-0">
-					<div class="row breadcrumb-bar">
-						<div class="col-md-6">
-							<h3 class="block-title">Add Appointment</h3>
-						</div>
-						<div class="col-md-6">
-							<ol class="breadcrumb">
-								<li class="breadcrumb-item">
-									<a href="#">
-										<span class="ti-home"></span>
-									</a>
-								</li>
-								<li class="breadcrumb-item">Appointments</li>
-								<li class="breadcrumb-item ">Add Appointment</li>
-							</ol>
-						</div>
+			<!-- Top Navigation -->
+
+			<!-- /Top Navigation -->
+			<!-- Menu -->
+			{% include 'doctor/navbar.html' %}
+			<!-- /Menu -->
+			<!-- Breadcrumb -->
+			<!-- Page Title -->
+			<div class="container mt-0">
+				<div class="row breadcrumb-bar">
+					<div class="col-md-6">
+						<h3 class="block-title">Add Appointment</h3>
+					</div>
+					<div class="col-md-6">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item">
+								<a href="#">
+									<span class="ti-home"></span>
+								</a>
+							</li>
+							<li class="breadcrumb-item">Appointments</li>
+							<li class="breadcrumb-item ">Add Appointment</li>
+						</ol>
 					</div>
 				</div>
+			</div>
 			<!-- /Page Title -->
-	<!-- Top Navigation -->
-	
-	<!-- /Top Navigation -->
+			<!-- Top Navigation -->
+
+			<!-- /Top Navigation -->
 			<!-- /Breadcrumb -->
 			<!-- Main Content -->
 			<div class="container">
@@ -74,7 +75,8 @@
 								<div class="form-row">
 									<div class="form-group col-md-6">
 										<label for="patient-id">Patient ID</label>
-										<input type="text" class="form-control" placeholder="Patient ID" id="patient-id" name="patient_id">
+										<input type="text" class="form-control" placeholder="Patient ID" id="patient-id"
+											name="patient_id">
 										<div id="patientIdError" class="text-danger"></div>
 									</div>
 									<div class="form-group col-md-6">
@@ -89,7 +91,7 @@
 									</div>
 									<div class="form-group col-md-3">
 										<label for="end_time">End Time </label>
-										<input type="time" class="form-control"  id="end_time" name="end_time">
+										<input type="time" class="form-control" id="end_time" name="end_time">
 										<div id="timeSlotError" class="text-danger"></div>
 									</div>
 									<div class="form-group col-md-6">
@@ -114,10 +116,20 @@
 									</div>
 									<div class="form-group col-md-6">
 										<label for="problem">Problem</label>
-										<textarea placeholder="Problem" class="form-control" id="problem" rows="3" name="problem"></textarea>
+										<textarea placeholder="Problem" class="form-control" id="problem" rows="3"
+											name="problem"></textarea>
 										<div id="problemError" class="text-danger"></div>
 									</div>
-									<div class="form-group col-md-6 mb-3">
+									{% if messages %}
+									<ul class="messages">
+										{% for message in messages %}
+										<li{% if message.tags %} class="{{ message.tags }}" {% endif %}
+											style="color: red;">
+											{{message }}</li>
+											{% endfor %}
+									</ul>
+									{% endif %}
+									<div class="form-group col-md-12 mb-3">
 										<button type="submit" class="btn btn-primary btn-lg">Submit</button>
 									</div>
 								</div>
@@ -129,7 +141,7 @@
 									var drName = document.getElementById("dr_name");
 									var appStatus = document.getElementById("app_status");
 									var problem = document.getElementById("problem");
-							
+
 									// Check if patient ID is empty
 									if (patientId.value.trim() === "") {
 										patientId.style.borderColor = "red";
@@ -143,7 +155,7 @@
 										patientId.style.borderColor = "green";
 										document.getElementById("patientIdError").innerText = "";
 									}
-							
+
 									// Check if time slot is selected
 									if (timeSlot.value.trim() === "Choose Time") {
 										timeSlot.style.borderColor = "red";
@@ -153,7 +165,7 @@
 										timeSlot.style.borderColor = "green";
 										document.getElementById("timeSlotError").innerText = "";
 									}
-							
+
 									// Check if doctor name is selected
 									if (drName.value.trim() === "Choose Name") {
 										drName.style.borderColor = "red";
@@ -163,7 +175,7 @@
 										drName.style.borderColor = "green";
 										document.getElementById("drNameError").innerText = "";
 									}
-							
+
 									// Check if appointment status is selected
 									if (appStatus.value.trim() === "Choose Status") {
 										appStatus.style.borderColor = "red";
@@ -173,7 +185,7 @@
 										appStatus.style.borderColor = "green";
 										document.getElementById("appStatusError").innerText = "";
 									}
-							
+
 									// Check if problem is empty
 									if (problem.value.trim() === "") {
 										problem.style.borderColor = "red";
@@ -183,13 +195,13 @@
 										problem.style.borderColor = "green";
 										document.getElementById("problemError").innerText = "";
 									}
-							
+
 									// All fields are valid
 									return true;
 								}
 							</script>
-							
-							
+
+
 							<!-- Alerts-->
 							{% if registered %}
 							<div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -198,7 +210,7 @@
 									<span aria-hidden="true">×</span>
 								</button>
 							</div>
-					
+
 							{% endif %}
 							<!-- /Alerts-->
 						</div>
@@ -222,5 +234,6 @@
 
 
 <!-- Mirrored from www.konnectplugins.com/proclinic/Horizontal/add-appointment.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 24 Jan 2022 10:42:01 GMT -->
+
 </html>
 {% endblock %}

@@ -18,7 +18,7 @@ from django.utils.html import strip_tags
 from HMS_project import settings
 from twilio.rest import Client
 from doctor_app.models import Appointment
-
+from django.http import Http404
 from twilio.base.exceptions import TwilioRestException
 def doctor_list(request):
     # Get all distinct doctor IDs from the PatientHistory model
@@ -137,27 +137,30 @@ def add_patient(request):
         doctor_name = request.POST.get('assidoc')
         symptom = request.POST.get('symptom')
         generated_id = 'SH' + get_random_string(length=6, allowed_chars='1234567890')
-
         recept = get_object_or_404(User, username=recep_name)
         doctor = get_object_or_404(User, username=doctor_name)
-        PatientRegister.objects.create(
-        patient_id=generated_id,
-        first_name=first_name,
-        middle_name=middle_name,
-        last_name=last_name,
-        gender=gender,
-        birth_date=birth_date,
-        age=age,
-        phone_number=phone_number,
-        email=email,
-        country=country,
-        city=city,
-        region=region,
-        kebele=kebele,
-        receptinist_name=recept,
-        doctor_name=doctor,
-        symptom=symptom,
-                )
+        try:
+            PatientRegister.objects.create(
+            patient_id=generated_id,
+            first_name=first_name,
+            middle_name=middle_name,
+            last_name=last_name,
+            gender=gender,
+            birth_date=birth_date,
+            age=age,
+            phone_number=phone_number,
+            email=email,
+            country=country,
+            city=city,
+            region=region,
+            kebele=kebele,
+            receptinist_name=recept,
+            doctor_name=doctor,
+            symptom=symptom,
+                    )
+        except Http404:
+            messages.error(request, 'Users Does not exist!!')
+            return render(request, 'receptionist_dash/add-patient.html')
         username = generate_username(first_name, middle_name)
         password = generate_password()
         login_credencials = 'Hello Customer!\n' + ' Your Username is:' + username  + '\nPassword is:' + password 
@@ -258,16 +261,21 @@ def existing_patient(request):
     if request.method == 'POST':
         doctors = User.objects.filter(userprofileinfo__role='doctor')
         recep = User.objects.filter(userprofileinfo__role='receptionist')
-        patient_id = request.POST.get('patient_id')
-        patient = get_object_or_404(PatientRegister, patient_id=patient_id)
-        form=True
-        return render(request, 'receptionist_dash/existing_patient.html', {'patients': patient,
+        
+        try:
+           patient_id = request.POST.get('patient_id')
+           patient = get_object_or_404(PatientRegister, patient_id=patient_id)
+           form=True
+           return render(request, 'receptionist_dash/existing_patient.html', {'patients': patient,
                                                                            'doctors':doctors,
                                                                            'receps':recep,
                                                                            'form':form
                                                                            ,
                                                               'notifications':notifications,
                                                               'unseen_count':unseen_count})
+        except Http404:
+            messages.error(request, 'Patient Does not exist!!')
+            return render(request, 'receptionist_dash/existing_patient.html')
     return render(request, 'receptionist_dash/existing_patient.html', {'form': form,
                                                               'notifications':notifications,
                                                               'unseen_count':unseen_count})
@@ -324,40 +332,48 @@ def edit_patient(request,patient_id):
        return render(request,'receptionist_dash/edit-patient.html',{'patientid':patientid,'users':users,
                                                                     'notifications':notifications,
                                                                     'unseen_count':unseen_count})
-    except PatientRegister.DoesNotExist:
-       return render(request,'receptionist_dash/edit-patient.html',{'message':'patient  not found'})
+    except Http404:
+       messages.error(request, 'Patient Does not exist!!')
+       return render(request,'receptionist_dash/edit-patient.html')
 
 def update_patient(request,patient_id):
-   first_name = request.POST.get('first_name')
-   middle_name = request.POST.get('middle_name')
-   last_name = request.POST.get('last_name')
-   age = request.POST.get('age')
-   phone_number = request.POST.get('phone_number')
-   email = request.POST.get('email')
-   country = request.POST.get('country')
-   city = request.POST.get('city')
-   region = request.POST.get('region')
-   date = request.POST.get('birth_date')
-   kebele = request.POST.get('kebele')
-   doctor_id = request.POST.get('assidoc')
-   rece = request.POST.get('rece_name')
-   symptom = request.POST.get('symptom')
-   recept = get_object_or_404(User, username=rece)
-   doctor = get_object_or_404(User, username=doctor_id)
-   patient = PatientRegister.objects.get(pk=patient_id)
-   patient.first_name=first_name
-   patient.middle_name=middle_name
-   patient.last_name=last_name
-   patient.age=age
-   patient.phone_number=phone_number
-   patient.email=email
-   patient.country=country
-   patient.city=city
-   patient.region=region
-   patient.birth_date=date
-   patient.kebele=kebele
-   patient.symptom=symptom
-   patient.doctor_name=doctor
-   patient.receptinist_name=recept
-   patient.save()
-   return redirect('dis_patient')
+    first_name = request.POST.get('first_name')
+    middle_name = request.POST.get('middle_name')
+    last_name = request.POST.get('last_name')
+    age = request.POST.get('age')
+    phone_number = request.POST.get('phone_number')
+    email = request.POST.get('email')
+    country = request.POST.get('country')
+    city = request.POST.get('city')
+    region = request.POST.get('region')
+    date = request.POST.get('birth_date')
+    kebele = request.POST.get('kebele')
+    doctor_id = request.POST.get('assidoc')
+    rece = request.POST.get('rece_name')
+    symptom = request.POST.get('symptom')
+    
+    try:
+        recept = get_object_or_404(User, username=rece)
+        doctor = get_object_or_404(User, username=doctor_id)
+        patient = PatientRegister.objects.get(pk=patient_id)
+        patient.first_name=first_name
+        patient.middle_name=middle_name
+        patient.last_name=last_name
+        patient.age=age
+        patient.phone_number=phone_number
+        patient.email=email
+        patient.country=country
+        patient.city=city
+        patient.region=region
+        patient.birth_date=date
+        patient.kebele=kebele
+        patient.symptom=symptom
+        patient.doctor_name=doctor
+        patient.receptinist_name=recept
+        patient.save()
+        return redirect('dis_patient')
+    except Http404:
+        messages.error(request, 'Patient  or User Does not exist!!')
+        return render(request,'receptionist_dash/patients.html')
+    
+    

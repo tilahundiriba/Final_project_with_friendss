@@ -177,7 +177,14 @@
 										</tbody>
 									</table>
 								</form>
-
+								{% if messages %}
+								<ul class="messages">
+									{% for message in messages %}
+									<li{% if message.tags %} class="{{ message.tags }}" {% endif %} style="color: red;">
+									{{message }}</li>
+										{% endfor %}
+								</ul>
+								{% endif %}
 								<!--Export links-->
 								<nav aria-label="Page navigation example">
 									<ul class="pagination justify-content-center export-pagination">
@@ -203,47 +210,7 @@
 	</a>
 	<!-- /Back to Top -->
 
-	<script>
-		// JavaScript code for pagination
-		document.addEventListener('DOMContentLoaded', function () {
-			// Get the table rows and calculate total pages
-			var tableRows = document.querySelectorAll('#mytable tbody tr');
-			var totalPages = Math.ceil(tableRows.length / 5);
 
-			// Generate pagination links
-			var paginationContainer = document.querySelector('.pagination');
-			for (var i = 1; i <= totalPages; i++) {
-				var pageLink = document.createElement('a');
-				pageLink.href = '#';
-				pageLink.textContent = i;
-				pageLink.addEventListener('click', function (event) {
-					event.preventDefault();
-					showPage(parseInt(this.textContent));
-				});
-				paginationContainer.appendChild(pageLink);
-			}
-
-			// Function to show page
-			function showPage(pageNumber) {
-				// Hide all table rows
-				tableRows.forEach(function (row) {
-					row.style.display = 'none';
-				});
-
-				// Calculate start and end indexes for current page
-				var startIndex = (pageNumber - 1) * 5;
-				var endIndex = startIndex + 5;
-
-				// Show table rows for current page
-				for (var i = startIndex; i < endIndex && i < tableRows.length; i++) {
-					tableRows[i].style.display = '';
-				}
-			}
-
-			// Show the first page by default
-			showPage(1);
-		});
-	</script>
 		
 		
 </body>

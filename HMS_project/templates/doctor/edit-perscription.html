@@ -83,6 +83,15 @@
 										<textarea placeholder="Prescription" class="form-control" id="exampleFormControlTextarea1" rows="3" name="prescription">{{prescriptions.Precscriptions}}</textarea>
 										<div id="prescriptionError" class="text-danger"></div>
 									</div>
+									{% if messages %}
+									<ul class="messages">
+										{% for message in messages %}
+										<li{% if message.tags %} class="{{ message.tags }}" {% endif %} style="color: red;">
+											{{
+											message }}</li>
+											{% endfor %}
+									</ul>
+									{% endif %}
 									<div class="form-group col-md-6 mb-3">
 										<button type="submit" class="btn btn-primary btn-lg">Update</button>
 									</div>

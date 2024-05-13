@@ -103,8 +103,15 @@
 										</select>
 										<div id="bedNoError" class="error-text"></div>
 									</div>
-							
-									<div class="form-group col-md-6 mb-3">
+									{% if messages %}
+								<ul class="messages">
+									{% for message in messages %}
+									<li{% if message.tags %} class="{{ message.tags }}" {% endif %} style="color: red;">
+										{{message }}</li>
+										{% endfor %}
+								</ul>
+								{% endif %}
+									<div class="form-group col-md-12 mb-3">
 										<button type="submit" class="btn btn-primary btn-lg">Allocate</button>
 									</div>
 								</div>

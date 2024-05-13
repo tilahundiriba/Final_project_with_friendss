@@ -124,9 +124,7 @@
 												<th>First Name</th>
 												<th>Last Name</th>
 
-												<th>Gender</th>
-
-												<th>Age</th>
+											
 												<th>Phone Number</th>
 
 												<th>Country</th>
@@ -134,7 +132,7 @@
 
 												<th>Kebele</th>
 												<th>Dr Name</th>
-												<th>Rt Name</th>
+												
 												
 												
 
@@ -152,9 +150,9 @@
 												<td>{{patients.middle_name}}</td>
 
 
-												<td>{{patients.gender}}</td>
+										
 
-												<td>{{patients.age}}</td>
+											
 												<td>{{patients.phone_number}}</td>
 
 												<td>{{patients.country}}</td>
@@ -162,7 +160,7 @@
 
 												<td>{{patients.kebele}}</td>
 												<td>{{patients.doctor_name}}</td>
-												<td>{{patients.receptinist_name}}</td>
+												
 											
 
 									
@@ -187,14 +185,14 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {% for lab in labs %}
+                                            
                                             <tr>
                                     
-                                                <td>{{lab.PatientID}}</td>
-                                                <td>{{lab.Lab_type}}</td>
+                                                <td>{{labs.PatientID}}</td>
+                                                <td>{{labs.Lab_type}}</td>
                                             
                                         
-                                                <td>{{lab.Admit_date}}</td>
+                                                <td>{{labs.Admit_date}}</td>
                                                 {%  if lab.Is_tested %}
                                                 <td>
                                                     <span class="badge badge-success">Completed</span>
@@ -210,7 +208,7 @@
                                              
                                             </tr>
     
-                                            {% endfor %}
+                                          
                                         </tbody>
                                     </table>
                                     {% endif %}
@@ -221,43 +219,46 @@
                                         
                                                 <th>Appointment No</th>
                                                 <th>Patient ID</th>
-                                                <th>Time Slot</th>
+                                                <th>Start Time</th>
+                                                <th>End Time</th>
                                                 <th>Appointment Date</th>
     
                                                 <th>Problem</th>
+                                                <th>Dr. Name</th>
                                                 <th>Status</th>
                                               
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {% for app in appointments %}
+                                          
                                             <tr>
                                             
-                                                <td>{{app.App_number}}</td>
-                                                <td>{{app.PatientID}}</td>
-                                                <td>{{app.Time_slot}}</td>
-                                                <td>{{app.App_date}}</td>
-    
-                                                <td>{{app.App_reason}}</td>
-                                                {% if app.App_status == 'Completed' %}
+                                                <td>{{appointments.App_number}}</td>
+                                                <td>{{appointments.PatientID}}</td>
+                                                <td>{{appointments.Start_Time}}</td>
+                                                <td>{{appointments.End_Time}}</td>
+                                                <td>{{appointments.App_date}}</td>
+                                                <td>{{appointments.App_reason}}</td>
+                                                <td>{{appointments.Doctor_ID}}</td>
+                                                {% if appointments.App_status == 'Completed' %}
                                                 <td>
-                                                    <span class="badge badge-success">{{app.App_status}}</span>
+                                                    <span class="badge badge-success">{{appointments.App_status}}</span>
                                                 </td>
                                                 {% endif %}
-                                                {% if app.App_status == 'Pending' %}
+                                                {% if appointments.App_status == 'Pending' %}
                                                 <td>
-                                                    <span class="badge badge-warning">{{app.App_status}}</span>
+                                                    <span class="badge badge-warning">{{appointments.App_status}}</span>
                                                 </td>
                                                 {% endif %}
-                                                {% if app.App_status == 'Cancelled' %}
+                                                {% if appointments.App_status == 'Cancelled' %}
                                                 <td>
-                                                    <span class="badge badge-danger">{{app.App_status}}</span>
+                                                    <span class="badge badge-danger">{{appointments.App_status}}</span>
                                                 </td>
                                                 {% endif %}
                                                
                                             </tr>
     
-                                            {% endfor %}
+                                          
                                         </tbody>
                                     </table>
                                     {% endif %}
@@ -288,47 +289,7 @@
 	</a>
 	<!-- /Back to Top -->
 
-	<script>
-		// JavaScript code for pagination
-		document.addEventListener('DOMContentLoaded', function () {
-			// Get the table rows and calculate total pages
-			var tableRows = document.querySelectorAll('#tableId tbody tr');
-			var totalPages = Math.ceil(tableRows.length / 5);
 
-			// Generate pagination links
-			var paginationContainer = document.querySelector('.pagination');
-			for (var i = 1; i <= totalPages; i++) {
-				var pageLink = document.createElement('a');
-				pageLink.href = '#';
-				pageLink.textContent = i;
-				pageLink.addEventListener('click', function (event) {
-					event.preventDefault();
-					showPage(parseInt(this.textContent));
-				});
-				paginationContainer.appendChild(pageLink);
-			}
-
-			// Function to show page
-			function showPage(pageNumber) {
-				// Hide all table rows
-				tableRows.forEach(function (row) {
-					row.style.display = 'none';
-				});
-
-				// Calculate start and end indexes for current page
-				var startIndex = (pageNumber - 1) * 5;
-				var endIndex = startIndex + 5;
-
-				// Show table rows for current page
-				for (var i = startIndex; i < endIndex && i < tableRows.length; i++) {
-					tableRows[i].style.display = '';
-				}
-			}
-
-			// Show the first page by default
-			showPage(1);
-		});
-	</script>
 		
 		
 </body>

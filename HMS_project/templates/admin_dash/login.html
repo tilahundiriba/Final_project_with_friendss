@@ -7,11 +7,12 @@
 
 
 <!-- Mirrored from www.konnectplugins.com/proclinic/Horizontal/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 24 Jan 2022 10:42:12 GMT -->
+
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	
+
 	<title>Login</title>
 
 	<!-- Fav  Icon Link -->
@@ -55,9 +56,11 @@
 							<form action="{% url 'user_log' %}" method="post" onsubmit="return validateLoginForm()">
 								{% csrf_token %}
 								<!-- form-group -->
+
 								<div class="form-group row">
 									<div class="col-sm-12">
-										<input id="username" name="username" placeholder="Username" class="form-control">
+										<input id="username" name="username" placeholder="Username"
+											class="form-control">
 										<div id="usernameError" class="text-danger"></div>
 									</div>
 								</div>
@@ -65,7 +68,8 @@
 								<!-- form-group -->
 								<div class="form-group row">
 									<div class="col-sm-12">
-										<input type="password" id="password" placeholder="Password" name="password" class="form-control">
+										<input type="password" id="password" placeholder="Password" name="password"
+											class="form-control">
 										<div id="passwordError" class="text-danger"></div>
 									</div>
 								</div>
@@ -78,31 +82,38 @@
 										</div>
 									</div>
 								</div>
-								<!-- /Check Box -->    
-								<!-- Login Button -->            
+								{% if messages %}
+								<ul class="messages">
+									{% for message in messages %}
+									<li{% if message.tags %} class="{{ message.tags }}" {% endif %} style="color: red;">{{ message }}</li>
+										{% endfor %}
+								</ul>
+								{% endif %}
+								<!-- /Check Box -->
+								<!-- Login Button -->
 								<div class="button-btn-block">
-									<input type="submit" class="btn btn-primary btn-lg btn-block" value="Login"/>
+									<input type="submit" class="btn btn-primary btn-lg btn-block" value="Login" />
 								</div>
-								<!-- /Login Button -->    
-								<!-- Links -->    
+								<!-- /Login Button -->
+								<!-- Links -->
 								<div class="auth-footer-text">
 									<small>Forget Password,
 										<a href="{% url 'password_reset' %}">Reset</a> Here</small>
 								</div>
 								<!-- /Links -->
 							</form>
-							
+
 							<script>
 								function validateLoginForm() {
 									var username = document.getElementById("username").value.trim();
 									var password = document.getElementById("password").value.trim();
 									var rememberMe = document.getElementById("rememberMe").checked;
-							
+
 									var usernameError = document.getElementById("usernameError");
 									var passwordError = document.getElementById("passwordError");
-							
+
 									var isValid = true;
-							
+
 									// Check if username is empty
 									if (username === "") {
 										usernameError.innerText = "Username is required";
@@ -112,7 +123,7 @@
 										usernameError.innerText = "";
 										document.getElementById("username").style.borderColor = "green";
 									}
-							
+
 									// Check if password is empty
 									if (password === "") {
 										passwordError.innerText = "Password is required";
@@ -122,11 +133,11 @@
 										passwordError.innerText = "";
 										document.getElementById("password").style.borderColor = "green";
 									}
-							
+
 									return isValid;
 								}
 							</script>
-							
+
 						</div>
 					</div>
 				</div>
@@ -149,5 +160,6 @@
 
 
 <!-- Mirrored from www.konnectplugins.com/proclinic/Horizontal/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 24 Jan 2022 10:42:12 GMT -->
+
 </html>
 {% endblock %}

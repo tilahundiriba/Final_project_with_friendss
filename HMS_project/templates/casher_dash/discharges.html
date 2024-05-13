@@ -69,12 +69,7 @@
                                 <table id="tableId" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
-                                            <th class="no-sort">
-                                                <div class="custom-control custom-checkbox">
-                                                    <input class="custom-control-input" type="checkbox" id="select-all">
-                                                    <label class="custom-control-label" for="select-all"></label>
-                                                </div>
-                                            </th>
+                                     
                                             <th>Patient ID</th>
                                             <th>Reason</th>
                                             <th>Reffere to</th>
@@ -89,12 +84,7 @@
                                     <tbody>
                                         {% for discharge in discharges %}
                                         <tr>
-                                            <td>
-                                                <div class="custom-control custom-checkbox">
-                                                    <input class="custom-control-input" type="checkbox" id="1">
-                                                    <label class="custom-control-label" for="1"></label>
-                                                </div>
-                                            </td>
+                                      
                                             <td>{{discharge.patient_id}}</td>
                                             <td>{{discharge.reason}}</td>
                                             <td>{{discharge.referred_to}}</td>
@@ -117,11 +107,7 @@
                                         
                                     </ul>
                                 </nav>
-                                <!-- /Export links-->
-                                {% if request.user.userprofileinfo.role == 'admin' %}
-                                <button type="button" class="btn btn-danger mt-3 mb-0"><span class="ti-trash"></span>
-                                    DELETE</button>
-                                    {% endif %}
+
                                
                             </div>
                         </div>

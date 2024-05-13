@@ -6,7 +6,8 @@ from receptionist_app.models import PatientRegister
 from.models import Rooms,VitalInformation,Medication,BedAllocation
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-
+from django.http import Http404
+from django.contrib import messages
 @login_required
 def nurse_profile(request):
     notifications = Notification.objects.all()
@@ -51,22 +52,29 @@ def add_medication(request):
         nurse_name = request.POST.get('nurseid')
         remark = request.POST.get('remark')
       
-        patient = get_object_or_404( PatientRegister,patient_id=patient_id)
-        nurse_names = get_object_or_404( User,username=nurse_name)
-        med = Medication(
-            Patient_id=patient,
-            Med_time=med_time,
-            Bed_no=bed_no,
-            Remark=remark,
-            Nurse_name=nurse_names,
-            Drugs=drug,
-           
-        )
-        med.save()
-        registered=True
-        return render(request,'nurse_dash/add_medication.html',{'registered':registered,
-                                                                'nurses':nurses,
-                                                                'notifications':notifications,
+        
+        try:
+            patient = get_object_or_404( PatientRegister,patient_id=patient_id)
+            nurse_names = get_object_or_404( User,username=nurse_name)
+            med = Medication(
+                Patient_id=patient,
+                Med_time=med_time,
+                Bed_no=bed_no,
+                Remark=remark,
+                Nurse_name=nurse_names,
+                Drugs=drug,
+            
+            )
+            med.save()
+            registered=True
+            return render(request,'nurse_dash/add_medication.html',{'registered':registered,
+                                                                    'nurses':nurses,
+                                                                    'notifications':notifications,
+                                                        'unseen_count':unseen_count})
+        except Http404:
+            messages.error(request, 'Users or Patient Does not exist!!')
+            return render(request,'nurse_dash/add_medication.html',{'nurses':nurses,
+                                                            'notifications':notifications,
                                                        'unseen_count':unseen_count})
     return render(request,'nurse_dash/add_medication.html',{'nurses':nurses,
                                                             'notifications':notifications,
@@ -92,15 +100,21 @@ def edit_medication(request,med_no):
         remark = request.POST.get('remark')
         nurse_name = get_object_or_404( User,username=nurse_name)
         patient = get_object_or_404( PatientRegister,patient_id=patient_id)
-    
-        medications.Patient_id=patient
-        medications.Med_time=med_time
-        medications.Bed_no=bed_no
-        medications.Remark=remark
-        medications.Nurse_name=nurse_name
-        medications.Drugs=drug
-        medications.save()
-        return redirect('dis_medication')
+        try:
+            medications.Patient_id=patient
+            medications.Med_time=med_time
+            medications.Bed_no=bed_no
+            medications.Remark=remark
+            medications.Nurse_name=nurse_name
+            medications.Drugs=drug
+            medications.save()
+            return redirect('dis_medication')
+        except Http404:
+            messages.error(request, 'Users or Patient Does not exist!!')
+            return render(request,'nurse_dash/edit_medication.html',{'medications':medications,
+                                                             'users':nurses,
+                                                             'notifications':notifications,
+                                                       'unseen_count':unseen_count})
     return render(request,'nurse_dash/edit_medication.html',{'medications':medications,
                                                              'users':nurses,
                                                              'notifications':notifications,
@@ -124,27 +138,35 @@ def add_vital_info(request):
         bloodglu = request.POST.get('bloodglu')
         nurse_name = request.POST.get('nurseid')
         remark = request.POST.get('remark')
-        patient = get_object_or_404( PatientRegister,patient_id=patient_id)
-        nurse_name = get_object_or_404( User,username=nurse_name)
-        vital = VitalInformation(
-            Patient_id=patient,
-            H_rate=Heart_Rate,
-            B_pressure=bloodpre,
-            Body_temp=bodytemp,
-            Pain_level=painlev,
-            Weight=weight,
-            Height=height,
-            Nurse_id=nurse_name,
-            Oxy_satu=oxysatu,
-            B_gluc_level=bloodglu,
-            R_rate=resRate,
-            Remark=remark,
-        )
-        vital.save()
-        registered=True
-        return render(request,'nurse_dash/add-vital_info.html',{'registered':registered,
-                                                                'notifications':notifications,
-                                                       'unseen_count':unseen_count}) # Redirect to a success page or another URL
+       
+        try:
+            patient = get_object_or_404( PatientRegister,patient_id=patient_id)
+            nurse_name = get_object_or_404( User,username=nurse_name)
+            vital = VitalInformation(
+                Patient_id=patient,
+                H_rate=Heart_Rate,
+                B_pressure=bloodpre,
+                Body_temp=bodytemp,
+                Pain_level=painlev,
+                Weight=weight,
+                Height=height,
+                Nurse_id=nurse_name,
+                Oxy_satu=oxysatu,
+                B_gluc_level=bloodglu,
+                R_rate=resRate,
+                Remark=remark,
+            )
+            vital.save()
+            registered=True
+            return render(request,'nurse_dash/add-vital_info.html',{'registered':registered,
+                                                                    'notifications':notifications,
+                                                        'unseen_count':unseen_count}) 
+        except Http404:
+            messages.error(request, 'Users or Patient Does not exist!!')
+            return render(request,'nurse_dash/add-vital_info.html',{'users':nurses,
+                                                            'notifications':notifications,
+                                                       'unseen_count':unseen_count})
+        # Redirect to a success page or another URL
     return render(request,'nurse_dash/add-vital_info.html',{'users':nurses,
                                                             'notifications':notifications,
                                                        'unseen_count':unseen_count})
@@ -167,22 +189,30 @@ def edit_vital_info(request,vital_info_no):
         bloodglu = request.POST.get('bloodglu')
         nurse_names = request.POST.get('nurseid')
         remark = request.POST.get('remark')
-        patient = get_object_or_404( PatientRegister,patient_id=patient_id)
-        nurse_name = get_object_or_404( User,username=nurse_names)
-        vitals.Patient_id=patient
-        vitals.H_rate=Heart_Rate
-        vitals.B_pressure=bloodpre
-        vitals.Body_temp=bodytemp
-        vitals.Pain_level=painlev
-        vitals.Weight=weight
-        vitals.Height=height
-        vitals.Nurse_id=nurse_name
-        vitals.Oxy_satu=oxysatu
-        vitals.B_gluc_level=bloodglu
-        vitals.R_rate=resRate
-        vitals.Remark=remark
-        vitals.save()
-        return redirect('dis_vitals') # Redirect to a success page or another URL
+        
+        try:
+            patient = get_object_or_404( PatientRegister,patient_id=patient_id)
+            nurse_name = get_object_or_404( User,username=nurse_names)
+            vitals.Patient_id=patient
+            vitals.H_rate=Heart_Rate
+            vitals.B_pressure=bloodpre
+            vitals.Body_temp=bodytemp
+            vitals.Pain_level=painlev
+            vitals.Weight=weight
+            vitals.Height=height
+            vitals.Nurse_id=nurse_name
+            vitals.Oxy_satu=oxysatu
+            vitals.B_gluc_level=bloodglu
+            vitals.R_rate=resRate
+            vitals.Remark=remark
+            vitals.save()
+            return redirect('dis_vitals')
+        except Http404:
+            messages.error(request, 'Users or Patient Does not exist!!')
+            return render(request,'nurse_dash/edit_vitals.html',{'users':nurses,
+                                                            'notifications':notifications,
+                                                       'unseen_count':unseen_count,
+                                                       'vitals':vitals})
     return render(request,'nurse_dash/edit_vitals.html',{'users':nurses,
                                                             'notifications':notifications,
                                                        'unseen_count':unseen_count,
@@ -235,14 +265,20 @@ def edit_allocation(request,room_id):
         room_num = request.POST.get('room-number')
         bed_noo = request.POST.get('bed_no')
         room_type = request.POST.get('room-type')
-        patient = get_object_or_404( PatientRegister,patient_id=patient_id)
-        room_nums = get_object_or_404( Rooms,Room_no=room_num)
-        allocations.Patient_id=patient
-        allocations.Room_num=room_nums
-        allocations.Bed_num=bed_noo
-        allocations.Room_type=room_type
-        allocations.save()
-        return redirect('dis_allocate_bed')
+        
+        try:
+            patient = get_object_or_404( PatientRegister,patient_id=patient_id)
+            room_nums = get_object_or_404( Rooms,Room_no=room_num)
+            allocations.Patient_id=patient
+            allocations.Room_num=room_nums
+            allocations.Bed_num=bed_noo
+            allocations.Room_type=room_type
+            allocations.save()
+            return redirect('dis_allocate_bed')
+        except Http404:
+            messages.error(request, 'Users or Patient Does not exist!!')
+            return render(request,'nurse_dash/edit_allocations.html',{'rooms':allocations,'notifications':notifications,
+                                                       'unseen_count':unseen_count})
     return render(request,'nurse_dash/edit_allocations.html',{'rooms':allocations,'notifications':notifications,
                                                        'unseen_count':unseen_count})
 def dis_room(request):
@@ -291,20 +327,28 @@ def allocate_room(request):
         room_no = request.POST.get('room-number')
         bed_no = request.POST.get('bed_no')
         room_type = request.POST.get('room-type')
-        patient = get_object_or_404( PatientRegister,patient_id=patient_id)
-        room_nos = get_object_or_404( Rooms,Room_no=room_no)
-        bed_info = BedAllocation.objects.create(
-            Patient_id=patient,
-            Room_num=room_nos,
-            Bed_num=bed_no,
-            Room_type=room_type,
-        )
-        room = get_object_or_404(Rooms, Room_no=room_no,Bed_no=bed_no)
-        room.Status = 'Occupied'  # Update status to 'Occupied' or any other value as needed
-        room.save()
-        registered=True
-        return render(request,'nurse_dash/Room_allocation.html',{'registered':registered,'notifications':notifications,
-                                                       'unseen_count':unseen_count})
+        
+        try:
+            patient = get_object_or_404( PatientRegister,patient_id=patient_id)
+            room_nos = get_object_or_404( Rooms,Room_no=room_no)
+            bed_info = BedAllocation.objects.create(
+                Patient_id=patient,
+                Room_num=room_nos,
+                Bed_num=bed_no,
+                Room_type=room_type,
+            )
+            room = get_object_or_404(Rooms, Room_no=room_no,Bed_no=bed_no)
+            room.Status = 'Occupied'  # Update status to 'Occupied' or any other value as needed
+            room.save()
+            registered=True
+            return render(request,'nurse_dash/Room_allocation.html',{'registered':registered,'notifications':notifications,
+                                                        'unseen_count':unseen_count})
+        except Http404:
+            messages.error(request, 'Room or Patient Does not exist!!')
+            return render(request,'nurse_dash/Room_allocation.html',{
+            'notifications':notifications,
+            'room_info':room_info,
+            'unseen_count':unseen_count})
     return render(request,'nurse_dash/Room_allocation.html',{
         'notifications':notifications,
         'room_info':room_info,

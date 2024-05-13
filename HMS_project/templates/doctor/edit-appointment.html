@@ -115,6 +115,15 @@
 										<textarea placeholder="Problem" class="form-control" id="problem" rows="3" name="problem">{{appointments.App_reason}}</textarea>
 										<div id="problemError" class="text-danger"></div>
 									</div>
+									{% if messages %}
+									<ul class="messages">
+										{% for message in messages %}
+										<li{% if message.tags %} class="{{ message.tags }}" {% endif %} style="color: red;">
+											{{
+											message }}</li>
+											{% endfor %}
+									</ul>
+									{% endif %}
 									<div class="form-group col-md-6 mb-3">
 										<button type="submit" class="btn btn-primary btn-lg">Submit</button>
 									</div>
