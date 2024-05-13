@@ -642,9 +642,9 @@ def create_appointment(request):
             phone_number = '+251' + phone_number[1:]
 
         # Twilio credentials
-        account_sid = 'ACfa34a64a48ac610545ce9cee8c70bb15'
-        auth_token = 'a4c42e61f3487ad86f7bea242dbacb07'
-        twilio_number = '+14844984613'
+        account_sid = 'AC853cc8d20b814ed3b23041aab29acec4'
+        auth_token = 'f3d400b45cf9e9a461e3cd14ad51716c'
+        twilio_number = '+19474652604'
 
         # Initialize Twilio client
         client = Client(account_sid, auth_token)
