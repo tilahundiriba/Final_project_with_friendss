@@ -47,6 +47,24 @@ from django.shortcuts import render
 from django.template.loader import render_to_string
 
 
+# views.py
+
+from django.shortcuts import render
+
+def my_view(request):
+    # Set session variable
+    request.session['username'] = 'john'
+
+    # Get session variable
+    username = request.session.get('username', 'Guest')
+
+    # Delete session variable
+    del request.session['username']
+
+    # Clear all session data
+    request.session.clear()
+
+    return render(request, 'admin_dash/login.html', {'username': username})
 
 
 def registration_years(request):

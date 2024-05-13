@@ -122,7 +122,7 @@ TEMPLATES = [
 ]
 ASGI_APPLICATION = 'HMS_project.asgi.application'
 
-
+SESSION_COOKIE_AGE = 3600 
 # 👇 5. Add the below line for channel layer
 CHANNEL_LAYERS = {
     'default': {
