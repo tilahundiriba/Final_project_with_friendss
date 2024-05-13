@@ -64,29 +64,98 @@
 					<div class="col-md-12" >
 						<div class="widget-area-2 proclinic-box-shadow">
 							<h3 class="widget-title">Write Notifications</h3>
-							<form action="{% url 'poster' %}" method="post">
+							<form id="posterForm" action="{% url 'poster' %}" method="post">
 								{% csrf_token %}
-                                <div class="form-group col-md-12">
-                                    <label for="message">Name</label>
-                                  
-                                    <input id="name" type="text" name="name" class="form-control"  placeholder="Name....."></input>
-                                </div>
-                                <div class="form-group col-md-12">
-                                    <label for="title">Title</label>
-                                    <input id="title" type="text" name="title" class="form-control"  placeholder="titles....."></input>
-                                </div>
-                                <div class="form-group col-md-12">
-                                    <label for="message">Messages</label>
-                                  
-                                    <textarea id="message" name="message" rows="4" class="form-control" cols="50" placeholder="Messages....."></textarea>
-                                </div>
-								
-								
+								<div class="form-row">
+									<div class="form-group col-md-12">
+										<label for="name">Name</label>
+										<input id="name" type="text" name="name" class="form-control" placeholder="Name.....">
+										<div id="nameError" class="error"></div>
+									</div>
+									<div class="form-group col-md-12">
+										<label for="title">Title</label>
+										<input id="title" type="text" name="title" class="form-control" placeholder="Title.....">
+										<div id="titleError" class="error"></div>
+									</div>
+									<div class="form-group col-md-12">
+										<label for="message">Messages</label>
+										<textarea id="message" name="message" rows="4" class="form-control" placeholder="Messages....."></textarea>
+										<div id="messageError" class="error"></div>
+									</div>
 									<div class="form-group col-md-6 mb-3">
 										<button type="submit" class="btn btn-primary btn-lg">Submit</button>
 									</div>
 								</div>
 							</form>
+							
+							<style>
+								.error {
+									color: red;
+								}
+							
+								.is-valid {
+									border: 1px solid green;
+								}
+							
+								.is-invalid {
+									border: 1px solid red;
+								}
+							</style>
+							
+							<script>
+								document.getElementById('posterForm').addEventListener('submit', function(event) {
+									event.preventDefault(); // Prevent form submission
+							
+									// Validate Name
+									var nameInput = document.getElementById('name');
+									var name = nameInput.value.trim();
+									var nameError = document.getElementById('nameError');
+							
+									if (!name) {
+										nameInput.classList.add('is-invalid');
+										nameError.textContent = 'Name cannot be empty.';
+										return;
+									} else {
+										nameInput.classList.remove('is-invalid');
+										nameInput.classList.add('is-valid');
+										nameError.textContent = '';
+									}
+							
+									// Validate Title
+									var titleInput = document.getElementById('title');
+									var title = titleInput.value.trim();
+									var titleError = document.getElementById('titleError');
+							
+									if (!title) {
+										titleInput.classList.add('is-invalid');
+										titleError.textContent = 'Title cannot be empty.';
+										return;
+									} else {
+										titleInput.classList.remove('is-invalid');
+										titleInput.classList.add('is-valid');
+										titleError.textContent = '';
+									}
+							
+									// Validate Message
+									var messageInput = document.getElementById('message');
+									var message = messageInput.value.trim();
+									var messageError = document.getElementById('messageError');
+							
+									if (!message) {
+										messageInput.classList.add('is-invalid');
+										messageError.textContent = 'Message cannot be empty.';
+										return;
+									} else {
+										messageInput.classList.remove('is-invalid');
+										messageInput.classList.add('is-valid');
+										messageError.textContent = '';
+									}
+							
+									// If all validations pass, you can submit the form
+									this.submit();
+								});
+							</script>
+							
 							<!-- Alerts-->
 							<div class="alert alert-success alert-dismissible fade show" role="alert">
 								<strong>Successfully Done!</strong> Please Check in user list

@@ -60,30 +60,103 @@
 					<div class="col-md-12">
 						<div class="widget-area-2 proclinic-box-shadow">
 							<h3 class="widget-title">Write Feedbacks</h3>
-							<form action="{% url 'write_feedback' %}" method="post">
+							<form id="feedbackForm" action="{% url 'write_feedback' %}" method="post">
 								{% csrf_token %}
-                                <div class="form-group col-md-12">
-                                    <label for="name">Name</label>
-                                  
-                                    <input id="name" name="name"  class="form-control"  placeholder="your name....."></input>
-                                </div>
-                                <div class="form-group col-md-12">
-                                    <label for="email">Email</label>
-                                  
-                                    <input id="email" name="email"  class="form-control" placeholder="example@gmail.com....."></input>
-                                </div>
-                                <div class="form-group col-md-12">
-                                    <label for="message">Feedbacks</label>
-                                  
-                                    <textarea id="message" name="message" rows="4" class="form-control" cols="50" placeholder="Feedbacks....."></textarea>
-                                </div>
-								
-								
+								<div class="form-row">
+									<div class="form-group col-md-12">
+										<label for="name">Name</label>
+										<input id="name" name="name" class="form-control" placeholder="Your name.....">
+										<div id="nameError" class="error"></div>
+									</div>
+									<div class="form-group col-md-12">
+										<label for="email">Email</label>
+										<input id="email" name="email" class="form-control" placeholder="example@gmail.com.....">
+										<div id="emailError" class="error"></div>
+									</div>
+									<div class="form-group col-md-12">
+										<label for="message">Feedbacks</label>
+										<textarea id="message" name="message" rows="4" class="form-control" placeholder="Feedbacks....."></textarea>
+										<div id="messageError" class="error"></div>
+									</div>
 									<div class="form-group col-md-6 mb-3">
 										<button type="submit" class="btn btn-primary btn-lg">Send</button>
 									</div>
 								</div>
 							</form>
+							
+							<style>
+								.error {
+									color: red;
+								}
+							
+								.is-valid {
+									border: 1px solid green;
+								}
+							
+								.is-invalid {
+									border: 1px solid red;
+								}
+							</style>
+							
+							<script>
+								document.getElementById('feedbackForm').addEventListener('submit', function(event) {
+									event.preventDefault(); // Prevent form submission
+							
+									// Validate Name
+									var nameInput = document.getElementById('name');
+									var name = nameInput.value.trim();
+									var nameError = document.getElementById('nameError');
+							
+									if (!name) {
+										nameInput.classList.add('is-invalid');
+										nameError.textContent = 'Name cannot be empty.';
+										return;
+									} else {
+										nameInput.classList.remove('is-invalid');
+										nameInput.classList.add('is-valid');
+										nameError.textContent = '';
+									}
+							
+									// Validate Email
+									var emailInput = document.getElementById('email');
+									var email = emailInput.value.trim();
+									var emailError = document.getElementById('emailError');
+									var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+							
+									if (!email) {
+										emailInput.classList.add('is-invalid');
+										emailError.textContent = 'Email cannot be empty.';
+										return;
+									} else if (!emailPattern.test(email)) {
+										emailInput.classList.add('is-invalid');
+										emailError.textContent = 'Invalid email format.';
+										return;
+									} else {
+										emailInput.classList.remove('is-invalid');
+										emailInput.classList.add('is-valid');
+										emailError.textContent = '';
+									}
+							
+									// Validate Message
+									var messageInput = document.getElementById('message');
+									var message = messageInput.value.trim();
+									var messageError = document.getElementById('messageError');
+							
+									if (!message) {
+										messageInput.classList.add('is-invalid');
+										messageError.textContent = 'Message cannot be empty.';
+										return;
+									} else {
+										messageInput.classList.remove('is-invalid');
+										messageInput.classList.add('is-valid');
+										messageError.textContent = '';
+									}
+							
+									// If all validations pass, you can submit the form
+									this.submit();
+								});
+							</script>
+							
 							<!-- Alerts-->
 							{% if Feedback %}
 							<div class="alert alert-success alert-dismissible fade show" role="alert">
