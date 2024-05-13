@@ -189,6 +189,28 @@ DATABASES = {
 # DATABASES = {
 #     'default': {
 #         'ENGINE':'django.db.backends.postgresql',
+#         'NAME':'Hospital',
+#         'USER':'postgres',    
+#         'PASSWORD':'211',
+#         'HOST':'localhost',
+#         'PORT':'5432',
+#     }
+# }
+DATABASES = {
+    'default': {
+        'ENGINE':'django.db.backends.postgresql',
+        'NAME':'sha',
+        'USER':'postgres',    
+        'PASSWORD':'211',
+        'HOST':'localhost',
+        'PORT':'5432',
+    }
+}
+
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE':'django.db.backends.postgresql',
 #         'NAME':'HMS',
 #         'USER':'tilish',
 #         'PASSWORD':'14241224',
