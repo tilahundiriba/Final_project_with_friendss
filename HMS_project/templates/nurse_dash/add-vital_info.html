@@ -159,156 +159,53 @@
 							</form>
 							<script>
 								function validateForm() {
-								        // Validate Patient ID
-										var patientId = document.getElementById("patient_id");
-										if (patientId.value.trim().length !== 8 || !patientId.value.trim().startsWith("SH")) {
-											patientId.style.borderColor = "red";
-											document.getElementById("patientIdError").innerText = "Patient ID must start with 'SH' and be 8 characters long";
-											return false;
+									var isValid = true;
+							
+									// Validate Patient ID
+									var patientId = patientIdInput.value.trim();
+									var patientIdError = document.getElementById('patientIdError');
+									patientIdError.textContent = '';
+									var patientId = document.getElementById("patient_id").value.trim();
+									if (!/^SH\d{6}$/.test(patientId)) {
+										document.getElementById("patientIdError").innerText = "Patient ID must start with 'SH' followed by 6 digits";
+										document.getElementById("patient_id").style.borderColor = "red";
+										isValid = false;
+									} else {
+										document.getElementById("patientIdError").innerText = "";
+										document.getElementById("patient_id").style.borderColor = "green";
+									}
+							
+									// Validate numeric fields
+									var numericFields = ['HeartRate', 'bloodpre', 'resRate', 'bodytemp'];
+									numericFields.forEach(function(field) {
+										var input = document.getElementById(field);
+										var value = input.value.trim();
+										var errorDiv = document.getElementById(field + 'Error');
+										errorDiv.textContent = '';
+							
+										if (value === '' || isNaN(value)) {
+											input.classList.add('is-invalid');
+											errorDiv.textContent = 'This field cannot be empty and must contain a numeric value.';
+											isValid = false;
 										} else {
-											patientId.style.borderColor = "green";
-											document.getElementById("patientIdError").innerText = "";
+											input.classList.remove('is-invalid');
+											input.classList.add('is-valid');
 										}
-								
-										// Validate Heart Rate
-										var heartRate = document.getElementById("HeartRate");
-										if (heartRate.value.trim() === "" || isNaN(heartRate.value.trim())) {
-											heartRate.style.borderColor = "red";
-											document.getElementById("heartRateError").innerText = "Heart Rate must be a number";
-											heartRateError.style.color = "red";
-
-											return false;
-										} else {
-											heartRate.style.borderColor = "green";
-											document.getElementById("heartRateError").innerText = "";
-										}
-								
-										// Validate Blood Pressure
-										var bloodPressure = document.getElementById("bloodpre");
-										if (bloodPressure.value.trim() === "" || isNaN(bloodPressure.value.trim())) {
-											bloodPressure.style.borderColor = "red";
-											document.getElementById("bloodPressureError").innerText = "Blood Pressure must be a number";
-											bloodPressureError.style.color = "red";
-
-											return false;
-										} else {
-											bloodPressure.style.borderColor = "green";
-											document.getElementById("bloodPressureError").innerText = "";
-										}
-									// Validate Respiratory Rate
-									   var respiratoryRate = document.getElementById("resRate");
-										if (respiratoryRate.value.trim() === "" || isNaN(respiratoryRate.value.trim())) {
-											respiratoryRate.style.borderColor = "red";
-											document.getElementById("resRateError").innerText = "Respiratory Rate must be a number";
-											resRateError.style.color = "red";
-
-											return false;
-										} else {
-											respiratoryRate.style.borderColor = "green";
-											document.getElementById("resRateError").innerText = "";
-										}
+									});
 							
-								
-							
-									// Validate Body Temperature
-									var bodyTemperature = document.getElementById("bodytemp").value.trim();
-									if (isNaN(bodyTemperature)) {
-										document.getElementById("bodytempError").innerText = "Body Temperature must be a number";
-										document.getElementById("bodytemp").style.borderColor = "red";
-										isValid = false;
-									} else {
-										document.getElementById("bodytempError").innerText = "";
-										document.getElementById("bodytemp").style.borderColor = "green";
+									// Prevent form submission if validation fails
+									if (!isValid) {
+										event.preventDefault(); // This prevents the form from submitting
 									}
 							
-									// Validate Oxygen Saturation
-									var oxygenSaturation = document.getElementById("oxysatu").value.trim();
-									if (isNaN(oxygenSaturation)) {
-										document.getElementById("oxysatuError").innerText = "Oxygen Saturation must be a number";
-										document.getElementById("oxysatu").style.borderColor = "red";
-										isValid = false;
-									} else {
-										document.getElementById("oxysatuError").innerText = "";
-										document.getElementById("oxysatu").style.borderColor = "green";
-									}
-							
-									// Validate Pain Level
-									var painLevel = document.getElementById("painlev").value.trim();
-									if (isNaN(painLevel)) {
-										document.getElementById("painlevError").innerText = "Pain Level must be a number";
-										document.getElementById("painlev").style.borderColor = "red";
-										isValid = false;
-									} else {
-										document.getElementById("painlevError").innerText = "";
-										document.getElementById("painlev").style.borderColor = "green";
-									}
-							
-									// Validate Height
-									var height = document.getElementById("height").value.trim();
-									if (isNaN(height)) {
-										document.getElementById("heightError").innerText = "Height must be a number";
-										document.getElementById("height").style.borderColor = "red";
-										isValid = false;
-									} else {
-										document.getElementById("heightError").innerText = "";
-										document.getElementById("height").style.borderColor = "green";
-									}
-							
-									// Validate Weight
-									var weight = document.getElementById("weight").value.trim();
-									if (isNaN(weight)) {
-										document.getElementById("weightError").innerText = "Weight must be a number";
-										document.getElementById("weight").style.borderColor = "red";
-										isValid = false;
-									} else {
-										document.getElementById("weightError").innerText = "";
-										document.getElementById("weight").style.borderColor = "green";
-									}
-							
-									// Validate Blood Glucose Level
-									var bloodGlucoseLevel = document.getElementById("bloodglu").value.trim();
-									if (isNaN(bloodGlucoseLevel)) {
-										document.getElementById("bloodgluError").innerText = "Blood Glucose Level must be a number";
-										document.getElementById("bloodglu").style.borderColor = "red";
-										isValid = false;
-									} else {
-										document.getElementById("bloodgluError").innerText = "";
-										document.getElementById("bloodglu").style.borderColor = "green";
-									}
-							
-									// Validate Nursing ID
-									var nurseId = document.getElementById("nurseid").value;
-									if (nurseId === "Select Name") {
-										document.getElementById("nurseidError").innerText = "Please select a nurse";
-										document.getElementById("nurseid").style.borderColor = "red";
-										isValid = false;
-									} else {
-										document.getElementById("nurseidError").innerText = "";
-										document.getElementById("nurseid").style.borderColor = "green";
-									}
-							
-									// Validate Remark
-									var remark = document.getElementById("exampleFormControlTextarea1").value.trim();
-									if (!remark) {
-										document.getElementById("remarkError").innerText = "Remark cannot be empty";
-										document.getElementById("exampleFormControlTextarea1").style.borderColor = "red";
-										isValid = false;
-									} else {
-										document.getElementById("remarkError").innerText = "";
-										document.getElementById("exampleFormControlTextarea1").style.borderColor = "green";
-									}
-							
+									// Return true if the form is valid, otherwise false
 									return isValid;
 								}
-							
-								function submitForm(event) {
-									if (!validateForm()) {
-										event.preventDefault(); // Prevent form submission
-									}
-								}
-							
-								document.getElementById("formId").addEventListener("submit", submitForm);
 							</script>
+							
+							
+							
+							
 							
 							
 							

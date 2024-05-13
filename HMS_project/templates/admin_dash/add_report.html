@@ -70,30 +70,87 @@
 					<div class="col-md-12">
 						<div class="widget-area-2 proclinic-box-shadow">
 							<h3 class="widget-title">Add Reports</h3>
-							<form action="{% url 'add_report' %}" method="post" onsubmit="return validateForm()" enctype="multipart/form-data">
+							<form id="reportForm" action="{% url 'add_report' %}" method="post" enctype="multipart/form-data">
 								{% csrf_token %}
 								<div class="form-row">
 									<div class="form-group col-md-12">
 										<label for="name">Name</label>
-										<input type="text" placeholder="name....." class="form-control" id="name" name="name">
-										<div id="fnameError" class="error"></div>
+										<input type="text" placeholder="Name....." class="form-control" id="name" name="name">
+										<div id="nameError" class="error"></div>
 									</div>
 									<div class="form-group col-md-12">
 										<label for="title">Report Title</label>
-										<input type="text" placeholder="report title" class="form-control" id="title" name="title">
-										<div id="lnameError" class="error"></div>
+										<input type="text" placeholder="Report Title" class="form-control" id="title" name="title">
+										<div id="titleError" class="error"></div>
 									</div>
 									<div class="form-group col-md-12">
-										<label for="report_file">report_file</label>
-										<input type="file"  class="form-control" id="report_file" name="report_file">
-										<div id="emailError" class="error"></div>
+										<label for="report_file">Report File</label>
+										<input type="file" class="form-control" id="report_file" name="report_file">
+										<div id="fileError" class="error"></div>
 									</div>
-									
 									<div class="form-group col-md-12 mb-3">
 										<button type="submit" class="btn btn-primary btn-lg">Report</button>
 									</div>
 								</div>
 							</form>
+							
+							<style>
+								.error {
+									color: red;
+								}
+							</style>
+							
+							<script>
+								document.getElementById('reportForm').addEventListener('submit', function(event) {
+									event.preventDefault(); // Prevent form submission
+							
+									// Validate Name
+									var nameInput = document.getElementById('name');
+									var name = nameInput.value.trim();
+									var nameError = document.getElementById('nameError');
+							
+									if (!name) {
+										nameInput.classList.add('is-invalid');
+										nameError.textContent = 'Name cannot be empty.';
+										return;
+									} else {
+										nameInput.classList.remove('is-invalid');
+										nameError.textContent = '';
+									}
+							
+									// Validate Report Title
+									var titleInput = document.getElementById('title');
+									var title = titleInput.value.trim();
+									var titleError = document.getElementById('titleError');
+							
+									if (!title) {
+										titleInput.classList.add('is-invalid');
+										titleError.textContent = 'Report Title cannot be empty.';
+										return;
+									} else {
+										titleInput.classList.remove('is-invalid');
+										titleError.textContent = '';
+									}
+							
+									// Validate Report File
+									var fileInput = document.getElementById('report_file');
+									var file = fileInput.files[0];
+									var fileError = document.getElementById('fileError');
+							
+									if (!file) {
+										fileInput.classList.add('is-invalid');
+										fileError.textContent = 'Please select a file.';
+										return;
+									} else {
+										fileInput.classList.remove('is-invalid');
+										fileError.textContent = '';
+									}
+							
+									// If all validations pass, you can submit the form
+									this.submit();
+								});
+							</script>
+							
 						
 							<!-- <script>
 								function validateForm() {
