@@ -7,14 +7,15 @@
 
 
 <!-- Mirrored from www.konnectplugins.com/proclinic/Horizontal/edit-room.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 24 Jan 2022 10:42:01 GMT -->
+
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    {% block title %}
-        <title>Edit Room</title>
-    {% endblock %}
-    <!-- Fav  Icon Link -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	{% block title %}
+	<title>Edit Room</title>
+	{% endblock %}
+	<!-- Fav  Icon Link -->
 </head>
 
 
@@ -33,28 +34,28 @@
 	<div class="wrapper">
 		<!-- Page Content -->
 		<div id="content">
-				<!-- Top Navigation -->
+			<!-- Top Navigation -->
 
-		
-				<!-- Page Title -->
-				<div class="container mt-0">
-					<div class="row breadcrumb-bar">
-						<div class="col-md-6">
-							<h3 class="block-title"> Add Vital Informations</h3>
-						</div>
-						<div class="col-md-6">
-							<ol class="breadcrumb">
-								<li class="breadcrumb-item">
-									<a href="index.html">
-										<span class="ti-home"></span>
-									</a>
-								</li>
-								<li class="breadcrumb-item active">Vital Informations</li>
-								<li class="breadcrumb-item ">Add Vital Informations</li>
-							</ol>
-						</div>
+
+			<!-- Page Title -->
+			<div class="container mt-0">
+				<div class="row breadcrumb-bar">
+					<div class="col-md-6">
+						<h3 class="block-title"> Add Vital Informations</h3>
+					</div>
+					<div class="col-md-6">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item">
+								<a href="index.html">
+									<span class="ti-home"></span>
+								</a>
+							</li>
+							<li class="breadcrumb-item active">Vital Informations</li>
+							<li class="breadcrumb-item ">Add Vital Informations</li>
+						</ol>
 					</div>
 				</div>
+			</div>
 			<!-- /Page Title -->
 
 			<!-- /Breadcrumb -->
@@ -66,67 +67,85 @@
 					<div class="col-md-12">
 						<div class="widget-area-2 proclinic-box-shadow">
 							<h3 class="widget-title">Vital Informations</h3>
-							<form action="{% url 'vital_info' %}" method="post" onsubmit="return validateForm()" id="formId">
+							<form action="{% url 'vital_info' %}" method="post" id="formId"
+								onsubmit="return validateForm()">
 								{% csrf_token %}
 								<div class="form-row">
 									<div class="form-group col-md-6">
 										<label for="patient_id">Patient ID</label>
-										<input type="text" class="form-control" placeholder="Patient id" id="patient_id" name="patient_id">
+										<input type="text" class="form-control" placeholder="Patient id" id="patient_id"
+											name="patient_id">
 										<div id="patientIdError" class="text-danger"></div>
 									</div>
-								
+
 									<div class="form-group col-md-6">
 										<label for="HeartRate">Heart Rate</label>
-										<input type="text" placeholder="heart rate" class="form-control" id="HeartRate" name="Heart_Rate">
+										<input type="text" placeholder="heart rate" class="form-control" id="HeartRate"
+											name="Heart_Rate">
 										<div id="heartRateError" class="error-text"></div>
 
 									</div>
-								
+
 									<div class="form-group col-md-6">
 										<label for="bloodpre">Blood Pressure</label>
-										<input type="text" placeholder="blood pressure" class="form-control" id="bloodpre" name="bloodpre">
+										<input type="text" placeholder="blood pressure" class="form-control"
+											id="bloodpre" name="bloodpre">
 										<div id="bloodPressureError" class="error-text"></div>
 
 									</div>
 									<div class="form-group col-md-6">
 										<label for="resRate">Respiratory Rate</label>
-										<input type="text" placeholder="respiratory rate" class="form-control" id="resRate" name="resRate">
+										<input type="text" placeholder="respiratory rate" class="form-control"
+											id="resRate" name="resRate">
 										<div id="respiratoryRateError" class="error-text"></div>
 
 									</div>
 									<div class="form-group col-md-6">
 										<label for="bodytemp">Body Temprature</label>
-										<input type="text" placeholder="body temprature" class="form-control" id="bodytemp" name="bodytemp">
+										<input type="text" placeholder="body temprature" class="form-control"
+											id="bodytemp" name="bodytemp">
 										<div id="bodyTemperatureError" class="error-text"></div>
 
 									</div>
 									<div class="form-group col-md-6">
 										<label for="oxysatu">Oxygen Saturation</label>
-										<input type="text" placeholder="oxygen saturation" class="form-control" id="oxysatu" name="oxysatu">
+										<input type="text" placeholder="oxygen saturation" class="form-control"
+											id="oxysatu" name="oxysatu">
 										<div id="oxygenSaturationError" class="error-text"></div>
 
 									</div>
 									<div class="form-group col-md-6">
 										<label for="painlev">Pain Level</label>
-										<input type="text" placeholder="Pain level" class="form-control" id="painlev" name="painlev">
+										<select class="form-control" id="painlev" name="painlev">
+											<option selected disabled>Select Pain Level</option>
+
+											<option value="Severe">Severe</option>
+											<option value="Medium">Medium</option>
+											<option value="Mild">Mild</option>
+
+										</select>
+
 										<div id="painLevelError" class="error-text"></div>
 
 									</div>
 									<div class="form-group col-md-6">
 										<label for="height">Height</label>
-										<input type="text" placeholder="height" class="form-control" id="height" name="height">
+										<input type="text" placeholder="height" class="form-control" id="height"
+											name="height">
 										<div id="heightError" class="error-text"></div>
 
 									</div>
 									<div class="form-group col-md-6">
 										<label for="weight">Weight</label>
-										<input type="text" placeholder="weight" class="form-control" id="weight" name="weight">
+										<input type="text" placeholder="weight" class="form-control" id="weight"
+											name="weight">
 										<div id="weightError" class="error-text"></div>
 
 									</div>
 									<div class="form-group col-md-6">
 										<label for="bloodglu">Blood Glucose level</label>
-										<input type="text" placeholder="blood glucose level" class="form-control" id="bloodglu" name="bloodglu">
+										<input type="text" placeholder="blood glucose level" class="form-control"
+											id="bloodglu" name="bloodglu">
 										<div id="bloodGlucoseLevelError" class="error-text"></div>
 
 									</div>
@@ -144,17 +163,19 @@
 									</div>
 									<div class="form-group col-md-6">
 										<label for="exampleFormControlTextarea1">Remark</label>
-										<textarea placeholder="remark" class="form-control" id="exampleFormControlTextarea1" rows="3" name="remark"></textarea>
+										<textarea placeholder="remark" class="form-control"
+											id="exampleFormControlTextarea1" rows="3" name="remark"></textarea>
 										<div id="remarkError" class="error-text"></div>
 
 									</div>
 
-									
-																	
+
+
 									{% if messages %}
 									<ul class="messages">
 										{% for message in messages %}
-										<li{% if message.tags %} class="{{ message.tags }}" {% endif %} style="color: red;">
+										<li{% if message.tags %} class="{{ message.tags }}" {% endif %}
+											style="color: red;">
 											{{message }}</li>
 											{% endfor %}
 									</ul>
@@ -166,67 +187,189 @@
 							</form>
 							<script>
 								function validateForm() {
-									var isValid = true;
-							
 									// Validate Patient ID
-									var patientId = patientIdInput.value.trim();
-									var patientIdError = document.getElementById('patientIdError');
-									patientIdError.textContent = '';
 									var patientId = document.getElementById("patient_id").value.trim();
-									if (!/^SH\d{6}$/.test(patientId)) {
-										document.getElementById("patientIdError").innerText = "Patient ID must start with 'SH' followed by 6 digits";
+									var patientIdError = document.getElementById("patientIdError");
+									if (patientId === "" || patientId.length !== 8 || !patientId.startsWith("SH")) {
+										patientIdError.innerText = "Patient ID must start with 'SH' and be 8 characters long";
+										patientIdError.style.color = "red";
 										document.getElementById("patient_id").style.borderColor = "red";
-										isValid = false;
+										return false;
 									} else {
-										document.getElementById("patientIdError").innerText = "";
+										patientIdError.innerText = "";
 										document.getElementById("patient_id").style.borderColor = "green";
 									}
-							
-									// Validate numeric fields
-									var numericFields = ['HeartRate', 'bloodpre', 'resRate', 'bodytemp'];
-									numericFields.forEach(function(field) {
-										var input = document.getElementById(field);
-										var value = input.value.trim();
-										var errorDiv = document.getElementById(field + 'Error');
-										errorDiv.textContent = '';
-							
-										if (value === '' || isNaN(value)) {
-											input.classList.add('is-invalid');
-											errorDiv.textContent = 'This field cannot be empty and must contain a numeric value.';
-											isValid = false;
-										} else {
-											input.classList.remove('is-invalid');
-											input.classList.add('is-valid');
-										}
-									});
-							
-									// Prevent form submission if validation fails
-									if (!isValid) {
-										event.preventDefault(); // This prevents the form from submitting
+
+									// Validate Medication Time
+									var mediTime = document.getElementById("HeartRate").value.trim();
+									var mediTimeError = document.getElementById("heartRateError");
+									if (mediTime === "") {
+										mediTimeError.innerText = "HeartRate Time cannot be empty";
+										mediTimeError.style.color = "red";
+										document.getElementById("HeartRate").style.borderColor = "red";
+										return false;
+									} else {
+										mediTimeError.innerText = "";
+										document.getElementById("HeartRate").style.borderColor = "green";
 									}
-							
-									// Return true if the form is valid, otherwise false
-									return isValid;
+
+									// Validate Bed Number
+									var bedNumber = document.getElementById("bloodpre").value.trim();
+									var bedNumberError = document.getElementById("bloodPressureError");
+									if (bedNumber === "") {
+										bedNumberError.innerText = "Bed Number cannot be empty";
+										bedNumberError.style.color = "red";
+										document.getElementById("bloodpre").style.borderColor = "red";
+										return false;
+									} else {
+										bedNumberError.innerText = "";
+										document.getElementById("bloodpre").style.borderColor = "green";
+									}
+
+									// Validate Nurse Name
+									var nurseName = document.getElementById("resRate").value.trim();
+									var nurseNameError = document.getElementById("respiratoryRateError");
+									if (nurseName === "") {
+										nurseNameError.innerText = "Respiratory Cannot be Empty";
+										nurseNameError.style.color = "red";
+										document.getElementById("resRate").style.borderColor = "red";
+										return false;
+									} else {
+										nurseNameError.innerText = "";
+										document.getElementById("resRate").style.borderColor = "green";
+									}
+
+									// Validate Drugs
+									var drugs = document.getElementById("bodytemp").value.trim();
+									var drugsError = document.getElementById("bodyTemperatureError");
+									if (drugs === "") {
+										drugsError.innerText = "Body temprature cannot be empty";
+										drugsError.style.color = "red";
+										document.getElementById("bodytemp").style.borderColor = "red";
+										return false;
+									} else {
+										drugsError.innerText = "";
+										document.getElementById("bodytemp").style.borderColor = "green";
+									}
+									// Validate Oxygen Saturation
+									var oxygenSaturation = document.getElementById('oxysatu').value.trim();
+									var oxygenSaturationError = document.getElementById('oxygenSaturationError');
+									if (oxygenSaturation === '') {
+										oxygenSaturationError.innerText = 'Oxygen Saturation cannot be empty';
+										oxygenSaturationError.style.color = 'red';
+										document.getElementById('oxysatu').style.borderColor = 'red';
+										return false;
+									} else {
+										oxygenSaturationError.innerText = '';
+										document.getElementById('oxysatu').style.borderColor = 'green';
+									}
+
+									// Validate Pain Level
+									var painLevel = document.getElementById('painlev').value.trim();
+									var painLevelError = document.getElementById('painLevelError');
+									if (painLevel === '') {
+										painLevelError.innerText = 'Pain Level cannot be empty';
+										painLevelError.style.color = 'red';
+										document.getElementById('painlev').style.borderColor = 'red';
+										return false;
+									} else {
+										painLevelError.innerText = '';
+										document.getElementById('painlev').style.borderColor = 'green';
+									}
+									// Validate Height
+									var height = document.getElementById('height').value.trim();
+									var heightError = document.getElementById('heightError');
+									var heightPattern = /^[0-9]+$/;
+									if (height === '') {
+										heightError.innerText = 'Height cannot be empty';
+										heightError.style.color = 'red';
+										document.getElementById('height').style.borderColor = 'red';
+										return false;
+									} else if (!heightPattern.test(height)) {
+										heightError.innerText = 'Height must be a number';
+										heightError.style.color = 'red';
+										document.getElementById('height').style.borderColor = 'red';
+										return false;
+									} else {
+										heightError.innerText = '';
+										document.getElementById('height').style.borderColor = 'green';
+									}
+
+
+									// Validate Weight
+									var weight = document.getElementById('weight').value.trim();
+									var weightError = document.getElementById('weightError');
+									if (weight === '') {
+										weightError.innerText = 'Weight cannot be empty';
+										weightError.style.color = 'red';
+										document.getElementById('weight').style.borderColor = 'red';
+										return false;
+									} else {
+										weightError.innerText = '';
+										document.getElementById('weight').style.borderColor = 'green';
+									}
+
+									// Validate Blood Glucose level
+									var bloodglu = document.getElementById('bloodglu').value.trim();
+									var bloodgluError = document.getElementById('bloodGlucoseLevelError');
+									if (bloodglu === '') {
+										bloodgluError.innerText = 'Blood Glucose level cannot be empty';
+										bloodgluError.style.color = 'red';
+										document.getElementById('bloodglu').style.borderColor = 'red';
+										return false;
+									} else {
+										bloodgluError.innerText = '';
+										document.getElementById('bloodglu').style.borderColor = 'green';
+									}
+
+									// Validate Nurse Name
+									var nurseid = document.getElementById('nurseid').value.trim();
+									var nurseidError = document.getElementById('nursingIdError');
+									if (nurseid === '' || nurseid === 'Select Name') {
+										nurseidError.innerText = 'Please select a Nurse Name';
+										nurseidError.style.color = 'red';
+										document.getElementById('nurseid').style.borderColor = 'red';
+										return false;
+									} else {
+										nurseidError.innerText = '';
+										document.getElementById('nurseid').style.borderColor = 'green';
+									}
+									// Validate Remark
+									var nurseid = document.getElementById('exampleFormControlTextarea1').value.trim();
+									var nurseidError = document.getElementById('remarkError');
+									if (nurseid === '') {
+										nurseidError.innerText = 'Remark cannot be empty!!';
+										nurseidError.style.color = 'red';
+										document.getElementById('exampleFormControlTextarea1').style.borderColor = 'red';
+										return false;
+									} else {
+										nurseidError.innerText = '';
+										document.getElementById('exampleFormControlTextarea1').style.borderColor = 'green';
+									}
+
+
+									return true;
 								}
 							</script>
-							
-							
-							
-							
-							
-							
-							
-								<!-- Alerts-->
-								{% if registered %}
-								<div class="alert alert-success alert-dismissible fade show" role="alert">
-									<strong>Successfully Done!</strong> Please check in Allotment list
-									<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-										<span aria-hidden="true">×</span>
-									</button>
-								</div>
-							
-								{% endif %}
-							
+
+
+
+
+
+
+
+
+							<!-- Alerts-->
+							{% if registered %}
+							<div class="alert alert-success alert-dismissible fade show" role="alert">
+								<strong>Successfully Done!</strong> Please check in Allotment list
+								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+									<span aria-hidden="true">×</span>
+								</button>
+							</div>
+
+							{% endif %}
+
 						</div>
 					</div>
 					<!-- /Widget Item -->
@@ -248,5 +391,6 @@
 
 
 <!-- Mirrored from www.konnectplugins.com/proclinic/Horizontal/edit-room.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 24 Jan 2022 10:42:01 GMT -->
+
 </html>
 {% endblock %}

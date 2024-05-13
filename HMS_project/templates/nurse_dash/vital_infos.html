@@ -134,9 +134,7 @@
                                             <td>{{vital.D_record}}</td>
                                             
                                             <td>
-												{% if request.user.userprofileinfo.role == 'admin' %}
-												<a href="#" class="btn btn-outline-danger"><span class="ti-trash"></span>DELETE </a>
-												{% endif %}
+												
 												{% if request.user.userprofileinfo.role == 'nurse' %}
 												<a href="{% url 'edit_vitals' vital.Vital_info_no %}" class="btn btn-outline-primary "><span class="ti-pencil-alt"></span>EDIT</a>
 												<a href="#" class="btn btn-outline-info "><span class="ti-eye"></span>DETAILS</a>

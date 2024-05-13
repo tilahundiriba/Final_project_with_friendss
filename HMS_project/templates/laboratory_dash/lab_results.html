@@ -91,10 +91,7 @@
 											
 											<td>{{lab.Admit_date}}</td>
 											<td>
-										{% if request.user.userprofileinfo.role == 'admin' %}
-											<a href="#" class="btn btn-outline-danger  mb-0"><span
-														class="ti-trash"></span>DELETE</a>
-										{% endif %}
+
 										{% if request.user.userprofileinfo.role == 'technician' %}
 												<a href="{% url 'edit_lab_result' lab.Lab_number %}" class="btn btn-outline-primary  mb-0"><span
 														class="ti-pencil-alt"></span>EDIT</a>
