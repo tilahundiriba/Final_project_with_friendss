@@ -175,16 +175,16 @@ DESIGNATED_ADMIN_USERNAME = 'admin'
 #          'PORT':'5432',
    #}}
 
-DATABASES = {
-    'default': {
-        'ENGINE':'django.db.backends.postgresql',
-        'NAME':'FinalDatabase',
-        'USER':'tilish',
-        'PASSWORD':'14241224',
-        'HOST':'localhost',
-        'PORT':'5432',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE':'django.db.backends.postgresql',
+#         'NAME':'FinalDatabase',
+#         'USER':'tilish',
+#         'PASSWORD':'14241224',
+#         'HOST':'localhost',
+#         'PORT':'5432',
+#     }
+# }
 
 # DATABASES = {
 #     'default': {
@@ -196,6 +196,18 @@ DATABASES = {
 #         'PORT':'5432',
 #     }
 # }
+
+DATABASES = {
+    'default': {
+        'ENGINE':'django.db.backends.postgresql',
+        'NAME':'yaba',
+        'USER':'postgres',    
+        'PASSWORD':'211',
+        'HOST':'localhost',
+        'PORT':'5432',
+    }
+}
+
 # DATABASES = {
 #     'default': {
 #         'ENGINE':'django.db.backends.postgresql',
