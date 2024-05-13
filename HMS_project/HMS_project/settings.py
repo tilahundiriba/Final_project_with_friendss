@@ -199,7 +199,7 @@ DESIGNATED_ADMIN_USERNAME = 'admin'
 DATABASES = {
     'default': {
         'ENGINE':'django.db.backends.postgresql',
-        'NAME':'sha',
+        'NAME':'yaba',
         'USER':'postgres',    
         'PASSWORD':'211',
         'HOST':'localhost',
