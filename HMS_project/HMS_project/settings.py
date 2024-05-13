@@ -178,7 +178,7 @@ DESIGNATED_ADMIN_USERNAME = 'admin'
 DATABASES = {
     'default': {
         'ENGINE':'django.db.backends.postgresql',
-        'NAME':'test',
+        'NAME':'FinalDatabase',
         'USER':'tilish',
         'PASSWORD':'14241224',
         'HOST':'localhost',

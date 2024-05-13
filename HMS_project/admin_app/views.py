@@ -46,7 +46,25 @@ from django.shortcuts import render
 from django.template.loader import render_to_string
 
 
-from django.shortcuts import redirect
+
+
+def registration_years(request):
+    # Get the current year
+    current_year = datetime.now().year
+
+    # Create a list of years from 2022 to the current year
+    years = list(range(2022, current_year + 1))
+
+    # Query the database to count registrations for each year
+    registration_counts = [
+        {
+            'year': year,
+            'count': Appointment.objects.filter(App_date__year=year).count()  # Replace YourModel and date_of_registration with your actual model and field names
+        }
+        for year in years
+    ]
+    context= {'registration_counts':registration_counts}
+    return JsonResponse({'registration_years': registration_counts})
 
 def delete_medication(request):
     if 'delete' in request.POST:
@@ -552,10 +570,26 @@ def dis_dash_content(request):
     insurance_total_sum = insurance_total_sums['total_sum'] or 0
     unseen_feedbacks = Feedback.objects.filter(Is_seen=False)
     unseen_feedbacks_count = Feedback.objects.filter(Is_seen=False).count()
+      # Get the current year
+    current_year = datetime.now().year
+
+    # Create a list of years from 2022 to the current year
+    years = list(range(2022, current_year + 1))
+
+    # Query the database to count registrations for each year
+    registration_counts = [
+        {
+            'year': year,
+            'count': Appointment.objects.filter(App_date__year=year).count()  # Replace YourModel and date_of_registration with your actual model and field names
+        }
+        for year in years
+    ]
+    context= {'registration_counts':registration_counts}
     return render(request,'admin_dash/dash_content.html',{'cash_total_sum':cash_total_sum,
                                                           'insurance_total_sum':insurance_total_sum,
                                                           'unseen_feedbacks':unseen_feedbacks,
-                                                          'unseen_feedbacks_count':unseen_feedbacks_count})
+                                                          'unseen_feedbacks_count':unseen_feedbacks_count,
+                                                          'context':context})
 # @login_required
 def refere_info(request,discharge_no,patient_id):
     notifications = Notification.objects.all()
@@ -593,6 +627,20 @@ def dis_index(request):
     number_of_cancelled= Appointment.objects.filter(App_status='Cancelled').count()
     number_of_pending= Appointment.objects.filter(App_status='Pending').count()
     number_of_completed= Appointment.objects.filter(App_status='Completed').count()
+    current_year = datetime.now().year
+
+    # Create a list of years from 2022 to the current year
+    years = list(range(2022, current_year + 1))
+
+    # Query the database to count registrations for each year
+    registration_counts = [
+        {
+            'year': year,
+            'count': Appointment.objects.filter(App_date__year=year).count()  # Replace YourModel and date_of_registration with your actual model and field names
+        }
+        for year in years
+    ]
+    context= {'registration_counts':registration_counts}
     return render(request,'admin_dash/index.html',{'number_patients':number_of_patient,
                                                    'number_of_app':number_of_app,
                                                    'total_amount':total_sum,
@@ -605,6 +653,7 @@ def dis_index(request):
                                                    'cash_total_sum':cash_total_sum,
                                                    'insurance_total_sum':insurance_total_sum,
                                                    'number_of_lab':number_of_lab,
+                                                   'context':context,
                                                    'number_of_cancelled':number_of_cancelled,
                                                    'number_of_pending':number_of_pending,
                                                    'number_of_completed':number_of_completed,
