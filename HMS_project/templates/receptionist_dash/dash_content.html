@@ -132,96 +132,88 @@
           <!-- Widget Item -->
           <div class="col-md-12">
             <div class="widget-area-2 proclinic-box-shadow">
-              <h3 class="widget-title">Appointments</h3>
-              <div class="table-responsive">
-                <table class="table table-bordered table-striped">
-                  <thead>
-                    <tr>
-                      <th>Patient Name</th>
-                      <th>Doctor</th>
-                      <th>Check-Up</th>
-                      <th>Date</th>
-                      <th>Time</th>
-                      <th>Status</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>Rajesh</td>
-                      <td>Manoj Kumar</td>
-                      <td>Dental</td>
-                      <td>12-10-2018</td>
-                      <td>12:10PM</td>
-                      <td>
-                        <span class="badge badge-success">Completed</span>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Riya</td>
-                      <td>Daniel </td>
-                      <td>Ortho</td>
-                      <td>12-10-2018</td>
-                      <td>1:10PM</td>
-                      <td>
-                        <span class="badge badge-warning">Pending</span>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Siri</td>
-                      <td>Daniel </td>
-                      <td>Ortho</td>
-                      <td>12-10-2018</td>
-                      <td>1:30PM</td>
-                      <td>
-                        <span class="badge badge-danger">Cancelled</span>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Rajesh</td>
-                      <td>Manoj Kumar</td>
-                      <td>Dental</td>
-                      <td>12-10-2018</td>
-                      <td>12:10PM</td>
-                      <td>
-                        <span class="badge badge-success">Completed</span>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Riya</td>
-                      <td>Daniel </td>
-                      <td>Ortho</td>
-                      <td>12-10-2018</td>
-                      <td>1:10PM</td>
-                      <td>
-                        <span class="badge badge-warning">Pending</span>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Siri</td>
-                      <td>Daniel </td>
-                      <td>Ortho</td>
-                      <td>12-10-2018</td>
-                      <td>1:30PM</td>
-                      <td>
-                        <span class="badge badge-danger">Cancelled</span>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
+              <h3 class="widget-title">Appointments Lists</h3>
+            	<div class="table-responsive mb-3">
+								<table id="mytable" class="table table-bordered table-striped">
+									<thead>
+										<tr>
+									
+											<th>Appointment No</th>
+											<th>Patient ID</th>
+											<th>Start Time</th>
+											<th>End Time</th>
+											<th>Appointment Date</th>
+											
+
+											<th>Problem</th>
+											<th>Created Date</th>
+											<th>Status</th>
+											<th>Actions</th>
+										</tr>
+									</thead>
+									<tbody>
+										{% for app in appointment %}
+										<tr>
+										
+											<td>{{app.App_number}}</td>
+											<td>{{app.PatientID}}</td>
+											<td>{{app.Start_Time}}</td>
+											<td>{{app.End_Time}}</td>
+											<td>{{app.Appointment_date}}</td>
+										
+
+											<td>{{app.App_reason}}</td>
+											<td>{{app.App_date}}</td>
+											{% if app.App_status == 'Completed' %}
+											<td>
+												<span class="badge badge-success">{{app.App_status}}</span>
+											</td>
+											{% endif %}
+											{% if app.App_status == 'Pending' %}
+											<td>
+												<span class="badge badge-warning">{{app.App_status}}</span>
+											</td>
+											{% endif %}
+											{% if app.App_status == 'Cancelled' %}
+											<td>
+												<span class="badge badge-danger">{{app.App_status}}</span>
+											</td>
+											{% endif %}
+											<td>
+											{% if request.user.userprofileinfo.role == 'doctor' %}
+											
+												<a href="{% url 'about-appointment' app.App_number %}" class="btn btn-outline-info"><span
+														class="ti-eye"></span>DETAILS</a>
+											
+											{% endif %}
+											{% if request.user.userprofileinfo.role == 'admin' %}
+											
+												<a href="#" class="btn btn-outline-danger"><span
+														class="ti-trash"></span>DELETE</a>
+											
+											{% endif %}
+										</td>
+										</tr>
+
+										{% endfor %}
+									</tbody>
+								</table>
+
+								<!--Export links-->
+								<nav aria-label="Page navigation example">
+									<ul class="pagination justify-content-center export-pagination">
+										
+									</ul>
+								</nav>
+								
+							</div>
             </div>
           </div>
           <!-- /Widget Item -->
         </div>
       </div>
       <!-- /Main Content -->
-      <!--Copy Rights-->
-      <div class="container">
-        <div class="d-sm-flex justify-content-center">
-          <span class="text-muted text-center d-block d-sm-inline-block">Copyright © 2018 <a href="http://www.konnectplugins.com/" target="_blank">konnectcode</a>. All rights reserved.</span>
-        </div>
-      </div>
-      <!-- /Copy Rights-->
+
     </div>
     <!-- /Page Content -->
   </div>
@@ -231,5 +223,7 @@
   </a>
   <!-- /Back to Top -->
   <!-- Jquery Library-->
+  
+
 </body>
  {% endblock %}

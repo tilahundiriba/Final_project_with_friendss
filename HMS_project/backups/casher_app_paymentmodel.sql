@@ -1,0 +1,10 @@
+INSERT INTO "casher_app_paymentmodel" VALUES ('1','2024-05-09','0.00','0.00','0.00','100.00','0.00','Insurance','100.00','6','SH703566');
+INSERT INTO "casher_app_paymentmodel" VALUES ('2','2024-05-09','0.00','0.00','0.00','100.00','0.00','Insurance','100.00','6','SH838797');
+INSERT INTO "casher_app_paymentmodel" VALUES ('5','2024-05-10','600.00','0.00','600.00','0.00','0.00','Cash','600.00','6','SH838797');
+INSERT INTO "casher_app_paymentmodel" VALUES ('3','2024-05-09','0.00','400.00','0.00','100.00','400.00','Cash','4900.00','6','SH856953');
+INSERT INTO "casher_app_paymentmodel" VALUES ('4','2024-05-10','400.00','400.00','400.00','0.00','400.00','Insurance','1200.00','6','SH838797');
+INSERT INTO "casher_app_paymentmodel" VALUES ('10','2024-05-12','0.00','0.00','0.00','100.00','0.00','Insurance','100.00','6','SH967364');
+INSERT INTO "casher_app_paymentmodel" VALUES ('9','2024-05-11','600.00','400.00','600.00','0.00','400.00','Insurance','1400.00','6','SH703566');
+INSERT INTO "casher_app_paymentmodel" VALUES ('11','2024-05-12','0.00','0.00','0.00','100.00','0.00','Insurance','100.00','6','SH362656');
+INSERT INTO "casher_app_paymentmodel" VALUES ('12','2024-05-12','600.00','0.00','600.00','0.00','0.00','Cash','600.00','6','SH013629');
+INSERT INTO "casher_app_paymentmodel" VALUES ('13','2024-05-12','0.00','0.00','0.00','100.00','0.00','Insurance','100.00','6','SH522825');

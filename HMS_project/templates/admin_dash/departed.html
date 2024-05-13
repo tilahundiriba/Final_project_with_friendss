@@ -84,7 +84,9 @@
                         <div class="widget-area-2 proclinic-box-shadow">
                             <h3 class="widget-title">Discharge List</h3>
                             <div class="table-responsive mb-3">
-                                <table id="tableId" class="table table-bordered table-striped">
+                                <form action="{% url 'delete_discharge' %}" method="post">
+									{% csrf_token %}
+                                <table id="mytable" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
                                             <th>select</th>
@@ -96,7 +98,7 @@
                                             <th>Food Payments</th>
                                             <th>Bed Payments</th>
                                             <th>Departure Date</th>
-                                            <th>Actions</th>
+                                         
                                        
                                         </tr>
                                     </thead>
@@ -104,10 +106,10 @@
                                         {% for discharge in discharges %}
                                         <tr>
                                             <td>
-												<div class="custom-control custom-checkbox">
-													<input class="custom-control-input" type="checkbox" id="{{discharge.Discharge_no}}" onclick="toggleDeleteButton()">
-													<label class="custom-control-label" for="{{discharge.Discharge_no}}"></label>
-												</div></td>
+												
+													<input type="checkbox" id="{{discharge.Discharge_no}}" value="{{discharge.Discharge_no}}"  name="dis_delete" onclick="toggleDeleteButton()">
+													
+												</td>
                                             <td>{{discharge.patient_id}}</td>
                                             <td>{{discharge.reason}}</td>
                                             <td>{{discharge.referred_to}}</td>
@@ -116,19 +118,20 @@
                                             <td>{{discharge.bed_payment}}</td>
                                             <td>{{discharge.departure_date}}</td>
                                            
-                                            <td style="display: none;" id="deleteButton">
-												{% if request.user.userprofileinfo.role == 'admin' %}
-												<a href="{% url 'delete_discharge' discharge.Discharge_no %}" class="btn btn-outline-danger" onclick="return confirmDelete();">
-													<span class="ti-trash"></span>DELETE
-												</a>
-												{% endif %}
-											</td>
+                                            
                                             
                                         </tr>
+                                        <div style="display: none;" id="deleteButton">
+                                            {% if request.user.userprofileinfo.role == 'admin' %}
+                                            <button type="submit"  class="btn btn-outline-danger" name="delete" onclick="return confirmDelete();">
+                                                <span class="ti-trash"></span>DELETE
+                                            </button>
+                                            {% endif %}
+                                        </div>
                                         {% endfor %}
                                     </tbody>
                                 </table>
-
+                                </form>
                                 <!--Export links-->
                                 <nav aria-label="Page navigation example">
                                     <ul class="pagination justify-content-center export-pagination">
@@ -155,7 +158,47 @@
     <!-- /Back to Top -->
     <!-- Jquery Library-->
 
+	<script>
+		// JavaScript code for pagination
+		document.addEventListener('DOMContentLoaded', function () {
+			// Get the table rows and calculate total pages
+			var tableRows = document.querySelectorAll('#mytable tbody tr');
+			var totalPages = Math.ceil(tableRows.length / 5);
 
+			// Generate pagination links
+			var paginationContainer = document.querySelector('.pagination');
+			for (var i = 1; i <= totalPages; i++) {
+				var pageLink = document.createElement('a');
+				pageLink.href = '#';
+				pageLink.textContent = i;
+				pageLink.addEventListener('click', function (event) {
+					event.preventDefault();
+					showPage(parseInt(this.textContent));
+				});
+				paginationContainer.appendChild(pageLink);
+			}
+
+			// Function to show page
+			function showPage(pageNumber) {
+				// Hide all table rows
+				tableRows.forEach(function (row) {
+					row.style.display = 'none';
+				});
+
+				// Calculate start and end indexes for current page
+				var startIndex = (pageNumber - 1) * 5;
+				var endIndex = startIndex + 5;
+
+				// Show table rows for current page
+				for (var i = startIndex; i < endIndex && i < tableRows.length; i++) {
+					tableRows[i].style.display = '';
+				}
+			}
+
+			// Show the first page by default
+			showPage(1);
+		});
+	</script>
 </body>
 
 

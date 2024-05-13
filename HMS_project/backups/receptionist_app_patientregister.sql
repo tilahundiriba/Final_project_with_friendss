@@ -1,0 +1,7 @@
+INSERT INTO "receptionist_app_patientregister" VALUES ('SH856953','tilish','Mekoya','Diriba','Male','2024-05-15','45','0999999511','driver8@gmail.com','Ethiopia','wolkite','arsi','01','good','True','True','2','3');
+INSERT INTO "receptionist_app_patientregister" VALUES ('SH838797','some','Mekoya','Diriba','Female','2024-05-21','45','0999999777','driver8@gmail.com','Ethiopia','wolkite','uuuuuu','022','test','True','True','2','3');
+INSERT INTO "receptionist_app_patientregister" VALUES ('SH703566','Tilahun','Mekoya','Diriba','Female','2024-05-21','45','0999999777','driver8@gmail.com','Ethiopia','wolkite','uuuuuu','022','test','True','True','2','3');
+INSERT INTO "receptionist_app_patientregister" VALUES ('SH013629','muljgsij',' Mekoya','Diriba','Female','2024-05-10','45','0989987282','fikefiresew1234@gmail.com','Ethiopia','wolkite','arsi','011','sothing','True','True','2','3');
+INSERT INTO "receptionist_app_patientregister" VALUES ('SH362656','test','getaye','rtrtr','Male','2024-05-14','45','0989987282','fikefiresew1234@gmail.com','Ethiopia','wolkite','arsi','011','something','True','True','2','3');
+INSERT INTO "receptionist_app_patientregister" VALUES ('SH967364','muljgsij','you','rtrtr','Male','2024-05-08','45','0999999777','admin@gmail.com','Ethiopia','wolkite','uuuuuu','01','something','True','True','2','3');
+INSERT INTO "receptionist_app_patientregister" VALUES ('SH522825','Belete ','melese','Diriba','Female','2024-05-02','45','0948771033','yuuytu@gmai.com','Ethiopia','wolkite','arsi','011','sothing','True','True','2','3');

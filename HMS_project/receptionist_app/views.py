@@ -17,7 +17,7 @@ from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 from HMS_project import settings
 from twilio.rest import Client
-from django.http import HttpResponse
+from doctor_app.models import Appointment
 
 from twilio.base.exceptions import TwilioRestException
 def doctor_list(request):
@@ -80,13 +80,17 @@ def rece_profile_update(request, user_id):
 def receptionist_dash(request):
     notifications = Notification.objects.all()
     unseen_count = Notification.objects.filter(Seen=False).count()
+    appointment=Appointment.objects.all()
     return render(request,'receptionist_dash/receptionist_dash.html',{
+                                                              'appointment':appointment,
                                                               'notifications':notifications,
                                                               'unseen_count':unseen_count})
 def receptionist_dash_content(request):
     notifications = Notification.objects.all()
     unseen_count = Notification.objects.filter(Seen=False).count()
+    appointment=Appointment.objects.all()
     return render(request,'receptionist_dash/dash_content.html',{
+                                                              'appointment':appointment,
                                                               'notifications':notifications,
                                                               'unseen_count':unseen_count})
 

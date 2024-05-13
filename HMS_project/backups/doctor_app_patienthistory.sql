@@ -1,0 +1,10 @@
+INSERT INTO "doctor_app_patienthistory" VALUES ('2024-05-12','good very good','good','4','something','False','2','1','SH856953');
+INSERT INTO "doctor_app_patienthistory" VALUES ('2024-05-12','something','test','5','something','False','2','1','SH838797');
+INSERT INTO "doctor_app_patienthistory" VALUES ('2024-05-12','something','something','6','sothing','False','2','1','SH967364');
+INSERT INTO "doctor_app_patienthistory" VALUES ('2024-05-12','sothing','test','7','sothing','False','2','1','SH838797');
+INSERT INTO "doctor_app_patienthistory" VALUES ('2024-05-12','sothing','test','8','sothing','False','2','1','SH838797');
+INSERT INTO "doctor_app_patienthistory" VALUES ('2024-05-12','dddddd','test','9','ddddddd','False','2','1','SH703566');
+INSERT INTO "doctor_app_patienthistory" VALUES ('2024-05-12','ddsdsdss','sothingdsd','10','sddsdsdsds','False','2','Select Nurse Name','SH013629');
+INSERT INTO "doctor_app_patienthistory" VALUES ('2024-05-12','sddsdd','something','11','sdsdsdsds','False','2','tilish','SH362656');
+INSERT INTO "doctor_app_patienthistory" VALUES ('2024-05-12','ewewew','something','12','wewewew','False','2','None','SH967364');
+INSERT INTO "doctor_app_patienthistory" VALUES ('2024-05-12','sothing','sothing','13','watery','False','2','dagimnurse','SH522825');
