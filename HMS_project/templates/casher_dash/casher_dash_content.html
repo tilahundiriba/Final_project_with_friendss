@@ -81,6 +81,7 @@
           <!-- Widget Item -->
           <div class="col-md-12">
             <div class="widget-area-2 proclinic-box-shadow">
+              {% if lab_payment_request %}
               <h3 class="widget-title">Labboratories Payment Requests</h3>
               <div class="table-responsive">
                 <table class="table table-bordered table-striped">
@@ -91,26 +92,57 @@
                       <th>Doctor Name</th>
                       <th>Request Date</th>
                  
-                      <th>Actions</th>
+                      
                     </tr>
                   </thead>
                   <tbody>
+                    {% for pay in lab_payment_request %}
                     <tr>
-                      {% for pay in lab_payment_request %}
+                      
                       <td>{{pay.PatientID}}</td>
                       <td>{{pay.Lab_type}}</td>
                       <td>{{pay.Doctor_ID}}</td>
                       <td>{{pay.Admit_date}}</td>
                    
-                      <td>
-                        <span class="badge badge-success">Completed</span>
-                      </td>
-                      {% endfor %}
-                    </tr>
                     
+                      
+                    </tr>
+                    {% endfor %}
                   </tbody>
                 </table>
               </div>
+              {% endif %}
+              {% if card_payment_request %}
+              <h3 class="widget-title">Card Payment Requests</h3>
+              <div class="table-responsive">
+                <table class="table table-bordered table-striped">
+                  <thead>
+                    <tr>
+                      <th>Patient Id</th>
+                      <th>Name</th>
+                      <th>Doctor Name</th>
+                   
+                 
+                      
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for pay in card_payment_request %}
+                    <tr>
+                      
+                      <td>{{pay.patient_id}}</td>
+                      <td>{{pay.first_name}}{{pay.middle_name}}</td>
+                      <td>{{pay.doctor_name}}</td>
+                      
+                   
+                    
+                      
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+              {% endif %}
             </div>
           </div>
           <!-- /Widget Item -->
