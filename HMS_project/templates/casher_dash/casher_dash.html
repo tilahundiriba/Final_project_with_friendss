@@ -4,64 +4,71 @@
 <html lang="en" data-bs-theme="dark">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    {% block 'title' %}
-    <title>Casher Dashboard</title>
-{% endblock %}
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  {% block 'title' %}
+  <title>Casher Dashboard</title>
+  {% endblock %}
 
-	<!-- Fav  Icon Link -->
-	<link rel="shortcut icon" type="image/png" href="{% static 'images2/fav.png' %}">
-	<!-- Bootstrap core CSS -->
-	<link rel="stylesheet" href="{% static 'css2/bootstrap.min.css' %}">
-	<!-- themify icons CSS -->
-	<link rel="stylesheet" href="{% static 'css2/themify-icons.css' %}">
-	<!-- Animations CSS -->
-	<link rel="stylesheet" href="{% static 'css2/animate.css' %}">
-	<!-- Main CSS -->
-	<link rel="stylesheet" href="{% static 'css2/styles.css' %}">
-	<link rel="stylesheet" href="{% static 'css2/green.css' %}" id="style_theme">
-	<link rel="stylesheet" href="{% static 'css2/responsive.css' %}">
-	<!-- morris charts -->
-	<link rel="stylesheet" href="{% static 'charts/css/morris.css' %}">
-	<!-- jvectormap -->
-	<link rel="stylesheet" href="{% static 'css2/jquery-jvectormap.css' %}">
+  <!-- Fav  Icon Link -->
+  <link rel="shortcut icon" type="image/png" href="{% static 'images2/fav.png' %}">
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="{% static 'css2/bootstrap.min.css' %}">
+  <!-- themify icons CSS -->
+  <link rel="stylesheet" href="{% static 'css2/themify-icons.css' %}">
+  <!-- Animations CSS -->
+  <link rel="stylesheet" href="{% static 'css2/animate.css' %}">
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="{% static 'css2/styles.css' %}">
+  <link rel="stylesheet" href="{% static 'css2/green.css' %}" id="style_theme">
+  <link rel="stylesheet" href="{% static 'css2/responsive.css' %}">
+  <!-- morris charts -->
+  <link rel="stylesheet" href="{% static 'charts/css/morris.css' %}">
+  <!-- jvectormap -->
+  <link rel="stylesheet" href="{% static 'css2/jquery-jvectormap.css' %}">
 
-	<script src="{% static 'js2/modernizr.min.js' %}"></script>
-    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'fontawesome/css/all.min.css' %}">
-    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}" />
+  <script src="{% static 'js2/modernizr.min.js' %}"></script>
+  <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'fontawesome/css/all.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/dashboard.css' %}" />
 
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 
-    <style>
-        /* Default style for the div */
-        .js-sidebar {
-          display: block; /* Hide the div by default */
-        }
-      #container-min{
+  <style>
+    /* Default style for the div */
+    .js-sidebar {
+      display: block;
+      /* Hide the div by default */
+    }
+
+    #container-min {
+      display: none;
+    }
+
+    #navbar_id {
+      display: block;
+
+    }
+
+    /* Media query for screens less than or equal to 435px */
+    @media only screen and (max-width: 768px) {
+      .js-sidebar {
         display: none;
+        /* Display the div when the screen is 435px or less */
       }
-      #navbar_id{
-        display:block;
 
-      }
-     
-        /* Media query for screens less than or equal to 435px */
-        @media only screen and (max-width: 768px) {
-          .js-sidebar {
-            display: none; /* Display the div when the screen is 435px or less */
-          }
-          #container-min{
+      #container-min {
         display: block;
       }
-      #navbar_id{
+
+      #navbar_id {
         display: none;
       }
-        }
-        .unseen {
+    }
+
+    .unseen {
       color: red;
     }
 
@@ -93,398 +100,375 @@
       padding-top: 10px;
       font-size: smaller;
     }
-      </style>
+  </style>
 
 
 </head>
 
 <body>
-    <div class="wrapper">
-        <aside id="sidebar" class="js-sidebar" style="background-color: rgb(34, 146, 183);">
-            <!-- Content For Sidebar -->
-            <div class="h-100">
-              
-                <div class="sidebar-logo">
-                    <img src="{% static 'images/hospital_logo3.png' %}" alt="NOOOOOOo"
-                    class="rounded-circle"
-                    width="70"
-                    height="70">
-                  
-                </div>
-             
-                <ul class="sidebar-nav">
-                    <li class="sidebar-header">Elements</li>
-                    <li class="sidebar-item">
-                        <a href="{% url 'casher_dash_content' %}" class="sidebar-link">
-                            <i class="fa-solid fa-list pe-2"></i>
-                            Dashboard
-                        </a>
-                    </li>
-    
-                    <li class="sidebar-item">
-                        <a href="#" class="sidebar-link collapsed" data-bs-target="#posts" data-bs-toggle="collapse"
-                            aria-expanded="false"><i class="fa-solid fa-money-bills pe-2"></i>
-                            Payments
-                        </a>
-                        <ul id="posts" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
-                           
-                            <li class="sidebar-item">
-                                <a href="{% url 'dis_payment' %}" class="sidebar-link">View Payment</a>
-                            </li>
-                            <li class="sidebar-item">
-                                <a href="{% url 'card_payments' %}" class="sidebar-link">Card Payment Request</a>
-                            </li>
-                            <li class="sidebar-item">
-                                <a href="{% url 'check_payment_request' %}" class="sidebar-link">Lab Payment Request</a>
-                            </li>
+  <div class="wrapper">
+    <aside id="sidebar" class="js-sidebar" style="background-color: rgb(34, 146, 183);">
+      <!-- Content For Sidebar -->
+      <div class="h-100">
 
-                        </ul>
-                    </li>
-                    <li class="sidebar-item">
-                        <a href="#" class="sidebar-link collapsed" data-bs-target="#discharge" data-bs-toggle="collapse"
-                            aria-expanded="false"><i class="fa-solid fa-plane-departure pe-2"></i>
-                            Discharge
-                        </a>
-                        <ul id="discharge" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
-                            <li class="sidebar-item">
-                                <a href="{% url 'add-discharge' %}" class="sidebar-link">Add Discharge</a>
-                            </li>
-                            <li class="sidebar-item">
-                                <a href="{% url 'discharges' %}" class="sidebar-link">View Discharge</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="sidebar-item">
-                        <a href="#" class="sidebar-link collapsed" data-bs-target="#setting" data-bs-toggle="collapse"
-                            aria-expanded="false">
-                     
-                            <i class="fa-solid fa-language pe-2"></i>
-                            Language
-                        </a>
-                        <ul id="setting" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
-                            <li class="sidebar-item">
-                                <a href="#" class="sidebar-link">
-                                    <div id="google_translate_element" class=""></div></a>
-                            </li>
-                            
-                        </ul>
-                    </li>
-      
-                </ul>
-            </div>
-        </aside>
-        <div class="main">
-            <nav class="navbar navbar-expend px-3 border-bottom " id="navbar_id">
-                <button class="btn  text-dark" id="sidebar-toggle" type="button">
-                    <span class="navbar-toggler-icon text-white"></span>
-                </button>
-                <!-- <img src="{% static 'images/profile.jpg'%}" class="avatar img-fluid rounded" alt="" /> -->
-   
-            </nav>
-            <main class="content px-3 py-2">
-                <div class="container top-brand">
-					<nav class="navbar navbar-default">			
-						<div class="navbar-header">
-							<div class="sidebar-header"> <a href="#"><img src="{% static 'images/hospital_logo3.png' %}" class="logo" alt="logo" style="width: 50px; height: 50px; border-radius: 50%;"></a>
-							</div>
-						</div>
-						<ul class="nav justify-content-end">
-							<li class="nav-item">
-								<a class="nav-link">
-									<span title="Fullscreen" class="ti-fullscreen fullscreen"></span>
-								</a>							
-							</li>
-						
-                            <li class="nav-item">
-                                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
-                                  aria-expanded="false">
-                                  <span id="bellCount" class="ti-announcement" data-count="{{unseen_count}}"></span>
-                                </a>
-                                <div class="dropdown-menu proclinic-box-shadow2 notifications animated flipInY" >
-                                  <h5>Notifications</h5>
-                                  <ul style="overflow: auto; max-height: 300px; max-width: 200px;">
-                                
-                                    {% include 'admin_dash/seeNotifications.html' %}
-                                
-                                  </ul> <!-- Empty <ul> element to contain the notifications -->
-                                </div>
-                              </li>
-							<li class="nav-item">
-								<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
-								 aria-expanded="false">
-											<img src="{{ user.userprofileinfo.profile_pic.url}}" alt="NOOOOOOo"
-											class="rounded-circle"
-											width="40"
-											height="40">
-								</a>
-								
-								<div class="dropdown-menu proclinic-box-shadow2 profile animated flipInY">
-									<h5>{{ request.user.username }}</h5>
-									<a class="dropdown-item text-dark" href="{% url 'show_casher_profile' %}">
-										<span class="ti-image"></span> Profile</a>
-									<a class="dropdown-item text-dark" href="{% url 'logout' %}">
-										<span class="ti-power-off"></span> Logout</a>
-								</div>
-							</li>
-						</ul>
-				
-					</nav>
-				</div>
-                			<!-- Top Navigation -->
-				{% include 'casher_dash/navbar.html' %}
-				<!-- /Menu -->
-				<!-- Breadcrumb -->
-                {% block content %}
-         
-                <body>
-                    <!-- Pre Loader -->
-                    <div class="loading">
-                      <div class="spinner">
-                        <div class="double-bounce1"></div>
-                        <div class="double-bounce2"></div>
-                      </div>
-                    </div>
-                    <!--/Pre Loader -->
-                    <!-- Color Changer -->
-                  
-                    <!-- /Color Changer -->
-                    <div class="wrapper">		
-                      <!-- Page Content -->
-                      <div id="content">
-                  
-                        <!-- Page Title -->
-                        <div class="container mt-0">
-                          <div class="row breadcrumb-bar">
-                            <div class="col-md-6">
-                              <h3 class="block-title">Quick Statistics</h3>
-                            </div>
-                            <div class="col-md-6">
-                              <ol class="breadcrumb">
-                                <li class="breadcrumb-item">
-                                  <a href="index.html">
-                                    <span class="ti-home"></span>
-                                  </a>
-                                </li>
-                                <li class="breadcrumb-item active">Dashboard</li>
-                              </ol>
-                            </div>
-                          </div>
-                        </div>
-                        <!-- /Page Title -->
-                        <!-- /Breadcrumb -->
-                        <!-- Main Content -->
-                        <div class="container home">
-                          <div class="row">
-                            <!-- Widget Item -->
-                            <div class="col-md-6">
-                              <div class="widget-area proclinic-box-shadow color-red">
-                                <div class="widget-left">
-                                  <span class="ti-user"></span>
-                                </div>
-                                <div class="widget-right">
-                                  <h4 class="wiget-title text-success">Card Payment Remaning</h4>
-                                  <span class="numeric color-red">{{card_payment}}</span>
-                                  
-                                  
-                                </div>
-                              </div>
-                            </div>
-                            <!-- /Widget Item -->
-                            <!-- Widget Item -->
-                            <div class="col-md-6">
-                              <div class="widget-area proclinic-box-shadow color-green">
-                                <div class="widget-left">
-                                  <span class="ti-timer"></span>
-                                </div>
-                                <div class="widget-right">
-                                  <h4 class="wiget-title text-success">Laboratory Payment Remaning </h4>
-                                  <span class="numeric color-green">{{lab_payment}}</span>
-                                 
-                                </div>
-                              </div>
-                            </div>
-                      
-                   
-                    
-                            <!-- /Widget Item -->
-                          </div>
-                          <div class="row">
-                            <!-- Widget Item -->
-                            <div class="col-md-12">
-                              <div class="widget-area-2 proclinic-box-shadow">
-                                <h3 class="widget-title">Appointments</h3>
-                                <div class="table-responsive">
-                                  <table class="table table-bordered table-striped">
-                                    <thead>
-                                      <tr>
-                                        <th>Patient Name</th>
-                                        <th>Doctor</th>
-                                        <th>Check-Up</th>
-                                        <th>Date</th>
-                                        <th>Time</th>
-                                        <th>Status</th>
-                                      </tr>
-                                    </thead>
-                                    <tbody>
-                                      <tr>
-                                        <td>Rajesh</td>
-                                        <td>Manoj Kumar</td>
-                                        <td>Dental</td>
-                                        <td>12-10-2018</td>
-                                        <td>12:10PM</td>
-                                        <td>
-                                          <span class="badge badge-success">Completed</span>
-                                        </td>
-                                      </tr>
-                                      <tr>
-                                        <td>Riya</td>
-                                        <td>Daniel </td>
-                                        <td>Ortho</td>
-                                        <td>12-10-2018</td>
-                                        <td>1:10PM</td>
-                                        <td>
-                                          <span class="badge badge-warning">Pending</span>
-                                        </td>
-                                      </tr>
-                                      <tr>
-                                        <td>Siri</td>
-                                        <td>Daniel </td>
-                                        <td>Ortho</td>
-                                        <td>12-10-2018</td>
-                                        <td>1:30PM</td>
-                                        <td>
-                                          <span class="badge badge-danger">Cancelled</span>
-                                        </td>
-                                      </tr>
-                                      <tr>
-                                        <td>Rajesh</td>
-                                        <td>Manoj Kumar</td>
-                                        <td>Dental</td>
-                                        <td>12-10-2018</td>
-                                        <td>12:10PM</td>
-                                        <td>
-                                          <span class="badge badge-success">Completed</span>
-                                        </td>
-                                      </tr>
-                                      <tr>
-                                        <td>Riya</td>
-                                        <td>Daniel </td>
-                                        <td>Ortho</td>
-                                        <td>12-10-2018</td>
-                                        <td>1:10PM</td>
-                                        <td>
-                                          <span class="badge badge-warning">Pending</span>
-                                        </td>
-                                      </tr>
-                                      <tr>
-                                        <td>Siri</td>
-                                        <td>Daniel </td>
-                                        <td>Ortho</td>
-                                        <td>12-10-2018</td>
-                                        <td>1:30PM</td>
-                                        <td>
-                                          <span class="badge badge-danger">Cancelled</span>
-                                        </td>
-                                      </tr>
-                                    </tbody>
-                                  </table>
-                                </div>
-                              </div>
-                            </div>
-                            <!-- /Widget Item -->
-                          </div>
-                        </div>
-                        <!-- /Main Content -->
-                        <!--Copy Rights-->
-                        <div class="container">
-                          <div class="d-sm-flex justify-content-center">
-                            <span class="text-muted text-center d-block d-sm-inline-block">Copyright © 2018 <a href="http://www.konnectplugins.com/" target="_blank">konnectcode</a>. All rights reserved.</span>
-                          </div>
-                        </div>
-                        <!-- /Copy Rights-->
-                      </div>
-                      <!-- /Page Content -->
-                    </div>
-                    <!-- Back to Top -->
-                    <a id="back-to-top" href="#" class="back-to-top">
-                      <span class="ti-angle-up"></span>
-                    </a>
-                    <!-- /Back to Top -->
-                  
-                  
-                  </body>
-                    {% endblock %}
-                </main>
-                <a href="#" class="theme-toggle">
-                    <i class="fa-regular fa-moon"></i>
-                    <i class="fa-regular fa-sun"></i>
-                </a>
-           
-                    <div class="container-fluid">
-                        <div class="row text-muted">
-                            <div class="col-6 text-start">
-                                <p class="mb-0">
-                                    <a href="#" class="text-muted">
-                                        <strong>CodzSwod</strong>
-                                    </a>
-                                </p>
-                            </div>
-                            <div class="col-6 text-end">
-                                <ul class="list-inline">
-                                    <li class="list-inline-item">
-                                        <a href="#" class="text-muted">Contact</a>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a href="#" class="text-muted">About Us</a>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a href="#" class="text-muted">Terms</a>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a href="#" class="text-muted">Booking</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </footer> 
-               
+        <div class="sidebar-logo">
+          <img src="{% static 'images/hospital_logo3.png' %}" alt="NOOOOOOo" class="rounded-circle" width="70"
+            height="70">
+
         </div>
+
+        <ul class="sidebar-nav">
+          <li class="sidebar-header">Elements</li>
+          <li class="sidebar-item">
+            <a href="{% url 'casher_dash_content' %}" class="sidebar-link">
+              <i class="fa-solid fa-list pe-2"></i>
+              Dashboard
+            </a>
+          </li>
+
+          <li class="sidebar-item">
+            <a href="#" class="sidebar-link collapsed" data-bs-target="#posts" data-bs-toggle="collapse"
+              aria-expanded="false"><i class="fa-solid fa-money-bills pe-2"></i>
+              Payments
+            </a>
+            <ul id="posts" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+
+              <li class="sidebar-item">
+                <a href="{% url 'dis_payment' %}" class="sidebar-link">View Payment</a>
+              </li>
+              <li class="sidebar-item">
+                <a href="{% url 'card_payments' %}" class="sidebar-link">Card Payment Request</a>
+              </li>
+              <li class="sidebar-item">
+                <a href="{% url 'check_payment_request' %}" class="sidebar-link">Lab Payment Request</a>
+              </li>
+
+            </ul>
+          </li>
+          <li class="sidebar-item">
+            <a href="#" class="sidebar-link collapsed" data-bs-target="#discharge" data-bs-toggle="collapse"
+              aria-expanded="false"><i class="fa-solid fa-plane-departure pe-2"></i>
+              Discharge
+            </a>
+            <ul id="discharge" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+              <li class="sidebar-item">
+                <a href="{% url 'add-discharge' %}" class="sidebar-link">Add Discharge</a>
+              </li>
+              <li class="sidebar-item">
+                <a href="{% url 'discharges' %}" class="sidebar-link">View Discharge</a>
+              </li>
+            </ul>
+          </li>
+          <li class="sidebar-item">
+            <a href="#" class="sidebar-link collapsed" data-bs-target="#setting" data-bs-toggle="collapse"
+              aria-expanded="false">
+
+              <i class="fa-solid fa-language pe-2"></i>
+              Language
+            </a>
+            <ul id="setting" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+              <li class="sidebar-item">
+                <a href="#" class="sidebar-link">
+                  <div id="google_translate_element" class=""></div>
+                </a>
+              </li>
+
+            </ul>
+          </li>
+
+        </ul>
+      </div>
+    </aside>
+    <div class="main">
+      <nav class="navbar navbar-expend px-3 border-bottom " id="navbar_id">
+        <button class="btn  text-dark" id="sidebar-toggle" type="button">
+          <span class="navbar-toggler-icon text-white"></span>
+        </button>
+        <!-- <img src="{% static 'images/profile.jpg'%}" class="avatar img-fluid rounded" alt="" /> -->
+
+      </nav>
+      <main class="content px-3 py-2">
+        <div class="container top-brand">
+          <nav class="navbar navbar-default">
+            <div class="navbar-header">
+              <div class="sidebar-header"> <a href="#"><img src="{% static 'images/hospital_logo3.png' %}" class="logo"
+                    alt="logo" style="width: 50px; height: 50px; border-radius: 50%;"></a>
+              </div>
+            </div>
+            <ul class="nav justify-content-end">
+              <li class="nav-item">
+                <a class="nav-link">
+                  <span title="Fullscreen" class="ti-fullscreen fullscreen"></span>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+                  aria-expanded="false">
+                  <span id="bellCount" class="ti-announcement" data-count="{{unseen_count}}"></span>
+                </a>
+                <div class="dropdown-menu proclinic-box-shadow2 notifications animated flipInY">
+                  <h5>Notifications</h5>
+                  <ul style="overflow: auto; max-height: 300px; max-width: 200px;">
+
+                    {% include 'admin_dash/seeNotifications.html' %}
+
+                  </ul> <!-- Empty <ul> element to contain the notifications -->
+                </div>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+                  aria-expanded="false">
+                  <img src="{{ user.userprofileinfo.profile_pic.url}}" alt="NOOOOOOo" class="rounded-circle" width="40"
+                    height="40">
+                </a>
+
+                <div class="dropdown-menu proclinic-box-shadow2 profile animated flipInY">
+                  <h5>{{ request.user.username }}</h5>
+                  <a class="dropdown-item text-dark" href="{% url 'show_casher_profile' %}">
+                    <span class="ti-image"></span> Profile</a>
+                  <a class="dropdown-item text-dark" href="{% url 'logout' %}">
+                    <span class="ti-power-off"></span> Logout</a>
+                </div>
+              </li>
+            </ul>
+
+          </nav>
+        </div>
+        <!-- Top Navigation -->
+        {% include 'casher_dash/navbar.html' %}
+        <!-- /Menu -->
+        <!-- Breadcrumb -->
+        {% block content %}
+
+        <body>
+          <!-- Pre Loader -->
+          <div class="loading">
+            <div class="spinner">
+              <div class="double-bounce1"></div>
+              <div class="double-bounce2"></div>
+            </div>
+          </div>
+          <!--/Pre Loader -->
+          <!-- Color Changer -->
+
+          <!-- /Color Changer -->
+          <div class="wrapper">
+            <!-- Page Content -->
+            <div id="content">
+
+              <!-- Page Title -->
+              <div class="container mt-0">
+                <div class="row breadcrumb-bar">
+                  <div class="col-md-6">
+                    <h3 class="block-title">Quick Statistics</h3>
+                  </div>
+                  <div class="col-md-6">
+                    <ol class="breadcrumb">
+                      <li class="breadcrumb-item">
+                        <a href="index.html">
+                          <span class="ti-home"></span>
+                        </a>
+                      </li>
+                      <li class="breadcrumb-item active">Dashboard</li>
+                    </ol>
+                  </div>
+                </div>
+              </div>
+              <!-- /Page Title -->
+              <!-- /Breadcrumb -->
+              <!-- Main Content -->
+              <div class="container home">
+                <div class="row">
+                  <!-- Widget Item -->
+                  <div class="col-md-6">
+                    <div class="widget-area proclinic-box-shadow color-red">
+                      <div class="widget-left">
+                        <span class="ti-user"></span>
+                      </div>
+                      <div class="widget-right">
+                        <h4 class="wiget-title text-success">Card Payment Remaning</h4>
+                        <span class="numeric color-red">{{card_payment}}</span>
+
+
+                      </div>
+                    </div>
+                  </div>
+                  <!-- /Widget Item -->
+                  <!-- Widget Item -->
+                  <div class="col-md-6">
+                    <div class="widget-area proclinic-box-shadow color-green">
+                      <div class="widget-left">
+                        <span class="ti-timer"></span>
+                      </div>
+                      <div class="widget-right">
+                        <h4 class="wiget-title text-success">Laboratory Payment Remaning </h4>
+                        <span class="numeric color-green">{{lab_payment}}</span>
+
+                      </div>
+                    </div>
+                  </div>
+
+
+
+                  <!-- /Widget Item -->
+                </div>
+                <div class="row">
+                  <!-- Widget Item -->
+                  <div class="col-md-12">
+                    <div class="widget-area-2 proclinic-box-shadow">
+                      {% if lab_payment_request %}
+                      <h3 class="widget-title">Labboratories Payment Requests</h3>
+                      <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                          <thead>
+                            <tr>
+                              <th>Patient Id</th>
+                              <th>Laboratories</th>
+                              <th>Doctor Name</th>
+                              <th>Request Date</th>
+
+
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {% for pay in lab_payment_request %}
+                            <tr>
+
+                              <td>{{pay.PatientID}}</td>
+                              <td>{{pay.Lab_type}}</td>
+                              <td>{{pay.Doctor_ID}}</td>
+                              <td>{{pay.Admit_date}}</td>
+
+
+
+                            </tr>
+                            {% endfor %}
+                          </tbody>
+                        </table>
+                      </div>
+                      {% endif %}
+                      {% if card_payment_request %}
+                      <h3 class="widget-title">Card Payment Requests</h3>
+                      <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                          <thead>
+                            <tr>
+                              <th>Patient Id</th>
+                              <th>Name</th>
+                              <th>Doctor Name</th>
+
+
+
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {% for pay in card_payment_request %}
+                            <tr>
+
+                              <td>{{pay.patient_id}}</td>
+                              <td>{{pay.first_name}}{{pay.middle_name}}</td>
+                              <td>{{pay.doctor_name}}</td>
+
+
+
+
+                            </tr>
+                            {% endfor %}
+                          </tbody>
+                        </table>
+                      </div>
+                      {% endif %}
+                    </div>
+                  </div>
+                  <!-- /Widget Item -->
+                </div>
+              </div>
+              <!-- /Main Content -->
+
+            </div>
+            <!-- /Page Content -->
+          </div>
+          <!-- Back to Top -->
+          <a id="back-to-top" href="#" class="back-to-top">
+            <span class="ti-angle-up"></span>
+          </a>
+          <!-- /Back to Top -->
+
+
+        </body>
+        {% endblock %}
+      </main>
+      <a href="#" class="theme-toggle">
+        <i class="fa-regular fa-moon"></i>
+        <i class="fa-regular fa-sun"></i>
+      </a>
+
+      <div class="container-fluid">
+        <div class="row text-muted">
+          <div class="col-6 text-start">
+            <p class="mb-0">
+              <a href="#" class="text-muted">
+                <strong>CodzSwod</strong>
+              </a>
+            </p>
+          </div>
+          <div class="col-6 text-end">
+            <ul class="list-inline">
+              <li class="list-inline-item">
+                <a href="#" class="text-muted">Contact</a>
+              </li>
+              <li class="list-inline-item">
+                <a href="#" class="text-muted">About Us</a>
+              </li>
+              <li class="list-inline-item">
+                <a href="#" class="text-muted">Terms</a>
+              </li>
+              <li class="list-inline-item">
+                <a href="#" class="text-muted">Booking</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      </footer>
+
     </div>
+  </div>
 
-    <script>
-        // Check if user is logged in, redirect to login page if not
-        var isAuthenticated = "{{ user.is_authenticated|lower }}";
-        if (!isAuthenticated) {
-            window.location.replace("{% url 'user_log' %}");
-        }
-    </script>
-    <script src="http://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-    <script>
-  
-      function googleTranslateElementInit() {
-        new google.translate.TranslateElement(
-          { pageLanguage: 'en', defaultLanguage: 'en' },
-          'google_translate_element'
-        );
-      } 
+  <script>
+    // Check if user is logged in, redirect to login page if not
+    var isAuthenticated = "{{ user.is_authenticated|lower }}";
+    if (!isAuthenticated) {
+      window.location.replace("{% url 'user_log' %}");
+    }
+  </script>
+  <script src="http://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+  <script>
 
-    </script> 
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement(
+        { pageLanguage: 'en', defaultLanguage: 'en' },
+        'google_translate_element'
+      );
+    }
 
-    <script src="{% static 'js2/jquery-3.2.1.min.js' %}"></script>
-	<!-- Popper Library-->
-	<script src="{% static 'js2/popper.min.js' %}"></script>
-	<!-- Bootstrap Library-->
-    <script src="{% static 'js2/bootstrap.min.js' %}"></script>
-    
-    <!-- Datatable  -->
-	<script src="{% static 'datatable/jquery.dataTables.min.js' %}"></script>
-	<script src="{% static 'datatable/dataTables.bootstrap4.min.js' %}"></script>
-    
-	<!-- Custom Script-->
-	<script src="{% static 'js2/custom.js' %}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="{% static 'js/scripts.js' %}"></script>
+  </script>
+
+  <script src="{% static 'js2/jquery-3.2.1.min.js' %}"></script>
+  <!-- Popper Library-->
+  <script src="{% static 'js2/popper.min.js' %}"></script>
+  <!-- Bootstrap Library-->
+  <script src="{% static 'js2/bootstrap.min.js' %}"></script>
+
+  <!-- Datatable  -->
+  <script src="{% static 'datatable/jquery.dataTables.min.js' %}"></script>
+  <script src="{% static 'datatable/dataTables.bootstrap4.min.js' %}"></script>
+
+  <!-- Custom Script-->
+  <script src="{% static 'js2/custom.js' %}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="{% static 'js/scripts.js' %}"></script>
 </body>
 
 </html>
