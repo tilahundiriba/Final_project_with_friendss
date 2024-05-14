@@ -161,21 +161,21 @@ def delete_discharge(request):
         # Redirect to a success page or back to the medications list
     return redirect('departed') 
 
-# @login_required
+@login_required
 def dis_appointment(request):
     notifications = Notification.objects.all()
     unseen_count = Notification.objects.filter(Seen=False).count()
     appointment=Appointment.objects.all()
     return render(request,'admin_dash/appointments.html',{'appointment':appointment,'notifications':notifications,
                                                 'unseen_count':unseen_count})
-# @login_required
+@login_required
 def dis_history(request):
     notifications = Notification.objects.all()
     unseen_count = Notification.objects.filter(Seen=False).count()
     histories = PatientHistory.objects.all()
     return render(request,'admin_dash/histories.html',{'histories':histories,'notifications':notifications,
                                                 'unseen_count':unseen_count})
-# @login_required
+@login_required
 def perscription(request):
     prescription= Prescription.objects.all()
     notifications = Notification.objects.all()
@@ -262,7 +262,7 @@ def add_report(request):
     return render(request, 'admin_dash/add_report.html')
 
 
-# @login_required
+@login_required
 def admin_profile(request):
     user = request.user
     notifications = Notification.objects.all()
@@ -270,7 +270,7 @@ def admin_profile(request):
     return render(request, 'admin_dash/admin_profile.html', {'user': user,'notifications':notifications,
                                                         'unseen_count':unseen_count})
 
-# @login_required
+@login_required
 def profile_update_admin(request, user_id):
     user = get_object_or_404(User, pk=user_id)
     if request.user != user:  # Ensure user can only update their own profile
@@ -294,6 +294,7 @@ def notification_view(request):
     notifications = Notification.objects.all()
     unseen_count = Notification.objects.filter(Seen=False).count()
     return render(request, 'admin_dash/seeNotifications.html', {'notifications': notifications,'unseen_count': unseen_count})
+@login_required
 def general_report(request):
     # Fetch all notifications that haven't been seen by the user
     current_time = datetime.now()  # Get the current system time
@@ -380,7 +381,7 @@ def mark_notification_as_seen(request, id):
     if 'unseen_count' in request.session:
         request.session['unseen_count'] = max(0, request.session.get('unseen_count', 0) - 1)
     return redirect('index')
-
+@login_required
 def poster(request):
     if request.method=='POST':
         message=request.POST.get('message')
@@ -397,7 +398,7 @@ def poster(request):
     return render(request,'admin_dash/write-notifications.html',{'notifications':notifications,
                                                    'unseen_count':unseen_count})
 
-# @login_required
+#@login_required
 def login_view(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -443,7 +444,7 @@ def login_view(request):
         return render(request, 'admin_dash/login.html')
     # return render(request, 'admin_dash/login.html')
 
-#@login_required
+@login_required
 def logout_view(request):
     logout(request)
     return redirect(reverse('user_log'))
@@ -494,7 +495,7 @@ def edit_service(request,service):
                                                                 'unseen_count':unseen_count,
                                                                 'services':services
                                                                 })
-# @login_required
+@login_required
 def createUserAccount(request):
     created=False
     if request.method == 'POST':
@@ -551,7 +552,7 @@ def dis_login2(request):
 def dis_base(request):
     return render(request,'admin_app/base.html')
 # admin dashboard views
-# @login_required
+@login_required
 def dis_dash(request):
     total_sum = PaymentModel.objects.aggregate(total_sum=Sum('Total'))['total_sum']
     total_sum = total_sum or 0
@@ -588,7 +589,7 @@ def dis_dash(request):
                                                    'unseen_feedbacks':unseen_feedbacks,
                                                    'unseen_feedbacks_count':unseen_feedbacks_count
                                                    })
-# @login_required
+@login_required
 def dis_dash_content(request):
     cash_total_sums = PaymentModel.objects.filter(Pay_method='Cash').aggregate(total_sum=Sum('Total'))
     cash_total_sum = cash_total_sums['total_sum'] or 0
@@ -616,7 +617,7 @@ def dis_dash_content(request):
                                                           'unseen_feedbacks':unseen_feedbacks,
                                                           'unseen_feedbacks_count':unseen_feedbacks_count,
                                                           'context':context})
-# @login_required
+@login_required
 def refere_info(request,discharge_no,patient_id):
     notifications = Notification.objects.all()
     unseen_count = Notification.objects.filter(Seen=False).count()
@@ -633,7 +634,7 @@ def refere_info(request,discharge_no,patient_id):
                                                          'laboratories':lab,
                                                          'prescriptions':prec}
                   )
-# @login_required
+@login_required
 def dis_index(request):
     total_sum = PaymentModel.objects.aggregate(total_sum=Sum('Total'))['total_sum']
     total_sum = total_sum or 0
@@ -707,7 +708,7 @@ def display_users(request):
                                                        'notifications': notifications,
                                                        'unseen_count': unseen_count})
 
-# @login_required
+@login_required
 def dis_user_registration(request):
     notifications = Notification.objects.all()
     unseen_count = Notification.objects.filter(Seen=False).count()
@@ -717,7 +718,7 @@ def dis_web_home(request):
     return render(request,'admin_dash/web_home.html')
 def edit_staff(request):
     return render(request,'admin_dash/edit_staff.html')
-# @login_required
+@login_required
 def view_staff(request,user_id):
     user = get_object_or_404(User, pk=user_id)
     user_profile_info = get_object_or_404(UserProfileInfo, user_id=user_id)
@@ -729,7 +730,7 @@ def view_staff(request,user_id):
                                                     'unseen_count':unseen_count})
 
 
-# @login_required
+@login_required
 def change_credentials(request):
     if request.method == 'POST':
         username = request.POST['username']
@@ -770,7 +771,7 @@ def success_message(request):
     # You can customize this view to display a success message or redirect to a different page
     return HttpResponse("Password changed successfully.")
 
-# @login_required
+@login_required
 def save_data(request, format):
     queryset = PatientRegister.objects.all()  # Fetch data from your model
 
@@ -828,7 +829,7 @@ def save_data(request, format):
         # Handle other formats or invalid requests here
         return HttpResponse("Invalid format requested")
     
-# @login_required
+@login_required
 def deactivate(request, user_id):
     user_deactive = get_object_or_404(User, id=user_id)
     user_deactive.is_active = False

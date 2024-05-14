@@ -148,7 +148,7 @@ def approve_discharge_request(request, discharge_no):
     dis_request.Approval = True
     dis_request.save()
     return redirect('approve_departure')
-
+@login_required
 def add_payment(request,patient_id):
     notifications = Notification.objects.all()
     patient_pay = get_object_or_404(PatientRegister, patient_id=patient_id)
@@ -250,7 +250,7 @@ def invoice(request):
     return render(request,'casher_dash/invoice.html',{'notifications':notifications,
                                                             'unseen_count':unseen_count})
 from decimal import Decimal
-
+@login_required
 def add_payment_for_patient(request, patient_id):
     # Assuming you have a Payment model with fields like patient_id, card_payment, lab_payment, bed_payment, food_payment, etc.
     for_food = get_object_or_404(ServicePayment, id=6)
@@ -310,7 +310,7 @@ def add_payment_for_patient(request, patient_id):
         'unseen_count': unseen_count
     })
 
-
+@login_required
 def card_payments(request):
     notifications = Notification.objects.all()
     unseen_count = Notification.objects.filter(Seen=False).count()
