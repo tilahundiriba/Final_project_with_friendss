@@ -138,98 +138,26 @@ class NoCacheMixin:
     def dispatch(self, *args, **kwargs):
         return super().dispatch(*args, **kwargs)
     
-ADMIN_USERNAME = 'tilahun'   
-DESIGNATED_ADMIN_USERNAME = 'admin'
+ADMIN_USERNAME = 'your username'   
+DESIGNATED_ADMIN_USERNAME = 'your second admin name'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE':'django.db.backends.postgresql',
-#         'NAME':'malu',
-#         'USER':'postgres',
-#         'PASSWORD':'1234',
-#         'HOST':'localhost',
-#         'PORT':'5050',
-#     }
-# }
-# 
-# DATABASES = {
-#     'default': {
-#         'ENGINE':'django.db.backends.postgresql',
-#         'NAME':'malu',
-#         'USER':'postgres',
-#         'PASSWORD':'1234',
-#         'HOST':'localhost',
-#         'PORT':'5050',
-#     }
-# }
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE':'django.db.backends.postgresql',
-#         'NAME':'mg',
-#         'USER':'postgres',
-#         'PASSWORD':'362588',
-#          'HOST':'localhost',
-#          'PORT':'5432',
-   #}}
+
 
 DATABASES = {
     'default': {
         'ENGINE':'django.db.backends.postgresql',
-        'NAME':'FinalDatabase',
-        'USER':'tilish',
-        'PASSWORD':'14241224',
-        'HOST':'localhost',
-        'PORT':'5432',
+        'NAME':'your database name',
+        'USER':'your database user',
+        'PASSWORD':'your password',
+        'HOST':'your hostname',
+        'PORT':'your port number',
     }
 }
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE':'django.db.backends.postgresql',
-#         'NAME':'Hospital',
-#         'USER':'postgres',    
-#         'PASSWORD':'211',
-#         'HOST':'localhost',
-#         'PORT':'5432',
-#     }
-# }
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE':'django.db.backends.postgresql',
-#         'NAME':'yaba',
-#         'USER':'postgres',    
-#         'PASSWORD':'211',
-#         'HOST':'localhost',
-#         'PORT':'5432',
-#     }
-# }
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE':'django.db.backends.postgresql',
-#         'NAME':'sha',
-#         'USER':'postgres',    
-#         'PASSWORD':'211',
-#         'HOST':'localhost',
-#         'PORT':'5432',
-#     }
-# }
-
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE':'django.db.backends.postgresql',
-#         'NAME':'HMS',
-#         'USER':'tilish',
-#         'PASSWORD':'14241224',
-#         'HOST':'localhost',
-#         'PORT':'5432',
-#     }
-# }
 
 # DATABASES = {
 #    'default': {
@@ -238,16 +166,7 @@ DATABASES = {
 #    }
 # }
 # 
-# DATABASES = {
-#     'default': {
-#         'ENGINE':'django.db.backends.postgresql',
-#         'NAME':'mgmg',
-#         'USER':'postgres',
-#         'PASSWORD':'362588',
-#         'HOST':'localhost',
-#         'PORT':'5432',
-#     }
-# }
+# 
 
 
 # Password validation
@@ -308,5 +227,5 @@ EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER ='fikefiresew1234@gmail.com'
-EMAIL_HOST_PASSWORD ='minyvxbzjtyxxwnu'
+EMAIL_HOST_USER ='youremail@gmail.com'
+EMAIL_HOST_PASSWORD ='your token password'
