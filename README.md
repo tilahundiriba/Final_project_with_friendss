@@ -162,7 +162,11 @@ We would like to express our deepest gratitude to all the people and institution
 
 #### Reference Design
 - We would also like to thank [<a href="">Name of your reference</a>] for the original design that served as inspiration for this project.
-
+#### Development Team
+- Industrial Project Group: Thank you for being a productive partner with impressive technical thinking and good execusion style.
+- Muluken Getaye: I appreciate your commitment and dedication. Your zeal and you promptness to executing tasks at hand, you are a great partner.
+- Malefiyash Belete: I appreciate your commitment and dedication. Your zeal and you promptness to executing tasks at hand, you are a great partner.
+- Jaackson Tombe: I appreciate your commitment and dedication. Your zeal and you promptness to executing tasks at hand, you are a great partner.
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- LICENSE -->
