@@ -155,7 +155,6 @@ If you found this project helpful, consider giving a ⭐️!
 We would like to express our deepest gratitude to all the people and institutions that have contributed to making this project possible.
 
 #### Development Team
-#### Development Team
 - Industrial Project Group: Thank you for being a productive partner with impressive technical thinking and good execusion style.
 - Muluken Getaye: I appreciate your commitment and dedication. Your zeal and you promptness to executing tasks at hand, you are a great partner.
 - Malefiyash Belete: I appreciate your commitment and dedication. Your zeal and you promptness to executing tasks at hand, you are a great partner.
