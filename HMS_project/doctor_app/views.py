@@ -66,7 +66,7 @@ def profile_update_doc(request, user_id):
                                                            'notifications':notifications,
                                                         'unseen_count':unseen_count})
 
-# @login_required
+@login_required
 def dis_dr_dash(request):
     notifications = Notification.objects.all()
     unseen_count = Notification.objects.filter(Seen=False).count()

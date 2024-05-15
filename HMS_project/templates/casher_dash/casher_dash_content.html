@@ -81,6 +81,8 @@
           <!-- Widget Item -->
           <div class="col-md-12">
             <div class="widget-area-2 proclinic-box-shadow">
+
+
               {% if lab_payment_request %}
               <h3 class="widget-title">Labboratories Payment Requests</h3>
               <div class="table-responsive">
@@ -97,6 +99,9 @@
                   </thead>
                   <tbody>
                     {% for pay in lab_payment_request %}
+
+                    <tr>
+
                     <tr>
                       
                       <td>{{pay.PatientID}}</td>

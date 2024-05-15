@@ -146,6 +146,7 @@ DESIGNATED_ADMIN_USERNAME = 'your second admin name'
 
 
 
+
 DATABASES = {
     'default': {
         'ENGINE':'django.db.backends.postgresql',
@@ -156,6 +157,26 @@ DATABASES = {
         'PORT':'your port number',
     }
 }
+
+
+
+
+
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE':'django.db.backends.postgresql',
+#         'NAME':'yaba',
+#         'USER':'postgres',    
+#         'PASSWORD':'211',
+#         'HOST':'localhost',
+#         'PORT':'5432',
+#     }
+# }
+
+
+
+
 
 
 
