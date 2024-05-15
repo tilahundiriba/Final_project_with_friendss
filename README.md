@@ -155,18 +155,18 @@ If you found this project helpful, consider giving a ⭐️!
 We would like to express our deepest gratitude to all the people and institutions that have contributed to making this project possible.
 
 #### Development Team
-- **[Contributor Name]**: Thank you for your valuable contributions and dedication to this project.
+#### Development Team
+- Industrial Project Group: Thank you for being a productive partner with impressive technical thinking and good execusion style.
+- Muluken Getaye: I appreciate your commitment and dedication. Your zeal and you promptness to executing tasks at hand, you are a great partner.
+- Malefiyash Belete: I appreciate your commitment and dedication. Your zeal and you promptness to executing tasks at hand, you are a great partner.
+- Jaackson Tombe: I appreciate your commitment and dedication. Your zeal and you promptness to executing tasks at hand, you are a great partner.
 
 #### Institution
 - **Shashamene Specialized Referral Hospital**: We appreciate the support and collaboration in developing this system to enhance healthcare services.
 
 #### Reference Design
 - We would also like to thank [<a href="">Name of your reference</a>] for the original design that served as inspiration for this project.
-#### Development Team
-- Industrial Project Group: Thank you for being a productive partner with impressive technical thinking and good execusion style.
-- Muluken Getaye: I appreciate your commitment and dedication. Your zeal and you promptness to executing tasks at hand, you are a great partner.
-- Malefiyash Belete: I appreciate your commitment and dedication. Your zeal and you promptness to executing tasks at hand, you are a great partner.
-- Jaackson Tombe: I appreciate your commitment and dedication. Your zeal and you promptness to executing tasks at hand, you are a great partner.
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- LICENSE -->
