@@ -36,20 +36,27 @@ This is a comprehensive Hospital Management System designed for Shashamene Speci
 ## 🛠 Built With <a name="built-with"></a>
 
 ### Tech Stack <a name="tech-stack"></a>
-  <ul>
+   <ul>
     <li>
       <a href="https://www.djangoproject.com/">
-      Django
+      Django (Backend)
       </a>
+    </li>
+    <li>
+      HTML (Frontend)
+    </li>
+    <li>
+      JavaScript (Frontend)
+    </li>
+    <li>
+      Bootstrap (Frontend)
+    </li>
+    <li>
+      CSS (Frontend)
     </li>
     <li>
       <a href="https://www.postgresql.org/">
-      PostgreSQL
-      </a>
-    </li>
-    <li>
-      <a href="https://getbootstrap.com/">
-      Bootstrap
+      PostgreSQL (Database)
       </a>
     </li>
   </ul>
