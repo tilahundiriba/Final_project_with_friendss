@@ -147,21 +147,16 @@ DESIGNATED_ADMIN_USERNAME = 'your second admin name'
 
 
 
-DATABASES = {
-    'default': {
-        'ENGINE':'django.db.backends.postgresql',
-        'NAME':'your database name',
-        'USER':'your database user',
-        'PASSWORD':'your password',
-        'HOST':'your hostname',
-        'PORT':'your port number',
-    }
-}
-
-
-
-
-
+# DATABASES = {
+#     'default': {
+#         'ENGINE':'django.db.backends.postgresql',
+#         'NAME':'your database name',
+#         'USER':'your database user',
+#         'PASSWORD':'your password',
+#         'HOST':'your hostname',
+#         'PORT':'your port number',
+#     }
+# }
 
 # DATABASES = {
 #     'default': {
@@ -173,11 +168,16 @@ DATABASES = {
 #         'PORT':'5432',
 #     }
 # }
-
-
-
-
-
+DATABASES = {
+    'default': {
+        'ENGINE':'django.db.backends.postgresql',
+        'NAME':'Jackson',
+        'USER':'postgres',    
+        'PASSWORD':'211',
+        'HOST':'localhost',
+        'PORT':'5432',
+    }
+}
 
 
 # DATABASES = {
